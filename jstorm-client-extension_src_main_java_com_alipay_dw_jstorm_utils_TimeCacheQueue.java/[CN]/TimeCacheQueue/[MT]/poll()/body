@@ -1,0 +1,13 @@
+{
+synchronized (_lock) {
+    Iterator<LinkedBlockingDeque<K>> itor=_buckets.descendingIterator();
+    while (itor.hasNext()) {
+      LinkedBlockingDeque<K> bucket=itor.next();
+      K entry=bucket.poll();
+      if (entry != null) {
+        return entry;
+      }
+    }
+    return null;
+  }
+}

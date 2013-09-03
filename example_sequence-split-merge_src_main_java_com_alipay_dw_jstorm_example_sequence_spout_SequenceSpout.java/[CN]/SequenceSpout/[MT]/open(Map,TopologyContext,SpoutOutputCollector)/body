@@ -1,0 +1,6 @@
+{
+  this.collector=collector;
+  isFinished=false;
+  tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
+  LOG.info("Finish open");
+}

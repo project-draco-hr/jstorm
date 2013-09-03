@@ -1,0 +1,9 @@
+{
+  List<WinComponentStats> ret=new ArrayList<WinComponentStats>();
+  Map<StaticsType,Object> staticsMap=UIUtils.mergeTasks(taskList,window);
+  WinComponentStats winComponentStats=new WinComponentStats();
+  winComponentStats.setWindow(window);
+  winComponentStats.setValues(staticsMap);
+  ret.add(winComponentStats);
+  return ret;
+}

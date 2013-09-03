@@ -1,0 +1,10 @@
+{
+  List<TopologySumm> tsumm=new ArrayList<TopologySumm>();
+  if (ts != null) {
+    for (    TopologySummary t : ts) {
+      TopologySumm tsu=new TopologySumm(t.get_name(),t.get_id(),t.get_status(),StatBuckets.prettyUptimeStr(t.get_uptime_secs()),String.valueOf(t.get_num_workers()),String.valueOf(t.get_num_tasks()),t.get_uptime_secs());
+      tsumm.add(tsu);
+    }
+  }
+  return tsumm;
+}

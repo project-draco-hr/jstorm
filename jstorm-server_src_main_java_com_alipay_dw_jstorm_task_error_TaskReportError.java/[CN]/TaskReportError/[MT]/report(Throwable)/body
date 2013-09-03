@@ -1,0 +1,9 @@
+{
+  LOG.error("Report error to /ZK/taskerrors/" + storm_id + "/"+ task_id+ "\n",error);
+  try {
+    zkCluster.report_task_error(storm_id,task_id,error);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed update error to /ZK/taskerrors/" + storm_id + "/"+ task_id+ "\n",e);
+  }
+}

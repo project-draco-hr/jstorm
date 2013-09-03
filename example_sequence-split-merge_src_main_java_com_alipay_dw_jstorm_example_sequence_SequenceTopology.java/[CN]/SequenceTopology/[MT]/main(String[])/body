@@ -1,0 +1,11 @@
+{
+  if (args == null || args.length == 0) {
+    SetLocalTopology();
+  }
+  if (args[0] == "rpc") {
+    SetDPRCTopology();
+  }
+ else {
+    SetRemoteTopology(args[0]);
+  }
+}

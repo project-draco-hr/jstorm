@@ -1,0 +1,4 @@
+{
+  this.grouping=_grouping;
+  this.grouping.prepare(context,_out_fields,targetTask);
+}

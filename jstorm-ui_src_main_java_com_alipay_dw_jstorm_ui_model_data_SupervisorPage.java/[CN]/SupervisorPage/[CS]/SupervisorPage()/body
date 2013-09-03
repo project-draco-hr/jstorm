@@ -1,0 +1,7 @@
+{
+  FacesContext ctx=FacesContext.getCurrentInstance();
+  if (ctx.getExternalContext().getRequestParameterMap().get("host") != null) {
+    host=(String)ctx.getExternalContext().getRequestParameterMap().get("host");
+  }
+  init(host);
+}

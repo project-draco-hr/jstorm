@@ -1,0 +1,8 @@
+{
+  Pair rtn=new Pair();
+  for (  Pair p : avg) {
+    rtn.setFirst(rtn.getFirst() + p.getFirst());
+    rtn.setSecond(rtn.getSecond() + p.getSecond());
+  }
+  return rtn;
+}

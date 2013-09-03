@@ -1,0 +1,8 @@
+{
+  this.emitted=null;
+  this.send_tps=null;
+  this.recv_tps=null;
+  this.acked=null;
+  this.failed=null;
+  this.process_ms_avg=null;
+}

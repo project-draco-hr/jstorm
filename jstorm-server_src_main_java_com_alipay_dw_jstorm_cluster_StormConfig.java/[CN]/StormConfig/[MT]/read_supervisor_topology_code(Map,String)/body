@@ -1,0 +1,5 @@
+{
+  String topologyRoot=StormConfig.supervisor_stormdist_root(conf,topologyId);
+  String codePath=StormConfig.stormcode_path(topologyRoot);
+  return (StormTopology)readLocalObject(topologyId,codePath);
+}

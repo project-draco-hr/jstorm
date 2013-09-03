@@ -1,0 +1,10 @@
+{
+  getSupervisorWorkers_result result=new getSupervisorWorkers_result();
+  try {
+    result.success=iface.getSupervisorWorkers(args.host);
+  }
+ catch (  NotAliveException e) {
+    result.e=e;
+  }
+  return result;
+}

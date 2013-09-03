@@ -1,0 +1,16 @@
+{
+  List<Object> to_remove=StormConfig.All_CONFIGS();
+  to_remove.remove(Config.TOPOLOGY_DEBUG);
+  to_remove.remove(Config.TOPOLOGY_MAX_SPOUT_PENDING);
+  to_remove.remove(Config.TOPOLOGY_MAX_TASK_PARALLELISM);
+  to_remove.remove(Config.TOPOLOGY_TRANSACTIONAL_ID);
+  Map<Object,Object> componentConf=new HashMap<Object,Object>();
+  String jconf=topology_context.getComponentCommon(component_id).get_json_conf();
+  if (jconf != null) {
+    componentConf=(Map<Object,Object>)JStormUtils.from_json(jconf);
+  }
+  Map<Object,Object> ret=new HashMap<Object,Object>();
+  ret.putAll(storm_conf);
+  ret.putAll(componentConf);
+  return ret;
+}

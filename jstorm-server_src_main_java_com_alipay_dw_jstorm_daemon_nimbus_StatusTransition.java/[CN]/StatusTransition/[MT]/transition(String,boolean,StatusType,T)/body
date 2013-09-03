@@ -1,0 +1,11 @@
+{
+  Object lock=topologyLocks.get(topologyid);
+  if (lock == null) {
+    lock=new Object();
+    topologyLocks.put(topologyid,lock);
+  }
+synchronized (lock) {
+    transitionLock(topologyid,errorOnNoTransition,changeStatus,args);
+    topologyLocks.put(topologyid,lock);
+  }
+}

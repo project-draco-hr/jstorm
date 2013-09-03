@@ -1,0 +1,3 @@
+def __init__(self, supervisor=None, workers=None):
+    self.supervisor = supervisor
+    self.workers = workers

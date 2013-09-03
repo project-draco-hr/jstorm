@@ -1,0 +1,5 @@
+{
+  Set<Integer> outboundTasks=worker_output_tasks();
+  RefreshConnections refresh_connections=new RefreshConnections(workerData,outboundTasks);
+  return refresh_connections;
+}

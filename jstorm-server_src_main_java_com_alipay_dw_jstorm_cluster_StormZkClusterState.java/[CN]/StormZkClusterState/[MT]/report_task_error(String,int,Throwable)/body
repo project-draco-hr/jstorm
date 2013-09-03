@@ -1,0 +1,15 @@
+{
+  String path=Cluster.taskerror_path(stormId,taskId);
+  cluster_state.mkdirs(path);
+  List<Integer> children=new ArrayList<Integer>();
+  for (  String str : cluster_state.get_children(path,false)) {
+    children.add(Integer.parseInt(str));
+  }
+  Collections.sort(children);
+  while (children.size() >= 10) {
+    cluster_state.delete_node(path + Cluster.ZK_SEPERATOR + children.remove(0));
+  }
+  String timestampPath=path + Cluster.ZK_SEPERATOR + TimeUtils.current_time_secs();
+  byte[] errorData=new String(JStormUtils.getErrorInfo(error)).getBytes();
+  cluster_state.set_data(timestampPath,errorData);
+}

@@ -1,0 +1,10 @@
+{
+  RollingWindow rtn=new RollingWindow();
+  rtn.setUpdater(updater);
+  rtn.setMerger(merger);
+  rtn.setExtractor(extractor);
+  rtn.setBucket_size_secs(bucket_size_secs);
+  rtn.setNum_buckets(num_buckets);
+  rtn.setBuckets(new HashMap<Integer,Map>());
+  return rtn;
+}

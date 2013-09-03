@@ -1,0 +1,17 @@
+{
+  Enumeration<? extends ZipEntry> entries=null;
+  try {
+    entries=(new ZipFile(zipfile)).entries();
+    while (entries != null && entries.hasMoreElements()) {
+      ZipEntry ze=entries.nextElement();
+      String name=ze.getName();
+      if (name.startsWith(resources + "/")) {
+        return true;
+      }
+    }
+  }
+ catch (  IOException e) {
+    LOG.error(e + "zipContainsDir error");
+  }
+  return false;
+}

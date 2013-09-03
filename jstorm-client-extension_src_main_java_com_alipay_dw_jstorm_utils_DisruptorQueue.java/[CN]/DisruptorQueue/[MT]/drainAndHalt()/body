@@ -1,0 +1,10 @@
+{
+  Sequence[] workerSequences=getWorkerSequences();
+  while (ringBuffer.getCursor() > Util.getMinimumSequence(workerSequences)) {
+    Thread.yield();
+  }
+  for (  WorkProcessor<?> processor : workProcessors) {
+    processor.halt();
+  }
+  started.set(false);
+}

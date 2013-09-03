@@ -1,0 +1,4 @@
+String topologyid
+boolean errorOnNoTransition
+StatusType changeStatus
+T args

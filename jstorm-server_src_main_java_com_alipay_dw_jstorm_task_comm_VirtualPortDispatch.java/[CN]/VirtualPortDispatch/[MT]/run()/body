@@ -1,0 +1,33 @@
+{
+  boolean hasTuple=false;
+  while (true) {
+    byte[] data=recvConn.recv();
+    if (data == null || data.length == 0) {
+      if (hasTuple == false) {
+        JStormUtils.sleepMs(1);
+      }
+      return;
+    }
+    hasTuple=true;
+    long before=System.currentTimeMillis();
+    PacketPair packet=PacketPair.parse_packet(data);
+    if (packet.getPort() == -1) {
+      cleanup();
+      return;
+    }
+    Integer port=(int)packet.getPort();
+    if (valid_ports == null || valid_ports.contains(port)) {
+      ISendConnection sendConn=sendConns.get(port);
+      if (sendConn == null) {
+        sendConn=mqContext.connect(false,"localhost",port);
+        sendConns.put(port,sendConn);
+      }
+      sendConn.send(packet.getMessage());
+    }
+ else {
+      LOG.warn("Received invalid message directed at port " + packet.getPort() + ". Dropping...");
+    }
+    long after=System.currentTimeMillis();
+    runCounter.count(after - before);
+  }
+}

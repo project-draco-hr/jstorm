@@ -1,0 +1,11 @@
+{
+  TSocket ts=new TSocket(host,port);
+  TFramedTransport tt=new TFramedTransport(ts);
+  TBinaryProtocol prot=new TBinaryProtocol(tt);
+  Client nc=new Client(prot);
+  ts.open();
+  List l=new ArrayList();
+  l.add(nc);
+  l.add(tt);
+  return l;
+}

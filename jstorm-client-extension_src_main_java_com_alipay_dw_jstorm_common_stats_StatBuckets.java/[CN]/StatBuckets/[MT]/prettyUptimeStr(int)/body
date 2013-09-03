@@ -1,0 +1,21 @@
+{
+  int diversize=PRETTYSECDIVIDERS.length;
+  List<String> tmp=new ArrayList<String>();
+  int div=secs;
+  for (int i=0; i < diversize; i++) {
+    if (PRETTYSECDIVIDERS[i][1] != null) {
+      Integer d=Integer.parseInt(PRETTYSECDIVIDERS[i][1]);
+      tmp.add(div % d + PRETTYSECDIVIDERS[i][0]);
+      div=div / d;
+    }
+ else {
+      tmp.add(div + PRETTYSECDIVIDERS[i][0]);
+    }
+  }
+  String rtn="";
+  int tmpSzie=tmp.size();
+  for (int j=tmpSzie - 1; j > -1; j--) {
+    rtn+=tmp.get(j);
+  }
+  return rtn;
+}

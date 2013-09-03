@@ -1,0 +1,10 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case HOST:
+    return is_set_host();
+}
+throw new IllegalStateException();
+}

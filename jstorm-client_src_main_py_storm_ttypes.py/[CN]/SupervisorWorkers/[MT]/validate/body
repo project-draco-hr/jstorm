@@ -1,0 +1,6 @@
+def validate(self):
+    if (self.supervisor is None):
+        raise TProtocol.TProtocolException(message='Required field supervisor is unset!')
+    if (self.workers is None):
+        raise TProtocol.TProtocolException(message='Required field workers is unset!')
+    return

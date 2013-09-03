@@ -1,0 +1,8 @@
+{
+  TopologyAssignEvent assignEvent=new TopologyAssignEvent();
+  assignEvent.setTopologyId(topologyid);
+  assignEvent.setScratch(false);
+  assignEvent.setOldStatus(oldStatus);
+  TopologyAssign.push(assignEvent);
+  return null;
+}

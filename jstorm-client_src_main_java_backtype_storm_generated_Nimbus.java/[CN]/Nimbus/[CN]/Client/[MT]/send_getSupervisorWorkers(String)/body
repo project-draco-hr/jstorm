@@ -1,0 +1,5 @@
+{
+  getSupervisorWorkers_args args=new getSupervisorWorkers_args();
+  args.set_host(host);
+  sendBase("getSupervisorWorkers",args);
+}

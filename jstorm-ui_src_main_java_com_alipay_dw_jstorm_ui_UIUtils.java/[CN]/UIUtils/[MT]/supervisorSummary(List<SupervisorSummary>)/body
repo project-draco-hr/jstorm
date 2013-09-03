@@ -1,0 +1,11 @@
+{
+  List<SupervisorSumm> ssumm=new ArrayList<SupervisorSumm>();
+  if (ss == null) {
+    ss=new ArrayList<SupervisorSummary>();
+  }
+  for (  SupervisorSummary s : ss) {
+    SupervisorSumm ssum=new SupervisorSumm(s);
+    ssumm.add(ssum);
+  }
+  return ssumm;
+}

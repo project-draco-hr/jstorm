@@ -1,0 +1,120 @@
+{
+  validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (this.emitted != null) {
+    oprot.writeFieldBegin(EMITTED_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,this.emitted.size()));
+      for (      Map.Entry<String,Map<String,Long>> _iter93 : this.emitted.entrySet()) {
+        oprot.writeString(_iter93.getKey());
+{
+          oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.I64,_iter93.getValue().size()));
+          for (          Map.Entry<String,Long> _iter94 : _iter93.getValue().entrySet()) {
+            oprot.writeString(_iter94.getKey());
+            oprot.writeI64(_iter94.getValue());
+          }
+          oprot.writeMapEnd();
+        }
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.send_tps != null) {
+    oprot.writeFieldBegin(SEND_TPS_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,this.send_tps.size()));
+      for (      Map.Entry<String,Map<String,Double>> _iter95 : this.send_tps.entrySet()) {
+        oprot.writeString(_iter95.getKey());
+{
+          oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.DOUBLE,_iter95.getValue().size()));
+          for (          Map.Entry<String,Double> _iter96 : _iter95.getValue().entrySet()) {
+            oprot.writeString(_iter96.getKey());
+            oprot.writeDouble(_iter96.getValue());
+          }
+          oprot.writeMapEnd();
+        }
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.recv_tps != null) {
+    oprot.writeFieldBegin(RECV_TPS_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,this.recv_tps.size()));
+      for (      Map.Entry<String,Map<GlobalStreamId,Double>> _iter97 : this.recv_tps.entrySet()) {
+        oprot.writeString(_iter97.getKey());
+{
+          oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRUCT,org.apache.thrift.protocol.TType.DOUBLE,_iter97.getValue().size()));
+          for (          Map.Entry<GlobalStreamId,Double> _iter98 : _iter97.getValue().entrySet()) {
+            _iter98.getKey().write(oprot);
+            oprot.writeDouble(_iter98.getValue());
+          }
+          oprot.writeMapEnd();
+        }
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.acked != null) {
+    oprot.writeFieldBegin(ACKED_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,this.acked.size()));
+      for (      Map.Entry<String,Map<GlobalStreamId,Long>> _iter99 : this.acked.entrySet()) {
+        oprot.writeString(_iter99.getKey());
+{
+          oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRUCT,org.apache.thrift.protocol.TType.I64,_iter99.getValue().size()));
+          for (          Map.Entry<GlobalStreamId,Long> _iter100 : _iter99.getValue().entrySet()) {
+            _iter100.getKey().write(oprot);
+            oprot.writeI64(_iter100.getValue());
+          }
+          oprot.writeMapEnd();
+        }
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.failed != null) {
+    oprot.writeFieldBegin(FAILED_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,this.failed.size()));
+      for (      Map.Entry<String,Map<GlobalStreamId,Long>> _iter101 : this.failed.entrySet()) {
+        oprot.writeString(_iter101.getKey());
+{
+          oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRUCT,org.apache.thrift.protocol.TType.I64,_iter101.getValue().size()));
+          for (          Map.Entry<GlobalStreamId,Long> _iter102 : _iter101.getValue().entrySet()) {
+            _iter102.getKey().write(oprot);
+            oprot.writeI64(_iter102.getValue());
+          }
+          oprot.writeMapEnd();
+        }
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.process_ms_avg != null) {
+    oprot.writeFieldBegin(PROCESS_MS_AVG_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,this.process_ms_avg.size()));
+      for (      Map.Entry<String,Map<GlobalStreamId,Double>> _iter103 : this.process_ms_avg.entrySet()) {
+        oprot.writeString(_iter103.getKey());
+{
+          oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRUCT,org.apache.thrift.protocol.TType.DOUBLE,_iter103.getValue().size()));
+          for (          Map.Entry<GlobalStreamId,Double> _iter104 : _iter103.getValue().entrySet()) {
+            _iter104.getKey().write(oprot);
+            oprot.writeDouble(_iter104.getValue());
+          }
+          oprot.writeMapEnd();
+        }
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

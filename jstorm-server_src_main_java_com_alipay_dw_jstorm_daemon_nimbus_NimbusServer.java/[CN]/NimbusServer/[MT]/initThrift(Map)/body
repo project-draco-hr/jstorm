@@ -1,0 +1,11 @@
+{
+  Integer thrift_port=(Integer)conf.get(Config.NIMBUS_THRIFT_PORT);
+  TNonblockingServerSocket socket=new TNonblockingServerSocket(thrift_port);
+  THsHaServer.Args args=new THsHaServer.Args(socket);
+  args.workerThreads(ServiceHandler.THREAD_NUM);
+  args.protocolFactory(new TBinaryProtocol.Factory());
+  args.processor(new Nimbus.Processor<Iface>(serviceHandler));
+  thriftServer=new THsHaServer(args);
+  LOG.info("Successfully started nimbus: started Thrift server...");
+  thriftServer.serve();
+}

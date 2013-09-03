@@ -1,0 +1,19 @@
+{
+  String url=null;
+  if (distributeZmq) {
+    if (ipc) {
+      url="ipc://" + port + ".ipc";
+    }
+ else {
+      url="tcp://*:" + port;
+    }
+  }
+ else {
+    url="inproc://" + port;
+  }
+  Socket socket=ZeroMq.socket(context,ZeroMq.pull);
+  ZeroMq.bind(socket,url);
+  ZeroMq.set_hwm(socket,maxQueueMsg);
+  LOG.info("Create zmq receiver " + url);
+  return new ZMQRecvConnection(socket);
+}

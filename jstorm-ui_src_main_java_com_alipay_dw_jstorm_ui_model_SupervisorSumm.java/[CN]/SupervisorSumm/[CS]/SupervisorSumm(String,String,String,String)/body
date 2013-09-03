@@ -1,0 +1,6 @@
+{
+  this.host=host;
+  this.uptime=uptime;
+  this.slots=slots;
+  this.usedSlots=usedSlots;
+}

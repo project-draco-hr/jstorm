@@ -1,0 +1,21 @@
+{
+  for (  Entry<String,String> entry : topologyCodes.entrySet()) {
+    String stormId=entry.getKey();
+    String masterCodeDir=entry.getValue();
+    if (!downloadedTopologyIds.contains(stormId)) {
+      LOG.info("Downloading code for storm id " + stormId + " from "+ masterCodeDir);
+      try {
+        downloadStormCode(conf,stormId,masterCodeDir);
+      }
+ catch (      IOException e) {
+        LOG.error(e + " downloadStormCode failed " + "stormId:"+ stormId+ "masterCodeDir:"+ masterCodeDir);
+        throw e;
+      }
+catch (      TException e) {
+        LOG.error(e + " downloadStormCode failed " + "stormId:"+ stormId+ "masterCodeDir:"+ masterCodeDir);
+        throw e;
+      }
+      LOG.info("Finished downloading code for storm id " + stormId + " from "+ masterCodeDir);
+    }
+  }
+}

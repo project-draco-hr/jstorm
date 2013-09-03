@@ -1,0 +1,5 @@
+GlobalStreamId gstreamId
+Double recvTps
+Double process
+Long acked
+Long failed

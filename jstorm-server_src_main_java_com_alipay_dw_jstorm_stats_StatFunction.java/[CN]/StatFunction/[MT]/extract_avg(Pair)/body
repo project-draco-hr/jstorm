@@ -1,0 +1,6 @@
+{
+  if (p.getSecond() == 0) {
+    return 0d;
+  }
+  return (p.getFirst() * 1.0) / p.getSecond();
+}

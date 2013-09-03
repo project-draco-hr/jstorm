@@ -1,0 +1,67 @@
+{
+  String idStr=" topology:" + topologyId + ",taskid:"+ taskId;
+  Integer zkReportTime=null;
+  StormClusterState stormClusterState=data.getStormClusterState();
+  TaskHeartbeat zkTaskHeartbeat=null;
+  try {
+    zkTaskHeartbeat=stormClusterState.task_heartbeat(topologyId,taskId);
+    if (zkTaskHeartbeat != null) {
+      zkReportTime=zkTaskHeartbeat.getTimeSecs();
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to get ZK task hearbeat " + idStr);
+    return true;
+  }
+  Map<Integer,TkHbCacheTime> taskHBs=data.getTaskHeartbeatsCache().get(topologyId);
+  if (taskHBs == null) {
+    LOG.info("No task heartbeat cache " + topologyId);
+    taskHBs=new HashMap<Integer,TkHbCacheTime>();
+    data.getTaskHeartbeatsCache().put(topologyId,taskHBs);
+  }
+  TkHbCacheTime taskHB=taskHBs.get(taskId);
+  if (taskHB == null) {
+    LOG.info("No task heartbeat cache " + idStr);
+    if (zkTaskHeartbeat == null) {
+      LOG.info("No ZK task hearbeat " + idStr);
+      return true;
+    }
+    taskHB=new TkHbCacheTime();
+    taskHB.update(zkTaskHeartbeat);
+    taskHBs.put(taskId,taskHB);
+    return false;
+  }
+  if (zkReportTime == null) {
+    LOG.debug("No ZK task heartbeat " + idStr);
+    int nowSecs=TimeUtils.current_time_secs();
+    int assignSecs=taskHB.getTaskAssignedTime();
+    int waitInitTimeout=JStormUtils.parseInt(data.getConf().get(Config.NIMBUS_TASK_LAUNCH_SECS));
+    if (nowSecs - assignSecs > waitInitTimeout) {
+      LOG.info(idStr + " failed to init ");
+      return true;
+    }
+ else {
+      return false;
+    }
+  }
+  int nimbusTime=taskHB.getNimbusTime();
+  int reportTime=taskHB.getTaskReportedTime();
+  int nowSecs=TimeUtils.current_time_secs();
+  if (nimbusTime == 0) {
+    taskHB.setNimbusTime(nowSecs);
+    taskHB.setTaskReportedTime(zkReportTime);
+    LOG.info("Update taskheartbeat to nimbus cache " + idStr);
+    return false;
+  }
+  if (reportTime != zkReportTime.intValue()) {
+    taskHB.setNimbusTime(nowSecs);
+    taskHB.setTaskReportedTime(zkReportTime);
+    LOG.debug(idStr + ",nimbusTime " + nowSecs+ ",zkReport:"+ zkReportTime+ ",report:"+ reportTime);
+    return false;
+  }
+  int taskHBTimeout=JStormUtils.parseInt(data.getConf().get(Config.NIMBUS_TASK_TIMEOUT_SECS));
+  if (nowSecs - nimbusTime > taskHBTimeout) {
+    return true;
+  }
+  return false;
+}

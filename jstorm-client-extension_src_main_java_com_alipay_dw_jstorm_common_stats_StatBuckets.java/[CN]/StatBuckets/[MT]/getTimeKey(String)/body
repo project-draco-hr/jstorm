@@ -1,0 +1,22 @@
+{
+  String window=null;
+  if (showKey == null) {
+    window=String.valueOf(MINUTE_WINDOW);
+  }
+ else   if (showKey.equals(MINUTE_WINDOW_STR)) {
+    window=String.valueOf(MINUTE_WINDOW);
+  }
+ else   if (showKey.equals(HOUR_WINDOW_STR)) {
+    window=String.valueOf(HOUR_WINDOW);
+  }
+ else   if (showKey.equals(DAY_WINDOW_STR)) {
+    window=String.valueOf(DAY_WINDOW);
+  }
+ else   if (showKey.equals(ALL_WINDOW_STR)) {
+    window=ALL_WINDOW_STR;
+  }
+ else {
+    window=String.valueOf(MINUTE_WINDOW);
+  }
+  return window;
+}

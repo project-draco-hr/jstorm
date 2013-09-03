@@ -1,0 +1,5 @@
+{
+  Map<Integer,Object> statics=staticsMap.get(StaticsType.acked);
+  GlobalStreamId streamIdSample=new GlobalStreamId("","");
+  return convertKey(statics,streamIdSample,Long.valueOf(0));
+}

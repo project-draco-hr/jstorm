@@ -1,0 +1,14 @@
+def validate(self):
+    if (self.emitted is None):
+        raise TProtocol.TProtocolException(message='Required field emitted is unset!')
+    if (self.send_tps is None):
+        raise TProtocol.TProtocolException(message='Required field send_tps is unset!')
+    if (self.recv_tps is None):
+        raise TProtocol.TProtocolException(message='Required field recv_tps is unset!')
+    if (self.acked is None):
+        raise TProtocol.TProtocolException(message='Required field acked is unset!')
+    if (self.failed is None):
+        raise TProtocol.TProtocolException(message='Required field failed is unset!')
+    if (self.process_ms_avg is None):
+        raise TProtocol.TProtocolException(message='Required field process_ms_avg is unset!')
+    return

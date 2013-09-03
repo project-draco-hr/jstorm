@@ -1,0 +1,34 @@
+{
+  try {
+    while (manager.isRunning()) {
+      RunnableCallback r=null;
+      try {
+        r=manager.poll();
+      }
+ catch (      InterruptedException e) {
+      }
+      if (r == null) {
+        try {
+          Thread.sleep(10);
+        }
+ catch (        InterruptedException e) {
+        }
+        continue;
+      }
+      r.run();
+      Exception e=r.error();
+      if (e != null) {
+        throw e;
+      }
+      manager.proccessinc();
+    }
+  }
+ catch (  InterruptedException e) {
+    error=e;
+    LOG.error("Event Manager interrupted",e);
+  }
+catch (  Exception e) {
+    LOG.error("Error when processing event ",e);
+    JStormUtils.halt_process(20,"Error when processing an event");
+  }
+}

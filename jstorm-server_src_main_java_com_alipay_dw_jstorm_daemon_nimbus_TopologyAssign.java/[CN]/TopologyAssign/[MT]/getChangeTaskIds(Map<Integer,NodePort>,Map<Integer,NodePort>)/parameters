@@ -1,0 +1,2 @@
+Map<Integer,NodePort> oldTaskToNodePort
+Map<Integer,NodePort> newTaskToNodePort

@@ -1,0 +1,18 @@
+{
+  tpsCounter.count();
+  Long tupleId=tuple.getLong(0);
+  Object obj=tuple.getValue(1);
+  if (obj instanceof TradeCustomer) {
+    TradeCustomer tradeCustomer=(TradeCustomer)obj;
+    Pair trade=tradeCustomer.getTrade();
+    Pair customer=tradeCustomer.getCustomer();
+    collector.emit(SequenceTopologyDef.TRADE_STREAM_ID,new Values(tupleId,trade));
+    collector.emit(SequenceTopologyDef.CUSTOMER_STREAM_ID,new Values(tupleId,customer));
+  }
+ else   if (obj != null) {
+    LOG.info("Unknow type " + obj.getClass().getName());
+  }
+ else {
+    LOG.info("Nullpointer ");
+  }
+}

@@ -1,0 +1,8 @@
+{
+  Long value=Long.valueOf(0);
+  if (map.containsKey(key)) {
+    value=map.get(key);
+  }
+  value=(Long)JStormUtils.add(value,amt);
+  map.put(key,value);
+}

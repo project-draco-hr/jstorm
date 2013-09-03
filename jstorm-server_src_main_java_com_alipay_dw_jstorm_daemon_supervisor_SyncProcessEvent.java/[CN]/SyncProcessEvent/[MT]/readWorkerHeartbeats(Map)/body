@@ -1,0 +1,14 @@
+{
+  Map<String,WorkerHeartbeat> workerHeartbeats=new HashMap<String,WorkerHeartbeat>();
+  String path=StormConfig.worker_root(conf);
+  List<String> workerIds=PathUtils.read_dir_contents(path);
+  if (workerIds == null) {
+    LOG.info("No worker dir under " + path);
+    return workerHeartbeats;
+  }
+  for (  String workerId : workerIds) {
+    WorkerHeartbeat whb=readWorkerHeartbeat(conf,workerId);
+    workerHeartbeats.put(workerId,whb);
+  }
+  return workerHeartbeats;
+}

@@ -1,0 +1,7 @@
+def __init__(self, emitted=None, send_tps=None, recv_tps=None, acked=None, failed=None, process_ms_avg=None):
+    self.emitted = emitted
+    self.send_tps = send_tps
+    self.recv_tps = recv_tps
+    self.acked = acked
+    self.failed = failed
+    self.process_ms_avg = process_ms_avg

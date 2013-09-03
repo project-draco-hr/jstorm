@@ -1,0 +1,4 @@
+{
+  int index=randomrange.nextInt();
+  return JStormUtils.mk_list(index);
+}

@@ -1,0 +1,22 @@
+{
+  validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (this.supervisor != null) {
+    oprot.writeFieldBegin(SUPERVISOR_FIELD_DESC);
+    this.supervisor.write(oprot);
+    oprot.writeFieldEnd();
+  }
+  if (this.workers != null) {
+    oprot.writeFieldBegin(WORKERS_FIELD_DESC);
+{
+      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,this.workers.size()));
+      for (      WorkerSummary _iter120 : this.workers) {
+        _iter120.write(oprot);
+      }
+      oprot.writeListEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

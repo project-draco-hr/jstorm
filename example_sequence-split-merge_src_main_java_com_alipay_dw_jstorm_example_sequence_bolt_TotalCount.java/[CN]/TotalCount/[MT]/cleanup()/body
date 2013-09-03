@@ -1,0 +1,5 @@
+{
+  tpsCounter.cleanup();
+  LOG.info("tradeSum:" + tradeSum + ",cumsterSum"+ customerSum);
+  LOG.info("Finish cleanup");
+}

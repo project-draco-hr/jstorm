@@ -1,0 +1,8 @@
+{
+  try {
+    TopologyPage instance=new TopologyPage("sequence_test-1-1363056062",StatBuckets.ALL_WINDOW_STR);
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+}

@@ -1,0 +1,13 @@
+{
+  Integer currtime=TimeUtils.current_time_secs();
+  TaskHeartbeat hb=new TaskHeartbeat(currtime,uptime.uptime(),task_stats.render_stats());
+  try {
+    zkCluster.task_heartbeat(storm_id,task_id,hb);
+  }
+ catch (  Exception e) {
+    String errMsg="Failed to update heartbeat to ZK " + idStr + "\n";
+    LOG.error(errMsg,e);
+    return;
+  }
+  LOG.debug("task hearbeat task_id=" + idStr + "=>"+ hb.toString());
+}

@@ -1,0 +1,6 @@
+Map conf
+MQContext sharedcontext
+String topologyId
+String supervisorId
+Integer port
+String workerId

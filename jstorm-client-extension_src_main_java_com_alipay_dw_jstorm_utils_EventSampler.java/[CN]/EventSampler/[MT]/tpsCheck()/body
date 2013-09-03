@@ -1,0 +1,9 @@
+{
+  int send=counter.incrementAndGet();
+  Double pastSeconds=intervalCheck.checkAndGet();
+  if (pastSeconds != null) {
+    counter.set(0);
+    return Integer.valueOf((int)(send / pastSeconds));
+  }
+  return null;
+}

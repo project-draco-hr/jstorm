@@ -1,0 +1,11 @@
+{
+  try {
+    StringWriter sw=new StringWriter();
+    PrintWriter pw=new PrintWriter(sw);
+    e.printStackTrace(pw);
+    return baseInfo + "\r\n" + sw.toString()+ "\r\n";
+  }
+ catch (  Exception e2) {
+    return baseInfo;
+  }
+}

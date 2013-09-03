@@ -1,0 +1,10 @@
+{
+  if ((base instanceof StormStatus) == false) {
+    return false;
+  }
+  StormStatus check=(StormStatus)base;
+  if (check.getStatusType().equals(getStatusType()) && check.getKillTimeSecs() == getKillTimeSecs() && check.getDelaySecs().equals(getDelaySecs())) {
+    return true;
+  }
+  return false;
+}

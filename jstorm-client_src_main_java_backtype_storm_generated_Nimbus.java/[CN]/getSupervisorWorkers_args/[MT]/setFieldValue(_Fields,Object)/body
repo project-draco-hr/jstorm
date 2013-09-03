@@ -1,0 +1,12 @@
+{
+switch (field) {
+case HOST:
+    if (value == null) {
+      unset_host();
+    }
+ else {
+      set_host((String)value);
+    }
+  break;
+}
+}

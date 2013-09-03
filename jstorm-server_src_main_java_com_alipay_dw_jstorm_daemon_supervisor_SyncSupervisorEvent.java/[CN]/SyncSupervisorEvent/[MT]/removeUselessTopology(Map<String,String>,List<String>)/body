@@ -1,0 +1,16 @@
+{
+  for (  String topologyId : downloadedTopologyIds) {
+    if (!topologyCodes.containsKey(topologyId)) {
+      LOG.info("Removing code for storm id " + topologyId);
+      String path=null;
+      try {
+        path=StormConfig.supervisor_stormdist_root(conf,topologyId);
+        PathUtils.rmr(path);
+      }
+ catch (      IOException e) {
+        String errMsg="rmr the path:" + path + "failed\n";
+        LOG.error(errMsg,e);
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  Pair trade=PairMaker.makeTradeInstance();
+  Pair customer=PairMaker.makeCustomerInstance();
+  TradeCustomer tradeCustomer=new TradeCustomer();
+  tradeCustomer.setTrade(trade);
+  tradeCustomer.setCustomer(customer);
+  tradeSum.addAndGet(trade.getValue());
+  customerSum.addAndGet(customer.getValue());
+  collector.emit(new Values(tupleId,tradeCustomer),Long.valueOf(tupleId));
+  tupleId++;
+  tpsCounter.count();
+}

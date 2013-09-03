@@ -1,0 +1,17 @@
+{
+  Map<String,Assignment> ret=new HashMap<String,Assignment>();
+  List<String> assignments=stormClusterState.assignments(callback);
+  if (assignments == null) {
+    LOG.debug("No assignment of ZK");
+    return ret;
+  }
+  for (  String topologyid : assignments) {
+    Assignment assignment=stormClusterState.assignment_info(topologyid,callback);
+    if (assignment == null) {
+      LOG.error("Failed to get Assignment of " + topologyid + " from ZK");
+      continue;
+    }
+    ret.put(topologyid,assignment);
+  }
+  return ret;
+}

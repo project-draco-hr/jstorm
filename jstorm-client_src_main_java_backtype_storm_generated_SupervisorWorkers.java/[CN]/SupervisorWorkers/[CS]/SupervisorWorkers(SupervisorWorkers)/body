@@ -1,0 +1,12 @@
+{
+  if (other.is_set_supervisor()) {
+    this.supervisor=new SupervisorSummary(other.supervisor);
+  }
+  if (other.is_set_workers()) {
+    List<WorkerSummary> __this__workers=new ArrayList<WorkerSummary>();
+    for (    WorkerSummary other_element : other.workers) {
+      __this__workers.add(new WorkerSummary(other_element));
+    }
+    this.workers=__this__workers;
+  }
+}

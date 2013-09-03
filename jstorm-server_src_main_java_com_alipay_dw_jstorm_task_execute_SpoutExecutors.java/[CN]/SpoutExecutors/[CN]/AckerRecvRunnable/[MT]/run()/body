@@ -1,0 +1,12 @@
+{
+  while (SpoutExecutors.this.taskStatus.isShutdown() == false) {
+    try {
+      pushQueue();
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to handle recv event ",e);
+      report_error.report(e);
+    }
+  }
+  LOG.info("Successfully shutdown Spout's acker thread " + idStr);
+}

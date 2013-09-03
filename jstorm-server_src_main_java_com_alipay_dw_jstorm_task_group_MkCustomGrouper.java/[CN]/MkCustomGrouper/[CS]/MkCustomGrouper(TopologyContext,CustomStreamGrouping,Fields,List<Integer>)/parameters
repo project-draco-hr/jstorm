@@ -1,0 +1,4 @@
+TopologyContext context
+CustomStreamGrouping _grouping
+Fields _out_fields
+List<Integer> targetTask

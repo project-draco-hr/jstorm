@@ -1,0 +1,8 @@
+{
+  this.taskid=taskid;
+  this.host=host;
+  this.port=port;
+  this.topologyname=topologyname;
+  this.componentId=componentId;
+  this.uptime=uptime;
+}

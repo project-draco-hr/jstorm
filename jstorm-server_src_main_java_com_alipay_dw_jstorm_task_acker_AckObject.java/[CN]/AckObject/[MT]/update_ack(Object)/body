@@ -1,0 +1,8 @@
+{
+synchronized (this) {
+    if (val == null) {
+      val=Long.valueOf(0);
+    }
+    val=JStormUtils.bit_xor(val,value);
+  }
+}

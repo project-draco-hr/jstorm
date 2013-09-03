@@ -1,0 +1,4 @@
+{
+  tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
+  LOG.info("Successfully do prepare");
+}

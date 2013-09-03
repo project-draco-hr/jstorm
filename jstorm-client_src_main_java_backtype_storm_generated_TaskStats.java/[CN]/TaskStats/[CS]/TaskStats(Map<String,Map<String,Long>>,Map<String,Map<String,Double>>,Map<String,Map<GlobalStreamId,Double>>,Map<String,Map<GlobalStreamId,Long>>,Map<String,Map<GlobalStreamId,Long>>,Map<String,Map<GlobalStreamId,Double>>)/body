@@ -1,0 +1,9 @@
+{
+  this();
+  this.emitted=emitted;
+  this.send_tps=send_tps;
+  this.recv_tps=recv_tps;
+  this.acked=acked;
+  this.failed=failed;
+  this.process_ms_avg=process_ms_avg;
+}

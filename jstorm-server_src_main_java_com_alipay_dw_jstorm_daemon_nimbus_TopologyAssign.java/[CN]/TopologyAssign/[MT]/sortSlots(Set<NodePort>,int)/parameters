@@ -1,0 +1,2 @@
+Set<NodePort> allSlots
+int needSlotNum

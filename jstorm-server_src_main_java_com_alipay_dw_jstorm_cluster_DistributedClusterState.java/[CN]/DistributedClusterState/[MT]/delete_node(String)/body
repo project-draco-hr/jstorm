@@ -1,0 +1,3 @@
+{
+  zkobj.deletereRcursive(zk,path);
+}

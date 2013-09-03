@@ -1,0 +1,5 @@
+{
+  this.collector=collector;
+  tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
+  LOG.info("Finished preparation");
+}

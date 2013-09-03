@@ -1,0 +1,8 @@
+{
+  List<TaskSummary> taskList=taskMap.get(componentId);
+  if (taskList == null) {
+    taskList=new ArrayList<TaskSummary>();
+    taskMap.put(componentId,taskList);
+  }
+  taskList.add(t);
+}

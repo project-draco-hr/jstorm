@@ -1,0 +1,13 @@
+{
+  try {
+    TopologyAssignEvent event=new TopologyAssignEvent();
+    event.setTopologyId(topologyid);
+    event.setScratch(true);
+    event.setOldStatus(oldStatus);
+    TopologyAssign.push(event);
+  }
+ catch (  Exception e) {
+    LOG.error("do-rebalance error!",e);
+  }
+  return oldStatus.getOldStatus();
+}

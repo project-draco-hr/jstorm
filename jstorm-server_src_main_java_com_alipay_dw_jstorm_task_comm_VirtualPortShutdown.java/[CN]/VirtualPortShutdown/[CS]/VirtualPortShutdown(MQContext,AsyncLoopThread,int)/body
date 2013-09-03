@@ -1,0 +1,5 @@
+{
+  this.mqContext=mqContext;
+  this.vthread=vthread;
+  this.port=port;
+}

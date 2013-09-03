@@ -1,0 +1,13 @@
+def process_getSupervisorWorkers(self, seqid, iprot, oprot):
+    args = getSupervisorWorkers_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getSupervisorWorkers_result()
+    try:
+        result.success = self._handler.getSupervisorWorkers(args.host)
+    except NotAliveException as e:
+        result.e = e
+    oprot.writeMessageBegin('getSupervisorWorkers', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

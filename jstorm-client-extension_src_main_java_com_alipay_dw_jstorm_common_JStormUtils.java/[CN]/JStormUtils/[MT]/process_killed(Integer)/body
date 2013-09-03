@@ -1,0 +1,12 @@
+{
+  try {
+    exec_command("kill " + pid);
+    LOG.info("kill process " + pid);
+  }
+ catch (  ExecuteException e) {
+    LOG.info("Error when trying to kill " + pid + ". Process is probably already dead. ");
+  }
+catch (  Exception e) {
+    LOG.info("Error when trying to kill " + pid + ".Exception ",e);
+  }
+}

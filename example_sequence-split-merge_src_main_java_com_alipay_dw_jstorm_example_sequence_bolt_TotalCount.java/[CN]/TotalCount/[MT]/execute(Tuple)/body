@@ -1,0 +1,10 @@
+{
+  Long tupleId=input.getLong(0);
+  TradeCustomer tradeCustomer=(TradeCustomer)input.getValue(1);
+  tradeSum.addAndGet(tradeCustomer.getTrade().getValue());
+  customerSum.addAndGet(tradeCustomer.getCustomer().getValue());
+  collector.ack(input);
+  long now=System.currentTimeMillis();
+  long spend=now - tradeCustomer.getTimestamp();
+  tpsCounter.count(spend);
+}

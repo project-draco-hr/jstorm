@@ -1,0 +1,6 @@
+{
+  this.collector=collector;
+  String key=Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS;
+  int timeoutSec=JStormUtils.parseInt(stormConf.get(key),30);
+  pending=new TimeCacheMap<Object,AckObject>(timeoutSec,TIMEOUT_BUCKET_NUM);
+}

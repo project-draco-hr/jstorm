@@ -1,0 +1,4 @@
+def getSupervisorWorkers(self, host):
+    '\n    Parameters:\n     - host\n    '
+    self.send_getSupervisorWorkers(host)
+    return self.recv_getSupervisorWorkers()

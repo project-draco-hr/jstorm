@@ -1,0 +1,3 @@
+def getSupervisorWorkers(self, host):
+    '\n    Parameters:\n     - host\n    '
+    pass

@@ -1,0 +1,12 @@
+{
+  if (!started.compareAndSet(false,true)) {
+    throw new IllegalStateException("WorkerPool has already been started and cannot be restarted until halted.");
+  }
+  final long cursor=ringBuffer.getCursor();
+  workSequence.set(cursor);
+  for (  WorkProcessor<T> processor : workProcessors) {
+    processor.getSequence().set(cursor);
+    new Thread(processor).start();
+  }
+  return;
+}

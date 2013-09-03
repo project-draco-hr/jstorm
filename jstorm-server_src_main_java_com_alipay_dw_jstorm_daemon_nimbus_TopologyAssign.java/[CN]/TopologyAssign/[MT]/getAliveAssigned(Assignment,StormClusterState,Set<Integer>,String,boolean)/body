@@ -1,0 +1,15 @@
+{
+  Map<NodePort,List<Integer>> aliveAssigned=new HashMap<NodePort,List<Integer>>();
+  if (existingAssignment == null) {
+    return aliveAssigned;
+  }
+  Set<Integer> aliveIds=getAliveTasks(topologyId,allTaskIds);
+  Map<NodePort,List<Integer>> existingAssigned=JStormUtils.reverse_map(existingAssignment.getTaskToNodeport());
+  for (  Entry<NodePort,List<Integer>> entry : existingAssigned.entrySet()) {
+    Set<Integer> taskids=JStormUtils.listToSet(entry.getValue());
+    if (aliveIds != null && aliveIds.containsAll(taskids)) {
+      aliveAssigned.put(entry.getKey(),entry.getValue());
+    }
+  }
+  return aliveAssigned;
+}

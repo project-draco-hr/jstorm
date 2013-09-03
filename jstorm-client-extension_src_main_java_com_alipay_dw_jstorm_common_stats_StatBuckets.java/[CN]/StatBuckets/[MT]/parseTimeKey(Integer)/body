@@ -1,0 +1,8 @@
+{
+  if (key == 0) {
+    return ALL_WINDOW_STR;
+  }
+ else {
+    return String.valueOf(key);
+  }
+}

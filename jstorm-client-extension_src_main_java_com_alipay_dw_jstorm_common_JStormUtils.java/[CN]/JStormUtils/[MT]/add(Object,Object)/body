@@ -1,0 +1,24 @@
+{
+  if (oldValue == null) {
+    return newValue;
+  }
+  if (oldValue instanceof Long) {
+    if (newValue == null) {
+      return (Long)oldValue;
+    }
+ else {
+      return (Long)oldValue + (Long)newValue;
+    }
+  }
+ else   if (oldValue instanceof Double) {
+    if (newValue == null) {
+      return (Double)oldValue;
+    }
+ else {
+      return (Double)oldValue + (Double)newValue;
+    }
+  }
+ else {
+    return null;
+  }
+}

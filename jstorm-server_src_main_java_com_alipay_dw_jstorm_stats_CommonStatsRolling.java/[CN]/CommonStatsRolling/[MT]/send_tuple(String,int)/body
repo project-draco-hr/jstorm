@@ -1,0 +1,26 @@
+{
+  if (enable == false) {
+    return;
+  }
+  if (num_out_tasks <= 0) {
+    return;
+  }
+  EventSampler emittedSampler=emittedSamplers.get(stream);
+  if (emittedSampler == null) {
+    emittedSampler=new EventSampler(rate);
+    emittedSamplers.put(stream,emittedSampler);
+  }
+  Integer times=emittedSampler.timesCheck();
+  if (times != null) {
+    update_task_stat(StaticsType.emitted,stream,times * num_out_tasks);
+  }
+  EventSampler sendTpsSampler=sendTpsSamplers.get(stream);
+  if (sendTpsSampler == null) {
+    sendTpsSampler=new EventSampler(rate);
+    sendTpsSamplers.put(stream,sendTpsSampler);
+  }
+  Integer send=sendTpsSampler.tpsCheck();
+  if (send != null) {
+    update_task_stat(StaticsType.send_tps,stream,send * num_out_tasks);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  LinearDRPCTopologyBuilder builder=construct();
+  Config conf=new Config();
+  conf.setNumWorkers(6);
+  StormSubmitter.submitTopology(args[0],conf,builder.createRemoteTopology());
+}

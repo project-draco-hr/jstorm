@@ -1,0 +1,9 @@
+{
+  Map<String,String> rtn=new HashMap<String,String>();
+  for (  Entry<String,Assignment> entry : assignments.entrySet()) {
+    String topologyid=entry.getKey();
+    Assignment assignmenInfo=entry.getValue();
+    rtn.put(topologyid,assignmenInfo.getMasterCodeDir());
+  }
+  return rtn;
+}

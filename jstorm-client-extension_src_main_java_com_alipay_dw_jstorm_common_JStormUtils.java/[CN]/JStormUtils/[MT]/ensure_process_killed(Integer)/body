@@ -1,0 +1,15 @@
+{
+  for (int i=0; i < 5; i++) {
+    try {
+      exec_command("kill -9 " + pid);
+      LOG.info("kill -9 process " + pid);
+      sleepMs(100);
+    }
+ catch (    ExecuteException e) {
+      LOG.info("Error when trying to kill " + pid + ". Process is probably already dead. ");
+    }
+catch (    Exception e) {
+      LOG.info("Error when trying to kill " + pid + ".Exception ",e);
+    }
+  }
+}

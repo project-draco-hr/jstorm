@@ -1,0 +1,3 @@
+boolean distributeZmq
+String host
+int port

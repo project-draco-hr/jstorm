@@ -1,0 +1,28 @@
+{
+  String classpath=JStormUtils.current_classpath();
+  String[] classpathes=classpath.split(":");
+  Set<String> classSet=new HashSet<String>();
+  for (  String classJar : classpathes) {
+    classSet.add(classJar);
+  }
+  if (stormHome != null) {
+    List<String> stormHomeFiles=PathUtils.read_dir_contents(stormHome);
+    for (    String file : stormHomeFiles) {
+      if (file.endsWith(".jar")) {
+        classSet.add(stormHome + "/" + file);
+      }
+    }
+    List<String> stormLibFiles=PathUtils.read_dir_contents(stormHome + "/lib");
+    for (    String file : stormLibFiles) {
+      if (file.endsWith(".jar")) {
+        classSet.add(stormHome + "/lib/" + file);
+      }
+    }
+  }
+  StringBuilder sb=new StringBuilder();
+  sb.append(stormjar);
+  for (  String jar : classSet) {
+    sb.append(":" + jar);
+  }
+  return sb.toString();
+}

@@ -1,0 +1,7 @@
+{
+  HashCodeBuilder builder=new HashCodeBuilder();
+  boolean present_host=true && (is_set_host());
+  builder.append(present_host);
+  if (present_host)   builder.append(host);
+  return builder.toHashCode();
+}

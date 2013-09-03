@@ -1,0 +1,4 @@
+{
+  tpsCounter.cleanup();
+  LOG.info("Finish cleanup");
+}

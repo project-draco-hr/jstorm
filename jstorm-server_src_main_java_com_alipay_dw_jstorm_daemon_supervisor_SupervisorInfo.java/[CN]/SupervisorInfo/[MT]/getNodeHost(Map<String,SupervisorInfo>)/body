@@ -1,0 +1,9 @@
+{
+  Map<String,String> rtn=new HashMap<String,String>();
+  for (  Entry<String,SupervisorInfo> entry : supInfos.entrySet()) {
+    SupervisorInfo superinfo=entry.getValue();
+    String supervisorid=entry.getKey();
+    rtn.put(supervisorid,superinfo.getHostName());
+  }
+  return rtn;
+}

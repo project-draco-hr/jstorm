@@ -1,0 +1,12 @@
+{
+  if (isMultiProducer) {
+    ringBuffer=RingBuffer.createMultiProducer(new ObjectEventFactory(),bufferSize,waitStrategy);
+  }
+ else {
+    ringBuffer=RingBuffer.createSingleProducer(new ObjectEventFactory(),bufferSize,waitStrategy);
+  }
+  sequenceBarrier=ringBuffer.newBarrier();
+  exceptionHandler=new FatalExceptionHandler();
+  workProcessors=new ArrayList<WorkProcessor>();
+  workSequence=new Sequence(Sequencer.INITIAL_CURSOR_VALUE);
+}

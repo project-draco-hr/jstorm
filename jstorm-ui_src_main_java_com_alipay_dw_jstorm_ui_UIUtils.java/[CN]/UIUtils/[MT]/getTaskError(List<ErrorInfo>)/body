@@ -1,0 +1,23 @@
+{
+  if (errList == null) {
+    return "";
+  }
+  TreeMap<Integer,String> map=new TreeMap<Integer,String>(new DescendComparator());
+  for (  ErrorInfo einfo : errList) {
+    long current=System.currentTimeMillis() / 1000;
+    if (current - einfo.get_error_time_secs() < maxErrortime) {
+      map.put(new Integer(einfo.get_error_time_secs()),einfo.get_error());
+    }
+  }
+  String rtn="";
+  Collection<String> values=map.values();
+  int size=0;
+  for (  String s : values) {
+    if (size >= maxErrornum) {
+      break;
+    }
+    rtn+=s + ";";
+    size++;
+  }
+  return rtn;
+}

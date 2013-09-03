@@ -1,0 +1,6 @@
+{
+  set_port_isSet(false);
+  this.port=0;
+  this.topology=null;
+  this.tasks=null;
+}

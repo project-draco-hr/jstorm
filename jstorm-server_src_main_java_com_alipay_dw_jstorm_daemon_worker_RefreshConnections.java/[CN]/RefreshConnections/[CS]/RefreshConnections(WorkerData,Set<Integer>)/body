@@ -1,0 +1,12 @@
+{
+  this.workerData=workerData;
+  this.active=workerData.getActive();
+  this.conf=workerData.getConf();
+  this.zkCluster=workerData.getZkCluster();
+  this.topologyId=workerData.getTopologyId();
+  this.outboundTasks=outbound_tasks;
+  this.nodeportSocket=workerData.getNodeportSocket();
+  this.mqContext=workerData.getMqContext();
+  this.taskNodeport=workerData.getTaskNodeport();
+  frequence=JStormUtils.parseInt(conf.get(Config.TASK_REFRESH_POLL_SECS),5);
+}

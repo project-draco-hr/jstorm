@@ -1,0 +1,7 @@
+{
+  Object ret=null;
+  for (  Object value : list) {
+    ret=add(ret,value);
+  }
+  return ret;
+}

@@ -1,0 +1,12 @@
+{
+  QueueConnection queueConnection=null;
+synchronized (this) {
+    queueConnection=queueConnections.get(port);
+    if (queueConnection == null) {
+      queueConnection=new QueueConnection();
+      queueConnections.put(port,queueConnection);
+      LOG.info("Create internal queue connect " + port);
+    }
+  }
+  return queueConnection;
+}

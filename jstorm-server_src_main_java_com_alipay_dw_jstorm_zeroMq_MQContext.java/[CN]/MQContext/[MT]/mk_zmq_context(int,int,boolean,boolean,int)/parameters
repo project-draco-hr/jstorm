@@ -1,0 +1,5 @@
+int num_threads
+int linger
+boolean local
+boolean virtportZmq
+int maxQueueMsg

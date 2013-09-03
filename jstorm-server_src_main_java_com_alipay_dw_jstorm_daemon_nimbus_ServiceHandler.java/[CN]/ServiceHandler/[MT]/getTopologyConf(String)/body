@@ -1,0 +1,12 @@
+{
+  String rtn;
+  try {
+    Map<Object,Object> topologyConf=StormConfig.read_nimbus_topology_conf(conf,id);
+    rtn=JStormUtils.to_json(topologyConf);
+  }
+ catch (  IOException e) {
+    LOG.info("Failed to get configuration of " + id,e);
+    throw new TException(e);
+  }
+  return rtn;
+}

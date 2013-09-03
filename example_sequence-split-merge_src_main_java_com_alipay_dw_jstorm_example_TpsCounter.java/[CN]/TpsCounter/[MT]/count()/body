@@ -1,0 +1,8 @@
+{
+  long totalValue=total.incrementAndGet();
+  long tpsValue=tps.incrementAndGet();
+  if (intervalCheck.check() == true) {
+    LOG.info(id + " tps " + tpsValue / intervalCheck.getInterval() + ", total:" + totalValue);
+    tps.set(0);
+  }
+}

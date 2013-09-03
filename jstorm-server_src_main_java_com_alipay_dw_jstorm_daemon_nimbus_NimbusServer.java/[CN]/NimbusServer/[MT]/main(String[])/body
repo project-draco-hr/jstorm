@@ -1,0 +1,5 @@
+{
+  @SuppressWarnings("rawtypes") Map config=Utils.readStormConfig();
+  NimbusServer instance=new NimbusServer();
+  instance.launchServer(config);
+}

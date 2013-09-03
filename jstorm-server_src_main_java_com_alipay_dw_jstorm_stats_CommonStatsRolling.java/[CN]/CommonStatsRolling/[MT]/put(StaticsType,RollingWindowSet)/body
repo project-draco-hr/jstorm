@@ -1,0 +1,3 @@
+{
+  staticTypeMap.put(type,statics);
+}

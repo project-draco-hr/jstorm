@@ -1,0 +1,15 @@
+{
+  __isset_bit_vector.clear();
+  __isset_bit_vector.or(other.__isset_bit_vector);
+  this.port=other.port;
+  if (other.is_set_topology()) {
+    this.topology=other.topology;
+  }
+  if (other.is_set_tasks()) {
+    List<TaskSummary> __this__tasks=new ArrayList<TaskSummary>();
+    for (    TaskSummary other_element : other.tasks) {
+      __this__tasks.add(new TaskSummary(other_element));
+    }
+    this.tasks=__this__tasks;
+  }
+}

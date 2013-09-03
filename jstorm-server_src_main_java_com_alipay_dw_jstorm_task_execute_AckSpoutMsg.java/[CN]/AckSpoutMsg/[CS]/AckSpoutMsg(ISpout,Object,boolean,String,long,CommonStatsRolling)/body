@@ -1,0 +1,8 @@
+{
+  this.spout=_spout;
+  this.msg_id=_msg_id;
+  this.isDebug=_isDebug;
+  this.stream=stream;
+  this.time_stamp=_time_stamp;
+  this.task_stats=_task_stats;
+}

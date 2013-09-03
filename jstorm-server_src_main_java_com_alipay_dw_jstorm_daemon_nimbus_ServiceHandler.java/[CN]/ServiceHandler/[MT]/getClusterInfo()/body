@@ -1,0 +1,50 @@
+{
+  try {
+    StormClusterState stormClusterState=data.getStormClusterState();
+    Map<String,Assignment> assignments=new HashMap<String,Assignment>();
+    int uptime=data.uptime();
+    List<TopologySummary> topologySummaries=new ArrayList<TopologySummary>();
+    Map<String,StormBase> bases=Cluster.topology_bases(stormClusterState);
+    for (    Entry<String,StormBase> entry : bases.entrySet()) {
+      String stormId=entry.getKey();
+      StormBase base=entry.getValue();
+      Assignment assignment=stormClusterState.assignment_info(stormId,null);
+      if (assignment == null) {
+        LOG.error("Failed to get assignment of " + stormId);
+        continue;
+      }
+      assignments.put(stormId,assignment);
+      HashSet<NodePort> workers=new HashSet<NodePort>();
+      Collection<NodePort> entryColl=assignment.getTaskToNodeport().values();
+      workers.addAll(entryColl);
+      TopologySummary topology=new TopologySummary(stormId,base.getStormName(),assignment.getTaskToNodeport().size(),workers.size(),TimeUtils.time_delta(base.getLanchTimeSecs()),extractStatusStr(base));
+      topologySummaries.add(topology);
+    }
+    Map<String,Set<Integer>> assigned=Cluster.assignedSlots(stormClusterState,assignments);
+    Map<String,SupervisorInfo> supervisorInfos=Cluster.allSupervisorInfo(stormClusterState,null);
+    List<SupervisorSummary> supervisorSummaries=new ArrayList<SupervisorSummary>();
+    for (    Entry<String,SupervisorInfo> entry : supervisorInfos.entrySet()) {
+      String supervisorId=entry.getKey();
+      SupervisorInfo info=entry.getValue();
+      int num_workers=0;
+      List<Integer> ports=info.getWorkPorts();
+      if (ports != null) {
+        num_workers=ports.size();
+      }
+      int num_used_workers=0;
+      if (assigned != null && assigned.get(supervisorId) != null) {
+        num_used_workers=assigned.get(supervisorId).size();
+      }
+      supervisorSummaries.add(new SupervisorSummary(info.getHostName(),info.getUptimeSecs(),num_workers,num_used_workers));
+    }
+    return new ClusterSummary(supervisorSummaries,uptime,topologySummaries);
+  }
+ catch (  TException e) {
+    LOG.info("Failed to get ClusterSummary ",e);
+    throw e;
+  }
+catch (  Exception e) {
+    LOG.info("Failed to get ClusterSummary ",e);
+    throw new TException(e);
+  }
+}

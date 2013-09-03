@@ -1,0 +1,6 @@
+String taskid
+String host
+String port
+String topologyname
+String componentId
+String uptime

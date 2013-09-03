@@ -1,0 +1,3 @@
+{
+  ZeroMq.send(socket,message);
+}

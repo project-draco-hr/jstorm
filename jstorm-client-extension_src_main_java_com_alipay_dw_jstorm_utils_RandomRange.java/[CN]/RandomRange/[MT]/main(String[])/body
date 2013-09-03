@@ -1,0 +1,6 @@
+{
+  RandomRange test=new RandomRange(10);
+  for (int i=0; i < 10; i++) {
+    System.out.println(test.acquire_random_range_id());
+  }
+}

@@ -1,0 +1,9 @@
+{
+  String cmd="unzip -qq " + jarpath + " "+ dir+ "/** -d "+ destdir;
+  try {
+    exec_command(cmd);
+  }
+ catch (  Exception e) {
+    LOG.warn("Error when trying to extract " + dir + " from "+ jarpath+ " IOException"+ "by cmd:"+ cmd+ "!"+ e.getMessage());
+  }
+}

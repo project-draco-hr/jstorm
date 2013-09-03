@@ -1,0 +1,14 @@
+{
+  if (o == null) {
+    return defaultValue;
+  }
+  if (o instanceof String) {
+    return Boolean.valueOf((String)o);
+  }
+ else   if (o instanceof Boolean) {
+    return (Boolean)o;
+  }
+ else {
+    return defaultValue;
+  }
+}

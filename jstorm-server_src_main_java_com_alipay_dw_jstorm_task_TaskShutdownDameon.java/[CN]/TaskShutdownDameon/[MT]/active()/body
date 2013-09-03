@@ -1,0 +1,6 @@
+{
+  if (task_obj instanceof ISpout) {
+    taskStatus.setStatus(TaskStatus.RUN);
+    ((ISpout)task_obj).activate();
+  }
+}

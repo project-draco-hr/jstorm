@@ -1,0 +1,40 @@
+{
+  if (that == null)   return false;
+  boolean this_present_emitted=true && this.is_set_emitted();
+  boolean that_present_emitted=true && that.is_set_emitted();
+  if (this_present_emitted || that_present_emitted) {
+    if (!(this_present_emitted && that_present_emitted))     return false;
+    if (!this.emitted.equals(that.emitted))     return false;
+  }
+  boolean this_present_send_tps=true && this.is_set_send_tps();
+  boolean that_present_send_tps=true && that.is_set_send_tps();
+  if (this_present_send_tps || that_present_send_tps) {
+    if (!(this_present_send_tps && that_present_send_tps))     return false;
+    if (!this.send_tps.equals(that.send_tps))     return false;
+  }
+  boolean this_present_recv_tps=true && this.is_set_recv_tps();
+  boolean that_present_recv_tps=true && that.is_set_recv_tps();
+  if (this_present_recv_tps || that_present_recv_tps) {
+    if (!(this_present_recv_tps && that_present_recv_tps))     return false;
+    if (!this.recv_tps.equals(that.recv_tps))     return false;
+  }
+  boolean this_present_acked=true && this.is_set_acked();
+  boolean that_present_acked=true && that.is_set_acked();
+  if (this_present_acked || that_present_acked) {
+    if (!(this_present_acked && that_present_acked))     return false;
+    if (!this.acked.equals(that.acked))     return false;
+  }
+  boolean this_present_failed=true && this.is_set_failed();
+  boolean that_present_failed=true && that.is_set_failed();
+  if (this_present_failed || that_present_failed) {
+    if (!(this_present_failed && that_present_failed))     return false;
+    if (!this.failed.equals(that.failed))     return false;
+  }
+  boolean this_present_process_ms_avg=true && this.is_set_process_ms_avg();
+  boolean that_present_process_ms_avg=true && that.is_set_process_ms_avg();
+  if (this_present_process_ms_avg || that_present_process_ms_avg) {
+    if (!(this_present_process_ms_avg && that_present_process_ms_avg))     return false;
+    if (!this.process_ms_avg.equals(that.process_ms_avg))     return false;
+  }
+  return true;
+}

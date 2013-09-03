@@ -1,0 +1,5 @@
+{
+  if (other.is_set_host()) {
+    this.host=other.host;
+  }
+}

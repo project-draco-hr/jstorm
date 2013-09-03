@@ -1,0 +1,7 @@
+{
+  TopologyBuilder builder=new TopologyBuilder();
+  Map conf=new HashMap();
+  SetBuilder(builder,conf);
+  conf.put(Config.STORM_CLUSTER_MODE,"distributed");
+  StormSubmitter.submitTopology(streamName,conf,builder.createTopology());
+}

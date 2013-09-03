@@ -1,0 +1,9 @@
+{
+  eventManager.add(event);
+  if (active.get()) {
+    this.result=frequence;
+  }
+ else {
+    this.result=-1;
+  }
+}

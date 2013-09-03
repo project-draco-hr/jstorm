@@ -1,0 +1,9 @@
+{
+  Map<StaticsType,Object> staticsType=UIUtils.mergeTasks(taskSummaries,window);
+  Components component=new Components();
+  component.setType(type);
+  component.setComponetId(componentId);
+  component.setParallelism(String.valueOf(taskSummaries.size()));
+  component.setValues(staticsType);
+  return component;
+}

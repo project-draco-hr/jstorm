@@ -1,0 +1,6 @@
+{
+  if (task_obj instanceof ISpout) {
+    taskStatus.setStatus(TaskStatus.PAUSE);
+    ((ISpout)task_obj).deactivate();
+  }
+}

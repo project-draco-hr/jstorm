@@ -1,0 +1,7 @@
+{
+  context=_context;
+  linger_ms=_linger_ms;
+  ipc=_ipc;
+  this.virtportZmq=virtportZmq;
+  this.maxQueueMsg=maxQueueMsg;
+}

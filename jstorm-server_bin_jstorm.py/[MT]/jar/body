@@ -1,0 +1,4 @@
+def jar(jarfile, klass, *args):
+    'Syntax: [jstorm jar topology-jar-path class ...]\n\n    Runs the main method of class with the specified arguments. \n    The jstorm jars and configs in ~/.jstorm are put on the classpath. \n    The process is configured so that StormSubmitter \n    (http://nathanmarz.github.com/storm/doc/backtype/storm/StormSubmitter.html)\n    will upload the jar at topology-jar-path when the topology is submitted.\n    '
+    childopts = ('-Dstorm.jar=' + jarfile)
+    exec_storm_class(klass, jvmtype='-client -Xms256m -Xmx256m', extrajars=[jarfile, CONF_DIR, (JSTORM_DIR + '/bin'), LOG4J_CONF], args=args, childopts=childopts)

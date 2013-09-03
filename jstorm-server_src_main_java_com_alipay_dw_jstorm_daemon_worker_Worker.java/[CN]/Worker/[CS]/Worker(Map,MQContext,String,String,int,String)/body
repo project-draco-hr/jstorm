@@ -1,0 +1,3 @@
+{
+  workerData=new WorkerData(conf,mq_context,topology_id,supervisor_id,port,worker_id);
+}

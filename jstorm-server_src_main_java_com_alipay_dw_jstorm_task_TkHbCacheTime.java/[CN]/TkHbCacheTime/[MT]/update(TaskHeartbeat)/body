@@ -1,0 +1,6 @@
+{
+  int nowSecs=TimeUtils.current_time_secs();
+  this.nimbusTime=nowSecs;
+  this.taskReportedTime=zkTaskHeartbeat.getTimeSecs();
+  this.taskAssignedTime=zkTaskHeartbeat.getTimeSecs() - zkTaskHeartbeat.getUptimeSecs();
+}

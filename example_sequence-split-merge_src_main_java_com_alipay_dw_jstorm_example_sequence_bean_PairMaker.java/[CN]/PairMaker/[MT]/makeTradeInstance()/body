@@ -1,0 +1,8 @@
+{
+  Pair pair=new Pair();
+  String key=tradeType[rand.nextInt(tradeType.length)];
+  Long value=Long.valueOf(((rand.nextInt(1000000) - 400000) / 1000));
+  pair.setKey(key);
+  pair.setValue(value);
+  return pair;
+}

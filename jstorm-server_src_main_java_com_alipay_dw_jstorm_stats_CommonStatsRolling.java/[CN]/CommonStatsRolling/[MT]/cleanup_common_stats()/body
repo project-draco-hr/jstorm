@@ -1,0 +1,6 @@
+{
+  for (  Entry<StaticsType,RollingWindowSet> entry : staticTypeMap.entrySet()) {
+    RollingWindowSet rws=entry.getValue();
+    rws.cleanup_rolling_window_set();
+  }
+}

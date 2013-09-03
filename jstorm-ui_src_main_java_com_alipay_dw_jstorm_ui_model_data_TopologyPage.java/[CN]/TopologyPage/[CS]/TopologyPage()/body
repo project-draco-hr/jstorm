@@ -1,0 +1,14 @@
+{
+  FacesContext ctx=FacesContext.getCurrentInstance();
+  if (ctx.getExternalContext().getRequestParameterMap().get("topologyid") != null) {
+    topologyid=(String)ctx.getExternalContext().getRequestParameterMap().get("topologyid");
+    LOG.debug("Query topology " + topologyid);
+  }
+  window=UIUtils.getWindow(ctx);
+  LOG.info("Window:" + window);
+  if (topologyid == null) {
+    LOG.error("Not set topologyid");
+    throw new NotAliveException("Input topologyId is null ");
+  }
+  init();
+}

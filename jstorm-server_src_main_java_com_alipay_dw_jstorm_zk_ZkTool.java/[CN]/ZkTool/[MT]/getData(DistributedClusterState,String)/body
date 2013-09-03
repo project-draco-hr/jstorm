@@ -1,0 +1,8 @@
+{
+  byte[] data=zkClusterState.get_data(path,false);
+  if (data == null || data.length == 0) {
+    return null;
+  }
+  Object obj=Utils.deserialize(data);
+  return obj.toString();
+}

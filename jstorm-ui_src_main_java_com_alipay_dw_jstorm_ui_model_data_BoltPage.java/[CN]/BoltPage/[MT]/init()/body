@@ -1,0 +1,28 @@
+{
+  NimbusClient client=null;
+  try {
+    Map conf=UIUtils.readUiConfig();
+    client=NimbusClient.getConfiguredClient(conf);
+    TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
+    StormTopology topology=client.getClient().getTopology(topologyid);
+    String type=UIUtils.componentType(topology,componentid);
+    List<TaskSummary> ts=UIUtils.getTaskList(summ.get_tasks(),componentid);
+    coms=getComponentSummaries(summ,ts);
+    cts=getComponentTasks(ts,window);
+    comstats=getWinComponentStats(ts,window);
+    getInputOutputSummary(ts,window);
+  }
+ catch (  TException e) {
+    LOG.error(e.getCause(),e);
+    throw e;
+  }
+catch (  NotAliveException e) {
+    LOG.error(e.getCause(),e);
+    throw e;
+  }
+ finally {
+    if (client != null) {
+      client.close();
+    }
+  }
+}

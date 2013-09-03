@@ -1,0 +1,25 @@
+{
+  try {
+    while (true) {
+      Runnable event=null;
+      if (supportRecvThread == true) {
+        try {
+          event=ackerQueue.take();
+        }
+ catch (        InterruptedException e) {
+        }
+      }
+ else {
+        event=ackerQueue.poll();
+      }
+      if (event == null) {
+        return;
+      }
+      event.run();
+    }
+  }
+ catch (  Exception e) {
+    LOG.info("Unknow excpetion ",e);
+    report_error.report(e);
+  }
+}

@@ -1,0 +1,18 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  getSupervisorWorkers_args typedOther=(getSupervisorWorkers_args)other;
+  lastComparison=Boolean.valueOf(is_set_host()).compareTo(typedOther.is_set_host());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_host()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.host,typedOther.host);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

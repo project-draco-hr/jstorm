@@ -1,0 +1,12 @@
+{
+  this.reportError=report_error;
+  this.sendTargets=_send_fn;
+  this.storm_conf=_storm_conf;
+  this.workerTransfer=_transfer_fn;
+  this.topologyContext=_topology_context;
+  this.task_id=task_id;
+  this.task_stats=_task_stats;
+  this.pending_acks=new TimeCacheMap<Tuple,Long>(message_timeout_secs,Acker.TIMEOUT_BUCKET_NUM);
+  this.tuple_start_times=tuple_start_times;
+  this.ackerNum=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_ACKERS));
+}

@@ -1,0 +1,15 @@
+{
+  this.storm_conf=_storm_conf;
+  this.puller=_puller;
+  this.userTopologyCtx=_user_context;
+  this.task_stats=_task_stats;
+  this.taskId=topology_context.getThisTaskId();
+  this.component_id=topology_context.getThisComponentId();
+  this.idStr="ComponentId:" + component_id + ",taskId:"+ taskId+ " ";
+  this.taskStatus=taskStatus;
+  this.report_error=_report_error;
+  this.deserializer=new KryoTupleDeserializer(storm_conf,topology_context);
+  this.isDebugRecv=JStormUtils.parseBoolean(storm_conf.get(ConfigExtension.TOPOLOGY_DEBUG_RECV_TUPLE),false);
+  this.isDebug=JStormUtils.parseBoolean(storm_conf.get(Config.TOPOLOGY_DEBUG),false);
+  message_timeout_secs=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS));
+}

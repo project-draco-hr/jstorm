@@ -1,0 +1,3 @@
+{
+  LOG.info(ZkTool.class.getName() + " read zkpath");
+}

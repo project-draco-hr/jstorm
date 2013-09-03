@@ -1,0 +1,8 @@
+{
+  this.stream=stream;
+  this.emitted=JStormUtils.formatValue(emitted);
+  this.sendTps=JStormUtils.formatValue(sendTps);
+  this.acked=JStormUtils.formatValue(acked);
+  this.failed=JStormUtils.formatValue(failed);
+  this.process=JStormUtils.formatValue(process);
+}

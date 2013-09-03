@@ -1,0 +1,6 @@
+{
+synchronized (_lock) {
+    LinkedBlockingDeque<K> bucket=_buckets.getFirst();
+    bucket.offer(entry);
+  }
+}

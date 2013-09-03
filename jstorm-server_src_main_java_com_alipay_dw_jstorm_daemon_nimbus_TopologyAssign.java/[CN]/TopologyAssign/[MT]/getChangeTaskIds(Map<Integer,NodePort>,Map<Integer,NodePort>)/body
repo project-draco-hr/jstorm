@@ -1,0 +1,35 @@
+{
+  Map<NodePort,List<Integer>> oldSlotAssigned=JStormUtils.reverse_map(oldTaskToNodePort);
+  Map<NodePort,List<Integer>> newSlotAssigned=JStormUtils.reverse_map(newTaskToNodePort);
+  Set<Integer> rtn=new HashSet<Integer>();
+  for (  Entry<NodePort,List<Integer>> entry : newSlotAssigned.entrySet()) {
+    if (oldSlotAssigned.containsKey(entry.getKey()) == false) {
+      List<Integer> lst=entry.getValue();
+      rtn.addAll(lst);
+    }
+ else {
+      List<Integer> oldList=oldSlotAssigned.get(entry.getKey());
+      List<Integer> newList=entry.getValue();
+      if (oldList == null) {
+        rtn.addAll(newList);
+        continue;
+      }
+ else       if (newList == null) {
+        LOG.error("newSlotAssigned and newSlotAssign is null, " + entry.getKey());
+        continue;
+      }
+      boolean isSame=true;
+      if (oldList.containsAll(newList) == false) {
+        isSame=false;
+      }
+ else       if (newList.containsAll(oldList) == false) {
+        isSame=false;
+      }
+      if (isSame == false) {
+        rtn.addAll(newList);
+        continue;
+      }
+    }
+  }
+  return rtn;
+}

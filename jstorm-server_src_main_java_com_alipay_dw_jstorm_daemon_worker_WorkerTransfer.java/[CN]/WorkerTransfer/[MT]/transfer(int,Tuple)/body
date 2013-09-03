@@ -1,0 +1,6 @@
+{
+  byte[] tupleMessage=serializer.serialize(tuple);
+  byte[] sendMessage=PacketPair.mk_packet((short)taskid,tupleMessage);
+  TransferData tData=new TransferData(taskid,sendMessage);
+  transferQueue.offer(tData);
+}

@@ -1,0 +1,28 @@
+{
+  Map<String,List<NodePort>> nodeMap=new HashMap<String,List<NodePort>>();
+  for (  NodePort np : allSlots) {
+    String node=np.getNode();
+    List<NodePort> list=nodeMap.get(node);
+    if (list == null) {
+      list=new ArrayList<NodePort>();
+      nodeMap.put(node,list);
+    }
+    list.add(np);
+  }
+  for (  Entry<String,List<NodePort>> entry : nodeMap.entrySet()) {
+    List<NodePort> ports=entry.getValue();
+    Collections.sort(ports);
+  }
+  List<List<NodePort>> splitup=new ArrayList<List<NodePort>>(nodeMap.values());
+  Collections.sort(splitup,new Comparator<List<NodePort>>(){
+    public int compare(    List<NodePort> o1,    List<NodePort> o2){
+      return o1.size() - o2.size();
+    }
+  }
+);
+  List<NodePort> sortedFreeSlots=JStormUtils.interleave_all(splitup);
+  if (sortedFreeSlots.size() <= needSlotNum) {
+    return sortedFreeSlots;
+  }
+  return sortedFreeSlots.subList(0,needSlotNum);
+}

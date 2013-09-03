@@ -1,0 +1,10 @@
+{
+  LOG.info("Killing topology: " + topologyid);
+  try {
+    data.getStormClusterState().remove_storm(topologyid);
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to remove StormBase " + topologyid + " from ZK",e);
+  }
+  return null;
+}

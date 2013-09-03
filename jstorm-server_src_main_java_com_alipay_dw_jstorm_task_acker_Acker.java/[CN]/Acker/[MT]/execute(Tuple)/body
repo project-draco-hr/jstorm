@@ -1,0 +1,55 @@
+{
+  Object id=input.getValue(0);
+  AckObject curr=pending.get(id);
+  String stream_id=input.getSourceStreamId();
+  if (Acker.ACKER_INIT_STREAM_ID.equals(stream_id)) {
+    if (curr == null) {
+      curr=new AckObject();
+      curr.val=input.getLong(1);
+      curr.spout_task=input.getInteger(2);
+      pending.put(id,curr);
+    }
+ else {
+      curr.update_ack(input.getValue(1));
+      curr.spout_task=input.getInteger(2);
+    }
+  }
+ else   if (Acker.ACKER_ACK_STREAM_ID.equals(stream_id)) {
+    if (curr != null) {
+      curr.update_ack(input.getValue(1));
+    }
+ else {
+      curr=new AckObject();
+      curr.val=Long.valueOf(input.getLong(1));
+      pending.put(id,curr);
+    }
+  }
+ else   if (Acker.ACKER_FAIL_STREAM_ID.equals(stream_id)) {
+    if (curr == null) {
+      return;
+    }
+    curr.failed=true;
+  }
+ else {
+    LOG.info("Unknow source stream");
+    return;
+  }
+  Integer task=curr.spout_task;
+  if (task != null) {
+    if (curr.val == 0) {
+      pending.remove(id);
+      List values=JStormUtils.mk_list(id);
+      collector.emitDirect(task,Acker.ACKER_ACK_STREAM_ID,values);
+    }
+ else {
+      if (curr.failed) {
+        pending.remove(id);
+        List values=JStormUtils.mk_list(id);
+        collector.emitDirect(task,Acker.ACKER_FAIL_STREAM_ID,values);
+      }
+    }
+  }
+ else {
+  }
+  collector.ack(input);
+}

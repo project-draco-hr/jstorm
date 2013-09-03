@@ -1,0 +1,10 @@
+{
+  TaskStats taskStats=new TaskStats();
+  taskStats.set_emitted(get_emitted());
+  taskStats.set_send_tps(get_send_tps());
+  taskStats.set_recv_tps(get_recv_tps());
+  taskStats.set_acked(get_acked());
+  taskStats.set_failed(get_failed());
+  taskStats.set_process_ms_avg(get_process_latencie());
+  return taskStats;
+}

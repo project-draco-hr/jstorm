@@ -1,0 +1,8 @@
+{
+  this.workerData=workerData;
+  this.active=workerData.getActive();
+  this.conf=workerData.getConf();
+  this.zkCluster=workerData.getZkCluster();
+  this.topologyId=workerData.getTopologyId();
+  this.frequence=JStormUtils.parseInt(conf.get(Config.TASK_REFRESH_POLL_SECS),10);
+}

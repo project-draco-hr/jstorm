@@ -1,0 +1,23 @@
+{
+  RollingWindowSet emitted=StatFunction.keyed_counter_rolling_window_set(StatFunction.NUM_STAT_BUCKETS,StatBuckets.STAT_BUCKETS);
+  staticTypeMap.put(StaticsType.emitted,emitted);
+  RollingWindowSet sendTps=StatFunction.keyed_avg_rolling_window_set(StatFunction.NUM_STAT_BUCKETS,StatBuckets.STAT_BUCKETS);
+  staticTypeMap.put(StaticsType.send_tps,sendTps);
+  RollingWindowSet recvTps=StatFunction.keyed_avg_rolling_window_set(StatFunction.NUM_STAT_BUCKETS,StatBuckets.STAT_BUCKETS);
+  staticTypeMap.put(StaticsType.recv_tps,recvTps);
+  RollingWindowSet acked=StatFunction.keyed_counter_rolling_window_set(StatFunction.NUM_STAT_BUCKETS,StatBuckets.STAT_BUCKETS);
+  staticTypeMap.put(StaticsType.acked,acked);
+  RollingWindowSet failed=StatFunction.keyed_counter_rolling_window_set(StatFunction.NUM_STAT_BUCKETS,StatBuckets.STAT_BUCKETS);
+  staticTypeMap.put(StaticsType.failed,failed);
+  RollingWindowSet process_latencies=StatFunction.keyed_avg_rolling_window_set(StatFunction.NUM_STAT_BUCKETS,StatBuckets.STAT_BUCKETS);
+  staticTypeMap.put(StaticsType.process_latencies,process_latencies);
+  emittedSamplers=new HashMap<String,EventSampler>();
+  sendTpsSamplers=new HashMap<String,EventSampler>();
+  recvTpsSamplers=new HashMap<String,Map<String,EventSampler>>();
+  boltAckedSamplers=new HashMap<String,Map<String,EventSampler>>();
+  boltFailedSamplers=new HashMap<String,Map<String,EventSampler>>();
+  spoutAckedSamplers=new HashMap<String,EventSampler>();
+  spoutFailedSamplers=new HashMap<String,EventSampler>();
+  processSamplers=new HashMap<String,Map<String,EventSampler>>();
+  this.rate=rate;
+}

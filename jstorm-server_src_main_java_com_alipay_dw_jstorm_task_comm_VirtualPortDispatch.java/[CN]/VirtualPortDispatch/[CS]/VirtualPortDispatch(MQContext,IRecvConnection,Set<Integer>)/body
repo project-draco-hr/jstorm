@@ -1,0 +1,6 @@
+{
+  this.mqContext=mqContext;
+  this.recvConn=recvConn;
+  this.valid_ports=valid_ports;
+  sendConns=new HashMap<Integer,ISendConnection>();
+}

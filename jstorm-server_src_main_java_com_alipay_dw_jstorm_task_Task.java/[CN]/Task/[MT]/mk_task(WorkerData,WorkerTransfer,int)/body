@@ -1,0 +1,6 @@
+{
+  TopologyContext topologyContext=workerData.getContextMaker().makeTopologyContext(workerData.getSysTopology(),taskId);
+  TopologyContext userContext=workerData.getContextMaker().makeTopologyContext(workerData.getRawTopology(),taskId);
+  Task t=new Task(workerData,topologyContext,userContext,workerTransfer);
+  return t.execute();
+}

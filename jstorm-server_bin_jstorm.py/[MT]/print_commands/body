@@ -1,0 +1,5 @@
+def print_commands():
+    'Print all client commands and link to documentation'
+    print 'Commands:\n\t', '\n\t'.join(sorted(COMMANDS.keys()))
+    print '\nHelp:', '\n\thelp', '\n\thelp <command>'
+    print '\nDocumentation for the jstorm client can be found at https://github.com/nathanmarz/storm/wiki/Command-line-client\n'

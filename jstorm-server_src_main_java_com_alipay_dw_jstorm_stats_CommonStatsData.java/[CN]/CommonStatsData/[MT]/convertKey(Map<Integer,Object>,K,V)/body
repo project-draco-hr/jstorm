@@ -1,0 +1,10 @@
+{
+  Map<String,Map<K,V>> ret=new HashMap<String,Map<K,V>>();
+  for (  Entry<Integer,Object> times : statics.entrySet()) {
+    Map<K,V> val=(Map<K,V>)times.getValue();
+    Integer window=times.getKey();
+    String key=StatBuckets.parseTimeKey(window);
+    ret.put(key,val);
+  }
+  return ret;
+}

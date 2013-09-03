@@ -1,0 +1,38 @@
+{
+  if (firstTime == true) {
+    int delayRun=JStormUtils.parseInt(storm_conf.get(ConfigExtension.SPOUT_DELAY_RUN),60);
+    JStormUtils.sleepMs(delayRun * 1000);
+    firstTime=false;
+    LOG.info(idStr + " is ready ");
+  }
+  if (supportRecvThread == false) {
+    executeEvent();
+  }
+  if (taskStatus.isRun() == false) {
+    if (supportRecvThread == true) {
+      JStormUtils.sleepMs(10);
+    }
+ else {
+      JStormUtils.sleepMs(1);
+    }
+    return;
+  }
+  if (max_spout_pending == null || pending.size() < max_spout_pending) {
+    try {
+      spout.nextTuple();
+    }
+ catch (    Exception e) {
+      error=e;
+      LOG.error("spout execute error ",e);
+      report_error.report(e);
+    }
+    return;
+  }
+ else {
+    if (supportRecvThread == true) {
+      JStormUtils.sleepMs(1);
+    }
+ else {
+    }
+  }
+}

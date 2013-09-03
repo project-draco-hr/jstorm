@@ -1,0 +1,25 @@
+{
+  if (enable == false) {
+    return;
+  }
+  if (latency_ms == null) {
+    return;
+  }
+  Map<String,EventSampler> componentSamplers=boltAckedSamplers.get(component);
+  if (componentSamplers == null) {
+    componentSamplers=new HashMap<String,EventSampler>();
+    boltAckedSamplers.put(component,componentSamplers);
+  }
+  EventSampler sampler=componentSamplers.get(stream);
+  if (sampler == null) {
+    sampler=new EventSampler(rate);
+    componentSamplers.put(stream,sampler);
+  }
+  Integer times=sampler.timesCheck();
+  if (times == null) {
+    return;
+  }
+  GlobalStreamId key=new GlobalStreamId(component,stream);
+  update_task_stat(StaticsType.acked,key,times);
+  update_task_stat(StaticsType.process_latencies,key,latency_ms);
+}

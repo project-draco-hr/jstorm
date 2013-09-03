@@ -1,0 +1,18 @@
+{
+switch (fieldId) {
+case 1:
+    return EMITTED;
+case 2:
+  return SEND_TPS;
+case 3:
+return RECV_TPS;
+case 4:
+return ACKED;
+case 5:
+return FAILED;
+case 6:
+return PROCESS_MS_AVG;
+default :
+return null;
+}
+}

@@ -1,0 +1,4 @@
+{
+  send_getSupervisorWorkers(host);
+  return recv_getSupervisorWorkers();
+}

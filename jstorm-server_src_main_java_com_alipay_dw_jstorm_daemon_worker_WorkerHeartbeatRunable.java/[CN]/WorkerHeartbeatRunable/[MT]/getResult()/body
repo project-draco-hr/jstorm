@@ -1,0 +1,6 @@
+{
+  if (this.active.get()) {
+    return frequence;
+  }
+  return -1;
+}

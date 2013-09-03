@@ -1,0 +1,16 @@
+{
+  FacesContext ctx=FacesContext.getCurrentInstance();
+  if (ctx.getExternalContext().getRequestParameterMap().get("topologyid") != null) {
+    topologyid=(String)ctx.getExternalContext().getRequestParameterMap().get("topologyid");
+  }
+  if (ctx.getExternalContext().getRequestParameterMap().get("window") != null) {
+    window=(String)ctx.getExternalContext().getRequestParameterMap().get("window");
+  }
+  if (ctx.getExternalContext().getRequestParameterMap().get("componentid") != null) {
+    componentid=(String)ctx.getExternalContext().getRequestParameterMap().get("componentid");
+  }
+  if (ctx.getExternalContext().getRequestParameterMap().get("taskid") != null) {
+    taskid=(String)ctx.getExternalContext().getRequestParameterMap().get("taskid");
+  }
+  window=StatBuckets.getShowTimeStr(window);
+}

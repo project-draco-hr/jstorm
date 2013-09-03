@@ -1,0 +1,5 @@
+{
+  String ret=stormdist_path(masterLocalDir(conf));
+  FileUtils.forceMkdir(new File(ret));
+  return ret;
+}

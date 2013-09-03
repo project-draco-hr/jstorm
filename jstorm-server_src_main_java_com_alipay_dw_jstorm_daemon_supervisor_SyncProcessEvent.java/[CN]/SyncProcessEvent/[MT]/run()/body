@@ -1,0 +1,31 @@
+{
+  LOG.debug("Syncing processes");
+  try {
+    Map<Integer,LocalAssignment> localAssignments=null;
+    try {
+      localAssignments=(Map<Integer,LocalAssignment>)localState.get(Common.LS_LOCAL_ASSIGNMENTS);
+    }
+ catch (    IOException e) {
+      LOG.error("Failed to get LOCAL_ASSIGNMENTS from LocalState",e);
+      throw e;
+    }
+    if (localAssignments == null) {
+      localAssignments=new HashMap<Integer,LocalAssignment>();
+    }
+    LOG.debug("Assigned tasks: " + localAssignments);
+    Map<String,StateHeartbeat> localWorkerStats=null;
+    try {
+      localWorkerStats=getLocalWorkerStats(conf,localState,localAssignments);
+    }
+ catch (    IOException e) {
+      LOG.error("Failed to get Local worker stats");
+      throw e;
+    }
+    LOG.debug("Allocated: " + localWorkerStats);
+    Set<Integer> keepPorts=killUselessWorkers(localWorkerStats);
+    startNewWorkers(keepPorts,localAssignments);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed Sync Process",e);
+  }
+}

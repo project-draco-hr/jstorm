@@ -1,0 +1,15 @@
+{
+  Map<K,V> ret=new HashMap<K,V>();
+  for (  Map<K,V> listEntry : list) {
+    if (listEntry == null) {
+      continue;
+    }
+    for (    Entry<K,V> mapEntry : listEntry.entrySet()) {
+      K key=mapEntry.getKey();
+      V value=mapEntry.getValue();
+      V retValue=(V)add(ret.get(key),value);
+      ret.put(key,retValue);
+    }
+  }
+  return ret;
+}

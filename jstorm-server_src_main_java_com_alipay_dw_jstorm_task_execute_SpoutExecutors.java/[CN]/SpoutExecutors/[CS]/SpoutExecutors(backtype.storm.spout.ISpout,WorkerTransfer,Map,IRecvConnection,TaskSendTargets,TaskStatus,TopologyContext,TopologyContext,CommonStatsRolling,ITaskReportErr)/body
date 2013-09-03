@@ -1,0 +1,37 @@
+{
+  super(_transfer_fn,_storm_conf,_puller,topology_context,_user_context,_task_stats,taskStatus,_report_error);
+  this.spout=_spout;
+  ackerQueue=new LinkedBlockingQueue<Runnable>();
+  this.pending=new TimeCacheMap(message_timeout_secs,Acker.TIMEOUT_BUCKET_NUM,new SpoutTimeCallBack<Object,Object>(ackerQueue,spout,storm_conf,task_stats));
+  this.max_spout_pending=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
+  if (max_spout_pending != null && max_spout_pending.intValue() == 1) {
+    LOG.info("Do recv/ack in execute thread");
+    supportRecvThread=false;
+  }
+ else {
+    LOG.info("Do recv/ack in extra thread");
+    supportRecvThread=true;
+  }
+  if (supportRecvThread == true) {
+    Thread ackerThread=new Thread(new AckerRunnable());
+    ackerThread.setName("SpoutAckThread");
+    ackerThread.setDaemon(true);
+    ackerThread.setPriority(Thread.MAX_PRIORITY);
+    ackerThread.start();
+  }
+  Thread recvThread=new Thread(new AckerRecvRunnable());
+  recvThread.setName("SpoutRecvThread");
+  recvThread.setDaemon(true);
+  recvThread.setPriority(Thread.MAX_PRIORITY);
+  recvThread.start();
+  this.output_collector=new SpoutCollector(taskId,spout,task_stats,sendTargets,storm_conf,_transfer_fn,pending,topology_context,ackerQueue,_report_error);
+  try {
+    this.spout.open(storm_conf,userTopologyCtx,new SpoutOutputCollector(output_collector));
+  }
+ catch (  Exception e) {
+    error=e;
+    LOG.error("spout open error ",e);
+    report_error.report(e);
+  }
+  LOG.info("Successfully create SpoutExecutors " + idStr);
+}

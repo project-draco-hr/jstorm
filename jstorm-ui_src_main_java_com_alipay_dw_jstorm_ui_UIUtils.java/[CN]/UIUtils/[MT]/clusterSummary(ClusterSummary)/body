@@ -1,0 +1,27 @@
+{
+  List<SupervisorSummary> sups=summ.get_supervisors();
+  int useSlots=0;
+  int totalSlots=0;
+  int supSize=0;
+  if (sups != null) {
+    supSize=sups.size();
+    for (int i=0; i < supSize; i++) {
+      useSlots+=sups.get(i).get_num_used_workers();
+      totalSlots+=sups.get(i).get_num_workers();
+    }
+  }
+  int freeslots=totalSlots - useSlots;
+  int totalTasks=0;
+  List<TopologySummary> topos=summ.get_topologies();
+  if (topos != null) {
+    int topoSize=topos.size();
+    for (int j=0; j < topoSize; j++) {
+      totalTasks+=topos.get(j).get_num_tasks();
+    }
+  }
+  String nimbustime=StatBuckets.prettyUptimeStr(summ.get_nimbus_uptime_secs());
+  List<ClusterSumm> clusumm=new ArrayList<ClusterSumm>();
+  ClusterSumm cd=new ClusterSumm(nimbustime,String.valueOf(supSize),String.valueOf(useSlots),String.valueOf(freeslots),String.valueOf(totalSlots),String.valueOf(totalTasks));
+  clusumm.add(cd);
+  return clusumm;
+}

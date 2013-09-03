@@ -1,0 +1,3 @@
+{
+  return zkobj.getData(zk,path,watch);
+}

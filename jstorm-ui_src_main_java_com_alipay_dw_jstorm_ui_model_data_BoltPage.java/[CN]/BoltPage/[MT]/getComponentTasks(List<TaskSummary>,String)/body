@@ -1,0 +1,26 @@
+{
+  List<ComponetTask> ret=new ArrayList<ComponetTask>();
+  for (  TaskSummary task : taskList) {
+    TaskStats taskStats=task.get_stats();
+    Map<String,Long> emitted=UIUtils.mergeStream(taskStats.get_emitted(),Long.valueOf(0));
+    Map<String,Double> sendTps=UIUtils.mergeStream(taskStats.get_send_tps(),Double.valueOf(0));
+    Map<String,Double> recvTps=UIUtils.mergeStream(taskStats.get_recv_tps(),Double.valueOf(0));
+    Map<String,Long> acked=UIUtils.mergeStream(taskStats.get_acked(),Long.valueOf(0));
+    Map<String,Long> failed=UIUtils.mergeStream(taskStats.get_failed(),Long.valueOf(0));
+    Map<String,Double> process=UIUtils.mergeStream(taskStats.get_process_ms_avg(),Double.valueOf(0));
+    ComponetTask componentTask=new ComponetTask();
+    componentTask.setTaskid(String.valueOf(task.get_task_id()));
+    componentTask.setHost(task.get_host());
+    componentTask.setPort(String.valueOf(task.get_port()));
+    componentTask.setUptime(StatBuckets.prettyUptimeStr(task.get_uptime_secs()));
+    componentTask.setLastErr(UIUtils.getTaskError(task.get_errors()));
+    componentTask.setEmitted(JStormUtils.formatValue(emitted.get(window)));
+    componentTask.setSendTps(JStormUtils.formatValue(sendTps.get(window)));
+    componentTask.setRecvTps(JStormUtils.formatValue(recvTps.get(window)));
+    componentTask.setAcked(JStormUtils.formatValue(acked.get(window)));
+    componentTask.setFailed(JStormUtils.formatValue(failed.get(window)));
+    componentTask.setProcess(JStormUtils.formatValue(process.get(window)));
+    ret.add(componentTask);
+  }
+  return ret;
+}

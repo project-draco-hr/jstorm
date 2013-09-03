@@ -1,0 +1,10 @@
+IBolt _bolt
+WorkerTransfer _transfer_fn
+Map storm_conf
+IRecvConnection _puller
+TaskSendTargets _send_fn
+TaskStatus taskStatus
+TopologyContext sysTopologyCxt
+TopologyContext userTopologyCxt
+CommonStatsRolling _task_stats
+ITaskReportErr _report_error

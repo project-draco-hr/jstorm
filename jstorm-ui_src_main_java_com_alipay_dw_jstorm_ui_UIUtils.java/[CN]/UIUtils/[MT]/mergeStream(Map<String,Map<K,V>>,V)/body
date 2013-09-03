@@ -1,0 +1,17 @@
+{
+  Map<String,V> ret=new HashMap<String,V>();
+  for (  Entry<String,Map<K,V>> rawEntry : rawMap.entrySet()) {
+    String window=rawEntry.getKey();
+    Map<K,V> streamMap=rawEntry.getValue();
+    V retValue=zeroValue;
+    if (streamMap != null) {
+      for (      Entry<K,V> streamEntry : streamMap.entrySet()) {
+        K entry=streamEntry.getKey();
+        V counter=streamEntry.getValue();
+        retValue=(V)JStormUtils.add(retValue,counter);
+      }
+    }
+    ret.put(window,retValue);
+  }
+  return ret;
+}

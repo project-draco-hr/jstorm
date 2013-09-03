@@ -1,0 +1,4 @@
+{
+  topologyAssign=TopologyAssign.getInstance();
+  topologyAssign.init(data);
+}

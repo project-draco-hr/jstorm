@@ -1,0 +1,13 @@
+{
+  if ((obj instanceof NodePort) == false) {
+    return false;
+  }
+  NodePort other=(NodePort)obj;
+  if (node.equals(other.getNode()) == false) {
+    return false;
+  }
+  if (port.equals(other.getPort()) == false) {
+    return false;
+  }
+  return true;
+}

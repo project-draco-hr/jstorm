@@ -1,0 +1,7 @@
+{
+  this.freq=freq;
+  this.target=r.nextInt(freq);
+  if (freq / 4 > 1) {
+    intervalCheck.setInterval(freq / 4);
+  }
+}

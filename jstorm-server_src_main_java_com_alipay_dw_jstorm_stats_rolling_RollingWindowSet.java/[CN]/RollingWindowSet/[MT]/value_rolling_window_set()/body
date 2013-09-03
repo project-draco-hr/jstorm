@@ -1,0 +1,14 @@
+{
+  HashMap<Integer,Object> rtn=new HashMap<Integer,Object>();
+synchronized (this) {
+    int wSize=windows.length;
+    for (int i=0; i < wSize; i++) {
+      int size=windows[i].rolling_window_size();
+      Object obj=windows[i].value_rolling_window();
+      rtn.put(size,obj);
+    }
+    Object result=extractor.execute(all_time);
+    rtn.put(0,result);
+    return rtn;
+  }
+}

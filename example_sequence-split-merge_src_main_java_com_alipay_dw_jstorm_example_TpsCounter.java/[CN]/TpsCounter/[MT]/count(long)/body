@@ -1,0 +1,15 @@
+{
+  long totalValue=total.incrementAndGet();
+  long tpsValue=tps.incrementAndGet();
+  long spendValue=spend.addAndGet(value);
+  if (intervalCheck.check() == true) {
+    StringBuilder sb=new StringBuilder();
+    sb.append(id);
+    sb.append(" tps:" + tpsValue / intervalCheck.getInterval());
+    sb.append(", total:" + totalValue);
+    sb.append(", spend:" + spendValue / tpsValue);
+    LOG.info(sb.toString());
+    tps.set(0);
+    spend.set(0);
+  }
+}

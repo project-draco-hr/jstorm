@@ -1,0 +1,5 @@
+{
+  String ret=worker_root(conf,id) + FILE_SEPERATEOR + "pids";
+  FileUtils.forceMkdir(new File(ret));
+  return ret;
+}

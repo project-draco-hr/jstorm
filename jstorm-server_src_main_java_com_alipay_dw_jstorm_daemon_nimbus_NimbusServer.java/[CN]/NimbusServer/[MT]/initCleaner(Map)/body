@@ -1,0 +1,9 @@
+{
+  final ScheduledExecutorService scheduExec=data.getScheduExec();
+  String dir_location=StormConfig.masterInbox(conf);
+  int inbox_jar_expiration_secs=JStormUtils.parseInt(conf.get(Config.NIMBUS_INBOX_JAR_EXPIRATION_SECS),3600);
+  CleanRunnable r2=new CleanRunnable(dir_location,inbox_jar_expiration_secs);
+  int cleanup_inbox_freq_secs=JStormUtils.parseInt(conf.get(Config.NIMBUS_CLEANUP_INBOX_FREQ_SECS),600);
+  scheduExec.scheduleAtFixedRate(r2,0,cleanup_inbox_freq_secs,TimeUnit.SECONDS);
+  LOG.info("Successfully init " + dir_location + " cleaner");
+}

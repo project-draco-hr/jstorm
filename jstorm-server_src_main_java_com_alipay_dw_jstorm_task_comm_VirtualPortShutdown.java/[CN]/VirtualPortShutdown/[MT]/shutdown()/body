@@ -1,0 +1,11 @@
+{
+  ISendConnection sendConn=mqContext.connect(true,"localhost",port);
+  sendConn.send(PacketPair.mk_packet((short)-1,new byte[0]));
+  LOG.info("Waiting for virtual port at url " + port + " to die");
+  try {
+    vthread.join();
+  }
+ catch (  InterruptedException e) {
+  }
+  LOG.info("Shutdown virtual port at url: " + port);
+}

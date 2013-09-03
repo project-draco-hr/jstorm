@@ -1,0 +1,4 @@
+{
+  declarer.declareStream(SequenceTopologyDef.TRADE_STREAM_ID,new Fields("ID","TRADE"));
+  declarer.declareStream(SequenceTopologyDef.CUSTOMER_STREAM_ID,new Fields("ID","CUSTOMER"));
+}

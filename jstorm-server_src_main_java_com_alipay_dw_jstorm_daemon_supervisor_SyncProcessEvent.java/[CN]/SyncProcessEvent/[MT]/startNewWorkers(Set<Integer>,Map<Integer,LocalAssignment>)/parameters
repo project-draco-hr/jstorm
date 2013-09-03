@@ -1,0 +1,2 @@
+Set<Integer> keepPorts
+Map<Integer,LocalAssignment> localAssignments

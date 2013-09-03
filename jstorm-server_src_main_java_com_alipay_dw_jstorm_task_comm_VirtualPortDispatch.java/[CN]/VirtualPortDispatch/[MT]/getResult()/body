@@ -1,0 +1,3 @@
+{
+  return recvConn == null ? -1 : 0;
+}

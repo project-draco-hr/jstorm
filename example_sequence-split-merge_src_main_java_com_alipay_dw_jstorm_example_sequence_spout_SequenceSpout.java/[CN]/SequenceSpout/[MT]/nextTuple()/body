@@ -1,0 +1,13 @@
+{
+  if (isLimited == false) {
+    emit();
+    return;
+  }
+  if (isFinished == true) {
+    return;
+  }
+  if (tupleId > SequenceTopologyDef.MAX_MESSAGE_COUNT) {
+    isFinished=true;
+    return;
+  }
+}

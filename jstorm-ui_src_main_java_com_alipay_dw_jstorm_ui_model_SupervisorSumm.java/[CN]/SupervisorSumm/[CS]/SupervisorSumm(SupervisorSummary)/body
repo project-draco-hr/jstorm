@@ -1,0 +1,6 @@
+{
+  this.host=s.get_host();
+  this.uptime=StatBuckets.prettyUptimeStr(s.get_uptime_secs());
+  this.slots=String.valueOf(s.get_num_workers());
+  this.usedSlots=String.valueOf(s.get_num_used_workers());
+}

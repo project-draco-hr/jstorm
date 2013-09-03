@@ -1,0 +1,3 @@
+Map<Integer,Object> statics
+K keySample
+V valueSample

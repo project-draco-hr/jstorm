@@ -1,0 +1,14 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case PORT:
+    return is_set_port();
+case TOPOLOGY:
+  return is_set_topology();
+case TASKS:
+return is_set_tasks();
+}
+throw new IllegalStateException();
+}

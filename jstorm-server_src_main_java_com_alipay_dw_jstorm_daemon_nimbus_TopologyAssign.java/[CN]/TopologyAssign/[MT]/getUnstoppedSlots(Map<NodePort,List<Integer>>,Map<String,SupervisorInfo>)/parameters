@@ -1,0 +1,2 @@
+Map<NodePort,List<Integer>> aliveAssigned
+Map<String,SupervisorInfo> supInfos

@@ -1,0 +1,71 @@
+{
+  try {
+    StormClusterState stormClusterState=data.getStormClusterState();
+    SupervisorSummary supervisorSummary=null;
+    String supervisorId=null;
+    Map<String,SupervisorInfo> supervisorInfos=Cluster.allSupervisorInfo(stormClusterState,null);
+    for (    Entry<String,SupervisorInfo> entry : supervisorInfos.entrySet()) {
+      SupervisorInfo info=entry.getValue();
+      if (info.getHostName().equals(host) == false) {
+        continue;
+      }
+      int num_workers=0;
+      List<Integer> ports=info.getWorkPorts();
+      if (ports != null) {
+        num_workers=ports.size();
+      }
+      int num_used_workers=0;
+      supervisorSummary=new SupervisorSummary(info.getHostName(),info.getUptimeSecs(),num_workers,num_used_workers);
+      supervisorId=entry.getKey();
+    }
+    if (supervisorSummary == null) {
+      LOG.warn("No " + host + " supervisor");
+      throw new NotAliveException("No " + host + " supervisor");
+    }
+    List<WorkerSummary> workers=new ArrayList<WorkerSummary>();
+    Map<String,StormBase> bases=Cluster.topology_bases(stormClusterState);
+    for (    Entry<String,StormBase> entry : bases.entrySet()) {
+      String stormId=entry.getKey();
+      StormBase base=entry.getValue();
+      Assignment assignment=stormClusterState.assignment_info(stormId,null);
+      if (assignment == null) {
+        LOG.error("Failed to get assignment of " + stormId);
+        continue;
+      }
+      if (assignment.getNodeHost().containsKey(supervisorId) == false) {
+        continue;
+      }
+      Map<Integer,List<TaskSummary>> portMap=new HashMap<Integer,List<TaskSummary>>();
+      Map<Integer,NodePort> taskToNodePort=assignment.getTaskToNodeport();
+      for (      Entry<Integer,NodePort> nodePortEntry : taskToNodePort.entrySet()) {
+        Integer taskId=nodePortEntry.getKey();
+        NodePort nodePort=nodePortEntry.getValue();
+        if (nodePort.getNode().equals(supervisorId) == false) {
+          continue;
+        }
+        Integer port=nodePort.getPort();
+        List<TaskSummary> tasks=portMap.get(port);
+        if (tasks == null) {
+          tasks=new ArrayList<TaskSummary>();
+          portMap.put(port,tasks);
+        }
+        TaskInfo taskInfo=stormClusterState.task_info(stormId,taskId);
+        int uptime=(int)(System.currentTimeMillis() / 1000 - assignment.getTaskStartTimeSecs().get(taskId));
+        tasks.add(new TaskSummary(taskId,taskInfo.getComponentId(),host,port,uptime,new ArrayList<ErrorInfo>()));
+      }
+      for (      Entry<Integer,List<TaskSummary>> portEntry : portMap.entrySet()) {
+        workers.add(new WorkerSummary(portEntry.getKey(),base.getStormName(),portEntry.getValue()));
+      }
+    }
+    supervisorSummary.set_num_used_workers(workers.size());
+    return new SupervisorWorkers(supervisorSummary,workers);
+  }
+ catch (  TException e) {
+    LOG.info("Failed to get ClusterSummary ",e);
+    throw e;
+  }
+catch (  Exception e) {
+    LOG.info("Failed to get ClusterSummary ",e);
+    throw new TException(e);
+  }
+}

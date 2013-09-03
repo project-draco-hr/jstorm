@@ -1,0 +1,5 @@
+{
+  String ret=stormdist_path(supervisor_local_dir(conf));
+  FileUtils.forceMkdir(new File(ret));
+  return ret;
+}

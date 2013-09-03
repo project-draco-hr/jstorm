@@ -1,0 +1,5 @@
+{
+  String topologyRoot=StormConfig.supervisor_stormdist_root(conf,topologyId);
+  String confPath=StormConfig.sotrmconf_path(topologyRoot);
+  return (Map)readLocalObject(topologyId,confPath);
+}

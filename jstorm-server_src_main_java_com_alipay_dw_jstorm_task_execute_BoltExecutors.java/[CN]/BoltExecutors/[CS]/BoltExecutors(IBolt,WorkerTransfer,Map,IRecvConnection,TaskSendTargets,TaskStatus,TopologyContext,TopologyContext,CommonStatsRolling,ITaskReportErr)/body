@@ -1,0 +1,23 @@
+{
+  super(_transfer_fn,storm_conf,_puller,sysTopologyCxt,userTopologyCxt,_task_stats,taskStatus,_report_error);
+  this.bolt=_bolt;
+  this.tuple_start_times=new TimeCacheMap<Tuple,Long>(message_timeout_secs,Acker.TIMEOUT_BUCKET_NUM);
+  TimeCacheQueue.DefaultExpiredCallback<Tuple> logExpireCb=new TimeCacheQueue.DefaultExpiredCallback<Tuple>(idStr);
+  this.recv_tuple_queue=new LinkedBlockingQueue<Tuple>();
+  Thread recvThread=new Thread(new RecvRunnable());
+  recvThread.setName("BoltRecvThread");
+  recvThread.setPriority(Thread.MAX_PRIORITY);
+  recvThread.setDaemon(true);
+  recvThread.start();
+  IOutputCollector output_collector=new BoltCollector(message_timeout_secs,_report_error,_send_fn,storm_conf,_transfer_fn,sysTopologyCxt,taskId,tuple_start_times,_task_stats);
+  outputCollector=new OutputCollector(output_collector);
+  try {
+    bolt.prepare(storm_conf,userTopologyCxt,outputCollector);
+  }
+ catch (  Exception e) {
+    error=e;
+    LOG.error("bolt prepare error ",e);
+    report_error.report(e);
+  }
+  LOG.info("Successfully create BoltExecutors " + idStr);
+}

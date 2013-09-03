@@ -1,0 +1,16 @@
+{
+  String genId=Long.toString(MessageId.generateId());
+  _inputs.put(genId,input);
+  try {
+    JSONObject obj=new JSONObject();
+    obj.put("id",genId);
+    obj.put("comp",input.getSourceComponent());
+    obj.put("stream",input.getSourceStreamId());
+    obj.put("task",input.getSourceTask());
+    obj.put("tuple",input.getValues());
+    _pendingWrites.put(obj);
+  }
+ catch (  InterruptedException e) {
+    throw new RuntimeException("Error during multilang processing",e);
+  }
+}

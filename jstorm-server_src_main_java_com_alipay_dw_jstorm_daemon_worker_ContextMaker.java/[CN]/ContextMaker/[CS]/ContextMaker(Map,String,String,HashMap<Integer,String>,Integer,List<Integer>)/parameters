@@ -1,0 +1,6 @@
+Map stormConf
+String topologyId
+String workerId
+HashMap<Integer,String> tasksToComponent
+Integer port
+List<Integer> workerTasks

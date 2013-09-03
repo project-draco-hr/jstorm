@@ -1,0 +1,36 @@
+{
+  NimbusClient client=null;
+  try {
+    Map conf=Utils.readStormConfig();
+    client=NimbusClient.getConfiguredClient(conf);
+    TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
+    List<TaskSummary> ts=summ.get_tasks();
+    if (ts == null) {
+      throw new NotAliveException("No TaskSummary");
+    }
+    TaskSummary t=null;
+    if (ts != null) {
+      int tssize=ts.size();
+      for (int i=0; i < tssize; i++) {
+        if (ts.get(i).get_task_id() == Integer.parseInt(taskid)) {
+          t=ts.get(i);
+        }
+      }
+    }
+    tsumms=taskSummaryTable(t,summ);
+    esumms=taskErrorTable(t);
+  }
+ catch (  TException e) {
+    LOG.error(e.getCause(),e);
+    throw e;
+  }
+catch (  NotAliveException e) {
+    LOG.error(e.getCause(),e);
+    throw e;
+  }
+ finally {
+    if (client != null) {
+      client.close();
+    }
+  }
+}

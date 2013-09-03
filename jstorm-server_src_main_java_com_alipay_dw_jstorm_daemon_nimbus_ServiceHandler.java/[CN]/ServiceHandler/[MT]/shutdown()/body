@@ -1,0 +1,4 @@
+{
+  LOG.info("Shutting down master");
+  LOG.info("Shut down master");
+}

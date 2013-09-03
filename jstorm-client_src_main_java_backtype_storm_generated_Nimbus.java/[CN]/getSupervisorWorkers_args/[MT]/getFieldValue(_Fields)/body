@@ -1,0 +1,7 @@
+{
+switch (field) {
+case HOST:
+    return get_host();
+}
+throw new IllegalStateException();
+}

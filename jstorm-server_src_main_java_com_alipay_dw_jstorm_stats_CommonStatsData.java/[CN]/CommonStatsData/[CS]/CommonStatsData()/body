@@ -1,0 +1,15 @@
+{
+  staticsMap=new HashMap<StaticsType,Map<Integer,Object>>();
+  HashMap<Integer,Object> emitted=new HashMap<Integer,Object>();
+  HashMap<Integer,Object> sendTps=new HashMap<Integer,Object>();
+  HashMap<Integer,Object> recvTps=new HashMap<Integer,Object>();
+  HashMap<Integer,Object> acked=new HashMap<Integer,Object>();
+  HashMap<Integer,Object> failed=new HashMap<Integer,Object>();
+  HashMap<Integer,Object> processLatencies=new HashMap<Integer,Object>();
+  staticsMap.put(StaticsType.emitted,emitted);
+  staticsMap.put(StaticsType.send_tps,sendTps);
+  staticsMap.put(StaticsType.recv_tps,recvTps);
+  staticsMap.put(StaticsType.acked,acked);
+  staticsMap.put(StaticsType.failed,failed);
+  staticsMap.put(StaticsType.process_latencies,processLatencies);
+}

@@ -1,0 +1,15 @@
+{
+  Assignment assignmentInfo=zkCluster.assignment_info(topologyId,null);
+  if (assignmentInfo == null) {
+    throw new RuntimeException("Failed to get " + topologyId + " Assignement from ZK");
+  }
+  Set<Integer> tasks=new HashSet<Integer>();
+  Map<Integer,NodePort> taskToNodeport=assignmentInfo.getTaskToNodeport();
+  for (  Entry<Integer,NodePort> taskNode : taskToNodeport.entrySet()) {
+    NodePort loc=taskNode.getValue();
+    if (loc != null && loc.getNode().equals(supervisorId) && loc.getPort() == port) {
+      tasks.add(taskNode.getKey());
+    }
+  }
+  return tasks;
+}

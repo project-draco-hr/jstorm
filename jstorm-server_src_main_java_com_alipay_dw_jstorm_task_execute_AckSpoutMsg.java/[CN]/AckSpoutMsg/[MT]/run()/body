@@ -1,0 +1,7 @@
+{
+  if (isDebug) {
+    LOG.info("Acking message " + msg_id);
+  }
+  spout.ack(msg_id);
+  task_stats.spout_acked_tuple(stream,time_stamp);
+}

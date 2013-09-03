@@ -1,0 +1,12 @@
+{
+  List<Components> components=new ArrayList<Components>();
+  for (  Entry<String,List<TaskSummary>> entry : componentMap.entrySet()) {
+    String componentId=entry.getKey();
+    List<TaskSummary> taskList=entry.getValue();
+    Components component=UIUtils.getComponent(taskList,componentId,type,window);
+    String lastError=UIUtils.mostRecentError(taskList);
+    component.setLastError(lastError);
+    components.add(component);
+  }
+  return components;
+}

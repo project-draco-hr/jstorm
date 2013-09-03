@@ -1,0 +1,17 @@
+{
+switch (field) {
+case EMITTED:
+    return get_emitted();
+case SEND_TPS:
+  return get_send_tps();
+case RECV_TPS:
+return get_recv_tps();
+case ACKED:
+return get_acked();
+case FAILED:
+return get_failed();
+case PROCESS_MS_AVG:
+return get_process_ms_avg();
+}
+throw new IllegalStateException();
+}

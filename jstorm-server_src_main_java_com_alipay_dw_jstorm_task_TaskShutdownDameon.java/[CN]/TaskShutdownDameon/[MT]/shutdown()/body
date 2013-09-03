@@ -1,0 +1,21 @@
+{
+  LOG.info("Begin to shut down task " + storm_id + ":"+ task_id);
+  taskStatus.setStatus(TaskStatus.SHUTDOWN);
+  for (  AsyncLoopThread thr : all_threads) {
+    thr.interrupt();
+    try {
+      thr.join();
+    }
+ catch (    InterruptedException e) {
+    }
+  }
+  try {
+    zkCluster.remove_task_heartbeat(storm_id,task_id);
+    zkCluster.disconnect();
+  }
+ catch (  Exception e) {
+    LOG.info(e);
+  }
+  closeComponent(task_obj);
+  LOG.info("Successfully shut down task " + storm_id + ":"+ task_id);
+}

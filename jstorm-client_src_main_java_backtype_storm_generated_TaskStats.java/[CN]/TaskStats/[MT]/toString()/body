@@ -1,0 +1,59 @@
+{
+  StringBuilder sb=new StringBuilder("TaskStats(");
+  boolean first=true;
+  sb.append("emitted:");
+  if (this.emitted == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.emitted);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("send_tps:");
+  if (this.send_tps == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.send_tps);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("recv_tps:");
+  if (this.recv_tps == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.recv_tps);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("acked:");
+  if (this.acked == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.acked);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("failed:");
+  if (this.failed == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.failed);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("process_ms_avg:");
+  if (this.process_ms_avg == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.process_ms_avg);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

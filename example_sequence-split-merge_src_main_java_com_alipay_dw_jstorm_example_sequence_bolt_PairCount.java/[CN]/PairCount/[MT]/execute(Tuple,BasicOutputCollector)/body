@@ -1,0 +1,7 @@
+{
+  tpsCounter.count();
+  Long tupleId=tuple.getLong(0);
+  Pair pair=(Pair)tuple.getValue(1);
+  sum.addAndGet(pair.getValue());
+  collector.emit(new Values(tupleId,pair));
+}

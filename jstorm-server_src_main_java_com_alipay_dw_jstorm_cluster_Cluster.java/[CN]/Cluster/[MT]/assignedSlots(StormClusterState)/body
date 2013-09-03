@@ -1,0 +1,4 @@
+{
+  Map<String,Assignment> assignments=get_all_assignment(stormClusterState,null);
+  return assignedSlots(stormClusterState,assignments);
+}

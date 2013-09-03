@@ -1,0 +1,25 @@
+{
+  Map<String,Set<Integer>> rtn=new HashMap<String,Set<Integer>>();
+  for (  Entry<String,Assignment> assignmentEntry : assignments.entrySet()) {
+    String topologyid=assignmentEntry.getKey();
+    Assignment assignment=assignmentEntry.getValue();
+    Map<Integer,NodePort> taskNodePort=assignment.getTaskToNodeport();
+    if (taskNodePort == null) {
+      LOG.warn("Failed to get task to NodePort map of " + topologyid);
+      continue;
+    }
+    for (    Entry<Integer,NodePort> entry : taskNodePort.entrySet()) {
+      NodePort np=entry.getValue();
+      if (rtn.containsKey(np.getNode())) {
+        Set<Integer> ports=rtn.get(np.getNode());
+        ports.add(np.getPort());
+      }
+ else {
+        Set<Integer> tmp=new HashSet<Integer>();
+        tmp.add(np.getPort());
+        rtn.put(np.getNode(),tmp);
+      }
+    }
+  }
+  return rtn;
+}

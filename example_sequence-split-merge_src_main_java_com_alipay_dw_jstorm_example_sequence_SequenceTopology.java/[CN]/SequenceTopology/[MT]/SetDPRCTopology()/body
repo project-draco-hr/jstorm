@@ -1,0 +1,7 @@
+{
+  LinearDRPCTopologyBuilder builder=new LinearDRPCTopologyBuilder("exclamation");
+  builder.addBolt(new TotalCount(),3);
+  Config conf=new Config();
+  conf.setNumWorkers(3);
+  StormSubmitter.submitTopology("rpc",conf,builder.createRemoteTopology());
+}

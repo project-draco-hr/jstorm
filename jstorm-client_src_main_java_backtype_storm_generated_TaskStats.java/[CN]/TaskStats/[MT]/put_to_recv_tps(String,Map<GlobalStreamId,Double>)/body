@@ -1,0 +1,6 @@
+{
+  if (this.recv_tps == null) {
+    this.recv_tps=new HashMap<String,Map<GlobalStreamId,Double>>();
+  }
+  this.recv_tps.put(key,val);
+}

@@ -1,0 +1,7 @@
+def send_getSupervisorWorkers(self, host):
+    self._oprot.writeMessageBegin('getSupervisorWorkers', TMessageType.CALL, self._seqid)
+    args = getSupervisorWorkers_args()
+    args.host = host
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

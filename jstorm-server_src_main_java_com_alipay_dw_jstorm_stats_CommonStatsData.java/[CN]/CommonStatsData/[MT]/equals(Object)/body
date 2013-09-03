@@ -1,0 +1,15 @@
+{
+  if ((assignment instanceof CommonStatsData) == false) {
+    return false;
+  }
+  CommonStatsData otherData=(CommonStatsData)assignment;
+  for (  Entry<StaticsType,Map<Integer,Object>> entry : staticsMap.entrySet()) {
+    StaticsType type=entry.getKey();
+    Map<Integer,Object> value=entry.getValue();
+    Map<Integer,Object> otherValue=otherData.get(type);
+    if (value.equals(otherValue) == false) {
+      return false;
+    }
+  }
+  return true;
+}

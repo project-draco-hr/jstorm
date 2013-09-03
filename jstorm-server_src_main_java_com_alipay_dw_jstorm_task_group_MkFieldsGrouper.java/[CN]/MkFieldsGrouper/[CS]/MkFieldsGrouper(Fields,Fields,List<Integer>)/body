@@ -1,0 +1,9 @@
+{
+  for (Iterator<String> it=_group_fields.iterator(); it.hasNext(); ) {
+    String groupField=it.next();
+    _out_fields.fieldIndex(groupField);
+  }
+  this.out_fields=_out_fields;
+  this.group_fields=_group_fields;
+  this.out_tasks=_out_tasks;
+}

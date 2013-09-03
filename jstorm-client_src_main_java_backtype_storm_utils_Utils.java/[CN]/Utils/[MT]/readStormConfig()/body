@@ -1,0 +1,7 @@
+{
+  Map ret=readDefaultConfig();
+  Map storm=findAndReadConfigFile("storm.yaml",false);
+  ret.putAll(storm);
+  ret.putAll(readCommandLineOpts());
+  return ret;
+}

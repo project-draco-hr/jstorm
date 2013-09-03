@@ -1,0 +1,3 @@
+Map<String,SupervisorInfo> supervisorMap
+Assignment existingAssignment
+Map<Integer,NodePort> taskNodePort

@@ -1,0 +1,28 @@
+{
+switch (field) {
+case PORT:
+    if (value == null) {
+      unset_port();
+    }
+ else {
+      set_port((Integer)value);
+    }
+  break;
+case TOPOLOGY:
+if (value == null) {
+  unset_topology();
+}
+ else {
+  set_topology((String)value);
+}
+break;
+case TASKS:
+if (value == null) {
+unset_tasks();
+}
+ else {
+set_tasks((List<TaskSummary>)value);
+}
+break;
+}
+}

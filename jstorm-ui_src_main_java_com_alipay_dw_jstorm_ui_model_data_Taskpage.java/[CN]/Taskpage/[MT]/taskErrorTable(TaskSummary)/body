@@ -1,0 +1,13 @@
+{
+  List<ErrorSummary> esums=new ArrayList<ErrorSummary>();
+  List<ErrorInfo> errors=task.get_errors();
+  if (errors != null) {
+    int errorsize=errors.size();
+    for (int i=0; i < errorsize; i++) {
+      ErrorInfo einfo=errors.get(i);
+      ErrorSummary esumm=new ErrorSummary(String.valueOf(einfo.get_error_time_secs()),einfo.get_error());
+      esums.add(esumm);
+    }
+  }
+  return esums;
+}

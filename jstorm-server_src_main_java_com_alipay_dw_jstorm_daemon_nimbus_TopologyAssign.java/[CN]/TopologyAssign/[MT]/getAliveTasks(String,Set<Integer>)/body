@@ -1,0 +1,10 @@
+{
+  Set<Integer> aliveTasks=new HashSet<Integer>();
+  for (  int taskId : taskIds) {
+    boolean isDead=NimbusUtils.isTaskDead(nimbusData,topologyId,taskId);
+    if (isDead == false) {
+      aliveTasks.add(taskId);
+    }
+  }
+  return aliveTasks;
+}

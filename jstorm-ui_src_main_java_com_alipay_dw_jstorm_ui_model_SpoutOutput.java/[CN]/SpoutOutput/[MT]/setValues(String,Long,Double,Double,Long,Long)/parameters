@@ -1,0 +1,6 @@
+String stream
+Long emitted
+Double sendTps
+Double process
+Long acked
+Long failed

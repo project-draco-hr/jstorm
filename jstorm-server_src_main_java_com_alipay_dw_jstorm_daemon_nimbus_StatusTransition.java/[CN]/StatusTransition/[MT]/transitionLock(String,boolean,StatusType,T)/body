@@ -1,0 +1,31 @@
+{
+  StormBase stormbase=data.getStormClusterState().storm_base(topologyid,null);
+  if (stormbase == null) {
+    LOG.error("Cannot apply event changing status " + changeStatus.getStatus() + " to "+ topologyid+ " because failed to get StormBase from ZK");
+    return;
+  }
+  StormStatus currentStatus=stormbase.getStatus();
+  if (currentStatus == null) {
+    LOG.error("Cannot apply event changing status " + changeStatus.getStatus() + " to "+ topologyid+ " because topologyStatus is null in ZK");
+    return;
+  }
+  Map<StatusType,Map<StatusType,Callback>> callbackMap=stateTransitions(topologyid,currentStatus);
+  Map<StatusType,Callback> changingCallbacks=callbackMap.get(currentStatus.getStatusType());
+  if (changingCallbacks == null || changingCallbacks.containsKey(changeStatus) == false || changingCallbacks.get(changeStatus) == null) {
+    String msg="No transition for event: changing status" + changeStatus.getStatus() + ", current status: "+ currentStatus.getStatusType()+ " topology-id: "+ topologyid;
+    LOG.info(msg);
+    if (errorOnNoTransition) {
+      throw new RuntimeException(msg);
+    }
+    return;
+  }
+  Callback callback=changingCallbacks.get(changeStatus);
+  Object obj=callback.execute(args);
+  if (obj != null && obj instanceof StormStatus) {
+    StormStatus newStatus=(StormStatus)obj;
+    data.getStormClusterState().update_storm(topologyid,newStatus);
+    LOG.info("Successfully updated " + topologyid + " as status "+ newStatus);
+  }
+  LOG.info("Successfully apply event changing status " + changeStatus.getStatus() + " to "+ topologyid);
+  return;
+}

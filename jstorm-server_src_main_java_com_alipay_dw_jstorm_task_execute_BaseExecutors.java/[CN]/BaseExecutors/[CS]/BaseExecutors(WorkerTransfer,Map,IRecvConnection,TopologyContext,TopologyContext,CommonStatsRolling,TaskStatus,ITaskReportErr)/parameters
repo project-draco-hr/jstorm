@@ -1,0 +1,8 @@
+WorkerTransfer _transfer_fn
+Map _storm_conf
+IRecvConnection _puller
+TopologyContext topology_context
+TopologyContext _user_context
+CommonStatsRolling _task_stats
+TaskStatus taskStatus
+ITaskReportErr _report_error

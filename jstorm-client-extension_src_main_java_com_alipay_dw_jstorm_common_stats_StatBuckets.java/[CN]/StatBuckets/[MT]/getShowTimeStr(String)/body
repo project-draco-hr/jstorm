@@ -1,0 +1,11 @@
+{
+  if (showStr == null) {
+    return MINUTE_WINDOW_STR;
+  }
+ else   if (showStr.equals(MINUTE_WINDOW_STR) || showStr.equals(HOUR_WINDOW_STR) || showStr.equals(DAY_WINDOW_STR)|| showStr.equals(ALL_WINDOW_STR)) {
+    return showStr;
+  }
+ else {
+    return MINUTE_WINDOW_STR;
+  }
+}

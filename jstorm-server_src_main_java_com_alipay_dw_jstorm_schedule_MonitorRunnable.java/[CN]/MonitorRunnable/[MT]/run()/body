@@ -1,0 +1,33 @@
+{
+  StormClusterState clusterState=data.getStormClusterState();
+  try {
+    List<String> active_topologys=clusterState.assignments(null);
+    if (active_topologys == null) {
+      LOG.info("Failed to get active topologies");
+      return;
+    }
+    for (    String topologyid : active_topologys) {
+      LOG.debug("Check tasks " + topologyid);
+      List<Integer> taskIds=clusterState.task_ids(topologyid);
+      if (taskIds == null) {
+        LOG.info("Failed to get task ids of " + topologyid);
+        continue;
+      }
+      boolean needReassign=false;
+      for (      Integer task : taskIds) {
+        boolean isTaskDead=NimbusUtils.isTaskDead(data,topologyid,task);
+        if (isTaskDead == true) {
+          LOG.info("Found " + topologyid + ",taskid:"+ task+ " is dead");
+          needReassign=true;
+          break;
+        }
+      }
+      if (needReassign == true) {
+        NimbusUtils.transition(data,topologyid,false,StatusType.monitor);
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.error(e.getCause(),e);
+  }
+}

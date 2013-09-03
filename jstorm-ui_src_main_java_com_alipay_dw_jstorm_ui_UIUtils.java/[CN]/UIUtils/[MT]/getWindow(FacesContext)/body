@@ -1,0 +1,7 @@
+{
+  String window=null;
+  if (ctx.getExternalContext().getRequestParameterMap().get("window") != null) {
+    window=(String)ctx.getExternalContext().getRequestParameterMap().get("window");
+  }
+  return StatBuckets.getTimeKey(window);
+}

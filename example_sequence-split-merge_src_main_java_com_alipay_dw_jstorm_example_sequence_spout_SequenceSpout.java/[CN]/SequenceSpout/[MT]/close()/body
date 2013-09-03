@@ -1,0 +1,5 @@
+{
+  tpsCounter.cleanup();
+  LOG.info("Sending :" + tupleId + ", success:"+ succeedCount+ ", failed:"+ failedCount);
+  LOG.info("tradeSum:" + tradeSum + ",cumsterSum"+ customerSum);
+}

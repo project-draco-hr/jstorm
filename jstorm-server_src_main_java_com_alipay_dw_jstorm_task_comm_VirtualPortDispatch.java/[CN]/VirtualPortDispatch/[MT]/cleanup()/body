@@ -1,0 +1,11 @@
+{
+  LOG.info("Virtual port  received shutdown notice");
+  byte shutdownCmd[]={TaskStatus.SHUTDOWN};
+  for (  Entry<Integer,ISendConnection> entry : sendConns.entrySet()) {
+    ISendConnection sendConn=entry.getValue();
+    sendConn.send(shutdownCmd);
+    sendConn.close();
+  }
+  recvConn.close();
+  recvConn=null;
+}

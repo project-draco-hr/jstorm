@@ -1,0 +1,11 @@
+{
+  Map<StaticsType,Object> ret=new HashMap<StaticsType,Object>();
+  Map<StaticsType,List<Object>> mergedStreamTasks=mergeStream(taskSummaries,window);
+  for (  Entry<StaticsType,List<Object>> entry : mergedStreamTasks.entrySet()) {
+    StaticsType type=entry.getKey();
+    List<Object> valueList=entry.getValue();
+    Object valueSum=JStormUtils.mergeList(valueList);
+    ret.put(type,valueSum);
+  }
+  return ret;
+}

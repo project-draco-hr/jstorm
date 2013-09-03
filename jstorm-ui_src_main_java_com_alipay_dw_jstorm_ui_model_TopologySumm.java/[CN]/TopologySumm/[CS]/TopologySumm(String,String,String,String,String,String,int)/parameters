@@ -1,0 +1,7 @@
+String topologyname
+String topologyid
+String status
+String uptime
+String numworkers
+String numtasks
+int luptime

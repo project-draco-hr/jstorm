@@ -1,0 +1,6 @@
+{
+  int startTime=TimeUtils.current_time_secs();
+  for (  String workerId : workerIds) {
+    waitForWorkerLaunch(conf,workerId,startTime);
+  }
+}

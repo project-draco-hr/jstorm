@@ -1,0 +1,8 @@
+{
+synchronized (TopologyAssign.class) {
+    if (instance == null) {
+      instance=new TopologyAssign();
+    }
+    return instance;
+  }
+}

@@ -1,0 +1,6 @@
+{
+  RollingWindowSet statics=staticTypeMap.get(type);
+  if (statics != null) {
+    statics.update_rolling_window_set(args);
+  }
+}

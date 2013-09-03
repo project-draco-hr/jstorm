@@ -1,0 +1,10 @@
+{
+  String msg="Launching virtual port for supervisor";
+  LOG.info(msg + ":" + supervisorId+ " stormid:"+ topologyId+ " port:"+ port);
+  boolean islocal=StormConfig.local_mode(conf);
+  RunnableCallback killfn=JStormServerUtils.getDefaultKillfn();
+  IRecvConnection recvConnection=mqContext.bind(true,port);
+  RunnableCallback recvDispather=new VirtualPortDispatch(mqContext,recvConnection,taskIds);
+  AsyncLoopThread vthread=new AsyncLoopThread(recvDispather,false,killfn,Thread.MAX_PRIORITY,true);
+  return new VirtualPortShutdown(mqContext,vthread,port);
+}

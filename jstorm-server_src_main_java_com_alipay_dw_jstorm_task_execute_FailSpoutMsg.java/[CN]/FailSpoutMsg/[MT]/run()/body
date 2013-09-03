@@ -1,0 +1,14 @@
+{
+  Object msg_id=tupleInfo.getMessageId();
+  if (spout instanceof IFailValueSpout) {
+    IFailValueSpout enhanceSpout=(IFailValueSpout)spout;
+    enhanceSpout.fail(msg_id,tupleInfo.getValues());
+  }
+ else {
+    spout.fail(msg_id);
+  }
+  task_stats.spout_failed_tuple(tupleInfo.getStream());
+  if (isDebug) {
+    LOG.info("Failed message " + msg_id + ": "+ tupleInfo.getValues().toString());
+  }
+}

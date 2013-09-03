@@ -1,0 +1,16 @@
+{
+  long totalValue=total.incrementAndGet();
+  long timesValue=times.incrementAndGet();
+  long v=values.addAndGet(value);
+  Double pass=intervalCheck.checkAndGet();
+  if (pass != null) {
+    times.set(0);
+    values.set(0);
+    StringBuilder sb=new StringBuilder();
+    sb.append(id);
+    sb.append(", tps:" + timesValue / pass);
+    sb.append(", avg:" + ((double)v) / timesValue);
+    sb.append(", total:" + totalValue);
+    LOG.info(sb.toString());
+  }
+}

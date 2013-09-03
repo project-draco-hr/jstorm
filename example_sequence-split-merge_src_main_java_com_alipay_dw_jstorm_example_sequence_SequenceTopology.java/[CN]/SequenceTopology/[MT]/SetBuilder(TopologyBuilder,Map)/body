@@ -1,0 +1,7 @@
+{
+  builder.setSpout(SequenceTopologyDef.SEQUENCE_SPOUT_NAME,new SequenceSpout(),1);
+  builder.setBolt(SequenceTopologyDef.TOTAL_BOLT_NAME,new TotalCount(),1).noneGrouping(SequenceTopologyDef.SEQUENCE_SPOUT_NAME);
+  conf.put(Config.TOPOLOGY_DEBUG,false);
+  conf.put(Config.TOPOLOGY_ACKERS,1);
+  conf.put(Config.TOPOLOGY_WORKERS,6);
+}

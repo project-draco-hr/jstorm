@@ -1,0 +1,3 @@
+{
+  return (this.send_tps == null) ? 0 : this.send_tps.size();
+}

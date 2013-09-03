@@ -1,0 +1,23 @@
+{
+  Map ret=Utils.readStormConfig();
+  String curDir=System.getProperty("user.home");
+  String confPath=curDir + File.separator + ".jstorm"+ File.separator+ "storm.yaml";
+  File file=new File(confPath);
+  if (file.exists()) {
+    FileInputStream fileStream;
+    try {
+      fileStream=new FileInputStream(file);
+      Yaml yaml=new Yaml();
+      Map clientConf=(Map)yaml.load(fileStream);
+      if (clientConf != null) {
+        ret.putAll(clientConf);
+      }
+    }
+ catch (    FileNotFoundException e) {
+    }
+  }
+  if (ret.containsKey(Config.NIMBUS_HOST) == false) {
+    ret.put(Config.NIMBUS_HOST,"localhost");
+  }
+  return ret;
+}

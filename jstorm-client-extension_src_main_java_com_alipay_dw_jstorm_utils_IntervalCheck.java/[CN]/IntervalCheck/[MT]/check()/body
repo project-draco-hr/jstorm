@@ -1,0 +1,3 @@
+{
+  return checkAndGet() != null;
+}

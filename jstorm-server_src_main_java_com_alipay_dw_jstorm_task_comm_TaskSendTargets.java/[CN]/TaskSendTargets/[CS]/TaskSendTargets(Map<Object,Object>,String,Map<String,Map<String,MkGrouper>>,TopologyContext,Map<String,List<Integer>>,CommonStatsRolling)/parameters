@@ -1,0 +1,6 @@
+Map<Object,Object> _storm_conf
+String _component
+Map<String,Map<String,MkGrouper>> _stream_component_grouper
+TopologyContext _topology_context
+Map<String,List<Integer>> _component_tasks
+CommonStatsRolling _task_stats

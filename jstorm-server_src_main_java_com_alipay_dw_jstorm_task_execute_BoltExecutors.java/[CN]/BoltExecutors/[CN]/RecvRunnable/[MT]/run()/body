@@ -1,0 +1,10 @@
+{
+  while (taskStatus.isShutdown() == false) {
+    Tuple tuple=BoltExecutors.this.recv();
+    if (tuple == null) {
+      continue;
+    }
+    recv_tuple_queue.offer(tuple);
+  }
+  LOG.info("Successfully shutdown recv thread of " + idStr);
+}

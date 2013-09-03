@@ -1,0 +1,23 @@
+{
+  if (ts == null) {
+    LOG.error("Task list is empty");
+    throw new NotAliveException("Task list is empty");
+  }
+  Map<String,List<TaskSummary>> spoutTasks=new HashMap<String,List<TaskSummary>>();
+  Map<String,List<TaskSummary>> boltTasks=new HashMap<String,List<TaskSummary>>();
+  for (  TaskSummary t : ts) {
+    if (t == null) {
+      continue;
+    }
+    String componentid=t.get_component_id();
+    String componentType=UIUtils.componentType(topology,componentid);
+    if (componentType.equals(UIUtils.SPOUT_STR)) {
+      UIUtils.addTask(spoutTasks,t,componentid);
+    }
+ else     if (componentType.equals(UIUtils.BOLT_STR)) {
+      UIUtils.addTask(boltTasks,t,componentid);
+    }
+  }
+  scom=getComponents(spoutTasks,UIUtils.SPOUT_STR);
+  bcom=getComponents(boltTasks,UIUtils.BOLT_STR);
+}
