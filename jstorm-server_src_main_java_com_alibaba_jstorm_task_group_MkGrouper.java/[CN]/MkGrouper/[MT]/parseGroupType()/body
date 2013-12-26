@@ -1,0 +1,51 @@
+{
+  GrouperType grouperType=null;
+  if (Grouping._Fields.FIELDS.equals(fields)) {
+    if (Thrift.isGlobalGrouping(thrift_grouping)) {
+      grouperType=GrouperType.global;
+    }
+ else {
+      List<String> fields_group=Thrift.fieldGrouping(thrift_grouping);
+      Fields fields=new Fields(fields_group);
+      fields_grouper=new MkFieldsGrouper(out_fields,fields,out_tasks);
+      grouperType=GrouperType.fields;
+    }
+  }
+ else   if (Grouping._Fields.ALL.equals(fields)) {
+    grouperType=GrouperType.all;
+  }
+ else   if (Grouping._Fields.SHUFFLE.equals(fields)) {
+    this.randomrange=new RandomRange(out_tasks.size());
+    grouperType=GrouperType.shuffle;
+  }
+ else   if (Grouping._Fields.NONE.equals(fields)) {
+    this.random=new Random();
+    grouperType=GrouperType.none;
+  }
+ else   if (Grouping._Fields.CUSTOM_OBJECT.equals(fields)) {
+    JavaObject jobj=thrift_grouping.get_custom_object();
+    CustomStreamGrouping g=Thrift.instantiateJavaObject(jobj);
+    int myTaskId=topology_context.getThisTaskId();
+    String componentId=topology_context.getComponentId(myTaskId);
+    GlobalStreamId stream=new GlobalStreamId(componentId,streamId);
+    custom_grouper=new MkCustomGrouper(topology_context,g,stream,out_tasks,myTaskId);
+    grouperType=GrouperType.custom_obj;
+  }
+ else   if (Grouping._Fields.CUSTOM_SERIALIZED.equals(fields)) {
+    byte[] obj=thrift_grouping.get_custom_serialized();
+    CustomStreamGrouping g=(CustomStreamGrouping)Utils.deserialize(obj);
+    int myTaskId=topology_context.getThisTaskId();
+    String componentId=topology_context.getComponentId(myTaskId);
+    GlobalStreamId stream=new GlobalStreamId(componentId,streamId);
+    custom_grouper=new MkCustomGrouper(topology_context,g,stream,out_tasks,myTaskId);
+    grouperType=GrouperType.custom_serialized;
+  }
+ else   if (Grouping._Fields.DIRECT.equals(fields)) {
+    grouperType=GrouperType.direct;
+  }
+ else   if (Grouping._Fields.LOCAL_OR_SHUFFLE.equals(fields)) {
+    grouperType=GrouperType.local_or_shuffle;
+    local_shuffer_grouper=new MkLocalShuffer(local_tasks,out_tasks);
+  }
+  return grouperType;
+}

@@ -1,0 +1,25 @@
+{
+  String req_msg="Aloha is the most Hawaiian word.";
+  Map storm_conf=Maps.newHashMap();
+  storm_conf.put(Config.STORM_MESSAGING_TRANSPORT,context_class_name);
+  storm_conf.put(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE,1024);
+  storm_conf.put(Config.STORM_MESSAGING_NETTY_MAX_RETRIES,10);
+  storm_conf.put(Config.STORM_MESSAGING_NETTY_MIN_SLEEP_MS,1000);
+  storm_conf.put(Config.STORM_MESSAGING_NETTY_MAX_SLEEP_MS,5000);
+  storm_conf.put(Config.STORM_MESSAGING_NETTY_SERVER_WORKER_THREADS,1);
+  storm_conf.put(Config.STORM_MESSAGING_NETTY_CLIENT_WORKER_THREADS,1);
+  storm_conf.put(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE,1024);
+  storm_conf.put(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY,"com.lmax.disruptor.BlockingWaitStrategy");
+  IContext context=TransportFactory.makeContext(storm_conf);
+  IConnection server=null;
+  IConnection client=null;
+  client=context.connect(null,"localhost",port,true);
+  client.send(task,req_msg.getBytes());
+  Thread.sleep(1000);
+  server=context.bind(null,port,true);
+  byte[] recv_msg=server.recv(0);
+  Assert.assertEquals(req_msg,new String(recv_msg));
+  server.close();
+  client.close();
+  context.term();
+}

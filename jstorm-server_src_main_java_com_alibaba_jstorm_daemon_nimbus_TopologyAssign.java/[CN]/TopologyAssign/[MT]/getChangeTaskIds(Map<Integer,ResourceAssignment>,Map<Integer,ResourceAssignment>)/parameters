@@ -1,0 +1,2 @@
+Map<Integer,ResourceAssignment> oldTaskToWorkerSlot
+Map<Integer,ResourceAssignment> newTaskToWorkerSlot

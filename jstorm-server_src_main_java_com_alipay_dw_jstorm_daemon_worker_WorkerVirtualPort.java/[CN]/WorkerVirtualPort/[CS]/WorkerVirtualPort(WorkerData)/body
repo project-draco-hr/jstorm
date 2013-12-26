@@ -1,8 +1,0 @@
-{
-  this.conf=workerData.getStormConf();
-  this.supervisorId=workerData.getSupervisorId();
-  this.port=workerData.getPort();
-  this.mqContext=workerData.getMqContext();
-  this.taskIds=workerData.getTaskids();
-  this.topologyId=workerData.getTopologyId();
-}

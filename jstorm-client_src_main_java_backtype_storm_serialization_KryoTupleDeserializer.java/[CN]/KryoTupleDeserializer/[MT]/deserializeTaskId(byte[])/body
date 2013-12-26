@@ -1,0 +1,6 @@
+{
+  Input _kryoInput=new Input(1);
+  _kryoInput.setBuffer(ser);
+  int targetTaskId=_kryoInput.readInt();
+  return targetTaskId;
+}

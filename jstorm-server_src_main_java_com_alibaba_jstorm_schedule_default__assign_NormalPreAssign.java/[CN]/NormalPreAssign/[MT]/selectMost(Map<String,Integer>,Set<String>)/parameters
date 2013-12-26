@@ -1,0 +1,2 @@
+Map<String,Integer> slotNums
+Set<String> supervisorIds

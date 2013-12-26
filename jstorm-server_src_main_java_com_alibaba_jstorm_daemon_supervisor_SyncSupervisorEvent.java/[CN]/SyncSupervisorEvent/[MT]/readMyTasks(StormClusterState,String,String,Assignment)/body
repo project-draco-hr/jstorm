@@ -1,0 +1,31 @@
+{
+  Map<Integer,LocalAssignment> portTasks=new HashMap<Integer,LocalAssignment>();
+  Map<Integer,ResourceAssignment> taskToResource=assignmenInfo.getTaskToResource();
+  if (taskToResource == null) {
+    LOG.error("No taskToWorkerSlot of assignement's " + assignmenInfo);
+    return portTasks;
+  }
+  for (  Entry<Integer,ResourceAssignment> entry : taskToResource.entrySet()) {
+    Integer taskId=entry.getKey();
+    ResourceAssignment resource=entry.getValue();
+    Integer port=resource.getPort();
+    String node=resource.getSupervisorId();
+    if (supervisorId.equals(node) == false) {
+      continue;
+    }
+    if (portTasks.containsKey(port)) {
+      LocalAssignment la=portTasks.get(port);
+      Set<Integer> taskIds=la.getTaskIds();
+      taskIds.add(taskId);
+      la.addMemSlotNum(resource.getMemSlotNum());
+    }
+ else {
+      Set<Integer> taskIds=new HashSet<Integer>();
+      taskIds.add(taskId);
+      LocalAssignment la=new LocalAssignment(topologyId,taskIds);
+      la.addMemSlotNum(resource.getMemSlotNum());
+      portTasks.put(port,la);
+    }
+  }
+  return portTasks;
+}

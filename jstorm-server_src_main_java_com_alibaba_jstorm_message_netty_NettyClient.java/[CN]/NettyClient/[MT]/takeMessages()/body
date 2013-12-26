@@ -1,0 +1,8 @@
+{
+  if (useDisruptor) {
+    return taskFromeDisruptorQ();
+  }
+ else {
+    return takeFromBlockQ();
+  }
+}

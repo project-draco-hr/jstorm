@@ -11,20 +11,29 @@
     oprot.writeString(this.name);
     oprot.writeFieldEnd();
   }
+  if (this.status != null) {
+    oprot.writeFieldBegin(STATUS_FIELD_DESC);
+    oprot.writeString(this.status);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldBegin(UPTIME_SECS_FIELD_DESC);
+  oprot.writeI32(this.uptime_secs);
+  oprot.writeFieldEnd();
   oprot.writeFieldBegin(NUM_TASKS_FIELD_DESC);
   oprot.writeI32(this.num_tasks);
   oprot.writeFieldEnd();
   oprot.writeFieldBegin(NUM_WORKERS_FIELD_DESC);
   oprot.writeI32(this.num_workers);
   oprot.writeFieldEnd();
-  oprot.writeFieldBegin(UPTIME_SECS_FIELD_DESC);
-  oprot.writeI32(this.uptime_secs);
+  oprot.writeFieldBegin(NUM_CPU_FIELD_DESC);
+  oprot.writeI32(this.num_cpu);
   oprot.writeFieldEnd();
-  if (this.status != null) {
-    oprot.writeFieldBegin(STATUS_FIELD_DESC);
-    oprot.writeString(this.status);
-    oprot.writeFieldEnd();
-  }
+  oprot.writeFieldBegin(NUM_MEM_FIELD_DESC);
+  oprot.writeI32(this.num_mem);
+  oprot.writeFieldEnd();
+  oprot.writeFieldBegin(NUM_DISK_FIELD_DESC);
+  oprot.writeI32(this.num_disk);
+  oprot.writeFieldEnd();
   oprot.writeFieldStop();
   oprot.writeStructEnd();
 }

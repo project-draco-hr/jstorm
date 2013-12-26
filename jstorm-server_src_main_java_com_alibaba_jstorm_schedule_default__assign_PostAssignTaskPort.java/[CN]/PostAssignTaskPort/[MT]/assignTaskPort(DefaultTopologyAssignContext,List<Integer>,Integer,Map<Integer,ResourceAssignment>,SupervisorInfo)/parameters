@@ -1,0 +1,5 @@
+DefaultTopologyAssignContext defaultContext
+List<Integer> taskList
+Integer workerNum
+Map<Integer,ResourceAssignment> newAssigns
+SupervisorInfo supervisorInfo

@@ -1,0 +1,6 @@
+{
+  cpuPool.alloc(resource.getCpuSlotNum(),null);
+  memPool.alloc(resource.getMemSlotNum(),null);
+  diskPool.alloc(resource.getDiskSlot(),null);
+  netPool.alloc(resource.getPort(),null);
+}

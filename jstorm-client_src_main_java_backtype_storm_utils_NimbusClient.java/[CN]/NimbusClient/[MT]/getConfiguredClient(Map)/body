@@ -1,5 +1,8 @@
 {
-  String nimbusHost=(String)conf.get(Config.NIMBUS_HOST);
-  int nimbusPort=Utils.getInt(conf.get(Config.NIMBUS_THRIFT_PORT));
-  return new NimbusClient(nimbusHost,nimbusPort);
+  try {
+    return new NimbusClient(conf);
+  }
+ catch (  Exception ex) {
+    throw new RuntimeException(ex);
+  }
 }

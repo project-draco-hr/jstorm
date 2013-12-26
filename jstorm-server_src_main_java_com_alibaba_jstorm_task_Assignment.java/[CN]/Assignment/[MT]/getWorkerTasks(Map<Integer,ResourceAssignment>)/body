@@ -1,0 +1,19 @@
+{
+  Map<WorkerSlot,List<Integer>> ret=new TreeMap<WorkerSlot,List<Integer>>();
+  for (  Entry<Integer,ResourceAssignment> entry : taskToResource.entrySet()) {
+    Integer taskId=entry.getKey();
+    ResourceAssignment assignment=entry.getValue();
+    WorkerSlot workerSlot=new WorkerSlot(assignment.getSupervisorId(),assignment.getPort());
+    List<Integer> taskList=ret.get(workerSlot);
+    if (taskList == null) {
+      taskList=new ArrayList<Integer>();
+      ret.put(workerSlot,taskList);
+    }
+    taskList.add(taskId);
+  }
+  for (  Entry<WorkerSlot,List<Integer>> entry : ret.entrySet()) {
+    List<Integer> list=entry.getValue();
+    Collections.sort(list);
+  }
+  return ret;
+}

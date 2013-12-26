@@ -1,0 +1,4 @@
+{
+  this.ringBuffer=ringBuffer;
+  this.size=size;
+}

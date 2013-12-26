@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(TOPOLOGY_MEM_WEIGHT),DEFAULT_MEM_WEIGHT);
+}

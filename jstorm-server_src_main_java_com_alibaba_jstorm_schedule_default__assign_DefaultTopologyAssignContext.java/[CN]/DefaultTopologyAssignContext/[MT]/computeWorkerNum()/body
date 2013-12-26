@@ -1,0 +1,27 @@
+{
+  Integer settingNum=JStormUtils.parseInt(stormConf.get(Config.TOPOLOGY_WORKERS));
+  int hintSum=0;
+  Map<String,Object> components=ThriftTopologyUtils.getComponents(sysTopology);
+  for (  Entry<String,Object> entry : components.entrySet()) {
+    String componentName=entry.getKey();
+    Object component=entry.getValue();
+    ComponentCommon common=null;
+    if (component instanceof Bolt) {
+      common=((Bolt)component).get_common();
+    }
+    if (component instanceof SpoutSpec) {
+      common=((SpoutSpec)component).get_common();
+    }
+    if (component instanceof StateSpoutSpec) {
+      common=((StateSpoutSpec)component).get_common();
+    }
+    int hint=common.get_parallelism_hint();
+    hintSum+=hint;
+  }
+  if (settingNum == null) {
+    return hintSum;
+  }
+ else {
+    return Math.min(settingNum,hintSum);
+  }
+}

@@ -1,0 +1,4 @@
+DefaultTopologyAssignContext defaultContext
+SupervisorInfo supervisorInfo
+TaskAllocResource taskAllocResource
+Integer allocTaskNum

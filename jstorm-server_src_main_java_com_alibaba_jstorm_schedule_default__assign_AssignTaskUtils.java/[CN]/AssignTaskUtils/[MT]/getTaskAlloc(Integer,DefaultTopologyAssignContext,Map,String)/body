@@ -1,0 +1,10 @@
+{
+  ResourceAssignment useDefineAlloc=getUserDefineAlloc(task,defaultContext,componentMap,componentName,false);
+  if (useDefineAlloc != null) {
+    return new TaskAllocResource(useDefineAlloc);
+  }
+  int cpuSlotNum=ConfigExtension.getCpuSlotsPerTask(componentMap);
+  int memSlotNum=ConfigExtension.getMemSlotPerTask(componentMap);
+  boolean diskAlloc=ConfigExtension.isTaskAllocDisk(componentMap);
+  return new TaskAllocResource(diskAlloc,cpuSlotNum,memSlotNum);
+}

@@ -1,0 +1,9 @@
+{
+  for (  Map<K,V> bucket : _buckets) {
+    Object value=bucket.remove(key);
+    if (value != null) {
+      return value;
+    }
+  }
+  return null;
+}

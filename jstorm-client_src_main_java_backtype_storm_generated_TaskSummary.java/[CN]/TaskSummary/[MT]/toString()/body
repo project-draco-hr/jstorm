@@ -23,6 +23,23 @@
   }
   first=false;
   if (!first)   sb.append(", ");
+  sb.append("cpu:");
+  sb.append(this.cpu);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("mem:");
+  sb.append(this.mem);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("disk:");
+  if (this.disk == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.disk);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
   sb.append("port:");
   sb.append(this.port);
   first=false;

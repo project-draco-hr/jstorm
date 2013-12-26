@@ -10,7 +10,7 @@ else:
 CONF_DIR = os.path.expanduser('~/.jstorm')
 JSTORM_DIR = '/'.join(os.path.realpath(__file__).split('/')[:(-2)])
 JSTORM_CONF_DIR = os.getenv('JSTORM_CONF_DIR', (JSTORM_DIR + '/conf'))
-LOG4J_CONF = (JSTORM_CONF_DIR + '/jstorm.log4j.properties')
+LOG4J_CONF = (JSTORM_CONF_DIR + '/cluster.xml')
 CONFIG_OPTS = []
 if (not os.path.exists((JSTORM_DIR + '/RELEASE'))):
     print '******************************************'

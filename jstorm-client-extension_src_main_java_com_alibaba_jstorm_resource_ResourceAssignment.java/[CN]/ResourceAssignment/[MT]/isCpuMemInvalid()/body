@@ -1,0 +1,9 @@
+{
+  if (cpuSlotNum == null || cpuSlotNum <= 0) {
+    return true;
+  }
+  if (memSlotNum == null || memSlotNum <= 0) {
+    return true;
+  }
+  return false;
+}

@@ -1,0 +1,11 @@
+{
+  TaskHeartbeatRunable hb=new TaskHeartbeatRunable(zkCluster,topologyid,taskid,uptime,taskStats,taskStatus,stormConf);
+  AsyncLoopThread heartbeat_thread=new AsyncLoopThread(hb,false,Thread.MIN_PRIORITY,true);
+  IConnection puller=context.bind(topologyid,taskid,false);
+  TaskSendTargets sendTargets=echoToSystemBolt();
+  RunnableCallback baseExecutor=mkExecutor(puller,sendTargets);
+  AsyncLoopThread executor_threads=new AsyncLoopThread(baseExecutor,false,null,Thread.MAX_PRIORITY,true);
+  AsyncLoopThread[] all_threads={executor_threads,heartbeat_thread};
+  LOG.info("Finished loading task " + componentid + ":"+ taskid);
+  return getShutdown(all_threads,heartbeat_thread,puller);
+}

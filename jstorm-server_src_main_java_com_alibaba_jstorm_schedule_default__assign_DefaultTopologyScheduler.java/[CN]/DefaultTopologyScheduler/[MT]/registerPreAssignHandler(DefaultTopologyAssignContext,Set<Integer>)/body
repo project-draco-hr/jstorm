@@ -1,0 +1,26 @@
+{
+  Map<ComponentAssignType,Pair<Set<Integer>,IPreassignTask>> ret=new TreeMap<ComponentAssignType,Pair<Set<Integer>,IPreassignTask>>();
+  for (  Integer taskId : needAssign) {
+    ComponentAssignType type=getComponentType(defaultContext,taskId);
+    Pair<Set<Integer>,IPreassignTask> pair=ret.get(type);
+    if (pair == null) {
+      Set<Integer> tasks=new TreeSet<Integer>();
+      IPreassignTask handler=getPreassignHandler(type);
+      pair=new Pair<Set<Integer>,IPreassignTask>(tasks,handler);
+      ret.put(type,pair);
+    }
+    Set<Integer> tasks=pair.getFirst();
+    tasks.add(taskId);
+  }
+  if (ret.size() < ComponentAssignType.values().length) {
+    for (    ComponentAssignType type : ComponentAssignType.values()) {
+      if (ret.containsKey(type) == false) {
+        Set<Integer> tasks=new TreeSet<Integer>();
+        IPreassignTask handler=getPreassignHandler(type);
+        Pair pair=new Pair<Set<Integer>,IPreassignTask>(tasks,handler);
+        ret.put(type,pair);
+      }
+    }
+  }
+  return ret;
+}

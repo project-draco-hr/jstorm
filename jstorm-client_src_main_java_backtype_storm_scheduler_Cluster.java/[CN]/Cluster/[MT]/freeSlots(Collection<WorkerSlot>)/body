@@ -1,0 +1,7 @@
+{
+  if (slots != null) {
+    for (    WorkerSlot slot : slots) {
+      this.freeSlot(slot);
+    }
+  }
+}

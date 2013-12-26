@@ -1,0 +1,31 @@
+{
+  DistributedClusterState zkClusterState=null;
+  try {
+    zkClusterState=new DistributedClusterState(conf);
+    String path=Cluster.ASSIGNMENTS_BAK_SUBTREE;
+    List<String> bakTopologys=zkClusterState.get_children(path,false);
+    for (    String tid : bakTopologys) {
+      if (tid.equals(topologyName)) {
+        LOG.info("Find backup " + topologyName);
+        String topologyPath=Cluster.assignment_bak_path(topologyName);
+        zkClusterState.delete_node(topologyPath);
+        LOG.info("Successfully delete topology " + topologyName + " backup Assignment");
+        return;
+      }
+    }
+    LOG.info("No backup topology " + topologyName + " Assignment");
+  }
+ catch (  Exception e) {
+    if (zkClusterState == null) {
+      LOG.error("Failed to connect ZK ",e);
+    }
+ else {
+      LOG.error("Failed to delete old topology " + topologyName + "\n",e);
+    }
+  }
+ finally {
+    if (zkClusterState != null) {
+      zkClusterState.close();
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  Integer object=JStormServerConfig.getSupervisorCpuSlotNum(conf);
+  if (object != null && JStormUtils.parseInt(object) > 0) {
+    return JStormUtils.parseInt(object);
+  }
+  int sysCpuNum=Runtime.getRuntime().availableProcessors();
+  if (sysCpuNum <= CPU_THREADHOLD) {
+    return sysCpuNum;
+  }
+ else {
+    return sysCpuNum - 1;
+  }
+}

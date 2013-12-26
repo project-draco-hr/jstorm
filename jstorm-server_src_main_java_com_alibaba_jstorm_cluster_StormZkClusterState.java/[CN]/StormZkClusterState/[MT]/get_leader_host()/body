@@ -1,0 +1,3 @@
+{
+  return new String(cluster_state.get_data(Cluster.MASTER_SUBTREE,false));
+}

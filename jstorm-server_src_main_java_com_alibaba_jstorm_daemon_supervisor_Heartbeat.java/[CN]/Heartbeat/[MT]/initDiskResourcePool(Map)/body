@@ -1,0 +1,17 @@
+{
+  List<String> object=JStormServerConfig.getSupervisorDiskSlots(conf);
+  Set<String> slotsSet=new TreeSet<String>();
+  if (object != null && object instanceof List) {
+    slotsSet=JStormUtils.listToSet((List)object);
+  }
+ else {
+    try {
+      String workerDataDir=StormConfig.default_worker_shared_dir(conf);
+      slotsSet.add(workerDataDir);
+    }
+ catch (    Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+  return new SlotResourcePool<String>(ResourceType.DISK,slotsSet);
+}

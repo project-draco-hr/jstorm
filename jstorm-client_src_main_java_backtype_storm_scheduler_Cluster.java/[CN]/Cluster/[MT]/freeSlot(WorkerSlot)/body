@@ -1,0 +1,7 @@
+{
+  for (  SchedulerAssignmentImpl assignment : this.assignments.values()) {
+    if (assignment.isSlotOccupied(slot)) {
+      assignment.unassignBySlot(slot);
+    }
+  }
+}

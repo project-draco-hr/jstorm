@@ -1,0 +1,10 @@
+{
+  this.nimbusData=nimbusData;
+  this.schedulers=new HashMap<String,IToplogyScheduler>();
+  IToplogyScheduler defaultScheduler=new DefaultTopologyScheduler();
+  defaultScheduler.prepare(nimbusData.getConf());
+  schedulers.put(DEFAULT_SCHEDULER_NAME,defaultScheduler);
+  Thread thread=new Thread(this);
+  thread.setName("TopologyAssign");
+  thread.start();
+}

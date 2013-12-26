@@ -1,0 +1,7 @@
+{
+  supervisorInfo=new SupervisorInfo(myHostName);
+  supervisorInfo.setCpuPool(initCpuResourcePool(conf));
+  supervisorInfo.setMemPool(initMemResourcePool(conf));
+  supervisorInfo.setDiskPool(initDiskResourcePool(conf));
+  supervisorInfo.setNetPool(initNetworkPool(conf));
+}

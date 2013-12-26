@@ -1,0 +1,7 @@
+{
+  this.storm_conf=_storm_conf;
+  this.disruptorEventQueue=disruptorEventQueue;
+  this.spout=_spout;
+  this.task_stats=stat;
+  this.isDebug=JStormUtils.parseBoolean(storm_conf.get(Config.TOPOLOGY_DEBUG),false);
+}

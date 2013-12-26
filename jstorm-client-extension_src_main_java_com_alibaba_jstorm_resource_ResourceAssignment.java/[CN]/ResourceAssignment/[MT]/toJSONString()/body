@@ -1,0 +1,17 @@
+{
+  StringBuilder sb=new StringBuilder();
+  sb.append("[");
+  sb.append("\"" + supervisorId + "\"");
+  sb.append(",");
+  sb.append("\"" + hostname + "\"");
+  sb.append(",");
+  sb.append("\"" + diskSlot + "\"");
+  sb.append(",");
+  sb.append("\"" + String.valueOf(cpuSlotNum) + "\"");
+  sb.append(",");
+  sb.append("\"" + String.valueOf(memSlotNum) + "\"");
+  sb.append(",");
+  sb.append("\"" + String.valueOf(port) + "\"");
+  sb.append("]");
+  return sb.toString();
+}

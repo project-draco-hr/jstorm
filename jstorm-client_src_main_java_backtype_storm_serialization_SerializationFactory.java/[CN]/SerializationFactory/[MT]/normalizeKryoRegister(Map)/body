@@ -5,7 +5,7 @@
   if (res instanceof Map) {
     ret=(Map<String,String>)res;
   }
- else   if (res instanceof List) {
+ else {
     for (    Object o : (List)res) {
       if (o instanceof Map) {
         ret.putAll((Map)o);

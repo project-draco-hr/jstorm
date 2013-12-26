@@ -1,0 +1,81 @@
+{
+  LOG.info("Receive " + topologyname + ", uploadedJarLocation:"+ uploadedJarLocation);
+  try {
+    checkTopologyActive(data,topologyname,false);
+  }
+ catch (  AlreadyAliveException e) {
+    LOG.info(topologyname + " is already exist ");
+    throw e;
+  }
+catch (  Exception e) {
+    LOG.info("Failed to check whether topology is alive or not",e);
+    throw new TException(e);
+  }
+  int counter=data.getSubmittedCount().incrementAndGet();
+  String topologyId=topologyname + "-" + counter+ "-"+ TimeUtils.current_time_secs();
+  Map<Object,Object> serializedConf=(Map<Object,Object>)JStormUtils.from_json(jsonConf);
+  if (serializedConf == null) {
+    LOG.warn("Failed to serialized Configuration");
+    throw new InvalidTopologyException("Failed to serilaze topology configuration");
+  }
+  serializedConf.put(Config.STORM_ID,topologyId);
+  serializedConf.put(Config.TOPOLOGY_NAME,topologyname);
+  Map<Object,Object> stormConf;
+  try {
+    stormConf=NimbusUtils.normalizeConf(conf,serializedConf,topology);
+  }
+ catch (  Exception e1) {
+    String errMsg=JStormUtils.getErrorInfo("Failed to commit topologystormId: " + topologyId + " uploadedJarLocation: "+ uploadedJarLocation+ ", due to failed to normalize configuration ",e1);
+    LOG.info(errMsg);
+    throw new FailedAssignTopologyException(errMsg);
+  }
+  Map<Object,Object> totalStormConf=new HashMap<Object,Object>(conf);
+  totalStormConf.putAll(stormConf);
+  StormTopology normalizedTopology=NimbusUtils.normalizeTopology(stormConf,topology);
+  Common.validate_basic(normalizedTopology,totalStormConf,topologyId);
+  try {
+    StormClusterState stormClusterState=data.getStormClusterState();
+    setupStormCode(conf,topologyId,uploadedJarLocation,stormConf,normalizedTopology);
+    setupZkTaskInfo(conf,topologyId,stormClusterState);
+    TopologyAssignEvent assignEvent=new TopologyAssignEvent();
+    assignEvent.setTopologyId(topologyId);
+    assignEvent.setScratch(false);
+    assignEvent.setTopologyName(topologyname);
+    assignEvent.setOldStatus(Thrift.topologyInitialStatusToStormStatus(options.get_initial_status()));
+    TopologyAssign.push(assignEvent);
+    LOG.info("Submit for " + topologyname + " with conf "+ serializedConf);
+    boolean isSuccess=assignEvent.waitFinish();
+    if (isSuccess == true) {
+      LOG.info("Finish submit for " + topologyname);
+    }
+ else {
+      throw new FailedAssignTopologyException(assignEvent.getErrorMsg());
+    }
+  }
+ catch (  FailedAssignTopologyException e) {
+    StringBuilder sb=new StringBuilder();
+    sb.append("Fail to sumbit topology, Root cause:");
+    if (e.getMessage() == null) {
+      sb.append("submit timeout");
+    }
+ else {
+      sb.append(e.getMessage());
+    }
+    sb.append("\n\n");
+    sb.append("topologyId:" + topologyId);
+    sb.append(", uploadedJarLocation" + uploadedJarLocation);
+    LOG.error(sb.toString());
+    throw new TopologyAssignException(sb.toString());
+  }
+catch (  Exception e) {
+    StringBuilder sb=new StringBuilder();
+    sb.append("Fail to sumbit topology ");
+    sb.append(e.getMessage());
+    sb.append(", cause:" + e.getCause());
+    sb.append("\n\n");
+    sb.append("topologyId:" + topologyId);
+    sb.append(", uploadedJarLocation" + uploadedJarLocation);
+    LOG.error(sb.toString());
+    throw new TopologyAssignException(sb.toString());
+  }
+}

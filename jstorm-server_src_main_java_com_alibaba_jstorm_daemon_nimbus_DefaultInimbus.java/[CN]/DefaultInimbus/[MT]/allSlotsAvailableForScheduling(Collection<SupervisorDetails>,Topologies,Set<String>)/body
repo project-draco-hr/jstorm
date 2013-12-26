@@ -1,0 +1,7 @@
+{
+  Collection<WorkerSlot> result=new HashSet<WorkerSlot>();
+  for (  SupervisorDetails detail : existingSupervisors) {
+    for (    Integer port : detail.getAllPorts())     result.add(new WorkerSlot(detail.getId(),port));
+  }
+  return result;
+}

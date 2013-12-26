@@ -1,0 +1,4 @@
+String masterCodeDir
+Map<Integer,ResourceAssignment> taskToResource
+Map<String,String> nodeHost
+Map<Integer,Integer> taskStartTimeSecs

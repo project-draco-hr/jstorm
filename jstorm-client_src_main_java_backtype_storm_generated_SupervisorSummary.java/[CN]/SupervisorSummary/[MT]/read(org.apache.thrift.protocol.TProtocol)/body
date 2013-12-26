@@ -16,15 +16,23 @@ case 1:
       }
     break;
 case 2:
-  if (field.type == org.apache.thrift.protocol.TType.I32) {
-    this.uptime_secs=iprot.readI32();
-    set_uptime_secs_isSet(true);
+  if (field.type == org.apache.thrift.protocol.TType.STRING) {
+    this.supervisor_id=iprot.readString();
   }
  else {
     org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
   }
 break;
 case 3:
+if (field.type == org.apache.thrift.protocol.TType.I32) {
+this.uptime_secs=iprot.readI32();
+set_uptime_secs_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+case 4:
 if (field.type == org.apache.thrift.protocol.TType.I32) {
 this.num_workers=iprot.readI32();
 set_num_workers_isSet(true);
@@ -33,10 +41,64 @@ set_num_workers_isSet(true);
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
 }
 break;
-case 4:
+case 5:
 if (field.type == org.apache.thrift.protocol.TType.I32) {
 this.num_used_workers=iprot.readI32();
 set_num_used_workers_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+case 6:
+if (field.type == org.apache.thrift.protocol.TType.I32) {
+this.num_cpu=iprot.readI32();
+set_num_cpu_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+case 7:
+if (field.type == org.apache.thrift.protocol.TType.I32) {
+this.num_used_cpu=iprot.readI32();
+set_num_used_cpu_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+case 8:
+if (field.type == org.apache.thrift.protocol.TType.I32) {
+this.num_mem=iprot.readI32();
+set_num_mem_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+case 9:
+if (field.type == org.apache.thrift.protocol.TType.I32) {
+this.num_used_mem=iprot.readI32();
+set_num_used_mem_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+case 10:
+if (field.type == org.apache.thrift.protocol.TType.I32) {
+this.num_disk=iprot.readI32();
+set_num_disk_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+case 11:
+if (field.type == org.apache.thrift.protocol.TType.I32) {
+this.num_used_disk=iprot.readI32();
+set_num_used_disk_isSet(true);
 }
  else {
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,field.type);

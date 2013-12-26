@@ -1,0 +1,60 @@
+{
+  Map<String,SupervisorInfo> cluster=defaultContext.getCluster();
+  Map<String,Integer> supervisorTaskNumMap=new HashMap<String,Integer>();
+  for (  Entry<Integer,ResourceAssignment> entry : newAssigns.entrySet()) {
+    Integer taskId=entry.getKey();
+    ResourceAssignment assign=entry.getValue();
+    String sid=assign.getSupervisorId();
+    Integer num=supervisorTaskNumMap.get(sid);
+    if (num == null) {
+      num=Integer.valueOf(0);
+    }
+    num=num + 1;
+    supervisorTaskNumMap.put(sid,num);
+    List<Integer> taskList=supervisorTasks.get(sid);
+    if (taskList == null) {
+      taskList=new ArrayList<Integer>();
+      supervisorTasks.put(sid,taskList);
+    }
+    taskList.add(taskId);
+  }
+  final Map<String,Integer> supervisorSlotNumMap=new HashMap<String,Integer>();
+  for (  String sid : supervisorTaskNumMap.keySet()) {
+    SupervisorInfo supervisorInfo=cluster.get(sid);
+    supervisorSlotNumMap.put(sid,supervisorInfo.getNetPool().getLeftNum());
+  }
+  List<String> sortSupervisorList=new ArrayList<String>();
+  sortSupervisorList.addAll(supervisorSlotNumMap.keySet());
+  Collections.sort(sortSupervisorList,new Comparator<String>(){
+    @Override public int compare(    String first,    String second){
+      Integer firstWeight=supervisorSlotNumMap.get(first);
+      Integer secondWeight=supervisorSlotNumMap.get(second);
+      return secondWeight - firstWeight;
+    }
+  }
+);
+  int index=0;
+  int tmp=allocWorkerNum;
+  while (tmp > 0) {
+    if (index >= sortSupervisorList.size()) {
+      index=0;
+    }
+    String supervisorId=sortSupervisorList.get(index);
+    Integer assignNum=supervisorAssignSlotNumMap.get(supervisorId);
+    if (assignNum == null) {
+      assignNum=Integer.valueOf(0);
+    }
+    Integer taskNum=supervisorTaskNumMap.get(supervisorId);
+    if (taskNum <= assignNum) {
+      sortSupervisorList.remove(index);
+      continue;
+    }
+    Integer slotNum=supervisorSlotNumMap.get(supervisorId);
+    if (slotNum > assignNum) {
+      assignNum=assignNum + 1;
+      supervisorAssignSlotNumMap.put(supervisorId,assignNum);
+    }
+    index++;
+    tmp--;
+  }
+}

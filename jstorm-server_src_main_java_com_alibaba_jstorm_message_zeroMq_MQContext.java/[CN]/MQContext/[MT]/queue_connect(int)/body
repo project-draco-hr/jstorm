@@ -1,0 +1,12 @@
+{
+  IConnection queueConnection=null;
+synchronized (this) {
+    queueConnection=queueConnections.get(port);
+    if (queueConnection == null) {
+      queueConnection=new QueueConnection(storm_conf);
+      queueConnections.put(port,queueConnection);
+      LOG.info("Create internal queue connect {}",port);
+    }
+  }
+  return queueConnection;
+}

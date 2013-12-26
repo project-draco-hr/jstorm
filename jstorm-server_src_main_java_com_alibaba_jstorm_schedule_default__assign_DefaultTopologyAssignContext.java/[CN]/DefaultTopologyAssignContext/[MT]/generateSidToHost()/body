@@ -1,0 +1,12 @@
+{
+  Map<String,String> sidToHostname=new HashMap<String,String>();
+  if (oldAssignment != null) {
+    sidToHostname.putAll(oldAssignment.getNodeHost());
+  }
+  for (  Entry<String,SupervisorInfo> entry : cluster.entrySet()) {
+    String supervisorId=entry.getKey();
+    SupervisorInfo supervisorInfo=entry.getValue();
+    sidToHostname.put(supervisorId,supervisorInfo.getHostName());
+  }
+  return sidToHostname;
+}

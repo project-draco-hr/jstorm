@@ -1,0 +1,3 @@
+{
+  return (Integer)conf.get(SUPERVISOR_MEM_SLOT_NUM);
+}

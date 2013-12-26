@@ -1,0 +1,4 @@
+{
+  _backing=new MemoryMapStateBacking(id);
+  _delegate=new SnapshottableMap(OpaqueMap.build(_backing),new Values("$MEMORY-MAP-STATE-GLOBAL$"));
+}

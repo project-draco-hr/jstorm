@@ -1,0 +1,12 @@
+{
+  Object object;
+  try {
+    object=ManagementFactory.getPlatformMBeanServer().getAttribute(new ObjectName("java.lang","type","OperatingSystem"),"TotalPhysicalMemorySize");
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to get system physical memory size,",e);
+    return null;
+  }
+  Long ret=(Long)object;
+  return ret;
+}

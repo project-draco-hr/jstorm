@@ -1,5 +1,0 @@
-Assignment existingAssignment
-StormClusterState stormClusterState
-Set<Integer> allTaskIds
-String topologyId
-boolean isScratch

@@ -1,0 +1,25 @@
+{
+  if (serviceHandler != null) {
+    serviceHandler.shutdown();
+  }
+  if (topologyAssign != null) {
+    topologyAssign.cleanup();
+  }
+  if (follower != null) {
+    follower.clean();
+  }
+  if (data != null) {
+    data.cleanup();
+  }
+  if (thriftServer != null) {
+    thriftServer.stop();
+  }
+  if (leaderSelector != null) {
+    try {
+      leaderSelector.close();
+    }
+ catch (    Exception e) {
+    }
+  }
+  LOG.info("Successfully shutdown nimbus");
+}

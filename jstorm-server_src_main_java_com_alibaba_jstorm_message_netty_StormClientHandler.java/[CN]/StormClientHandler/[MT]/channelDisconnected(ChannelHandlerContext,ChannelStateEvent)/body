@@ -1,0 +1,8 @@
+{
+  super.channelDisconnected(ctx,e);
+  LOG.info("Receive channelDisconnected to {}",client.getTarget_Server());
+  if (!being_closed.get()) {
+    client.setChannel(null);
+    client.reconnect();
+  }
+}

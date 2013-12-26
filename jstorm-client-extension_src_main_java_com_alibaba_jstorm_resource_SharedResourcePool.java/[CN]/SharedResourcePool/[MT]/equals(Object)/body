@@ -1,0 +1,7 @@
+{
+  if (obj instanceof SharedResourcePool == false) {
+    return false;
+  }
+  SharedResourcePool otherPool=(SharedResourcePool)obj;
+  return otherPool.getType().equals(type) && otherPool.totalSlotNum == totalSlotNum && otherPool.freeSlotNum.equals(freeSlotNum);
+}

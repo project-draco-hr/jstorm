@@ -1,0 +1,30 @@
+{
+  DistributedClusterState zkClusterState=null;
+  try {
+    conf.put(Config.STORM_ZOOKEEPER_ROOT,"/");
+    zkClusterState=new DistributedClusterState(conf);
+    String data=getData(zkClusterState,path);
+    if (data == null) {
+      LOG.info("No data of " + path);
+    }
+    StringBuilder sb=new StringBuilder();
+    sb.append("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n");
+    sb.append("Zk node " + path + "\n");
+    sb.append("Readable data:" + data + "\n");
+    sb.append("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n");
+    LOG.info(sb.toString());
+  }
+ catch (  Exception e) {
+    if (zkClusterState == null) {
+      LOG.error("Failed to connect ZK ",e);
+    }
+ else {
+      LOG.error("Failed to read data " + path + "\n",e);
+    }
+  }
+ finally {
+    if (zkClusterState != null) {
+      zkClusterState.close();
+    }
+  }
+}

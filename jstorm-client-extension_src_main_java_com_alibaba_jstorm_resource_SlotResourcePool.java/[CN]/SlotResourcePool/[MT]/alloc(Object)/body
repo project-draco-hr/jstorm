@@ -1,0 +1,14 @@
+{
+synchronized (type) {
+    for (    Entry<K,Boolean> entry : slots.entrySet()) {
+      if (entry.getValue() == true) {
+        continue;
+      }
+      K slot=entry.getKey();
+      slots.put(slot,Boolean.valueOf(true));
+      LOG.debug(context + " alloc " + type+ ":"+ slot);
+      return slot;
+    }
+  }
+  return null;
+}

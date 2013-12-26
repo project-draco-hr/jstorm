@@ -1,0 +1,3 @@
+{
+  conf.put(NETTY_ENABLE_DISRUPTOR_QUEUE,Boolean.valueOf(enable));
+}

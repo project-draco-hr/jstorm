@@ -1,0 +1,20 @@
+{
+  Object msg=e.getMessage();
+  if (msg == null)   return;
+  if (msg == ControlMessage.EOB_MESSAGE) {
+    Channel channel=ctx.getChannel();
+    LOG.debug("Receive ...{}",msg);
+    channel.write(ControlMessage.OK_RESPONSE);
+    return;
+  }
+ else   if (msg instanceof ControlMessage) {
+    LOG.debug("Receive ...{}",msg);
+    return;
+  }
+  try {
+    server.enqueue((TaskMessage)msg);
+  }
+ catch (  Exception e1) {
+    LOG.warn("Failed to enqueue a request message",e);
+  }
+}

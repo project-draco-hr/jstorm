@@ -1,0 +1,3 @@
+{
+  return (List<ResourceAssignment>)conf.get(USE_USERDEFINE_ASSIGNMENT);
+}

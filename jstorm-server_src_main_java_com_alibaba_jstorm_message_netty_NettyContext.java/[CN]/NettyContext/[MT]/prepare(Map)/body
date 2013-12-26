@@ -1,0 +1,4 @@
+{
+  this.storm_conf=storm_conf;
+  queueConnections=new HashMap<Integer,IConnection>();
+}

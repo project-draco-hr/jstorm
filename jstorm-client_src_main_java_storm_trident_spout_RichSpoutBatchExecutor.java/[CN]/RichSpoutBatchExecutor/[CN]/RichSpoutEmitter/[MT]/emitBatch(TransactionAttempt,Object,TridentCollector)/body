@@ -1,0 +1,26 @@
+{
+  long txid=tx.getTransactionId();
+  long now=System.currentTimeMillis();
+  if (now - lastRotate > rotateTime) {
+    Map<Long,List<Object>> failed=idsMap.rotate();
+    for (    Long id : failed.keySet()) {
+      fail(id);
+    }
+    lastRotate=now;
+  }
+  if (idsMap.containsKey(txid)) {
+    fail(txid);
+  }
+  _collector.reset(collector);
+  if (!prepared) {
+    _spout.open(_conf,_context,new SpoutOutputCollector(_collector));
+    prepared=true;
+  }
+  for (int i=0; i < _maxBatchSize; i++) {
+    _spout.nextTuple();
+    if (_collector.numEmitted < i) {
+      break;
+    }
+  }
+  idsMap.put(txid,_collector.ids);
+}

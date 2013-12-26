@@ -1,3 +1,0 @@
-{
-  handler.onEvent((T)event.getValue());
-}

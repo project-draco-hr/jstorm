@@ -9,6 +9,12 @@ case COMPONENT_ID:
   return is_set_component_id();
 case HOST:
 return is_set_host();
+case CPU:
+return is_set_cpu();
+case MEM:
+return is_set_mem();
+case DISK:
+return is_set_disk();
 case PORT:
 return is_set_port();
 case UPTIME_SECS:

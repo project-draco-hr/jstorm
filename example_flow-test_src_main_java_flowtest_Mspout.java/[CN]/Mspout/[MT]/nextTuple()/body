@@ -1,0 +1,12 @@
+{
+  try {
+    Object msgId=UUID.randomUUID();
+    Integer taskId=queue.take();
+    msgToTask.put(msgId,taskId);
+    state=true;
+    _collector.emitDirect(taskId,new Values("aa"),msgId);
+  }
+ catch (  InterruptedException e) {
+    e.printStackTrace();
+  }
+}

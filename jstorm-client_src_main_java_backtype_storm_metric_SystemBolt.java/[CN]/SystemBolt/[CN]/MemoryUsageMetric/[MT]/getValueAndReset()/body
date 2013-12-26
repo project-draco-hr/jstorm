@@ -1,0 +1,18 @@
+{
+  MemoryUsage memUsage;
+  try {
+    memUsage=(MemoryUsage)_getUsage.invoke();
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to get userage ",e);
+    throw new RuntimeException(e);
+  }
+  HashMap m=new HashMap();
+  m.put("maxBytes",memUsage.getMax());
+  m.put("committedBytes",memUsage.getCommitted());
+  m.put("initBytes",memUsage.getInit());
+  m.put("usedBytes",memUsage.getUsed());
+  m.put("virtualFreeBytes",memUsage.getMax() - memUsage.getUsed());
+  m.put("unusedBytes",memUsage.getCommitted() - memUsage.getUsed());
+  return m;
+}

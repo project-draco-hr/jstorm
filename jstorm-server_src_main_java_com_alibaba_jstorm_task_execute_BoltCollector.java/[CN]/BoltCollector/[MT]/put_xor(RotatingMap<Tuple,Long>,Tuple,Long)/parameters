@@ -1,0 +1,3 @@
+RotatingMap<Tuple,Long> pending
+Tuple key
+Long id

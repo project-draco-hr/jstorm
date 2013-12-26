@@ -1,0 +1,4 @@
+{
+  if (_transport != null)   _transport.close();
+  if (zkobj != null)   zkobj.close();
+}

@@ -1,0 +1,8 @@
+{
+  Map<String,Object> ret=new HashMap<String,Object>();
+  for (  StormTopology._Fields f : StormTopology.metaDataMap.keySet()) {
+    Map<String,Object> componentMap=(Map<String,Object>)topology.getFieldValue(f);
+    ret.putAll(componentMap);
+  }
+  return ret;
+}

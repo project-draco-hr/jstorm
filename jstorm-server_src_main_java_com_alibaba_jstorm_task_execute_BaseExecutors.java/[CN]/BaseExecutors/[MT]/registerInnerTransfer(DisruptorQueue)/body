@@ -1,0 +1,11 @@
+{
+  LOG.info("Registor inner transfer for executor thread of " + idStr);
+  DisruptorQueue existInnerTransfer=innerTaskTransfer.get(taskId);
+  if (existInnerTransfer != null) {
+    LOG.info("Exist inner task transfer for executing thread of " + idStr);
+    if (existInnerTransfer != disruptorQueue) {
+      throw new RuntimeException("Inner task transfer must be only one in executing thread of " + idStr);
+    }
+  }
+  innerTaskTransfer.put(taskId,disruptorQueue);
+}

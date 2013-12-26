@@ -1,0 +1,19 @@
+{
+  SchedulerAssignment existingAssignment=cluster.getAssignmentById(topologyId);
+  Map<ExecutorDetails,WorkerSlot> executorToSlot=null;
+  if (existingAssignment != null) {
+    executorToSlot=existingAssignment.getExecutorToSlot();
+  }
+  Map<WorkerSlot,List<ExecutorDetails>> result=new HashMap<WorkerSlot,List<ExecutorDetails>>();
+  if (executorToSlot != null) {
+    for (    Entry<ExecutorDetails,WorkerSlot> entry : executorToSlot.entrySet()) {
+      List<ExecutorDetails> cache=result.get(entry.getValue());
+      if (cache == null) {
+        cache=new ArrayList<ExecutorDetails>();
+        result.put(entry.getValue(),cache);
+      }
+      cache.add(entry.getKey());
+    }
+  }
+  return result;
+}

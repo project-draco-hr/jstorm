@@ -1,0 +1,29 @@
+{
+  String bestSupervisor=null;
+  int maxWeight=Integer.MIN_VALUE;
+  Map<String,Integer> newSupervisorTaskNum=new HashMap<String,Integer>();
+  for (  Entry<Integer,ResourceAssignment> entry : newAssigns.entrySet()) {
+    ResourceAssignment assignment=entry.getValue();
+    String supervisorId=assignment.getSupervisorId();
+    Integer num=newSupervisorTaskNum.get(supervisorId);
+    if (num == null) {
+      num=Integer.valueOf(0);
+    }
+    num=num + 1;
+    newSupervisorTaskNum.put(supervisorId,num);
+  }
+  Map<String,SupervisorInfo> cluster=defaultContext.getCluster();
+  for (  String supervisorId : supervisors) {
+    SupervisorInfo supervisorInfo=cluster.get(supervisorId);
+    Integer allocTaskNum=newSupervisorTaskNum.get(supervisorId);
+    if (allocTaskNum == null) {
+      allocTaskNum=Integer.valueOf(0);
+    }
+    int weight=computeSupervisorWeight(defaultContext,supervisorInfo,taskAllocResource,allocTaskNum);
+    if (weight > maxWeight) {
+      maxWeight=weight;
+      bestSupervisor=supervisorId;
+    }
+  }
+  return bestSupervisor;
+}

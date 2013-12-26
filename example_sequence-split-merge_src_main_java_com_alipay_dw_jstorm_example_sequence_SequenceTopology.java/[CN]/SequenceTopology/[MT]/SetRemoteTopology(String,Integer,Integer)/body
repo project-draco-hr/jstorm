@@ -1,0 +1,21 @@
+{
+  TopologyBuilder builder=new TopologyBuilder();
+  Map conf=new HashMap();
+  conf.put(TOPOLOGY_SPOUT_PARALLELISM_HINT,spout_parallelism_hint);
+  conf.put(TOPOLOGY_BOLT_PARALLELISM_HINT,bolt_parallelism_hint);
+  SetBuilder(builder,conf);
+  conf.put(Config.STORM_CLUSTER_MODE,"distributed");
+  if (streamName.contains("netty")) {
+    conf.put(Config.STORM_MESSAGING_TRANSPORT,"com.alibaba.jstorm.message.netty.NettyContext");
+    conf.put(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE,1024);
+    conf.put(Config.STORM_MESSAGING_NETTY_MAX_RETRIES,10);
+    conf.put(Config.STORM_MESSAGING_NETTY_MIN_SLEEP_MS,1000);
+    conf.put(Config.STORM_MESSAGING_NETTY_MAX_SLEEP_MS,5000);
+    conf.put(Config.STORM_MESSAGING_NETTY_SERVER_WORKER_THREADS,1);
+    conf.put(Config.STORM_MESSAGING_NETTY_CLIENT_WORKER_THREADS,1);
+  }
+ else {
+    conf.put(Config.STORM_MESSAGING_TRANSPORT,"com.alibaba.jstorm.message.zeroMq.MQContext");
+  }
+  StormSubmitter.submitTopology(streamName,conf,builder.createTopology());
+}

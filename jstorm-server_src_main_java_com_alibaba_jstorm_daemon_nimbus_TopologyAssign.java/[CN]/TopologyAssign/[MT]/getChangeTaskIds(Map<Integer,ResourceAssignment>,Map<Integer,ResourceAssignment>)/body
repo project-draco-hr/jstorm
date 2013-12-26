@@ -1,0 +1,37 @@
+{
+  Map<WorkerSlot,List<Integer>> oldSlotAssigned=Assignment.getWorkerTasks(oldTaskToWorkerSlot);
+  Map<WorkerSlot,List<Integer>> newSlotAssigned=Assignment.getWorkerTasks(newTaskToWorkerSlot);
+  Set<Integer> rtn=new HashSet<Integer>();
+  for (  Entry<WorkerSlot,List<Integer>> entry : newSlotAssigned.entrySet()) {
+    List<Integer> oldList=oldSlotAssigned.get(entry.getKey());
+    List<Integer> newList=entry.getValue();
+    if (oldList == null) {
+      rtn.addAll(newList);
+      continue;
+    }
+ else {
+      if (oldList.equals(newList) == false) {
+        rtn.addAll(newList);
+        continue;
+      }
+      boolean isSame=true;
+      for (      Integer taskId : newList) {
+        ResourceAssignment oldResource=oldTaskToWorkerSlot.get(taskId);
+        ResourceAssignment newResource=newTaskToWorkerSlot.get(taskId);
+        if (oldResource == null) {
+          isSame=false;
+          break;
+        }
+ else         if (oldResource.equals(newResource) == false) {
+          isSame=false;
+          break;
+        }
+      }
+      if (isSame == false) {
+        rtn.addAll(newList);
+        continue;
+      }
+    }
+  }
+  return rtn;
+}

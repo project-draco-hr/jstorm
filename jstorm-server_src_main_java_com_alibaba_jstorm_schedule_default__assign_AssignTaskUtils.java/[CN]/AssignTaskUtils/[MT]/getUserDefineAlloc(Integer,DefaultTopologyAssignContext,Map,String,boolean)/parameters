@@ -1,0 +1,5 @@
+Integer task
+DefaultTopologyAssignContext defaultContext
+Map componentMap
+String componentName
+boolean checkHostname

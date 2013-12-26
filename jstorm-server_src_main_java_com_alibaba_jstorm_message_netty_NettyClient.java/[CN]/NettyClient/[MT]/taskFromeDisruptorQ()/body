@@ -1,0 +1,14 @@
+{
+  if (batchHighLevel) {
+    MessageBatch retBatch=(MessageBatch)disruptorQueue.take();
+    return retBatch;
+  }
+ else {
+    MessageBatch retBatch=readyBatchs.poll();
+    if (retBatch == null) {
+      disruptorQueue.consumeBatchWhenAvailable(this);
+      retBatch=readyBatchs.poll();
+    }
+    return retBatch;
+  }
+}

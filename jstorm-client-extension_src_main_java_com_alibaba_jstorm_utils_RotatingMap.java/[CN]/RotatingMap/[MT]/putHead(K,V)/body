@@ -1,0 +1,4 @@
+{
+  Map<K,V> bucket=_buckets.getFirst();
+  bucket.put(key,value);
+}

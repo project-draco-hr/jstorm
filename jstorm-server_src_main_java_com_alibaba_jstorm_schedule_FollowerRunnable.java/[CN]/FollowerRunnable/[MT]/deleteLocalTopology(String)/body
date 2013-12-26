@@ -1,0 +1,11 @@
+{
+  String dir_to_delete=StormConfig.masterStormdistRoot(data.getConf(),topologyId);
+  try {
+    PathUtils.rmr(dir_to_delete);
+    LOG.info("delete:" + dir_to_delete + "successfully!");
+  }
+ catch (  IOException e) {
+    LOG.error("delete:" + dir_to_delete + "fail!");
+    e.printStackTrace();
+  }
+}

@@ -1,6 +1,0 @@
-String nimbusuptime
-String supervisors
-String usedSlots
-String freeSlots
-String totalSlots
-String runningTasks

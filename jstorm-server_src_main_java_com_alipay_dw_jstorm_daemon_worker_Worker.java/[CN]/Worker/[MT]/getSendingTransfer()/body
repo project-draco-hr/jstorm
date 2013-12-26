@@ -1,5 +1,0 @@
-{
-  TopologyContext sysTopologyContext=workerData.getContextMaker().makeTopologyContext(workerData.getSysTopology(),null);
-  KryoTupleSerializer serializer=new KryoTupleSerializer(workerData.getStormConf(),sysTopologyContext);
-  return new WorkerTransfer(serializer,workerData.getTransferQueue());
-}

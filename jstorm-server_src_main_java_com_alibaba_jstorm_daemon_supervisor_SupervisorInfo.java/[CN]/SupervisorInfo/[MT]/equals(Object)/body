@@ -1,0 +1,6 @@
+{
+  if (hb instanceof SupervisorInfo && ((SupervisorInfo)hb).timeSecs.equals(timeSecs) && ((SupervisorInfo)hb).hostName.equals(hostName)&& ((SupervisorInfo)hb).cpuPool.equals(cpuPool)&& ((SupervisorInfo)hb).memPool.equals(memPool)&& ((SupervisorInfo)hb).diskPool.equals(diskPool)&& ((SupervisorInfo)hb).netPool.equals(netPool)&& ((SupervisorInfo)hb).uptimeSecs.equals(uptimeSecs)) {
+    return true;
+  }
+  return false;
+}

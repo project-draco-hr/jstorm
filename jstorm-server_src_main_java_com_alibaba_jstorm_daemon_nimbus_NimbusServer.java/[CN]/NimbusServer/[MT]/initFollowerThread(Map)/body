@@ -1,0 +1,7 @@
+{
+  follower=new FollowerRunnable(data,leaderSelector,5000);
+  Thread thread=new Thread(follower);
+  thread.setDaemon(true);
+  thread.start();
+  LOG.info("Successfully init Follower thread");
+}

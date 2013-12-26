@@ -1,0 +1,6 @@
+{
+  LOG.debug(context + " free " + type+ ":"+ slotNum);
+  if (slotNum != null) {
+    freeSlotNum.addAndGet(slotNum);
+  }
+}

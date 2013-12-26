@@ -1,0 +1,15 @@
+{
+  Assignment assignment=null;
+  try {
+    assignment=mkAssignment(event);
+    setTopologyStatus(event);
+  }
+ catch (  Throwable e) {
+    LOG.error("Failed to assign topology " + event.getTopologyId(),e);
+    event.fail(e.getMessage());
+    return false;
+  }
+  backupAssignment(assignment,event);
+  event.done();
+  return true;
+}

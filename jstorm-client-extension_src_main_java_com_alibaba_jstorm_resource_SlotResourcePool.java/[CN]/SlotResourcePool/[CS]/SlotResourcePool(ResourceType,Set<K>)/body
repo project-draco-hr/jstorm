@@ -1,0 +1,8 @@
+{
+  this.type=type;
+  slots=new TreeMap();
+  for (  K slot : slotSet) {
+    slots.put(slot,Boolean.valueOf(false));
+  }
+  LOG.info("Successfully init " + this.getClass().getSimpleName() + ":"+ this.toString());
+}

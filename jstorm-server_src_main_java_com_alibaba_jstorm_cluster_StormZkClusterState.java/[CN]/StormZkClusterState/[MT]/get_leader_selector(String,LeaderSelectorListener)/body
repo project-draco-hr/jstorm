@@ -1,0 +1,3 @@
+{
+  return cluster_state.mkLeaderSelector(path,listener);
+}

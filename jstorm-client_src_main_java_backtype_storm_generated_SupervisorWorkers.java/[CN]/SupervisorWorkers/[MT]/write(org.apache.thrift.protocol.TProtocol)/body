@@ -10,8 +10,8 @@
     oprot.writeFieldBegin(WORKERS_FIELD_DESC);
 {
       oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,this.workers.size()));
-      for (      WorkerSummary _iter120 : this.workers) {
-        _iter120.write(oprot);
+      for (      WorkerSummary _iter200 : this.workers) {
+        _iter200.write(oprot);
       }
       oprot.writeListEnd();
     }

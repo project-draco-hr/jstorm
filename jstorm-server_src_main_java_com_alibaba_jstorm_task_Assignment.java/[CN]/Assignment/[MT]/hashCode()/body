@@ -1,0 +1,9 @@
+{
+  final int prime=31;
+  int result=1;
+  result=prime * result + ((masterCodeDir == null) ? 0 : masterCodeDir.hashCode());
+  result=prime * result + ((nodeHost == null) ? 0 : nodeHost.hashCode());
+  result=prime * result + ((taskStartTimeSecs == null) ? 0 : taskStartTimeSecs.hashCode());
+  result=prime * result + ((taskToResource == null) ? 0 : taskToResource.hashCode());
+  return result;
+}

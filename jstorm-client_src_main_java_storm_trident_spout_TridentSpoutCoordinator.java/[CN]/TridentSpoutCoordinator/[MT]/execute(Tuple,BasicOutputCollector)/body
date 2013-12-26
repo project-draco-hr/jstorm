@@ -1,0 +1,14 @@
+{
+  TransactionAttempt attempt=(TransactionAttempt)tuple.getValue(0);
+  if (tuple.getSourceStreamId().equals(MasterBatchCoordinator.SUCCESS_STREAM_ID)) {
+    _state.cleanupBefore(attempt.getTransactionId());
+    _coord.success(attempt.getTransactionId());
+  }
+ else {
+    long txid=attempt.getTransactionId();
+    Object prevMeta=_state.getPreviousState(txid);
+    Object meta=_coord.initializeTransaction(txid,prevMeta,_state.getState(txid));
+    _state.overrideState(txid,meta);
+    collector.emit(MasterBatchCoordinator.BATCH_STREAM_ID,new Values(attempt,meta));
+  }
+}

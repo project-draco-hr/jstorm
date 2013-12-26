@@ -1,0 +1,15 @@
+{
+  LOG.info("Follower Thread starts!");
+  while (state) {
+    try {
+      Thread.sleep(sleepTime);
+      if (leaderSelector.hasLeadership())       continue;
+      check();
+    }
+ catch (    InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+  zkobj.close();
+  LOG.info("Follower Thread has closed!");
+}

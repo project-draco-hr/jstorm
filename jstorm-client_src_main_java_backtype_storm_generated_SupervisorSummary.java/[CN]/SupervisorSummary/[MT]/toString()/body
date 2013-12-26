@@ -10,6 +10,15 @@
   }
   first=false;
   if (!first)   sb.append(", ");
+  sb.append("supervisor_id:");
+  if (this.supervisor_id == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.supervisor_id);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
   sb.append("uptime_secs:");
   sb.append(this.uptime_secs);
   first=false;
@@ -20,6 +29,30 @@
   if (!first)   sb.append(", ");
   sb.append("num_used_workers:");
   sb.append(this.num_used_workers);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("num_cpu:");
+  sb.append(this.num_cpu);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("num_used_cpu:");
+  sb.append(this.num_used_cpu);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("num_mem:");
+  sb.append(this.num_mem);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("num_used_mem:");
+  sb.append(this.num_used_mem);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("num_disk:");
+  sb.append(this.num_disk);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("num_used_disk:");
+  sb.append(this.num_used_disk);
   first=false;
   sb.append(")");
   return sb.toString();

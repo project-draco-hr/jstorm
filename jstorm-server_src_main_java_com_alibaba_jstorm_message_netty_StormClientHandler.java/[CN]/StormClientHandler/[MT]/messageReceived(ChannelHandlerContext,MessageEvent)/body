@@ -1,0 +1,13 @@
+{
+  ControlMessage msg=(ControlMessage)event.getMessage();
+  if (msg == ControlMessage.FAILURE_RESPONSE)   LOG.info("failure response:{}",msg);
+  Channel channel=event.getChannel();
+  try {
+    sendRequests(channel,client.takeMessages());
+  }
+ catch (  Exception e) {
+    LOG.warn("Occur channel error\n",e);
+    channel.close();
+    throw new RuntimeException(e);
+  }
+}

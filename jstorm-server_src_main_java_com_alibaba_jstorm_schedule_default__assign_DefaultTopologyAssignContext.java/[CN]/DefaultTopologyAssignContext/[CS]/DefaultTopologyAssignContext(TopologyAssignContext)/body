@@ -1,0 +1,33 @@
+{
+  super(context);
+  DISK_WEIGHT=ConfigExtension.getTopologyDiskWeight(stormConf);
+  CPU_WEIGHT=ConfigExtension.getTopologyCpuWeight(stormConf);
+  MEM_WEIGHT=ConfigExtension.getTopologyMemWeight(stormConf);
+  PORT_WEIGHT=ConfigExtension.getTopologyPortWeight(stormConf);
+  DEFAULT_WEIGHT=CPU_WEIGHT + MEM_WEIGHT;
+  TASK_ON_DIFFERENT_NODE_WEIGHT=JStormServerConfig.getTopologyTaskOnDiffWeight(stormConf);
+  USE_OLD_ASSIGN_RATIO_WEIGHT=JStormServerConfig.getTopologyUseOldAssignWeight(stormConf);
+  USER_DEFINE_ASSIGN_RATIO_WEIGHT=JStormServerConfig.getTopologyUserDefineAssignWeight(stormConf);
+  try {
+    sysTopology=Common.system_topology(stormConf,rawTopology);
+  }
+ catch (  Exception e) {
+    throw new FailedAssignTopologyException("Failed to generate system topology");
+  }
+  sidToHostname=generateSidToHost();
+  hostToSid=JStormUtils.reverse_map(sidToHostname);
+  if (oldAssignment != null) {
+    oldWorkerTasks=Assignment.getWorkerTasks(oldAssignment.getTaskToResource());
+  }
+ else {
+    oldWorkerTasks=new HashMap<WorkerSlot,List<Integer>>();
+  }
+  refineDeadTasks();
+  componentTasks=JStormUtils.reverse_map(context.getTaskToComponent());
+  for (  Entry<String,List<Integer>> entry : componentTasks.entrySet()) {
+    List<Integer> componentTaskList=entry.getValue();
+    Collections.sort(componentTaskList);
+  }
+  totalWorkerNum=computeWorkerNum();
+  unstoppedWorkerNum=computeUnstoppedAssignments();
+}

@@ -7,14 +7,20 @@ case ID:
     return is_set_id();
 case NAME:
   return is_set_name();
+case STATUS:
+return is_set_status();
+case UPTIME_SECS:
+return is_set_uptime_secs();
 case NUM_TASKS:
 return is_set_num_tasks();
 case NUM_WORKERS:
 return is_set_num_workers();
-case UPTIME_SECS:
-return is_set_uptime_secs();
-case STATUS:
-return is_set_status();
+case NUM_CPU:
+return is_set_num_cpu();
+case NUM_MEM:
+return is_set_num_mem();
+case NUM_DISK:
+return is_set_num_disk();
 }
 throw new IllegalStateException();
 }

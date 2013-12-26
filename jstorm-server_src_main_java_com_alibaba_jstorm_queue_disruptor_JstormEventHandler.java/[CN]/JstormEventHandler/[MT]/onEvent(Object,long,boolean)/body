@@ -1,0 +1,6 @@
+{
+  long msgId=Long.parseLong(((JstormEvent)event).getMsgId());
+  if (msgId == count - 1) {
+    logger.warn("end..." + System.currentTimeMillis());
+  }
+}

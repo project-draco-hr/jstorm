@@ -1,0 +1,3 @@
+{
+  conf.put(USE_SINGLE_NODE,Boolean.valueOf(useSingle));
+}

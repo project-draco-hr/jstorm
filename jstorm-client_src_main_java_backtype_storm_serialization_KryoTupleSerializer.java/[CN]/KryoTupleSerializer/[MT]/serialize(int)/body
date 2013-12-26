@@ -1,0 +1,6 @@
+{
+  ByteBuffer buff=ByteBuffer.allocate((Integer.SIZE / 8));
+  buff.putInt(targetTask);
+  byte[] rtn=buff.array();
+  return rtn;
+}

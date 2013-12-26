@@ -1,7 +1,0 @@
-{
-  final Sequence[] sequences=new Sequence[workProcessors.size()];
-  for (int i=0, size=workProcessors.size(); i < size; i++) {
-    sequences[i]=workProcessors.get(i).getSequence();
-  }
-  return sequences;
-}

@@ -1,4 +1,0 @@
-{
-  this.tuple=tuple;
-  this.failLatencyMs=failLatencyMs;
-}

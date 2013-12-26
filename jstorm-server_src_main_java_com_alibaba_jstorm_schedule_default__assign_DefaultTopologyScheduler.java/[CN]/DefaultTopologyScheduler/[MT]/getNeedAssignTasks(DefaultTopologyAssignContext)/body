@@ -1,0 +1,15 @@
+{
+  Set<Integer> needAssign=new HashSet<Integer>();
+  int assignType=context.getAssignType();
+  if (assignType == TopologyAssignContext.ASSIGN_TYPE_NEW) {
+    needAssign.addAll(context.getAllTaskIds());
+  }
+ else   if (assignType == TopologyAssignContext.ASSIGN_TYPE_REBALANCE) {
+    needAssign.addAll(context.getAllTaskIds());
+    needAssign.removeAll(context.getUnstoppedTaskIds());
+  }
+ else {
+    needAssign.addAll(context.getDeadTaskIds());
+  }
+  return needAssign;
+}

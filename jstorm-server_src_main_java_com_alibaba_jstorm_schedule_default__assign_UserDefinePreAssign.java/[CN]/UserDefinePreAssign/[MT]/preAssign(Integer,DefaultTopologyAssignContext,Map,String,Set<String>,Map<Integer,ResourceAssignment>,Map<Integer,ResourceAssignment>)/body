@@ -1,0 +1,13 @@
+{
+  ResourceAssignment taskAlloc=AssignTaskUtils.getUserDefineAlloc(task,defaultContext,componentMap,componentName,true);
+  if (taskAlloc == null) {
+    return null;
+  }
+  boolean resourceValid=AssignTaskUtils.checkResourceValid(taskAlloc,task,defaultContext,componentMap,componentName,canUsedSupervisorIds,alreadyAssign);
+  if (resourceValid == false) {
+    return null;
+  }
+  LOG.info(componentName + " of " + task+ " use user-define assignment "+ taskAlloc);
+  AssignTaskUtils.allocResource(defaultContext,taskAlloc);
+  return taskAlloc;
+}

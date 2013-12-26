@@ -1,0 +1,3 @@
+boolean allocDisk
+int cpuSlotNum
+int memSlotNum

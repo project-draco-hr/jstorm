@@ -1,0 +1,2 @@
+Set<WorkerSlot> allSlots
+int needSlotNum

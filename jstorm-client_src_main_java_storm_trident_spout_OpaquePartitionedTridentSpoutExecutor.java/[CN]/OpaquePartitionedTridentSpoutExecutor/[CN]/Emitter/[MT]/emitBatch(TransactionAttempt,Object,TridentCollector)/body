@@ -1,0 +1,34 @@
+{
+  if (_savedCoordinatorMeta == null || !_savedCoordinatorMeta.equals(coordinatorMeta)) {
+    List<ISpoutPartition> partitions=_emitter.getOrderedPartitions(coordinatorMeta);
+    _partitionStates.clear();
+    List<ISpoutPartition> myPartitions=new ArrayList();
+    for (int i=_index; i < partitions.size(); i+=_numTasks) {
+      ISpoutPartition p=partitions.get(i);
+      String id=p.getId();
+      myPartitions.add(p);
+      _partitionStates.put(id,new EmitterPartitionState(new RotatingTransactionalState(_state,id),p));
+    }
+    _emitter.refreshPartitions(myPartitions);
+    _savedCoordinatorMeta=coordinatorMeta;
+    _changedMeta=true;
+  }
+  Map<String,Object> metas=new HashMap<String,Object>();
+  _cachedMetas.put(tx.getTransactionId(),metas);
+  Entry<Long,Map<String,Object>> entry=_cachedMetas.lowerEntry(tx.getTransactionId());
+  Map<String,Object> prevCached;
+  if (entry != null) {
+    prevCached=entry.getValue();
+  }
+ else {
+    prevCached=new HashMap<String,Object>();
+  }
+  for (  String id : _partitionStates.keySet()) {
+    EmitterPartitionState s=_partitionStates.get(id);
+    s.rotatingState.removeState(tx.getTransactionId());
+    Object lastMeta=prevCached.get(id);
+    if (lastMeta == null)     lastMeta=s.rotatingState.getLastState();
+    Object meta=_emitter.emitPartitionBatch(tx,collector,s.partition,lastMeta);
+    metas.put(id,meta);
+  }
+}

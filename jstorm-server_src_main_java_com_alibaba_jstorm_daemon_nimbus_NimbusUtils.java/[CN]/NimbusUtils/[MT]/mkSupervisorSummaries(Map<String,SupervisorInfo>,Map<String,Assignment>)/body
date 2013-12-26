@@ -1,0 +1,28 @@
+{
+  for (  Entry<String,Assignment> entry : assignments.entrySet()) {
+    Map<Integer,ResourceAssignment> taskToResource=entry.getValue().getTaskToResource();
+    for (    Entry<Integer,ResourceAssignment> resourceEntry : taskToResource.entrySet()) {
+      ResourceAssignment resource=resourceEntry.getValue();
+      String supervisorId=resource.getSupervisorId();
+      SupervisorInfo supervisorInfo=supervisorInfos.get(supervisorId);
+      if (supervisorInfo == null) {
+        continue;
+      }
+      supervisorInfo.allocResource(resource);
+    }
+  }
+  List<SupervisorSummary> ret=new ArrayList<SupervisorSummary>();
+  for (  Entry<String,SupervisorInfo> entry : supervisorInfos.entrySet()) {
+    String supervisorId=entry.getKey();
+    SupervisorInfo supervisorInfo=entry.getValue();
+    SupervisorSummary summary=mkSupervisorSummary(supervisorInfo,supervisorId);
+    ret.add(summary);
+  }
+  Collections.sort(ret,new Comparator<SupervisorSummary>(){
+    @Override public int compare(    SupervisorSummary o1,    SupervisorSummary o2){
+      return o1.get_host().compareTo(o2.get_host());
+    }
+  }
+);
+  return ret;
+}

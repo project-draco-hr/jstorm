@@ -1,0 +1,40 @@
+{
+  Map<String,List<WorkerSlot>> nodeMap=new HashMap<String,List<WorkerSlot>>();
+  for (  WorkerSlot np : allSlots) {
+    String node=np.getNodeId();
+    List<WorkerSlot> list=nodeMap.get(node);
+    if (list == null) {
+      list=new ArrayList<WorkerSlot>();
+      nodeMap.put(node,list);
+    }
+    list.add(np);
+  }
+  for (  Entry<String,List<WorkerSlot>> entry : nodeMap.entrySet()) {
+    List<WorkerSlot> ports=entry.getValue();
+    Collections.sort(ports,new Comparator<WorkerSlot>(){
+      @Override public int compare(      WorkerSlot first,      WorkerSlot second){
+        String firstNode=first.getNodeId();
+        String secondNode=second.getNodeId();
+        if (firstNode.equals(secondNode) == false) {
+          return firstNode.compareTo(secondNode);
+        }
+ else {
+          return first.getPort() - second.getPort();
+        }
+      }
+    }
+);
+  }
+  List<List<WorkerSlot>> splitup=new ArrayList<List<WorkerSlot>>(nodeMap.values());
+  Collections.sort(splitup,new Comparator<List<WorkerSlot>>(){
+    public int compare(    List<WorkerSlot> o1,    List<WorkerSlot> o2){
+      return o2.size() - o1.size();
+    }
+  }
+);
+  List<WorkerSlot> sortedFreeSlots=JStormUtils.interleave_all(splitup);
+  if (sortedFreeSlots.size() <= needSlotNum) {
+    return sortedFreeSlots;
+  }
+  return sortedFreeSlots.subList(0,needSlotNum);
+}

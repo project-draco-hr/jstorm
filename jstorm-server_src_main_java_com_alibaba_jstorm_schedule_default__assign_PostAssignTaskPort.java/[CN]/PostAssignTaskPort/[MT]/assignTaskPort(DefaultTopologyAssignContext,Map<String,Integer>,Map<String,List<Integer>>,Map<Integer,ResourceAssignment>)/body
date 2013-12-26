@@ -1,0 +1,10 @@
+{
+  Map<String,SupervisorInfo> cluster=defaultContext.getCluster();
+  for (  Entry<String,List<Integer>> entry : supervisorTasks.entrySet()) {
+    String sid=entry.getKey();
+    List<Integer> taskList=entry.getValue();
+    Integer workerNum=supervisorAssignSlotNumMap.get(sid);
+    SupervisorInfo supervisorInfo=cluster.get(sid);
+    assignTaskPort(defaultContext,taskList,workerNum,newAssigns,supervisorInfo);
+  }
+}

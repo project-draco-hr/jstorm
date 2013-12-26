@@ -1,0 +1,12 @@
+{
+  try {
+    String localRoot=StormConfig.masterStormdistRoot(data.getConf(),topologyId);
+    String masterCodeDir=assignment.getMasterCodeDir();
+    JStormServerUtils.downloadCodeFromMaster(data.getConf(),localRoot,masterCodeDir);
+  }
+ catch (  TException e) {
+    LOG.error(e + " downloadStormCode failed " + "stormId:"+ topologyId+ "masterCodeDir:"+ assignment.getMasterCodeDir());
+    throw e;
+  }
+  LOG.info("Finished downloading code for topology id " + topologyId + " from "+ assignment.getMasterCodeDir());
+}

@@ -1,0 +1,15 @@
+{
+  if (event == null) {
+    return;
+  }
+  Tuple tuple=(Tuple)event;
+  tuple_start_times.put(tuple,System.currentTimeMillis());
+  try {
+    bolt.execute(tuple);
+  }
+ catch (  Exception e) {
+    error=e;
+    LOG.error("bolt execute error ",e);
+    report_error.report(e);
+  }
+}

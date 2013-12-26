@@ -1,0 +1,4 @@
+{
+  this.server=server;
+  failureCounters=new ConcurrentHashMap<Channel,Integer>();
+}

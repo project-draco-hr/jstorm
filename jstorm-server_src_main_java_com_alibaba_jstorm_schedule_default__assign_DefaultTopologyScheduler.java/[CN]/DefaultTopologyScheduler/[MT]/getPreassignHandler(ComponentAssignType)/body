@@ -1,0 +1,11 @@
+{
+  if (type == ComponentAssignType.USER_DEFINE) {
+    return new UserDefinePreAssign();
+  }
+ else   if (type == ComponentAssignType.USE_OLD) {
+    return new UseOldPreAssign();
+  }
+ else {
+    return new NormalPreAssign();
+  }
+}

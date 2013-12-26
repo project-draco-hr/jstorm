@@ -1,0 +1,5 @@
+{
+  super();
+  this.componentTasks=componentTasks;
+  this.assignment=assignment;
+}

@@ -1,0 +1,18 @@
+{
+  if (consumerStartedFlag == false) {
+    return _cache.poll();
+  }
+  final long nextSequence=_consumer.get() + 1;
+  try {
+    _barrier.waitFor(nextSequence);
+  }
+ catch (  AlertException e) {
+    throw new RuntimeException(e);
+  }
+catch (  InterruptedException e) {
+    return null;
+  }
+  MutableObject mo=_buffer.get(nextSequence);
+  _consumer.set(nextSequence);
+  return mo.o;
+}

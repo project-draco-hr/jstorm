@@ -1,0 +1,6 @@
+{
+  Map<String,List<Integer>> supervisorTasks=new HashMap<String,List<Integer>>();
+  Map<String,Integer> supervisorAssignSlotNumMap=new HashMap<String,Integer>();
+  assignWorkerNumToSupervisor(defaultContext,newAssigns,allocWorkerNum,supervisorTasks,supervisorAssignSlotNumMap);
+  assignTaskPort(defaultContext,supervisorAssignSlotNumMap,supervisorTasks,newAssigns);
+}

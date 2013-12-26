@@ -1,0 +1,14 @@
+{
+  LOG.info("Producer Thread " + hashNum + " start!");
+  for (  Integer taskId : taskIds) {
+    if (taskId % threadNum != hashNum) {
+      continue;
+    }
+    int i=0;
+    while (i < messageNum) {
+      queue.add(taskId);
+      i++;
+    }
+  }
+  LOG.info("Producer Thread " + hashNum + " done!");
+}

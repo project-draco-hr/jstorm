@@ -1,5 +1,0 @@
-{
-  this.values=values;
-  this.stream=stream;
-  this.outTasks=outTasks;
-}

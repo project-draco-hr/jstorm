@@ -1,0 +1,10 @@
+{
+  Map<Integer,ResourceAssignment> taskToPortbyNode=new TreeMap<Integer,ResourceAssignment>();
+  for (  Entry<Integer,ResourceAssignment> entry : taskToResource.entrySet()) {
+    String node=entry.getValue().getSupervisorId();
+    if (node.equals(supervisorId)) {
+      taskToPortbyNode.put(entry.getKey(),entry.getValue());
+    }
+  }
+  return taskToPortbyNode;
+}

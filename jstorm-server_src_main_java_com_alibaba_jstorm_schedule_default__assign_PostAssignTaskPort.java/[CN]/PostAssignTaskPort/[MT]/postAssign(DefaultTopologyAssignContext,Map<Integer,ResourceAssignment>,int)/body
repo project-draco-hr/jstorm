@@ -1,0 +1,3 @@
+{
+  assignTaskPort(defaultContext,newAssigns,allocWorkerNum);
+}

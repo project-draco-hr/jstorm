@@ -1,3 +1,0 @@
-boolean isMultiProducer
-int bufferSize
-WaitStrategy waitStrategy

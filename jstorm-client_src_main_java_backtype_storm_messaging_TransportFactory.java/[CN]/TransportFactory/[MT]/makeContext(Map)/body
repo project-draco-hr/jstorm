@@ -1,0 +1,27 @@
+{
+  String transport_plugin_klassName=(String)storm_conf.get(Config.STORM_MESSAGING_TRANSPORT);
+  LOG.info("Storm peer transport plugin:" + transport_plugin_klassName);
+  IContext transport=null;
+  try {
+    Class klass=Class.forName(transport_plugin_klassName);
+    Constructor constructor=klass.getDeclaredConstructor();
+    constructor.setAccessible(true);
+    Object obj=constructor.newInstance();
+    LOG.info("TransportFactory makeContext: new klass: " + obj);
+    if (obj instanceof IContext) {
+      transport=(IContext)obj;
+      transport.prepare(storm_conf);
+      LOG.info("TransportFactory makeContext: start prpare... " + storm_conf);
+    }
+ else {
+      Method method=klass.getMethod("makeContext",Map.class);
+      LOG.debug("object:" + obj + " method:"+ method);
+      transport=(IContext)method.invoke(obj,storm_conf);
+    }
+    LOG.info("TransportFactory makeContext done...");
+  }
+ catch (  Exception e) {
+    throw new RuntimeException("Fail to construct messaging plugin from plugin " + transport_plugin_klassName,e);
+  }
+  return transport;
+}

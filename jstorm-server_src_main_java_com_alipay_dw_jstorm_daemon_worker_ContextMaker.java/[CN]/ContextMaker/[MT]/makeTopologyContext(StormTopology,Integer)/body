@@ -1,3 +1,0 @@
-{
-  return new TopologyContext(topology,stormConf,tasksToComponent,topologyId,resourcePath,workPid,taskId,port,workerTasks);
-}

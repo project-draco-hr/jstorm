@@ -1,0 +1,5 @@
+KryoTupleSerializer serializer
+Map storm_conf
+DisruptorQueue _transfer_queue
+Map<Integer,DisruptorQueue> innerTaskTransfer
+WorkerHaltRunable halter

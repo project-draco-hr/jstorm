@@ -1,8 +1,0 @@
-{
-  this.nimbusuptime=nimbusuptime;
-  this.supervisors=supervisors;
-  this.usedSlots=usedSlots;
-  this.freeSlots=freeSlots;
-  this.totalSlots=totalSlots;
-  this.runningTasks=runningTasks;
-}

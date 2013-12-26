@@ -1,0 +1,18 @@
+{
+  Map<String,Assignment> assignments=Cluster.get_all_assignment(stormClusterState,null);
+  for (  Entry<String,Assignment> entry : assignments.entrySet()) {
+    String topologyId=entry.getKey();
+    Assignment assignment=entry.getValue();
+    Map<Integer,ResourceAssignment> taskAssignments=assignment.getTaskToResource();
+    for (    ResourceAssignment resource : taskAssignments.values()) {
+      SupervisorInfo supervisorInfo=supervisorInfos.get(resource.getSupervisorId());
+      if (supervisorInfo == null) {
+        continue;
+      }
+      supervisorInfo.getCpuPool().alloc(resource.getCpuSlotNum(),null);
+      supervisorInfo.getMemPool().alloc(resource.getMemSlotNum(),null);
+      supervisorInfo.getDiskPool().alloc(resource.getDiskSlot(),null);
+      supervisorInfo.getNetPool().alloc(resource.getPort(),null);
+    }
+  }
+}

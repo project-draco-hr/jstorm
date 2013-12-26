@@ -1,0 +1,28 @@
+{
+  Map<String,Integer> ret=new HashMap<String,Integer>();
+  Map<String,Object> components=ThriftTopologyUtils.getComponents(rawTopology);
+  for (  Entry<String,Object> entry : components.entrySet()) {
+    String componentName=entry.getKey();
+    Object component=entry.getValue();
+    ComponentCommon common=null;
+    if (component instanceof Bolt) {
+      common=((Bolt)component).get_common();
+    }
+    if (component instanceof SpoutSpec) {
+      common=((SpoutSpec)component).get_common();
+    }
+    if (component instanceof StateSpoutSpec) {
+      common=((StateSpoutSpec)component).get_common();
+    }
+    String jsonConfString=common.get_json_conf();
+    if (jsonConfString == null) {
+      ret.put(componentName,context.DEFAULT_WEIGHT);
+      continue;
+    }
+    Map componentMap=new HashMap();
+    componentMap.putAll((Map)JStormUtils.from_json(jsonConfString));
+    int weight=computeWeight(componentMap,context);
+    ret.put(componentName,weight);
+  }
+  return ret;
+}

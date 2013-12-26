@@ -12,6 +12,18 @@
     if (!(this_present_name && that_present_name))     return false;
     if (!this.name.equals(that.name))     return false;
   }
+  boolean this_present_status=true && this.is_set_status();
+  boolean that_present_status=true && that.is_set_status();
+  if (this_present_status || that_present_status) {
+    if (!(this_present_status && that_present_status))     return false;
+    if (!this.status.equals(that.status))     return false;
+  }
+  boolean this_present_uptime_secs=true;
+  boolean that_present_uptime_secs=true;
+  if (this_present_uptime_secs || that_present_uptime_secs) {
+    if (!(this_present_uptime_secs && that_present_uptime_secs))     return false;
+    if (this.uptime_secs != that.uptime_secs)     return false;
+  }
   boolean this_present_num_tasks=true;
   boolean that_present_num_tasks=true;
   if (this_present_num_tasks || that_present_num_tasks) {
@@ -24,17 +36,23 @@
     if (!(this_present_num_workers && that_present_num_workers))     return false;
     if (this.num_workers != that.num_workers)     return false;
   }
-  boolean this_present_uptime_secs=true;
-  boolean that_present_uptime_secs=true;
-  if (this_present_uptime_secs || that_present_uptime_secs) {
-    if (!(this_present_uptime_secs && that_present_uptime_secs))     return false;
-    if (this.uptime_secs != that.uptime_secs)     return false;
+  boolean this_present_num_cpu=true;
+  boolean that_present_num_cpu=true;
+  if (this_present_num_cpu || that_present_num_cpu) {
+    if (!(this_present_num_cpu && that_present_num_cpu))     return false;
+    if (this.num_cpu != that.num_cpu)     return false;
   }
-  boolean this_present_status=true && this.is_set_status();
-  boolean that_present_status=true && that.is_set_status();
-  if (this_present_status || that_present_status) {
-    if (!(this_present_status && that_present_status))     return false;
-    if (!this.status.equals(that.status))     return false;
+  boolean this_present_num_mem=true;
+  boolean that_present_num_mem=true;
+  if (this_present_num_mem || that_present_num_mem) {
+    if (!(this_present_num_mem && that_present_num_mem))     return false;
+    if (this.num_mem != that.num_mem)     return false;
+  }
+  boolean this_present_num_disk=true;
+  boolean that_present_num_disk=true;
+  if (this_present_num_disk || that_present_num_disk) {
+    if (!(this_present_num_disk && that_present_num_disk))     return false;
+    if (this.num_disk != that.num_disk)     return false;
   }
   return true;
 }

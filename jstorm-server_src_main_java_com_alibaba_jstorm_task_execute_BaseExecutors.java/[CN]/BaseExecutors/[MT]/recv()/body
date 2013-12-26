@@ -1,0 +1,33 @@
+{
+  byte[] ser_msg=null;
+  try {
+    ser_msg=puller.recv(0);
+    if (ser_msg == null) {
+      return null;
+    }
+    if (ser_msg.length == 0) {
+      return null;
+    }
+ else     if (ser_msg.length == 1) {
+      byte newStatus=ser_msg[0];
+      LOG.info("Change task status as " + newStatus);
+      taskStatus.setStatus(newStatus);
+      if (newStatus == TaskStatus.SHUTDOWN) {
+        puller.close();
+      }
+      return null;
+    }
+    Tuple tuple=deserializer.deserialize(ser_msg);
+    if (isDebugRecv) {
+      LOG.info(idStr + " receive " + tuple.toString());
+    }
+    task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
+    return tuple;
+  }
+ catch (  Exception e) {
+    if (taskStatus.isShutdown() == false) {
+      LOG.error(idStr + " recv thread error " + JStormUtils.toPrintableString(ser_msg)+ "\n",e);
+    }
+  }
+  return null;
+}

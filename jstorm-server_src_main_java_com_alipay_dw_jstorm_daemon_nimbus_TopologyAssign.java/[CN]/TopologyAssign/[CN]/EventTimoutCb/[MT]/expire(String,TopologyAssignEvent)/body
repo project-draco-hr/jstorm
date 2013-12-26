@@ -1,3 +1,0 @@
-{
-  TopologyAssign.push((com.alipay.dw.jstorm.daemon.nimbus.TopologyAssignEvent)event);
-}

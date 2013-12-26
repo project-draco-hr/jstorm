@@ -1,0 +1,8 @@
+{
+  if (distribute) {
+    return netty_connect(storm_id,host,port);
+  }
+ else {
+    return queue_connect(port);
+  }
+}

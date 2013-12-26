@@ -1,9 +1,0 @@
-{
-  this.topologyname=topologyname;
-  this.topologyid=topologyid;
-  this.status=status;
-  this.uptime=uptime;
-  this.numworkers=numworkers;
-  this.numtasks=numtasks;
-  this.luptime=luptime;
-}

@@ -1,9 +1,0 @@
-String topologyId
-Assignment existingAssignment
-StormClusterState stormClusterState
-Map<String,SupervisorInfo> supInfos
-boolean isScratch
-Set<Integer> allTaskIds
-Set<NodePort> freeSlots
-Map<NodePort,List<Integer>> aliveAssigned
-Map<NodePort,List<Integer>> unstopped

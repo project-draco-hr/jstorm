@@ -1,0 +1,68 @@
+{
+  int assignType=context.getAssignType();
+  if (TopologyAssignContext.isAssignTypeValid(assignType) == false) {
+    throw new FailedAssignTopologyException("Invalide Assign Type " + assignType);
+  }
+  DefaultTopologyAssignContext defaultContext=new DefaultTopologyAssignContext(context);
+  if (assignType == TopologyAssignContext.ASSIGN_TYPE_REBALANCE) {
+    freeUsed(defaultContext);
+  }
+  LOG.info("Dead tasks:" + defaultContext.getDeadTaskIds());
+  LOG.info("Unstopped tasks:" + defaultContext.getUnstoppedTaskIds());
+  Set<Integer> needAssignTasks=getNeedAssignTasks(defaultContext);
+  Map<Integer,ResourceAssignment> keepAssigns=getKeepAssign(defaultContext,needAssignTasks);
+  Map<Integer,ResourceAssignment> ret=new TreeMap<Integer,ResourceAssignment>();
+  ret.putAll(keepAssigns);
+  ret.putAll(defaultContext.getUnstoppedAssignments());
+  Map<WorkerSlot,List<Integer>> keepAssignWorkers=Assignment.getWorkerTasks(keepAssigns);
+  int allocWorkerNum=defaultContext.getTotalWorkerNum() - defaultContext.getUnstoppedWorkerNum() - keepAssignWorkers.size();
+  if (allocWorkerNum <= 0) {
+    LOG.warn("Don't need assign workers, all workers are fine " + defaultContext.toDetailString());
+    throw new FailedAssignTopologyException("Don't need assign worker, all workers are fine ");
+  }
+  Set<String> outputConfigComponents=new HashSet<String>();
+  Map<ComponentAssignType,Pair<Set<Integer>,IPreassignTask>> typeHandler=registerPreAssignHandler(defaultContext,needAssignTasks);
+  Map<Integer,ResourceAssignment> newAssigns=new HashMap<Integer,ResourceAssignment>();
+  Set<String> usedSupervisorIds=new HashSet<String>();
+  List<Integer> lastFailed=new ArrayList<Integer>();
+  for (  Entry<ComponentAssignType,Pair<Set<Integer>,IPreassignTask>> entry : typeHandler.entrySet()) {
+    ComponentAssignType type=entry.getKey();
+    Set<Integer> tasks=entry.getValue().getFirst();
+    IPreassignTask handler=entry.getValue().getSecond();
+    tasks.addAll(lastFailed);
+    lastFailed.clear();
+    List<Integer> sortedTasks=sortAssignTasks(defaultContext,tasks);
+    StormTopology sysTopology=defaultContext.getSysTopology();
+    for (    Integer task : sortedTasks) {
+      Set<String> canUsedSupervisorIds=getCanUsedSupervisors(defaultContext,usedSupervisorIds,allocWorkerNum);
+      String componentName=defaultContext.getTaskToComponent().get(task);
+      ComponentCommon componentCommon=ThriftTopologyUtils.getComponentCommon(sysTopology,componentName);
+      Map componentMap=(Map)JStormUtils.from_json(componentCommon.get_json_conf());
+      if (componentMap == null) {
+        componentMap=Maps.newHashMap();
+      }
+      if (outputConfigComponents.contains(componentName) == false) {
+        LOG.info("Component map of " + componentName + "\n"+ componentMap);
+        outputConfigComponents.add(componentName);
+      }
+      ResourceAssignment preAssignment=handler.preAssign(task,defaultContext,componentMap,componentName,canUsedSupervisorIds,ret,newAssigns);
+      if (preAssignment == null) {
+        lastFailed.add(task);
+      }
+ else {
+        newAssigns.put(task,preAssignment);
+        ret.put(task,preAssignment);
+        usedSupervisorIds.add(preAssignment.getSupervisorId());
+      }
+    }
+  }
+  if (lastFailed.isEmpty() == false) {
+    throw new FailedAssignTopologyException("Failed to assign tasks " + lastFailed);
+  }
+  IPostAssignTask postAssignHandler=new PostAssignTaskPort();
+  postAssignHandler.postAssign(defaultContext,newAssigns,allocWorkerNum);
+  LOG.info("Keep Alive slots:" + keepAssigns);
+  LOG.info("Unstopped slots:" + defaultContext.getUnstoppedAssignments());
+  LOG.info("New assign slots:" + newAssigns);
+  return ret;
+}

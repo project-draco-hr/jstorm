@@ -1,0 +1,3 @@
+Set<Integer> aliveTasks
+Map<String,SupervisorInfo> supInfos
+Assignment existAssignment

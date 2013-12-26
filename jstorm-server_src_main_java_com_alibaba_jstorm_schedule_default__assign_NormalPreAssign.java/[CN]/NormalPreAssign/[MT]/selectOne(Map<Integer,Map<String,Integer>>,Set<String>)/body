@@ -1,0 +1,12 @@
+{
+  String ret=null;
+  Set<String> leastSet=supervisorIds;
+  for (  Entry<Integer,Map<String,Integer>> entry : weightResourceMap.entrySet()) {
+    if (leastSet.size() == 1) {
+      break;
+    }
+    leastSet=selectMost(entry.getValue(),leastSet);
+  }
+  List<String> list=JStormUtils.mk_list(leastSet);
+  return list.get(0);
+}

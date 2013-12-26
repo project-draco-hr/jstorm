@@ -1,9 +1,0 @@
-{
-  if (taskObj instanceof IBolt) {
-    return new BoltExecutors((IBolt)taskObj,workerTransfer,stormConf,_puller,sendTargets,taskStatus,topologyContext,userContext,taskStats,_report_error);
-  }
- else   if (taskObj instanceof ISpout) {
-    return new SpoutExecutors((ISpout)taskObj,workerTransfer,stormConf,_puller,sendTargets,taskStatus,topologyContext,userContext,taskStats,_report_error);
-  }
-  return null;
-}

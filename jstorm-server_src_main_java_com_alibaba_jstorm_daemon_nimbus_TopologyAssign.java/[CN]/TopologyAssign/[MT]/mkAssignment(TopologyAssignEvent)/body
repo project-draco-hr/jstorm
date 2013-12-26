@@ -1,0 +1,16 @@
+{
+  String topologyId=event.getTopologyId();
+  LOG.info("Determining assignment for " + topologyId);
+  TopologyAssignContext context=prepareTopologyAssign(event);
+  IToplogyScheduler scheduler=schedulers.get(DEFAULT_SCHEDULER_NAME);
+  Map<Integer,ResourceAssignment> taskAssignments=scheduler.assignTasks(context);
+  Map<String,String> nodeHost=getTopologyNodeHost(context.getCluster(),context.getOldAssignment(),taskAssignments);
+  Map<Integer,Integer> startTimes=getTaskStartTimes(context,nimbusData,topologyId,context.getOldAssignment(),taskAssignments);
+  String codeDir=StormConfig.masterStormdistRoot(nimbusData.getConf(),topologyId);
+  Assignment assignment=new Assignment(codeDir,taskAssignments,nodeHost,startTimes);
+  StormClusterState stormClusterState=nimbusData.getStormClusterState();
+  stormClusterState.set_assignment(topologyId,assignment);
+  NimbusUtils.updateTaskHbStartTime(nimbusData,assignment,topologyId);
+  LOG.info("Successfully make assignment for topology id " + topologyId + ": "+ assignment);
+  return assignment;
+}

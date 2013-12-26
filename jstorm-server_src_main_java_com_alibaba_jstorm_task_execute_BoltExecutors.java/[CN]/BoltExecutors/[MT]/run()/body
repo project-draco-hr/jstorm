@@ -1,0 +1,17 @@
+{
+  while (taskStatus.isShutdown() == false) {
+    try {
+      long now=System.currentTimeMillis();
+      if (now - lastRotate > rotateTime) {
+        tuple_start_times.rotate();
+        lastRotate=now;
+      }
+      disruptorRecvQueue.consumeBatchWhenAvailable(this);
+    }
+ catch (    Exception e) {
+      if (taskStatus.isShutdown() == false) {
+        LOG.error(idStr + " bolt exeutor  error",e);
+      }
+    }
+  }
+}

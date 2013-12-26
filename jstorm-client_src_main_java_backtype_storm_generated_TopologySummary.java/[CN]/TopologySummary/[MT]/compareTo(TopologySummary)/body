@@ -24,6 +24,26 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_status()).compareTo(typedOther.is_set_status());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_status()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.status,typedOther.status);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_uptime_secs()).compareTo(typedOther.is_set_uptime_secs());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_uptime_secs()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.uptime_secs,typedOther.uptime_secs);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   lastComparison=Boolean.valueOf(is_set_num_tasks()).compareTo(typedOther.is_set_num_tasks());
   if (lastComparison != 0) {
     return lastComparison;
@@ -44,22 +64,32 @@
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_uptime_secs()).compareTo(typedOther.is_set_uptime_secs());
+  lastComparison=Boolean.valueOf(is_set_num_cpu()).compareTo(typedOther.is_set_num_cpu());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_uptime_secs()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.uptime_secs,typedOther.uptime_secs);
+  if (is_set_num_cpu()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_cpu,typedOther.num_cpu);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_status()).compareTo(typedOther.is_set_status());
+  lastComparison=Boolean.valueOf(is_set_num_mem()).compareTo(typedOther.is_set_num_mem());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_status()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.status,typedOther.status);
+  if (is_set_num_mem()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_mem,typedOther.num_mem);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_num_disk()).compareTo(typedOther.is_set_num_disk());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_num_disk()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_disk,typedOther.num_disk);
     if (lastComparison != 0) {
       return lastComparison;
     }

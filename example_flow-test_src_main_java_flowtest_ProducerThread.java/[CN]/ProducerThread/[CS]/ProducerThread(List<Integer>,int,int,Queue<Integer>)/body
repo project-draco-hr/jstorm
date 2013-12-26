@@ -1,0 +1,6 @@
+{
+  this.taskIds=taskIds;
+  this.threadNum=threadNum;
+  this.hashNum=hashNum;
+  this.queue=queue;
+}

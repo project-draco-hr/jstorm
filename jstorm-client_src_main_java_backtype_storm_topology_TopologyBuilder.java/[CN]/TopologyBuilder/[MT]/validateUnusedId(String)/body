@@ -1,12 +1,4 @@
 {
-  if (id.startsWith("__")) {
-    throw new IllegalArgumentException("Id should start with __ :" + id);
-  }
-  for (int i=0; i < id.length(); i++) {
-    if (Character.isWhitespace(id.charAt(i))) {
-      throw new IllegalArgumentException("Id shouldn't contain blank str :" + id);
-    }
-  }
   if (_bolts.containsKey(id)) {
     throw new IllegalArgumentException("Bolt has already been declared for id " + id);
   }

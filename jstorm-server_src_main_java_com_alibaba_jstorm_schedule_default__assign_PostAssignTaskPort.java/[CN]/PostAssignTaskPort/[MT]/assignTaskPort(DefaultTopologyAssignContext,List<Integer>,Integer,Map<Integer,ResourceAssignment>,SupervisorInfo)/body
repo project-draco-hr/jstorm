@@ -1,0 +1,59 @@
+{
+  if (taskList.size() <= workerNum) {
+    for (    Integer task : taskList) {
+      ResourceAssignment assignment=newAssigns.get(task);
+      if (assignment.getPort() != null) {
+        supervisorInfo.getNetPool().alloc(assignment.getPort(),defaultContext);
+      }
+ else {
+        Integer port=supervisorInfo.getNetPool().alloc(defaultContext);
+        assignment.setPort(port);
+      }
+    }
+  }
+ else {
+    Map<Integer,List<Integer>> preAssignPorts=new TreeMap<Integer,List<Integer>>();
+    for (    Integer task : taskList) {
+      ResourceAssignment assignment=newAssigns.get(task);
+      if (assignment.getPort() != null) {
+        Integer port=assignment.getPort();
+        List<Integer> slotList=preAssignPorts.get(port);
+        if (slotList == null) {
+          slotList=new ArrayList<Integer>();
+          preAssignPorts.put(port,slotList);
+        }
+        slotList.add(task);
+      }
+    }
+    if (preAssignPorts.keySet().size() > workerNum) {
+      List<Integer> assignPorts=new ArrayList<Integer>();
+      for (int i=0; i < workerNum; i++) {
+        Integer port=supervisorInfo.getNetPool().alloc(defaultContext);
+        assignPorts.add(port);
+      }
+      for (int i=0; i < taskList.size(); i++) {
+        ResourceAssignment assignment=newAssigns.get(taskList.get(i));
+        assignment.setPort(assignPorts.get(i % assignPorts.size()));
+      }
+    }
+ else {
+      for (      Integer port : preAssignPorts.keySet()) {
+        supervisorInfo.getNetPool().alloc(port,defaultContext);
+      }
+      for (int i=preAssignPorts.keySet().size(); i < workerNum; i++) {
+        Integer port=supervisorInfo.getNetPool().alloc(defaultContext);
+        preAssignPorts.put(port,new ArrayList<Integer>());
+      }
+      for (      Integer task : taskList) {
+        ResourceAssignment assignment=newAssigns.get(task);
+        if (assignment.getPort() != null) {
+          continue;
+        }
+        Integer port=selectLeastPort(preAssignPorts);
+        assignment.setPort(port);
+        List<Integer> portTaskList=preAssignPorts.get(port);
+        portTaskList.add(task);
+      }
+    }
+  }
+}

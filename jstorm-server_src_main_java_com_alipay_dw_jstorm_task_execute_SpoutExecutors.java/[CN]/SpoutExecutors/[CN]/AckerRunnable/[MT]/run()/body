@@ -1,6 +1,0 @@
-{
-  while (SpoutExecutors.this.taskStatus.isShutdown() == false) {
-    executeEvent();
-  }
-  LOG.info("Successfully shutdown Spout's acker thread " + idStr);
-}

@@ -1,0 +1,4 @@
+{
+  StatusType t=status.getStatusType();
+  return t.getStatus().toUpperCase();
+}

@@ -1,0 +1,20 @@
+{
+  try {
+    checkTopologyActive(data,topologyName,true);
+    Integer wait_amt=null;
+    if (options != null && options.is_set_wait_secs()) {
+      wait_amt=options.get_wait_secs();
+    }
+    NimbusUtils.transitionName(data,topologyName,true,StatusType.rebalance,wait_amt);
+  }
+ catch (  NotAliveException e) {
+    String errMsg="Rebalance Error, no this topology " + topologyName;
+    LOG.error(errMsg,e);
+    throw new NotAliveException(errMsg);
+  }
+catch (  Exception e) {
+    String errMsg="Failed to rebalance topology " + topologyName;
+    LOG.error(errMsg,e);
+    throw new TException(errMsg);
+  }
+}

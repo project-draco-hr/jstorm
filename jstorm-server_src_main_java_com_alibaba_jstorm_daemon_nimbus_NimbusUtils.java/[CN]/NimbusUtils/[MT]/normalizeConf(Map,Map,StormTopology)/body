@@ -1,0 +1,54 @@
+{
+  List kryoRegisterList=new ArrayList();
+  List kryoDecoratorList=new ArrayList();
+  Map totalConf=new HashMap();
+  totalConf.putAll(conf);
+  totalConf.putAll(stormConf);
+  Object totalRegister=totalConf.get(Config.TOPOLOGY_KRYO_REGISTER);
+  if (totalRegister != null) {
+    LOG.info("topology:" + stormConf.get(Config.TOPOLOGY_NAME) + ", TOPOLOGY_KRYO_REGISTER"+ totalRegister.getClass().getName());
+    JStormUtils.mergeList(kryoRegisterList,totalRegister);
+  }
+  Object totalDecorator=totalConf.get(Config.TOPOLOGY_KRYO_DECORATORS);
+  if (totalDecorator != null) {
+    LOG.info("topology:" + stormConf.get(Config.TOPOLOGY_NAME) + ", TOPOLOGY_KRYO_DECORATOR"+ totalDecorator.getClass().getName());
+    JStormUtils.mergeList(kryoDecoratorList,totalDecorator);
+  }
+  Set<String> cids=ThriftTopologyUtils.getComponentIds(topology);
+  for (Iterator it=cids.iterator(); it.hasNext(); ) {
+    String componentId=(String)it.next();
+    ComponentCommon common=ThriftTopologyUtils.getComponentCommon(topology,componentId);
+    String json=common.get_json_conf();
+    if (json == null) {
+      continue;
+    }
+    Map mtmp=(Map)JStormUtils.from_json(json);
+    if (mtmp == null) {
+      StringBuilder sb=new StringBuilder();
+      sb.append("Failed to deserilaize " + componentId);
+      sb.append(" json configuration: ");
+      sb.append(json);
+      LOG.info(sb.toString());
+      throw new Exception(sb.toString());
+    }
+    Object componentKryoRegister=mtmp.get(Config.TOPOLOGY_KRYO_REGISTER);
+    if (componentKryoRegister != null) {
+      LOG.info("topology:" + stormConf.get(Config.TOPOLOGY_NAME) + ", componentId:"+ componentId+ ", TOPOLOGY_KRYO_REGISTER"+ componentKryoRegister.getClass().getName());
+      JStormUtils.mergeList(kryoRegisterList,componentKryoRegister);
+    }
+    Object componentDecorator=mtmp.get(Config.TOPOLOGY_KRYO_DECORATORS);
+    if (componentDecorator != null) {
+      LOG.info("topology:" + stormConf.get(Config.TOPOLOGY_NAME) + ", componentId:"+ componentId+ ", TOPOLOGY_KRYO_DECORATOR"+ componentDecorator.getClass().getName());
+      JStormUtils.mergeList(kryoDecoratorList,componentDecorator);
+    }
+  }
+  Map kryoRegisterMap=mapifySerializations(kryoRegisterList);
+  List decoratorList=JStormUtils.distinctList(kryoDecoratorList);
+  Map rtn=new HashMap();
+  rtn.putAll(stormConf);
+  rtn.put(Config.TOPOLOGY_KRYO_DECORATORS,decoratorList);
+  rtn.put(Config.TOPOLOGY_KRYO_REGISTER,kryoRegisterMap);
+  rtn.put(Config.TOPOLOGY_ACKER_EXECUTORS,totalConf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
+  rtn.put(Config.TOPOLOGY_MAX_TASK_PARALLELISM,totalConf.get(Config.TOPOLOGY_MAX_TASK_PARALLELISM));
+  return rtn;
+}

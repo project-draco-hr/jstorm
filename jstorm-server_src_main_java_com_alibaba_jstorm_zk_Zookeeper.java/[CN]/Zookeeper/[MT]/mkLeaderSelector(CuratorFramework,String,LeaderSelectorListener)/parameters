@@ -1,0 +1,3 @@
+CuratorFramework client
+String leaderPath
+LeaderSelectorListener listener

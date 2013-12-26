@@ -1,0 +1,11 @@
+{
+  if (isClosed()) {
+    throw new RuntimeException("Client is being closed, and does not take requests any more");
+  }
+  try {
+    push(new TaskMessage(task,message));
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

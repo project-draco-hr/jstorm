@@ -1,0 +1,4 @@
+{
+  ListDelegate delegate=(ListDelegate)_kryo.readObject(input,ListDelegate.class);
+  return delegate.getDelegate();
+}

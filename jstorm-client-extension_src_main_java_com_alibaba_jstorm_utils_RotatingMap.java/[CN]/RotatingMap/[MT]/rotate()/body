@@ -1,0 +1,10 @@
+{
+  Map<K,V> dead=_buckets.removeLast();
+  _buckets.addFirst(new ConcurrentHashMap<K,V>());
+  if (_callback != null) {
+    for (    Entry<K,V> entry : dead.entrySet()) {
+      _callback.expire(entry.getKey(),entry.getValue());
+    }
+  }
+  return dead;
+}

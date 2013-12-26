@@ -1,3 +1,0 @@
-IRecvConnection _puller
-TaskSendTargets sendTargets
-ITaskReportErr _report_error

@@ -1,0 +1,11 @@
+{
+  this.data=data;
+  this.leaderSelector=leaderSelector;
+  this.sleepTime=sleepTime;
+  callback=new RunnableCallback(){
+    @Override public void run(){
+      check();
+    }
+  }
+;
+}

@@ -1,0 +1,12 @@
+{
+  List<Object> retList=new ArrayList<Object>();
+  for (  Object object : input) {
+    if (retList.contains(object)) {
+      continue;
+    }
+ else {
+      retList.add(object);
+    }
+  }
+  return retList;
+}

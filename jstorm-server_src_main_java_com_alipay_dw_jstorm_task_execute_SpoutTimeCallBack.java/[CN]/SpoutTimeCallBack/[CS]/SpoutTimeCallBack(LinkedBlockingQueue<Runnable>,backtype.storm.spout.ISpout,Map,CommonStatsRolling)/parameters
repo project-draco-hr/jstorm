@@ -1,4 +1,0 @@
-LinkedBlockingQueue<Runnable> _event_queue
-backtype.storm.spout.ISpout _spout
-Map _storm_conf
-CommonStatsRolling stat

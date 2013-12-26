@@ -1,0 +1,7 @@
+{
+  List<Object> msg=new ArrayList<Object>();
+  msg.add("startup");
+  TaskSendTargets sendTargets=makeSendTargets();
+  UnanchoredSend.send(topologyContext,sendTargets,taskTransfer,Common.SYSTEM_STREAM_ID,msg);
+  return sendTargets;
+}

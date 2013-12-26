@@ -1,0 +1,5 @@
+TopologyContext context
+CustomStreamGrouping _grouping
+GlobalStreamId stream
+List<Integer> targetTask
+int myTaskId

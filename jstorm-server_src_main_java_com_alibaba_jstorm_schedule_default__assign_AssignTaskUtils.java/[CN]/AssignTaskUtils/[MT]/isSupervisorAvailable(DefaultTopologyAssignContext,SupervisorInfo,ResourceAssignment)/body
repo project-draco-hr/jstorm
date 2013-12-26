@@ -1,0 +1,19 @@
+{
+  boolean isCpuAvailable=supervisorInfo.getCpuPool().isAvailable(taskAlloc.getCpuSlotNum(),defaultContext);
+  if (isCpuAvailable == false) {
+    return false;
+  }
+  boolean isMemAvailable=supervisorInfo.getMemPool().isAvailable(taskAlloc.getMemSlotNum(),defaultContext);
+  if (isMemAvailable == false) {
+    return false;
+  }
+  boolean isDiskAvailable=supervisorInfo.getDiskPool().isAvailable(taskAlloc.getDiskSlot(),defaultContext);
+  if (isDiskAvailable == false) {
+    return false;
+  }
+  boolean isPortAvailable=supervisorInfo.getNetPool().isAvailable(taskAlloc.getPort(),defaultContext);
+  if (isPortAvailable == false) {
+    return false;
+  }
+  return true;
+}

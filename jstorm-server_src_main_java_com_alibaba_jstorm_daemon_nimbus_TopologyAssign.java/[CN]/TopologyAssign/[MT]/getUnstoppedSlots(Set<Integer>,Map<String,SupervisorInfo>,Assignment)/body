@@ -1,0 +1,18 @@
+{
+  Set<Integer> ret=new HashSet<Integer>();
+  Map<Integer,ResourceAssignment> oldAssignment=existAssignment.getTaskToResource();
+  Set<String> aliveSupervisors=supInfos.keySet();
+  for (  Entry<Integer,ResourceAssignment> entry : oldAssignment.entrySet()) {
+    Integer taskId=entry.getKey();
+    ResourceAssignment resource=entry.getValue();
+    if (aliveTasks.contains(taskId) == false) {
+      continue;
+    }
+    String oldTaskSupervisorId=resource.getSupervisorId();
+    if (aliveSupervisors.contains(oldTaskSupervisorId) == false) {
+      ret.add(taskId);
+      continue;
+    }
+  }
+  return ret;
+}

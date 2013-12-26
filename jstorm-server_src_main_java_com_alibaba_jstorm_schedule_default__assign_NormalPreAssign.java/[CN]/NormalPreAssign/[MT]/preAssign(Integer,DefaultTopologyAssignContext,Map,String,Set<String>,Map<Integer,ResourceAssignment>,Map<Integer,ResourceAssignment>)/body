@@ -1,0 +1,28 @@
+{
+  Set<String> resEnoughSupervisorIds=new HashSet<String>();
+  TaskAllocResource taskAlloc=AssignTaskUtils.getTaskAlloc(task,defaultContext,componentMap,componentName);
+  for (  String supervisorId : canUsedSupervisorIds) {
+    SupervisorInfo supervisorInfo=defaultContext.getCluster().get(supervisorId);
+    boolean isEnough=AssignTaskUtils.isSupervisorAvailable(defaultContext,supervisorInfo,taskAlloc);
+    if (isEnough == false) {
+      continue;
+    }
+    boolean isDifferent=AssignTaskUtils.isIsolate(task,supervisorId,componentName,componentMap,defaultContext,alreadyAssign);
+    if (isDifferent == false) {
+      continue;
+    }
+    resEnoughSupervisorIds.add(supervisorId);
+  }
+  if (resEnoughSupervisorIds.isEmpty()) {
+    StringBuilder sb=new StringBuilder();
+    sb.append("No supervisor resource is enough for component ");
+    sb.append(componentName);
+    sb.append(" " + taskAlloc + " ");
+    sb.append("\n\n");
+    sb.append("Cluster resource:");
+    sb.append(defaultContext.getCluster());
+    throw new FailedAssignTopologyException(sb.toString());
+  }
+  String bestSupervisorId=selectBestSupervisor(defaultContext,taskAlloc,resEnoughSupervisorIds,newAssigns);
+  return AssignTaskUtils.allocResource(defaultContext,taskAlloc,bestSupervisorId);
+}

@@ -1,0 +1,18 @@
+{
+  if (o == null) {
+    return null;
+  }
+  if (o instanceof String) {
+    return Long.valueOf(String.valueOf(o));
+  }
+ else   if (o instanceof Integer) {
+    Integer value=(Integer)o;
+    return Long.valueOf((Integer)value);
+  }
+ else   if (o instanceof Long) {
+    return (Long)o;
+  }
+ else {
+    throw new RuntimeException("Invalid value " + o.getClass().getName() + " "+ o);
+  }
+}

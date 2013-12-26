@@ -1,0 +1,2 @@
+RingBuffer<JstormEvent> ringBuffer
+int size

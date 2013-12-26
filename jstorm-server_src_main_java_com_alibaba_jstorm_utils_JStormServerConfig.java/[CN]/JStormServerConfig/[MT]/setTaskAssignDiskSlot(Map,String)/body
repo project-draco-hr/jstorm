@@ -1,0 +1,3 @@
+{
+  conf.put(TASK_ASSIGN_DISK_SLOT,diskSlot);
+}

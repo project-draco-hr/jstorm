@@ -1,0 +1,46 @@
+{
+  String stormroot=StormConfig.supervisor_stormdist_root(conf,topologyId);
+  String stormjar=StormConfig.stormjar_path(stormroot);
+  Map stormConf=StormConfig.read_supervisor_topology_conf(conf,topologyId);
+  long memSlotSize=ConfigExtension.getMemSlotSize(conf);
+  long memSize=memSlotSize * assignment.getMemSlotNum();
+  String childopts=getChildOpts(stormConf,conf);
+  childopts=childopts.replace("%ID%",port.toString());
+  String logFileName=topologyId + "-worker-" + port+ ".log";
+  Map<String,String> environment=new HashMap<String,String>();
+  environment.put("LD_LIBRARY_PATH",(String)conf.get(Config.JAVA_LIBRARY_PATH));
+  StringBuilder commandSB=new StringBuilder();
+  commandSB.append("java -server ");
+  commandSB.append(childopts);
+  commandSB.append(" -Xms" + memSize);
+  commandSB.append(" -Xmx" + memSize + " ");
+  commandSB.append(" -Djava.library.path=");
+  commandSB.append((String)conf.get(Config.JAVA_LIBRARY_PATH));
+  commandSB.append(" -Dlogfile.name=");
+  commandSB.append(logFileName);
+  String stormhome=System.getProperty("jstorm.home");
+  if (stormhome != null) {
+    commandSB.append(" -Dlogback.configurationFile=" + stormhome + "/conf/cluster.xml");
+    commandSB.append(" -Djstorm.home=");
+    commandSB.append(stormhome);
+  }
+ else {
+    commandSB.append(" -Dlogback.configurationFile=cluster.xml");
+  }
+  String classpath=getClassPath(stormjar,stormhome);
+  String workerClassPath=(String)conf.get(Config.WORKER_CLASSPATH);
+  commandSB.append(" -cp ");
+  commandSB.append(workerClassPath + ":");
+  commandSB.append(classpath);
+  commandSB.append(" com.alibaba.jstorm.daemon.worker.Worker ");
+  commandSB.append(topologyId);
+  commandSB.append(" ");
+  commandSB.append(supervisorId);
+  commandSB.append(" ");
+  commandSB.append(port);
+  commandSB.append(" ");
+  commandSB.append(workerId);
+  LOG.info("Launching worker with command: " + commandSB);
+  LOG.info("Environment:" + environment.toString());
+  JStormUtils.launch_process(commandSB.toString(),environment);
+}

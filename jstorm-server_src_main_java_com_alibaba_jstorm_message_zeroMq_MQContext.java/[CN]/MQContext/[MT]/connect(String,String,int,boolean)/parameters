@@ -1,0 +1,4 @@
+String storm_id
+String host
+int port
+boolean distribute

@@ -1,0 +1,3 @@
+{
+  failureCounters.remove(channel);
+}

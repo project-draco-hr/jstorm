@@ -1,0 +1,18 @@
+{
+  String topologyId=event.getTopologyId();
+  String topologyName=event.getTopologyName();
+  try {
+    StormClusterState zkClusterState=nimbusData.getStormClusterState();
+    HashMap<Integer,String> tasks=Cluster.topology_task_info(zkClusterState,topologyId);
+    Map<String,List<Integer>> componentTasks=JStormUtils.reverse_map(tasks);
+    for (    Entry<String,List<Integer>> entry : componentTasks.entrySet()) {
+      List<Integer> keys=entry.getValue();
+      Collections.sort(keys);
+    }
+    AssignmentBak assignmentBak=new AssignmentBak(componentTasks,assignment);
+    zkClusterState.backup_assignment(topologyName,assignmentBak);
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to backup " + topologyId + " assignment "+ assignment,e);
+  }
+}

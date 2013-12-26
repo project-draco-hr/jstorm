@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(TOPOLOGY_DISK_WEIGHT),DEFAULT_DISK_WEIGHT);
+}

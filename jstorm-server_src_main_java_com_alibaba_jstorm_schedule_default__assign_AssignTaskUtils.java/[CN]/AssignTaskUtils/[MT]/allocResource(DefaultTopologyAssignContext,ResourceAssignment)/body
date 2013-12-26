@@ -1,0 +1,11 @@
+{
+  Map<String,SupervisorInfo> cluster=defaultContext.getCluster();
+  SupervisorInfo supervisorInfo=cluster.get(taskAlloc.getSupervisorId());
+  if (supervisorInfo == null) {
+    LOG.warn("No supervisor of " + taskAlloc.getSupervisorId() + ","+ defaultContext.toDetailString());
+    return;
+  }
+  supervisorInfo.getCpuPool().alloc(taskAlloc.getCpuSlotNum(),defaultContext);
+  supervisorInfo.getMemPool().alloc(taskAlloc.getMemSlotNum(),defaultContext);
+  supervisorInfo.getDiskPool().alloc(taskAlloc.getDiskSlot(),defaultContext);
+}

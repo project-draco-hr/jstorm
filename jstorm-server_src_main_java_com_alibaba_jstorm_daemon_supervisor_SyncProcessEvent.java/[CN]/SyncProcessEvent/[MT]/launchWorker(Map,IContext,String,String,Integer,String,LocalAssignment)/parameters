@@ -1,0 +1,7 @@
+Map conf
+IContext sharedcontext
+String topologyId
+String supervisorId
+Integer port
+String workerId
+LocalAssignment assignment

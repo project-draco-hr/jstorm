@@ -1,0 +1,21 @@
+{
+  Set<String> allSupervisorIds=defaultContext.getCluster().keySet();
+  Map stormConf=defaultContext.getStormConf();
+  boolean usedSingleNode=ConfigExtension.isUseSingleNode(stormConf);
+  if (usedSingleNode == true) {
+    if (usedSupervisorIds.isEmpty()) {
+      return allSupervisorIds;
+    }
+ else {
+      return usedSupervisorIds;
+    }
+  }
+ else {
+    if (allocWorkerNum > usedSupervisorIds.size()) {
+      return allSupervisorIds;
+    }
+ else {
+      return usedSupervisorIds;
+    }
+  }
+}

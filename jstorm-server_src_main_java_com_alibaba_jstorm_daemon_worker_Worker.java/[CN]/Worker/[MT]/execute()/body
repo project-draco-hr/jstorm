@@ -1,0 +1,16 @@
+{
+  List<TaskShutdownDameon> shutdowntasks=createTasks();
+  workerData.setShutdownTasks(shutdowntasks);
+  WorkerVirtualPort virtual_port=new WorkerVirtualPort(workerData);
+  Shutdownable virtual_port_shutdown=virtual_port.launch();
+  RefreshConnections refreshConn=makeRefreshConnections();
+  AsyncLoopThread refreshconn=new AsyncLoopThread(refreshConn);
+  RefreshActive refreshZkActive=new RefreshActive(workerData);
+  AsyncLoopThread refreshzk=new AsyncLoopThread(refreshZkActive);
+  RunnableCallback heartbeat_fn=new WorkerHeartbeatRunable(workerData);
+  AsyncLoopThread hb=new AsyncLoopThread(heartbeat_fn,false,null,Thread.NORM_PRIORITY,true);
+  DrainerRunable drainer=new DrainerRunable(workerData);
+  AsyncLoopThread dr=new AsyncLoopThread(drainer,false,null,Thread.MAX_PRIORITY,true);
+  AsyncLoopThread[] threads={refreshconn,refreshzk,hb,dr};
+  return new WorkerShutdown(workerData,shutdowntasks,virtual_port_shutdown,threads);
+}

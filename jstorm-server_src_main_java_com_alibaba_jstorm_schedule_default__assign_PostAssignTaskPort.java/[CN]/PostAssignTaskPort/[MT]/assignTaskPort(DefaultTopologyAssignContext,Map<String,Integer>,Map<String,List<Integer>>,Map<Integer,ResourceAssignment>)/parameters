@@ -1,0 +1,4 @@
+DefaultTopologyAssignContext defaultContext
+Map<String,Integer> supervisorAssignSlotNumMap
+Map<String,List<Integer>> supervisorTasks
+Map<Integer,ResourceAssignment> newAssigns

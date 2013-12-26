@@ -1,9 +1,0 @@
-{
-  if (ackerNum > 0) {
-    pending_acks.remove(input);
-    for (    Entry<Long,Long> e : input.getMessageId().getAnchorsToIds().entrySet()) {
-      UnanchoredSend.send(topologyContext,sendTargets,workerTransfer,Acker.ACKER_FAIL_STREAM_ID,JStormUtils.mk_list((Object)e.getKey()));
-    }
-  }
-  task_stats.bolt_failed_tuple(input.getSourceComponent(),input.getSourceStreamId());
-}

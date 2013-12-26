@@ -2,6 +2,9 @@
   if (!is_set_host()) {
     throw new org.apache.thrift.protocol.TProtocolException("Required field 'host' is unset! Struct:" + toString());
   }
+  if (!is_set_supervisor_id()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'supervisor_id' is unset! Struct:" + toString());
+  }
   if (!is_set_uptime_secs()) {
     throw new org.apache.thrift.protocol.TProtocolException("Required field 'uptime_secs' is unset! Struct:" + toString());
   }
@@ -10,5 +13,23 @@
   }
   if (!is_set_num_used_workers()) {
     throw new org.apache.thrift.protocol.TProtocolException("Required field 'num_used_workers' is unset! Struct:" + toString());
+  }
+  if (!is_set_num_cpu()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'num_cpu' is unset! Struct:" + toString());
+  }
+  if (!is_set_num_used_cpu()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'num_used_cpu' is unset! Struct:" + toString());
+  }
+  if (!is_set_num_mem()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'num_mem' is unset! Struct:" + toString());
+  }
+  if (!is_set_num_used_mem()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'num_used_mem' is unset! Struct:" + toString());
+  }
+  if (!is_set_num_disk()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'num_disk' is unset! Struct:" + toString());
+  }
+  if (!is_set_num_used_disk()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'num_used_disk' is unset! Struct:" + toString());
   }
 }

@@ -24,5 +24,15 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_tae()).compareTo(typedOther.is_set_tae());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_tae()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.tae,typedOther.tae);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   return 0;
 }

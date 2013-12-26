@@ -1,0 +1,38 @@
+{
+  this.port=String.valueOf(workerSummary.get_port());
+  this.topology=workerSummary.get_topology();
+  StringBuilder taskSB=new StringBuilder();
+  StringBuilder componentSB=new StringBuilder();
+  StringBuilder diskSB=new StringBuilder();
+  boolean isFirst=true;
+  int cpuNum=0;
+  int memNum=0;
+  int minUptime=0;
+  for (  TaskSummary taskSummary : workerSummary.get_tasks()) {
+    if (isFirst == false) {
+      taskSB.append(',');
+      componentSB.append(',');
+    }
+ else {
+      minUptime=taskSummary.get_uptime_secs();
+    }
+    taskSB.append(taskSummary.get_task_id());
+    componentSB.append(taskSummary.get_component_id());
+    String disk=taskSummary.get_disk();
+    if (disk != null && disk.isEmpty() != false) {
+      diskSB.append(disk + " ");
+    }
+    cpuNum+=taskSummary.get_cpu();
+    memNum+=taskSummary.get_mem();
+    if (minUptime < taskSummary.get_uptime_secs()) {
+      minUptime=taskSummary.get_uptime_secs();
+    }
+    isFirst=false;
+  }
+  this.uptime=StatBuckets.prettyUptimeStr(minUptime);
+  this.tasks=taskSB.toString();
+  this.components=componentSB.toString();
+  this.cpuNum=String.valueOf(cpuNum);
+  this.memNum=String.valueOf(memNum);
+  this.disks=diskSB.toString();
+}

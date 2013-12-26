@@ -1,0 +1,17 @@
+{
+  if (buf == null) {
+    return null;
+  }
+  StringBuilder sb=new StringBuilder();
+  int index=0;
+  for (  byte b : buf) {
+    if (index % 10 == 0) {
+      sb.append("\n");
+    }
+    index++;
+    sb.append(HEXES.charAt((b & 0xF0) >> 4));
+    sb.append(HEXES.charAt((b & 0x0F)));
+    sb.append(" ");
+  }
+  return sb.toString();
+}

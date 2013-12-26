@@ -6,6 +6,12 @@
     sb.append(this.wait_secs);
     first=false;
   }
+  if (is_set_num_workers()) {
+    if (!first)     sb.append(", ");
+    sb.append("num_workers:");
+    sb.append(this.num_workers);
+    first=false;
+  }
   sb.append(")");
   return sb.toString();
 }

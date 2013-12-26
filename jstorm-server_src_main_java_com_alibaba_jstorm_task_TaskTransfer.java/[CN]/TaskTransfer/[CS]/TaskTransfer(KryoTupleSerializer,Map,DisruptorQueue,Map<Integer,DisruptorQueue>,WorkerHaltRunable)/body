@@ -1,0 +1,14 @@
+{
+  this.storm_conf=storm_conf;
+  this.transferQueue=_transfer_queue;
+  this.serializer=serializer;
+  this.innerTaskTransfer=innerTaskTransfer;
+  int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  this.serializeQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(queue_size),waitStrategy);
+  Thread tranferThread=new Thread(new TransferRunnable());
+  tranferThread.setName("TaskTransferThread");
+  tranferThread.setPriority(Thread.MAX_PRIORITY);
+  tranferThread.setDaemon(true);
+  tranferThread.start();
+}

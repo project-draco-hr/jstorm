@@ -1,0 +1,3 @@
+{
+  conf.put(MEM_SLOT_PER_SIZE,Long.valueOf(slotSize));
+}

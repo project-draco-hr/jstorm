@@ -1,0 +1,8 @@
+{
+  currentBatch.add(message);
+  if (checkFlush() == true) {
+    flush.set(false);
+    disruptorQueue.publish(currentBatch);
+    currentBatch=new MessageBatch(buffer_size);
+  }
+}

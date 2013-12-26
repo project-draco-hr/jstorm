@@ -1,0 +1,8 @@
+{
+  if (distribute || virtportZmq) {
+    return zmq_bind(distribute,port);
+  }
+ else {
+    return queue_bind(port);
+  }
+}

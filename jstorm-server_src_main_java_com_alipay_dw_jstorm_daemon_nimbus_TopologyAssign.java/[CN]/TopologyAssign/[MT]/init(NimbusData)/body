@@ -1,4 +1,0 @@
-{
-  this.nimbusData=nimbusData;
-  new Thread(this).start();
-}

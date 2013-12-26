@@ -1,0 +1,13 @@
+{
+  transferQueue.consumerStarted();
+  while (workerActive.get()) {
+    try {
+      transferQueue.consumeBatchWhenAvailable(this);
+    }
+ catch (    Exception e) {
+      if (workerActive.get() == true) {
+        LOG.error("DrainerRunable send error",e);
+      }
+    }
+  }
+}

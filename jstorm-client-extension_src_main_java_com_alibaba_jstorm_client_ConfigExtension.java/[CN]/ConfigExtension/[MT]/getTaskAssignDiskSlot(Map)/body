@@ -1,0 +1,3 @@
+{
+  return (String)conf.get(TASK_ASSIGN_DISK_SLOT);
+}

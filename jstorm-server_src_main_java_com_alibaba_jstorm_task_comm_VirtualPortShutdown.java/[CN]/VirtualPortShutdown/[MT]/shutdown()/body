@@ -1,0 +1,11 @@
+{
+  IConnection sendConn=context.connect(topologyId,"localhost",port,true);
+  sendConn.send(-1,KryoTupleSerializer.serialize(-1));
+  LOG.info("Waiting for virtual port at url " + port + " to die");
+  try {
+    vthread.join();
+  }
+ catch (  InterruptedException e) {
+  }
+  LOG.info("Shutdown virtual port at url: " + port);
+}

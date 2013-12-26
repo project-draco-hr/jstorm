@@ -9,5 +9,8 @@
 catch (  InvalidTopologyException ite) {
     result.ite=ite;
   }
+catch (  TopologyAssignException tae) {
+    result.tae=tae;
+  }
   return result;
 }

@@ -6,6 +6,12 @@ case COMPONENT_ID:
   return get_component_id();
 case HOST:
 return get_host();
+case CPU:
+return Integer.valueOf(get_cpu());
+case MEM:
+return Integer.valueOf(get_mem());
+case DISK:
+return get_disk();
 case PORT:
 return Integer.valueOf(get_port());
 case UPTIME_SECS:

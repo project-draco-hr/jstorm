@@ -1,0 +1,6 @@
+{
+  super(streamId,null,allOutputFields);
+  this.txId=txid;
+  this.spout=spout;
+  this.type=type;
+}

@@ -1,0 +1,2 @@
+Map<String,SupervisorInfo> supervisorInfos
+Map<String,Assignment> assignments

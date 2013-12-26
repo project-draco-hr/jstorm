@@ -1,6 +1,6 @@
 def get_classpath(extrajars):
     ret = []
-    ret.extend(extrajars)
     ret.extend(get_jars_full(JSTORM_DIR))
     ret.extend(get_jars_full((JSTORM_DIR + '/lib')))
+    ret.extend(extrajars)
     return normclasspath(':'.join(ret))

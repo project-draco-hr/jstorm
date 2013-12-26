@@ -1,0 +1,4 @@
+SupervisorInfo supervisorInfo
+ResourceType type
+TaskAllocResource taskAllocResource
+Integer taskNum

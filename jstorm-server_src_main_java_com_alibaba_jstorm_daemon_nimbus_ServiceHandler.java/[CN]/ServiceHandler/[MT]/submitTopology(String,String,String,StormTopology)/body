@@ -1,0 +1,4 @@
+{
+  SubmitOptions options=new SubmitOptions(TopologyInitialStatus.ACTIVE);
+  submitTopologyWithOpts(name,uploadedJarLocation,jsonConf,topology,options);
+}

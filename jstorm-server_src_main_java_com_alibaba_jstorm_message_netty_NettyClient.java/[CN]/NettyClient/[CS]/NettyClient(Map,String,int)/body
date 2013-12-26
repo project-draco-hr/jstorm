@@ -1,0 +1,34 @@
+{
+  retries=new AtomicInteger(0);
+  channelRef=new AtomicReference<Channel>(null);
+  being_closed=new AtomicBoolean(false);
+  buffer_size=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE));
+  max_retries=Math.min(30,Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MAX_RETRIES)));
+  base_sleep_ms=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MIN_SLEEP_MS));
+  max_sleep_ms=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MAX_SLEEP_MS));
+  useDisruptor=ConfigExtension.isNettyEnableDisruptor(storm_conf);
+  int queue_size;
+  if (batchHighLevel == true) {
+    queue_size=16;
+    scheduExec=Executors.newSingleThreadScheduledExecutor();
+    scheduExec.scheduleAtFixedRate(new Flush(),1,1,TimeUnit.SECONDS);
+  }
+ else {
+    queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
+  }
+  WaitStrategy waitStrategy;
+  waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  disruptorQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(queue_size),waitStrategy);
+  blockingQueue=new LinkedBlockingQueue<Object>();
+  int maxWorkers=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_CLIENT_WORKER_THREADS));
+  factory=new NioClientSocketChannelFactory(Executors.newCachedThreadPool(),Executors.newCachedThreadPool(),1);
+  bootstrap=new ClientBootstrap(factory);
+  bootstrap.setOption("tcpNoDelay",true);
+  bootstrap.setOption("sendBufferSize",buffer_size);
+  bootstrap.setOption("keepAlive",true);
+  bootstrap.setPipelineFactory(new StormClientPipelineFactory(this));
+  remote_addr=new InetSocketAddress(host,port);
+  bootstrap.connect(remote_addr);
+  target_Server=host + ":" + port;
+  LOG.info("Begin to connect {}, useDisrutpor: {}",target_Server,useDisruptor);
+}

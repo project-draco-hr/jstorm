@@ -1,3 +1,0 @@
-MQContext mqContext
-IRecvConnection recvConn
-Set<Integer> valid_ports

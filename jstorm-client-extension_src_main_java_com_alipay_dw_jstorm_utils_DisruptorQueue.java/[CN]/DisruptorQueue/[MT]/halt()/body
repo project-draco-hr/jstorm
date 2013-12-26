@@ -1,6 +1,0 @@
-{
-  for (  WorkProcessor<?> processor : workProcessors) {
-    processor.halt();
-  }
-  started.set(false);
-}

@@ -1,0 +1,24 @@
+{
+  Set<Integer> keepAssignIds=new HashSet<Integer>();
+  keepAssignIds.addAll(defaultContext.getAllTaskIds());
+  keepAssignIds.removeAll(defaultContext.getUnstoppedTaskIds());
+  keepAssignIds.removeAll(needAssigns);
+  Map<Integer,ResourceAssignment> keeps=new HashMap<Integer,ResourceAssignment>();
+  if (keepAssignIds.isEmpty()) {
+    return keeps;
+  }
+  Assignment oldAssignment=defaultContext.getOldAssignment();
+  if (oldAssignment == null) {
+    return keeps;
+  }
+  Map<Integer,ResourceAssignment> olds=oldAssignment.getTaskToResource();
+  for (  Integer task : keepAssignIds) {
+    ResourceAssignment oldResource=olds.get(task);
+    if (oldResource == null) {
+      LOG.warn("No old assignment of " + task + ", "+ defaultContext.toDetailString());
+      continue;
+    }
+    keeps.put(task,oldResource);
+  }
+  return keeps;
+}

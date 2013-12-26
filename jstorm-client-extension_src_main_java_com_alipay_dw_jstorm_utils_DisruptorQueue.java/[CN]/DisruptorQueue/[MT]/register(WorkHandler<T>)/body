@@ -1,5 +1,0 @@
-{
-  WorkProcessor workProcessor=new WorkProcessor(ringBuffer,sequenceBarrier,new HandleWraper(handler),exceptionHandler,workSequence);
-  ringBuffer.addGatingSequences(workProcessor.getSequence());
-  workProcessors.add(workProcessor);
-}

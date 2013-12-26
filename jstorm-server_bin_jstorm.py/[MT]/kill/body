@@ -1,4 +1,4 @@
 def kill(*args):
     "Syntax: [jstorm kill topology-name [-w wait-time-secs]]\n\n    Kills the topology with the name topology-name. Storm will \n    first deactivate the topology's spouts for the duration of \n    the topology's message timeout to allow all messages currently \n    being processed to finish processing. Storm will then shutdown \n    the workers and clean up their state. You can override the length \n    of time Storm waits between deactivation and shutdown with the -w flag.\n    "
-    childopts = ' '
+    childopts = (' -Dstorm.root.logger=INFO,stdout -Dlogback.configurationFile=%s/conf/aloha_logback.xml' % JSTORM_DIR)
     exec_storm_class('backtype.storm.command.kill_topology', args=args, jvmtype='-client -Xms256m -Xmx256m', extrajars=[CONF_DIR, (JSTORM_DIR + '/bin'), LOG4J_CONF], childopts=childopts)

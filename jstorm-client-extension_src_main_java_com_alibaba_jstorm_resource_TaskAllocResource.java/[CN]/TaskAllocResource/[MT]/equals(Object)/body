@@ -1,0 +1,10 @@
+{
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  TaskAllocResource other=(TaskAllocResource)obj;
+  if (allocDisk != other.allocDisk)   return false;
+  if (cpuSlotNum != other.cpuSlotNum)   return false;
+  if (memSlotNum != other.memSlotNum)   return false;
+  return true;
+}

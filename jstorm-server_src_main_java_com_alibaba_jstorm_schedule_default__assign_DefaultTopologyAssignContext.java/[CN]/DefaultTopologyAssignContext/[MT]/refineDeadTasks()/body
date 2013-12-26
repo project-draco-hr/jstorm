@@ -1,0 +1,17 @@
+{
+  Set<Integer> rawDeadTasks=getDeadTaskIds();
+  Set<Integer> refineDeadTasks=new HashSet<Integer>();
+  refineDeadTasks.addAll(rawDeadTasks);
+  Set<Integer> unstoppedTasks=getUnstoppedTaskIds();
+  for (  Integer task : rawDeadTasks) {
+    if (unstoppedTasks.contains(task)) {
+      continue;
+    }
+    for (    List<Integer> workerTasks : oldWorkerTasks.values()) {
+      if (workerTasks.contains(task)) {
+        refineDeadTasks.addAll(workerTasks);
+      }
+    }
+  }
+  setDeadTaskIds(refineDeadTasks);
+}

@@ -1,0 +1,30 @@
+{
+  LOG.info("Starting Supervisor with conf " + conf);
+  active=new AtomicBoolean(true);
+  String path=StormConfig.supervisorTmpDir(conf);
+  FileUtils.cleanDirectory(new File(path));
+  StormClusterState stormClusterState=Cluster.mk_storm_cluster_state(conf);
+  LocalState localState=StormConfig.supervisorState(conf);
+  String supervisorId=(String)localState.get(Common.LS_ID);
+  if (supervisorId == null) {
+    supervisorId=UUID.randomUUID().toString();
+    localState.put(Common.LS_ID,supervisorId);
+  }
+  Vector<SmartThread> threads=new Vector<SmartThread>();
+  String myHostName=NetWorkUtils.hostname();
+  Heartbeat hb=new Heartbeat(conf,stormClusterState,supervisorId,myHostName,active);
+  hb.update();
+  AsyncLoopThread heartbeat=new AsyncLoopThread(hb,false,null,Thread.MIN_PRIORITY,true);
+  threads.add(heartbeat);
+  EventManager processEventManager=new EventManagerImp(false);
+  ConcurrentHashMap<String,String> workerThreadPids=new ConcurrentHashMap<String,String>();
+  SyncProcessEvent syncProcessEvent=new SyncProcessEvent(supervisorId,conf,localState,workerThreadPids,sharedContext);
+  EventManager syncSupEventManager=new EventManagerImp(false);
+  SyncSupervisorEvent syncSupervisorEvent=new SyncSupervisorEvent(supervisorId,conf,processEventManager,syncSupEventManager,stormClusterState,localState,syncProcessEvent);
+  int syncFrequence=(Integer)conf.get(Config.SUPERVISOR_MONITOR_FREQUENCY_SECS);
+  EventManagerPusher syncSupervisorPusher=new EventManagerPusher(syncSupEventManager,syncSupervisorEvent,active,syncFrequence);
+  AsyncLoopThread syncSupervisorThread=new AsyncLoopThread(syncSupervisorPusher);
+  threads.add(syncSupervisorThread);
+  LOG.info("Starting supervisor with id " + supervisorId + " at host "+ myHostName);
+  return new SupervisorManger(conf,supervisorId,active,threads,syncSupEventManager,processEventManager,stormClusterState,workerThreadPids);
+}

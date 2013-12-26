@@ -2,7 +2,9 @@
 switch (fieldId) {
 case 1:
     return WAIT_SECS;
+case 2:
+  return NUM_WORKERS;
 default :
-  return null;
+return null;
 }
 }

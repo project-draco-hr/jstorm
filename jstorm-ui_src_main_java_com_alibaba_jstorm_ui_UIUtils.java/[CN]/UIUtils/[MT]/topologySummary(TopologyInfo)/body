@@ -1,0 +1,34 @@
+{
+  List<TaskSummary> tasks=t.get_tasks();
+  Set<WorkerSlot> workers=new HashSet<WorkerSlot>();
+  int taskNum=0;
+  int cpuNum=0;
+  int memNum=0;
+  int diskNum=0;
+  Set<Integer> ports=new HashSet<Integer>();
+  if (tasks != null) {
+    taskNum=tasks.size();
+    for (int i=0; i < taskNum; i++) {
+      TaskSummary task=tasks.get(i);
+      cpuNum+=task.get_cpu();
+      memNum+=task.get_mem();
+      if (task.get_disk() != null && task.get_disk().isEmpty() == false) {
+        diskNum++;
+      }
+      ports.add(task.get_port());
+    }
+  }
+  List<TopologySumm> tsumm=new ArrayList<TopologySumm>();
+  TopologySumm topologySumm=new TopologySumm();
+  topologySumm.setTopologyId(t.get_id());
+  topologySumm.setTopologyName(t.get_name());
+  topologySumm.setStatus(t.get_status());
+  topologySumm.setUptime(StatBuckets.prettyUptimeStr(t.get_uptime_secs()));
+  topologySumm.setNumCpu(String.valueOf(cpuNum));
+  topologySumm.setNumMem(String.valueOf(memNum));
+  topologySumm.setNumDisk(String.valueOf(diskNum));
+  topologySumm.setNumWorkers(String.valueOf(ports.size()));
+  topologySumm.setNumTasks(String.valueOf(taskNum));
+  tsumm.add(topologySumm);
+  return tsumm;
+}

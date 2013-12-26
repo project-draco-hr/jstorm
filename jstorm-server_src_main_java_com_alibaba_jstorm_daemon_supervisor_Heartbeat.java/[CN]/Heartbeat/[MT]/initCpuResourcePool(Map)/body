@@ -1,0 +1,5 @@
+{
+  int slotNum=getCpuSlotNum(conf);
+  SharedResourcePool ret=new SharedResourcePool(ResourceType.CPU,slotNum);
+  return ret;
+}

@@ -1,0 +1,8 @@
+{
+  Pair<Long,Long> rtn=new Pair<Long,Long>(0l,0l);
+  for (  Pair<Long,Long> p : avg) {
+    rtn.setFirst(rtn.getFirst() + p.getFirst());
+    rtn.setSecond(rtn.getSecond() + p.getSecond());
+  }
+  return rtn;
+}

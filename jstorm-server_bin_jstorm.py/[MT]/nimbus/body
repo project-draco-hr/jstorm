@@ -2,5 +2,5 @@ def nimbus():
     'Syntax: [jstorm nimbus]\n\n    Launches the nimbus daemon. This command should be run under \n    supervision with a tool like daemontools or monit. \n\n    See Setting up a Storm cluster for more information.\n    (https://github.com/nathanmarz/storm/wiki/Setting-up-a-Storm-cluster)\n    '
     cppaths = [JSTORM_CONF_DIR]
     nimbus_classpath = confvalue('nimbus.classpath', cppaths)
-    childopts = (confvalue('nimbus.childopts', cppaths) + ' -Dlogfile.name=nimbus.log -Dlog4j.configuration=jstorm.log4j.properties ')
-    exec_storm_class('com.alipay.dw.jstorm.daemon.nimbus.NimbusServer', jvmtype='-server', extrajars=(cppaths + [nimbus_classpath]), childopts=childopts)
+    childopts = (confvalue('nimbus.childopts', cppaths) + (' -Dlogfile.name=nimbus.log -Dlogback.configurationFile=%s/conf/cluster.xml ' % JSTORM_DIR))
+    exec_storm_class('com.alibaba.jstorm.daemon.nimbus.NimbusServer', jvmtype='-server', extrajars=(cppaths + [nimbus_classpath]), childopts=childopts)

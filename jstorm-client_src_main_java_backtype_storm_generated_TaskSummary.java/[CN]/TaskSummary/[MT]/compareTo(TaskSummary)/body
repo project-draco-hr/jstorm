@@ -34,6 +34,36 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_cpu()).compareTo(typedOther.is_set_cpu());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_cpu()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.cpu,typedOther.cpu);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_mem()).compareTo(typedOther.is_set_mem());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_mem()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.mem,typedOther.mem);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_disk()).compareTo(typedOther.is_set_disk());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_disk()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.disk,typedOther.disk);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   lastComparison=Boolean.valueOf(is_set_port()).compareTo(typedOther.is_set_port());
   if (lastComparison != 0) {
     return lastComparison;

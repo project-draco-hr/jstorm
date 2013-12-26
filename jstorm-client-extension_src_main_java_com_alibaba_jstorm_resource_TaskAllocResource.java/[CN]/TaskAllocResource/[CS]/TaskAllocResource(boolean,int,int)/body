@@ -1,0 +1,6 @@
+{
+  super();
+  this.allocDisk=allocDisk;
+  this.cpuSlotNum=cpuSlotNum;
+  this.memSlotNum=memSlotNum;
+}

@@ -1,0 +1,8 @@
+{
+  this.conf=workerData.getStormConf();
+  this.supervisorId=workerData.getSupervisorId();
+  this.port=workerData.getPort();
+  this.context=workerData.getContext();
+  this.taskIds=workerData.getTaskids();
+  this.topologyId=workerData.getTopologyId();
+}

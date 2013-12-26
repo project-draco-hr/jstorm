@@ -1,0 +1,6 @@
+{
+  if (!isClosed()) {
+    being_closed.set(true);
+    close_n_release();
+  }
+}

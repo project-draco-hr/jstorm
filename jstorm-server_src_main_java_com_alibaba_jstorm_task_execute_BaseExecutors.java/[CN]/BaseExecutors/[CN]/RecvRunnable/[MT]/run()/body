@@ -1,0 +1,11 @@
+{
+  LOG.info("Successfully start recvThread of " + idStr);
+  while (taskStatus.isShutdown() == false) {
+    Tuple tuple=recv();
+    if (tuple == null) {
+      continue;
+    }
+    recvQueue.publish(tuple);
+  }
+  LOG.info("Successfully shutdown recvThread of " + idStr);
+}

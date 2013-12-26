@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(MEM_SLOTS_PER_TASK),1);
+}

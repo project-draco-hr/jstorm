@@ -1,0 +1,21 @@
+{
+  StormClusterState stormClusterState=nimbusData.getStormClusterState();
+  String topologyId=event.getTopologyId();
+  String topologyName=event.getTopologyName();
+  StormStatus status=new StormStatus(StatusType.active);
+  if (event.getOldStatus() != null) {
+    status=event.getOldStatus();
+  }
+  StormBase stormBase=stormClusterState.storm_base(topologyId,null);
+  if (stormBase == null) {
+    stormBase=new StormBase(topologyName,TimeUtils.current_time_secs(),status);
+    stormClusterState.activate_storm(topologyId,stormBase);
+  }
+ else {
+    stormClusterState.update_storm(topologyId,status);
+    if (topologyName == null) {
+      event.setTopologyName(stormBase.getStormName());
+    }
+  }
+  LOG.info("Update " + topologyId + " "+ status);
+}

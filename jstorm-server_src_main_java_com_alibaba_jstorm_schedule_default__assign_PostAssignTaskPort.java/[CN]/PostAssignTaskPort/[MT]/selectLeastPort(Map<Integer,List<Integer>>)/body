@@ -1,0 +1,12 @@
+{
+  Integer port=null;
+  int portLeastTaskNum=Integer.MAX_VALUE;
+  for (  Entry<Integer,List<Integer>> entry : preAssignPorts.entrySet()) {
+    int size=entry.getValue().size();
+    if (size < portLeastTaskNum) {
+      portLeastTaskNum=size;
+      port=entry.getKey();
+    }
+  }
+  return port;
+}

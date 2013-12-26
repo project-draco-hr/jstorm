@@ -8,5 +8,13 @@ case WAIT_SECS:
       set_wait_secs((Integer)value);
     }
   break;
+case NUM_WORKERS:
+if (value == null) {
+  unset_num_workers();
+}
+ else {
+  set_num_workers((Integer)value);
+}
+break;
 }
 }

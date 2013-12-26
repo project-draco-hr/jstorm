@@ -5,12 +5,26 @@
 switch (field) {
 case HOST:
     return is_set_host();
+case SUPERVISOR_ID:
+  return is_set_supervisor_id();
 case UPTIME_SECS:
-  return is_set_uptime_secs();
+return is_set_uptime_secs();
 case NUM_WORKERS:
 return is_set_num_workers();
 case NUM_USED_WORKERS:
 return is_set_num_used_workers();
+case NUM_CPU:
+return is_set_num_cpu();
+case NUM_USED_CPU:
+return is_set_num_used_cpu();
+case NUM_MEM:
+return is_set_num_mem();
+case NUM_USED_MEM:
+return is_set_num_used_mem();
+case NUM_DISK:
+return is_set_num_disk();
+case NUM_USED_DISK:
+return is_set_num_used_disk();
 }
 throw new IllegalStateException();
 }

@@ -1,0 +1,31 @@
+{
+  if (obj == null) {
+    return null;
+  }
+  if (obj instanceof List<?> == false) {
+    return null;
+  }
+  try {
+    List<String> list=(List<String>)obj;
+    if (list.size() < 6) {
+      return null;
+    }
+    String supervisorId=parseString(list.get(0));
+    String hostname=parseString(list.get(1));
+    String diskSlot=parseString(list.get(2));
+    Integer cpuSlotNum=parseInteger(list.get(3));
+    Integer memSlotNum=parseInteger(list.get(4));
+    Integer port=parseInteger(list.get(5));
+    ResourceAssignment ret=new ResourceAssignment();
+    ret.setSupervisorId(supervisorId);
+    ret.setHostname(hostname);
+    ret.setCpuSlotNum(cpuSlotNum);
+    ret.setMemSlotNum(memSlotNum);
+    ret.setDiskSlot(diskSlot);
+    ret.setPort(port);
+    return ret;
+  }
+ catch (  Exception e) {
+    return null;
+  }
+}

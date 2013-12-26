@@ -1,0 +1,8 @@
+{
+  Integer num=failureCounters.get(channel);
+  if (num == null) {
+    num=Integer.valueOf(0);
+  }
+  num=num + 1;
+  failureCounters.put(channel,num);
+}

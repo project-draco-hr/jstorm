@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(TOPOLOGY_PORT_WEIGHT),DEFAULT_PORT_WEIGHT);
+}

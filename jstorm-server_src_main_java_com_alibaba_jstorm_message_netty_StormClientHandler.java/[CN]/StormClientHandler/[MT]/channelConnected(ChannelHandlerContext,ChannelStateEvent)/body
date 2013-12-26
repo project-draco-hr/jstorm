@@ -1,0 +1,13 @@
+{
+  Channel channel=event.getChannel();
+  client.setChannel(channel);
+  LOG.info("connection established to :{}",client.getTarget_Server());
+  try {
+    sendRequests(channel,client.takeMessages());
+  }
+ catch (  Exception e) {
+    LOG.warn("Occur channel error\n",e);
+    channel.close();
+    throw new RuntimeException(e);
+  }
+}

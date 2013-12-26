@@ -1,9 +1,0 @@
-{
-  List<TaskShutdownDameon> shutdowntasks=new ArrayList<TaskShutdownDameon>();
-  Set<Integer> taskids=workerData.getTaskids();
-  for (  int taskid : taskids) {
-    TaskShutdownDameon t=Task.mk_task(workerData,workerTransfer,taskid);
-    shutdowntasks.add(t);
-  }
-  return shutdowntasks;
-}

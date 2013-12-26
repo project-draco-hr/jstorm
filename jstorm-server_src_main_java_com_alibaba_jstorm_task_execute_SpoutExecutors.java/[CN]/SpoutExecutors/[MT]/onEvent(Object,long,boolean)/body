@@ -1,0 +1,43 @@
+{
+  try {
+    if (event == null) {
+      return;
+    }
+    Runnable runnable=null;
+    if (event instanceof IAckMsg) {
+      runnable=(Runnable)event;
+    }
+ else     if (event instanceof Tuple) {
+      Tuple tuple=(Tuple)event;
+      Object id=tuple.getValue(0);
+      Object obj=pending.remove(id);
+      if (obj == null) {
+        LOG.warn("Pending map no entry:" + id + ", pending size:"+ pending.size());
+        return;
+      }
+      TupleInfo tupleInfo=(TupleInfo)obj;
+      String stream_id=tuple.getSourceStreamId();
+      if (stream_id.equals(Acker.ACKER_ACK_STREAM_ID)) {
+        runnable=new AckSpoutMsg(spout,tupleInfo.getMessageId(),isDebug,tupleInfo.getStream(),tupleInfo.getTimestamp(),task_stats);
+      }
+ else       if (stream_id.equals(Acker.ACKER_FAIL_STREAM_ID)) {
+        Long time_delta=null;
+        runnable=new FailSpoutMsg(spout,tupleInfo,task_stats,isDebug);
+      }
+    }
+ else     if (event instanceof Runnable) {
+      runnable=(Runnable)event;
+    }
+ else {
+      LOG.warn("Receive one unknow event " + idStr);
+      return;
+    }
+    runnable.run();
+  }
+ catch (  Exception e) {
+    if (taskStatus.isShutdown() == false) {
+      LOG.info("Unknow excpetion ",e);
+      report_error.report(e);
+    }
+  }
+}

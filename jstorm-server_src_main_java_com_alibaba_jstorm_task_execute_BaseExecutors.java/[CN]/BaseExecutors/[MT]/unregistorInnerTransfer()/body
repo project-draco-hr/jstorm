@@ -1,0 +1,4 @@
+{
+  LOG.info("Unregistor inner transfer for executor thread of " + idStr);
+  innerTaskTransfer.remove(taskId);
+}

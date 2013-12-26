@@ -1,0 +1,32 @@
+{
+  Map<Integer,Set<ResourceType>> weightMap=getWeightTree(defaultContext);
+  Map<Integer,Map<String,Integer>> ret=new TreeMap<Integer,Map<String,Integer>>(new Comparator<Integer>(){
+    @Override public int compare(    Integer o1,    Integer o2){
+      return o2.compareTo(o1);
+    }
+  }
+);
+  for (  Entry<Integer,Set<ResourceType>> entry : weightMap.entrySet()) {
+    Integer weight=entry.getKey();
+    Set<ResourceType> types=entry.getValue();
+    for (    ResourceType type : types) {
+      Map<String,Integer> supervisorLeftSlots=ret.get(weight);
+      if (supervisorLeftSlots == null) {
+        supervisorLeftSlots=new TreeMap<String,Integer>();
+        ret.put(weight,supervisorLeftSlots);
+      }
+      for (      String sid : supervisors) {
+        SupervisorInfo supervisorInfo=defaultContext.getCluster().get(sid);
+        Integer taskNum=newSupervisorTaskNum.get(sid);
+        Integer left=getLeftSlot(supervisorInfo,type,taskAllocResource,taskNum);
+        Integer leftSum=supervisorLeftSlots.get(sid);
+        if (leftSum == null) {
+          leftSum=Integer.valueOf(0);
+        }
+        leftSum=leftSum + left;
+        supervisorLeftSlots.put(sid,leftSum);
+      }
+    }
+  }
+  return ret;
+}

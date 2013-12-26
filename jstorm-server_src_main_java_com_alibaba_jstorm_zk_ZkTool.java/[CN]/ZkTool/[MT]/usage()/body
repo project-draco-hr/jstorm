@@ -1,0 +1,6 @@
+{
+  LOG.info("Read ZK node's data, please do as following:");
+  LOG.info(ZkTool.class.getName() + " read zkpath");
+  LOG.info("\nDelete topology backup assignment, please do as following:");
+  LOG.info(ZkTool.class.getName() + " rm topologyname");
+}

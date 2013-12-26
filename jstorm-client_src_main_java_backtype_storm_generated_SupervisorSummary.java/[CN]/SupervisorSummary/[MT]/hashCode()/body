@@ -3,6 +3,9 @@
   boolean present_host=true && (is_set_host());
   builder.append(present_host);
   if (present_host)   builder.append(host);
+  boolean present_supervisor_id=true && (is_set_supervisor_id());
+  builder.append(present_supervisor_id);
+  if (present_supervisor_id)   builder.append(supervisor_id);
   boolean present_uptime_secs=true;
   builder.append(present_uptime_secs);
   if (present_uptime_secs)   builder.append(uptime_secs);
@@ -12,5 +15,23 @@
   boolean present_num_used_workers=true;
   builder.append(present_num_used_workers);
   if (present_num_used_workers)   builder.append(num_used_workers);
+  boolean present_num_cpu=true;
+  builder.append(present_num_cpu);
+  if (present_num_cpu)   builder.append(num_cpu);
+  boolean present_num_used_cpu=true;
+  builder.append(present_num_used_cpu);
+  if (present_num_used_cpu)   builder.append(num_used_cpu);
+  boolean present_num_mem=true;
+  builder.append(present_num_mem);
+  if (present_num_mem)   builder.append(num_mem);
+  boolean present_num_used_mem=true;
+  builder.append(present_num_used_mem);
+  if (present_num_used_mem)   builder.append(num_used_mem);
+  boolean present_num_disk=true;
+  builder.append(present_num_disk);
+  if (present_num_disk)   builder.append(num_disk);
+  boolean present_num_used_disk=true;
+  builder.append(present_num_used_disk);
+  if (present_num_used_disk)   builder.append(num_used_disk);
   return builder.toHashCode();
 }

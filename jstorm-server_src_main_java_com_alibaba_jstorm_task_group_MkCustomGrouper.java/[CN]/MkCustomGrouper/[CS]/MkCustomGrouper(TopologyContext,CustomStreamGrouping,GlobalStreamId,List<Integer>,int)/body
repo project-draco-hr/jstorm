@@ -1,0 +1,5 @@
+{
+  this.myTaskId=myTaskId;
+  this.grouping=_grouping;
+  this.grouping.prepare(context,stream,targetTask);
+}

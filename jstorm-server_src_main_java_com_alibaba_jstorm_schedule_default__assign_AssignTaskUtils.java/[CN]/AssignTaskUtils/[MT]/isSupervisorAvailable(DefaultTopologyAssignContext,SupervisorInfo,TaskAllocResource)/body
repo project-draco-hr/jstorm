@@ -1,0 +1,17 @@
+{
+  boolean isCpuAvailable=supervisorInfo.getCpuPool().isAvailable(taskAlloc.getCpuSlotNum(),defaultContext);
+  if (isCpuAvailable == false) {
+    return false;
+  }
+  boolean isMemAvailable=supervisorInfo.getMemPool().isAvailable(taskAlloc.getMemSlotNum(),defaultContext);
+  if (isMemAvailable == false) {
+    return false;
+  }
+  if (taskAlloc.isAllocDisk() && supervisorInfo.getDiskPool().getLeftNum() < 1) {
+    return false;
+  }
+  if (supervisorInfo.getNetPool().getLeftNum() < 1) {
+    return false;
+  }
+  return true;
+}

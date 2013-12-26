@@ -1,7 +1,0 @@
-{
-  this.port=port;
-  this.topology=topology;
-  this.uptime=uptime;
-  this.tasks=tasks;
-  this.components=components;
-}

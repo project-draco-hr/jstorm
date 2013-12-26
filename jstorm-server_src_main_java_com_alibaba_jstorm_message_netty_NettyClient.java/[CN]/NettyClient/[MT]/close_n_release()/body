@@ -1,0 +1,13 @@
+{
+  if (channelRef.get() != null)   channelRef.get().close().awaitUninterruptibly();
+  new Thread(new Runnable(){
+    @Override public void run(){
+      if (useDisruptor) {
+        disruptorQueue.clear();
+      }
+      factory.releaseExternalResources();
+      LOG.info("Successfully close connection to {}",target_Server);
+    }
+  }
+).start();
+}

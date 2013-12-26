@@ -1,0 +1,8 @@
+{
+  if (tStatus.equals(TopologyInitialStatus.ACTIVE)) {
+    return new StormStatus(StatusType.active);
+  }
+ else {
+    return new StormStatus(StatusType.inactive);
+  }
+}

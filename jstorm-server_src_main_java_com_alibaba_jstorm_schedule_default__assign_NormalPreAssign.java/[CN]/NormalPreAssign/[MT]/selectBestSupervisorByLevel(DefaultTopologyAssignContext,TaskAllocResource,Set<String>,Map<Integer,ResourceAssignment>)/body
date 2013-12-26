@@ -1,0 +1,15 @@
+{
+  Map<String,Integer> newSupervisorTaskNum=new HashMap<String,Integer>();
+  for (  Entry<Integer,ResourceAssignment> entry : newAssigns.entrySet()) {
+    ResourceAssignment assignment=entry.getValue();
+    String supervisorId=assignment.getSupervisorId();
+    Integer num=newSupervisorTaskNum.get(supervisorId);
+    if (num == null) {
+      num=Integer.valueOf(0);
+    }
+    num=num + 1;
+    newSupervisorTaskNum.put(supervisorId,num);
+  }
+  Map<Integer,Map<String,Integer>> weightResourceMap=getWeightResourceMap(defaultContext,taskAllocResource,supervisors,newSupervisorTaskNum);
+  return selectOne(weightResourceMap,supervisors);
+}

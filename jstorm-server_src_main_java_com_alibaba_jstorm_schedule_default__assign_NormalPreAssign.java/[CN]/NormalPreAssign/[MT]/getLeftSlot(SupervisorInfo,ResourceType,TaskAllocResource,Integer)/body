@@ -1,0 +1,19 @@
+{
+  if (type == ResourceType.CPU) {
+    return (supervisorInfo.getCpuPool().getLeftNum() - taskAllocResource.getCpuSlotNum());
+  }
+ else   if (type == ResourceType.MEM) {
+    return (supervisorInfo.getMemPool().getLeftNum() - taskAllocResource.getMemSlotNum());
+  }
+ else   if (type == ResourceType.DISK) {
+    if (taskAllocResource.isAllocDisk() == false) {
+      return 0;
+    }
+ else {
+      return (supervisorInfo.getDiskPool().getLeftNum() - 1);
+    }
+  }
+ else {
+    return (supervisorInfo.getNetPool().getLeftNum() - taskNum);
+  }
+}

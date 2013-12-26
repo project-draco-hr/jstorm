@@ -1,0 +1,21 @@
+{
+  openOrPrepareWasCalled=new Atom(Boolean.valueOf(false));
+  this.topologyContext=workerData.getContextMaker().makeTopologyContext(workerData.getSysTopology(),taskId,openOrPrepareWasCalled);
+  this.userContext=workerData.getContextMaker().makeTopologyContext(workerData.getRawTopology(),taskId,openOrPrepareWasCalled);
+  this.taskTransfer=getSendingTransfer(workerData);
+  this.innerTaskTransfer=workerData.getInnerTaskTransfer();
+  this.topologyid=workerData.getTopologyId();
+  this.context=workerData.getContext();
+  this.workHalt=workerData.getWorkHalt();
+  this.zkCluster=new StormZkClusterState(workerData.getZkClusterstate());
+  this.taskid=taskId;
+  this.componentid=topologyContext.getThisComponentId();
+  this.stormConf=Common.component_conf(workerData.getStormConf(),topologyContext,componentid);
+  String diskSlot=getAssignDiskSlot();
+  JStormServerConfig.setTaskAssignDiskSlot(stormConf,diskSlot);
+  this.taskStatus=new TaskStatus();
+  this.taskObj=Common.get_task_object(topologyContext.getRawTopology(),componentid);
+  int samplerate=StormConfig.sampling_rate(stormConf);
+  this.taskStats=new CommonStatsRolling(samplerate);
+  LOG.info("Loading task " + componentid + ":"+ taskid+ " disk slot:"+ diskSlot);
+}

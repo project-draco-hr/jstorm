@@ -1,0 +1,32 @@
+{
+  try {
+    StormClusterState stormClusterState=data.getStormClusterState();
+    Map<String,Assignment> assignments=new HashMap<String,Assignment>();
+    int uptime=data.uptime();
+    List<TopologySummary> topologySummaries=new ArrayList<TopologySummary>();
+    Map<String,StormBase> bases=Cluster.topology_bases(stormClusterState);
+    for (    Entry<String,StormBase> entry : bases.entrySet()) {
+      String stormId=entry.getKey();
+      StormBase base=entry.getValue();
+      Assignment assignment=stormClusterState.assignment_info(stormId,null);
+      if (assignment == null) {
+        LOG.error("Failed to get assignment of " + stormId);
+        continue;
+      }
+      assignments.put(stormId,assignment);
+      TopologySummary topology=NimbusUtils.mkTopologySummary(assignment,stormId,base.getStormName(),base.getStatusString(),TimeUtils.time_delta(base.getLanchTimeSecs()));
+      topologySummaries.add(topology);
+    }
+    Map<String,SupervisorInfo> supervisorInfos=Cluster.allSupervisorInfo(stormClusterState,null);
+    List<SupervisorSummary> supervisorSummaries=NimbusUtils.mkSupervisorSummaries(supervisorInfos,assignments);
+    return new ClusterSummary(supervisorSummaries,uptime,topologySummaries);
+  }
+ catch (  TException e) {
+    LOG.info("Failed to get ClusterSummary ",e);
+    throw e;
+  }
+catch (  Exception e) {
+    LOG.info("Failed to get ClusterSummary ",e);
+    throw new TException(e);
+  }
+}

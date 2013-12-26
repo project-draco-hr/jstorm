@@ -1,0 +1,10 @@
+{
+  if (event == null) {
+    return;
+  }
+  TupleExt tuple=(TupleExt)event;
+  int taskid=tuple.getTargetTaskId();
+  byte[] tupleMessage=serializer.serialize(tuple);
+  TaskMessage taskMessage=new TaskMessage(taskid,tupleMessage);
+  transferQueue.publish(taskMessage);
+}

@@ -14,6 +14,16 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_supervisor_id()).compareTo(typedOther.is_set_supervisor_id());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_supervisor_id()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.supervisor_id,typedOther.supervisor_id);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   lastComparison=Boolean.valueOf(is_set_uptime_secs()).compareTo(typedOther.is_set_uptime_secs());
   if (lastComparison != 0) {
     return lastComparison;
@@ -40,6 +50,66 @@
   }
   if (is_set_num_used_workers()) {
     lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_used_workers,typedOther.num_used_workers);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_num_cpu()).compareTo(typedOther.is_set_num_cpu());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_num_cpu()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_cpu,typedOther.num_cpu);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_num_used_cpu()).compareTo(typedOther.is_set_num_used_cpu());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_num_used_cpu()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_used_cpu,typedOther.num_used_cpu);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_num_mem()).compareTo(typedOther.is_set_num_mem());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_num_mem()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_mem,typedOther.num_mem);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_num_used_mem()).compareTo(typedOther.is_set_num_used_mem());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_num_used_mem()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_used_mem,typedOther.num_used_mem);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_num_disk()).compareTo(typedOther.is_set_num_disk());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_num_disk()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_disk,typedOther.num_disk);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_num_used_disk()).compareTo(typedOther.is_set_num_used_disk());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_num_used_disk()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_used_disk,typedOther.num_used_disk);
     if (lastComparison != 0) {
       return lastComparison;
     }

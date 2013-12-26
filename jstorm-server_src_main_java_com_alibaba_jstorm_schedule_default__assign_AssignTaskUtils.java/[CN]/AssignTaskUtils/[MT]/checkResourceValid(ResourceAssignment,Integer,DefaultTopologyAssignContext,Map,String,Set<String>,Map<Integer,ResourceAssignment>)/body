@@ -1,0 +1,33 @@
+{
+  String allocSupervisorId=taskAlloc.getSupervisorId();
+  if (canUsedSupervisorIds.contains(allocSupervisorId) == false) {
+    LOG.info(componentMap + " task " + task+ " can't use supervisor "+ allocSupervisorId);
+    return false;
+  }
+  Map<String,SupervisorInfo> cluster=defaultContext.getCluster();
+  SupervisorInfo supervisorInfo=cluster.get(allocSupervisorId);
+  if (supervisorInfo == null) {
+    LOG.info(componentName + " task " + task+ " supervisorId is invalid "+ allocSupervisorId);
+    return false;
+  }
+  boolean canAlloc=isSupervisorAvailable(defaultContext,supervisorInfo,taskAlloc);
+  if (canAlloc == false) {
+    StringBuilder sb=new StringBuilder();
+    sb.append("Supervisor " + allocSupervisorId);
+    sb.append(" no enough resource for ");
+    sb.append(componentName + " task " + task+ ",");
+    sb.append(taskAlloc);
+    LOG.info(sb.toString());
+    return false;
+  }
+  if (isIsolate(task,allocSupervisorId,componentName,componentMap,defaultContext,alreadyAssign) == false) {
+    StringBuilder sb=new StringBuilder();
+    sb.append("Supervisor " + allocSupervisorId);
+    sb.append(" TASK_ON_DIFFERENT_NODE fail ");
+    sb.append(componentName + " task" + task+ ",");
+    sb.append(taskAlloc);
+    LOG.info(sb.toString());
+    return false;
+  }
+  return true;
+}

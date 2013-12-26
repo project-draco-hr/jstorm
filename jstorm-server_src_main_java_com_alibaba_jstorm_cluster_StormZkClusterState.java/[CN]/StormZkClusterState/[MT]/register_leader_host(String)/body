@@ -1,0 +1,7 @@
+{
+  if (host != null)   cluster_state.set_ephemeral_node(Cluster.MASTER_SUBTREE,host.getBytes());
+ else {
+    LOG.error("register host to zk fail!");
+    throw new Exception();
+  }
+}

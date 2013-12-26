@@ -1,0 +1,7 @@
+{
+  Integer num=failureCounters.get(channel);
+  if (num == null) {
+    return 0;
+  }
+  return num;
+}

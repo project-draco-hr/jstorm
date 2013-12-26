@@ -1,0 +1,6 @@
+{
+  this.taskToResource=taskToResource;
+  this.nodeHost=nodeHost;
+  this.taskStartTimeSecs=taskStartTimeSecs;
+  this.masterCodeDir=masterCodeDir;
+}

@@ -1,5 +1,0 @@
-{
-  this.componentId=componentId;
-  this.topologyname=topologyname;
-  this.parallelism=parallelism;
-}

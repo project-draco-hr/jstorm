@@ -1,0 +1,16 @@
+{
+  if (add instanceof Collection) {
+    for (    Object o : (Collection)add) {
+      result.add(o);
+    }
+  }
+ else   if (add instanceof Set) {
+    for (    Object o : (Collection)add) {
+      result.add(o);
+    }
+  }
+ else {
+    result.add(add);
+  }
+  return result;
+}

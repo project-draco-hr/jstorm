@@ -1,0 +1,13 @@
+{
+  if (useDisruptor) {
+    if (batchHighLevel) {
+      pushBatch((TaskMessage)obj);
+    }
+ else {
+      disruptorQueue.publish(obj);
+    }
+  }
+ else {
+    blockingQueue.offer(obj);
+  }
+}

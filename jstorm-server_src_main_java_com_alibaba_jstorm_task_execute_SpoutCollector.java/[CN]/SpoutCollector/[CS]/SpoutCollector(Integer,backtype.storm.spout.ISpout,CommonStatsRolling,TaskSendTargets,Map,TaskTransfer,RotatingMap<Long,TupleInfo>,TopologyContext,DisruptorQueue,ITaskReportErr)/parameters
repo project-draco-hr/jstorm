@@ -1,0 +1,10 @@
+Integer task_id
+backtype.storm.spout.ISpout spout
+CommonStatsRolling task_stats
+TaskSendTargets sendTargets
+Map _storm_conf
+TaskTransfer _transfer_fn
+RotatingMap<Long,TupleInfo> pending
+TopologyContext topology_context
+DisruptorQueue disruptorAckerQueue
+ITaskReportErr _report_error

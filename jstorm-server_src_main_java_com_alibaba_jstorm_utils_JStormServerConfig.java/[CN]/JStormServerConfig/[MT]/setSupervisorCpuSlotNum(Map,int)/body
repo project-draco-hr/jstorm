@@ -1,0 +1,3 @@
+{
+  conf.put(SUPERVISOR_CPU_SLOT_NUM,Integer.valueOf(slotNum));
+}

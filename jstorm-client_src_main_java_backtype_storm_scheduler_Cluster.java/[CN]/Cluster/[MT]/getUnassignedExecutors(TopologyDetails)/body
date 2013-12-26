@@ -1,0 +1,12 @@
+{
+  if (topology == null) {
+    return new ArrayList<ExecutorDetails>(0);
+  }
+  Collection<ExecutorDetails> ret=new HashSet(topology.getExecutors());
+  SchedulerAssignment assignment=this.getAssignmentById(topology.getId());
+  if (assignment != null) {
+    Set<ExecutorDetails> assignedExecutors=assignment.getExecutors();
+    ret.removeAll(assignedExecutors);
+  }
+  return ret;
+}

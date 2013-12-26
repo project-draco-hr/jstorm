@@ -1,0 +1,20 @@
+{
+  try {
+    if (supportRecvThread == true) {
+      disruptorRecvQueue.consumeBatchWhenAvailable(this);
+    }
+ else {
+      disruptorRecvQueue.consumeBatch(this);
+    }
+  }
+ catch (  Exception e) {
+    if (taskStatus.isShutdown() == false) {
+      LOG.error("Actor occur unknow exception ",e);
+    }
+  }
+  long now=System.currentTimeMillis();
+  if (now - lastRotate > rotateTime) {
+    lastRotate=now;
+    Map<Long,TupleInfo> dead=pending.rotate();
+  }
+}

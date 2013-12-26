@@ -1,0 +1,31 @@
+{
+  try {
+    Object message=null;
+    if ((flags & 0x01) == 0x01) {
+      if (useDisruptor) {
+        message=disruptorQ.poll();
+      }
+ else {
+        message=blockQ.poll();
+      }
+    }
+ else {
+      if (useDisruptor) {
+        message=disruptorQ.take();
+      }
+ else {
+        message=blockQ.take();
+      }
+    }
+    if (message != null) {
+      return ((TaskMessage)message).message();
+    }
+ else {
+      return null;
+    }
+  }
+ catch (  Exception e) {
+    LOG.warn("Occur unexception ",e);
+    return null;
+  }
+}

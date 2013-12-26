@@ -1,0 +1,3 @@
+StormTopology topology
+Integer taskId
+clojure.lang.Atom openOrPrepareWasCalled

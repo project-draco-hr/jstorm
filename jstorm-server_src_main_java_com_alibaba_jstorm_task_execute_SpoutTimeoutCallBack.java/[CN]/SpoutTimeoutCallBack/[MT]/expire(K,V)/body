@@ -1,0 +1,13 @@
+{
+  if (val == null) {
+    return;
+  }
+  try {
+    TupleInfo tupleInfo=(TupleInfo)val;
+    FailSpoutMsg fail=new FailSpoutMsg(spout,(TupleInfo)tupleInfo,task_stats,isDebug);
+    disruptorEventQueue.publish(fail);
+  }
+ catch (  Exception e) {
+    LOG.error("expire error",e);
+  }
+}

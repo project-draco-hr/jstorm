@@ -1,0 +1,11 @@
+{
+  while (true) {
+    try {
+      serializeQueue.consumeBatchWhenAvailable(this);
+    }
+ catch (    Exception e) {
+      LOG.error("Disruptor occur exception ",e);
+      halter.run();
+    }
+  }
+}

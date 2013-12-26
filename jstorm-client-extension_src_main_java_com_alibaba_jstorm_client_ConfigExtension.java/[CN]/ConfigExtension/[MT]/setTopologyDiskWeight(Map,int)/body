@@ -1,0 +1,3 @@
+{
+  conf.put(TOPOLOGY_DISK_WEIGHT,Integer.valueOf(weight));
+}
