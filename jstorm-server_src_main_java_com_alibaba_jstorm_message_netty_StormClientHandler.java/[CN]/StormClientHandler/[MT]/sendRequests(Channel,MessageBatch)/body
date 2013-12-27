@@ -6,9 +6,6 @@
     requests.remove(last_msg);
   }
   if (requests.isEmpty()) {
-    if (being_closed.get()) {
-      client.close_n_release();
-    }
     return;
   }
   ChannelFuture future=channel.write(requests);
@@ -19,9 +16,6 @@
         future.getChannel().close();
       }
  else {
-      }
-      if (being_closed.get()) {
-        client.close_n_release();
       }
     }
   }
