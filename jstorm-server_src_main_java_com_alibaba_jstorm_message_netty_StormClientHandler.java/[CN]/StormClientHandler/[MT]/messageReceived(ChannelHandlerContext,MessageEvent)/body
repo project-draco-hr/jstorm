@@ -6,8 +6,10 @@
     sendRequests(channel,client.takeMessages());
   }
  catch (  Exception e) {
-    LOG.warn("Occur channel error\n",e);
-    channel.close();
-    throw new RuntimeException(e);
+    if (being_closed.get() == false) {
+      LOG.warn("Occur channel error\n",e);
+      channel.close();
+      throw new RuntimeException(e);
+    }
   }
 }

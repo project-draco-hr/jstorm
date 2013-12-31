@@ -1,5 +1,5 @@
 {
   this.client=client;
-  being_closed=new AtomicBoolean(false);
+  being_closed=client.getBeing_closed();
   start_time=System.currentTimeMillis();
 }

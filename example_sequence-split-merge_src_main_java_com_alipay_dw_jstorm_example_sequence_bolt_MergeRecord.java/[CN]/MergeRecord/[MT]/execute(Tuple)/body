@@ -9,7 +9,7 @@
   if (input.getSourceComponent().equals(SequenceTopologyDef.CUSTOMER_BOLT_NAME)) {
     customer=pair;
     customerTuple=input;
-    tradeTuple=tradeMap.get(tupleId);
+    tradeTuple=tradeMap.remove(tupleId);
     if (tradeTuple == null) {
       customerMap.put(tupleId,input);
       return;
@@ -19,7 +19,7 @@
  else   if (input.getSourceComponent().equals(SequenceTopologyDef.TRADE_BOLT_NAME)) {
     trade=pair;
     tradeTuple=input;
-    customerTuple=customerMap.get(tupleId);
+    customerTuple=customerMap.remove(tupleId);
     if (customerTuple == null) {
       tradeMap.put(tupleId,input);
       return;
@@ -27,7 +27,7 @@
     customer=(Pair)customerTuple.getValue(1);
   }
  else {
-    LOG.info("Unknow source component");
+    LOG.info("Unknow source component: " + input.getSourceComponent());
     collector.fail(input);
     return;
   }
@@ -35,4 +35,8 @@
   customerSum.addAndGet(customer.getValue());
   collector.ack(tradeTuple);
   collector.ack(customerTuple);
+  TradeCustomer tradeCustomer=new TradeCustomer();
+  tradeCustomer.setTrade(trade);
+  tradeCustomer.setCustomer(customer);
+  collector.emit(new Values(tupleId,tradeCustomer));
 }
