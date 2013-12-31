@@ -1,4 +1,0 @@
-List<Integer> taskIds
-int threadNum
-int hashNum
-Queue<Integer> queue
