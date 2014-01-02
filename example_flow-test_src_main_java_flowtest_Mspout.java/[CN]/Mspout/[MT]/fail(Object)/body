@@ -1,9 +1,0 @@
-{
-  Integer taskId=msgToTask.remove(msgId);
-  Integer failNum=failToTask.get(taskId);
-  if (failNum == null) {
-    failNum=new Integer(0);
-    failToTask.put(taskId,failNum);
-  }
-  failNum=failNum + 1;
-}
