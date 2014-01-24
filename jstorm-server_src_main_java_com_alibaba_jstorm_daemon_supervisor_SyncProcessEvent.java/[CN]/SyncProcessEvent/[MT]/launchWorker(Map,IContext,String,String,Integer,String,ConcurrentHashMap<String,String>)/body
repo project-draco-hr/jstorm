@@ -1,6 +1,6 @@
 {
   String pid=UUID.randomUUID().toString();
-  WorkerShutdown worker=Worker.mk_worker(conf,sharedcontext,stormId,supervisorId,port,workerId);
+  WorkerShutdown worker=Worker.mk_worker(conf,sharedcontext,topologyId,supervisorId,port,workerId,null);
   ProcessSimulator.registerProcess(pid,worker);
   workerThreadPidsAtom.put(workerId,pid);
 }

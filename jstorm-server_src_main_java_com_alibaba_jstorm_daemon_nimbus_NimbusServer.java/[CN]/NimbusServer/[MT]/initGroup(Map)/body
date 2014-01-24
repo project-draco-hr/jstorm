@@ -1,0 +1,17 @@
+{
+  if (data.isGroupModel() == false) {
+    LOG.info("Group model has been disabled!");
+    return;
+  }
+  LOG.info("Nimbus is on group model!");
+  initGroupFileWatcher(ConfigExtension.getGroupFilePath(conf),data);
+  flushGroupFile(ConfigExtension.getGroupFilePath(conf),data);
+  data.getFlushGroupFileLock().lock();
+  try {
+    NimbusUtils.synchronizeGroupToTopology(data);
+    NimbusUtils.synchronizeGroupToResource(data);
+  }
+  finally {
+    data.getFlushGroupFileLock().unlock();
+  }
+}

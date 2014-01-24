@@ -1,10 +1,10 @@
 {
   HashMap<Integer,String> rtn=new HashMap<Integer,String>();
-  List<Integer> taks_ids=zkCluster.task_ids(topologyid);
+  List<Integer> taks_ids=zkCluster.task_ids(topology_id);
   for (  Integer task : taks_ids) {
-    TaskInfo info=zkCluster.task_info(topologyid,task);
+    TaskInfo info=zkCluster.task_info(topology_id,task);
     if (info == null) {
-      LOG.error("Failed to get TaskInfo of " + topologyid + ",taskid:"+ task);
+      LOG.error("Failed to get TaskInfo of " + topology_id + ",taskid:"+ task);
       continue;
     }
     String componentId=info.getComponentId();

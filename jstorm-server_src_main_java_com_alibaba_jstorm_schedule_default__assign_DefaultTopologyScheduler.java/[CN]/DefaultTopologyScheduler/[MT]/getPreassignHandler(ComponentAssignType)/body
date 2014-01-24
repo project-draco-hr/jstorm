@@ -6,6 +6,6 @@
     return new UseOldPreAssign();
   }
  else {
-    return new NormalPreAssign();
+    return new NormalPreAssign(nimbusConf);
   }
 }

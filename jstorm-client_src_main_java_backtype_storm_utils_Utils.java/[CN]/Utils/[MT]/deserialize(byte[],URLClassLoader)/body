@@ -1,0 +1,23 @@
+{
+  try {
+    ByteArrayInputStream bis=new ByteArrayInputStream(serialized);
+    Object ret=null;
+    if (loader != null) {
+      ClassLoaderObjectInputStream cis=new ClassLoaderObjectInputStream(loader,bis);
+      ret=cis.readObject();
+      cis.close();
+    }
+ else {
+      ObjectInputStream ois=new ObjectInputStream(bis);
+      ret=ois.readObject();
+      ois.close();
+    }
+    return ret;
+  }
+ catch (  IOException ioe) {
+    throw new RuntimeException(ioe);
+  }
+catch (  ClassNotFoundException e) {
+    throw new RuntimeException(e);
+  }
+}

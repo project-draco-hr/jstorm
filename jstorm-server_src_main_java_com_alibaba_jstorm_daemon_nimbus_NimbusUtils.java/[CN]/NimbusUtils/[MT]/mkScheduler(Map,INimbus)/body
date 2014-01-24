@@ -3,7 +3,7 @@
  else   if (conf.get(Config.STORM_SCHEDULER) != null) {
     IScheduler result=null;
     try {
-      result=(IScheduler)Class.forName(Config.STORM_SCHEDULER).newInstance();
+      result=(IScheduler)Class.forName((String)conf.get(Config.STORM_SCHEDULER)).newInstance();
     }
  catch (    Exception e) {
       LOG.error(Config.STORM_SCHEDULER + " : Scheduler initialize error!");

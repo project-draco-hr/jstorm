@@ -26,4 +26,7 @@
   if (!is_set_num_disk()) {
     throw new org.apache.thrift.protocol.TProtocolException("Required field 'num_disk' is unset! Struct:" + toString());
   }
+  if (!is_set_group()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'group' is unset! Struct:" + toString());
+  }
 }

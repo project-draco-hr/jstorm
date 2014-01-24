@@ -42,6 +42,8 @@
   List<ClusterSumm> clusumms=new ArrayList<ClusterSumm>();
   ClusterSumm clusterSumm=new ClusterSumm();
   clusterSumm.setNimbusHostname(masterHostname);
+  if (summ.is_isGroupModel())   clusterSumm.setIsGroupModel("true");
+ else   clusterSumm.setIsGroupModel("false");
   clusterSumm.setNimbusUptime(nimbustime);
   clusterSumm.setSupervisorNum(String.valueOf(supSize));
   clusterSumm.setRunningTaskNum(String.valueOf(totalTasks));

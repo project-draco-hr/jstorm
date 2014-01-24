@@ -6,12 +6,16 @@
   IOutputCollector output_collector=new BoltCollector(message_timeout_secs,_report_error,_send_fn,storm_conf,_transfer_fn,sysTopologyCxt,taskId,tuple_start_times,_task_stats);
   outputCollector=new OutputCollector(output_collector);
   try {
+    WorkerClassLoader.switchThreadContext();
     bolt.prepare(storm_conf,userTopologyCxt,outputCollector);
   }
  catch (  Exception e) {
     error=e;
     LOG.error("bolt prepare error ",e);
     report_error.report(e);
+  }
+ finally {
+    WorkerClassLoader.restoreThreadContext();
   }
   LOG.info("Successfully create BoltExecutors " + idStr);
 }

@@ -1,5 +1,5 @@
 {
-  LOG.info("Begin to shut down task " + storm_id + ":"+ task_id);
+  LOG.info("Begin to shut down task " + topology_id + ":"+ task_id);
   taskStatus.setStatus(TaskStatus.SHUTDOWN);
   try {
     Thread.sleep(100);
@@ -15,12 +15,12 @@
     }
   }
   try {
-    zkCluster.remove_task_heartbeat(storm_id,task_id);
+    zkCluster.remove_task_heartbeat(topology_id,task_id);
     zkCluster.disconnect();
   }
  catch (  Exception e) {
     LOG.info(e);
   }
   closeComponent(task_obj);
-  LOG.info("Successfully shut down task " + storm_id + ":"+ task_id);
+  LOG.info("Successfully shut down task " + topology_id + ":"+ task_id);
 }

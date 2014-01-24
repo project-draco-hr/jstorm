@@ -9,6 +9,6 @@
   }
   task_stats.spout_failed_tuple(tupleInfo.getStream());
   if (isDebug) {
-    LOG.info("Failed message " + msg_id + ": "+ tupleInfo.getValues().toString());
+    LOG.info("Failed message {} : {}",msg_id,tupleInfo.getValues().toString());
   }
 }

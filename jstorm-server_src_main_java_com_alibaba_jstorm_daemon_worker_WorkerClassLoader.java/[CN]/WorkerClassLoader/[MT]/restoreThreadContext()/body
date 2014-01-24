@@ -1,0 +1,13 @@
+{
+  if (enable == false) {
+    return;
+  }
+  Thread thread=Thread.currentThread();
+  ClassLoader oldClassLoader=threadContextCache.get(thread);
+  if (oldClassLoader != null) {
+    thread.setContextClassLoader(oldClassLoader);
+  }
+ else {
+    LOG.info("No context classloader of " + thread.getName());
+  }
+}

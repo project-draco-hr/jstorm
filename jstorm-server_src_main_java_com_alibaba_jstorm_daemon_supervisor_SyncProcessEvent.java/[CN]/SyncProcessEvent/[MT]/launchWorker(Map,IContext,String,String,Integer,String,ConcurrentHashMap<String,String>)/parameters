@@ -1,6 +1,6 @@
 Map conf
 IContext sharedcontext
-String stormId
+String topologyId
 String supervisorId
 Integer port
 String workerId

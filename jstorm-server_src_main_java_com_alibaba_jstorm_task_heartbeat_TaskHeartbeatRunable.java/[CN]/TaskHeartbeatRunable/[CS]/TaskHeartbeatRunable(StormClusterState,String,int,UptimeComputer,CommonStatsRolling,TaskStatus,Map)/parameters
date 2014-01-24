@@ -1,5 +1,5 @@
 StormClusterState zkCluster
-String _storm_id
+String _topology_id
 int _task_id
 UptimeComputer _uptime
 CommonStatsRolling _task_stats

@@ -1,0 +1,15 @@
+{
+  this.name=name;
+  for (  Entry<ThriftResourceType,Integer> entry : total.entrySet()) {
+    if (entry.getKey() == ThriftResourceType.CPU)     totalCpu=getString(entry.getValue());
+ else     if (entry.getKey() == ThriftResourceType.MEM)     totalMem=getString(entry.getValue());
+ else     if (entry.getKey() == ThriftResourceType.DISK)     totalDisk=getString(entry.getValue());
+ else     if (entry.getKey() == ThriftResourceType.NET)     totalPort=getString(entry.getValue());
+  }
+  for (  Entry<ThriftResourceType,Integer> entry : used.entrySet()) {
+    if (entry.getKey() == ThriftResourceType.CPU)     usedCpu=getString(entry.getValue());
+ else     if (entry.getKey() == ThriftResourceType.MEM)     usedMem=getString(entry.getValue());
+ else     if (entry.getKey() == ThriftResourceType.DISK)     usedDisk=getString(entry.getValue());
+ else     if (entry.getKey() == ThriftResourceType.NET)     usedPort=getString(entry.getValue());
+  }
+}

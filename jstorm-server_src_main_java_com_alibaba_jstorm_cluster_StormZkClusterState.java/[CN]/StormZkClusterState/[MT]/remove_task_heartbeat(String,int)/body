@@ -1,4 +1,4 @@
 {
-  String taskbeatPath=Cluster.taskbeat_path(stormId,taskId);
+  String taskbeatPath=Cluster.taskbeat_path(topologyId,taskId);
   cluster_state.delete_node(taskbeatPath);
 }

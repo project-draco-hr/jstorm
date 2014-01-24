@@ -1,3 +1,3 @@
 {
-  return taskbeat_storm_root(storm_id) + ZK_SEPERATOR + task_id;
+  return taskbeat_storm_root(topology_id) + ZK_SEPERATOR + task_id;
 }

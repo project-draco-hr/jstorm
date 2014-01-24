@@ -1,7 +1,7 @@
 {
   String tmproot=StormConfig.supervisorTmpDir(conf) + "/" + UUID.randomUUID().toString();
   FileUtils.forceMkdir(new File(tmproot));
-  String stormroot=StormConfig.supervisor_stormdist_root(conf,stormId);
+  String stormroot=StormConfig.supervisor_stormdist_root(conf,topologyId);
   String masterStormjarPath=StormConfig.stormjar_path(masterCodeDir);
   String localFileJarTmp=StormConfig.stormjar_path(tmproot);
   Utils.downloadFromMaster(conf,masterStormjarPath,localFileJarTmp);

@@ -72,5 +72,13 @@ unset_num_disk();
 set_num_disk((Integer)value);
 }
 break;
+case GROUP:
+if (value == null) {
+unset_group();
+}
+ else {
+set_group((String)value);
+}
+break;
 }
 }

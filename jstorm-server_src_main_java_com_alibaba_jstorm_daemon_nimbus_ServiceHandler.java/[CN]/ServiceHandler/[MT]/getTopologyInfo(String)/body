@@ -20,11 +20,11 @@
     return topologyInfo;
   }
  catch (  TException e) {
-    LOG.info("Failed to get topologyInfo" + topologyId,e);
+    LOG.info("Failed to get topologyInfo " + topologyId,e);
     throw e;
   }
 catch (  Exception e) {
-    LOG.info("Failed to get topologyInfo" + topologyId,e);
+    LOG.info("Failed to get topologyInfo " + topologyId,e);
     throw new TException("Failed to get topologyInfo" + topologyId);
   }
 }

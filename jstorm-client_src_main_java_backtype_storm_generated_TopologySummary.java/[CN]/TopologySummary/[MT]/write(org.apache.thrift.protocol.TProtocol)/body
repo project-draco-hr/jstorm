@@ -34,6 +34,11 @@
   oprot.writeFieldBegin(NUM_DISK_FIELD_DESC);
   oprot.writeI32(this.num_disk);
   oprot.writeFieldEnd();
+  if (this.group != null) {
+    oprot.writeFieldBegin(GROUP_FIELD_DESC);
+    oprot.writeString(this.group);
+    oprot.writeFieldEnd();
+  }
   oprot.writeFieldStop();
   oprot.writeStructEnd();
 }

@@ -1,0 +1,15 @@
+{
+  List<GroupSumm> result=new ArrayList<GroupSumm>();
+  for (  Entry<String,Map<ThriftResourceType,Integer>> entry : total.entrySet()) {
+    if (used.get(entry.getKey()) == null) {
+      Map<ThriftResourceType,Integer> cache=new HashMap<ThriftResourceType,Integer>();
+      cache.put(ThriftResourceType.CPU,0);
+      cache.put(ThriftResourceType.MEM,0);
+      cache.put(ThriftResourceType.DISK,0);
+      cache.put(ThriftResourceType.NET,0);
+      used.put(entry.getKey(),cache);
+    }
+    result.add(new GroupSumm(entry.getKey(),entry.getValue(),used.get(entry.getKey())));
+  }
+  return result;
+}

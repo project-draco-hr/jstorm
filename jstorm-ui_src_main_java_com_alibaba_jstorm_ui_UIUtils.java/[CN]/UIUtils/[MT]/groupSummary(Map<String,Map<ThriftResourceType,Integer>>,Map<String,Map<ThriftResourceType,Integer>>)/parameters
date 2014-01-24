@@ -1,0 +1,2 @@
+Map<String,Map<ThriftResourceType,Integer>> total
+Map<String,Map<ThriftResourceType,Integer>> used

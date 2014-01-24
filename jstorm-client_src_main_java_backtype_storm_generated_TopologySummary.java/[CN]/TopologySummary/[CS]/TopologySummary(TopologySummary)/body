@@ -16,4 +16,7 @@
   this.num_cpu=other.num_cpu;
   this.num_mem=other.num_mem;
   this.num_disk=other.num_disk;
+  if (other.is_set_group()) {
+    this.group=other.group;
+  }
 }

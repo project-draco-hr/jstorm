@@ -50,6 +50,8 @@
         lastFailed.add(task);
       }
  else {
+        SupervisorInfo supervisorInfo=defaultContext.getCluster().get(preAssignment.getSupervisorId());
+        LOG.info("Task " + task + " had been assigned to "+ supervisorInfo.getHostName());
         newAssigns.put(task,preAssignment);
         ret.put(task,preAssignment);
         usedSupervisorIds.add(preAssignment.getSupervisorId());

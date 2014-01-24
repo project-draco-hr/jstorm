@@ -6,6 +6,14 @@ case 2:
   return NIMBUS_UPTIME_SECS;
 case 3:
 return TOPOLOGIES;
+case 4:
+return GROUP_TO_TOPOLOGY;
+case 5:
+return GROUP_TO_RESOURCE;
+case 6:
+return GROUP_TO_USED_RESOURCE;
+case 7:
+return IS_GROUP_MODEL;
 default :
 return null;
 }

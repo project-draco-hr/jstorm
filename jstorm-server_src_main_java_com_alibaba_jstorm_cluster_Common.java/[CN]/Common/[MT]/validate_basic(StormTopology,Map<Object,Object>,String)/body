@@ -15,7 +15,7 @@
     throw new InvalidParameterException(errMsg);
   }
   Integer ackerNum=JStormUtils.parseInt(totalStormConf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
-  if (ackerNum == null || ackerNum < 0) {
+  if (ackerNum != null && ackerNum < 0) {
     String errMsg="Invalide Config.TOPOLOGY_ACKERS in configuration of " + topologyid;
     throw new InvalidParameterException(errMsg);
   }

@@ -94,5 +94,15 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_group()).compareTo(typedOther.is_set_group());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_group()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.group,typedOther.group);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   return 0;
 }

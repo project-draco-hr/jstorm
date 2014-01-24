@@ -1,0 +1,10 @@
+String id
+String name
+String status
+int uptime_secs
+int num_tasks
+int num_workers
+int num_cpu
+int num_mem
+int num_disk
+String group

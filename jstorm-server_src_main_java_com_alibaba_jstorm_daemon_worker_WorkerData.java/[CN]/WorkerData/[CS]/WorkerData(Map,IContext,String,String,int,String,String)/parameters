@@ -1,0 +1,7 @@
+Map conf
+IContext context
+String topology_id
+String supervisor_id
+int port
+String worker_id
+String jar_path
