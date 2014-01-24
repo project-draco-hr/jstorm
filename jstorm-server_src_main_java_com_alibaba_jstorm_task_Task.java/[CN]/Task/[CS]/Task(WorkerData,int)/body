@@ -14,7 +14,7 @@
   String diskSlot=getAssignDiskSlot();
   JStormServerConfig.setTaskAssignDiskSlot(stormConf,diskSlot);
   this.taskStatus=new TaskStatus();
-  this.taskObj=Common.get_task_object(topologyContext.getRawTopology(),componentid);
+  this.taskObj=Common.get_task_object(topologyContext.getRawTopology(),componentid,WorkerClassLoader.getInstance());
   int samplerate=StormConfig.sampling_rate(stormConf);
   this.taskStats=new CommonStatsRolling(samplerate);
   LOG.info("Loading task " + componentid + ":"+ taskid+ " disk slot:"+ diskSlot);

@@ -1,4 +1,5 @@
 {
+  WorkerClassLoader.switchThreadContext();
   while (taskStatus.isShutdown() == false) {
     try {
       long now=System.currentTimeMillis();
@@ -14,4 +15,5 @@
       }
     }
   }
+  WorkerClassLoader.restoreThreadContext();
 }

@@ -1,0 +1,19 @@
+{
+  this();
+  this.id=id;
+  this.name=name;
+  this.status=status;
+  this.uptime_secs=uptime_secs;
+  set_uptime_secs_isSet(true);
+  this.num_tasks=num_tasks;
+  set_num_tasks_isSet(true);
+  this.num_workers=num_workers;
+  set_num_workers_isSet(true);
+  this.num_cpu=num_cpu;
+  set_num_cpu_isSet(true);
+  this.num_mem=num_mem;
+  set_num_mem_isSet(true);
+  this.num_disk=num_disk;
+  set_num_disk_isSet(true);
+  this.group=group;
+}

@@ -18,6 +18,8 @@ case NUM_MEM:
 return Integer.valueOf(get_num_mem());
 case NUM_DISK:
 return Integer.valueOf(get_num_disk());
+case GROUP:
+return get_group();
 }
 throw new IllegalStateException();
 }

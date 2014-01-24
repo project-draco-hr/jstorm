@@ -4,9 +4,11 @@
     Map conf=UIUtils.readUiConfig();
     client=NimbusClient.getConfiguredClient(conf);
     summ=client.getClient().getClusterInfo();
-    tsumm=UIUtils.topologySummary(summ.get_topologies());
+    tsumm=UIUtils.topologySummary(summ.get_topologies(),summ.get_groupToResource().keySet());
     csumm=UIUtils.clusterSummary(summ,client.getMasterHost());
     ssumm=UIUtils.supervisorSummary(summ.get_supervisors());
+    gsumm=UIUtils.groupSummary(summ.get_groupToResource(),summ.get_groupToUsedResource());
+    if (!summ.is_isGroupModel())     gsumm=new ArrayList<GroupSumm>();
   }
  catch (  Exception e) {
     LOG.error("Failed to get cluster information:",e);

@@ -1,0 +1,22 @@
+{
+  Map<Integer,ResourceAssignment> taskAssignments=assignment.getTaskToResource();
+  Map<WorkerSlot,List<Integer>> workerTaskList=Assignment.getWorkerTasks(taskAssignments);
+  Set<WorkerSlot> workers=workerTaskList.keySet();
+  int num_workers=workers.size();
+  int num_tasks=0;
+  int num_cpu=0;
+  int num_mem=0;
+  int num_disk=0;
+  for (  Entry<Integer,ResourceAssignment> entry : taskAssignments.entrySet()) {
+    Integer task=entry.getKey();
+    ResourceAssignment resourceAssignment=entry.getValue();
+    num_tasks++;
+    num_cpu+=resourceAssignment.getCpuSlotNum();
+    num_mem+=resourceAssignment.getMemSlotNum();
+    if (resourceAssignment.getDiskSlot() != null) {
+      num_disk++;
+    }
+  }
+  TopologySummary ret=new TopologySummary(topologyId,topologyName,status,uptime_secs,num_tasks,num_workers,num_cpu,num_mem,num_disk,group);
+  return ret;
+}

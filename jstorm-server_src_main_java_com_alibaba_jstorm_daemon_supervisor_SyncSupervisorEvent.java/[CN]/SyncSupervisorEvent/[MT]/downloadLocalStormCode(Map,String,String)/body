@@ -1,5 +1,5 @@
 {
-  String stormroot=StormConfig.supervisor_stormdist_root(conf,stormId);
+  String stormroot=StormConfig.supervisor_stormdist_root(conf,topologyId);
   FileUtils.copyDirectory(new File(masterCodeDir),new File(stormroot));
   ClassLoader classloader=Thread.currentThread().getContextClassLoader();
   String resourcesJar=resourcesJar();

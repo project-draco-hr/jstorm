@@ -2,13 +2,14 @@
   StormClusterState stormClusterState=nimbusData.getStormClusterState();
   String topologyId=event.getTopologyId();
   String topologyName=event.getTopologyName();
+  String group=event.getGroup();
   StormStatus status=new StormStatus(StatusType.active);
   if (event.getOldStatus() != null) {
     status=event.getOldStatus();
   }
   StormBase stormBase=stormClusterState.storm_base(topologyId,null);
   if (stormBase == null) {
-    stormBase=new StormBase(topologyName,TimeUtils.current_time_secs(),status);
+    stormBase=new StormBase(topologyName,TimeUtils.current_time_secs(),status,group);
     stormClusterState.activate_storm(topologyId,stormBase);
   }
  else {

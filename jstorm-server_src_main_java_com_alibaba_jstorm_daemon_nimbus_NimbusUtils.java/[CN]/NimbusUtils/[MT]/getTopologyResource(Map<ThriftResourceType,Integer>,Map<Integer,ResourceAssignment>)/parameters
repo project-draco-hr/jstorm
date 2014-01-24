@@ -1,0 +1,2 @@
+Map<ThriftResourceType,Integer> result
+Map<Integer,ResourceAssignment> assignment

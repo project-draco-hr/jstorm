@@ -21,6 +21,8 @@ case NUM_MEM:
 return is_set_num_mem();
 case NUM_DISK:
 return is_set_num_disk();
+case GROUP:
+return is_set_group();
 }
 throw new IllegalStateException();
 }

@@ -54,5 +54,11 @@
     if (!(this_present_num_disk && that_present_num_disk))     return false;
     if (this.num_disk != that.num_disk)     return false;
   }
+  boolean this_present_group=true && this.is_set_group();
+  boolean that_present_group=true && that.is_set_group();
+  if (this_present_group || that_present_group) {
+    if (!(this_present_group && that_present_group))     return false;
+    if (!this.group.equals(that.group))     return false;
+  }
   return true;
 }

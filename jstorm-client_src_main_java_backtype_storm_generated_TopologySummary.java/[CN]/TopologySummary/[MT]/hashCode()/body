@@ -27,5 +27,8 @@
   boolean present_num_disk=true;
   builder.append(present_num_disk);
   if (present_num_disk)   builder.append(num_disk);
+  boolean present_group=true && (is_set_group());
+  builder.append(present_group);
+  if (present_group)   builder.append(group);
   return builder.toHashCode();
 }

@@ -32,7 +32,13 @@
       LOG.warn("Receive one unknow event " + idStr);
       return;
     }
-    runnable.run();
+    WorkerClassLoader.switchThreadContext();
+    try {
+      runnable.run();
+    }
+  finally {
+      WorkerClassLoader.restoreThreadContext();
+    }
   }
  catch (  Exception e) {
     if (taskStatus.isShutdown() == false) {

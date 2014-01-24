@@ -1,0 +1,11 @@
+{
+  super.onFileChange(file);
+  if (file.getName().equals(fileName)) {
+    try {
+      flushGroupFile(filePath,data);
+    }
+ catch (    Exception e) {
+      LOG.error("",e);
+    }
+  }
+}

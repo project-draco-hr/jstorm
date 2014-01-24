@@ -6,6 +6,7 @@
   stormConf.putAll(Utils.readCommandLineOpts());
   Map conf=Utils.readStormConfig();
   conf.putAll(stormConf);
+  putUserInfo(conf,stormConf);
   try {
     String serConf=JSONValue.toJSONString(stormConf);
     if (localNimbus != null) {

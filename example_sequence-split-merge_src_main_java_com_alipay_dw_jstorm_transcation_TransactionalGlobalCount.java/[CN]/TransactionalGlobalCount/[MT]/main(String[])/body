@@ -1,0 +1,12 @@
+{
+  MemoryTransactionalSpout spout=new MemoryTransactionalSpout(DATA,new Fields("word"),PARTITION_TAKE_PER_BATCH);
+  TransactionalTopologyBuilder builder=new TransactionalTopologyBuilder("global-count","spout",spout,2);
+  builder.setBolt("partial-count",new BatchCount(),3).noneGrouping("spout");
+  builder.setBolt("sum",new UpdateGlobalCount(),1).globalGrouping("partial-count");
+  Config config=new Config();
+  config.setDebug(true);
+  config.setMaxSpoutPending(3);
+  config.put(Config.TOPOLOGY_WORKERS,9);
+  Config.setNumAckers(config,0);
+  StormSubmitter.submitTopology("global-count-topology",config,builder.buildTopology());
+}

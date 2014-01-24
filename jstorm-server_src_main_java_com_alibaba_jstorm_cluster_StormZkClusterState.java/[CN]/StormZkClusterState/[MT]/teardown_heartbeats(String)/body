@@ -1,9 +1,9 @@
 {
   try {
-    String taskbeatPath=Cluster.taskbeat_storm_root(stormId);
+    String taskbeatPath=Cluster.taskbeat_storm_root(topologyId);
     cluster_state.delete_node(taskbeatPath);
   }
  catch (  Exception e) {
-    LOG.error("Could not teardown heartbeats for " + stormId,e);
+    LOG.error("Could not teardown heartbeats for " + topologyId,e);
   }
 }

@@ -2,9 +2,12 @@
   String stormroot=StormConfig.supervisor_stormdist_root(conf,topologyId);
   String stormjar=StormConfig.stormjar_path(stormroot);
   Map stormConf=StormConfig.read_supervisor_topology_conf(conf,topologyId);
+  Map totalConf=new HashMap();
+  totalConf.putAll(conf);
+  totalConf.putAll(stormConf);
   long memSlotSize=ConfigExtension.getMemSlotSize(conf);
   long memSize=memSlotSize * assignment.getMemSlotNum();
-  String childopts=getChildOpts(stormConf,conf);
+  String childopts=getChildOpts(totalConf);
   childopts=childopts.replace("%ID%",port.toString());
   String logFileName=topologyId + "-worker-" + port+ ".log";
   Map<String,String> environment=new HashMap<String,String>();
@@ -27,11 +30,11 @@
  else {
     commandSB.append(" -Dlog4j.configuration=File:jstorm.log4j.properties");
   }
-  String classpath=getClassPath(stormjar,stormhome);
+  String classpath=getClassPath(stormjar,stormhome,totalConf);
   String workerClassPath=(String)conf.get(Config.WORKER_CLASSPATH);
   commandSB.append(" -cp ");
-  commandSB.append(workerClassPath + ":");
   commandSB.append(classpath);
+  if (!ConfigExtension.isEnableTopologyClassLoader(totalConf))   commandSB.append(":").append(workerClassPath);
   commandSB.append(" com.alibaba.jstorm.daemon.worker.Worker ");
   commandSB.append(topologyId);
   commandSB.append(" ");
@@ -40,6 +43,8 @@
   commandSB.append(port);
   commandSB.append(" ");
   commandSB.append(workerId);
+  commandSB.append(" ");
+  commandSB.append(workerClassPath + ":" + stormjar);
   LOG.info("Launching worker with command: " + commandSB);
   LOG.info("Environment:" + environment.toString());
   JStormUtils.launch_process(commandSB.toString(),environment);

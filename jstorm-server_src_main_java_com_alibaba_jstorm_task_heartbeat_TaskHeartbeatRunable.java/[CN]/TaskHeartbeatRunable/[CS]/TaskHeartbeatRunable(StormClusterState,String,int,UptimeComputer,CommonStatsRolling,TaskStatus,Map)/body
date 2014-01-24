@@ -1,6 +1,6 @@
 {
   this.zkCluster=zkCluster;
-  this.storm_id=_storm_id;
+  this.topology_id=_topology_id;
   this.task_id=_task_id;
   this.uptime=_uptime;
   this.task_stats=_task_stats;
@@ -9,5 +9,5 @@
   String key=Config.TASK_HEARTBEAT_FREQUENCY_SECS;
   Object time=storm_conf.get(key);
   frequence=JStormUtils.parseInt(time,10);
-  idStr=" " + storm_id + ":"+ task_id+ " ";
+  idStr=" " + topology_id + ":"+ task_id+ " ";
 }

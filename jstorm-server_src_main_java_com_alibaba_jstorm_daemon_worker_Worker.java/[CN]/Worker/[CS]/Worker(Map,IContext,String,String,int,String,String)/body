@@ -1,0 +1,3 @@
+{
+  workerData=new WorkerData(conf,context,topology_id,supervisor_id,port,worker_id,jar_path);
+}

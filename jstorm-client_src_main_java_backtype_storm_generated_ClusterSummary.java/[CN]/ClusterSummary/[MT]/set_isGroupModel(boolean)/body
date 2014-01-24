@@ -1,0 +1,4 @@
+{
+  this.isGroupModel=isGroupModel;
+  set_isGroupModel_isSet(true);
+}

@@ -18,6 +18,9 @@
       for (      String sid : supervisors) {
         SupervisorInfo supervisorInfo=defaultContext.getCluster().get(sid);
         Integer taskNum=newSupervisorTaskNum.get(sid);
+        if (taskNum == null) {
+          taskNum=Integer.valueOf(0);
+        }
         Integer left=getLeftSlot(supervisorInfo,type,taskAllocResource,taskNum);
         Integer leftSum=supervisorLeftSlots.get(sid);
         if (leftSum == null) {

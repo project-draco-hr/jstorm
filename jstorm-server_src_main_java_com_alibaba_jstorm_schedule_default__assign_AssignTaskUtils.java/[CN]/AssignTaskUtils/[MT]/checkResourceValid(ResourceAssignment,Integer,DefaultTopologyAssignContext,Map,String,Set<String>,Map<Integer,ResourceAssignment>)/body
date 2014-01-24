@@ -10,13 +10,16 @@
     LOG.info(componentName + " task " + task+ " supervisorId is invalid "+ allocSupervisorId);
     return false;
   }
-  boolean canAlloc=isSupervisorAvailable(defaultContext,supervisorInfo,taskAlloc);
-  if (canAlloc == false) {
+  String lackingResource=isSupervisorAvailable(defaultContext,supervisorInfo,taskAlloc);
+  if (lackingResource != null) {
     StringBuilder sb=new StringBuilder();
     sb.append("Supervisor " + allocSupervisorId);
     sb.append(" no enough resource for ");
     sb.append(componentName + " task " + task+ ",");
     sb.append(taskAlloc);
+    sb.append("\n\n");
+    sb.append("the lacking resource is :");
+    sb.append(lackingResource);
     LOG.info(sb.toString());
     return false;
   }

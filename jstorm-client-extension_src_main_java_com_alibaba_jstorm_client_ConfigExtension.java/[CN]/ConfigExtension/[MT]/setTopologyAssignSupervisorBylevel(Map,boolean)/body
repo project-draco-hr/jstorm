@@ -1,0 +1,3 @@
+{
+  conf.put(TOPOLOGY_ASSIGN_SUPERVISOR_BYLEVEL,Boolean.valueOf(enable));
+}

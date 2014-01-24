@@ -16,6 +16,7 @@
         diskNum++;
       }
       ports.add(task.get_port());
+      workers.add(new WorkerSlot(task.get_host(),task.get_port()));
     }
   }
   List<TopologySumm> tsumm=new ArrayList<TopologySumm>();
@@ -27,7 +28,7 @@
   topologySumm.setNumCpu(String.valueOf(cpuNum));
   topologySumm.setNumMem(String.valueOf(memNum));
   topologySumm.setNumDisk(String.valueOf(diskNum));
-  topologySumm.setNumWorkers(String.valueOf(ports.size()));
+  topologySumm.setNumWorkers(String.valueOf(workers.size()));
   topologySumm.setNumTasks(String.valueOf(taskNum));
   tsumm.add(topologySumm);
   return tsumm;

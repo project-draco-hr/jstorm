@@ -1,8 +1,8 @@
 {
   if (callback != null) {
-    assignment_info_callback.put(stormId,callback);
+    assignment_info_callback.put(topologyId,callback);
   }
-  String assgnmentPath=Cluster.assignment_path(stormId);
+  String assgnmentPath=Cluster.assignment_path(topologyId);
   byte[] znodeData=cluster_state.get_data(assgnmentPath,callback != null);
   Object data=Cluster.maybe_deserialize(znodeData);
   if (data == null) {

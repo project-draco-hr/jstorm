@@ -1,6 +1,6 @@
 {
   StormClusterState stormClusterState=data.getStormClusterState();
-  String topologyId=Cluster.get_storm_id(stormClusterState,topologyName);
+  String topologyId=Cluster.get_topology_id(stormClusterState,topologyName);
   if (topologyId == null) {
     throw new NotAliveException(topologyName);
   }

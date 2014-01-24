@@ -1,0 +1,21 @@
+{
+  if (result == null)   result=new HashMap<ThriftResourceType,Integer>();
+  int cpuNum=0;
+  int memNum=0;
+  Set<String> disk=new HashSet<String>();
+  Set<String> slot=new HashSet<String>();
+  for (  Entry<Integer,ResourceAssignment> entry : assignment.entrySet()) {
+    ResourceAssignment resource=entry.getValue();
+    cpuNum+=resource.getCpuSlotNum();
+    memNum+=resource.getMemSlotNum();
+    if (resource.getDiskSlot() != null) {
+      disk.add(resource.getDiskSlot());
+    }
+    slot.add(String.valueOf(resource.getPort()) + resource.getSupervisorId());
+  }
+  result.put(ThriftResourceType.CPU,cpuNum);
+  result.put(ThriftResourceType.MEM,memNum);
+  result.put(ThriftResourceType.DISK,disk.size());
+  result.put(ThriftResourceType.NET,slot.size());
+  return result;
+}

@@ -1,0 +1,9 @@
+{
+  if (enable == false) {
+    return;
+  }
+  Thread thread=Thread.currentThread();
+  ClassLoader oldClassLoader=thread.getContextClassLoader();
+  threadContextCache.put(thread,oldClassLoader);
+  thread.setContextClassLoader(instance);
+}

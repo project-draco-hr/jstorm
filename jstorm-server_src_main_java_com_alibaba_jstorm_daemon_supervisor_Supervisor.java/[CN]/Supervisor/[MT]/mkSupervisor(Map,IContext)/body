@@ -11,7 +11,11 @@
     localState.put(Common.LS_ID,supervisorId);
   }
   Vector<SmartThread> threads=new Vector<SmartThread>();
-  String myHostName=NetWorkUtils.hostname();
+  String myHostName=null;
+  myHostName=ConfigExtension.getSupervisorHost(conf);
+  if (myHostName == null) {
+    myHostName=NetWorkUtils.hostname();
+  }
   Heartbeat hb=new Heartbeat(conf,stormClusterState,supervisorId,myHostName,active);
   hb.update();
   AsyncLoopThread heartbeat=new AsyncLoopThread(hb,false,null,Thread.MIN_PRIORITY,true);
@@ -21,7 +25,7 @@
   SyncProcessEvent syncProcessEvent=new SyncProcessEvent(supervisorId,conf,localState,workerThreadPids,sharedContext);
   EventManager syncSupEventManager=new EventManagerImp(false);
   SyncSupervisorEvent syncSupervisorEvent=new SyncSupervisorEvent(supervisorId,conf,processEventManager,syncSupEventManager,stormClusterState,localState,syncProcessEvent);
-  int syncFrequence=(Integer)conf.get(Config.SUPERVISOR_MONITOR_FREQUENCY_SECS);
+  int syncFrequence=JStormUtils.parseInt(conf.get(Config.SUPERVISOR_MONITOR_FREQUENCY_SECS));
   EventManagerPusher syncSupervisorPusher=new EventManagerPusher(syncSupEventManager,syncSupervisorEvent,active,syncFrequence);
   AsyncLoopThread syncSupervisorThread=new AsyncLoopThread(syncSupervisorPusher);
   threads.add(syncSupervisorThread);

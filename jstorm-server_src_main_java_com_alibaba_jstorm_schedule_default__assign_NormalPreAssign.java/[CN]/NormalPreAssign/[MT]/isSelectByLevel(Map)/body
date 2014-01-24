@@ -1,0 +1,6 @@
+{
+  Map tmpConf=new HashMap();
+  tmpConf.putAll(nimbusConf);
+  tmpConf.putAll(topologyConf);
+  return ConfigExtension.isTopologyAssignSupervisorBylevel(tmpConf);
+}

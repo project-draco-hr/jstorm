@@ -1,0 +1,9 @@
+{
+  if (!data.isGroupModel())   return null;
+  StormClusterState stormClusterState=data.getStormClusterState();
+  StormBase base=stormClusterState.storm_base(topologyId,null);
+  if (base == null) {
+    return null;
+  }
+  return base.getGroup();
+}

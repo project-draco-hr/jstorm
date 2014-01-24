@@ -1,0 +1,13 @@
+{
+  HashMap<String,StormBase> rtn=new HashMap<String,StormBase>();
+  List<String> active_storms=zkCluster.active_storms();
+  if (active_storms != null) {
+    for (    String topology_id : active_storms) {
+      StormBase base=zkCluster.storm_base(topology_id,null);
+      if (base != null) {
+        rtn.put(topology_id,base);
+      }
+    }
+  }
+  return rtn;
+}

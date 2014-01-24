@@ -1,0 +1,27 @@
+{
+  if (!nimbusData.isGroupModel())   return;
+  String group=ConfigExtension.getUserGroup(conf);
+  if (group == null)   throw new FailedAssignTopologyException("It's group model, do you forget to set group name in your topology's conf? ^_^");
+  Map<ThriftResourceType,Integer> groupResource=nimbusData.getGroupToResource().get(group);
+  if (groupResource == null)   throw new FailedAssignTopologyException("Your group name: " + group + " is not valid");
+  Map<ThriftResourceType,Integer> usedResource=nimbusData.getGroupToUsedResource().get(group);
+  if (usedResource == null) {
+    usedResource=new HashMap<ThriftResourceType,Integer>();
+    nimbusData.getGroupToUsedResource().put(group,usedResource);
+    usedResource.put(ThriftResourceType.CPU,0);
+    usedResource.put(ThriftResourceType.MEM,0);
+    usedResource.put(ThriftResourceType.DISK,0);
+    usedResource.put(ThriftResourceType.NET,0);
+  }
+  Map<ThriftResourceType,Integer> topologyResource=NimbusUtils.getTopologyResource(null,assignment);
+  for (  Entry<ThriftResourceType,Integer> entry : topologyResource.entrySet()) {
+    int used=usedResource.get(entry.getKey());
+    int had=groupResource.get(entry.getKey());
+    if ((used + entry.getValue()) > had) {
+      StringBuilder failMSG=new StringBuilder();
+      failMSG.append("Your group '").append(group).append("' have not enough ").append(entry.getKey().name()).append("\n").append("Your group's ").append(entry.getKey()).append("POOL size is:").append(had).append(" ").append("and had been used:").append(used).append(" ").append("but your topology '").append(topologyName).append("' need:").append(entry.getValue()).append("\n");
+      throw new FailedAssignTopologyException(failMSG.toString());
+    }
+  }
+  takeTopologyResource(group,topologyResource,usedResource,topologyName);
+}

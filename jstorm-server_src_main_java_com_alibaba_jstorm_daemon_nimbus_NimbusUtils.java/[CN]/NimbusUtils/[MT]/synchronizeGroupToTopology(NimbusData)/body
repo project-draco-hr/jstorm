@@ -1,0 +1,26 @@
+{
+  try {
+    if (data.isGroupModel()) {
+      List<String> active_ids=data.getStormClusterState().active_storms();
+      Map<String,Map<String,Map<ThriftResourceType,Integer>>> groupToTopology=data.getGroupToTopology();
+      for (      String active_id : active_ids) {
+        Assignment assignment=data.getStormClusterState().assignment_info(active_id,null);
+        StormBase stormBase=data.getStormClusterState().storm_base(active_id,null);
+        String group=stormBase.getGroup();
+        if (group == null)         continue;
+        Map<String,Map<ThriftResourceType,Integer>> topologys=groupToTopology.get(group);
+        if (topologys == null) {
+          topologys=new HashMap<String,Map<ThriftResourceType,Integer>>();
+          groupToTopology.put(group,topologys);
+        }
+        Map<ThriftResourceType,Integer> topology=topologys.get(stormBase.getStormName());
+        topology=getTopologyResource(topology,assignment.getTaskToResource());
+        topologys.put(stormBase.getStormName(),topology);
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("synchronizeGroupToTopology error!",e);
+    throw new RuntimeException();
+  }
+}

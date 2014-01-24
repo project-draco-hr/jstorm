@@ -1,6 +1,6 @@
 {
   boolean rtn=false;
-  if (Cluster.get_storm_id(stormClusterState,topologyName) != null) {
+  if (Cluster.get_topology_id(stormClusterState,topologyName) != null) {
     rtn=true;
   }
   return rtn;
