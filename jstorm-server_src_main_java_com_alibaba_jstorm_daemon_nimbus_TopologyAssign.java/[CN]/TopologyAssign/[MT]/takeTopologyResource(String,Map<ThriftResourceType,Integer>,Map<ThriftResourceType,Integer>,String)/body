@@ -1,0 +1,11 @@
+{
+  for (  Entry<ThriftResourceType,Integer> entry : topologyResource.entrySet()) {
+    usedResource.put(entry.getKey(),usedResource.get(entry.getKey()) + entry.getValue());
+  }
+  Map<String,Map<ThriftResourceType,Integer>> topologys=nimbusData.getGroupToTopology().get(group);
+  if (topologys == null) {
+    topologys=new HashMap<String,Map<ThriftResourceType,Integer>>();
+    nimbusData.getGroupToTopology().put(group,topologys);
+  }
+  topologys.put(topologyName,topologyResource);
+}

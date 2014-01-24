@@ -1,0 +1,17 @@
+{
+  List<String> active_storms=zkCluster.active_storms();
+  String rtn=null;
+  if (active_storms != null) {
+    for (    String topology_id : active_storms) {
+      if (topology_id.indexOf(storm_name) < 0) {
+        continue;
+      }
+      StormBase base=zkCluster.storm_base(topology_id,null);
+      if (base != null && storm_name.equals(base.getStormName())) {
+        rtn=topology_id;
+        break;
+      }
+    }
+  }
+  return rtn;
+}

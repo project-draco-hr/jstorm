@@ -1,6 +1,6 @@
 {
   this.taskStatus=taskStatus;
-  this.storm_id=storm_id;
+  this.topology_id=topology_id;
   this.task_id=task_id;
   this.context=context;
   this.all_threads=all_threads;

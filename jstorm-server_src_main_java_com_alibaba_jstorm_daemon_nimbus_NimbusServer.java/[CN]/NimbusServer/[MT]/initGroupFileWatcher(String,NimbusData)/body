@@ -1,0 +1,36 @@
+{
+  try {
+    String normalizePath=PathUtils.normalize_path(filePath);
+    if (PathUtils.exists_file(normalizePath) == false) {
+      LOG.warn("Grouping file doesn't exist " + filePath);
+      throw new RuntimeException("Grouping file doesn't exist " + filePath);
+    }
+    List<String> paths=PathUtils.tokenize_path(normalizePath);
+    String fileName=paths.get(paths.size() - 1);
+    String path=PathUtils.parent_path(normalizePath);
+    FileAlterationObserver observer=new FileAlterationObserver(path,null);
+    FileListenerAdaptor listener=new FileListenerAdaptor(fileName,normalizePath,data);
+    observer.addListener(listener);
+    final FileAlterationMonitor fileMonitor=new FileAlterationMonitor(10000,new FileAlterationObserver[]{observer});
+    Runnable runnable=new Runnable(){
+      @Override public void run(){
+        try {
+          fileMonitor.start();
+        }
+ catch (        Exception e) {
+          LOG.error("init group_file watcher error!",e);
+          throw new RuntimeException();
+        }
+      }
+    }
+;
+    Thread thread=new Thread(runnable);
+    thread.setDaemon(true);
+    thread.start();
+    LOG.info("Successfully init gorup_file watcher !" + normalizePath);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to init group_file watcher " + filePath,e);
+    throw new RuntimeException();
+  }
+}

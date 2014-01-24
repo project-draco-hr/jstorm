@@ -10,11 +10,12 @@
     }
     @Override public void takeLeadership(    CuratorFramework client) throws Exception {
       LOG.info("Get masterlock!");
-      String host=InetAddress.getLocalHost().getHostName().toString();
+      String host=NetWorkUtils.hostname();
       Integer port=Utils.getInt(conf.get(Config.NIMBUS_THRIFT_PORT));
       data.getStormClusterState().register_leader_host(host + ":" + String.valueOf(port));
-      LOG.info(host + " :register successfully!");
+      LOG.info(host + " register successfully!");
       NimbusUtils.cleanupCorruptTopologies(data);
+      initGroup(conf);
       initTopologyAssign();
       initTopologyStatus();
       initMonitor(conf);

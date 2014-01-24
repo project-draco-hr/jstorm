@@ -1,9 +1,9 @@
 {
   String clusterMode=StormConfig.cluster_mode(conf);
   if (clusterMode.endsWith("distributed")) {
-    downloadDistributeStormCode(conf,stormId,masterCodeDir);
+    downloadDistributeStormCode(conf,topologyId,masterCodeDir);
   }
  else   if (clusterMode.endsWith("local")) {
-    downloadLocalStormCode(conf,stormId,masterCodeDir);
+    downloadLocalStormCode(conf,topologyId,masterCodeDir);
   }
 }

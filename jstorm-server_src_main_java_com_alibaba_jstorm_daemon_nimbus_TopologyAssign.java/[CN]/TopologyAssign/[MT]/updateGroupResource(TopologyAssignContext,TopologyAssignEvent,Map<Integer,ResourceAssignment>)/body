@@ -1,0 +1,21 @@
+{
+  if (nimbusData.isGroupModel() == false) {
+    return;
+  }
+  String topologyId=event.getTopologyId();
+  nimbusData.getFlushGroupFileLock().lock();
+  try {
+    if (context.getAssignType() == TopologyAssignContext.ASSIGN_TYPE_NEW) {
+      String topologyName=event.getTopologyName();
+      checkGroupResource(context.getStormConf(),taskAssignments,topologyName);
+      event.setGroup(ConfigExtension.getUserGroup(context.getStormConf()));
+    }
+ else {
+      upadateUsedResrouce(topologyId,taskAssignments);
+    }
+  }
+  finally {
+    nimbusData.getFlushGroupFileLock().unlock();
+  }
+  return;
+}

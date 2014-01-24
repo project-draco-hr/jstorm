@@ -1,0 +1,3 @@
+{
+  return (this.groupToTopology == null) ? 0 : this.groupToTopology.size();
+}

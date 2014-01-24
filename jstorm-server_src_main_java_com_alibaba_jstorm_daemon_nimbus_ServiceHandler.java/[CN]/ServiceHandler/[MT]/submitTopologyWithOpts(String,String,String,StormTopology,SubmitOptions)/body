@@ -18,14 +18,14 @@ catch (  Exception e) {
     LOG.warn("Failed to serialized Configuration");
     throw new InvalidTopologyException("Failed to serilaze topology configuration");
   }
-  serializedConf.put(Config.STORM_ID,topologyId);
+  serializedConf.put(Config.TOPOLOGY_ID,topologyId);
   serializedConf.put(Config.TOPOLOGY_NAME,topologyname);
   Map<Object,Object> stormConf;
   try {
     stormConf=NimbusUtils.normalizeConf(conf,serializedConf,topology);
   }
  catch (  Exception e1) {
-    String errMsg=JStormUtils.getErrorInfo("Failed to commit topologystormId: " + topologyId + " uploadedJarLocation: "+ uploadedJarLocation+ ", due to failed to normalize configuration ",e1);
+    String errMsg=JStormUtils.getErrorInfo("Failed to commit topologyId: " + topologyId + " uploadedJarLocation: "+ uploadedJarLocation+ ", due to failed to normalize configuration ",e1);
     LOG.info(errMsg);
     throw new FailedAssignTopologyException(errMsg);
   }
@@ -63,8 +63,8 @@ catch (  Exception e) {
     }
     sb.append("\n\n");
     sb.append("topologyId:" + topologyId);
-    sb.append(", uploadedJarLocation" + uploadedJarLocation);
-    LOG.error(sb.toString());
+    sb.append(", uploadedJarLocation:" + uploadedJarLocation + "\n");
+    LOG.error(sb.toString(),e);
     throw new TopologyAssignException(sb.toString());
   }
 catch (  Exception e) {
@@ -74,8 +74,8 @@ catch (  Exception e) {
     sb.append(", cause:" + e.getCause());
     sb.append("\n\n");
     sb.append("topologyId:" + topologyId);
-    sb.append(", uploadedJarLocation" + uploadedJarLocation);
-    LOG.error(sb.toString());
+    sb.append(", uploadedJarLocation:" + uploadedJarLocation + "\n");
+    LOG.error(sb.toString(),e);
     throw new TopologyAssignException(sb.toString());
   }
 }

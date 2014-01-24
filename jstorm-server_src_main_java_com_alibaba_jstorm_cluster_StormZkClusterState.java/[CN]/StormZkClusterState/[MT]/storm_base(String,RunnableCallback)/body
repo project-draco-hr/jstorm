@@ -1,8 +1,8 @@
 {
   if (callback != null) {
-    storm_base_callback.put(stormId,callback);
+    storm_base_callback.put(topologyId,callback);
   }
-  Object data=Cluster.maybe_deserialize(cluster_state.get_data(Cluster.storm_path(stormId),callback != null));
+  Object data=Cluster.maybe_deserialize(cluster_state.get_data(Cluster.storm_path(topologyId),callback != null));
   if (data == null) {
     return null;
   }

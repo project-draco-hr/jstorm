@@ -20,7 +20,15 @@
   Map<GlobalStreamId,Double> recvTps=JStormUtils.mergeMapList(recvTpsList);
   Map<GlobalStreamId,Long> acked=JStormUtils.mergeMapList(ackedList);
   Map<GlobalStreamId,Long> failed=JStormUtils.mergeMapList(failedList);
-  Map<GlobalStreamId,Double> process=JStormUtils.mergeMapList(processList);
+  Map<GlobalStreamId,Double> processSum=JStormUtils.mergeMapList(processList);
+  Map<GlobalStreamId,Double> process=new HashMap<GlobalStreamId,Double>();
+  for (  Entry<GlobalStreamId,Double> entry : processSum.entrySet()) {
+    GlobalStreamId streamId=entry.getKey();
+    Double value=entry.getValue();
+    if (value != null && processList.size() > 0) {
+      process.put(streamId,value / processList.size());
+    }
+  }
   for (  Entry<String,Long> emittedEntry : emitted.entrySet()) {
     String outputStreamId=emittedEntry.getKey();
     Long emittedValue=emittedEntry.getValue();

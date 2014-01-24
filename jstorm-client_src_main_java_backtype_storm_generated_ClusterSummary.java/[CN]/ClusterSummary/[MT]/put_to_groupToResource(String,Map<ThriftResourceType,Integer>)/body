@@ -1,0 +1,6 @@
+{
+  if (this.groupToResource == null) {
+    this.groupToResource=new HashMap<String,Map<ThriftResourceType,Integer>>();
+  }
+  this.groupToResource.put(key,val);
+}

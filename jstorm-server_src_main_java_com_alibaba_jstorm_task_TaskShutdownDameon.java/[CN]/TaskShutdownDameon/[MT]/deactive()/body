@@ -1,6 +1,12 @@
 {
   if (task_obj instanceof ISpout) {
     taskStatus.setStatus(TaskStatus.PAUSE);
-    ((ISpout)task_obj).deactivate();
+    WorkerClassLoader.switchThreadContext();
+    try {
+      ((ISpout)task_obj).deactivate();
+    }
+  finally {
+      WorkerClassLoader.restoreThreadContext();
+    }
   }
 }

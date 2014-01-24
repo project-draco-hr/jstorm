@@ -7,6 +7,7 @@
     }
   }
   ProcessBuilder builder=new ProcessBuilder(buff);
+  builder.redirectErrorStream(true);
   Map<String,String> process_evn=builder.environment();
   for (  Entry<String,String> entry : environment.entrySet()) {
     process_evn.put(entry.getKey(),entry.getValue());

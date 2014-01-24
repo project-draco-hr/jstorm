@@ -1,6 +1,12 @@
 {
   if (task_obj instanceof ISpout) {
     taskStatus.setStatus(TaskStatus.RUN);
-    ((ISpout)task_obj).activate();
+    WorkerClassLoader.switchThreadContext();
+    try {
+      ((ISpout)task_obj).activate();
+    }
+  finally {
+      WorkerClassLoader.restoreThreadContext();
+    }
   }
 }

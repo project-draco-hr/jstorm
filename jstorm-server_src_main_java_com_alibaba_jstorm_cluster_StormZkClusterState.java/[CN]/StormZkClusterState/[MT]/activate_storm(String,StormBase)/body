@@ -1,5 +1,5 @@
 {
-  String stormPath=Cluster.storm_path(stormId);
+  String stormPath=Cluster.storm_path(topologyId);
   byte[] stormBaseData=Utils.serialize(stormBase);
   cluster_state.set_data(stormPath,stormBaseData);
 }

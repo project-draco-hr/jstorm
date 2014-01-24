@@ -1,0 +1,5 @@
+{
+  stormConf.put("user.group",conf.get("user.group"));
+  stormConf.put("user.name",conf.get("user.name"));
+  stormConf.put("user.password",conf.get("user.password"));
+}

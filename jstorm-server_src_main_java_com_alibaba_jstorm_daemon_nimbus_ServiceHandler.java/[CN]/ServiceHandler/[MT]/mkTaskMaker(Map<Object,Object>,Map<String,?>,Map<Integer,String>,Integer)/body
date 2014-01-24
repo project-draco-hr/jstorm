@@ -20,7 +20,7 @@
     int declared=Thrift.parallelismHint(common);
     Integer parallelism=declared;
     Map newStormConf=new HashMap(stormConf);
-    Integer maxParallelism=(Integer)newStormConf.get(Config.TOPOLOGY_MAX_TASK_PARALLELISM);
+    Integer maxParallelism=JStormUtils.parseInt(newStormConf.get(Config.TOPOLOGY_MAX_TASK_PARALLELISM));
     if (maxParallelism != null) {
       parallelism=Math.min(maxParallelism,declared);
     }

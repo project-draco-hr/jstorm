@@ -1,14 +1,23 @@
 {
   Set<String> resEnoughSupervisorIds=new HashSet<String>();
   TaskAllocResource taskAlloc=AssignTaskUtils.getTaskAlloc(task,defaultContext,componentMap,componentName);
+  StringBuilder failMessage=new StringBuilder();
   for (  String supervisorId : canUsedSupervisorIds) {
     SupervisorInfo supervisorInfo=defaultContext.getCluster().get(supervisorId);
-    boolean isEnough=AssignTaskUtils.isSupervisorAvailable(defaultContext,supervisorInfo,taskAlloc);
-    if (isEnough == false) {
+    String lackingResource=AssignTaskUtils.isSupervisorAvailable(defaultContext,supervisorInfo,taskAlloc);
+    if (lackingResource != null) {
+      failMessage.append(supervisorInfo.getHostName());
+      failMessage.append(" has not enough resource of ");
+      failMessage.append(lackingResource);
+      failMessage.append("\n");
       continue;
     }
     boolean isDifferent=AssignTaskUtils.isIsolate(task,supervisorId,componentName,componentMap,defaultContext,alreadyAssign);
     if (isDifferent == false) {
+      failMessage.append(supervisorInfo.getHostName());
+      failMessage.append(" TaskOnDifferent fail for ");
+      failMessage.append(componentName);
+      failMessage.append("\n");
       continue;
     }
     resEnoughSupervisorIds.add(supervisorId);
@@ -21,6 +30,8 @@
     sb.append("\n\n");
     sb.append("Cluster resource:");
     sb.append(defaultContext.getCluster());
+    sb.append("\n\n");
+    sb.append(failMessage.toString());
     throw new FailedAssignTopologyException(sb.toString());
   }
   String bestSupervisorId=selectBestSupervisor(defaultContext,taskAlloc,resEnoughSupervisorIds,newAssigns);

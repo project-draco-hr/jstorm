@@ -19,12 +19,16 @@
   }
   if (max_spout_pending == null || pending.size() < max_spout_pending) {
     try {
+      WorkerClassLoader.switchThreadContext();
       spout.nextTuple();
     }
  catch (    Exception e) {
       error=e;
       LOG.error("spout execute error ",e);
       report_error.report(e);
+    }
+ finally {
+      WorkerClassLoader.restoreThreadContext();
     }
     return;
   }

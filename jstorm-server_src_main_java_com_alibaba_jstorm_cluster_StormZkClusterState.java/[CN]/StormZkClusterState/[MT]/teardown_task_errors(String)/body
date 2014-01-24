@@ -1,9 +1,9 @@
 {
   try {
-    String taskerrPath=Cluster.taskerror_storm_root(stormId);
+    String taskerrPath=Cluster.taskerror_storm_root(topologyId);
     cluster_state.delete_node(taskerrPath);
   }
  catch (  Exception e) {
-    LOG.error("Could not teardown errors for " + stormId,e);
+    LOG.error("Could not teardown errors for " + topologyId,e);
   }
 }

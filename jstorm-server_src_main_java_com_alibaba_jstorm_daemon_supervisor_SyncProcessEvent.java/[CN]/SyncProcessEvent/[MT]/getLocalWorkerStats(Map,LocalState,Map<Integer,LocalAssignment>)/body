@@ -12,7 +12,7 @@
  else     if (matchesAssignment(whb,assignedTasks) == false) {
       state=State.disallowed;
     }
- else     if ((now - whb.getTimeSecs()) > (Integer)conf.get(Config.SUPERVISOR_WORKER_TIMEOUT_SECS)) {
+ else     if ((now - whb.getTimeSecs()) > JStormUtils.parseInt(conf.get(Config.SUPERVISOR_WORKER_TIMEOUT_SECS))) {
       state=State.timedOut;
     }
  else {

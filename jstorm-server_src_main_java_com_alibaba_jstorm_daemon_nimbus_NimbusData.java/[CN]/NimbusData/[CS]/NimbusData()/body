@@ -1,5 +1,6 @@
 {
   scheduExec=Executors.newScheduledThreadPool(6);
   inimubs=null;
+  groupModel=false;
   scheduler=NimbusUtils.mkScheduler(conf,inimubs);
 }

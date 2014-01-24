@@ -1,0 +1,8 @@
+{
+  String OUT_TARGET_FILE="/dev/null";
+  System.out.println("Redirect output to " + OUT_TARGET_FILE);
+  FileOutputStream workerOut=new FileOutputStream(new File(OUT_TARGET_FILE));
+  PrintStream ps=new PrintStream(new BufferedOutputStream(workerOut),true);
+  System.setOut(ps);
+  LOG.info("Successfully redirect System.out to " + OUT_TARGET_FILE);
+}

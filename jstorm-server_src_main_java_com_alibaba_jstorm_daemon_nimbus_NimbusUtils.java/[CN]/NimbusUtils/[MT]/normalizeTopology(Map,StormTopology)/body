@@ -23,6 +23,7 @@
     Integer taskNum=componentParalism(stormConf,common);
     componentMap.put(Config.TOPOLOGY_TASKS,taskNum);
     common.set_parallelism_hint(taskNum);
+    LOG.info("Set " + componentName + " parallelism "+ taskNum);
     normalizeComponentResouce(componentMap,componentName);
     boolean allocDisk=ConfigExtension.isTaskAllocDisk(componentMap);
     if (allocDisk == true) {

@@ -4,7 +4,7 @@
   input.readBytes(ser);
   ByteArrayInputStream bis=new ByteArrayInputStream(ser);
   try {
-    ObjectInputStream ois=new ObjectInputStream(bis);
+    ClassLoaderObjectInputStream ois=new ClassLoaderObjectInputStream(kryo.getClassLoader(),bis);
     return ois.readObject();
   }
  catch (  Exception e) {

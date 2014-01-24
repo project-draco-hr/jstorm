@@ -1,0 +1,17 @@
+{
+  Map<String,Map<ThriftResourceType,Integer>> groupToResource=data.getGroupToResource();
+  Map<String,Map<ThriftResourceType,Integer>> groupToUsedResource=data.getGroupToUsedResource();
+  for (  String group : groupToUsedResource.keySet()) {
+    if (groupToResource.get(group) == null) {
+      Map<ThriftResourceType,Integer> usedResource=groupToUsedResource.get(group);
+      boolean delete=true;
+      for (      Entry<ThriftResourceType,Integer> entry : usedResource.entrySet()) {
+        if (entry.getValue().intValue() != 0) {
+          delete=false;
+          break;
+        }
+      }
+      if (delete)       groupToUsedResource.remove(group);
+    }
+  }
+}

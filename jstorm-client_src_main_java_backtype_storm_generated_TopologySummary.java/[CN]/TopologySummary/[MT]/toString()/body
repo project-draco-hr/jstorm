@@ -51,6 +51,15 @@
   sb.append("num_disk:");
   sb.append(this.num_disk);
   first=false;
+  if (!first)   sb.append(", ");
+  sb.append("group:");
+  if (this.group == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.group);
+  }
+  first=false;
   sb.append(")");
   return sb.toString();
 }

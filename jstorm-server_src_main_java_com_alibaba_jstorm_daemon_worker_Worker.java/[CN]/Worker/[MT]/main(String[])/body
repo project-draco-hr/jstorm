@@ -1,24 +1,32 @@
 {
-  if (args.length != 4) {
-    LOG.error("the length of args is less than 4");
-    return;
+  if (args.length < 5) {
+    StringBuilder sb=new StringBuilder();
+    sb.append("The length of args is less than 5 ");
+    for (    String arg : args) {
+      sb.append(arg + " ");
+    }
+    LOG.error(sb.toString());
+    System.exit(-1);
   }
   String topology_id=args[0];
   String supervisor_id=args[1];
   String port_str=args[2];
   String worker_id=args[3];
+  String jar_path=args[4];
   Map conf=Utils.readStormConfig();
   StormConfig.validate_distributed_mode(conf);
   StringBuilder sb=new StringBuilder();
   sb.append("topologyId:" + topology_id + ", ");
   sb.append("port:" + port_str + ", ");
-  sb.append("workerId:" + worker_id + "\n");
+  sb.append("workerId:" + worker_id + ", ");
+  sb.append("jar_path:" + jar_path + "\n");
   try {
-    WorkerShutdown sd=mk_worker(conf,null,topology_id,supervisor_id,Integer.parseInt(port_str),worker_id);
+    redirectOutput(port_str);
+    WorkerShutdown sd=mk_worker(conf,null,topology_id,supervisor_id,Integer.parseInt(port_str),worker_id,jar_path);
     sd.join();
     LOG.info("Successfully shutdown worker " + sb.toString());
   }
- catch (  Exception e) {
+ catch (  Throwable e) {
     String errMsg="Failed to create worker, " + sb.toString();
     LOG.error(errMsg,e);
   }

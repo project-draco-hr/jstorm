@@ -14,4 +14,5 @@
   this.num_mem=0;
   set_num_disk_isSet(false);
   this.num_disk=0;
+  this.group=null;
 }

@@ -1,19 +1,21 @@
 {
+  StringBuilder result=new StringBuilder();
   boolean isCpuAvailable=supervisorInfo.getCpuPool().isAvailable(taskAlloc.getCpuSlotNum(),defaultContext);
   if (isCpuAvailable == false) {
-    return false;
+    result.append(LACK_CPU);
   }
   boolean isMemAvailable=supervisorInfo.getMemPool().isAvailable(taskAlloc.getMemSlotNum(),defaultContext);
   if (isMemAvailable == false) {
-    return false;
+    result.append(LACK_MEM);
   }
   boolean isDiskAvailable=supervisorInfo.getDiskPool().isAvailable(taskAlloc.getDiskSlot(),defaultContext);
   if (isDiskAvailable == false) {
-    return false;
+    result.append(LACK_DISK);
   }
   boolean isPortAvailable=supervisorInfo.getNetPool().isAvailable(taskAlloc.getPort(),defaultContext);
   if (isPortAvailable == false) {
-    return false;
+    result.append(LACK_NET);
   }
-  return true;
+  if (result.length() == 0)   return null;
+ else   return result.toString();
 }

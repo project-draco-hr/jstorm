@@ -18,6 +18,8 @@ case 8:
 return NUM_MEM;
 case 9:
 return NUM_DISK;
+case 10:
+return GROUP;
 default :
 return null;
 }

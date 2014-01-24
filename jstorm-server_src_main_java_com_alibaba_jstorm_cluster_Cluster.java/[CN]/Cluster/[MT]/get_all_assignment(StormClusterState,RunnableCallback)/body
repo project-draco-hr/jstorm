@@ -5,13 +5,13 @@
     LOG.debug("No assignment of ZK");
     return ret;
   }
-  for (  String topologyid : assignments) {
-    Assignment assignment=stormClusterState.assignment_info(topologyid,callback);
+  for (  String topology_id : assignments) {
+    Assignment assignment=stormClusterState.assignment_info(topology_id,callback);
     if (assignment == null) {
-      LOG.error("Failed to get Assignment of " + topologyid + " from ZK");
+      LOG.error("Failed to get Assignment of " + topology_id + " from ZK");
       continue;
     }
-    ret.put(topologyid,assignment);
+    ret.put(topology_id,assignment);
   }
   return ret;
 }

@@ -1,4 +1,4 @@
-String storm_id
+String topology_id
 String host
 int port
 boolean distribute

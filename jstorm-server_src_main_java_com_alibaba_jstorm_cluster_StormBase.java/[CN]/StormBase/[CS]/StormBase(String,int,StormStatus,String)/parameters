@@ -1,0 +1,4 @@
+String stormName
+int lanchTimeSecs
+StormStatus status
+String group

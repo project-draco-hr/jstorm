@@ -9,7 +9,7 @@
   this.idStr="ComponentId:" + component_id + ",taskId:"+ taskId+ " ";
   this.taskStatus=taskStatus;
   this.report_error=_report_error;
-  this.deserializer=new KryoTupleDeserializer(storm_conf,topology_context);
+  this.deserializer=new KryoTupleDeserializer(storm_conf,topology_context,WorkerClassLoader.getInstance());
   this.isDebugRecv=ConfigExtension.isTopologyDebugRecvTuple(storm_conf);
   this.isDebug=JStormUtils.parseBoolean(storm_conf.get(Config.TOPOLOGY_DEBUG),false);
   message_timeout_secs=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
@@ -18,9 +18,5 @@
   this.disruptorRecvQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(queue_size),waitStrategy);
   this.disruptorRecvQueue.consumerStarted();
   this.registerInnerTransfer(disruptorRecvQueue);
-  Thread recvThread=new Thread(new RecvRunnable(disruptorRecvQueue));
-  recvThread.setName(component_id + "-" + taskId+ "-recvThread");
-  recvThread.setPriority(Thread.MAX_PRIORITY);
-  recvThread.setDaemon(true);
-  recvThread.start();
+  new AsyncLoopThread(new RecvRunnable(disruptorRecvQueue));
 }
