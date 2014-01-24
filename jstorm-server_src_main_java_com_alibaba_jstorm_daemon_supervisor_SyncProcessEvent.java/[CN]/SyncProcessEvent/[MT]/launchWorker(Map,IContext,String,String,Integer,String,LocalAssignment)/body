@@ -5,10 +5,13 @@
   Map totalConf=new HashMap();
   totalConf.putAll(conf);
   totalConf.putAll(stormConf);
+  String stormhome=System.getProperty("jstorm.home");
   long memSlotSize=ConfigExtension.getMemSlotSize(conf);
   long memSize=memSlotSize * assignment.getMemSlotNum();
   String childopts=getChildOpts(totalConf);
   childopts=childopts.replace("%ID%",port.toString());
+  childopts=childopts.replace("%TOPOLOGYID%",topologyId);
+  childopts=childopts.replace("%JSTORM_HOME%",stormhome);
   String logFileName=topologyId + "-worker-" + port+ ".log";
   Map<String,String> environment=new HashMap<String,String>();
   environment.put("LD_LIBRARY_PATH",(String)conf.get(Config.JAVA_LIBRARY_PATH));
@@ -21,7 +24,6 @@
   commandSB.append((String)conf.get(Config.JAVA_LIBRARY_PATH));
   commandSB.append(" -Dlogfile.name=");
   commandSB.append(logFileName);
-  String stormhome=System.getProperty("jstorm.home");
   if (stormhome != null) {
     commandSB.append(" -Dlog4j.configuration=File:" + stormhome + "/conf/jstorm.log4j.properties");
     commandSB.append(" -Djstorm.home=");
