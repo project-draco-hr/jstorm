@@ -1,0 +1,12 @@
+{
+  if (callback != null)   this.master_callback.set(callback);
+  try {
+    cluster_state.tryToBeLeader(path,host.getBytes());
+  }
+ catch (  NodeExistsException e) {
+    cluster_state.node_existed(path,true);
+    LOG.info("leader is alive");
+    return false;
+  }
+  return true;
+}

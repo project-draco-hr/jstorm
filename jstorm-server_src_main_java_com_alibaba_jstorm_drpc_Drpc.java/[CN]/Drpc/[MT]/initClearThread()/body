@@ -1,0 +1,4 @@
+{
+  clearThread=new AsyncLoopThread(new ClearThread(this));
+  LOG.info("Successfully start clear thread");
+}

@@ -21,7 +21,6 @@
     if (isDebugRecv) {
       LOG.info(idStr + " receive " + tuple.toString());
     }
-    task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
     return tuple;
   }
  catch (  Exception e) {

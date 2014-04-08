@@ -1,0 +1,64 @@
+{
+  List<SupervisorSummary> sups=summ.get_supervisors();
+  int supSize=0;
+  int totalCpuSlots=0;
+  int useCpuSlots=0;
+  int freeCpuSlots=0;
+  int totalMemSlots=0;
+  int useMemSlots=0;
+  int freeMemSlots=0;
+  int totalDiskSlots=0;
+  int useDiskSlots=0;
+  int freeDiskSlots=0;
+  int totalPortSlots=0;
+  int usePortSlots=0;
+  int freePortSlots=0;
+  if (sups != null) {
+    supSize=sups.size();
+    for (    SupervisorSummary ss : sups) {
+      totalCpuSlots+=ss.get_num_cpu();
+      useCpuSlots+=ss.get_num_used_cpu();
+      totalMemSlots+=ss.get_num_mem();
+      useMemSlots+=ss.get_num_used_mem();
+      totalDiskSlots+=ss.get_num_disk();
+      useDiskSlots+=ss.get_num_used_disk();
+      totalPortSlots+=ss.get_num_workers();
+      usePortSlots+=ss.get_num_used_workers();
+    }
+    freeCpuSlots=totalCpuSlots - useCpuSlots;
+    freeMemSlots=totalMemSlots - useMemSlots;
+    freeDiskSlots=totalDiskSlots - useDiskSlots;
+    freePortSlots=totalPortSlots - usePortSlots;
+  }
+  int totalTasks=0;
+  List<TopologySummary> topos=summ.get_topologies();
+  if (topos != null) {
+    int topoSize=topos.size();
+    for (int j=0; j < topoSize; j++) {
+      totalTasks+=topos.get(j).get_num_tasks();
+    }
+  }
+  String nimbustime=StatBuckets.prettyUptimeStr(summ.get_nimbus_uptime_secs());
+  List<ClusterSumm> clusumms=new ArrayList<ClusterSumm>();
+  ClusterSumm clusterSumm=new ClusterSumm();
+  clusterSumm.setNimbusHostname(client.getMasterHost());
+  if (summ.is_isGroupModel())   clusterSumm.setIsGroupModel("true");
+ else   clusterSumm.setIsGroupModel("false");
+  clusterSumm.setNimbusUptime(nimbustime);
+  clusterSumm.setSupervisorNum(String.valueOf(supSize));
+  clusterSumm.setRunningTaskNum(String.valueOf(totalTasks));
+  clusterSumm.setTotalCpuSlotNum(String.valueOf(totalCpuSlots));
+  clusterSumm.setUsedCpuSlotNum(String.valueOf(useCpuSlots));
+  clusterSumm.setFreeCpuSlotNum(String.valueOf(freeCpuSlots));
+  clusterSumm.setTotalMemSlotNum(String.valueOf(totalMemSlots));
+  clusterSumm.setUsedMemSlotNum(String.valueOf(useMemSlots));
+  clusterSumm.setFreeMemSlotNum(String.valueOf(freeMemSlots));
+  clusterSumm.setTotalDiskSlotNum(String.valueOf(totalDiskSlots));
+  clusterSumm.setUsedDiskSlotNum(String.valueOf(useDiskSlots));
+  clusterSumm.setFreeDiskSlotNum(String.valueOf(freeDiskSlots));
+  clusterSumm.setTotalPortSlotNum(String.valueOf(totalPortSlots));
+  clusterSumm.setUsedPortSlotNum(String.valueOf(usePortSlots));
+  clusterSumm.setFreePortSlotNum(String.valueOf(freePortSlots));
+  clusumms.add(clusterSumm);
+  return clusumms;
+}

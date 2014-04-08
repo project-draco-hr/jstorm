@@ -1,0 +1,4 @@
+{
+  if (h instanceof Hierarchy && ((Hierarchy)h).type.equals(this.type))   return true;
+  return false;
+}

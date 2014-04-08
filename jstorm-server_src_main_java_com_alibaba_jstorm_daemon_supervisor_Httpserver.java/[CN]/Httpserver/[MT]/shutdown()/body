@@ -1,0 +1,5 @@
+{
+  if (hs != null) {
+    hs.stop(0);
+  }
+}

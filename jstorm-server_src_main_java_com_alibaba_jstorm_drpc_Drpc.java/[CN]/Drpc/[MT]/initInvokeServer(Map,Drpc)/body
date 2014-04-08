@@ -1,0 +1,11 @@
+{
+  int port=JStormUtils.parseInt(conf.get(Config.DRPC_INVOCATIONS_PORT));
+  TNonblockingServerSocket socket=new TNonblockingServerSocket(port);
+  THsHaServer.Args targsInvoke=new THsHaServer.Args(socket);
+  targsInvoke.workerThreads(64);
+  targsInvoke.protocolFactory(new TBinaryProtocol.Factory());
+  targsInvoke.processor(new DistributedRPCInvocations.Processor<DistributedRPCInvocations.Iface>(service));
+  THsHaServer invokeServer=new THsHaServer(targsInvoke);
+  LOG.info("Successfully init Invoke Server " + port);
+  return invokeServer;
+}

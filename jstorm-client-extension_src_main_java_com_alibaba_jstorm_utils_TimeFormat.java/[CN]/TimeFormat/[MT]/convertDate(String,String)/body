@@ -1,0 +1,17 @@
+{
+  Date date=null;
+  try {
+    if (format != null) {
+      SimpleDateFormat simpleDateFormat=new SimpleDateFormat(format);
+      date=simpleDateFormat.parse(dateStr);
+    }
+ else {
+      date=new Date(dateStr);
+    }
+  }
+ catch (  Exception ex) {
+    log.error("Failed to convert " + dateStr + " to Date, format:"+ format);
+    return null;
+  }
+  return date;
+}

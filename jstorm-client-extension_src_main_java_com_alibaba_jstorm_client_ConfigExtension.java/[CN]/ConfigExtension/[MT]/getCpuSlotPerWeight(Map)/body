@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(CPU_SLOT_PER_WEIGHT),1);
+}

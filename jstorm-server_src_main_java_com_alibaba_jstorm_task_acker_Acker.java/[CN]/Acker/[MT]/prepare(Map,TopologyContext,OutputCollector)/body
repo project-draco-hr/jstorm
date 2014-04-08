@@ -1,5 +1,5 @@
 {
   this.collector=collector;
   this.pending=new RotatingMap<Object,AckObject>(TIMEOUT_BUCKET_NUM);
-  this.rotateTime=1000L * JStormUtils.parseInt(stormConf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
+  this.rotateTime=1000L * JStormUtils.parseInt(stormConf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30) / TIMEOUT_BUCKET_NUM;
 }

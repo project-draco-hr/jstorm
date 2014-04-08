@@ -3,40 +3,8 @@
   String root=String.valueOf(storm_conf.get(Config.STORM_ZOOKEEPER_ROOT));
   zkMasterDir=root + MASTER_PATH;
   LOG.info("zkServer:" + (List<String>)storm_conf.get(Config.STORM_ZOOKEEPER_SERVERS) + ", zkPort:"+ (Integer)storm_conf.get(Config.STORM_ZOOKEEPER_PORT));
-  zkobj=Utils.newCurator(storm_conf,(List<String>)storm_conf.get(Config.STORM_ZOOKEEPER_SERVERS),storm_conf.get(Config.STORM_ZOOKEEPER_PORT),root);
-  zkobj.start();
-  if (zkobj.checkExists().forPath(MASTER_PATH) == null)   throw new RuntimeException("No alive nimbus ");
-  zkobj.close();
   zkobj=Utils.newCurator(storm_conf,(List<String>)storm_conf.get(Config.STORM_ZOOKEEPER_SERVERS),storm_conf.get(Config.STORM_ZOOKEEPER_PORT),zkMasterDir);
-  zkobj.getCuratorListenable().addListener(new CuratorListener(){
-    @Override public void eventReceived(    CuratorFramework arg0,    CuratorEvent e) throws Exception {
-      if (e.getType().equals(CuratorEventType.WATCHED)) {
-        WatchedEvent event=e.getWatchedEvent();
-        KeeperState state=event.getState();
-        EventType type=event.getType();
-        String path=event.getPath();
-        if (!(state.equals(KeeperState.SyncConnected))) {
-          LOG.warn("Received event " + state + ":"+ type+ ":"+ path+ " with disconnected Zookeeper.");
-        }
- else {
-          LOG.info("Received event " + state + ":"+ type+ ":"+ path);
-        }
-        if (!type.equals(EventType.None)) {
-          flushClient(conf,null);
-          flush();
-        }
-      }
-    }
-  }
-);
-  zkobj.getUnhandledErrorListenable().addListener(new UnhandledErrorListener(){
-    @Override public void unhandledError(    String msg,    Throwable error){
-      String errmsg="Unrecoverable Zookeeper error, halting process: " + msg;
-      LOG.error(errmsg,error);
-      Runtime.getRuntime().halt(1);
-    }
-  }
-);
   zkobj.start();
+  if (zkobj.checkExists().forPath("/") == null)   throw new RuntimeException("No alive nimbus ");
   flushClient(storm_conf,timeout);
 }

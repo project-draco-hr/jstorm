@@ -11,13 +11,14 @@
   supervisors_callback=new AtomicReference<RunnableCallback>(null);
   assignments_callback=new AtomicReference<RunnableCallback>(null);
   storm_base_callback=new ConcurrentHashMap<String,RunnableCallback>();
+  master_callback=new AtomicReference<RunnableCallback>(null);
   state_id=cluster_state.register(new ClusterStateCallback(){
     public <T>Object execute(    T... args){
       if (args == null) {
         LOG.warn("Input args is null");
         return null;
       }
- else       if (args.length == 2) {
+ else       if (args.length < 2) {
         LOG.warn("Input args is invalid, args length:" + args.length);
         return null;
       }
@@ -45,8 +46,11 @@
           params=toks.get(1);
           fn=storm_base_callback.remove(params);
         }
+ else         if (root.equals(Cluster.MASTER_ROOT)) {
+          fn=master_callback.getAndSet(null);
+        }
  else {
-          JStormUtils.halt_process(30,"Unknown callback for subtree " + path);
+          LOG.error("Unknown callback for subtree " + path);
         }
         if (fn != null) {
           fn.run();

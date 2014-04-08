@@ -1,0 +1,4 @@
+{
+  BasicConfigurator.configure();
+  SystemOperation.mount("test","/cgroup/cpu","cgroup","cpu");
+}

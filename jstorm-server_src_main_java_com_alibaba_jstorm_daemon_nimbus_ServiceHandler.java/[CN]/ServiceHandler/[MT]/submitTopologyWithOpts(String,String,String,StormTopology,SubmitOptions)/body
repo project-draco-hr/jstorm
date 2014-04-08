@@ -20,20 +20,13 @@ catch (  Exception e) {
   }
   serializedConf.put(Config.TOPOLOGY_ID,topologyId);
   serializedConf.put(Config.TOPOLOGY_NAME,topologyname);
-  Map<Object,Object> stormConf;
   try {
+    Map<Object,Object> stormConf;
     stormConf=NimbusUtils.normalizeConf(conf,serializedConf,topology);
-  }
- catch (  Exception e1) {
-    String errMsg=JStormUtils.getErrorInfo("Failed to commit topologyId: " + topologyId + " uploadedJarLocation: "+ uploadedJarLocation+ ", due to failed to normalize configuration ",e1);
-    LOG.info(errMsg);
-    throw new FailedAssignTopologyException(errMsg);
-  }
-  Map<Object,Object> totalStormConf=new HashMap<Object,Object>(conf);
-  totalStormConf.putAll(stormConf);
-  StormTopology normalizedTopology=NimbusUtils.normalizeTopology(stormConf,topology);
-  Common.validate_basic(normalizedTopology,totalStormConf,topologyId);
-  try {
+    Map<Object,Object> totalStormConf=new HashMap<Object,Object>(conf);
+    totalStormConf.putAll(stormConf);
+    StormTopology normalizedTopology=NimbusUtils.normalizeTopology(stormConf,topology);
+    Common.validate_basic(normalizedTopology,totalStormConf,topologyId);
     StormClusterState stormClusterState=data.getStormClusterState();
     setupStormCode(conf,topologyId,uploadedJarLocation,stormConf,normalizedTopology);
     setupZkTaskInfo(conf,topologyId,stormClusterState);
@@ -67,7 +60,18 @@ catch (  Exception e) {
     LOG.error(sb.toString(),e);
     throw new TopologyAssignException(sb.toString());
   }
-catch (  Exception e) {
+catch (  InvalidParameterException e) {
+    StringBuilder sb=new StringBuilder();
+    sb.append("Fail to sumbit topology ");
+    sb.append(e.getMessage());
+    sb.append(", cause:" + e.getCause());
+    sb.append("\n\n");
+    sb.append("topologyId:" + topologyId);
+    sb.append(", uploadedJarLocation:" + uploadedJarLocation + "\n");
+    LOG.error(sb.toString(),e);
+    throw new InvalidParameterException(sb.toString());
+  }
+catch (  Throwable e) {
     StringBuilder sb=new StringBuilder();
     sb.append("Fail to sumbit topology ");
     sb.append(e.getMessage());

@@ -11,7 +11,7 @@
     if (obj instanceof IContext) {
       transport=(IContext)obj;
       transport.prepare(storm_conf);
-      LOG.info("TransportFactory makeContext: start prpare... " + storm_conf);
+      LOG.info("TransportFactory makeContext: start prepare... " + storm_conf);
     }
  else {
       Method method=klass.getMethod("makeContext",Map.class);

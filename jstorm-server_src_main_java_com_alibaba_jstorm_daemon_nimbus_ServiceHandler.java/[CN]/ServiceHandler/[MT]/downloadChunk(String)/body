@@ -4,13 +4,13 @@
   if (obj == null) {
     throw new TException("Could not find input stream for that id");
   }
-  byte[] ret=null;
   try {
     if (obj instanceof BufferFileInputStream) {
       BufferFileInputStream is=(BufferFileInputStream)obj;
-      ret=is.read();
+      byte[] ret=is.read();
       if (ret != null) {
         downloaders.put(id,(BufferFileInputStream)is);
+        return ByteBuffer.wrap(ret);
       }
     }
  else {
@@ -18,8 +18,9 @@
     }
   }
  catch (  IOException e) {
-    LOG.error(e + "BufferFileInputStream read failed when downloadChunk ");
+    LOG.error("BufferFileInputStream read failed when downloadChunk ",e);
     throw new TException(e);
   }
-  return ByteBuffer.wrap(ret);
+  byte[] empty={};
+  return ByteBuffer.wrap(empty);
 }

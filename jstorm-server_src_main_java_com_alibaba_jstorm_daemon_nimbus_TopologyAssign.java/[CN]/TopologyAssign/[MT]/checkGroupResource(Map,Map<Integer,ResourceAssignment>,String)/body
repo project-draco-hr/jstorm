@@ -1,5 +1,5 @@
 {
-  if (!nimbusData.isGroupModel())   return;
+  if (!nimbusData.isGroupMode())   return;
   String group=ConfigExtension.getUserGroup(conf);
   if (group == null)   throw new FailedAssignTopologyException("It's group model, do you forget to set group name in your topology's conf? ^_^");
   Map<ThriftResourceType,Integer> groupResource=nimbusData.getGroupToResource().get(group);

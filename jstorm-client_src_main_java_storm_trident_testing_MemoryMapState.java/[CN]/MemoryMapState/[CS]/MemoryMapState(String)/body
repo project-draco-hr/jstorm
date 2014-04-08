@@ -1,4 +1,6 @@
 {
-  _backing=new MemoryMapStateBacking(id);
-  _delegate=new SnapshottableMap(OpaqueMap.build(_backing),new Values("$MEMORY-MAP-STATE-GLOBAL$"));
+  if (!_dbs.containsKey(id)) {
+    _dbs.put(id,new HashMap());
+  }
+  this.db=(Map<List<Object>,T>)_dbs.get(id);
 }

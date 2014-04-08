@@ -10,7 +10,7 @@
   LOG.info("Get system memory size :" + physicalMemSize);
   long availablePhyMemSize=0;
   if (physicalMemSize <= MEM_THREADHOLD) {
-    availablePhyMemSize=physicalMemSize;
+    availablePhyMemSize=MEM_THREADHOLD;
   }
  else {
     availablePhyMemSize=Math.min((long)(physicalMemSize * 0.8),physicalMemSize - 4 * JStormUtils.SIZE_1_G);

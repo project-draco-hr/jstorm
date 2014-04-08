@@ -1,0 +1,5 @@
+{
+  Date now=new Date();
+  String todayStr=getDay(now);
+  return getDay(todayStr);
+}

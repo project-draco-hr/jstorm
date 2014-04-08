@@ -1,0 +1,8 @@
+{
+  Date now=new Date();
+  Calendar yesterdayCal=Calendar.getInstance();
+  yesterdayCal.setTime(now);
+  yesterdayCal.add(Calendar.DATE,-1);
+  String yesterdayStr=getDay(yesterdayCal.getTime());
+  return getDay(yesterdayStr);
+}

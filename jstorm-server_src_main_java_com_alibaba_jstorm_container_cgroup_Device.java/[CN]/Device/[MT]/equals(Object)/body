@@ -1,0 +1,4 @@
+{
+  if (object instanceof Device && ((Device)object).major == major && ((Device)object).minor == minor)   return true;
+  return false;
+}

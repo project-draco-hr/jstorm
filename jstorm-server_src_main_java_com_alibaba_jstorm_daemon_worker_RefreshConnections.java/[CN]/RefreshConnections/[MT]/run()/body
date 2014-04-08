@@ -10,6 +10,11 @@
       return;
     }
     Map<Integer,ResourceAssignment> taskToResource=assignment.getTaskToResource();
+    if (taskToResource == null) {
+      String errMsg="Failed to get taskToResource of " + topologyId;
+      LOG.error(errMsg);
+      return;
+    }
     workerData.getTaskToResource().putAll(taskToResource);
     Map<Integer,WorkerSlot> my_assignment=new HashMap<Integer,WorkerSlot>();
     Map<String,String> node=assignment.getNodeHost();
@@ -53,5 +58,6 @@
   }
  catch (  Exception e) {
     LOG.error("Failed to refresh worker Connection",e);
+    throw new RuntimeException(e);
   }
 }

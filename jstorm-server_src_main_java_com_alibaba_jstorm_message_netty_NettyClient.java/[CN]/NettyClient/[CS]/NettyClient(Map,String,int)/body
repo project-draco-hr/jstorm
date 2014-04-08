@@ -29,6 +29,5 @@
   bootstrap.setPipelineFactory(new StormClientPipelineFactory(this));
   remote_addr=new InetSocketAddress(host,port);
   bootstrap.connect(remote_addr);
-  target_Server=host + ":" + port;
-  LOG.info("Begin to connect {}, useDisrutpor: {}",target_Server,useDisruptor);
+  LOG.info("Begin to connect {}, useDisrutpor: {}",remote_addr,useDisruptor);
 }

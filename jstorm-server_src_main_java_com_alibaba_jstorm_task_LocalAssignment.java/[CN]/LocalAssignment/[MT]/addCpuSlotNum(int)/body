@@ -1,0 +1,3 @@
+{
+  cpuSlotNum+=slotCpu;
+}

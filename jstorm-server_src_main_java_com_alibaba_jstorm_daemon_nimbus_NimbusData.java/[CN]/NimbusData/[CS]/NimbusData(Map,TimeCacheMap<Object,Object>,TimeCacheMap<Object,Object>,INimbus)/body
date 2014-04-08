@@ -15,6 +15,7 @@
   this.groupToUsedResource=new ConcurrentHashMap<String,Map<ThriftResourceType,Integer>>();
   this.flushGroupFileLock=new ReentrantLock();
   String groupCfg=ConfigExtension.getGroupFilePath(conf);
-  if (StringUtils.isBlank(groupCfg))   groupModel=false;
- else   groupModel=true;
+  if (StringUtils.isBlank(groupCfg))   groupMode=false;
+ else   groupMode=true;
+  localMode=StormConfig.local_mode(conf);
 }

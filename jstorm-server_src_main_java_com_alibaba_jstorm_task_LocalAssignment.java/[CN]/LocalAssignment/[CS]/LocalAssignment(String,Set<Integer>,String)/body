@@ -1,0 +1,5 @@
+{
+  this.topologyId=topologyId;
+  this.taskIds=new HashSet<Integer>(taskIds);
+  this.topologyName=topologyName;
+}

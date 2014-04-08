@@ -4,7 +4,7 @@
   boolean islocal=StormConfig.local_mode(conf);
   RunnableCallback killfn=JStormServerUtils.getDefaultKillfn();
   IConnection recvConnection=context.bind(topologyId,port,true);
-  RunnableCallback recvDispather=new VirtualPortDispatch(topologyId,context,recvConnection,taskIds);
+  RunnableCallback recvDispather=new VirtualPortDispatch(topologyId,context,recvConnection,taskIds,active);
   AsyncLoopThread vthread=new AsyncLoopThread(recvDispather,false,killfn,Thread.MAX_PRIORITY,true);
   LOG.info("Successfully " + msg + ":"+ supervisorId+ " topologyId:"+ topologyId+ " port:"+ port);
   return new VirtualPortShutdown(topologyId,context,vthread,port);

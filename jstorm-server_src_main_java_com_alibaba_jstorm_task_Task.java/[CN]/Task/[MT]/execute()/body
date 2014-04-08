@@ -5,7 +5,9 @@
   TaskSendTargets sendTargets=echoToSystemBolt();
   RunnableCallback baseExecutor=mkExecutor(puller,sendTargets);
   AsyncLoopThread executor_threads=new AsyncLoopThread(baseExecutor,false,Thread.MAX_PRIORITY,true);
-  AsyncLoopThread[] all_threads={executor_threads,heartbeat_thread};
+  List<AsyncLoopThread> allThreads=new ArrayList<AsyncLoopThread>();
+  allThreads.add(heartbeat_thread);
+  allThreads.add(executor_threads);
   LOG.info("Finished loading task " + componentid + ":"+ taskid);
-  return getShutdown(all_threads,heartbeat_thread,puller);
+  return getShutdown(allThreads,heartbeat_thread,puller,baseExecutor);
 }

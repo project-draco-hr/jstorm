@@ -1,0 +1,9 @@
+{
+  if (active.get() == true) {
+    return TIMEOUT_CHECK_SECS;
+  }
+ else {
+    LOG.info("Quit Drpc clear thread ");
+    return -1;
+  }
+}

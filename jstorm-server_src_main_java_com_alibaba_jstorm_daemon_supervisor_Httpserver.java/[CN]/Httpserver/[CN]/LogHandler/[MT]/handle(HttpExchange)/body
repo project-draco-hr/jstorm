@@ -1,0 +1,9 @@
+{
+  URI uri=t.getRequestURI();
+  Map<String,String> paramMap=parseRawQuery(uri.getRawQuery());
+  byte[] logBytes=queryLog(paramMap);
+  t.sendResponseHeaders(200,logBytes.length);
+  OutputStream os=t.getResponseBody();
+  os.write(logBytes);
+  os.close();
+}

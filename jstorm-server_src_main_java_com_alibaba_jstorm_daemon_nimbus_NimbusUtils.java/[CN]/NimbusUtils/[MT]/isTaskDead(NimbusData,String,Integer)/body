@@ -61,6 +61,9 @@
   }
   int taskHBTimeout=JStormUtils.parseInt(data.getConf().get(Config.NIMBUS_TASK_TIMEOUT_SECS));
   if (nowSecs - nimbusTime > taskHBTimeout) {
+    long ts=nimbusTime * 1000;
+    Date lastTaskHBDate=new Date(ts);
+    LOG.info(idStr + " last tasktime is " + nimbusTime+ " "+ lastTaskHBDate);
     return true;
   }
   return false;

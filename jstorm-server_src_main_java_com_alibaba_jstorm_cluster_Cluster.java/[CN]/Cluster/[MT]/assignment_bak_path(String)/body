@@ -1,3 +1,0 @@
-{
-  return ASSIGNMENTS_BAK_SUBTREE + ZK_SEPERATOR + id;
-}

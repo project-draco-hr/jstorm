@@ -1,0 +1,14 @@
+{
+  LOG.info("running on cgroup mode");
+  this.CPU_SLOT_PER_WEIGHT=ConfigExtension.getCpuSlotPerWeight(conf);
+  try {
+    if (!SystemOperation.isRoot())     throw new RuntimeException("If you want to use cgroup, please start supervisor on root");
+  }
+ catch (  IOException e) {
+    LOG.error("check root error",e);
+    throw new RuntimeException(e);
+  }
+  center=CgroupCenter.getInstance();
+  if (center == null)   throw new RuntimeException("Cgroup error, please check /proc/cgroups");
+  this.prepareSubSystem();
+}

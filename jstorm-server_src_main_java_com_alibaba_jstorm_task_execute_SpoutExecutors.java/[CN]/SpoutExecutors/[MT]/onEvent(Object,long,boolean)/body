@@ -10,7 +10,7 @@
  else     if (event instanceof Tuple) {
       Tuple tuple=(Tuple)event;
       Object id=tuple.getValue(0);
-      Object obj=pending.remove(id);
+      Object obj=pending.remove((Long)id);
       if (obj == null) {
         LOG.warn("Pending map no entry:" + id + ", pending size:"+ pending.size());
         return;
@@ -21,9 +21,13 @@
         runnable=new AckSpoutMsg(spout,tupleInfo.getMessageId(),isDebug,tupleInfo.getStream(),tupleInfo.getTimestamp(),task_stats);
       }
  else       if (stream_id.equals(Acker.ACKER_FAIL_STREAM_ID)) {
-        Long time_delta=null;
         runnable=new FailSpoutMsg(spout,tupleInfo,task_stats,isDebug);
       }
+ else {
+        LOG.warn("Receive one unknow source Tuple " + idStr);
+        return;
+      }
+      task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
     }
  else     if (event instanceof Runnable) {
       runnable=(Runnable)event;

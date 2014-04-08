@@ -1,13 +1,14 @@
 {
+  int weight=ConfigExtension.getCpuSlotPerWeight(conf);
   Integer object=JStormServerConfig.getSupervisorCpuSlotNum(conf);
   if (object != null && JStormUtils.parseInt(object) > 0) {
     return JStormUtils.parseInt(object);
   }
   int sysCpuNum=Runtime.getRuntime().availableProcessors();
   if (sysCpuNum <= CPU_THREADHOLD) {
-    return sysCpuNum;
+    return CPU_THREADHOLD * weight;
   }
  else {
-    return sysCpuNum - 1;
+    return (sysCpuNum - 1) * weight;
   }
 }

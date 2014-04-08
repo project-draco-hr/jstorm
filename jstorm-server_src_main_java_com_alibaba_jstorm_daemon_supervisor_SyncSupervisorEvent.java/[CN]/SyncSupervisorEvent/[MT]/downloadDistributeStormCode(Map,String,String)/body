@@ -1,16 +1,8 @@
 {
-  String tmproot=StormConfig.supervisorTmpDir(conf) + "/" + UUID.randomUUID().toString();
-  FileUtils.forceMkdir(new File(tmproot));
+  String tmproot=StormConfig.supervisorTmpDir(conf) + File.separator + UUID.randomUUID().toString();
   String stormroot=StormConfig.supervisor_stormdist_root(conf,topologyId);
-  String masterStormjarPath=StormConfig.stormjar_path(masterCodeDir);
+  JStormServerUtils.downloadCodeFromMaster(conf,tmproot,masterCodeDir);
   String localFileJarTmp=StormConfig.stormjar_path(tmproot);
-  Utils.downloadFromMaster(conf,masterStormjarPath,localFileJarTmp);
-  String masterStormcodePath=StormConfig.stormcode_path(masterCodeDir);
-  String localFileCodeTmp=StormConfig.stormcode_path(tmproot);
-  Utils.downloadFromMaster(conf,masterStormcodePath,localFileCodeTmp);
-  String masterStormConfPath=StormConfig.sotrmconf_path(masterCodeDir);
-  String localFileConfTmp=StormConfig.sotrmconf_path(tmproot);
-  Utils.downloadFromMaster(conf,masterStormConfPath,localFileConfTmp);
   JStormUtils.extract_dir_from_jar(localFileJarTmp,StormConfig.RESOURCES_SUBDIR,tmproot);
   FileUtils.moveDirectory(new File(tmproot),new File(stormroot));
 }

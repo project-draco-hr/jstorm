@@ -1,5 +1,10 @@
 {
   Map<Integer,LocalAssignment> portTasks=new HashMap<Integer,LocalAssignment>();
+  StormBase stormBase=stormClusterState.storm_base(topologyId,null);
+  if (stormBase == null) {
+    LOG.error("Failed to get StormBase of " + topologyId);
+    return portTasks;
+  }
   Map<Integer,ResourceAssignment> taskToResource=assignmenInfo.getTaskToResource();
   if (taskToResource == null) {
     LOG.error("No taskToWorkerSlot of assignement's " + assignmenInfo);
@@ -18,12 +23,14 @@
       Set<Integer> taskIds=la.getTaskIds();
       taskIds.add(taskId);
       la.addMemSlotNum(resource.getMemSlotNum());
+      la.addCpuSlotNum(resource.getCpuSlotNum());
     }
  else {
       Set<Integer> taskIds=new HashSet<Integer>();
       taskIds.add(taskId);
-      LocalAssignment la=new LocalAssignment(topologyId,taskIds);
+      LocalAssignment la=new LocalAssignment(topologyId,taskIds,stormBase.getStormName());
       la.addMemSlotNum(resource.getMemSlotNum());
+      la.addCpuSlotNum(resource.getCpuSlotNum());
       portTasks.put(port,la);
     }
   }

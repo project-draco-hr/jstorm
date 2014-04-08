@@ -1,0 +1,3 @@
+{
+  System.out.println(CgroupCenter.getInstance().getHierarchies().get(0).getRootCgroups().getChildren().size());
+}

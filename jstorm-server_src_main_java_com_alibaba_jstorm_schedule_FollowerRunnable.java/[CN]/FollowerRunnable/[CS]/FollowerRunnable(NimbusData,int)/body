@@ -1,0 +1,26 @@
+{
+  this.data=data;
+  this.sleepTime=sleepTime;
+  this.nimbusHost=NetWorkUtils.hostname() + "_pid_" + JStormUtils.process_pid();
+  this.hostPort=NetWorkUtils.hostname() + ":" + String.valueOf(Utils.getInt(data.getConf().get(Config.NIMBUS_THRIFT_PORT)));
+  try {
+    this.tryToBeLeader(data.getConf());
+  }
+ catch (  Exception e1) {
+    LOG.error("try to be leader error.",e1);
+    throw new RuntimeException(e1);
+  }
+  try {
+    data.getStormClusterState().register_nimbus_host(nimbusHost);
+  }
+ catch (  Exception e) {
+    LOG.error("register nimbus host fail!",e);
+    throw new RuntimeException();
+  }
+  callback=new RunnableCallback(){
+    @Override public void run(){
+      if (!data.isLeader())       check();
+    }
+  }
+;
+}

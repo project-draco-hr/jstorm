@@ -1,0 +1,22 @@
+{
+  Map<Integer,ResourceAssignment> result=new HashMap<Integer,ResourceAssignment>();
+  Map<String,SupervisorInfo> cluster=context.getCluster();
+  if (cluster.size() != 1)   throw new RuntimeException();
+  SupervisorInfo localSupervisor=null;
+  String supervisorId=null;
+  for (  Entry<String,SupervisorInfo> entry : cluster.entrySet()) {
+    supervisorId=entry.getKey();
+    localSupervisor=entry.getValue();
+  }
+  int port=localSupervisor.getNetPool().alloc(null);
+  for (  Integer task : context.getAllTaskIds()) {
+    ResourceAssignment resourceAssignment=new ResourceAssignment();
+    resourceAssignment.setHostname(localSupervisor.getHostName());
+    resourceAssignment.setSupervisorId(supervisorId);
+    resourceAssignment.setPort(port);
+    resourceAssignment.setCpuSlotNum(0);
+    resourceAssignment.setMemSlotNum(0);
+    result.put(task,resourceAssignment);
+  }
+  return result;
+}

@@ -1,0 +1,11 @@
+{
+  List<NimbusSlave> slaves=Lists.newArrayList();
+  Map<String,String> followerMap=ZkTool.get_followers(cluster_state);
+  if (!followerMap.isEmpty()) {
+    for (    Entry<String,String> entry : followerMap.entrySet()) {
+      String uptime=StatBuckets.prettyUptimeStr(Integer.valueOf(entry.getValue()));
+      slaves.add(new NimbusSlave(entry.getKey(),uptime));
+    }
+  }
+  return slaves;
+}

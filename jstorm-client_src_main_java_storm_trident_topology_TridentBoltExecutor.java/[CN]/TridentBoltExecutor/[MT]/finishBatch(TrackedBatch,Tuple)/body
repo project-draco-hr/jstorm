@@ -12,9 +12,9 @@
     }
   }
  catch (  FailedException e) {
-    failBatch(tracked,e);
+    failBatch(tracked);
     success=false;
   }
-  _batches.remove(tracked.info.batchId.getId());
+  _batches.remove(tracked.info.batchId);
   return success;
 }

@@ -1,0 +1,11 @@
+{
+  String output=null;
+  try {
+    SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
+    output=sdf.format(date);
+  }
+ catch (  Exception e) {
+    return null;
+  }
+  return output;
+}

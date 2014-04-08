@@ -1,3 +1,0 @@
-{
-  return zkobj.existsNode(zk,path,false);
-}

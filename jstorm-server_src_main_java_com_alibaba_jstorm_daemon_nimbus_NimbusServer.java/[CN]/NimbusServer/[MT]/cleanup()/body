@@ -1,25 +1,28 @@
 {
+  if (isShutdown.compareAndSet(false,true) == false) {
+    LOG.info("Notify to quit nimbus");
+    return;
+  }
+  LOG.info("Begin to shutdown nimbus");
   if (serviceHandler != null) {
     serviceHandler.shutdown();
   }
   if (topologyAssign != null) {
     topologyAssign.cleanup();
+    LOG.info("Successfully shutdown TopologyAssign thread");
   }
   if (follower != null) {
     follower.clean();
+    LOG.info("Successfully shutdown follower thread");
   }
   if (data != null) {
     data.cleanup();
+    LOG.info("Successfully shutdown NimbusData");
   }
   if (thriftServer != null) {
     thriftServer.stop();
-  }
-  if (leaderSelector != null) {
-    try {
-      leaderSelector.close();
-    }
- catch (    Exception e) {
-    }
+    LOG.info("Successfully shutdown thrift server");
   }
   LOG.info("Successfully shutdown nimbus");
+  JStormUtils.halt_process(0,"!!!Shutdown!!!");
 }

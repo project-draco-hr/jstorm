@@ -1,0 +1,24 @@
+{
+  if (cgroup.isRoot()) {
+    LOG.error("You can't create rootCgroup in this function");
+    return;
+  }
+  CgroupCommon parent=cgroup.getParent();
+  while (parent != null) {
+    if (!CgroupUtils.dirExists(parent.getDir())) {
+      LOG.error(parent.getDir() + "is not existed");
+      return;
+    }
+    parent=parent.getParent();
+  }
+  Hierarchy h=cgroup.getHierarchy();
+  if (mounted(h) == null) {
+    LOG.error(h.getDir() + " is not mounted");
+    return;
+  }
+  if (CgroupUtils.dirExists(cgroup.getDir())) {
+    LOG.error(cgroup.getDir() + " is existed");
+    return;
+  }
+  (new File(cgroup.getDir())).mkdir();
+}

@@ -1,6 +1,6 @@
 {
   try {
-    if (data.isGroupModel()) {
+    if (data.isGroupMode()) {
       List<String> active_ids=data.getStormClusterState().active_storms();
       Map<String,Map<String,Map<ThriftResourceType,Integer>>> groupToTopology=data.getGroupToTopology();
       for (      String active_id : active_ids) {

@@ -6,7 +6,7 @@
       sleepMs(100);
     }
  catch (    ExecuteException e) {
-      LOG.info("Error when trying to kill " + pid + ". Process is probably already dead. ");
+      LOG.info("Error when trying to kill " + pid + ". Process has been killed");
     }
 catch (    Exception e) {
       LOG.info("Error when trying to kill " + pid + ".Exception ",e);

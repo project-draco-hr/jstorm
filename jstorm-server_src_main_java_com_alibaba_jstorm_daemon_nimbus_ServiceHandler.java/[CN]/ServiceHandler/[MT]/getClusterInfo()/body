@@ -15,14 +15,14 @@
       }
       assignments.put(topologyId,assignment);
       String group="default";
-      if (data.isGroupModel())       group=base.getGroup();
+      if (data.isGroupMode())       group=base.getGroup();
       if (group == null)       group="default";
       TopologySummary topology=NimbusUtils.mkTopologySummary(assignment,topologyId,base.getStormName(),base.getStatusString(),TimeUtils.time_delta(base.getLanchTimeSecs()),group);
       topologySummaries.add(topology);
     }
     Map<String,SupervisorInfo> supervisorInfos=Cluster.allSupervisorInfo(stormClusterState,null);
     List<SupervisorSummary> supervisorSummaries=NimbusUtils.mkSupervisorSummaries(supervisorInfos,assignments);
-    return new ClusterSummary(supervisorSummaries,uptime,topologySummaries,data.getGroupToTopology(),data.getGroupToResource(),data.getGroupToUsedResource(),data.isGroupModel());
+    return new ClusterSummary(supervisorSummaries,uptime,topologySummaries,data.getGroupToTopology(),data.getGroupToResource(),data.getGroupToUsedResource(),data.isGroupMode());
   }
  catch (  TException e) {
     LOG.info("Failed to get ClusterSummary ",e);

@@ -1,3 +1,14 @@
 {
-  this.clearthread.interrupt();
+  isActive.set(false);
+  clearThread.interrupt();
+  try {
+    clearThread.join();
+  }
+ catch (  InterruptedException e) {
+  }
+  LOG.info("Successfully cleanup clear thread");
+  invokeServer.stop();
+  LOG.info("Successfully stop invokeServer");
+  handlerServer.stop();
+  LOG.info("Successfully stop handlerServer");
 }

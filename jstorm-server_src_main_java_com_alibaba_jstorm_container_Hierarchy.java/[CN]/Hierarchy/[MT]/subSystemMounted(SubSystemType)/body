@@ -1,0 +1,6 @@
+{
+  for (  SubSystemType type : this.subSystems) {
+    if (type == subsystem)     return true;
+  }
+  return false;
+}

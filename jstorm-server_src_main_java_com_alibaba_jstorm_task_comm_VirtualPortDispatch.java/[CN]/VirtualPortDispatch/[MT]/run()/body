@@ -1,19 +1,19 @@
 {
   boolean hasTuple=false;
-  while (true) {
+  while (active.get() == true) {
     byte[] data=recvConn.recv(0);
     if (data == null || data.length == 0) {
       if (hasTuple == false) {
         JStormUtils.sleepMs(1);
       }
-      return;
+      continue;
     }
     hasTuple=true;
     long before=System.currentTimeMillis();
     int port=KryoTupleDeserializer.deserializeTaskId(data);
     if (port == -1) {
-      cleanup();
-      return;
+      active.set(false);
+      break;
     }
     if (valid_ports == null || valid_ports.contains(port)) {
       IConnection sendConn=sendConns.get(port);
@@ -28,5 +28,8 @@
     }
     long after=System.currentTimeMillis();
     runCounter.count(after - before);
+  }
+  if (active.get() == false) {
+    cleanup();
   }
 }

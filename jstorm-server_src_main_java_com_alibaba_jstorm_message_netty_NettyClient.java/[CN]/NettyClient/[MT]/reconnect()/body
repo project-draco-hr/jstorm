@@ -3,7 +3,7 @@
     if (isClosed() == false) {
       int tried_count=retries.incrementAndGet();
       Thread.sleep(getSleepTimeMs());
-      LOG.info("Reconnect ... [{}], {}",tried_count,target_Server);
+      LOG.info("Reconnect ... [{}], {}",tried_count,remote_addr);
       bootstrap.connect(remote_addr);
     }
   }

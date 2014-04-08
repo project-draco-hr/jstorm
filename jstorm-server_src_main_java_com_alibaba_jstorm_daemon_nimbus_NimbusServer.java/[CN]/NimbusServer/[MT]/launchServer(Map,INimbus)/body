@@ -1,32 +1,19 @@
 {
   LOG.info("Begin to start nimbus with conf " + conf);
-  StormConfig.validate_distributed_mode(conf);
-  initShutdownHook();
-  inimbus.prepare(conf,StormConfig.masterInimbus(conf));
-  data=createNimbusData(conf,inimbus);
-  leaderSelector=data.getStormClusterState().get_leader_selector(Cluster.MASTER_LOCK_SUBTREE,new LeaderSelectorListener(){
-    @Override public void stateChanged(    CuratorFramework client,    ConnectionState newState){
-      LOG.info("state change to " + newState.name());
-    }
-    @Override public void takeLeadership(    CuratorFramework client) throws Exception {
-      LOG.info("Get masterlock!");
-      String host=NetWorkUtils.hostname();
-      Integer port=Utils.getInt(conf.get(Config.NIMBUS_THRIFT_PORT));
-      data.getStormClusterState().register_leader_host(host + ":" + String.valueOf(port));
-      LOG.info(host + " register successfully!");
-      NimbusUtils.cleanupCorruptTopologies(data);
-      initGroup(conf);
-      initTopologyAssign();
-      initTopologyStatus();
-      initMonitor(conf);
-      initCleaner(conf);
-      serviceHandler=new ServiceHandler(data);
-      initThrift(conf);
-    }
+  try {
+    StormConfig.validate_distributed_mode(conf);
+    initShutdownHook();
+    inimbus.prepare(conf,StormConfig.masterInimbus(conf));
+    data=createNimbusData(conf,inimbus);
+    initFollowerThread(conf);
+    while (!data.isLeader())     Utils.sleep(5000);
+    init(conf);
   }
-);
-  leaderSelector.start();
-  while (!data.getStormClusterState().leader_existed())   Thread.sleep(10000);
-  initFollowerThread(conf);
-  while (true)   Thread.sleep(3600000);
+ catch (  Throwable e) {
+    LOG.error("Fail to run nimbus ",e);
+  }
+ finally {
+    cleanup();
+  }
+  LOG.info("Quit nimbus");
 }

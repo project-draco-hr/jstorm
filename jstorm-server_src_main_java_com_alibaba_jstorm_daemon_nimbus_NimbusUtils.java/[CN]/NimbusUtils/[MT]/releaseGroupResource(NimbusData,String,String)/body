@@ -1,5 +1,5 @@
 {
-  if (!data.isGroupModel())   return;
+  if (!data.isGroupMode())   return;
   if (group == null)   return;
   Map<ThriftResourceType,Integer> topologyResource=data.getGroupToTopology().get(group).remove(topologyName);
   Map<ThriftResourceType,Integer> usedResource=data.getGroupToUsedResource().get(group);

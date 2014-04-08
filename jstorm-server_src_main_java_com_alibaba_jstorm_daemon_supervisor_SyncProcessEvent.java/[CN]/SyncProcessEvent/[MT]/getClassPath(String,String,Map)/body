@@ -19,9 +19,27 @@
       }
     }
   }
+  String filterJarKeyword=null;
+  String transport_plugin_klassName=(String)totalConf.get(Config.STORM_MESSAGING_TRANSPORT);
+  if (transport_plugin_klassName.equals(MQContext.class.getCanonicalName())) {
+    filterJarKeyword="jeromq";
+  }
+ else   if (transport_plugin_klassName.equals(JMQContext.class.getCanonicalName())) {
+    filterJarKeyword="jzmq";
+  }
   StringBuilder sb=new StringBuilder();
-  for (  String jar : classSet) {
-    sb.append(jar + ":");
+  if (filterJarKeyword != null) {
+    for (    String jar : classSet) {
+      if (jar.contains(filterJarKeyword)) {
+        continue;
+      }
+      sb.append(jar + ":");
+    }
+  }
+ else {
+    for (    String jar : classSet) {
+      sb.append(jar + ":");
+    }
   }
   if (ConfigExtension.isEnableTopologyClassLoader(totalConf)) {
     return sb.toString().substring(0,sb.length() - 1);

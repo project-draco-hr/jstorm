@@ -5,4 +5,5 @@
   this.context=workerData.getContext();
   this.taskIds=workerData.getTaskids();
   this.topologyId=workerData.getTopologyId();
+  this.active=workerData.getActive();
 }

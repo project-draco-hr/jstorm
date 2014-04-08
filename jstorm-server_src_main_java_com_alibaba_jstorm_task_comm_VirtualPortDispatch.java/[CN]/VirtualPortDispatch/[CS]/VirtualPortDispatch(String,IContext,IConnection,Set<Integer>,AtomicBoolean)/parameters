@@ -1,0 +1,5 @@
+String topologyId
+IContext context
+IConnection recvConn
+Set<Integer> valid_ports
+AtomicBoolean active

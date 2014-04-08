@@ -1,4 +1,5 @@
 {
+  if (System.getenv("REDIRECT") == null || !System.getenv("REDIRECT").equals("true"))   return;
   String OUT_TARGET_FILE="/dev/null";
   System.out.println("Redirect output to " + OUT_TARGET_FILE);
   FileOutputStream workerOut=new FileOutputStream(new File(OUT_TARGET_FILE));

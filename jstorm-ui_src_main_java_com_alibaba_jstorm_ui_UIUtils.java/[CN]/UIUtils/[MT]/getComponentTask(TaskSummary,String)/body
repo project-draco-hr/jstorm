@@ -1,0 +1,22 @@
+{
+  ComponentTask componentTask=new ComponentTask();
+  componentTask.setComponentid(task.get_component_id());
+  componentTask.setTaskid(String.valueOf(task.get_task_id()));
+  componentTask.setHost(task.get_host());
+  componentTask.setPort(String.valueOf(task.get_port()));
+  componentTask.setUptime(StatBuckets.prettyUptimeStr(task.get_uptime_secs()));
+  componentTask.setLastErr(UIUtils.getTaskError(task.get_errors()));
+  String ip=NetWorkUtils.host2Ip(task.get_host());
+  if (ip == null) {
+    ip=task.get_host();
+  }
+  componentTask.setIp(ip);
+  if (task.get_disk() != null) {
+    componentTask.setDiskSlot(task.get_disk());
+  }
+ else {
+    componentTask.setDiskSlot("");
+  }
+  componentTask.setTopologyid(topologyid);
+  return componentTask;
+}

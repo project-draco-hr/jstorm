@@ -1,0 +1,12 @@
+{
+  String ret=null;
+  try {
+    SimpleDateFormat sdf=new SimpleDateFormat(format);
+    ret=sdf.format(date);
+  }
+ catch (  Exception e) {
+    log.error("Failed to convert " + date + " to String, format:"+ format);
+    return null;
+  }
+  return ret;
+}

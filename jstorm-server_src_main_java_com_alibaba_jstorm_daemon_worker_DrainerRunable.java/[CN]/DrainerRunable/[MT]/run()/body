@@ -7,6 +7,7 @@
  catch (    Exception e) {
       if (workerActive.get() == true) {
         LOG.error("DrainerRunable send error",e);
+        throw new RuntimeException(e);
       }
     }
   }

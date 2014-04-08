@@ -1,5 +1,5 @@
 {
-  if (data.isGroupModel()) {
+  if (data.isGroupMode()) {
     Map<String,Map<ThriftResourceType,Integer>> groupToUsedResource=data.getGroupToUsedResource();
     Map<String,Map<String,Map<ThriftResourceType,Integer>>> groupToTopology=data.getGroupToTopology();
     for (    String group : groupToTopology.keySet()) {

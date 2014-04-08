@@ -1,0 +1,19 @@
+{
+  FileWriter writer=null;
+  BufferedWriter bw=null;
+  try {
+    File file=new File(fileDir);
+    if (!file.exists()) {
+      LOG.error(fileDir + " is no existed");
+      return;
+    }
+    writer=new FileWriter(file,true);
+    bw=new BufferedWriter(writer);
+    bw.write(string);
+    bw.newLine();
+    bw.flush();
+  }
+  finally {
+    CgroupUtils.close(writer,bw);
+  }
+}

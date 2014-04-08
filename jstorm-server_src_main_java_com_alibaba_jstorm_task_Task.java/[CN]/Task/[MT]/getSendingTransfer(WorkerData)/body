@@ -1,4 +1,4 @@
 {
   KryoTupleSerializer serializer=new KryoTupleSerializer(workerData.getStormConf(),topologyContext);
-  return new TaskTransfer(serializer,workerData.getConf(),workerData.getTransferQueue(),workerData.getInnerTaskTransfer(),workerData.getWorkHalt());
+  return new TaskTransfer(serializer,taskStatus,workerData);
 }

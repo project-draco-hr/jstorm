@@ -1,0 +1,24 @@
+{
+  Set<SubSystem> subSystems=new HashSet<SubSystem>();
+  FileReader reader=null;
+  BufferedReader br=null;
+  try {
+    reader=new FileReader(Constants.CGROUP_STATUS_FILE);
+    br=new BufferedReader(reader);
+    String str=null;
+    while ((str=br.readLine()) != null) {
+      String[] split=str.split("\t");
+      SubSystemType type=SubSystemType.getSubSystem(split[0]);
+      if (type == null)       continue;
+      subSystems.add(new SubSystem(type,Integer.valueOf(split[1]),Integer.valueOf(split[2]),Integer.valueOf(split[3]).intValue() == 1 ? true : false));
+    }
+    return subSystems;
+  }
+ catch (  Exception e) {
+    LOG.error("Get subSystems error ",e);
+  }
+ finally {
+    CgroupUtils.close(reader,br);
+  }
+  return null;
+}

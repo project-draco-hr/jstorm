@@ -1,4 +1,3 @@
 {
-  projectionValidation(inputFields);
   return global().partitionPersist(spec,inputFields,new ReducerAggStateUpdater(agg),functionFields);
 }

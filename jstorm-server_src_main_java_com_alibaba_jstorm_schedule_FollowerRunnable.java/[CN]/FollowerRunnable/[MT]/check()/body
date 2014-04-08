@@ -23,13 +23,11 @@
     }
   }
  catch (  IOException e) {
-    LOG.error("Get stormdist dir error!");
-    e.printStackTrace();
+    LOG.error("Get stormdist dir error!",e);
     return;
   }
 catch (  Exception e) {
-    LOG.error("Check error!");
-    e.printStackTrace();
+    LOG.error("Check error!",e);
     return;
   }
 }

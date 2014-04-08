@@ -1,3 +1,7 @@
 {
-  return _delegate.multiGet(keys);
+  List<T> ret=new ArrayList<T>();
+  for (  List<Object> key : keys) {
+    ret.add(db.get(key));
+  }
+  return ret;
 }

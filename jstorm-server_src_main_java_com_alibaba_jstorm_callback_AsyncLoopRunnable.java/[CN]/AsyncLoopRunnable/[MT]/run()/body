@@ -4,8 +4,8 @@
       Exception e=null;
       try {
         if (fn == null) {
-          LOG.info("fn==null," + fn.getClass());
-          continue;
+          LOG.warn("fn==null");
+          throw new RuntimeException("AsyncLoopRunnable no core function ");
         }
         fn.run();
         e=fn.error();
@@ -18,7 +18,7 @@
         throw e;
       }
       Object rtn=fn.getResult();
-      if (this.needSleep(rtn)) {
+      if (this.needQuit(rtn)) {
         return;
       }
     }
@@ -27,8 +27,9 @@
     LOG.info("Async loop interrupted!");
   }
 catch (  Throwable e) {
-    if (e.getCause() instanceof InterruptedException) {
-      LOG.info("Async loop interrupted!");
+    Object rtn=fn.getResult();
+    if (this.needQuit(rtn)) {
+      return;
     }
  else {
       LOG.error("Async loop died!",e);

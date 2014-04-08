@@ -1,0 +1,20 @@
+{
+  try {
+    h=center.busy(SubSystemType.cpu);
+    if (h == null) {
+      Set<SubSystemType> types=new HashSet<SubSystemType>();
+      types.add(SubSystemType.cpu);
+      h=new Hierarchy(JSTORM_HIERARCHY_NAME,types,"/jstorm/cgroup/cpu");
+      center.mount(h);
+    }
+    File file=new File(h.getDir() + "/worker_root");
+    rootCgroup=new CgroupCommon("worker_root",h,h.getRootCgroups());
+    if (!file.exists()) {
+      center.create(rootCgroup);
+    }
+  }
+ catch (  IOException e) {
+    LOG.error("prepare subsystem error!",e);
+    throw new RuntimeException(e);
+  }
+}

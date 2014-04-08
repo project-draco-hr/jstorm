@@ -1,0 +1,8 @@
+{
+  Record actual=(Record)o;
+  boolean result=false;
+  if (type == actual.type && device == actual.device && accesses == actual.accesses) {
+    result=true;
+  }
+  return result;
+}

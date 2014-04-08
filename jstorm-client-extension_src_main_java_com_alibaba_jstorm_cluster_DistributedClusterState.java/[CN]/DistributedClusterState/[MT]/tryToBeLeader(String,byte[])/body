@@ -1,0 +1,3 @@
+{
+  zkobj.createNode(zk,path,host,CreateMode.EPHEMERAL);
+}

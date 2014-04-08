@@ -1,5 +1,5 @@
 {
-  if (data.isGroupModel() == false) {
+  if (data.isGroupMode() == false) {
     LOG.info("Group model has been disabled!");
     return;
   }

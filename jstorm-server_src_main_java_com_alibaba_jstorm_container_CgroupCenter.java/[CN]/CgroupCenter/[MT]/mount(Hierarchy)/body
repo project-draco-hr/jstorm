@@ -1,0 +1,17 @@
+{
+  if (this.mounted(hierarchy) != null) {
+    LOG.error(hierarchy.getDir() + " is mounted");
+    return;
+  }
+  Set<SubSystemType> subsystems=hierarchy.getSubSystems();
+  for (  SubSystemType type : subsystems) {
+    if (this.busy(type) != null) {
+      LOG.error("subsystem: " + type.name() + " is busy");
+      subsystems.remove(type);
+    }
+  }
+  if (subsystems.size() == 0)   return;
+  if (!CgroupUtils.dirExists(hierarchy.getDir()))   new File(hierarchy.getDir()).mkdirs();
+  String subSystems=CgroupUtils.reAnalyse(subsystems);
+  SystemOperation.mount(subSystems,hierarchy.getDir(),"cgroup",subSystems);
+}

@@ -1,5 +1,14 @@
 {
   List<Integer> portList=(List<Integer>)conf.get(Config.SUPERVISOR_SLOTS_PORTS);
-  Set<Integer> ports=JStormUtils.listToSet(portList);
-  return new SlotResourcePool<Integer>(ResourceType.NET,ports);
+  if (!StormConfig.local_mode(conf)) {
+    Set<Integer> ports=JStormUtils.listToSet(portList);
+    return new SlotResourcePool<Integer>(ResourceType.NET,ports);
+  }
+ else {
+    List<Integer> result=new ArrayList<Integer>();
+    int port=portList.get(0);
+    result.add(port);
+    Set<Integer> ports=JStormUtils.listToSet(result);
+    return new SlotResourcePool<Integer>(ResourceType.NET,ports);
+  }
 }

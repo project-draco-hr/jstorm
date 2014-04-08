@@ -1,0 +1,18 @@
+{
+  if (nimbusServer != null)   nimbusServer.cleanup();
+  if (supervisor != null) {
+    supervisor.ShutdownAllWorkers();
+    supervisor.shutdown();
+  }
+  if (zookeeper != null)   zookeeper.shutdown();
+  if (tmpDir != null) {
+    for (    String dir : tmpDir) {
+      try {
+        PathUtils.rmr(dir);
+      }
+ catch (      IOException e) {
+        LOG.error("fail to delete " + dir,e);
+      }
+    }
+  }
+}

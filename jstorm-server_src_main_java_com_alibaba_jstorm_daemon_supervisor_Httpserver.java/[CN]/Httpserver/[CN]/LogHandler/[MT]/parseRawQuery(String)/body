@@ -1,0 +1,10 @@
+{
+  Map<String,String> paramMap=Maps.newHashMap();
+  for (  String param : StringUtils.split(uriRawQuery,"&")) {
+    String[] pair=StringUtils.split(param,"=");
+    if (pair.length == 2) {
+      paramMap.put(pair[0],pair[1]);
+    }
+  }
+  return paramMap;
+}

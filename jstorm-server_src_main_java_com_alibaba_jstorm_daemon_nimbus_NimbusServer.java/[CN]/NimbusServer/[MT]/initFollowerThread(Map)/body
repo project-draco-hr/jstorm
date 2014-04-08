@@ -1,5 +1,5 @@
 {
-  follower=new FollowerRunnable(data,leaderSelector,5000);
+  follower=new FollowerRunnable(data,5000);
   Thread thread=new Thread(follower);
   thread.setDaemon(true);
   thread.start();

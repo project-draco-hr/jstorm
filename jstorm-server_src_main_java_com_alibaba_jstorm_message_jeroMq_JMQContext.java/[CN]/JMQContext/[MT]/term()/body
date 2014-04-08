@@ -1,0 +1,4 @@
+{
+  LOG.info("JZMQ context terminates ");
+  context.term();
+}

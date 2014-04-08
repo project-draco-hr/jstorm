@@ -1,18 +1,21 @@
 {
   LOG.info("Begin to shut down task " + topology_id + ":"+ task_id);
   taskStatus.setStatus(TaskStatus.SHUTDOWN);
+  closeComponent(task_obj);
   try {
     Thread.sleep(100);
   }
  catch (  InterruptedException e) {
   }
   for (  AsyncLoopThread thr : all_threads) {
+    LOG.info("Begin to shutdown " + thr.getThread().getName());
     thr.interrupt();
     try {
-      thr.join();
+      thr.getThread().stop();
     }
- catch (    InterruptedException e) {
+ catch (    Exception e) {
     }
+    LOG.info("Successfully shutdown " + thr.getThread().getName());
   }
   try {
     zkCluster.remove_task_heartbeat(topology_id,task_id);
@@ -21,6 +24,5 @@
  catch (  Exception e) {
     LOG.info(e);
   }
-  closeComponent(task_obj);
   LOG.info("Successfully shut down task " + topology_id + ":"+ task_id);
 }

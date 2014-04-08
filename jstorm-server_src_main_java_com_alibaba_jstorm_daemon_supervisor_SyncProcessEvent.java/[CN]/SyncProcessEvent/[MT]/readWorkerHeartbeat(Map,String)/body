@@ -1,4 +1,10 @@
 {
-  LocalState ls=StormConfig.worker_state(conf,workerId);
-  return (WorkerHeartbeat)ls.get(Common.LS_WORKER_HEARTBEAT);
+  try {
+    LocalState ls=StormConfig.worker_state(conf,workerId);
+    return (WorkerHeartbeat)ls.get(Common.LS_WORKER_HEARTBEAT);
+  }
+ catch (  IOException e) {
+    LOG.error("Failed to get worker Heartbeat",e);
+    return null;
+  }
 }

@@ -1,0 +1,15 @@
+{
+  RunnableCallback masterCallback=new RunnableCallback(){
+    @Override public void run(){
+      try {
+        tryToBeLeader(conf);
+      }
+ catch (      Exception e) {
+        LOG.error("To be master error",e);
+        JStormUtils.halt_process(30,"Cant't to be master" + e.getMessage());
+      }
+    }
+  }
+;
+  data.setLeader(data.getStormClusterState().try_to_be_leader(Cluster.MASTER_SUBTREE,hostPort,masterCallback));
+}

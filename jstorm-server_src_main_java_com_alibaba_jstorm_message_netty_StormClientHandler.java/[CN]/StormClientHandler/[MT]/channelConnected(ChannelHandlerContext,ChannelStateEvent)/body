@@ -1,7 +1,7 @@
 {
   Channel channel=event.getChannel();
   client.setChannel(channel);
-  LOG.info("connection established to :{}",client.getTarget_Server());
+  LOG.info("connection established to :{}",client.getRemoteAddr());
   try {
     sendRequests(channel,client.takeMessages());
   }

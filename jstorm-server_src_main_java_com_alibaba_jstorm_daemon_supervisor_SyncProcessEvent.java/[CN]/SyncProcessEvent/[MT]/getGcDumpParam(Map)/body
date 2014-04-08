@@ -1,0 +1,15 @@
+{
+  String gcPath=ConfigExtension.getWorkerGcPath(totalConf);
+  Date now=new Date();
+  String nowStr=TimeFormat.getSecond(now);
+  StringBuilder gc=new StringBuilder();
+  gc.append(" -Xloggc:");
+  gc.append(gcPath);
+  gc.append(File.separator);
+  gc.append("%TOPOLOGYID%-worker-%ID%-");
+  gc.append(nowStr);
+  gc.append("-gc.log -verbose:gc -XX:HeapDumpPath=");
+  gc.append(gcPath);
+  gc.append(" ");
+  return gc.toString();
+}

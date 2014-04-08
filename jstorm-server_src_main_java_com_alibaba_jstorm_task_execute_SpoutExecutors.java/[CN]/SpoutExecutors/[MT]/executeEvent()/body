@@ -12,9 +12,4 @@
       LOG.error("Actor occur unknow exception ",e);
     }
   }
-  long now=System.currentTimeMillis();
-  if (now - lastRotate > rotateTime) {
-    lastRotate=now;
-    Map<Long,TupleInfo> dead=pending.rotate();
-  }
 }

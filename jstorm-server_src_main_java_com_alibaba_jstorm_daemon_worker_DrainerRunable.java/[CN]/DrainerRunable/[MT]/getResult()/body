@@ -1,3 +1,4 @@
 {
-  return 0;
+  if (workerActive.get())   return 0;
+ else   return -1;
 }

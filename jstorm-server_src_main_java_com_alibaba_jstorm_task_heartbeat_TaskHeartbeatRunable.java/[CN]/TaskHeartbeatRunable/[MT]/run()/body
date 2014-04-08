@@ -9,5 +9,5 @@
     LOG.error(errMsg,e);
     return;
   }
-  LOG.debug("task hearbeat task_id=" + idStr + "=>"+ hb.toString());
+  LOG.info("task hearbeat task_id=" + idStr + " ts "+ currtime);
 }

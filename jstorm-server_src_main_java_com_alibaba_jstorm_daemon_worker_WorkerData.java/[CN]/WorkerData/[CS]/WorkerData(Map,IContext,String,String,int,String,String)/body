@@ -13,21 +13,27 @@
     PathUtils.touch(pidPath);
     LOG.info("Current worker's pid is " + pidPath);
   }
-  this.zkClusterstate=Cluster.mk_distributed_cluster_state(conf);
+  this.zkClusterstate=ZkTool.mk_distributed_cluster_state(conf);
   this.zkCluster=Cluster.mk_storm_cluster_state(zkClusterstate);
   Map rawConf=StormConfig.read_supervisor_topology_conf(conf,topology_id);
   this.stormConf=new HashMap<Object,Object>();
   this.stormConf.putAll(conf);
   this.stormConf.putAll(rawConf);
+  LOG.info("Worker Configuration " + stormConf);
   try {
-    String[] paths=jar_path.split(":");
-    Set<URL> urls=new HashSet<URL>();
-    for (    String path : paths) {
-      if (path.equals(""))       continue;
-      URL url=new URL("File:" + path);
-      urls.add(url);
+    if (jar_path != null) {
+      String[] paths=jar_path.split(":");
+      Set<URL> urls=new HashSet<URL>();
+      for (      String path : paths) {
+        if (StringUtils.isBlank(path))         continue;
+        URL url=new URL("File:" + path);
+        urls.add(url);
+      }
+      WorkerClassLoader.mkInstance(urls.toArray(new URL[0]),ClassLoader.getSystemClassLoader(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
     }
-    jarClassLoader=WorkerClassLoader.mkInstance(urls.toArray(new URL[0]),ClassLoader.getSystemClassLoader(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
+ else {
+      WorkerClassLoader.mkInstance(new URL[0],ClassLoader.getSystemClassLoader(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
+    }
   }
  catch (  Exception e) {
     LOG.error("init jarClassLoader error!",e);

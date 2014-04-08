@@ -5,7 +5,6 @@
     LOG.info("delete:" + dir_to_delete + "successfully!");
   }
  catch (  IOException e) {
-    LOG.error("delete:" + dir_to_delete + "fail!");
-    e.printStackTrace();
+    LOG.error("delete:" + dir_to_delete + "fail!",e);
   }
 }

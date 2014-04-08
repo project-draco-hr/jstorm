@@ -1,5 +1,5 @@
 {
-  String assgnmentBakPath=Cluster.assignment_bak_path(topologyName);
+  String assgnmentBakPath=ZkTool.assignment_bak_path(topologyName);
   byte[] znodeData=cluster_state.get_data(assgnmentBakPath,false);
   Object data=Cluster.maybe_deserialize(znodeData);
   if (data == null) {

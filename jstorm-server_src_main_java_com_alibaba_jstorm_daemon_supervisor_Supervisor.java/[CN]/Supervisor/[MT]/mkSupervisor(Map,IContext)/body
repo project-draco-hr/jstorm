@@ -29,6 +29,8 @@
   EventManagerPusher syncSupervisorPusher=new EventManagerPusher(syncSupEventManager,syncSupervisorEvent,active,syncFrequence);
   AsyncLoopThread syncSupervisorThread=new AsyncLoopThread(syncSupervisorPusher);
   threads.add(syncSupervisorThread);
+  Httpserver httpserver=new Httpserver(conf);
+  httpserver.start();
   LOG.info("Starting supervisor with id " + supervisorId + " at host "+ myHostName);
-  return new SupervisorManger(conf,supervisorId,active,threads,syncSupEventManager,processEventManager,stormClusterState,workerThreadPids);
+  return new SupervisorManger(conf,supervisorId,active,threads,syncSupEventManager,processEventManager,httpserver,stormClusterState,workerThreadPids);
 }

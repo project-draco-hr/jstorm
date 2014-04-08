@@ -1,4 +1,3 @@
 {
   _currTx=null;
-  _backing.reset();
 }

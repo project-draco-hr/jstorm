@@ -3,8 +3,16 @@
   while (state) {
     try {
       Thread.sleep(sleepTime);
-      if (leaderSelector.hasLeadership())       continue;
+      if (data.isLeader()) {
+        data.getStormClusterState().unregister_nimbus_host(nimbusHost);
+        return;
+      }
+      if (!data.getStormClusterState().leader_existed()) {
+        this.tryToBeLeader(data.getConf());
+        continue;
+      }
       check();
+      data.getStormClusterState().update_follower_hb(nimbusHost,data.uptime());
     }
  catch (    InterruptedException e) {
       continue;
@@ -15,6 +23,5 @@ catch (    Exception e) {
       }
     }
   }
-  zkobj.close();
   LOG.info("Follower Thread has closed!");
 }

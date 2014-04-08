@@ -3,6 +3,7 @@
     return;
   }
   Tuple tuple=(Tuple)event;
+  task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
   tuple_start_times.put(tuple,System.currentTimeMillis());
   try {
     bolt.execute(tuple);

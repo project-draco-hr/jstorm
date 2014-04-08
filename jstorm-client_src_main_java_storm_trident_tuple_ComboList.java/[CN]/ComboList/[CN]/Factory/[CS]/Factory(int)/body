@@ -1,5 +1,4 @@
 {
-  this.sizes=sizes;
   int total=0;
   for (  int size : sizes) {
     total+=size;

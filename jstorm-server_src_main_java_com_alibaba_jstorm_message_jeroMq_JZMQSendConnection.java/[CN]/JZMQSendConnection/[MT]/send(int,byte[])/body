@@ -1,0 +1,3 @@
+{
+  socket.send(message);
+}

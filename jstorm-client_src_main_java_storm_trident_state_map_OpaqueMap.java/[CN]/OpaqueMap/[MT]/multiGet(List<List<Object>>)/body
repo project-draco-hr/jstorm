@@ -1,8 +1,7 @@
 {
-  List<CachedBatchReadsMap.RetVal<OpaqueValue>> curr=_backing.multiGet(keys);
+  List<OpaqueValue> curr=_backing.multiGet(keys);
   List<T> ret=new ArrayList<T>(curr.size());
-  for (  CachedBatchReadsMap.RetVal<OpaqueValue> retval : curr) {
-    OpaqueValue val=retval.val;
+  for (  OpaqueValue val : curr) {
     if (val != null) {
       ret.add((T)val.get(_currTx));
     }

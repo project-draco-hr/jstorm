@@ -14,20 +14,11 @@
     _collector.ack(tuple);
     return;
   }
-  IBatchID id=(IBatchID)tuple.getValue(0);
-  TrackedBatch tracked=(TrackedBatch)_batches.get(id.getId());
-  if (tracked != null) {
-    if (id.getAttemptId() > tracked.attemptId) {
-      _batches.remove(id.getId());
-      tracked=null;
-    }
- else     if (id.getAttemptId() < tracked.attemptId) {
-      return;
-    }
-  }
+  Object id=tuple.getValue(0);
+  TrackedBatch tracked=(TrackedBatch)_batches.get(id);
   if (tracked == null) {
-    tracked=new TrackedBatch(new BatchInfo(batchGroup,id,_bolt.initBatchState(batchGroup,id)),_coordConditions.get(batchGroup),id.getAttemptId());
-    _batches.put(id.getId(),tracked);
+    tracked=new TrackedBatch(new BatchInfo(batchGroup,id,_bolt.initBatchState(batchGroup,id)),_coordConditions.get(batchGroup));
+    _batches.put(id,tracked);
   }
   _coordCollector.setCurrBatch(tracked);
   TupleType t=getTupleType(tuple,tracked);
@@ -51,7 +42,7 @@
       }
     }
  catch (    FailedException e) {
-      failBatch(tracked,e);
+      failBatch(tracked);
     }
     if (success) {
       _collector.ack(tuple);

@@ -1,8 +1,11 @@
 {
   try {
     String localRoot=StormConfig.masterStormdistRoot(data.getConf(),topologyId);
+    String tmpDir=localRoot + UUID.randomUUID().toString();
+    ;
     String masterCodeDir=assignment.getMasterCodeDir();
-    JStormServerUtils.downloadCodeFromMaster(data.getConf(),localRoot,masterCodeDir);
+    JStormServerUtils.downloadCodeFromMaster(data.getConf(),tmpDir,masterCodeDir);
+    FileUtils.moveDirectory(new File(tmpDir),new File(localRoot));
   }
  catch (  TException e) {
     LOG.error(e + " downloadStormCode failed " + "topologyId:"+ topologyId+ "masterCodeDir:"+ assignment.getMasterCodeDir());

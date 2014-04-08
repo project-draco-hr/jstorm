@@ -1,4 +1,4 @@
 {
   int index=randomrange.nextInt();
-  return JStormUtils.mk_list(index);
+  return JStormUtils.mk_list(outTasks.get(index));
 }

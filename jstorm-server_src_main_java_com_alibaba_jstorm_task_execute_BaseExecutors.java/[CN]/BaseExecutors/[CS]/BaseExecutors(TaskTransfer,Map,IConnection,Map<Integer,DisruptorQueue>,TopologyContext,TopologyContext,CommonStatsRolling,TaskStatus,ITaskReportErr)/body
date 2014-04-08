@@ -18,5 +18,5 @@
   this.disruptorRecvQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(queue_size),waitStrategy);
   this.disruptorRecvQueue.consumerStarted();
   this.registerInnerTransfer(disruptorRecvQueue);
-  new AsyncLoopThread(new RecvRunnable(disruptorRecvQueue));
+  recvThread=new AsyncLoopThread(new RecvRunnable(disruptorRecvQueue));
 }

@@ -10,6 +10,7 @@
     isLocal=true;
   }
  else {
+    this.outTasks=new ArrayList<Integer>();
     this.outTasks.addAll(allOutTasks);
     isLocal=false;
   }

@@ -20,5 +20,6 @@
  catch (  Exception e) {
     LOG.error("Failed to shutdown ZK client",e);
   }
+  httpserver.shutdown();
   isFinishShutdown=true;
 }

@@ -1,0 +1,16 @@
+{
+  Date date=new Date();
+  String dateStr=getDay(date);
+  Date newDate=getDay(dateStr);
+  System.out.println("new date:" + newDate);
+  Date current=new Date();
+  Calendar tomorrow=Calendar.getInstance();
+  tomorrow.setTime(current);
+  tomorrow.add(Calendar.DATE,1);
+  tomorrow.set(Calendar.AM_PM,Calendar.AM);
+  tomorrow.set(Calendar.HOUR,2);
+  tomorrow.set(Calendar.MINUTE,0);
+  Date startTime=tomorrow.getTime();
+  long hourdiff=(startTime.getTime() - current.getTime()) / ONE_HOUR_MILLISECONDS;
+  System.out.println("Current:" + current + ", tomorrow"+ startTime+ ", diff hour"+ hourdiff);
+}

@@ -1,5 +1,5 @@
 {
-  if (distribute) {
+  if (distribute && !StormConfig.local_mode(storm_conf)) {
     return netty_connect(topology_id,host,port);
   }
  else {

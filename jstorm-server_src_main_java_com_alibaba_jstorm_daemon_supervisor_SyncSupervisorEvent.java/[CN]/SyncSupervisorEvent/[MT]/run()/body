@@ -15,7 +15,7 @@
       LOG.error("put LS_LOCAL_ASSIGNMENTS " + localAssignment + " of localState failed");
       throw e;
     }
-    Map<String,String> topologyCodes=getTopologyCodeLocations(assignments);
+    Map<String,String> topologyCodes=getTopologyCodeLocations(assignments,supervisorId);
     downloadTopology(topologyCodes,downloadedTopologyIds);
     removeUselessTopology(topologyCodes,downloadedTopologyIds);
     processEventManager.add(syncProcesses);

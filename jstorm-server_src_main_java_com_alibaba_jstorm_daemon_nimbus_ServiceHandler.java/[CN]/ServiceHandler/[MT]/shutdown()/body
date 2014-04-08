@@ -1,4 +1,4 @@
 {
-  LOG.info("Shutting down master");
-  LOG.info("Shut down master");
+  LOG.info("Begin to shut down master");
+  LOG.info("Successfully shut down master");
 }

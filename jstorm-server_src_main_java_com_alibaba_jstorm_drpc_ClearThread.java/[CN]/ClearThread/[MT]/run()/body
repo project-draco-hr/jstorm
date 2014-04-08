@@ -1,0 +1,15 @@
+{
+  for (  Entry<String,Integer> e : drpcService.getIdtoStart().entrySet()) {
+    if (TimeUtils.time_delta(e.getValue()) > REQUEST_TIMEOUT_SECS) {
+      String id=e.getKey();
+      drpcService.getIdtoResult().put(id,new DRPCExecutionException("Request timed out"));
+      Semaphore s=drpcService.getIdtoSem().get(id);
+      if (s != null) {
+        s.release();
+      }
+      drpcService.cleanup(id);
+      LOG.info("Clear request " + id);
+    }
+  }
+  JStormUtils.sleepMs(10);
+}

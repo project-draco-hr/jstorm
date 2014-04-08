@@ -1,0 +1,60 @@
+{
+  String fileParam=paramMap.get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_LOGFILE);
+  if (StringUtils.isEmpty(fileParam)) {
+    return "Bad Request, Params Error".getBytes();
+  }
+  ViewMode viewMode=ViewMode.l4k;
+  String modeParam=paramMap.get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_VIEWMODE);
+  if (StringUtils.isNotEmpty(modeParam)) {
+    try {
+      viewMode=ViewMode.valueOf(modeParam);
+    }
+ catch (    Throwable e) {
+      LOG.warn("Not Support Logview Mode : " + modeParam + ", Display Last 4KB!");
+    }
+  }
+  String logFile=Joiner.on("/").join(logDir,fileParam);
+  FileChannel fc=null;
+  MappedByteBuffer fout=null;
+  byte[] ret;
+  try {
+    fc=new RandomAccessFile(logFile,"r").getChannel();
+    long size=0;
+    long position=-1;
+switch (viewMode) {
+case l4k:
+      size=1024 * 4;
+    position=fc.size() - size;
+  break;
+case l8k:
+size=1024 * 8;
+position=fc.size() - size;
+break;
+case all:
+size=fc.size();
+position=0L;
+}
+if (position < 0) {
+position=0L;
+}
+LOG.info("logview " + logFile + ", position="+ position+ ", size="+ size);
+fout=fc.map(FileChannel.MapMode.READ_ONLY,position,size);
+ret=new byte[(int)size];
+fout.get(ret);
+return ret;
+}
+ catch (FileNotFoundException e) {
+LOG.warn(e);
+return e.toString().getBytes();
+}
+catch (IOException e) {
+LOG.warn(e);
+return e.toString().getBytes();
+}
+ finally {
+fout=null;
+if (fc != null) {
+IOUtils.closeQuietly(fc);
+}
+}
+}

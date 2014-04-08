@@ -1,0 +1,16 @@
+{
+  if (rtn != null) {
+    long sleepTime=Long.parseLong(String.valueOf(rtn));
+    if (sleepTime < 0) {
+      return true;
+    }
+ else     if (sleepTime > 0) {
+      try {
+        JStormServerUtils.sleep_secs(sleepTime);
+      }
+ catch (      InterruptedException e) {
+      }
+    }
+  }
+  return false;
+}

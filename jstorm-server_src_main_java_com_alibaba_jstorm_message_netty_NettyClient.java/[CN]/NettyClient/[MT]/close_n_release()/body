@@ -6,7 +6,7 @@
         disruptorQueue.clear();
       }
       factory.releaseExternalResources();
-      LOG.info("Successfully close connection to {}",target_Server);
+      LOG.info("Successfully close connection to {}",remote_addr);
     }
   }
 ).start();

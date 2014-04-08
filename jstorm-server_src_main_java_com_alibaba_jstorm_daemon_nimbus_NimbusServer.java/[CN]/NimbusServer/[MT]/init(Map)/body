@@ -1,0 +1,12 @@
+{
+  NimbusUtils.cleanupCorruptTopologies(data);
+  initTopologyAssign();
+  initTopologyStatus();
+  initMonitor(conf);
+  initCleaner(conf);
+  serviceHandler=new ServiceHandler(data);
+  if (!data.isLocalMode()) {
+    initGroup(conf);
+    initThrift(conf);
+  }
+}

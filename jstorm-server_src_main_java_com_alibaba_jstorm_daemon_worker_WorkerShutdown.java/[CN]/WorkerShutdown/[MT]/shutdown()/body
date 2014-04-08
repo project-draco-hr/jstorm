@@ -1,14 +1,14 @@
 {
   active.set(false);
-  for (  ShutdownableDameon task : shutdowntasks) {
-    task.shutdown();
-  }
+  virtualPortShutdown.shutdown();
   for (  WorkerSlot k : nodeportSocket.keySet()) {
     IConnection value=nodeportSocket.get(k);
     value.close();
   }
-  virtualPortShutdown.shutdown();
   context.term();
+  for (  ShutdownableDameon task : shutdowntasks) {
+    task.shutdown();
+  }
   for (  AsyncLoopThread t : threads) {
     t.interrupt();
     try {

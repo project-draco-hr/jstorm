@@ -1,0 +1,15 @@
+{
+  int port=JStormUtils.parseInt(conf.get(Config.DRPC_PORT));
+  int workerThreadNum=JStormUtils.parseInt(conf.get(Config.DRPC_WORKER_THREADS));
+  int queueSize=JStormUtils.parseInt(conf.get(Config.DRPC_QUEUE_SIZE));
+  TNonblockingServerSocket socket=new TNonblockingServerSocket(port);
+  THsHaServer.Args targs=new THsHaServer.Args(socket);
+  targs.workerThreads(64);
+  targs.protocolFactory(new TBinaryProtocol.Factory());
+  targs.processor(new DistributedRPC.Processor<DistributedRPC.Iface>(service));
+  ThreadPoolExecutor executor=new ThreadPoolExecutor(workerThreadNum,workerThreadNum,60,TimeUnit.SECONDS,new ArrayBlockingQueue(queueSize));
+  targs.executorService(executor);
+  THsHaServer handlerServer=new THsHaServer(targs);
+  LOG.info("Successfully init Handler Server " + port);
+  return handlerServer;
+}

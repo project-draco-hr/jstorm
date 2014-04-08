@@ -1,0 +1,20 @@
+{
+  handlerServer=initHandlerServer(conf,this);
+  invokeServer=initInvokeServer(conf,this);
+  Runtime.getRuntime().addShutdownHook(new Thread(){
+    public void run(){
+      Drpc.this.shutdown();
+      handlerServer.stop();
+      invokeServer.stop();
+    }
+  }
+);
+  LOG.info("Starting Distributed RPC servers...");
+  new Thread(new Runnable(){
+    @Override public void run(){
+      invokeServer.serve();
+    }
+  }
+).start();
+  handlerServer.serve();
+}

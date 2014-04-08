@@ -1,3 +1,0 @@
-{
-  return zkobj.mkLeaderSelector(zk,path,listener);
-}

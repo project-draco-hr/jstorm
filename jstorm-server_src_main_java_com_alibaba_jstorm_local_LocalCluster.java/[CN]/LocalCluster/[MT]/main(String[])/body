@@ -1,0 +1,9 @@
+{
+  LocalCluster localCluster=null;
+  try {
+    localCluster=new LocalCluster();
+  }
+  finally {
+    localCluster.shutdown();
+  }
+}

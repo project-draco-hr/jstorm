@@ -6,22 +6,47 @@
   totalConf.putAll(conf);
   totalConf.putAll(stormConf);
   String stormhome=System.getProperty("jstorm.home");
-  long memSlotSize=ConfigExtension.getMemSlotSize(conf);
+  long memSlotSize=ConfigExtension.getMemSlotSize(totalConf);
   long memSize=memSlotSize * assignment.getMemSlotNum();
+  int cpuNum=assignment.getCpuSlotNum();
   String childopts=getChildOpts(totalConf);
+  childopts+=getGcDumpParam(totalConf);
   childopts=childopts.replace("%ID%",port.toString());
   childopts=childopts.replace("%TOPOLOGYID%",topologyId);
-  childopts=childopts.replace("%JSTORM_HOME%",stormhome);
-  String logFileName=topologyId + "-worker-" + port+ ".log";
+  if (stormhome != null) {
+    childopts=childopts.replace("%JSTORM_HOME%",stormhome);
+  }
+ else {
+    childopts=childopts.replace("%JSTORM_HOME%","./");
+  }
   Map<String,String> environment=new HashMap<String,String>();
-  environment.put("LD_LIBRARY_PATH",(String)conf.get(Config.JAVA_LIBRARY_PATH));
+  if (ConfigExtension.getWorkerRedirectOutput(totalConf)) {
+    environment.put("REDIRECT","true");
+  }
+ else {
+    environment.put("REDIRECT","false");
+  }
+  String logFileName=topologyId + "-worker-" + port+ ".log";
+  environment.put("LD_LIBRARY_PATH",(String)totalConf.get(Config.JAVA_LIBRARY_PATH));
   StringBuilder commandSB=new StringBuilder();
+  try {
+    if (this.cgroupManager != null) {
+      commandSB.append(cgroupManager.startNewWorker(cpuNum,workerId));
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("fail to prepare cgroup to workerId: " + workerId,e);
+    return;
+  }
   commandSB.append("java -server ");
-  commandSB.append(childopts);
   commandSB.append(" -Xms" + memSize);
   commandSB.append(" -Xmx" + memSize + " ");
+  commandSB.append(" -Xmn" + memSize / 3 + " ");
+  commandSB.append(" -XX:PermSize=" + memSize / 16);
+  commandSB.append(" -XX:MaxPermSize=" + memSize / 8);
+  commandSB.append(childopts);
   commandSB.append(" -Djava.library.path=");
-  commandSB.append((String)conf.get(Config.JAVA_LIBRARY_PATH));
+  commandSB.append((String)totalConf.get(Config.JAVA_LIBRARY_PATH));
   commandSB.append(" -Dlogfile.name=");
   commandSB.append(logFileName);
   if (stormhome != null) {
@@ -33,7 +58,7 @@
     commandSB.append(" -Dlog4j.configuration=File:jstorm.log4j.properties");
   }
   String classpath=getClassPath(stormjar,stormhome,totalConf);
-  String workerClassPath=(String)conf.get(Config.WORKER_CLASSPATH);
+  String workerClassPath=(String)totalConf.get(Config.WORKER_CLASSPATH);
   commandSB.append(" -cp ");
   commandSB.append(classpath);
   if (!ConfigExtension.isEnableTopologyClassLoader(totalConf))   commandSB.append(":").append(workerClassPath);

@@ -1,0 +1,8 @@
+{
+  Stat excepted=(Stat)obj;
+  boolean result=false;
+  if (this.nrPeriods == excepted.nrPeriods && this.nrThrottled == excepted.nrThrottled && this.throttledTime == excepted.throttledTime) {
+    result=true;
+  }
+  return result;
+}

@@ -1,0 +1,8 @@
+{
+  try {
+    state.getNimbus().deactivate(topologyName);
+  }
+ catch (  TException e) {
+    LOG.error("fail to deactivate " + topologyName,e);
+  }
+}
