@@ -6,11 +6,14 @@
   if (pass != null) {
     times.set(0);
     values.set(0);
+    Double tps=timesValue / pass;
     StringBuilder sb=new StringBuilder();
     sb.append(id);
-    sb.append(", tps:" + timesValue / pass);
+    sb.append(", tps:" + tps);
     sb.append(", avg:" + ((double)v) / timesValue);
     sb.append(", total:" + totalValue);
     LOG.info(sb.toString());
+    return tps;
   }
+  return null;
 }

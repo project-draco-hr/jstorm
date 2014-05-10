@@ -1,0 +1,14 @@
+{
+  Pair<Long,byte[]> logPair=queryLog(t,paramMap);
+  if (logPair == null) {
+    return;
+  }
+  String size=String.format(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_SIZE_FORMAT,logPair.getFirst());
+  byte[] sizeByts=size.getBytes();
+  byte[] logData=logPair.getSecond();
+  t.sendResponseHeaders(HttpURLConnection.HTTP_OK,sizeByts.length + logData.length);
+  OutputStream os=t.getResponseBody();
+  os.write(sizeByts);
+  os.write(logData);
+  os.close();
+}

@@ -1,0 +1,5 @@
+{
+  process_killed(pid);
+  sleepMs(5 * 1000);
+  ensure_process_killed(pid);
+}

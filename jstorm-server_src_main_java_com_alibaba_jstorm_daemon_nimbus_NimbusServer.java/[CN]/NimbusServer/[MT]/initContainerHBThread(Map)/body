@@ -1,0 +1,6 @@
+{
+  AsyncLoopThread thread=SyncContainerHb.mkNimbusInstance(conf);
+  if (thread != null) {
+    smartThreads.add(thread);
+  }
+}

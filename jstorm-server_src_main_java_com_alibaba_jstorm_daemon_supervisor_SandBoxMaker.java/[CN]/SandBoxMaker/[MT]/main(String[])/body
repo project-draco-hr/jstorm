@@ -1,0 +1,11 @@
+{
+  Map<Object,Object> conf=Utils.readStormConfig();
+  conf.put("java.sandbox.enable",Boolean.valueOf(true));
+  SandBoxMaker maker=new SandBoxMaker(conf);
+  try {
+    System.out.println("sandboxPolicy:" + maker.sandboxPolicy("simple",new HashMap<String,String>()));
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+}

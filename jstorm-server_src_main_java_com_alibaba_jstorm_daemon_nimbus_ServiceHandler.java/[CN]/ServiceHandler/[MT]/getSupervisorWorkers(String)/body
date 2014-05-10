@@ -3,10 +3,12 @@
     StormClusterState stormClusterState=data.getStormClusterState();
     String supervisorId=null;
     SupervisorInfo supervisorInfo=null;
+    String ip=NetWorkUtils.host2Ip(host);
+    String hostName=NetWorkUtils.ip2Host(host);
     Map<String,SupervisorInfo> supervisorInfos=Cluster.allSupervisorInfo(stormClusterState,null);
     for (    Entry<String,SupervisorInfo> entry : supervisorInfos.entrySet()) {
       SupervisorInfo info=entry.getValue();
-      if (info.getHostName().equals(host)) {
+      if (info.getHostName().equals(hostName) || info.getHostName().equals(ip)) {
         supervisorId=entry.getKey();
         supervisorInfo=info;
         break;

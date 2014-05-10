@@ -1,16 +1,4 @@
 {
-  Enumeration<Appender> enumAppender=Logger.getRootLogger().getAllAppenders();
-  FileAppender fileAppender=null;
-  while (enumAppender.hasMoreElements()) {
-    Appender appender=enumAppender.nextElement();
-    if (appender instanceof FileAppender) {
-      fileAppender=(FileAppender)appender;
-      break;
-    }
-  }
-  if (fileAppender != null) {
-    String file=fileAppender.getFile();
-    logDir=file.substring(0,file.lastIndexOf('/'));
-  }
+  logDir=JStormUtils.getLogDir();
   LOG.info("logview logDir=" + logDir);
 }

@@ -1,16 +1,24 @@
 {
   List<TaskShutdownDameon> shutdowntasks=createTasks();
   workerData.setShutdownTasks(shutdowntasks);
+  List<AsyncLoopThread> threads=new ArrayList<AsyncLoopThread>();
   WorkerVirtualPort virtual_port=new WorkerVirtualPort(workerData);
   Shutdownable virtual_port_shutdown=virtual_port.launch();
   RefreshConnections refreshConn=makeRefreshConnections();
   AsyncLoopThread refreshconn=new AsyncLoopThread(refreshConn,false,Thread.MIN_PRIORITY,true);
+  threads.add(refreshconn);
   RefreshActive refreshZkActive=new RefreshActive(workerData);
   AsyncLoopThread refreshzk=new AsyncLoopThread(refreshZkActive,false,Thread.MIN_PRIORITY,true);
+  threads.add(refreshzk);
   RunnableCallback heartbeat_fn=new WorkerHeartbeatRunable(workerData);
   AsyncLoopThread hb=new AsyncLoopThread(heartbeat_fn,false,null,Thread.NORM_PRIORITY,true);
+  threads.add(hb);
   DrainerRunable drainer=new DrainerRunable(workerData);
   AsyncLoopThread dr=new AsyncLoopThread(drainer,false,Thread.MAX_PRIORITY,true);
-  AsyncLoopThread[] threads={refreshconn,refreshzk,hb,dr};
+  threads.add(dr);
+  AsyncLoopThread syncContainerHbThread=SyncContainerHb.mkWorkerInstance(workerData.getConf());
+  if (syncContainerHbThread != null) {
+    threads.add(syncContainerHbThread);
+  }
   return new WorkerShutdown(workerData,shutdowntasks,virtual_port_shutdown,threads);
 }

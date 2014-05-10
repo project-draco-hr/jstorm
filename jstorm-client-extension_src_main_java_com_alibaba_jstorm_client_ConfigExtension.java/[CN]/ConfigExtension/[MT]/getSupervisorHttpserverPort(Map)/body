@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(SUPERVISOR_HTTPSERVER_PORT),DEFAULT_SUPERVISOR_HTTPSERVER_PORT);
-}

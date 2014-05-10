@@ -1,5 +1,6 @@
 {
   if (hs != null) {
     hs.stop(0);
+    LOG.info("Successfully stop http server");
   }
 }

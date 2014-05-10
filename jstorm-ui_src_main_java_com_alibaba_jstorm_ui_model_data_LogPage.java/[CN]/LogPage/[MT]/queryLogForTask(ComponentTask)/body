@@ -1,7 +1,0 @@
-{
-  String host=task.getHost();
-  String logFile="/home/admin/aloha/logs/" + task.getTopologyid() + "-worker-"+ task.getPort()+ ".log";
-  host="10.232.12.32";
-  logFile="/home/admin/diamond/logs/client-request.log";
-  String url=String.format(START_AGENT,host,logFile);
-}

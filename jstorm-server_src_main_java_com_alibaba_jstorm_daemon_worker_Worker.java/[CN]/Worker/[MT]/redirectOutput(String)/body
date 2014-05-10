@@ -1,9 +1,13 @@
 {
-  if (System.getenv("REDIRECT") == null || !System.getenv("REDIRECT").equals("true"))   return;
-  String OUT_TARGET_FILE="/dev/null";
-  System.out.println("Redirect output to " + OUT_TARGET_FILE);
-  FileOutputStream workerOut=new FileOutputStream(new File(OUT_TARGET_FILE));
-  PrintStream ps=new PrintStream(new BufferedOutputStream(workerOut),true);
-  System.setOut(ps);
-  LOG.info("Successfully redirect System.out to " + OUT_TARGET_FILE);
+  if (System.getenv("REDIRECT") == null || !System.getenv("REDIRECT").equals("true")) {
+    return;
+  }
+  String OUT_TARGET_FILE=JStormUtils.getLogFileName();
+  if (OUT_TARGET_FILE == null) {
+    OUT_TARGET_FILE="/dev/null";
+  }
+ else {
+    OUT_TARGET_FILE+=".out";
+  }
+  JStormUtils.redirectOutput(OUT_TARGET_FILE);
 }

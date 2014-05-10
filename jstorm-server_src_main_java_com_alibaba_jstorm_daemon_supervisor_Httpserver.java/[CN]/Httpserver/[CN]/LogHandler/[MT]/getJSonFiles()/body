@@ -1,0 +1,25 @@
+{
+  Map<String,FileAttribute> fileMap=new HashMap<String,FileAttribute>();
+  File file=new File(logDir);
+  String[] files=file.list();
+  for (  String fileName : files) {
+    String logFile=Joiner.on(File.separator).join(logDir,fileName);
+    FileAttribute fileAttribute=new FileAttribute();
+    fileAttribute.setFileName(fileName);
+    File subFile=new File(logFile);
+    Date modify=new Date(subFile.lastModified());
+    fileAttribute.setModifyTime(TimeFormat.getSecond(modify));
+    if (subFile.isFile()) {
+      fileAttribute.setIsDir(String.valueOf(false));
+      fileAttribute.setSize(String.valueOf(subFile.length()));
+      fileMap.put(logFile,fileAttribute);
+    }
+ else     if (subFile.isDirectory()) {
+      fileAttribute.setIsDir(String.valueOf(true));
+      fileAttribute.setSize(String.valueOf(4096));
+      fileMap.put(logFile,fileAttribute);
+    }
+  }
+  String fileJsonStr=JStormUtils.to_json(fileMap);
+  return fileJsonStr.getBytes();
+}

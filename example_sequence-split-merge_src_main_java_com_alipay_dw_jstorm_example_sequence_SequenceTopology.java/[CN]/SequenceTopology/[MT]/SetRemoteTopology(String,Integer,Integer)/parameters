@@ -1,3 +1,0 @@
-String streamName
-Integer spout_parallelism_hint
-Integer bolt_parallelism_hint

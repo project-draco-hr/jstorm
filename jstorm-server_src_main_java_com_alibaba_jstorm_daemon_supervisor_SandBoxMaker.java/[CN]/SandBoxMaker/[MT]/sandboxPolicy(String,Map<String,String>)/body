@@ -1,0 +1,15 @@
+{
+  if (isEnable == false) {
+    return "";
+  }
+  replaceMap.putAll(replaceBaseMap);
+  String tmpPolicy=generatePolicyFile(replaceMap);
+  File file=new File(tmpPolicy);
+  String policyPath=StormConfig.worker_root(conf,workerId) + File.separator + SANBOX_TEMPLATE_NAME;
+  File dest=new File(policyPath);
+  file.renameTo(dest);
+  StringBuilder sb=new StringBuilder();
+  sb.append(" -Djava.security.manager -Djava.security.policy=");
+  sb.append(policyPath);
+  return sb.toString();
+}

@@ -31,18 +31,21 @@
   killedMap.put(StatusType.do_rebalance,null);
   rtn.put(StatusType.killed,killedMap);
   Map<StatusType,Callback> rebalancingMap=new HashMap<StatusType,Callback>();
-  StatusType rebalanceOdStatus=StatusType.active;
+  StatusType rebalanceOldStatus=StatusType.active;
   if (currentStatus.getOldStatus() != null) {
-    rebalanceOdStatus=currentStatus.getOldStatus().getStatusType();
+    rebalanceOldStatus=currentStatus.getOldStatus().getStatusType();
+    if (rebalanceOldStatus == StatusType.rebalance) {
+      rebalanceOldStatus=StatusType.active;
+    }
   }
   rebalancingMap.put(StatusType.monitor,null);
   rebalancingMap.put(StatusType.inactivate,null);
-  rebalancingMap.put(StatusType.startup,new RebalanceTransitionCallback(data,topologyid,new StormStatus(rebalanceOdStatus)));
+  rebalancingMap.put(StatusType.startup,new RebalanceTransitionCallback(data,topologyid,new StormStatus(rebalanceOldStatus)));
   rebalancingMap.put(StatusType.activate,null);
   rebalancingMap.put(StatusType.kill,null);
   rebalancingMap.put(StatusType.remove,null);
   rebalancingMap.put(StatusType.rebalance,new RebalanceTransitionCallback(data,topologyid,currentStatus));
-  rebalancingMap.put(StatusType.do_rebalance,new DoRebalanceTransitionCallback(data,topologyid,new StormStatus(rebalanceOdStatus)));
+  rebalancingMap.put(StatusType.do_rebalance,new DoRebalanceTransitionCallback(data,topologyid,new StormStatus(rebalanceOldStatus)));
   rtn.put(StatusType.rebalancing,rebalancingMap);
   return rtn;
 }

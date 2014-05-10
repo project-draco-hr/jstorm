@@ -41,7 +41,14 @@
   String nimbustime=StatBuckets.prettyUptimeStr(summ.get_nimbus_uptime_secs());
   List<ClusterSumm> clusumms=new ArrayList<ClusterSumm>();
   ClusterSumm clusterSumm=new ClusterSumm();
-  clusterSumm.setNimbusHostname(client.getMasterHost());
+  String master=client.getMasterHost();
+  clusterSumm.setNimbusHostname(master);
+  if (master.contains(":")) {
+    clusterSumm.setNimbusIp(NetWorkUtils.host2Ip(master.substring(0,master.indexOf(":"))));
+  }
+ else {
+    clusterSumm.setNimbusIp(NetWorkUtils.host2Ip(master));
+  }
   if (summ.is_isGroupModel())   clusterSumm.setIsGroupModel("true");
  else   clusterSumm.setIsGroupModel("false");
   clusterSumm.setNimbusUptime(nimbustime);

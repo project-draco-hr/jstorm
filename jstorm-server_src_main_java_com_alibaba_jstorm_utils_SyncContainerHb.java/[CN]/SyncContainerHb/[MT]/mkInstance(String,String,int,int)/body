@@ -1,0 +1,16 @@
+{
+  SyncContainerHb syncContainerHbThread=new SyncContainerHb();
+  syncContainerHbThread.setReadDir(containerHbDir);
+  syncContainerHbThread.setWriteDir(hbDir);
+  syncContainerHbThread.setTimeoutSeconds(timeout);
+  syncContainerHbThread.setFrequence(frequence);
+  StringBuilder sb=new StringBuilder();
+  sb.append("Run process under Apsara/Yarn container");
+  sb.append("ContainerDir:").append(containerHbDir);
+  sb.append("MyDir:").append(hbDir);
+  sb.append(", timeout:").append(timeout);
+  sb.append(",frequence:").append(frequence);
+  LOG.info(sb.toString());
+  AsyncLoopThread thread=new AsyncLoopThread(syncContainerHbThread,true,Thread.NORM_PRIORITY,true);
+  return thread;
+}

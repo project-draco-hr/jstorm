@@ -2,7 +2,7 @@
   String msg="Launching virtual port for supervisor";
   LOG.info(msg + ":" + supervisorId+ " topologyId:"+ topologyId+ " port:"+ port);
   boolean islocal=StormConfig.local_mode(conf);
-  RunnableCallback killfn=JStormServerUtils.getDefaultKillfn();
+  RunnableCallback killfn=JStormUtils.getDefaultKillfn();
   IConnection recvConnection=context.bind(topologyId,port,true);
   RunnableCallback recvDispather=new VirtualPortDispatch(topologyId,context,recvConnection,taskIds,active);
   AsyncLoopThread vthread=new AsyncLoopThread(recvDispather,false,killfn,Thread.MAX_PRIORITY,true);

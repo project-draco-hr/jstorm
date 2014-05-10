@@ -1,7 +1,0 @@
-{
-  this._kryo=SerializationFactory.getKryo(conf);
-  this._kryoInput=new Input(1);
-  if (loader != null) {
-    this._kryo.setClassLoader(loader);
-  }
-}

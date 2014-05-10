@@ -1,0 +1,14 @@
+{
+  byte[] filesJson="Failed to get file list".getBytes();
+  try {
+    filesJson=getJSonFiles();
+  }
+ catch (  Exception e) {
+    handlFailure(t,"Failed to get file list");
+    return;
+  }
+  t.sendResponseHeaders(HttpURLConnection.HTTP_OK,filesJson.length);
+  OutputStream os=t.getResponseBody();
+  os.write(filesJson);
+  os.close();
+}

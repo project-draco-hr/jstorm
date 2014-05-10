@@ -1,5 +1,5 @@
 {
-  if (args.length == 1) {
+  if (args.length >= 1) {
     if (args[0].equals("rpc")) {
       SetDPRCTopology();
       return;
@@ -8,18 +8,7 @@
       SetLocalTopology();
       return;
     }
+    LoadProperty(args[0]);
   }
-  String topologyName="SequenceTest";
-  if (args.length > 0) {
-    topologyName=args[0];
-  }
-  Integer spout_parallelism_hint=null;
-  Integer bolt_parallelism_hint=null;
-  if (args.length > 1) {
-    spout_parallelism_hint=Integer.parseInt(args[1]);
-    if (args.length > 2) {
-      bolt_parallelism_hint=Integer.parseInt(args[2]);
-    }
-  }
-  SetRemoteTopology(topologyName,spout_parallelism_hint,bolt_parallelism_hint);
+  SetRemoteTopology();
 }

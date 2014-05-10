@@ -1,0 +1,11 @@
+{
+  for (  Entry<String,String> entry : replaceMap.entrySet()) {
+    if (line.contains(CLASS_PATH_KEY)) {
+      return genClassPath(entry.getValue());
+    }
+ else     if (line.contains(entry.getKey())) {
+      return line.replace(entry.getKey(),entry.getValue());
+    }
+  }
+  return line;
+}

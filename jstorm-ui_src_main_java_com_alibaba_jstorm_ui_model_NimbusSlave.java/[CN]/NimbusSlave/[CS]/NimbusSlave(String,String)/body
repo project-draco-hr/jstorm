@@ -1,4 +1,6 @@
 {
   this.hostname=hostname;
   this.uptime=uptime;
+  String[] fields=StringUtils.split(hostname,":");
+  this.ip=NetWorkUtils.host2Ip(fields[0]);
 }

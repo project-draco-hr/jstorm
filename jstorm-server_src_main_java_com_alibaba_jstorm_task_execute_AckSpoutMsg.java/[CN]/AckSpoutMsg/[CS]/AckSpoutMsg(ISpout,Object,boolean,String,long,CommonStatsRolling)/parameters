@@ -1,6 +1,0 @@
-ISpout _spout
-Object _msg_id
-boolean _isDebug
-String stream
-long _time_stamp
-CommonStatsRolling _task_stats

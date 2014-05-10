@@ -1,5 +1,6 @@
 {
   @SuppressWarnings("rawtypes") Map config=Utils.readStormConfig();
+  JStormServerUtils.startTaobaoJvmMonitor();
   NimbusServer instance=new NimbusServer();
   INimbus iNimbus=new DefaultInimbus();
   instance.launchServer(config,iNimbus);

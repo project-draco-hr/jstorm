@@ -10,5 +10,6 @@
   }
   ret.putAll(storm);
   ret.putAll(readCommandLineOpts());
+  replaceLocalDir(ret);
   return ret;
 }

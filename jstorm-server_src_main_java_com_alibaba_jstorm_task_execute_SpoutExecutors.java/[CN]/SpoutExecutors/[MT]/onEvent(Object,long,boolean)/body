@@ -18,7 +18,7 @@
       TupleInfo tupleInfo=(TupleInfo)obj;
       String stream_id=tuple.getSourceStreamId();
       if (stream_id.equals(Acker.ACKER_ACK_STREAM_ID)) {
-        runnable=new AckSpoutMsg(spout,tupleInfo.getMessageId(),isDebug,tupleInfo.getStream(),tupleInfo.getTimestamp(),task_stats);
+        runnable=new AckSpoutMsg(spout,tupleInfo,task_stats,isDebug);
       }
  else       if (stream_id.equals(Acker.ACKER_FAIL_STREAM_ID)) {
         runnable=new FailSpoutMsg(spout,tupleInfo,task_stats,isDebug);

@@ -1,0 +1,8 @@
+{
+  Map<String,String> map=new HashMap<String,String>();
+  map.put(FILE_NAME_FIELD,fileName);
+  map.put(IS_DIR_FIELD,isDir);
+  map.put(MODIFY_TIME_FIELD,modifyTime);
+  map.put(SIZE_FIELD,size);
+  return JStormUtils.to_json(map);
+}

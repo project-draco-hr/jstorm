@@ -1,0 +1,4 @@
+{
+  frequence=-1;
+  LOG.info("Shutdown sync container thread");
+}

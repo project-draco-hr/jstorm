@@ -1,0 +1,12 @@
+{
+  if (rtn != null) {
+    long sleepTime=Long.parseLong(String.valueOf(rtn));
+    if (sleepTime < 0) {
+      return true;
+    }
+ else     if (sleepTime > 0) {
+      JStormUtils.sleepMs(sleepTime * 1000);
+    }
+  }
+  return false;
+}

@@ -10,12 +10,13 @@
     sampler=new EventSampler(rate);
     spoutAckedSamplers.put(stream,sampler);
   }
-  Integer times=sampler.timesCheck();
-  if (times == null) {
+  long latency_ms=TimeUtils.time_delta_ms(st);
+  Pair<Integer,Double> pair=sampler.avgCheck(latency_ms * 1000);
+  if (pair == null) {
     return;
   }
-  Long latency_ms=TimeUtils.time_delta_ms(st);
+  long avgLatency=(long)((double)pair.getSecond());
   GlobalStreamId key=new GlobalStreamId(Common.ACKER_COMPONENT_ID,stream);
-  update_task_stat(StaticsType.acked,key,times);
-  update_task_stat(StaticsType.process_latencies,key,latency_ms);
+  update_task_stat(StaticsType.acked,key,pair.getFirst());
+  update_task_stat(StaticsType.process_latencies,key,avgLatency);
 }

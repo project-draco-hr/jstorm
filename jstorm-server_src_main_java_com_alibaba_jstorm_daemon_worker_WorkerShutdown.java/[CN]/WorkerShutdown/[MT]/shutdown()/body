@@ -10,6 +10,8 @@
     task.shutdown();
   }
   for (  AsyncLoopThread t : threads) {
+    t.cleanup();
+    JStormUtils.sleepMs(10);
     t.interrupt();
     try {
       t.join();

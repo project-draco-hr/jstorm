@@ -59,6 +59,10 @@
   }
   String classpath=getClassPath(stormjar,stormhome,totalConf);
   String workerClassPath=(String)totalConf.get(Config.WORKER_CLASSPATH);
+  Map<String,String> policyReplaceMap=new HashMap<String,String>();
+  String realClassPath=classpath + ":" + workerClassPath;
+  policyReplaceMap.put(SandBoxMaker.CLASS_PATH_KEY,realClassPath);
+  commandSB.append(sandBoxMaker.sandboxPolicy(workerId,policyReplaceMap));
   commandSB.append(" -cp ");
   commandSB.append(classpath);
   if (!ConfigExtension.isEnableTopologyClassLoader(totalConf))   commandSB.append(":").append(workerClassPath);

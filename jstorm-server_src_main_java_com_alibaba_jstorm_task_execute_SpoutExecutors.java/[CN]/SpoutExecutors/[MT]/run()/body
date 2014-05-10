@@ -33,10 +33,5 @@
     return;
   }
  else {
-    if (supportRecvThread == true) {
-      JStormUtils.sleepMs(1);
-    }
- else {
-    }
   }
 }

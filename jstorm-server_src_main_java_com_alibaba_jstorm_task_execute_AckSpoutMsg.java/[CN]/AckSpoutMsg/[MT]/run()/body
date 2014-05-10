@@ -1,7 +1,13 @@
 {
   if (isDebug) {
-    LOG.info("Acking message {}",msg_id);
+    LOG.info("Acking message {}",msgId);
   }
-  spout.ack(msg_id);
-  task_stats.spout_acked_tuple(stream,time_stamp);
+  if (spout instanceof IAckValueSpout) {
+    IAckValueSpout ackValueSpout=(IAckValueSpout)spout;
+    ackValueSpout.ack(msgId,values);
+  }
+ else {
+    spout.ack(msgId);
+  }
+  task_stats.spout_acked_tuple(stream,timeStamp);
 }

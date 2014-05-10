@@ -34,8 +34,8 @@
   }
 );
   int index=0;
-  int tmp=allocWorkerNum;
-  while (tmp > 0) {
+  int tmp=Math.min(allocWorkerNum,newAssigns.size());
+  while (tmp > 0 && sortSupervisorList.size() > 0) {
     if (index >= sortSupervisorList.size()) {
       index=0;
     }
@@ -53,8 +53,12 @@
     if (slotNum > assignNum) {
       assignNum=assignNum + 1;
       supervisorAssignSlotNumMap.put(supervisorId,assignNum);
+      index++;
+      tmp--;
     }
-    index++;
-    tmp--;
+ else {
+      sortSupervisorList.remove(index);
+      continue;
+    }
   }
 }

@@ -1,0 +1,15 @@
+{
+  int send=counter.incrementAndGet();
+  long total=sum.addAndGet(one);
+  Double pastSeconds=intervalCheck.checkAndGet();
+  if (pastSeconds != null) {
+    counter.set(0);
+    sum.set(0);
+    Double avg=Double.valueOf(0);
+    if (send != 0) {
+      avg=((double)total) / send;
+    }
+    return new Pair<Integer,Double>(send,avg);
+  }
+  return null;
+}

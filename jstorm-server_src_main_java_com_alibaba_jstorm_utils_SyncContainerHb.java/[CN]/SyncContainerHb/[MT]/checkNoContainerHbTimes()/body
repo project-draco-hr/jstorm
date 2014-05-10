@@ -1,0 +1,7 @@
+{
+  noContainerHbTimes++;
+  if (noContainerHbTimes >= MAX_NO_CONTAINER_HB_TIMES) {
+    LOG.info("It's long time no container hearbeat");
+    throw new RuntimeException("It's long time no container hearbeat");
+  }
+}

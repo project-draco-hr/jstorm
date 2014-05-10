@@ -1,0 +1,27 @@
+{
+  String tmpPolicy=StormConfig.supervisorTmpDir(conf) + File.separator + UUID.randomUUID().toString();
+  InputStream inputStream=SandBoxMaker.class.getClassLoader().getResourceAsStream(SANBOX_TEMPLATE_NAME);
+  PrintWriter writer=new PrintWriter(new BufferedWriter(new FileWriter(tmpPolicy)));
+  try {
+    InputStreamReader inputReader=new InputStreamReader(inputStream);
+    BufferedReader reader=new BufferedReader(new LineNumberReader(inputReader));
+    String line=null;
+    while ((line=reader.readLine()) != null) {
+      String replaced=replaceLine(line,replaceMap);
+      writer.println(replaced);
+    }
+    return tmpPolicy;
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to generate policy file\n",e);
+    throw new IOException(e);
+  }
+ finally {
+    if (inputStream != null) {
+      inputStream.close();
+    }
+    if (writer != null) {
+      writer.close();
+    }
+  }
+}

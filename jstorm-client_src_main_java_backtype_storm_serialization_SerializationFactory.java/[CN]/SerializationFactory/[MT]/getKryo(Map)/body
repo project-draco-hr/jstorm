@@ -1,10 +1,11 @@
 {
   IKryoFactory kryoFactory=(IKryoFactory)Utils.newInstance((String)conf.get(Config.TOPOLOGY_KRYO_FACTORY));
   Kryo k=kryoFactory.getKryo(conf);
+  if (WorkerClassLoader.getInstance() != null)   k.setClassLoader(WorkerClassLoader.getInstance());
   k.register(byte[].class);
   String payloadSerializerName=(String)conf.get(Config.TOPOLOGY_TUPLE_SERIALIZER);
   try {
-    Class serializerClass=Class.forName(payloadSerializerName);
+    Class serializerClass=Class.forName(payloadSerializerName,true,k.getClassLoader());
     Serializer serializer=resolveSerializerInstance(k,ListDelegate.class,serializerClass,conf);
     k.register(ListDelegate.class,serializer);
   }
@@ -32,9 +33,9 @@
   for (  String klassName : registrations.keySet()) {
     String serializerClassName=registrations.get(klassName);
     try {
-      Class klass=Class.forName(klassName);
+      Class klass=Class.forName(klassName,true,k.getClassLoader());
       Class serializerClass=null;
-      if (serializerClassName != null)       serializerClass=Class.forName(serializerClassName);
+      if (serializerClassName != null)       serializerClass=Class.forName(serializerClassName,true,k.getClassLoader());
       if (serializerClass == null) {
         k.register(klass);
       }
@@ -55,7 +56,7 @@
   if (conf.get(Config.TOPOLOGY_KRYO_DECORATORS) != null) {
     for (    String klassName : (List<String>)conf.get(Config.TOPOLOGY_KRYO_DECORATORS)) {
       try {
-        Class klass=Class.forName(klassName);
+        Class klass=Class.forName(klassName,true,k.getClassLoader());
         IKryoDecorator decorator=(IKryoDecorator)klass.newInstance();
         decorator.decorate(k);
       }

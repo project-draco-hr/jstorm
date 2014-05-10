@@ -9,13 +9,13 @@
     List<String> stormHomeFiles=PathUtils.read_dir_contents(stormHome);
     for (    String file : stormHomeFiles) {
       if (file.endsWith(".jar")) {
-        classSet.add(stormHome + "/" + file);
+        classSet.add(stormHome + File.separator + file);
       }
     }
-    List<String> stormLibFiles=PathUtils.read_dir_contents(stormHome + "/lib");
+    List<String> stormLibFiles=PathUtils.read_dir_contents(stormHome + File.separator + "lib");
     for (    String file : stormLibFiles) {
       if (file.endsWith(".jar")) {
-        classSet.add(stormHome + "/lib/" + file);
+        classSet.add(stormHome + File.separator + "lib"+ File.separator+ file);
       }
     }
   }

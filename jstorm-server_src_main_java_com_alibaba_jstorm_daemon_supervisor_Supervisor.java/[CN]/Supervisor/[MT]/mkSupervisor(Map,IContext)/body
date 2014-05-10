@@ -11,15 +11,14 @@
     localState.put(Common.LS_ID,supervisorId);
   }
   Vector<SmartThread> threads=new Vector<SmartThread>();
-  String myHostName=null;
-  myHostName=ConfigExtension.getSupervisorHost(conf);
-  if (myHostName == null) {
-    myHostName=NetWorkUtils.hostname();
-  }
-  Heartbeat hb=new Heartbeat(conf,stormClusterState,supervisorId,myHostName,active);
+  Heartbeat hb=new Heartbeat(conf,stormClusterState,supervisorId,active);
   hb.update();
   AsyncLoopThread heartbeat=new AsyncLoopThread(hb,false,null,Thread.MIN_PRIORITY,true);
   threads.add(heartbeat);
+  AsyncLoopThread syncContainerHbThread=SyncContainerHb.mkSupervisorInstance(conf);
+  if (syncContainerHbThread != null) {
+    threads.add(syncContainerHbThread);
+  }
   EventManager processEventManager=new EventManagerImp(false);
   ConcurrentHashMap<String,String> workerThreadPids=new ConcurrentHashMap<String,String>();
   SyncProcessEvent syncProcessEvent=new SyncProcessEvent(supervisorId,conf,localState,workerThreadPids,sharedContext);
@@ -31,6 +30,5 @@
   threads.add(syncSupervisorThread);
   Httpserver httpserver=new Httpserver(conf);
   httpserver.start();
-  LOG.info("Starting supervisor with id " + supervisorId + " at host "+ myHostName);
   return new SupervisorManger(conf,supervisorId,active,threads,syncSupEventManager,processEventManager,httpserver,stormClusterState,workerThreadPids);
 }

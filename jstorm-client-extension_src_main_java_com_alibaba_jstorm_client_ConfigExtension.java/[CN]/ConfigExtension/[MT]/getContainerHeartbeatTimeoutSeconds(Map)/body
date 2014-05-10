@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(CONTAINER_HEARTBEAT_TIMEOUT_SECONDS),240);
+}

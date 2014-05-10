@@ -1,16 +1,7 @@
 {
   FacesContext ctx=FacesContext.getCurrentInstance();
-  if (ctx.getExternalContext().getRequestParameterMap().get("topologyid") != null) {
-    topologyid=(String)ctx.getExternalContext().getRequestParameterMap().get("topologyid");
-  }
-  if (ctx.getExternalContext().getRequestParameterMap().get("taskid") != null) {
-    taskid=ctx.getExternalContext().getRequestParameterMap().get("taskid");
-  }
-  if (topologyid == null) {
-    throw new NotAliveException("Input topologyId is null ");
-  }
-  if (taskid == null) {
-    throw new NotAliveException("Input taskId is null ");
+  if (ctx.getExternalContext().getRequestParameterMap().get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_POS) != null) {
+    position=ctx.getExternalContext().getRequestParameterMap().get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_POS);
   }
   init();
 }

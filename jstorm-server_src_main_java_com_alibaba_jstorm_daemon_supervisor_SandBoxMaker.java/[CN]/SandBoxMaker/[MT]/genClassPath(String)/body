@@ -1,0 +1,21 @@
+{
+  StringBuilder sb=new StringBuilder();
+  String[] classPathes=classPathLine.split(":");
+  for (  String classpath : classPathes) {
+    if (StringUtils.isBlank(classpath)) {
+      continue;
+    }
+    File file=new File(classpath);
+    if (file.isDirectory()) {
+      sb.append(" permission java.io.FilePermission \"");
+      sb.append(classpath).append(File.separator).append("**");
+      sb.append("\", \"read\";\n");
+    }
+ else {
+      sb.append(" permission java.io.FilePermission \"");
+      sb.append(classpath);
+      sb.append("\", \"read\";\n");
+    }
+  }
+  return sb.toString();
+}

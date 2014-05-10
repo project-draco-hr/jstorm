@@ -4,7 +4,7 @@
     try {
       Thread.sleep(sleepTime);
       if (data.isLeader()) {
-        data.getStormClusterState().unregister_nimbus_host(nimbusHost);
+        data.getStormClusterState().unregister_nimbus_host(hostPort);
         return;
       }
       if (!data.getStormClusterState().leader_existed()) {
@@ -12,7 +12,7 @@
         continue;
       }
       check();
-      data.getStormClusterState().update_follower_hb(nimbusHost,data.uptime());
+      data.getStormClusterState().update_follower_hb(hostPort,data.uptime());
     }
  catch (    InterruptedException e) {
       continue;

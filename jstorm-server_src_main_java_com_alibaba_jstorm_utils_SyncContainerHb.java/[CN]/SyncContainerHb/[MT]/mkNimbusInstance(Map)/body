@@ -1,0 +1,12 @@
+{
+  boolean isEnable=ConfigExtension.isEnableContainerNimbus();
+  if (isEnable == false) {
+    LOG.info("Run nimbus without Apsara/Yarn container");
+    return null;
+  }
+  String containerHbDir=ConfigExtension.getContainerNimbusHearbeat();
+  String hbDir=StormConfig.masterHearbeatForContainer(conf);
+  int timeout=ConfigExtension.getContainerHeartbeatTimeoutSeconds(conf);
+  int frequence=ConfigExtension.getContainerHeartbeatFrequence(conf);
+  return mkInstance(containerHbDir,hbDir,timeout,frequence);
+}

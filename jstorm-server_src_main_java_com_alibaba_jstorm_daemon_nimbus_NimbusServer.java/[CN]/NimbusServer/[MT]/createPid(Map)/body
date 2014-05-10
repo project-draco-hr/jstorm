@@ -1,0 +1,4 @@
+{
+  String pidDir=StormConfig.masterPids(conf);
+  JStormServerUtils.createPid(pidDir);
+}

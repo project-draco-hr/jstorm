@@ -1,0 +1,12 @@
+{
+  this.conf=conf;
+  isEnable=ConfigExtension.isJavaSandBoxEnable(conf);
+  LOG.info("Java Sandbox Policy :" + String.valueOf(isEnable));
+  String jstormHome=System.getProperty("jstorm.home");
+  if (jstormHome == null) {
+    jstormHome="./";
+  }
+  replaceBaseMap.put(JSTORM_HOME_KEY,jstormHome);
+  replaceBaseMap.put(LOCAL_DIR_KEY,(String)conf.get(Config.STORM_LOCAL_DIR));
+  LOG.info("JSTORM_HOME is " + jstormHome);
+}

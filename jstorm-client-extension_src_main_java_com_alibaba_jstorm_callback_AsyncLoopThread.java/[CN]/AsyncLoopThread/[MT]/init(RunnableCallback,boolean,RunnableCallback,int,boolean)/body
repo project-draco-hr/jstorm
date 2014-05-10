@@ -1,0 +1,21 @@
+{
+  if (kill_fn == null) {
+    kill_fn=new AsyncLoopDefaultKill();
+  }
+  Runnable runable=new AsyncLoopRunnable(afn,kill_fn);
+  thread=new Thread(runable);
+  thread.setName(afn.getClass().getSimpleName());
+  thread.setDaemon(daemon);
+  thread.setPriority(priority);
+  thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler(){
+    @Override public void uncaughtException(    Thread t,    Throwable e){
+      LOG.error("UncaughtException",e);
+      JStormUtils.halt_process(1,"UncaughtException");
+    }
+  }
+);
+  this.afn=afn;
+  if (start) {
+    thread.start();
+  }
+}

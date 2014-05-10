@@ -4,8 +4,8 @@
     address=InetAddress.getByName(host);
   }
  catch (  UnknownHostException e) {
-    LOG.warn("NetWorkUtils.host2Ip(" + host + ") error",e);
-    return null;
+    LOG.warn("NetWorkUtil can't transfer hostname(" + host + ") to ip, return hostname",e);
+    return host;
   }
   return address.getHostAddress();
 }

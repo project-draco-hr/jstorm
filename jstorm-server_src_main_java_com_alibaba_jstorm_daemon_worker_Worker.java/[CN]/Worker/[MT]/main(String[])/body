@@ -13,8 +13,10 @@
   String port_str=args[2];
   String worker_id=args[3];
   String jar_path=args[4];
+  killOldWorker(port_str);
   Map conf=Utils.readStormConfig();
   StormConfig.validate_distributed_mode(conf);
+  JStormServerUtils.startTaobaoJvmMonitor();
   StringBuilder sb=new StringBuilder();
   sb.append("topologyId:" + topology_id + ", ");
   sb.append("port:" + port_str + ", ");

@@ -1,0 +1,11 @@
+{
+  if (jobj == null) {
+    return null;
+  }
+  FileAttribute attribute=new FileAttribute();
+  attribute.setFileName((String)jobj.get(FILE_NAME_FIELD));
+  attribute.setIsDir((String)jobj.get(IS_DIR_FIELD));
+  attribute.setModifyTime((String)jobj.get(MODIFY_TIME_FIELD));
+  attribute.setSize((String)jobj.get(SIZE_FIELD));
+  return attribute;
+}

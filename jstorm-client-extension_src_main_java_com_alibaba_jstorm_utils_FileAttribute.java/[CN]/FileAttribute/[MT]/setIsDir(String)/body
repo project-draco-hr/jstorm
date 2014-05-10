@@ -1,0 +1,3 @@
+{
+  this.isDir=isDir;
+}

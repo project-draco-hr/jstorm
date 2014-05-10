@@ -1,0 +1,6 @@
+{
+  List<Integer> oldPids=getOldPortPids(port);
+  for (  Integer pid : oldPids) {
+    JStormUtils.kill(pid);
+  }
+}

@@ -9,7 +9,7 @@
   this.idStr="ComponentId:" + component_id + ",taskId:"+ taskId+ " ";
   this.taskStatus=taskStatus;
   this.report_error=_report_error;
-  this.deserializer=new KryoTupleDeserializer(storm_conf,topology_context,WorkerClassLoader.getInstance());
+  this.deserializer=new KryoTupleDeserializer(storm_conf,topology_context);
   this.isDebugRecv=ConfigExtension.isTopologyDebugRecvTuple(storm_conf);
   this.isDebug=JStormUtils.parseBoolean(storm_conf.get(Config.TOPOLOGY_DEBUG),false);
   message_timeout_secs=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);

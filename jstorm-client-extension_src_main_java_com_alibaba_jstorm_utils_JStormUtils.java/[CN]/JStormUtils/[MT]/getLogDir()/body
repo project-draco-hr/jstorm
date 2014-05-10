@@ -1,0 +1,13 @@
+{
+  String file=JStormUtils.getLogFileName();
+  if (file != null) {
+    return file.substring(0,file.lastIndexOf(File.separator));
+  }
+  String stormHome=System.getProperty("jstorm.home");
+  if (stormHome == null) {
+    return "." + File.separator + "logs";
+  }
+ else {
+    return stormHome + File.separator + "logs";
+  }
+}

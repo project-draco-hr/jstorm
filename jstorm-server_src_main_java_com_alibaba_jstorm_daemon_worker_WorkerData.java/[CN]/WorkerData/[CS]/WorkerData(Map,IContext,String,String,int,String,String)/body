@@ -8,10 +8,8 @@
   this.active=new AtomicBoolean(true);
   this.topologyStatus=StatusType.active;
   if (StormConfig.cluster_mode(conf).equals("distributed")) {
-    String pid=JStormUtils.process_pid();
-    String pidPath=StormConfig.worker_pid_path(conf,worker_id,pid);
-    PathUtils.touch(pidPath);
-    LOG.info("Current worker's pid is " + pidPath);
+    String pidDir=StormConfig.worker_pids_root(conf,worker_id);
+    JStormServerUtils.createPid(pidDir);
   }
   this.zkClusterstate=ZkTool.mk_distributed_cluster_state(conf);
   this.zkCluster=Cluster.mk_storm_cluster_state(zkClusterstate);

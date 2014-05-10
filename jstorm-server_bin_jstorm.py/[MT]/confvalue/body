@@ -1,5 +1,5 @@
 def confvalue(name, extrapaths):
-    command = ['java', '-client', '-Xms512m', '-Xmx512m', get_config_opts(), '-cp', get_classpath(extrapaths), 'backtype.storm.command.config_value', name]
+    command = ['java', '-client', '-Xms256m', '-Xmx256m', get_config_opts(), '-cp', get_classpath(extrapaths), 'backtype.storm.command.config_value', name]
     p = sub.Popen(command, stdout=sub.PIPE)
     (output, errors) = p.communicate()
     lines = output.split('\n')
@@ -7,3 +7,6 @@ def confvalue(name, extrapaths):
         tokens = line.split(' ')
         if (tokens[0] == 'VALUE:'):
             return ' '.join(tokens[1:])
+    print ('Failed to get config ' + name)
+    print errors
+    print output

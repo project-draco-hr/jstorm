@@ -1,0 +1,7 @@
+{
+  long pos=index * HttpserverUtils.HTTPSERVER_LOGVIEW_PAGESIZE;
+  LogPageIndex page=new LogPageIndex();
+  page.setIndex(String.valueOf(index));
+  page.setPos(String.valueOf(pos));
+  pages.add(page);
+}

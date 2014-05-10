@@ -1,0 +1,57 @@
+{
+  FacesContext ctx=FacesContext.getCurrentInstance();
+  if (ctx.getExternalContext().getRequestParameterMap().get("host") != null) {
+    host=ctx.getExternalContext().getRequestParameterMap().get("host");
+  }
+  if (ctx.getExternalContext().getRequestParameterMap().get("log") != null) {
+    logFileName=ctx.getExternalContext().getRequestParameterMap().get("log");
+  }
+  if (StringUtils.isBlank(host) == false && StringUtils.isBlank(logFileName) == false) {
+    return;
+  }
+  String topologyid=null;
+  String taskid=null;
+  if (ctx.getExternalContext().getRequestParameterMap().get("topologyid") != null) {
+    topologyid=ctx.getExternalContext().getRequestParameterMap().get("topologyid");
+  }
+  if (ctx.getExternalContext().getRequestParameterMap().get("taskid") != null) {
+    taskid=ctx.getExternalContext().getRequestParameterMap().get("taskid");
+  }
+  if (topologyid == null) {
+    throw new NotAliveException("Input topologyId is null ");
+  }
+  if (taskid == null) {
+    throw new NotAliveException("Input taskId is null ");
+  }
+  NimbusClient client=null;
+  try {
+    client=NimbusClient.getConfiguredClient(conf);
+    TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
+    TaskSummary taskSummary=null;
+    for (    TaskSummary _taskSummary : summ.get_tasks()) {
+      if (taskid.equals(String.valueOf(_taskSummary.get_task_id()))) {
+        taskSummary=_taskSummary;
+        break;
+      }
+    }
+    if (taskSummary == null) {
+      throw new NotAliveException("topologyid=" + topologyid + ", taskid="+ taskid);
+    }
+    ComponentTask componentTask=UIUtils.getComponentTask(taskSummary,topologyid);
+    host=componentTask.getHost();
+    logFileName=componentTask.getTopologyid() + "-worker-" + componentTask.getPort()+ ".log";
+  }
+ catch (  TException e) {
+    LOG.error(e.getCause(),e);
+    throw e;
+  }
+catch (  NotAliveException e) {
+    LOG.error(e.getCause(),e);
+    throw e;
+  }
+ finally {
+    if (client != null) {
+      client.close();
+    }
+  }
+}

@@ -4,6 +4,8 @@
   int size=threads.size();
   for (int i=0; i < size; i++) {
     SmartThread thread=threads.elementAt(i);
+    thread.cleanup();
+    JStormUtils.sleepMs(10);
     thread.interrupt();
     try {
       thread.join();

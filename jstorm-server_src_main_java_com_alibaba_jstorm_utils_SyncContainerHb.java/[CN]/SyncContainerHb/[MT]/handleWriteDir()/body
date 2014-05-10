@@ -1,0 +1,24 @@
+{
+  if (StringUtils.isBlank(writeDir) == true) {
+    return;
+  }
+  String seconds=String.valueOf(System.currentTimeMillis() / SECOND_MILLISCOND);
+  String path=writeDir + File.separator + seconds;
+  try {
+    PathUtils.touch(path);
+    LOG.info("Successfully touch " + path);
+  }
+ catch (  IOException e) {
+    LOG.error("Failed to touch " + path,e);
+    throw new RuntimeException("Failed to touch " + path);
+  }
+  File file=new File(writeDir);
+  String[] files=file.list();
+  if (files.length == 0) {
+    LOG.info(readDir + " doesn't contain hearbeat files right now");
+    return;
+  }
+  List<String> fileList=JStormUtils.mk_list(files);
+  Collections.sort(fileList);
+  removeOld(fileList,writeDir);
+}

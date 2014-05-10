@@ -1,0 +1,7 @@
+{
+  List<String> servers=Lists.newArrayList();
+  for (  String ip : (List<String>)conf.get(Config.STORM_ZOOKEEPER_SERVERS)) {
+    servers.add(NetWorkUtils.ip2Host(ip));
+  }
+  return servers;
+}

@@ -1,0 +1,21 @@
+{
+  this.writeDir=writeDir;
+  if (StringUtils.isBlank(writeDir) == true) {
+    LOG.warn("writeDir is empty");
+    return;
+  }
+ else {
+    LOG.info("writeDir is " + writeDir);
+  }
+  File file=new File(writeDir);
+  if (file.exists() == false) {
+    file.mkdirs();
+    LOG.info("Create Directory " + writeDir);
+    return;
+  }
+ else   if (file.isDirectory() == false) {
+    LOG.error(writeDir + " isn't a directory ");
+    throw new RuntimeException(writeDir + " isn't a directory ");
+  }
+  return;
+}

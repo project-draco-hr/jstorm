@@ -1,0 +1,23 @@
+{
+  File file=new File(dir);
+  if (file.exists() == false) {
+    file.mkdirs();
+  }
+ else   if (file.isDirectory() == false) {
+    throw new RuntimeException("pid dir:" + dir + " isn't directory");
+  }
+  String[] existPids=file.list();
+  String pid=JStormUtils.process_pid();
+  String pidPath=dir + File.separator + pid;
+  PathUtils.touch(pidPath);
+  LOG.info("Successfully touch pid  " + pidPath);
+  for (  String existPid : existPids) {
+    try {
+      JStormUtils.kill(Integer.valueOf(existPid));
+      PathUtils.rmpath(dir + File.separator + existPid);
+    }
+ catch (    Exception e) {
+      LOG.warn(e.getMessage(),e);
+    }
+  }
+}

@@ -4,6 +4,17 @@
     return;
   }
   LOG.info("Begin to shutdown nimbus");
+  for (  SmartThread t : smartThreads) {
+    t.cleanup();
+    JStormUtils.sleepMs(10);
+    t.interrupt();
+    try {
+      t.join();
+    }
+ catch (    InterruptedException e) {
+      LOG.error("join thread",e);
+    }
+  }
   if (serviceHandler != null) {
     serviceHandler.shutdown();
   }
@@ -22,6 +33,10 @@
   if (thriftServer != null) {
     thriftServer.stop();
     LOG.info("Successfully shutdown thrift server");
+  }
+  if (hs != null) {
+    hs.shutdown();
+    LOG.info("Successfully shutdown httpserver");
   }
   LOG.info("Successfully shutdown nimbus");
   JStormUtils.halt_process(0,"!!!Shutdown!!!");

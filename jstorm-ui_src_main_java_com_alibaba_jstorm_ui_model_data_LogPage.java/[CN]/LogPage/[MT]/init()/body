@@ -1,33 +1,12 @@
 {
-  NimbusClient client=null;
+  conf=UIUtils.readUiConfig();
+  port=ConfigExtension.getDeamonHttpserverPort(conf);
   try {
-    Map conf=UIUtils.readUiConfig();
-    client=NimbusClient.getConfiguredClient(conf);
-    TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
-    TaskSummary taskSummary=null;
-    for (    TaskSummary _taskSummary : summ.get_tasks()) {
-      if (taskid.equals(String.valueOf(_taskSummary.get_task_id()))) {
-        taskSummary=_taskSummary;
-        break;
-      }
-    }
-    if (taskSummary == null) {
-      throw new NotAliveException("topologyid=" + topologyid + ", taskid="+ taskid);
-    }
-    componentTask=UIUtils.getComponentTask(taskSummary,topologyid);
-    queryLogForTask(componentTask);
+    generateLogFileName();
+    queryLog();
   }
- catch (  TException e) {
+ catch (  Exception e) {
     LOG.error(e.getCause(),e);
     throw e;
-  }
-catch (  NotAliveException e) {
-    LOG.error(e.getCause(),e);
-    throw e;
-  }
- finally {
-    if (client != null) {
-      client.close();
-    }
   }
 }

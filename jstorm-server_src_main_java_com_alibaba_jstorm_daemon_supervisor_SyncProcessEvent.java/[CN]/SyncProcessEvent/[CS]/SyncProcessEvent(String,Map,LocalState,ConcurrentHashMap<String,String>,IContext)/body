@@ -4,5 +4,8 @@
   this.localState=localState;
   this.workerThreadPids=workerThreadPids;
   this.sharedContext=sharedContext;
-  if (ConfigExtension.isEnableCgroup(conf))   cgroupManager=new CgroupManager(conf);
+  this.sandBoxMaker=new SandBoxMaker(conf);
+  if (ConfigExtension.isEnableCgroup(conf)) {
+    cgroupManager=new CgroupManager(conf);
+  }
 }

@@ -9,6 +9,8 @@
   }
   for (  AsyncLoopThread thr : all_threads) {
     LOG.info("Begin to shutdown " + thr.getThread().getName());
+    thr.cleanup();
+    JStormUtils.sleepMs(10);
     thr.interrupt();
     try {
       thr.getThread().stop();

@@ -1,0 +1,3 @@
+{
+  return System.getenv(CONTAINER_NIMBUS_HEARTBEAT);
+}

@@ -1,0 +1,11 @@
+{
+  try {
+    Map conf=UIUtils.readUiConfig();
+    port=ConfigExtension.getDeamonHttpserverPort(conf);
+    listLogs();
+  }
+ catch (  Exception e) {
+    LOG.error(e.getCause(),e);
+    throw e;
+  }
+}

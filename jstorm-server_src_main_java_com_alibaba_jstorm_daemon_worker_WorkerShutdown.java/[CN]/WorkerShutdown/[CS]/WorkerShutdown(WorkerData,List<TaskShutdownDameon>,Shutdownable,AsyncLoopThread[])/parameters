@@ -1,4 +1,0 @@
-WorkerData workerData
-List<TaskShutdownDameon> _shutdowntasks
-Shutdownable _virtual_port_shutdown
-AsyncLoopThread[] _threads

@@ -1,3 +1,4 @@
 {
-  this(conf,null);
+  this._kryo=SerializationFactory.getKryo(conf);
+  this._kryoInput=new Input(1);
 }

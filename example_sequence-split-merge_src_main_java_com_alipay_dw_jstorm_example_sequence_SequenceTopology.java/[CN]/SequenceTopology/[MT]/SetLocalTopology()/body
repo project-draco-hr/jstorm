@@ -1,6 +1,5 @@
 {
   TopologyBuilder builder=new TopologyBuilder();
-  Map conf=new HashMap();
   conf.put(TOPOLOGY_BOLT_PARALLELISM_HINT,Integer.valueOf(1));
   SetBuilder(builder,conf);
   LocalCluster cluster=new LocalCluster();

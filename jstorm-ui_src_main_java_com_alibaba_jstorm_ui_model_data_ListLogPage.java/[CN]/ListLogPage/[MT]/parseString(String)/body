@@ -1,0 +1,10 @@
+{
+  Map<String,JSONObject> map=(Map<String,JSONObject>)JStormUtils.from_json(input);
+  for (  JSONObject jobj : map.values()) {
+    FileAttribute attribute=FileAttribute.fromJSONObject(jobj);
+    if (attribute != null) {
+      files.add(attribute);
+    }
+  }
+  summary="There are " + files.size() + " files";
+}

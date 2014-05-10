@@ -1,6 +1,6 @@
 {
   int numHandler=3;
-  int port=ConfigExtension.getSupervisorHttpserverPort(storm_conf);
+  int port=ConfigExtension.getDeamonHttpserverPort(storm_conf);
   InetSocketAddress socketAddr=new InetSocketAddress(port);
   Executor executor=Executors.newFixedThreadPool(numHandler);
   try {
@@ -9,8 +9,15 @@
     hs.setExecutor(executor);
     hs.start();
   }
- catch (  IOException e) {
-    LOG.error("Httpserver Start Failed",e);
+ catch (  BindException e) {
+    LOG.info("Httpserver Already start!");
+    hs=null;
+    return;
   }
-  LOG.info("Success start supervisor httpserver at port:" + port);
+catch (  IOException e) {
+    LOG.error("Httpserver Start Failed",e);
+    hs=null;
+    return;
+  }
+  LOG.info("Success start httpserver at port:" + port);
 }

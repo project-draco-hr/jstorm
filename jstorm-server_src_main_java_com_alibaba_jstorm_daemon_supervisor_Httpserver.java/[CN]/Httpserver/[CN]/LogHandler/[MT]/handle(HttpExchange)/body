@@ -1,9 +1,19 @@
 {
   URI uri=t.getRequestURI();
   Map<String,String> paramMap=parseRawQuery(uri.getRawQuery());
-  byte[] logBytes=queryLog(paramMap);
-  t.sendResponseHeaders(200,logBytes.length);
-  OutputStream os=t.getResponseBody();
-  os.write(logBytes);
-  os.close();
+  String cmd=paramMap.get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD);
+  if (StringUtils.isBlank(cmd) == true) {
+    handlFailure(t,"Bad Request, Not set command type");
+    return;
+  }
+  if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW.equals(cmd)) {
+    handleShowLog(t,paramMap);
+    return;
+  }
+ else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_LIST.equals(cmd)) {
+    handleListDir(t,paramMap);
+    return;
+  }
+  handlFailure(t,"Bad Request, Not support command type " + cmd);
+  return;
 }

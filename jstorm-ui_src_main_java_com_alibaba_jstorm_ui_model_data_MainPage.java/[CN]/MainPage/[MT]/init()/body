@@ -13,6 +13,8 @@
     if (!summ.is_isGroupModel())     gsumm=new ArrayList<GroupSumm>();
     cluster_state=ZkTool.mk_distributed_cluster_state(client.getConf());
     slaves=getNimbusSlave(cluster_state);
+    zkServers=getZkServer(conf);
+    zkPort=String.valueOf(conf.get(Config.STORM_ZOOKEEPER_PORT));
   }
  catch (  Exception e) {
     LOG.error("Failed to get cluster information:",e);

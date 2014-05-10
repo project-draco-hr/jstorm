@@ -1,0 +1,4 @@
+ISpout _spout
+TupleInfo tupleInfo
+CommonStatsRolling _task_stats
+boolean _isDebug

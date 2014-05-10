@@ -1,4 +1,5 @@
 {
+  JStormServerUtils.startTaobaoJvmMonitor();
   Supervisor instance=new Supervisor();
   instance.run();
 }

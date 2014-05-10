@@ -2,10 +2,14 @@
   LOG.info("Begin to start nimbus with conf " + conf);
   try {
     StormConfig.validate_distributed_mode(conf);
+    createPid(conf);
     initShutdownHook();
     inimbus.prepare(conf,StormConfig.masterInimbus(conf));
     data=createNimbusData(conf,inimbus);
     initFollowerThread(conf);
+    hs=new Httpserver(conf);
+    hs.start();
+    initContainerHBThread(conf);
     while (!data.isLeader())     Utils.sleep(5000);
     init(conf);
   }

@@ -1,0 +1,37 @@
+{
+  long size=Long.valueOf(sizeStr);
+  long item=(size + HttpserverUtils.HTTPSERVER_LOGVIEW_PAGESIZE - 1) / HttpserverUtils.HTTPSERVER_LOGVIEW_PAGESIZE;
+  if (item <= 10) {
+    for (long i=item - 1; i >= 0; i--) {
+      insertPage(i);
+    }
+    return;
+  }
+  long current=item - 1;
+  if (position != null) {
+    current=(Long.valueOf(position) + HttpserverUtils.HTTPSERVER_LOGVIEW_PAGESIZE - 1) / HttpserverUtils.HTTPSERVER_LOGVIEW_PAGESIZE;
+  }
+  List<Long> ret=new ArrayList<Long>();
+  if (item - current <= 5) {
+    for (long i=item - 1; i > current; i--) {
+      insertPage(i);
+    }
+  }
+ else {
+    insertPage(item - 1);
+    for (long i=current + 4; i > current; i--) {
+      insertPage(i);
+    }
+  }
+  if (current >= 5) {
+    for (long i=1; i < 5; i++) {
+      insertPage(current - i);
+    }
+    insertPage(Long.valueOf(0));
+  }
+ else {
+    for (long i=current - 1; i >= 0; i--) {
+      insertPage(i);
+    }
+  }
+}

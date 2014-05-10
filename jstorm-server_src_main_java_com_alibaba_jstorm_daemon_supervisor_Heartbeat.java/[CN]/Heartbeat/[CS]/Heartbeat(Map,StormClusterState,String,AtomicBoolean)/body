@@ -1,0 +1,17 @@
+{
+  String myHostName=ConfigExtension.getSupervisorHost(conf);
+  if (myHostName == null) {
+    myHostName=NetWorkUtils.hostname();
+  }
+  if (ConfigExtension.isSupervisorUseIp(conf)) {
+    myHostName=NetWorkUtils.ip();
+  }
+  this.stormClusterState=stormClusterState;
+  this.supervisorId=supervisorId;
+  this.conf=conf;
+  this.myHostName=myHostName;
+  this.startTime=TimeUtils.current_time_secs();
+  this.active=active;
+  this.frequence=JStormUtils.parseInt(conf.get(Config.SUPERVISOR_HEARTBEAT_FREQUENCY_SECS));
+  initSupervisorInfo(conf);
+}
