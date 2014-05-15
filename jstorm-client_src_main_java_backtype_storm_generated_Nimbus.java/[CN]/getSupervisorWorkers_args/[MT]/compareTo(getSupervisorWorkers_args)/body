@@ -9,7 +9,7 @@
     return lastComparison;
   }
   if (is_set_host()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.host,typedOther.host);
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.host,typedOther.host);
     if (lastComparison != 0) {
       return lastComparison;
     }

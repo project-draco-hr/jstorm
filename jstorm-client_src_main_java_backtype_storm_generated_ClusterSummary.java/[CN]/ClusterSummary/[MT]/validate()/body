@@ -1,23 +1,23 @@
 {
   if (!is_set_supervisors()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'supervisors' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'supervisors' is unset! Struct:" + toString());
   }
   if (!is_set_nimbus_uptime_secs()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'nimbus_uptime_secs' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'nimbus_uptime_secs' is unset! Struct:" + toString());
   }
   if (!is_set_topologies()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'topologies' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'topologies' is unset! Struct:" + toString());
   }
   if (!is_set_groupToTopology()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'groupToTopology' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'groupToTopology' is unset! Struct:" + toString());
   }
   if (!is_set_groupToResource()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'groupToResource' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'groupToResource' is unset! Struct:" + toString());
   }
   if (!is_set_groupToUsedResource()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'groupToUsedResource' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'groupToUsedResource' is unset! Struct:" + toString());
   }
   if (!is_set_isGroupModel()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'isGroupModel' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'isGroupModel' is unset! Struct:" + toString());
   }
 }

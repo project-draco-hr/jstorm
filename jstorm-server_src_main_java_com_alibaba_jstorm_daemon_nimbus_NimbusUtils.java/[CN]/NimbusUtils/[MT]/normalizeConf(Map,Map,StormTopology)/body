@@ -46,7 +46,7 @@
   List decoratorList=JStormUtils.distinctList(kryoDecoratorList);
   Integer ackerNum=JStormUtils.parseInt(totalConf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
   if (ackerNum == null) {
-    ackerNum=Integer.valueOf(0);
+    ackerNum=Integer.valueOf(1);
   }
   Map rtn=new HashMap();
   rtn.putAll(stormConf);

@@ -1,0 +1,52 @@
+{
+  org.apache.thrift7.protocol.TField field;
+  iprot.readStructBegin();
+  while (true) {
+    field=iprot.readFieldBegin();
+    if (field.type == org.apache.thrift7.protocol.TType.STOP) {
+      break;
+    }
+switch (field.id) {
+case 1:
+      if (field.type == org.apache.thrift7.protocol.TType.I32) {
+        this.port=iprot.readI32();
+        set_port_isSet(true);
+      }
+ else {
+        org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+      }
+    break;
+case 2:
+  if (field.type == org.apache.thrift7.protocol.TType.STRING) {
+    this.topology=iprot.readString();
+  }
+ else {
+    org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+  }
+break;
+case 3:
+if (field.type == org.apache.thrift7.protocol.TType.LIST) {
+{
+  org.apache.thrift7.protocol.TList _list228=iprot.readListBegin();
+  this.tasks=new ArrayList<TaskSummary>(_list228.size);
+  for (int _i229=0; _i229 < _list228.size; ++_i229) {
+    TaskSummary _elem230;
+    _elem230=new TaskSummary();
+    _elem230.read(iprot);
+    this.tasks.add(_elem230);
+  }
+  iprot.readListEnd();
+}
+}
+ else {
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+default :
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+iprot.readFieldEnd();
+}
+iprot.readStructEnd();
+validate();
+}

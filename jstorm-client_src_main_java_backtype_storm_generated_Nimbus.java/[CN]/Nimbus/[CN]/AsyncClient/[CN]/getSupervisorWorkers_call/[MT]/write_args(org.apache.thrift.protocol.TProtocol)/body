@@ -1,7 +1,0 @@
-{
-  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getSupervisorWorkers",org.apache.thrift.protocol.TMessageType.CALL,0));
-  getSupervisorWorkers_args args=new getSupervisorWorkers_args();
-  args.set_host(host);
-  args.write(prot);
-  prot.writeMessageEnd();
-}

@@ -1,2 +1,0 @@
-String host
-org.apache.thrift.async.AsyncMethodCallback<AsyncClient.getSupervisorWorkers_call> resultHandler

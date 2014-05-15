@@ -9,7 +9,7 @@
     return lastComparison;
   }
   if (is_set_port()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.port,typedOther.port);
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.port,typedOther.port);
     if (lastComparison != 0) {
       return lastComparison;
     }
@@ -19,7 +19,7 @@
     return lastComparison;
   }
   if (is_set_topology()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.topology,typedOther.topology);
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.topology,typedOther.topology);
     if (lastComparison != 0) {
       return lastComparison;
     }
@@ -29,7 +29,7 @@
     return lastComparison;
   }
   if (is_set_tasks()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.tasks,typedOther.tasks);
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.tasks,typedOther.tasks);
     if (lastComparison != 0) {
       return lastComparison;
     }

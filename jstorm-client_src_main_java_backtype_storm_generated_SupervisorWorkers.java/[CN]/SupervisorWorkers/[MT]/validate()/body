@@ -1,8 +1,8 @@
 {
   if (!is_set_supervisor()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'supervisor' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'supervisor' is unset! Struct:" + toString());
   }
   if (!is_set_workers()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'workers' is unset! Struct:" + toString());
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'workers' is unset! Struct:" + toString());
   }
 }

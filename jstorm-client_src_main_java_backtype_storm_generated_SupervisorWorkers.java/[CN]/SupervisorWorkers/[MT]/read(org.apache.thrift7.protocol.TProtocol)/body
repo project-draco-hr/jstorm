@@ -1,0 +1,44 @@
+{
+  org.apache.thrift7.protocol.TField field;
+  iprot.readStructBegin();
+  while (true) {
+    field=iprot.readFieldBegin();
+    if (field.type == org.apache.thrift7.protocol.TType.STOP) {
+      break;
+    }
+switch (field.id) {
+case 1:
+      if (field.type == org.apache.thrift7.protocol.TType.STRUCT) {
+        this.supervisor=new SupervisorSummary();
+        this.supervisor.read(iprot);
+      }
+ else {
+        org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+      }
+    break;
+case 2:
+  if (field.type == org.apache.thrift7.protocol.TType.LIST) {
+{
+      org.apache.thrift7.protocol.TList _list232=iprot.readListBegin();
+      this.workers=new ArrayList<WorkerSummary>(_list232.size);
+      for (int _i233=0; _i233 < _list232.size; ++_i233) {
+        WorkerSummary _elem234;
+        _elem234=new WorkerSummary();
+        _elem234.read(iprot);
+        this.workers.add(_elem234);
+      }
+      iprot.readListEnd();
+    }
+  }
+ else {
+    org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+  }
+break;
+default :
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+iprot.readFieldEnd();
+}
+iprot.readStructEnd();
+validate();
+}
