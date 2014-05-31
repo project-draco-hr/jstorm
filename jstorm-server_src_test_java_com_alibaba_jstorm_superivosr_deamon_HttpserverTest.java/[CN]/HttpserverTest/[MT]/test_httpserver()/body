@@ -1,5 +1,6 @@
 {
-  Httpserver httpserver=new Httpserver(Maps.newHashMap());
+  int port=ConfigExtension.getSupervisorDeamonHttpserverPort(Maps.newHashMap());
+  Httpserver httpserver=new Httpserver(port);
   httpserver.start();
   System.out.println("start....");
 }

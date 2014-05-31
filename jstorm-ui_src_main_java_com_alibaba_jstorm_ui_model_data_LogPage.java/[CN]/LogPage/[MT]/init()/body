@@ -1,7 +1,9 @@
 {
-  conf=UIUtils.readUiConfig();
-  port=ConfigExtension.getDeamonHttpserverPort(conf);
   try {
+    conf=UIUtils.readUiConfig();
+    if (port == 0) {
+      port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
+    }
     generateLogFileName();
     queryLog();
   }

@@ -49,6 +49,8 @@
  else {
     clusterSumm.setNimbusIp(NetWorkUtils.host2Ip(master));
   }
+  int port=ConfigExtension.getNimbusDeamonHttpserverPort(conf);
+  clusterSumm.setNimbusLogPort(String.valueOf(port));
   if (summ.is_isGroupModel())   clusterSumm.setIsGroupModel("true");
  else   clusterSumm.setIsGroupModel("false");
   clusterSumm.setNimbusUptime(nimbustime);

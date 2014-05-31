@@ -3,10 +3,21 @@
   if (ctx.getExternalContext().getRequestParameterMap().get("host") != null) {
     host=ctx.getExternalContext().getRequestParameterMap().get("host");
   }
+  String log=null;
   if (ctx.getExternalContext().getRequestParameterMap().get("log") != null) {
-    logFileName=ctx.getExternalContext().getRequestParameterMap().get("log");
+    log=ctx.getExternalContext().getRequestParameterMap().get("log");
   }
-  if (StringUtils.isBlank(host) == false && StringUtils.isBlank(logFileName) == false) {
+  if (StringUtils.isBlank(host) == false && StringUtils.isBlank(log) == false) {
+    String parent=null;
+    if (ctx.getExternalContext().getRequestParameterMap().get("parent") != null) {
+      parent=ctx.getExternalContext().getRequestParameterMap().get("parent");
+    }
+    if (parent == null) {
+      logFileName=log;
+    }
+ else {
+      logFileName=parent + File.separator + log;
+    }
     return;
   }
   String topologyid=null;

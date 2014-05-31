@@ -1,5 +1,5 @@
 {
-  String url=String.format(PROXY_URL,host,port,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_LIST);
+  String url=String.format(PROXY_URL,host,port,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_LIST,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_DIR,parent);
   try {
     HttpClient client=HttpClientBuilder.create().build();
     HttpPost post=new HttpPost(url);

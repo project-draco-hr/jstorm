@@ -3,5 +3,9 @@
   if (ctx.getExternalContext().getRequestParameterMap().get("host") != null) {
     host=(String)ctx.getExternalContext().getRequestParameterMap().get("host");
   }
+  if (ctx.getExternalContext().getRequestParameterMap().get("port") != null) {
+    port=JStormUtils.parseInt(ctx.getExternalContext().getRequestParameterMap().get("port"),0);
+  }
+  getTargetDir(ctx);
   init();
 }

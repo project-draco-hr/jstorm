@@ -1,6 +1,5 @@
 {
   int numHandler=3;
-  int port=ConfigExtension.getDeamonHttpserverPort(storm_conf);
   InetSocketAddress socketAddr=new InetSocketAddress(port);
   Executor executor=Executors.newFixedThreadPool(numHandler);
   try {

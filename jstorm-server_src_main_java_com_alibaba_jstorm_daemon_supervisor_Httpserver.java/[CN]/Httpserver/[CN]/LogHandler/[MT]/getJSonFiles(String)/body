@@ -1,9 +1,14 @@
 {
   Map<String,FileAttribute> fileMap=new HashMap<String,FileAttribute>();
-  File file=new File(logDir);
+  String path=logDir;
+  if (dir != null) {
+    path=path + File.separator + dir;
+  }
+  LOG.info("List dir " + path);
+  File file=new File(path);
   String[] files=file.list();
   for (  String fileName : files) {
-    String logFile=Joiner.on(File.separator).join(logDir,fileName);
+    String logFile=Joiner.on(File.separator).join(path,fileName);
     FileAttribute fileAttribute=new FileAttribute();
     fileAttribute.setFileName(fileName);
     File subFile=new File(logFile);

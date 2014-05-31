@@ -1,7 +1,10 @@
 {
   try {
-    Map conf=UIUtils.readUiConfig();
-    port=ConfigExtension.getDeamonHttpserverPort(conf);
+    if (port == 0) {
+      Map conf=UIUtils.readUiConfig();
+      port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
+    }
+    portStr=String.valueOf(port);
     listLogs();
   }
  catch (  Exception e) {

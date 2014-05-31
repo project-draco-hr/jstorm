@@ -1,7 +1,8 @@
 {
   byte[] filesJson="Failed to get file list".getBytes();
   try {
-    filesJson=getJSonFiles();
+    String dir=paramMap.get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_DIR);
+    filesJson=getJSonFiles(dir);
   }
  catch (  Exception e) {
     handlFailure(t,"Failed to get file list");

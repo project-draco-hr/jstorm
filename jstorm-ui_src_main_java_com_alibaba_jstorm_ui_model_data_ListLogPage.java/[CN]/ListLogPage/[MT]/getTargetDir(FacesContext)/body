@@ -1,0 +1,22 @@
+{
+  String dir=null;
+  if (ctx.getExternalContext().getRequestParameterMap().get("dir") != null) {
+    dir=ctx.getExternalContext().getRequestParameterMap().get("dir");
+  }
+  String paramParent=null;
+  if (ctx.getExternalContext().getRequestParameterMap().get("parent") != null) {
+    paramParent=ctx.getExternalContext().getRequestParameterMap().get("parent");
+  }
+  if (paramParent == null && dir == null) {
+    parent=".";
+  }
+ else   if (paramParent == null && dir != null) {
+    parent=dir;
+  }
+ else   if (paramParent != null && dir == null) {
+    parent=paramParent;
+  }
+ else {
+    parent=paramParent + File.separator + dir;
+  }
+}

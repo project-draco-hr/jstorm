@@ -3,7 +3,12 @@
   for (  JSONObject jobj : map.values()) {
     FileAttribute attribute=FileAttribute.fromJSONObject(jobj);
     if (attribute != null) {
-      files.add(attribute);
+      if (JStormUtils.parseBoolean(attribute.getIsDir(),false) == true) {
+        dirs.add(attribute);
+      }
+ else {
+        files.add(attribute);
+      }
     }
   }
   summary="There are " + files.size() + " files";

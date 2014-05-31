@@ -7,12 +7,12 @@
     client=NimbusClient.getConfiguredClient(conf);
     summ=client.getClient().getClusterInfo();
     tsumm=UIUtils.topologySummary(summ.get_topologies(),summ.get_groupToResource().keySet());
-    csumm=UIUtils.clusterSummary(summ,client);
+    csumm=UIUtils.clusterSummary(summ,client,conf);
     ssumm=UIUtils.supervisorSummary(summ.get_supervisors());
     gsumm=UIUtils.groupSummary(summ.get_groupToResource(),summ.get_groupToUsedResource());
     if (!summ.is_isGroupModel())     gsumm=new ArrayList<GroupSumm>();
     cluster_state=ZkTool.mk_distributed_cluster_state(client.getConf());
-    slaves=getNimbusSlave(cluster_state);
+    slaves=getNimbusSlave(cluster_state,conf);
     zkServers=getZkServer(conf);
     zkPort=String.valueOf(conf.get(Config.STORM_ZOOKEEPER_PORT));
   }

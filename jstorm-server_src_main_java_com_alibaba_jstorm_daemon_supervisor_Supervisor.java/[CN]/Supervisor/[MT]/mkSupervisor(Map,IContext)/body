@@ -28,7 +28,8 @@
   EventManagerPusher syncSupervisorPusher=new EventManagerPusher(syncSupEventManager,syncSupervisorEvent,active,syncFrequence);
   AsyncLoopThread syncSupervisorThread=new AsyncLoopThread(syncSupervisorPusher);
   threads.add(syncSupervisorThread);
-  Httpserver httpserver=new Httpserver(conf);
+  int port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
+  Httpserver httpserver=new Httpserver(port);
   httpserver.start();
   return new SupervisorManger(conf,supervisorId,active,threads,syncSupEventManager,processEventManager,httpserver,stormClusterState,workerThreadPids);
 }
