@@ -1,3 +1,0 @@
-{
-  return new NettyClient(storm_conf,host,port);
-}

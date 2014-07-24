@@ -1,0 +1,31 @@
+{
+  System.out.println("!!!!!!!!!!Start server reboot test!!!!!!!!");
+  String req_msg=setupLargMsg();
+  IContext context=TransportFactory.makeContext(storm_conf);
+  IConnection server=null;
+  IConnection client=null;
+  server=context.bind(null,port);
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(1024),waitStrategy);
+  server.registerQueue(recvQueue);
+  client=context.connect(null,"localhost",port);
+  List<TaskMessage> list=new ArrayList<TaskMessage>();
+  TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+  list.add(message);
+  client.send(message);
+  TaskMessage recv=server.recv(0);
+  Assert.assertEquals(req_msg,new String(recv.message()));
+  server.close();
+  client.send(message);
+  System.out.println("!!shutdow server and sleep 30s, please wait!!");
+  Thread.sleep(30000);
+  IConnection server2=context.bind(null,port);
+  server2.registerQueue(recvQueue);
+  System.out.println("!!!!!!!!!!!!!!!!!!!! restart server !!!!!!!!!!!");
+  TaskMessage recv2=server2.recv(0);
+  Assert.assertEquals(req_msg,new String(recv2.message()));
+  client.close();
+  server2.close();
+  context.term();
+  System.out.println("!!!!!!!!!!End server reboot test!!!!!!!!");
+}

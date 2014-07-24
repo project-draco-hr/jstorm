@@ -1,4 +1,7 @@
 {
+  if (client.isNoResponse()) {
+    return;
+  }
   ControlMessage msg=(ControlMessage)event.getMessage();
   if (msg == ControlMessage.FAILURE_RESPONSE)   LOG.info("failure response:{}",msg);
   Channel channel=event.getChannel();

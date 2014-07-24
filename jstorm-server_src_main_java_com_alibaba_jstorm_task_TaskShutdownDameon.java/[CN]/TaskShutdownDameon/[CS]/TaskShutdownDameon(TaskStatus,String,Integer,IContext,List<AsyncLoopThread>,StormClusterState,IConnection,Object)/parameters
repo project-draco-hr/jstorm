@@ -1,8 +1,0 @@
-TaskStatus taskStatus
-String topology_id
-Integer task_id
-IContext context
-List<AsyncLoopThread> all_threads
-StormClusterState zkCluster
-IConnection puller
-Object task_obj

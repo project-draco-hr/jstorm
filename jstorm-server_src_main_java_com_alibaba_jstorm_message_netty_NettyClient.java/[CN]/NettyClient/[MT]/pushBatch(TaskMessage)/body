@@ -1,8 +1,27 @@
 {
-  currentBatch.add(message);
-  if (checkFlush() == true) {
-    flush.set(false);
-    disruptorQueue.publish(currentBatch);
-    currentBatch=new MessageBatch(buffer_size);
+  if (TaskMessage.isEmpty(message)) {
+    return;
   }
+  MessageBatch messageBatch=messageBatchRef.getAndSet(null);
+  if (null == messageBatch) {
+    messageBatch=new MessageBatch(messageBatchSize);
+  }
+  messageBatch.add(message);
+  Channel channel=isChannelReady();
+  if (channel == null) {
+    handleFailedChannel(messageBatch);
+    return;
+  }
+  if (messageBatch.isFull()) {
+    flushRequest(channel,messageBatch);
+    return;
+  }
+  if (directlySend) {
+    flushRequest(channel,messageBatch);
+  }
+ else {
+    messageBatchRef.compareAndSet(null,messageBatch);
+    flush_later.set(true);
+  }
+  return;
 }

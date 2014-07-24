@@ -1,0 +1,8 @@
+{
+  if (channel == channelRef.get()) {
+    setChannel(null);
+  }
+ else {
+    channel.close();
+  }
+}

@@ -1,9 +1,4 @@
 {
   LOG.debug("message received with task: {},  receive: {} ",message.task(),counter.incrementAndGet());
-  if (useDisruptor) {
-    disruptorQ.publish(message);
-  }
- else {
-    blockQ.offer(message);
-  }
+  recvQueue.publish(message);
 }

@@ -27,10 +27,10 @@
         URL url=new URL("File:" + path);
         urls.add(url);
       }
-      WorkerClassLoader.mkInstance(urls.toArray(new URL[0]),ClassLoader.getSystemClassLoader(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
+      WorkerClassLoader.mkInstance(urls.toArray(new URL[0]),ClassLoader.getSystemClassLoader(),ClassLoader.getSystemClassLoader().getParent(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
     }
  else {
-      WorkerClassLoader.mkInstance(new URL[0],ClassLoader.getSystemClassLoader(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
+      WorkerClassLoader.mkInstance(new URL[0],ClassLoader.getSystemClassLoader(),ClassLoader.getSystemClassLoader().getParent(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
     }
   }
  catch (  Exception e) {
@@ -43,10 +43,13 @@
   int buffer_size=Utils.getInt(conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   this.transferQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(buffer_size),waitStrategy);
+  this.transferQueue.consumerStarted();
+  this.sendingQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(buffer_size),waitStrategy);
   this.nodeportSocket=new ConcurrentHashMap<WorkerSlot,IConnection>();
   this.taskNodeport=new ConcurrentHashMap<Integer,WorkerSlot>();
   this.taskToResource=new ConcurrentHashMap<Integer,ResourceAssignment>();
   this.innerTaskTransfer=new ConcurrentHashMap<Integer,DisruptorQueue>();
+  this.deserializeQueues=new ConcurrentHashMap<Integer,DisruptorQueue>();
   Assignment assignment=zkCluster.assignment_info(topologyId,null);
   if (assignment == null) {
     String errMsg="Failed to get Assignment of " + topologyId;

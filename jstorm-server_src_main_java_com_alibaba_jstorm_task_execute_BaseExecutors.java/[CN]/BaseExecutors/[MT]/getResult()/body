@@ -6,7 +6,6 @@
     return 0;
   }
  else   if (taskStatus.isShutdown()) {
-    LOG.info("Shutdown executing thread of " + idStr);
     this.shutdown();
     return -1;
   }

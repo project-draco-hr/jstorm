@@ -1,3 +1,7 @@
 {
+  LOG.info("Shutdown executing thread of " + idStr);
+  if (taskStatus.isShutdown() == false) {
+    LOG.info("Taskstatus isn't shutdown, but enter shutdown method, Occur exception");
+  }
   this.unregistorInnerTransfer();
 }

@@ -1,0 +1,11 @@
+{
+  validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (this.libName != null) {
+    oprot.writeFieldBegin(LIB_NAME_FIELD_DESC);
+    oprot.writeString(this.libName);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

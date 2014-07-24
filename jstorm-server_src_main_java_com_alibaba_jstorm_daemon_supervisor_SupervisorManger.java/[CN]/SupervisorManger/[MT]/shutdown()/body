@@ -24,4 +24,5 @@
   }
   httpserver.shutdown();
   isFinishShutdown=true;
+  JStormUtils.halt_process(0,"!!!Shutdown!!!");
 }

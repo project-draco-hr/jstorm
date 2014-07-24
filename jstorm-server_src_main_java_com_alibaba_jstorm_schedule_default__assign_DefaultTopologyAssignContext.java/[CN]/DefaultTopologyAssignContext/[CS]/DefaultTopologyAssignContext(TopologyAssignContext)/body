@@ -16,12 +16,21 @@
   }
   sidToHostname=generateSidToHost();
   hostToSid=JStormUtils.reverse_map(sidToHostname);
+  Map<WorkerSlot,List<Integer>> oldTasks=new HashMap<WorkerSlot,List<Integer>>();
   if (oldAssignment != null) {
-    oldWorkerTasks=Assignment.getWorkerTasks(oldAssignment.getTaskToResource());
+    try {
+      oldTasks=Assignment.getWorkerTasks(oldAssignment.getTaskToResource());
+    }
+ catch (    Exception e) {
+      StringBuilder sb=new StringBuilder();
+      sb.append("Failed to get oldWorkerTasks from assignment ");
+      sb.append(oldAssignment);
+      sb.append("Reset oldAssignment as null");
+      LOG.warn(sb.toString(),e);
+      oldAssignment=null;
+    }
   }
- else {
-    oldWorkerTasks=new HashMap<WorkerSlot,List<Integer>>();
-  }
+  oldWorkerTasks=oldTasks;
   refineDeadTasks();
   componentTasks=JStormUtils.reverse_map(context.getTaskToComponent());
   for (  Entry<String,List<Integer>> entry : componentTasks.entrySet()) {

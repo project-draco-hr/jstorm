@@ -1,0 +1,5 @@
+{
+  beginLibUpload_result result=new beginLibUpload_result();
+  receiveBase(result,"beginLibUpload");
+  return;
+}

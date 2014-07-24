@@ -24,7 +24,7 @@
   if (transport_plugin_klassName.equals(MQContext.class.getCanonicalName())) {
     filterJarKeyword="jeromq";
   }
- else   if (transport_plugin_klassName.equals(JMQContext.class.getCanonicalName())) {
+ else   if (transport_plugin_klassName.equals("com.alibaba.jstorm.message.jeroMq.JMQContext")) {
     filterJarKeyword="jzmq";
   }
   StringBuilder sb=new StringBuilder();

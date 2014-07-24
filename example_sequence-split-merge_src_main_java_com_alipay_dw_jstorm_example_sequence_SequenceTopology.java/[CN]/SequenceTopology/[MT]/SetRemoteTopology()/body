@@ -6,11 +6,5 @@
   TopologyBuilder builder=new TopologyBuilder();
   SetBuilder(builder,conf);
   conf.put(Config.STORM_CLUSTER_MODE,"distributed");
-  if (streamName.contains("zeromq")) {
-    conf.put(Config.STORM_MESSAGING_TRANSPORT,"com.alibaba.jstorm.message.zeroMq.MQContext");
-  }
- else {
-    conf.put(Config.STORM_MESSAGING_TRANSPORT,"com.alibaba.jstorm.message.netty.NettyContext");
-  }
   StormSubmitter.submitTopology(streamName,conf,builder.createTopology());
 }

@@ -1,6 +1,6 @@
 {
-  super.channelDisconnected(ctx,e);
   LOG.info("Receive channelDisconnected to {}",client.getRemoteAddr());
+  super.channelDisconnected(ctx,e);
   if (!being_closed.get()) {
     client.setChannel(null);
     client.reconnect();

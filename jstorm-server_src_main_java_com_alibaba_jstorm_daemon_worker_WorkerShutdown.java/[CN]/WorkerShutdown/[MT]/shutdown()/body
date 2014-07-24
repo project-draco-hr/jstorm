@@ -1,6 +1,6 @@
 {
   active.set(false);
-  virtualPortShutdown.shutdown();
+  metricReporter.shutdown();
   for (  WorkerSlot k : nodeportSocket.keySet()) {
     IConnection value=nodeportSocket.get(k);
     value.close();
@@ -11,14 +11,8 @@
   }
   for (  AsyncLoopThread t : threads) {
     t.cleanup();
-    JStormUtils.sleepMs(10);
+    JStormUtils.sleepMs(100);
     t.interrupt();
-    try {
-      t.join();
-    }
- catch (    InterruptedException e) {
-      LOG.error("join thread",e);
-    }
   }
   try {
     zkCluster.disconnect();
@@ -27,4 +21,5 @@
  catch (  Exception e) {
     LOG.info("Shutdown error,",e);
   }
+  JStormUtils.halt_process(0,"!!!Shutdown!!!");
 }

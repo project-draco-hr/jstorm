@@ -1,17 +1,22 @@
 {
   String fileLoc=null;
   try {
-    fileLoc=StormConfig.masterInbox(conf) + "/stormjar-" + UUID.randomUUID()+ ".jar";
+    String path=null;
+    String key=UUID.randomUUID().toString();
+    path=StormConfig.masterInbox(conf) + "/" + key;
+    FileUtils.forceMkdir(new File(path));
+    FileUtils.cleanDirectory(new File(path));
+    fileLoc=path + "/stormjar-" + key+ ".jar";
     data.getUploaders().put(fileLoc,Channels.newChannel(new FileOutputStream(fileLoc)));
-    LOG.info("Uploading file from client to " + fileLoc);
+    LOG.info("Begin upload file from client to " + fileLoc);
+    return path;
   }
  catch (  FileNotFoundException e) {
-    LOG.error(" file not found " + fileLoc);
+    LOG.error("File not found: " + fileLoc,e);
     throw new TException(e);
   }
 catch (  IOException e) {
-    LOG.error(" IOException  " + fileLoc,e);
+    LOG.error("Upload file error: " + fileLoc,e);
     throw new TException(e);
   }
-  return fileLoc;
 }

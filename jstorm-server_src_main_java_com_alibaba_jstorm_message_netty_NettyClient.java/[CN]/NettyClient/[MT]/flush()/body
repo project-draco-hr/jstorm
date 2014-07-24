@@ -1,0 +1,15 @@
+{
+  if (isClosed() == true) {
+    return;
+  }
+  if (flush_later.get() == false) {
+    return;
+  }
+  Channel channel=isChannelReady();
+  if (channel == null) {
+    return;
+  }
+  MessageBatch toBeFlushed=messageBatchRef.getAndSet(null);
+  flushRequest(channel,toBeFlushed);
+  flush_later.set(false);
+}

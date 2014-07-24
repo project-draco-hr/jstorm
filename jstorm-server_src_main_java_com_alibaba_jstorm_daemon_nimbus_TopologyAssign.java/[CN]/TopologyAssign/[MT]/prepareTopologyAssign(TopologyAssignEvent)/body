@@ -38,9 +38,14 @@
   ret.setCluster(supInfos);
   if (existingAssignment == null) {
     ret.setAssignType(TopologyAssignContext.ASSIGN_TYPE_NEW);
-    AssignmentBak lastAssignment=stormClusterState.assignment_bak(event.getTopologyName());
-    if (lastAssignment != null) {
-      ret.setOldAssignment(lastAssignment.getAssignment());
+    try {
+      AssignmentBak lastAssignment=stormClusterState.assignment_bak(event.getTopologyName());
+      if (lastAssignment != null) {
+        ret.setOldAssignment(lastAssignment.getAssignment());
+      }
+    }
+ catch (    Exception e) {
+      LOG.warn("Failed to get old Assignment,",e);
     }
   }
  else {

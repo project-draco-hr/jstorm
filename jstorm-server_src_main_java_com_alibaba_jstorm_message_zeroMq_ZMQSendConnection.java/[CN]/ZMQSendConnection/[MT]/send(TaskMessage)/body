@@ -1,0 +1,10 @@
+{
+  timer.start();
+  try {
+    ZeroMq.send(socket,message.message());
+  }
+  finally {
+    timer.stop();
+    histogram.update(1);
+  }
+}

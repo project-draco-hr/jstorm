@@ -1,0 +1,7 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift7.protocol.TMessage("beginLibUpload",org.apache.thrift7.protocol.TMessageType.CALL,0));
+  beginLibUpload_args args=new beginLibUpload_args();
+  args.set_libName(libName);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

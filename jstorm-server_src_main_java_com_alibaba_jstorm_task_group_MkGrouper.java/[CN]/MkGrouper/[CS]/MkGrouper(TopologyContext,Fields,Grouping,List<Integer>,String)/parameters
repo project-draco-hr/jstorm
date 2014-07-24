@@ -1,5 +1,0 @@
-TopologyContext _topology_context
-Fields _out_fields
-Grouping _thrift_grouping
-List<Integer> _outTasks
-String streamId

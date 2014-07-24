@@ -1,0 +1,10 @@
+{
+  if (that == null)   return false;
+  boolean this_present_libName=true && this.is_set_libName();
+  boolean that_present_libName=true && that.is_set_libName();
+  if (this_present_libName || that_present_libName) {
+    if (!(this_present_libName && that_present_libName))     return false;
+    if (!this.libName.equals(that.libName))     return false;
+  }
+  return true;
+}

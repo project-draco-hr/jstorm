@@ -26,5 +26,5 @@
  catch (  Exception e) {
     LOG.info(e);
   }
-  LOG.info("Successfully shut down task " + topology_id + ":"+ task_id);
+  LOG.info("Successfully shutdown task " + topology_id + ":"+ task_id);
 }

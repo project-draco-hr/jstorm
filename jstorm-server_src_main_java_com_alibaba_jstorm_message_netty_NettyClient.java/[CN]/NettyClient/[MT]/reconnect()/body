@@ -1,15 +1,3 @@
 {
-  try {
-    if (isClosed() == false) {
-      int tried_count=retries.incrementAndGet();
-      Thread.sleep(getSleepTimeMs());
-      LOG.info("Reconnect ... [{}], {}",tried_count,remote_addr);
-      bootstrap.connect(remote_addr);
-    }
-  }
- catch (  InterruptedException e) {
-    if (isClosed() == false) {
-      LOG.warn("connection failed",e);
-    }
-  }
+  reconnector.pushEvent(this);
 }

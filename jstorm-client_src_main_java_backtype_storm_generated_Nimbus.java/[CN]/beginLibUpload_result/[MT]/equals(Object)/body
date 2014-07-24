@@ -1,0 +1,5 @@
+{
+  if (that == null)   return false;
+  if (that instanceof beginLibUpload_result)   return this.equals((beginLibUpload_result)that);
+  return false;
+}

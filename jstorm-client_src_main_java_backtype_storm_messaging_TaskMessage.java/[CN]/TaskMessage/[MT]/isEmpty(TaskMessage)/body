@@ -1,0 +1,12 @@
+{
+  if (message == null) {
+    return true;
+  }
+ else   if (message.message() == null) {
+    return true;
+  }
+ else   if (message.message().length == 0) {
+    return true;
+  }
+  return false;
+}

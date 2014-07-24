@@ -1,12 +1,12 @@
 {
   LOG.info("running on cgroup mode");
   this.CPU_SLOT_PER_WEIGHT=ConfigExtension.getCpuSlotPerWeight(conf);
-  try {
-    if (!SystemOperation.isRoot())     throw new RuntimeException("If you want to use cgroup, please start supervisor on root");
-  }
- catch (  IOException e) {
-    LOG.error("check root error",e);
-    throw new RuntimeException(e);
+  root_dir=ConfigExtension.getCgroupRootDir(conf);
+  if (root_dir == null)   throw new RuntimeException("Check configuration file. The supervisor.cgroup.rootdir is missing.");
+  File file=new File(JSTORM_CPU_HIERARCHY_DIR + "/" + root_dir);
+  if (!file.exists()) {
+    LOG.error(JSTORM_CPU_HIERARCHY_DIR + "/" + root_dir+ " is not existing.");
+    throw new RuntimeException("Check if cgconfig service starts or /etc/cgconfig.conf is consistent with configuration file.");
   }
   center=CgroupCenter.getInstance();
   if (center == null)   throw new RuntimeException("Cgroup error, please check /proc/cgroups");

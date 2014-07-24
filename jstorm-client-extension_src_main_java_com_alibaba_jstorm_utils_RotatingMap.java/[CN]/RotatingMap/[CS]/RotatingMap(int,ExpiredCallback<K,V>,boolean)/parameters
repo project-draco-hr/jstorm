@@ -1,0 +1,3 @@
+int numBuckets
+ExpiredCallback<K,V> callback
+boolean isSingleThread

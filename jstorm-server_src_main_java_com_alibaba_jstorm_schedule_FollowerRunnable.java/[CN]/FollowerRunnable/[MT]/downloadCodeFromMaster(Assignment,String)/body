@@ -1,10 +1,9 @@
 {
   try {
     String localRoot=StormConfig.masterStormdistRoot(data.getConf(),topologyId);
-    String tmpDir=localRoot + UUID.randomUUID().toString();
-    ;
+    String tmpDir=StormConfig.masterInbox(data.getConf()) + "/" + UUID.randomUUID().toString();
     String masterCodeDir=assignment.getMasterCodeDir();
-    JStormServerUtils.downloadCodeFromMaster(data.getConf(),tmpDir,masterCodeDir);
+    JStormServerUtils.downloadCodeFromMaster(data.getConf(),tmpDir,masterCodeDir,topologyId,false);
     FileUtils.moveDirectory(new File(tmpDir),new File(localRoot));
   }
  catch (  TException e) {

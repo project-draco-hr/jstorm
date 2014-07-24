@@ -2,18 +2,7 @@
   WorkerClassLoader.switchThreadContext();
   while (taskStatus.isShutdown() == false) {
     try {
-      long now=System.currentTimeMillis();
-      if (now - lastRotate > rotateTime) {
-        Map<Tuple,Long> timeoutMap=tuple_start_times.rotate();
-        lastRotate=now;
-        if (ackerNum > 0) {
-          for (          Entry<Tuple,Long> entry : timeoutMap.entrySet()) {
-            Tuple input=entry.getKey();
-            task_stats.bolt_failed_tuple(input.getSourceComponent(),input.getSourceStreamId());
-          }
-        }
-      }
-      disruptorRecvQueue.consumeBatchWhenAvailable(this);
+      exeQueue.consumeBatchWhenAvailable(this);
     }
  catch (    Exception e) {
       if (taskStatus.isShutdown() == false) {

@@ -1,0 +1,35 @@
+{
+  Channel channel=null;
+  try {
+    int tried=0;
+    while (tried <= max_retries) {
+      LOG.info("Reconnect started for {}... [{}]",name(),tried);
+      ChannelFuture future=bootstrap.connect(remote_addr);
+      future.awaitUninterruptibly(10,TimeUnit.SECONDS);
+      Channel current=future.getChannel();
+      if (!future.isSuccess()) {
+        if (null != current) {
+          current.close();
+        }
+      }
+ else {
+        channel=current;
+        break;
+      }
+      JStormUtils.sleepMs(getSleepTimeMs());
+      tried++;
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Occur exception when reconnect to " + name());
+    channel=null;
+  }
+  if (null != channel) {
+    LOG.info("connection established to a remote host " + name() + ", "+ channel.toString());
+    setChannel(channel);
+  }
+ else {
+    LOG.info("Failed to connect to a remote host " + name());
+    JStormUtils.sleepMs(getSleepTimeMs());
+  }
+}

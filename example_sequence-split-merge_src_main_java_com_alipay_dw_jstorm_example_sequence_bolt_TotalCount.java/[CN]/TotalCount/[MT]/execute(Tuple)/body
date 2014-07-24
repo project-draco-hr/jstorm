@@ -1,5 +1,9 @@
 {
   Long tupleId=input.getLong(0);
+  if (tupleId <= lastTupleId) {
+    LOG.error("LastTupleId is " + lastTupleId + ", but now:"+ tupleId);
+  }
+  lastTupleId=tupleId;
   TradeCustomer tradeCustomer=(TradeCustomer)input.getValue(1);
   tradeSum.addAndGet(tradeCustomer.getTrade().getValue());
   customerSum.addAndGet(tradeCustomer.getCustomer().getValue());

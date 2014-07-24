@@ -1,18 +1,24 @@
 {
-  List<TaskShutdownDameon> shutdowntasks=createTasks();
-  workerData.setShutdownTasks(shutdowntasks);
   List<AsyncLoopThread> threads=new ArrayList<AsyncLoopThread>();
-  WorkerVirtualPort virtual_port=new WorkerVirtualPort(workerData);
-  Shutdownable virtual_port_shutdown=virtual_port.launch();
   RefreshConnections refreshConn=makeRefreshConnections();
   AsyncLoopThread refreshconn=new AsyncLoopThread(refreshConn,false,Thread.MIN_PRIORITY,true);
   threads.add(refreshconn);
-  RefreshActive refreshZkActive=new RefreshActive(workerData);
-  AsyncLoopThread refreshzk=new AsyncLoopThread(refreshZkActive,false,Thread.MIN_PRIORITY,true);
-  threads.add(refreshzk);
+  List<TaskShutdownDameon> shutdowntasks=createTasks();
+  workerData.setShutdownTasks(shutdowntasks);
+  AsyncLoopThread dispatcher=startDispatchThread();
+  threads.add(dispatcher);
   RunnableCallback heartbeat_fn=new WorkerHeartbeatRunable(workerData);
   AsyncLoopThread hb=new AsyncLoopThread(heartbeat_fn,false,null,Thread.NORM_PRIORITY,true);
   threads.add(hb);
+  TimeTick timeTick=new TimeTick(workerData);
+  AsyncLoopThread tick=new AsyncLoopThread(timeTick);
+  threads.add(tick);
+  RefreshActive refreshZkActive=new RefreshActive(workerData);
+  AsyncLoopThread refreshzk=new AsyncLoopThread(refreshZkActive,false,Thread.MIN_PRIORITY,true);
+  threads.add(refreshzk);
+  BatchTupleRunable batchRunable=new BatchTupleRunable(workerData);
+  AsyncLoopThread batch=new AsyncLoopThread(batchRunable,false,Thread.MAX_PRIORITY,true);
+  threads.add(batch);
   DrainerRunable drainer=new DrainerRunable(workerData);
   AsyncLoopThread dr=new AsyncLoopThread(drainer,false,Thread.MAX_PRIORITY,true);
   threads.add(dr);
@@ -20,5 +26,10 @@
   if (syncContainerHbThread != null) {
     threads.add(syncContainerHbThread);
   }
-  return new WorkerShutdown(workerData,shutdowntasks,virtual_port_shutdown,threads);
+  MetricReporter metricReporter=new MetricReporter();
+  boolean isMetricsEnable=ConfigExtension.isEnablePerformanceMetrics(workerData.getStormConf());
+  metricReporter.setEnable(isMetricsEnable);
+  metricReporter.start();
+  LOG.info("Start metrics reporter, enable performance metrics: " + isMetricsEnable);
+  return new WorkerShutdown(workerData,shutdowntasks,threads,metricReporter);
 }

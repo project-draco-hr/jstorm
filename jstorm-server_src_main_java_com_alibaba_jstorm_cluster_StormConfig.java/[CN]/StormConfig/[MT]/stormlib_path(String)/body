@@ -1,0 +1,3 @@
+{
+  return stormroot + FILE_SEPERATEOR + "lib";
+}

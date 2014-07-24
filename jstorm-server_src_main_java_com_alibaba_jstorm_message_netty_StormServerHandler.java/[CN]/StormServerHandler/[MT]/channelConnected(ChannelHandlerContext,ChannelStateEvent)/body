@@ -1,3 +1,4 @@
 {
+  LOG.info("Connection established {}",e.getChannel().getRemoteAddress());
   server.addChannel(e.getChannel());
 }

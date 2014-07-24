@@ -1,0 +1,10 @@
+{
+  try {
+    data.getUploaders().put(libName,Channels.newChannel(new FileOutputStream(libName)));
+    LOG.info("Begin upload file from client to " + libName);
+  }
+ catch (  FileNotFoundException e) {
+    LOG.error("Fail to upload jar " + libName,e);
+    throw new TException(e);
+  }
+}

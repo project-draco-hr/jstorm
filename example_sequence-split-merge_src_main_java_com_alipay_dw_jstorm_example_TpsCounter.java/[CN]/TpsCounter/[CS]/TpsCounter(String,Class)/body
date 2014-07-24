@@ -1,0 +1,6 @@
+{
+  this.id=id;
+  this.LOG=Logger.getLogger(tclass);
+  intervalCheck=new IntervalCheck();
+  intervalCheck.setInterval(60);
+}

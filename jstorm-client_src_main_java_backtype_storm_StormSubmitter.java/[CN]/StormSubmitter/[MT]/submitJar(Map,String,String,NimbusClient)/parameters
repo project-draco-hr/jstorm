@@ -1,0 +1,4 @@
+Map conf
+String localJar
+String uploadLocation
+NimbusClient client

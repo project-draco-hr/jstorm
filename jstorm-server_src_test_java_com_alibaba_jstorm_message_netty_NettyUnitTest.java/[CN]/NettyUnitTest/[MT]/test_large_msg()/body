@@ -1,28 +1,23 @@
 {
-  String req_msg="";
-  for (int i=0; i < Short.MAX_VALUE; i++) {
-    req_msg+="Aloha";
-  }
-  Map storm_conf=Maps.newHashMap();
-  storm_conf.put(Config.STORM_MESSAGING_TRANSPORT,context_class_name);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE,102400);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_MAX_RETRIES,10);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_MIN_SLEEP_MS,1000);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_MAX_SLEEP_MS,5000);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_SERVER_WORKER_THREADS,1);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_CLIENT_WORKER_THREADS,1);
-  storm_conf.put(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE,1024);
-  storm_conf.put(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY,"com.lmax.disruptor.BlockingWaitStrategy");
-  storm_conf.put(Config.STORM_CLUSTER_MODE,"distributed");
+  System.out.println("!!!!!!!!!!start larget message test!!!!!!!!");
+  String req_msg=setupLargMsg();
+  System.out.println("!!!!Finish batch data, size:" + req_msg.length() + "!!!!");
   IContext context=TransportFactory.makeContext(storm_conf);
   IConnection server=null;
   IConnection client=null;
-  server=context.bind(null,port,true);
-  client=context.connect(null,"localhost",port,true);
-  client.send(task,req_msg.getBytes());
-  byte[] recv_msg=server.recv(0);
-  Assert.assertEquals(req_msg,new String(recv_msg));
-  server.close();
+  server=context.bind(null,port);
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(1024),waitStrategy);
+  server.registerQueue(recvQueue);
+  client=context.connect(null,"localhost",port);
+  List<TaskMessage> list=new ArrayList<TaskMessage>();
+  TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+  list.add(message);
+  client.send(message);
+  TaskMessage recv=server.recv(0);
+  Assert.assertEquals(req_msg,new String(recv.message()));
   client.close();
+  server.close();
   context.term();
+  System.out.println("!!!!!!!!!!End larget message test!!!!!!!!");
 }

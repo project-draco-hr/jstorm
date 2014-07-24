@@ -97,6 +97,17 @@ return local_or_shuffle;
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 return null;
 }
+case LOCAL_FIRST:
+if (field.type == LOCAL_FIRST_FIELD_DESC.type) {
+NullStruct localFirst;
+localFirst=new NullStruct();
+localFirst.read(iprot);
+return localFirst;
+}
+ else {
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+return null;
+}
 default :
 throw new IllegalStateException("setField wasn't null, but didn't match any of the case statements!");
 }

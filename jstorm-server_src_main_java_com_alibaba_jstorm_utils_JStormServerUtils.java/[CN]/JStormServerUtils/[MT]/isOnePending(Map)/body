@@ -1,0 +1,13 @@
+{
+  Object pending=conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING);
+  if (pending == null) {
+    return false;
+  }
+  int pendingNum=JStormUtils.parseInt(pending);
+  if (pendingNum == 1) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

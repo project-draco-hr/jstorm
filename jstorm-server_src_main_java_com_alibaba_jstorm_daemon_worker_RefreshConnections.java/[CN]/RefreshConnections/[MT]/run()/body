@@ -3,57 +3,64 @@
     return;
   }
   try {
-    Assignment assignment=zkCluster.assignment_info(topologyId,this);
-    if (assignment == null) {
-      String errMsg="Failed to get Assignment of " + topologyId;
-      LOG.error(errMsg);
-      return;
-    }
-    Map<Integer,ResourceAssignment> taskToResource=assignment.getTaskToResource();
-    if (taskToResource == null) {
-      String errMsg="Failed to get taskToResource of " + topologyId;
-      LOG.error(errMsg);
-      return;
-    }
-    workerData.getTaskToResource().putAll(taskToResource);
-    Map<Integer,WorkerSlot> my_assignment=new HashMap<Integer,WorkerSlot>();
-    Map<String,String> node=assignment.getNodeHost();
-    Set<WorkerSlot> need_connections=new HashSet<WorkerSlot>();
-    if (taskToResource != null && outboundTasks != null) {
-      for (      Entry<Integer,ResourceAssignment> mm : taskToResource.entrySet()) {
-        int taks_id=mm.getKey();
-        ResourceAssignment resource=mm.getValue();
-        if (outboundTasks.contains(taks_id)) {
-          WorkerSlot workerSlot=new WorkerSlot(resource.getSupervisorId(),resource.getPort());
-          my_assignment.put(taks_id,workerSlot);
-          need_connections.add(workerSlot);
+synchronized (this) {
+      Assignment assignment=zkCluster.assignment_info(topologyId,this);
+      if (assignment == null) {
+        String errMsg="Failed to get Assignment of " + topologyId;
+        LOG.error(errMsg);
+        return;
+      }
+      Map<Integer,ResourceAssignment> taskToResource=assignment.getTaskToResource();
+      if (taskToResource == null) {
+        String errMsg="Failed to get taskToResource of " + topologyId;
+        LOG.error(errMsg);
+        return;
+      }
+      workerData.getTaskToResource().putAll(taskToResource);
+      Map<Integer,WorkerSlot> my_assignment=new HashMap<Integer,WorkerSlot>();
+      Map<String,String> node=assignment.getNodeHost();
+      Set<WorkerSlot> need_connections=new HashSet<WorkerSlot>();
+      Set<Integer> localNodeTasks=new HashSet<Integer>();
+      if (taskToResource != null && outboundTasks != null) {
+        for (        Entry<Integer,ResourceAssignment> mm : taskToResource.entrySet()) {
+          int taks_id=mm.getKey();
+          ResourceAssignment resource=mm.getValue();
+          if (outboundTasks.contains(taks_id)) {
+            WorkerSlot workerSlot=new WorkerSlot(resource.getSupervisorId(),resource.getPort());
+            my_assignment.put(taks_id,workerSlot);
+            need_connections.add(workerSlot);
+          }
+          if (supervisorId.equals(resource.getSupervisorId())) {
+            localNodeTasks.add(taks_id);
+          }
         }
       }
-    }
-    taskNodeport.putAll(my_assignment);
-    Set<WorkerSlot> current_connections=nodeportSocket.keySet();
-    Set<WorkerSlot> new_connections=new HashSet<WorkerSlot>();
-    Set<WorkerSlot> remove_connections=new HashSet<WorkerSlot>();
-    for (    WorkerSlot node_port : need_connections) {
-      if (!current_connections.contains(node_port)) {
-        new_connections.add(node_port);
+      taskNodeport.putAll(my_assignment);
+      workerData.setLocalNodeTasks(localNodeTasks);
+      Set<WorkerSlot> current_connections=nodeportSocket.keySet();
+      Set<WorkerSlot> new_connections=new HashSet<WorkerSlot>();
+      Set<WorkerSlot> remove_connections=new HashSet<WorkerSlot>();
+      for (      WorkerSlot node_port : need_connections) {
+        if (!current_connections.contains(node_port)) {
+          new_connections.add(node_port);
+        }
       }
-    }
-    for (    WorkerSlot node_port : current_connections) {
-      if (!need_connections.contains(node_port)) {
-        remove_connections.add(node_port);
+      for (      WorkerSlot node_port : current_connections) {
+        if (!need_connections.contains(node_port)) {
+          remove_connections.add(node_port);
+        }
       }
-    }
-    for (    WorkerSlot nodePort : new_connections) {
-      String host=node.get(nodePort.getNodeId());
-      int port=nodePort.getPort();
-      IConnection conn=context.connect(topologyId,host,port,true);
-      nodeportSocket.put(nodePort,conn);
-      LOG.info("Add connection to " + nodePort);
-    }
-    for (    WorkerSlot node_port : remove_connections) {
-      LOG.info("Remove connection to " + node_port);
-      nodeportSocket.remove(node_port).close();
+      for (      WorkerSlot nodePort : new_connections) {
+        String host=node.get(nodePort.getNodeId());
+        int port=nodePort.getPort();
+        IConnection conn=context.connect(topologyId,host,port);
+        nodeportSocket.put(nodePort,conn);
+        LOG.info("Add connection to " + nodePort);
+      }
+      for (      WorkerSlot node_port : remove_connections) {
+        LOG.info("Remove connection to " + node_port);
+        nodeportSocket.remove(node_port).close();
+      }
     }
   }
  catch (  Exception e) {

@@ -1,3 +1,6 @@
 {
+  if (e.getChannel() != null) {
+    LOG.info("Channel occur exception {}",e.getChannel().getRemoteAddress());
+  }
   server.closeChannel(e.getChannel());
 }

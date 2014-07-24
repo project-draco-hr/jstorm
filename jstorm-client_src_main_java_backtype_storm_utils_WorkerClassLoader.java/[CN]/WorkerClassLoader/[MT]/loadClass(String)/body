@@ -1,11 +1,14 @@
 {
   Class<?> result=null;
   result=this.findLoadedClass(name);
-  if (result != null) {
+  if (result != null && result.getClassLoader() == this) {
     return result;
   }
+ else {
+    result=null;
+  }
   try {
-    result=parent.getParent().loadClass(name);
+    result=JDKClassLoader.loadClass(name);
     if (result != null)     return result;
   }
  catch (  Exception e) {
@@ -20,5 +23,5 @@
   }
  catch (  Exception e) {
   }
-  return parent.loadClass(name);
+  return defaultClassLoader.loadClass(name);
 }

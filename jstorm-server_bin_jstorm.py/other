@@ -14,7 +14,7 @@ LOG4J_CONF = (JSTORM_CONF_DIR + '/jstorm.log4j.properties')
 CONFIG_OPTS = []
 if (not os.path.exists((JSTORM_DIR + '/RELEASE'))):
     print '******************************************'
-    print "The jstorm client can only be run from within a release. You appear to be trying to run the client from a checkout of Storm's source code."
+    print "The jstorm client can only be run from within a release. You appear to be trying to run the client from a checkout of JStorm's source code."
     print '\nYou can download a JStorm release '
     print '******************************************'
     sys.exit(1)

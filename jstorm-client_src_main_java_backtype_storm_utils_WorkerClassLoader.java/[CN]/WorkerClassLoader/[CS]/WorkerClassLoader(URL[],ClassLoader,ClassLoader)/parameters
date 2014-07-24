@@ -1,0 +1,3 @@
+URL[] urls
+ClassLoader defaultClassLoader
+ClassLoader JDKClassLoader

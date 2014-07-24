@@ -22,10 +22,10 @@
       try {
         LOG.info("Submitting topology " + name + " in distributed mode with conf "+ serConf);
         if (opts != null) {
-          client.getClient().submitTopologyWithOpts(name,submittedJar,serConf,topology,opts);
+          client.getClient().submitTopologyWithOpts(name,path,serConf,topology,opts);
         }
  else {
-          client.getClient().submitTopology(name,submittedJar,serConf,topology);
+          client.getClient().submitTopology(name,path,serConf,topology);
         }
       }
  catch (      InvalidTopologyException e) {

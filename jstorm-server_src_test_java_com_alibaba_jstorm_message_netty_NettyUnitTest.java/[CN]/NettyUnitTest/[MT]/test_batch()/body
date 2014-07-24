@@ -1,46 +1,31 @@
 {
-  Map storm_conf=Maps.newHashMap();
-  storm_conf.put(Config.STORM_MESSAGING_TRANSPORT,context_class_name);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE,1024);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_MAX_RETRIES,10);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_MIN_SLEEP_MS,1000);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_MAX_SLEEP_MS,5000);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_SERVER_WORKER_THREADS,1);
-  storm_conf.put(Config.STORM_MESSAGING_NETTY_CLIENT_WORKER_THREADS,1);
-  storm_conf.put(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE,1024);
-  storm_conf.put(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY,"com.lmax.disruptor.BlockingWaitStrategy");
-  storm_conf.put(Config.STORM_CLUSTER_MODE,"distributed");
+  System.out.println("!!!!!!!!!!Start batch message test!!!!!!!!");
   IContext context=TransportFactory.makeContext(storm_conf);
-  final IConnection server=context.bind(null,port,true);
+  final IConnection server=context.bind(null,port);
   IConnection client=null;
-  client=context.connect(null,"localhost",port,true);
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(1024),waitStrategy);
+  server.registerQueue(recvQueue);
+  client=context.connect(null,"localhost",port);
   final int base=100000;
-  Thread consumer=new Thread(new Runnable(){
-    public void run(){
-      for (int i=1; i < 10000; i++) {
-        byte[] recv_msg=server.recv(0);
-        Assert.assertEquals(String.valueOf(i + base),new String(recv_msg));
-        LOG.info("Receive " + i);
-      }
-      LOG.info("Finish Receive ");
+  List<TaskMessage> list=new ArrayList<TaskMessage>();
+  for (int i=1; i < Short.MAX_VALUE; i++) {
+    String req_msg=String.valueOf(i + base);
+    TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+    list.add(message);
+  }
+  client.send(list);
+  System.out.println("Finish Send ");
+  for (int i=1; i < Short.MAX_VALUE; i++) {
+    TaskMessage message=server.recv(0);
+    Assert.assertEquals(String.valueOf(i + base),new String(message.message()));
+    if (i % 1000 == 0) {
+      System.out.println("Receive " + i);
     }
   }
-,"Btach-Consumer-Thread");
-  consumer.start();
-  for (int i=1; i < 10000; i++) {
-    client.send(task,String.valueOf(base + i).getBytes());
-    if (i % 100 == 0) {
-      LOG.info("Send " + i);
-    }
-  }
-  LOG.info("Finish Send ");
-  try {
-    consumer.join();
-  }
- catch (  InterruptedException e) {
-    throw new RuntimeException(e);
-  }
+  System.out.println("Finish Receive ");
   client.close();
   server.close();
   context.term();
+  System.out.println("!!!!!!!!!!End batch message test!!!!!!!!");
 }

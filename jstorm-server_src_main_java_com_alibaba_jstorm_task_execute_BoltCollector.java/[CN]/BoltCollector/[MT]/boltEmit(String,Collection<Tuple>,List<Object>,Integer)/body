@@ -1,4 +1,5 @@
 {
+  timer.start();
   try {
     java.util.List<Integer> out_tasks=null;
     if (out_task_id != null) {
@@ -32,6 +33,9 @@
   }
  catch (  Exception e) {
     LOG.error("bolt emit",e);
+  }
+ finally {
+    timer.stop();
   }
   return new ArrayList<Integer>();
 }

@@ -1,7 +1,7 @@
 {
   String tmproot=StormConfig.supervisorTmpDir(conf) + File.separator + UUID.randomUUID().toString();
   String stormroot=StormConfig.supervisor_stormdist_root(conf,topologyId);
-  JStormServerUtils.downloadCodeFromMaster(conf,tmproot,masterCodeDir);
+  JStormServerUtils.downloadCodeFromMaster(conf,tmproot,masterCodeDir,topologyId,true);
   String localFileJarTmp=StormConfig.stormjar_path(tmproot);
   JStormUtils.extract_dir_from_jar(localFileJarTmp,StormConfig.RESOURCES_SUBDIR,tmproot);
   FileUtils.moveDirectory(new File(tmproot),new File(stormroot));

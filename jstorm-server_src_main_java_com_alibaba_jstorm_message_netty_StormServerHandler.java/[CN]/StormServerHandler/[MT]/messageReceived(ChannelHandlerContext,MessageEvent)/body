@@ -1,20 +1,15 @@
 {
-  Object msg=e.getMessage();
-  if (msg == null)   return;
-  if (msg == ControlMessage.EOB_MESSAGE) {
-    Channel channel=ctx.getChannel();
-    LOG.debug("Receive ...{}",msg);
-    channel.write(ControlMessage.OK_RESPONSE);
-    return;
-  }
- else   if (msg instanceof ControlMessage) {
-    LOG.debug("Receive ...{}",msg);
+  List<TaskMessage> msgs=(List<TaskMessage>)e.getMessage();
+  if (msgs == null) {
     return;
   }
   try {
-    server.enqueue((TaskMessage)msg);
+    Iterator<TaskMessage> iter=msgs.iterator();
+    while (iter.hasNext()) {
+      server.enqueue((TaskMessage)iter.next());
+    }
   }
  catch (  Exception e1) {
-    LOG.warn("Failed to enqueue a request message",e);
+    LOG.warn("Failed to enqueue a request message" + e1.toString(),e);
   }
 }

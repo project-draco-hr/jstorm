@@ -1,3 +1,4 @@
 {
   socket=_socket;
+  new AsyncLoopThread(this,true,Thread.MAX_PRIORITY,true);
 }

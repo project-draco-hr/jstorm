@@ -1,0 +1,24 @@
+{
+  if (requests == null || requests.isEmpty())   return;
+  long pending=pendings.incrementAndGet();
+  LOG.debug("Flush pending {}, this message size:{}",pending,requests.getEncoded_length());
+  ChannelFuture future=channel.write(requests);
+  future.addListener(new ChannelFutureListener(){
+    public void operationComplete(    ChannelFuture future) throws Exception {
+      pendings.decrementAndGet();
+      if (!future.isSuccess()) {
+        if (isClosed() == false) {
+          LOG.info("Failed to send requests to " + remote_addr.toString() + ": ",future.getCause());
+        }
+        Channel channel=future.getChannel();
+        if (null != channel) {
+          exceptionChannel(channel);
+        }
+      }
+ else {
+        LOG.debug("{} request(s) sent",requests.size());
+      }
+    }
+  }
+);
+}

@@ -1,0 +1,5 @@
+Map conf
+String localRoot
+String masterCodeDir
+String topologyId
+boolean isSupervisor

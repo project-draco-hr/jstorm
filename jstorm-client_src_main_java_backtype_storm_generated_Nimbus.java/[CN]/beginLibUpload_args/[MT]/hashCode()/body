@@ -1,0 +1,7 @@
+{
+  HashCodeBuilder builder=new HashCodeBuilder();
+  boolean present_libName=true && (is_set_libName());
+  builder.append(present_libName);
+  if (present_libName)   builder.append(libName);
+  return builder.toHashCode();
+}

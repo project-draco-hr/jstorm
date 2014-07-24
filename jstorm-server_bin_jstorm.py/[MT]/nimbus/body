@@ -1,5 +1,5 @@
 def nimbus():
-    'Syntax: [jstorm nimbus]\n\n    Launches the nimbus daemon. This command should be run under \n    supervision with a tool like daemontools or monit. \n\n    See Setting up a Storm cluster for more information.\n    (https://github.com/alibaba/jstorm/wiki/JStorm-Chinese-Documentation)\n    '
+    'Syntax: [jstorm nimbus]\n\n    Launches the nimbus daemon. This command should be run under \n    supervision with a tool like daemontools or monit. \n\n    See Setting up a JStorm cluster for more information.\n    (https://github.com/alibaba/jstorm/wiki/JStorm-Chinese-Documentation)\n    '
     cppaths = [JSTORM_CONF_DIR]
     nimbus_classpath = confvalue('nimbus.classpath', cppaths)
     childopts = (confvalue('nimbus.childopts', cppaths) + (' -Dlogfile.name=nimbus.log -Dlog4j.configuration=File:%s/conf/jstorm.log4j.properties ' % JSTORM_DIR))

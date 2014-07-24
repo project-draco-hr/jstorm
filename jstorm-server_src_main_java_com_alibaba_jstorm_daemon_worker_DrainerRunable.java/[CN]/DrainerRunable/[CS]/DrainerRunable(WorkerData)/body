@@ -1,6 +1,3 @@
 {
-  this.transferQueue=workerData.getTransferQueue();
-  this.nodeportSocket=workerData.getNodeportSocket();
-  this.taskNodeport=workerData.getTaskNodeport();
-  this.workerActive=workerData.getActive();
+  super(workerData.getSendingQueue(),DrainerRunable.class.getSimpleName(),workerData.getActive());
 }

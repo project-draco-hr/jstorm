@@ -16,6 +16,8 @@ case 7:
 return CUSTOM_SERIALIZED;
 case 8:
 return LOCAL_OR_SHUFFLE;
+case 9:
+return LOCAL_FIRST;
 default :
 return null;
 }

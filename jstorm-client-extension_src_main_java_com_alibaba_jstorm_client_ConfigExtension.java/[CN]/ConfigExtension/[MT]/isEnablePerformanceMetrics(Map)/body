@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseBoolean(conf.get(TOPOLOGY_PERFORMANCE_METRICS),true);
+}

@@ -1,0 +1,9 @@
+{
+  String mode=(String)conf.get(Config.STORM_CLUSTER_MODE);
+  if (mode != null) {
+    if (mode.equals("local")) {
+      return true;
+    }
+  }
+  return false;
+}

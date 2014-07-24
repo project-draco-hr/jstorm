@@ -1,4 +1,3 @@
 {
-  Map<K,V> bucket=_buckets.getFirst();
-  bucket.put(key,value);
+  _buckets.peekFirst().put(key,value);
 }

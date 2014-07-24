@@ -1,8 +1,0 @@
-{
-  if (distribute && !StormConfig.local_mode(storm_conf)) {
-    return netty_bind(topology_id,port);
-  }
- else {
-    return queue_bind(port);
-  }
-}

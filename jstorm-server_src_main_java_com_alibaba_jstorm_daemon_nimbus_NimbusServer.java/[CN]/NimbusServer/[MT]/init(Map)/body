@@ -2,10 +2,10 @@
   NimbusUtils.cleanupCorruptTopologies(data);
   initTopologyAssign();
   initTopologyStatus();
-  initMonitor(conf);
   initCleaner(conf);
   serviceHandler=new ServiceHandler(data);
   if (!data.isLocalMode()) {
+    initMonitor(conf);
     initGroup(conf);
     initThrift(conf);
   }

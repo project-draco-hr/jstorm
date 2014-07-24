@@ -1,0 +1,10 @@
+{
+  Channel channel=channelRef.get();
+  if (channel == null) {
+    return null;
+  }
+  if (channel.isWritable() == false) {
+    return null;
+  }
+  return channel;
+}

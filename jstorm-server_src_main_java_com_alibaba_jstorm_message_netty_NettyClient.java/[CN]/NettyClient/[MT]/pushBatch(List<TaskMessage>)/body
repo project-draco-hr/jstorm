@@ -1,0 +1,31 @@
+{
+  if (messages.isEmpty()) {
+    return;
+  }
+  MessageBatch messageBatch=messageBatchRef.getAndSet(null);
+  if (null == messageBatch) {
+    messageBatch=new MessageBatch(messageBatchSize);
+  }
+  for (  TaskMessage message : messages) {
+    if (TaskMessage.isEmpty(message)) {
+      continue;
+    }
+    messageBatch.add(message);
+    if (messageBatch.isFull()) {
+      Channel channel=isChannelReady();
+      if (channel != null) {
+        flushRequest(channel,messageBatch);
+        messageBatch=new MessageBatch(messageBatchSize);
+      }
+    }
+  }
+  Channel channel=isChannelReady();
+  if (channel == null) {
+    handleFailedChannel(messageBatch);
+    return;
+  }
+ else   if (messageBatch.isEmpty() == false) {
+    flushRequest(channel,messageBatch);
+  }
+  return;
+}

@@ -1,0 +1,8 @@
+{
+  LOG.info("Successfully start ZMQ Recv thread");
+  while (isClosed()) {
+    TaskMessage message=recv(0);
+    enqueue(message);
+  }
+  LOG.info("Successfully shutdown ZMQ Recv thread");
+}

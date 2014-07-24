@@ -1,18 +1,15 @@
 {
   this.storm_conf=storm_conf;
   this.port=port;
-  useDisruptor=ConfigExtension.isNettyEnableDisruptor(storm_conf);
-  blockQ=new LinkedBlockingQueue<TaskMessage>();
-  int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
-  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  disruptorQ=new DisruptorQueue(new SingleThreadedClaimStrategy(queue_size),waitStrategy);
   int buffer_size=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE));
   int maxWorkers=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_SERVER_WORKER_THREADS));
+  ThreadFactory bossFactory=new NettyRenameThreadFactory("server" + "-boss");
+  ThreadFactory workerFactory=new NettyRenameThreadFactory("server" + "-worker");
   if (maxWorkers > 0) {
-    factory=new NioServerSocketChannelFactory(Executors.newCachedThreadPool(),Executors.newCachedThreadPool(),maxWorkers);
+    factory=new NioServerSocketChannelFactory(Executors.newCachedThreadPool(bossFactory),Executors.newCachedThreadPool(workerFactory),maxWorkers);
   }
  else {
-    factory=new NioServerSocketChannelFactory(Executors.newCachedThreadPool(),Executors.newCachedThreadPool());
+    factory=new NioServerSocketChannelFactory(Executors.newCachedThreadPool(bossFactory),Executors.newCachedThreadPool(workerFactory));
   }
   bootstrap=new ServerBootstrap(factory);
   bootstrap.setOption("child.tcpNoDelay",true);
@@ -21,5 +18,5 @@
   bootstrap.setPipelineFactory(new StormServerPipelineFactory(this));
   Channel channel=bootstrap.bind(new InetSocketAddress(port));
   allChannels.add(channel);
-  LOG.info("Successfull bind {}, use disruptor:{}",port,useDisruptor);
+  LOG.info("Successfull bind {}, buffer_size:{}, maxWorkers:{}",port,buffer_size,maxWorkers);
 }

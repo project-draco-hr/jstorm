@@ -1,0 +1,25 @@
+{
+  this.storm_conf=_storm_conf;
+  this.deserializeQueue=deserializeQueue;
+  this.userTopologyCtx=_user_context;
+  this.task_stats=_task_stats;
+  this.taskId=topology_context.getThisTaskId();
+  this.innerTaskTransfer=innerTaskTransfer;
+  this.component_id=topology_context.getThisComponentId();
+  this.idStr=JStormServerUtils.getName(component_id,taskId);
+  this.taskStatus=taskStatus;
+  this.report_error=_report_error;
+  this.deserializer=new KryoTupleDeserializer(storm_conf,topology_context);
+  this.isDebugRecv=ConfigExtension.isTopologyDebugRecvTuple(storm_conf);
+  this.isDebug=JStormUtils.parseBoolean(storm_conf.get(Config.TOPOLOGY_DEBUG),false);
+  message_timeout_secs=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
+  int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_RECEIVE_BUFFER_SIZE),256);
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  this.exeQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(queue_size),waitStrategy);
+  this.exeQueue.consumerStarted();
+  this.registerInnerTransfer(exeQueue);
+  deserializeThread=new AsyncLoopThread(new DeserializeRunnable(deserializeQueue,exeQueue));
+  deserializeTimer=Metrics.registerTimer(idStr + "-deserialize-timer");
+  Metrics.registerQueue(idStr + "-deserialize-queue",deserializeQueue);
+  Metrics.registerQueue(idStr + "-exe-queue",exeQueue);
+}

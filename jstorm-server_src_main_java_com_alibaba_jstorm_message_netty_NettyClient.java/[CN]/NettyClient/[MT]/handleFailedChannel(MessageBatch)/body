@@ -1,0 +1,13 @@
+{
+  messageBatchRef.set(messageBatch);
+  flush_later.set(true);
+  long cachedSize=messageBatch.getEncoded_length();
+  if (cachedSize > BATCH_THREASHOLD_WARN) {
+    long count=(cachedSize + BATCH_THREASHOLD_WARN - 1) / BATCH_THREASHOLD_WARN;
+    long sleepMs=count * 20;
+    LOG.warn("Too much cached buffer {}, sleep {}ms ",cachedSize,sleepMs);
+    JStormUtils.sleepMs(sleepMs);
+    reconnect();
+  }
+  return;
+}

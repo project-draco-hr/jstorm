@@ -1,0 +1,8 @@
+{
+  if (getSetField() == _Fields.LOCAL_FIRST) {
+    return (NullStruct)getFieldValue();
+  }
+ else {
+    throw new RuntimeException("Cannot get field 'localFirst' because union is currently set to " + getFieldDesc(getSetField()).name);
+  }
+}

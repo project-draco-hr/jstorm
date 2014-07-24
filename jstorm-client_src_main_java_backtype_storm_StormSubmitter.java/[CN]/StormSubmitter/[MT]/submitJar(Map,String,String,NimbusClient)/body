@@ -1,0 +1,27 @@
+{
+  if (localJar == null) {
+    throw new RuntimeException("Must submit topologies using the 'storm' client script so that StormSubmitter knows which jar to upload.");
+  }
+  try {
+    LOG.info("Uploading topology jar " + localJar + " to assigned location: "+ uploadLocation);
+    int bufferSize=512 * 1024;
+    Object maxBufSizeObject=conf.get(Config.NIMBUS_THRIFT_MAX_BUFFER_SIZE);
+    if (maxBufSizeObject != null) {
+      bufferSize=Utils.getInt(maxBufSizeObject) / 2;
+    }
+    BufferFileInputStream is=new BufferFileInputStream(localJar,bufferSize);
+    while (true) {
+      byte[] toSubmit=is.read();
+      if (toSubmit.length == 0)       break;
+      client.getClient().uploadChunk(uploadLocation,ByteBuffer.wrap(toSubmit));
+    }
+    client.getClient().finishFileUpload(uploadLocation);
+    LOG.info("Successfully uploaded topology jar to assigned location: " + uploadLocation);
+    return uploadLocation;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+ finally {
+  }
+}

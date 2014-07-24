@@ -1,0 +1,5 @@
+{
+  socket=_socket;
+  timer=Metrics.registerTimer(JStormServerUtils.getName(host,port) + "-zmq-send-timer");
+  histogram=Metrics.registerHistograms(JStormServerUtils.getName(host,port) + "-zmq-send-histogram");
+}

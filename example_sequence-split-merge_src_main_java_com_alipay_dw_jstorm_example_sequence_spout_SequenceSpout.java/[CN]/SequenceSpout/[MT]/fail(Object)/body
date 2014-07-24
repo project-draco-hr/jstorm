@@ -1,5 +1,6 @@
 {
   failedCount++;
+  handleCounter.decrementAndGet();
   Long failId=(Long)id;
   LOG.info("Failed to handle " + failId);
   return;

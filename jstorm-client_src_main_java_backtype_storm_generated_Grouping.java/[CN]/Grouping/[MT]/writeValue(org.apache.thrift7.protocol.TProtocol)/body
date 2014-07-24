@@ -38,6 +38,10 @@ case LOCAL_OR_SHUFFLE:
 NullStruct local_or_shuffle=(NullStruct)value_;
 local_or_shuffle.write(oprot);
 return;
+case LOCAL_FIRST:
+NullStruct localFirst=(NullStruct)value_;
+localFirst.write(oprot);
+return;
 default :
 throw new IllegalStateException("Cannot write union with unknown field " + setField_);
 }

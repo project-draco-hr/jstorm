@@ -1,14 +1,13 @@
 {
-  if (args.length >= 1) {
-    if (args[0].equals("rpc")) {
-      SetDPRCTopology();
-      return;
-    }
- else     if (args[0].equals("local")) {
-      SetLocalTopology();
-      return;
-    }
-    LoadProperty(args[0]);
+  if (args.length == 0) {
+    System.err.println("Please input configuration file");
+    System.exit(-1);
   }
-  SetRemoteTopology();
+  LoadConf(args[0]);
+  if (local_mode(conf)) {
+    SetLocalTopology();
+  }
+ else {
+    SetRemoteTopology();
+  }
 }

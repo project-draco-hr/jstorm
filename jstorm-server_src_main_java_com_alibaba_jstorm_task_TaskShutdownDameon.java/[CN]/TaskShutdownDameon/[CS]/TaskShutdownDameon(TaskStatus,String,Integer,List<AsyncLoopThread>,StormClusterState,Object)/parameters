@@ -1,0 +1,6 @@
+TaskStatus taskStatus
+String topology_id
+Integer task_id
+List<AsyncLoopThread> all_threads
+StormClusterState zkCluster
+Object task_obj

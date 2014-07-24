@@ -1,0 +1,6 @@
+Map storm_conf
+ChannelFactory factory
+ScheduledExecutorService scheduler
+String host
+int port
+ReconnectRunnable reconnector

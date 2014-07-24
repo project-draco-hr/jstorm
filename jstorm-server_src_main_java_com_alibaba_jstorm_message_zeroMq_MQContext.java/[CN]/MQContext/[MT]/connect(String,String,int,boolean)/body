@@ -1,8 +1,0 @@
-{
-  if (distribute || virtportZmq) {
-    return zmq_connect(distribute,host,port);
-  }
- else {
-    return queue_connect(port);
-  }
-}

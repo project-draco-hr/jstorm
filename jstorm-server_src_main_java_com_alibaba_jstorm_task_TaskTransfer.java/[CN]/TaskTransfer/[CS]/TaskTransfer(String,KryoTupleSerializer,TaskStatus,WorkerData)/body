@@ -1,0 +1,15 @@
+{
+  this.taskName=taskName;
+  this.serializer=serializer;
+  this.taskStatus=taskStatus;
+  this.storm_conf=workerData.getConf();
+  this.transferQueue=workerData.getTransferQueue();
+  this.innerTaskTransfer=workerData.getInnerTaskTransfer();
+  int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_SEND_BUFFER_SIZE));
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  this.serializeQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(queue_size),waitStrategy);
+  Metrics.registerQueue(taskName + "-serialize-queue",serializeQueue);
+  timer=Metrics.registerTimer(taskName + "-serialize-timer");
+  serializeThread=new AsyncLoopThread(new TransferRunnable());
+  LOG.info("Successfully start TaskTransfer thread");
+}

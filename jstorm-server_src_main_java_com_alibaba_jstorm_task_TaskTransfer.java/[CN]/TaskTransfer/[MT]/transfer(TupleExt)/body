@@ -1,8 +1,8 @@
 {
   int taskid=tuple.getTargetTaskId();
-  DisruptorQueue disrutporQueue=innerTaskTransfer.get(taskid);
-  if (disrutporQueue != null) {
-    disrutporQueue.publish(tuple);
+  DisruptorQueue exeQueue=innerTaskTransfer.get(taskid);
+  if (exeQueue != null) {
+    exeQueue.publish(tuple);
   }
  else {
     serializeQueue.publish(tuple);

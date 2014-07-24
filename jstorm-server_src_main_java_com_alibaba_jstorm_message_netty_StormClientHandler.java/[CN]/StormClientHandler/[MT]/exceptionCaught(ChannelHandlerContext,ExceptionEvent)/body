@@ -4,7 +4,7 @@
     if (!(cause instanceof ConnectException)) {
       LOG.info("Connection failed:" + client.getRemoteAddr(),cause);
     }
-    client.setChannel(null);
+    client.exceptionChannel(event.getChannel());
     client.reconnect();
   }
 }

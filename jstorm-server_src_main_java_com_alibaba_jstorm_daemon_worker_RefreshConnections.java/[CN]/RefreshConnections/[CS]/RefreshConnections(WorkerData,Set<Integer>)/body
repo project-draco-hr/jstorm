@@ -8,5 +8,6 @@
   this.nodeportSocket=workerData.getNodeportSocket();
   this.context=workerData.getContext();
   this.taskNodeport=workerData.getTaskNodeport();
+  this.supervisorId=workerData.getSupervisorId();
   frequence=JStormUtils.parseInt(conf.get(Config.TASK_REFRESH_POLL_SECS),5);
 }

@@ -1,0 +1,12 @@
+{
+  timer.start();
+  try {
+    for (    TaskMessage message : messages) {
+      ZeroMq.send(socket,message.message());
+    }
+  }
+  finally {
+    timer.stop();
+    histogram.update(messages.size());
+  }
+}

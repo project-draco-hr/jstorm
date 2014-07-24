@@ -1,0 +1,27 @@
+{
+  OlderFileFilter filter=new OlderFileFilter(seconds);
+  File[] files=file.listFiles(filter);
+  for (  File f : files) {
+    if (f.isFile()) {
+      log.info("Cleaning inbox ... deleted: " + f.getName());
+      try {
+        f.delete();
+      }
+ catch (      Exception e) {
+        log.error("Cleaning inbox ... error deleting:" + f.getName() + ","+ e);
+      }
+    }
+ else {
+      clean(f);
+      if (f.listFiles().length == 0) {
+        log.info("Cleaning inbox ... deleted: " + f.getName());
+        try {
+          f.delete();
+        }
+ catch (        Exception e) {
+          log.error("Cleaning inbox ... error deleting:" + f.getName() + ","+ e);
+        }
+      }
+    }
+  }
+}

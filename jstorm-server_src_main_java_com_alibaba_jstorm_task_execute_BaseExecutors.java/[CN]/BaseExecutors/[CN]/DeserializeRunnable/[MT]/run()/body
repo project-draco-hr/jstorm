@@ -1,0 +1,18 @@
+{
+  Thread.currentThread().setName(component_id + "-" + taskId+ "-recvThread");
+  WorkerClassLoader.switchThreadContext();
+  LOG.info("Successfully start recvThread of " + idStr);
+  while (taskStatus.isShutdown() == false) {
+    try {
+      deserializeQueue.consumeBatchWhenAvailable(this);
+    }
+ catch (    Exception e) {
+      if (taskStatus.isShutdown() == false) {
+        LOG.error("Unknow exception ",e);
+        report_error.report(e);
+      }
+    }
+  }
+  WorkerClassLoader.restoreThreadContext();
+  LOG.info("Successfully shutdown recvThread of " + idStr);
+}

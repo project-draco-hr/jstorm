@@ -1,15 +1,19 @@
 {
   long totalValue=total.incrementAndGet();
-  long tpsValue=tps.incrementAndGet();
-  long spendValue=spend.addAndGet(value);
-  if (intervalCheck.check() == true) {
+  long timesValue=times.incrementAndGet();
+  long v=values.addAndGet(value);
+  Double pass=intervalCheck.checkAndGet();
+  if (pass != null) {
+    times.set(0);
+    values.set(0);
+    Double tps=timesValue / pass;
     StringBuilder sb=new StringBuilder();
     sb.append(id);
-    sb.append(" tps:" + tpsValue / intervalCheck.getInterval());
+    sb.append(", tps:" + tps);
+    sb.append(", avg:" + ((double)v) / timesValue);
     sb.append(", total:" + totalValue);
-    sb.append(", spend:" + spendValue / tpsValue);
     LOG.info(sb.toString());
-    tps.set(0);
-    spend.set(0);
+    return tps;
   }
+  return null;
 }

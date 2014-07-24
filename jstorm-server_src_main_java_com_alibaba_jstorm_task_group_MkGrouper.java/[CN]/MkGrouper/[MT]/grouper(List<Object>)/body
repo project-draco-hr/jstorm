@@ -25,5 +25,11 @@
  else   if (GrouperType.local_or_shuffle.equals(grouptype)) {
     return local_shuffer_grouper.grouper(values);
   }
+ else   if (GrouperType.localFirst.equals(grouptype)) {
+    return localFirst.grouper(values);
+  }
+ else {
+    LOG.warn("Unsupportted group type");
+  }
   return new ArrayList<Integer>();
 }

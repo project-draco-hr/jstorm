@@ -1,0 +1,7 @@
+{
+  boolean isOnePending=JStormServerUtils.isOnePending(conf);
+  if (isOnePending == true) {
+    return true;
+  }
+  return ConfigExtension.isSpoutSingleThread(conf);
+}

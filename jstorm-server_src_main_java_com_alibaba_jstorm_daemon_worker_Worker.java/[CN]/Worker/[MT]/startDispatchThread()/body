@@ -1,0 +1,14 @@
+{
+  Map stormConf=workerData.getStormConf();
+  int queue_size=Utils.getInt(stormConf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE),1024);
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)stormConf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  DisruptorQueue recvQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(queue_size),waitStrategy);
+  recvQueue.consumerStarted();
+  IContext context=workerData.getContext();
+  String topologyId=workerData.getTopologyId();
+  IConnection recvConnection=context.bind(topologyId,workerData.getPort());
+  recvConnection.registerQueue(recvQueue);
+  RunnableCallback recvDispather=new VirtualPortDispatch(workerData,recvConnection,recvQueue);
+  AsyncLoopThread vthread=new AsyncLoopThread(recvDispather,false,Thread.MAX_PRIORITY,true);
+  return vthread;
+}

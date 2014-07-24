@@ -1,7 +1,20 @@
 {
+  LOG.info("Begin to shutdown NettyServer");
   if (allChannels != null) {
-    allChannels.close().awaitUninterruptibly();
-    factory.releaseExternalResources();
-    allChannels=null;
+    new Thread(new Runnable(){
+      @Override public void run(){
+        try {
+          allChannels.close().await(1,TimeUnit.SECONDS);
+          LOG.info("Successfully close all channel");
+          factory.releaseExternalResources();
+        }
+ catch (        Exception e) {
+        }
+        allChannels=null;
+      }
+    }
+).start();
+    JStormUtils.sleepMs(1 * 1000);
   }
+  LOG.info("Successfully shutdown NettyServer");
 }

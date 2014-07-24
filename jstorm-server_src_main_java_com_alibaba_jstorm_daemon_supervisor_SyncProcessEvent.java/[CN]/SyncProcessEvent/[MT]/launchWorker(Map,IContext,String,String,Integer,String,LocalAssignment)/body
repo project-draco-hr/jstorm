@@ -59,6 +59,14 @@
   }
   String classpath=getClassPath(stormjar,stormhome,totalConf);
   String workerClassPath=(String)totalConf.get(Config.WORKER_CLASSPATH);
+  List<String> otherLibs=(List<String>)stormConf.get(GenericOptionsParser.TOPOLOGY_LIB_NAME);
+  StringBuilder sb=new StringBuilder();
+  if (otherLibs != null) {
+    for (    String libName : otherLibs) {
+      sb.append(StormConfig.stormlib_path(stormroot,libName)).append(":");
+    }
+  }
+  workerClassPath=workerClassPath + ":" + sb.toString();
   Map<String,String> policyReplaceMap=new HashMap<String,String>();
   String realClassPath=classpath + ":" + workerClassPath;
   policyReplaceMap.put(SandBoxMaker.CLASS_PATH_KEY,realClassPath);

@@ -1,8 +1,3 @@
 {
-  if (useDisruptor) {
-    return taskFromeDisruptorQ();
-  }
- else {
-    return takeFromBlockQ();
-  }
+  return messageBatchRef.getAndSet(null);
 }

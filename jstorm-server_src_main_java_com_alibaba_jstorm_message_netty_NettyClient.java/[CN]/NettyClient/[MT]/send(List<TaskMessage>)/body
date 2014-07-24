@@ -1,0 +1,17 @@
+{
+  if (isClosed()) {
+    LOG.warn("Client is being closed, and does not take requests any more");
+    return;
+  }
+  sendTimer.start();
+  try {
+    pushBatch(messages);
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+ finally {
+    sendTimer.stop();
+    histogram.update(messages.size());
+  }
+}

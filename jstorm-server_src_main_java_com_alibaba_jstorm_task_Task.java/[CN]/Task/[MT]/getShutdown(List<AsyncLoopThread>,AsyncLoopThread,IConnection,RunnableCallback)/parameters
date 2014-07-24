@@ -1,4 +1,0 @@
-List<AsyncLoopThread> allThreads
-AsyncLoopThread heartbeat_thread
-IConnection puller
-RunnableCallback baseExecutor
