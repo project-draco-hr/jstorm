@@ -1,0 +1,15 @@
+{
+  Config conf=getConf();
+  if (conf.get(Config.STORM_CLUSTER_MODE).equals("rpc")) {
+    SetDPRCTopology();
+    return 0;
+  }
+ else   if (conf.get(Config.STORM_CLUSTER_MODE).equals("local")) {
+    SetLocalTopology();
+    return 0;
+  }
+ else {
+    SetRemoteTopology();
+    return 0;
+  }
+}

@@ -1,0 +1,4 @@
+{
+  long id=staticId.incrementAndGet();
+  return new BatchId(id);
+}

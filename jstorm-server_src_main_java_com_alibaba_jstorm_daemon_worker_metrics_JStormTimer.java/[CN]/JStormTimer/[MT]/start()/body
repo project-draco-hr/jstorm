@@ -1,0 +1,10 @@
+{
+  if (JStormTimer.isEnable == false) {
+    return;
+  }
+  if (timerContext.get() != null) {
+    LOG.warn("Already start timer " + name);
+    return;
+  }
+  timerContext.set(instance.time());
+}

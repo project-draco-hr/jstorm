@@ -1,8 +1,0 @@
-{
-  this.topologyId=topologyId;
-  this.context=context;
-  this.recvConn=recvConn;
-  this.valid_ports=valid_ports;
-  this.active=active;
-  this.sendConns=new HashMap<Integer,IConnection>();
-}

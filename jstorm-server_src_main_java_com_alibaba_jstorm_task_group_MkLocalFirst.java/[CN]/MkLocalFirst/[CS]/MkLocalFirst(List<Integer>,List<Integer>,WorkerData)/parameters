@@ -1,0 +1,3 @@
+List<Integer> workerTasks
+List<Integer> allOutTasks
+WorkerData workerData

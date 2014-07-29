@@ -1,0 +1,5 @@
+{
+  LOG.info("Register Metric " + name);
+  Histogram instance=metrics.histogram(name);
+  return new JStormHistogram(name,instance);
+}

@@ -1,0 +1,4 @@
+{
+  reporter10Minute.close();
+  reporter1Minute.close();
+}

@@ -1,0 +1,10 @@
+{
+  try {
+    exeQueue.consumeBatch(this);
+  }
+ catch (  Exception e) {
+    if (taskStatus.isShutdown() == false) {
+      LOG.error("Actor occur unknow exception ",e);
+    }
+  }
+}

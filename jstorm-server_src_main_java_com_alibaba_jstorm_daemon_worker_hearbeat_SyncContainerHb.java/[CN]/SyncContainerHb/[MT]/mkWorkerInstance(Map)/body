@@ -1,0 +1,13 @@
+{
+  boolean isEnableContainer=ConfigExtension.isEnableContainerSupervisor();
+  boolean isWorkerAutomaticStop=ConfigExtension.isWorkerStopWithoutSupervisor(conf);
+  if (isEnableContainer == false && isWorkerAutomaticStop == false) {
+    LOG.info("Run worker without Apsara/Yarn container");
+    return null;
+  }
+  String containerHbDir=StormConfig.supervisorHearbeatForContainer(conf);
+  String hbDir=null;
+  int timeout=ConfigExtension.getContainerHeartbeatTimeoutSeconds(conf);
+  int frequence=ConfigExtension.getContainerHeartbeatFrequence(conf);
+  return mkInstance(containerHbDir,hbDir,timeout,frequence);
+}

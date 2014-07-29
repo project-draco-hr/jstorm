@@ -1,0 +1,21 @@
+{
+  if (batchStatus == BatchStatus.COMPUTING) {
+    return BatchDef.COMPUTING_STREAM_ID;
+  }
+ else   if (batchStatus == BatchStatus.PREPARE_COMMIT) {
+    return BatchDef.PREPARE_STREAM_ID;
+  }
+ else   if (batchStatus == BatchStatus.COMMIT) {
+    return BatchDef.COMMIT_STREAM_ID;
+  }
+ else   if (batchStatus == BatchStatus.POST_COMMIT) {
+    return BatchDef.POST_STREAM_ID;
+  }
+ else   if (batchStatus == BatchStatus.REVERT_COMMIT) {
+    return BatchDef.REVERT_STREAM_ID;
+  }
+ else {
+    LOG.error("Occur unkonw type BatchStatus " + batchStatus);
+    throw new RuntimeException();
+  }
+}

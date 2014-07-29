@@ -1,0 +1,17 @@
+{
+  LOG.info("Receive BatchId " + id);
+  if (currentId == null) {
+    currentId=id;
+  }
+ else   if (currentId.getId() >= id.getId()) {
+    LOG.info("Current BatchId is " + currentId + ", receive:"+ id);
+    throw new RuntimeException();
+  }
+  currentId=id;
+  AtomicLong counter=(AtomicLong)counters.remove(id);
+  if (counter == null) {
+    counter=new AtomicLong(0);
+  }
+  LOG.info("Flush " + id + ","+ counter);
+  return Utils.serialize(id);
+}

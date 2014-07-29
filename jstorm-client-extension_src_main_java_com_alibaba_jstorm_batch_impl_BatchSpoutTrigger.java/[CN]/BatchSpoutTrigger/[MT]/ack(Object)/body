@@ -1,0 +1,10 @@
+{
+  if (msgId instanceof BatchSpoutMsgId) {
+    forward((BatchSpoutMsgId)msgId);
+    return;
+  }
+ else {
+    LOG.warn("Unknown type msgId " + msgId.getClass().getName() + ":"+ msgId);
+    return;
+  }
+}

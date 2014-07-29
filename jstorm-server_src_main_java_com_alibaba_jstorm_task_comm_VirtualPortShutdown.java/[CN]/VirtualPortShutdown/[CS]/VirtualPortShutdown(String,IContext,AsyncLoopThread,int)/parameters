@@ -1,4 +1,0 @@
-String topologyId
-IContext context
-AsyncLoopThread vthread
-int port

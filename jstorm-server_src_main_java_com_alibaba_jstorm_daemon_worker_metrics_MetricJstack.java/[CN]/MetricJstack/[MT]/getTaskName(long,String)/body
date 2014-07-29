@@ -1,0 +1,6 @@
+{
+  if (name == null) {
+    return Long.toString(id);
+  }
+  return id + " (" + name+ ")";
+}

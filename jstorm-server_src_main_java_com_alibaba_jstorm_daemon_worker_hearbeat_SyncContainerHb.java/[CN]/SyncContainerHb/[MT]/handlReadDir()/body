@@ -1,0 +1,57 @@
+{
+  if (StringUtils.isBlank(readDir) == true) {
+    return;
+  }
+  File file=new File(readDir);
+  if (file.exists() == false) {
+    LOG.info(readDir + " doesn't exist right now");
+    checkNoContainerHbTimes();
+    return;
+  }
+ else   if (file.isDirectory() == false) {
+    String msg=readDir + " isn't dir";
+    LOG.error(msg);
+    throw new RuntimeException(msg);
+  }
+  String[] files=file.list();
+  if (files.length == 0) {
+    LOG.info(readDir + " doesn't contain hearbeat files right now");
+    checkNoContainerHbTimes();
+    return;
+  }
+  noContainerHbTimes=0;
+  List<String> fileList=JStormUtils.mk_list(files);
+  Collections.sort(fileList);
+  String biggest=fileList.get(fileList.size() - 1);
+  long now=System.currentTimeMillis() / SECOND_MILLISCOND;
+  long hb=0;
+  try {
+    hb=Long.valueOf(biggest);
+  }
+ catch (  Exception e) {
+    LOG.info("Heartbeat file " + biggest + " isn't a valid file, remove it");
+    String path=readDir + File.separator + biggest;
+    try {
+      PathUtils.rmpath(path);
+    }
+ catch (    Exception e1) {
+      LOG.error("Failed to delete " + path,e1);
+    }
+  }
+  if (now - hb > timeoutSeconds) {
+    if (isFirstRead == true) {
+      checkNoContainerHbTimes();
+      return;
+    }
+    StringBuilder sb=new StringBuilder();
+    sb.append("It's long time no container's hearbeat, ");
+    sb.append("ContainerDir:").append(readDir);
+    sb.append(",last hearbeat:").append(biggest);
+    LOG.error(sb.toString());
+    throw new RuntimeException(sb.toString());
+  }
+ else {
+    isFirstRead=false;
+    LOG.info("Receive container hearbeat " + biggest);
+  }
+}

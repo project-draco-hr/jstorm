@@ -1,0 +1,12 @@
+{
+  try {
+    for (    String f : commandLine.getOptionValues("conf")) {
+      Map m=loadConf(f);
+      if (m == null)       throw new ParseException("Empty configuration file " + f);
+      conf.putAll(m);
+    }
+  }
+ catch (  IOException e) {
+    throw new ParseException(e.getMessage());
+  }
+}

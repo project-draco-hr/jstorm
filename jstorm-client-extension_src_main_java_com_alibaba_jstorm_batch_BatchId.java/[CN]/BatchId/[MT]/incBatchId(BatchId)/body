@@ -1,0 +1,4 @@
+{
+  long other=old.getId();
+  return new BatchId(other + 1);
+}

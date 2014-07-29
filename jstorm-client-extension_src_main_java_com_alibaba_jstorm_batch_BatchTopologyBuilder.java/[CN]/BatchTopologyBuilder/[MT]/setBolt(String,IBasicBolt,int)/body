@@ -1,0 +1,15 @@
+{
+  CoordinatedBolt coordinatedBolt=new CoordinatedBolt(bolt);
+  BoltDeclarer boltDeclarer=topologyBuilder.setBolt(id,coordinatedBolt,paralel);
+  if (bolt instanceof IPrepareCommit) {
+    boltDeclarer.allGrouping(BatchDef.SPOUT_TRIGGER,BatchDef.PREPARE_STREAM_ID);
+  }
+  if (bolt instanceof ICommitter) {
+    boltDeclarer.allGrouping(BatchDef.SPOUT_TRIGGER,BatchDef.COMMIT_STREAM_ID);
+    boltDeclarer.allGrouping(BatchDef.SPOUT_TRIGGER,BatchDef.REVERT_STREAM_ID);
+  }
+  if (bolt instanceof IPostCommit) {
+    boltDeclarer.allGrouping(BatchDef.SPOUT_TRIGGER,BatchDef.POST_STREAM_ID);
+  }
+  return boltDeclarer;
+}

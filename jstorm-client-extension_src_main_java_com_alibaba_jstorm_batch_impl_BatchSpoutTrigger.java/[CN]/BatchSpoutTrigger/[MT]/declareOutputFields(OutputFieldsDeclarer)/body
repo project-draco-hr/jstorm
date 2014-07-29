@@ -1,0 +1,7 @@
+{
+  declarer.declareStream(BatchDef.COMPUTING_STREAM_ID,new Fields("BatchId"));
+  declarer.declareStream(BatchDef.PREPARE_STREAM_ID,new Fields("BatchId"));
+  declarer.declareStream(BatchDef.COMMIT_STREAM_ID,new Fields("BatchId"));
+  declarer.declareStream(BatchDef.REVERT_STREAM_ID,new Fields("BatchId"));
+  declarer.declareStream(BatchDef.POST_STREAM_ID,new Fields("BatchId"));
+}

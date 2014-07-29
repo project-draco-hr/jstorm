@@ -1,0 +1,15 @@
+{
+  LOG.info("Successfully start thread " + idStr);
+  while (active.get()) {
+    try {
+      queue.consumeBatchWhenAvailable(this);
+    }
+ catch (    Exception e) {
+      if (active.get() == true) {
+        LOG.error("DrainerRunable send error",e);
+        throw new RuntimeException(e);
+      }
+    }
+  }
+  LOG.info("Successfully exit thread " + idStr);
+}

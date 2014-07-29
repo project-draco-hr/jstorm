@@ -1,0 +1,10 @@
+{
+  BatchId id=(BatchId)input.getValue(0);
+  Long value=input.getLong(1);
+  AtomicLong counter=counters.get(id);
+  if (counter == null) {
+    counter=new AtomicLong(0);
+    counters.put(id,counter);
+  }
+  counter.addAndGet(value);
+}

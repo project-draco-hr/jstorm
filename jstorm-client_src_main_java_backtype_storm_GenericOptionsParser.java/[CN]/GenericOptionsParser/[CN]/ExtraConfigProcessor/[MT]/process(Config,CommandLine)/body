@@ -1,0 +1,7 @@
+{
+  for (  String s : commandLine.getOptionValues("D")) {
+    String[] keyval=s.split("=",2);
+    if (keyval.length != 2)     throw new ParseException("Invalid option value `" + s + "'");
+    conf.putAll((Map)yaml.load(keyval[0] + ": " + keyval[1]));
+  }
+}

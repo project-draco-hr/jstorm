@@ -1,0 +1,8 @@
+{
+  super(workerData.getTransferQueue(),BatchTupleRunable.class.getSimpleName(),workerData.getActive());
+  this.sendingQueue=workerData.getSendingQueue();
+  this.nodeportSocket=workerData.getNodeportSocket();
+  this.taskNodeport=workerData.getTaskNodeport();
+  this.dispatchMap=new HashMap<IConnection,List<TaskMessage>>();
+  workerData.getTransferQueue().consumerStarted();
+}

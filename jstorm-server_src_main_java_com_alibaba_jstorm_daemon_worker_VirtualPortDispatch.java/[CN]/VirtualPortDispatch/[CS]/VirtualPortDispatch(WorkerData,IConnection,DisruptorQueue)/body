@@ -1,0 +1,5 @@
+{
+  super(recvQueue,VirtualPortDispatch.class.getSimpleName(),workerData.getActive());
+  this.recvConnection=recvConnection;
+  this.deserializeQueues=workerData.getDeserializeQueues();
+}

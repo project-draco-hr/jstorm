@@ -1,0 +1,4 @@
+{
+  topologyBuilder=new TopologyBuilder();
+  spoutDeclarer=topologyBuilder.setSpout(BatchDef.SPOUT_TRIGGER,new BatchSpoutTrigger(),1);
+}

@@ -1,0 +1,19 @@
+{
+  List<String> childs=zkClient.get_children(path,false);
+  Collections.sort(childs,new Comparator<String>(){
+    @Override public int compare(    String o1,    String o2){
+      try {
+        Long v1=Long.valueOf(o1);
+        Long v2=Long.valueOf(o2);
+        return v1.compareTo(v2);
+      }
+ catch (      Exception e) {
+        return o1.compareTo(o2);
+      }
+    }
+  }
+);
+  for (int index=0; index < childs.size() - reserveSize; index++) {
+    zkClient.delete_node(path + BatchDef.ZK_SEPERATOR + childs.get(index));
+  }
+}

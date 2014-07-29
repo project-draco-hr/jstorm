@@ -1,0 +1,10 @@
+{
+  WorkerClassLoader.switchThreadContext();
+  try {
+    executeEvent();
+    super.nextTuple();
+  }
+  finally {
+    WorkerClassLoader.restoreThreadContext();
+  }
+}

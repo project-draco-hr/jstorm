@@ -1,0 +1,16 @@
+{
+  batchQueue=new LinkedBlockingQueue<BatchSpoutMsgId>();
+  this.collector=collector;
+  this.conf=conf;
+  taskName=context.getThisComponentId() + "_" + context.getThisTaskId();
+  intervalCheck=new IntervalCheck();
+  try {
+    zkClient=BatchCommon.getZkClient(conf);
+    initMsgId();
+  }
+ catch (  Exception e) {
+    LOG.error("",e);
+    throw new RuntimeException("Failed to init");
+  }
+  LOG.info("Successfully open " + taskName);
+}

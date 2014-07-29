@@ -1,0 +1,15 @@
+{
+  try {
+    removeUseless(zkCommitPath,BatchDef.ZK_COMMIT_RESERVER_NUM);
+    String path=getCommitPath((BatchId)id);
+    byte[] data=commitResult;
+    if (data == null) {
+      data=new byte[0];
+    }
+    zkClient.set_data(path,data);
+    LOG.info("Update " + path + " to zk");
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to update to zk,",e);
+  }
+}

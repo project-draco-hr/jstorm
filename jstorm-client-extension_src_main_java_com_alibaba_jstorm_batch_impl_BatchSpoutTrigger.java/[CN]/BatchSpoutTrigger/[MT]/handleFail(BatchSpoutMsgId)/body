@@ -1,0 +1,12 @@
+{
+  LOG.info("Failed batch " + msgId);
+  BatchStatus status=msgId.getBatchStatus();
+  BatchStatus newStatus=status.error();
+  if (newStatus == BatchStatus.ERROR) {
+    mkMsgId(msgId);
+  }
+ else {
+    msgId.setBatchStatus(newStatus);
+    batchQueue.offer(msgId);
+  }
+}

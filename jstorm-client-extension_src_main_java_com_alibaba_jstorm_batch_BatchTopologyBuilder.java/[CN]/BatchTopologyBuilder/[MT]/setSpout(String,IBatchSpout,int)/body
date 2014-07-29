@@ -1,0 +1,5 @@
+{
+  BoltDeclarer boltDeclarer=this.setBolt(id,(IBatchSpout)spout,paralel);
+  boltDeclarer.allGrouping(BatchDef.SPOUT_TRIGGER,BatchDef.COMPUTING_STREAM_ID);
+  return boltDeclarer;
+}

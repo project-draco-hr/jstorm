@@ -1,0 +1,16 @@
+{
+  Config conf=getConf();
+  StormTopology topology=buildTopology();
+  conf.put(Config.STORM_CLUSTER_MODE,"distributed");
+  String streamName=(String)conf.get(Config.TOPOLOGY_NAME);
+  if (streamName == null) {
+    streamName="SequenceTest";
+  }
+  if (streamName.contains("zeromq")) {
+    conf.put(Config.STORM_MESSAGING_TRANSPORT,"com.alibaba.jstorm.message.zeroMq.MQContext");
+  }
+ else {
+    conf.put(Config.STORM_MESSAGING_TRANSPORT,"com.alibaba.jstorm.message.netty.NettyContext");
+  }
+  StormSubmitter.submitTopology(streamName,conf,topology);
+}

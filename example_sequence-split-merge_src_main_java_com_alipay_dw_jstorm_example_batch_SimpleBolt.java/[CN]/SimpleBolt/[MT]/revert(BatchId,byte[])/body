@@ -1,0 +1,7 @@
+{
+  LOG.info("Receive BatchId " + id);
+  BatchId failedId=(BatchId)Utils.deserialize(commitResult);
+  if (failedId.equals(id) == false) {
+    LOG.info("Deserialized error  " + id);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  BatchTopologyBuilder topologyBuilder=new BatchTopologyBuilder(topologyName);
+  BoltDeclarer boltDeclarer=topologyBuilder.setSpout("Spout",new SimpleSpout(),3);
+  topologyBuilder.setBolt("Bolt",new SimpleBolt(),1).shuffleGrouping("Spout");
+  return topologyBuilder.getTopologyBuilder();
+}

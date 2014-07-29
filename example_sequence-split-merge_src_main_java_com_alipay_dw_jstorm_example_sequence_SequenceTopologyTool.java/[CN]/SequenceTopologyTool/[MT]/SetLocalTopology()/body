@@ -1,0 +1,8 @@
+{
+  Config conf=getConf();
+  StormTopology topology=buildTopology();
+  LocalCluster cluster=new LocalCluster();
+  cluster.submitTopology("SplitMerge",conf,topology);
+  Thread.sleep(60000);
+  cluster.shutdown();
+}

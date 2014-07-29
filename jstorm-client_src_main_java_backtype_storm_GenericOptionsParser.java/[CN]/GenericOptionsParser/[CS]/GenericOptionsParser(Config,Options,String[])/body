@@ -1,0 +1,4 @@
+{
+  this.conf=conf;
+  parseGeneralOptions(options,conf,args);
+}

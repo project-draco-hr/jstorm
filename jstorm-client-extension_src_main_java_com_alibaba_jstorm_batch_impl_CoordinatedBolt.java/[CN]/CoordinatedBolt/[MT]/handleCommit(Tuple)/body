@@ -1,0 +1,13 @@
+{
+  Object id=tuple.getValue(0);
+  try {
+    byte[] commitResult=((ICommitter)delegate).commit((BatchId)id);
+    collector.ack(tuple);
+    updateToZk(id,commitResult);
+    commited.put(id,commitResult);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to commit ",e);
+    collector.fail(tuple);
+  }
+}

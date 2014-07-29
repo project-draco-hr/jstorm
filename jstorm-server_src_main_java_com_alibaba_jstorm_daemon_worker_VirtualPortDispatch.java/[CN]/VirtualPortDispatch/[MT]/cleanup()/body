@@ -1,0 +1,10 @@
+{
+  LOG.info("Begin to shutdown VirtualPortDispatch");
+  try {
+    recvConnection.close();
+  }
+ catch (  Exception e) {
+  }
+  recvConnection=null;
+  LOG.info("Successfully shudown VirtualPortDispatch");
+}

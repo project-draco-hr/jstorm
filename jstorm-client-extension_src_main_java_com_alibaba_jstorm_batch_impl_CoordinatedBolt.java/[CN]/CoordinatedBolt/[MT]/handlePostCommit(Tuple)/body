@@ -1,0 +1,11 @@
+{
+  basicCollector.setContext(tuple);
+  try {
+    BatchId id=(BatchId)tuple.getValue(0);
+    ((IPostCommit)delegate).postCommit(id,basicCollector);
+  }
+ catch (  Exception e) {
+    LOG.info("Failed to do postCommit,",e);
+  }
+  collector.ack(tuple);
+}

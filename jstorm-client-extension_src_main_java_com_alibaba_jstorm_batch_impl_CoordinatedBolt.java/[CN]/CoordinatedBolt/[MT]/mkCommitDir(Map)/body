@@ -1,0 +1,15 @@
+{
+  try {
+    zkClient=BatchCommon.getZkClient(conf);
+    zkCommitPath=BatchDef.ZK_COMMIT_DIR + BatchDef.ZK_SEPERATOR + taskId;
+    if (zkClient.node_existed(zkCommitPath,false)) {
+      zkClient.delete_node(zkCommitPath);
+    }
+    zkClient.mkdirs(zkCommitPath);
+    LOG.info(taskName + " successfully create commit path" + zkCommitPath);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to create zk node",e);
+    throw new RuntimeException();
+  }
+}

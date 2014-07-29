@@ -1,0 +1,25 @@
+{
+  intervalCheck=new IntervalCheck();
+  intervalCheck.setInterval(60);
+  this.allOutTasks=allOutTasks;
+  this.workerData=workerData;
+  List<Integer> localWorkerOutTasks=new ArrayList<Integer>();
+  for (  Integer outTask : allOutTasks) {
+    if (workerTasks.contains(outTask)) {
+      localWorkerOutTasks.add(outTask);
+    }
+  }
+  if (localWorkerOutTasks.size() != 0) {
+    isLocalWorker=true;
+    this.outTasks=localWorkerOutTasks;
+    randomrange=new RandomRange(outTasks.size());
+    return;
+  }
+ else {
+    this.isLocalWorker=false;
+    this.outTasks=allOutTasks;
+    randomrange=new RandomRange(outTasks.size());
+    refreshLocalNodeTasks();
+    return;
+  }
+}

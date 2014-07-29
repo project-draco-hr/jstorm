@@ -1,0 +1,4 @@
+{
+  LOG.info("Receive BatchId " + id);
+  return null;
+}

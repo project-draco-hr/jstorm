@@ -1,0 +1,20 @@
+{
+  boolean isEnableContainer=ConfigExtension.isEnableContainerSupervisor();
+  if (isEnableContainer) {
+    String containerHbDir=ConfigExtension.getContainerSupervisorHearbeat();
+    String hbDir=StormConfig.supervisorHearbeatForContainer(conf);
+    int timeout=ConfigExtension.getContainerHeartbeatTimeoutSeconds(conf);
+    int frequence=ConfigExtension.getContainerHeartbeatFrequence(conf);
+    return mkInstance(containerHbDir,hbDir,timeout,frequence);
+  }
+  boolean isWorkerAutomaticStop=ConfigExtension.isWorkerStopWithoutSupervisor(conf);
+  if (isWorkerAutomaticStop) {
+    String containerHbDir=null;
+    String hbDir=StormConfig.supervisorHearbeatForContainer(conf);
+    int timeout=ConfigExtension.getContainerHeartbeatTimeoutSeconds(conf);
+    int frequence=ConfigExtension.getContainerHeartbeatFrequence(conf);
+    return mkInstance(containerHbDir,hbDir,timeout,frequence);
+  }
+  LOG.info("Run Supervisor without Apsara/Yarn container");
+  return null;
+}

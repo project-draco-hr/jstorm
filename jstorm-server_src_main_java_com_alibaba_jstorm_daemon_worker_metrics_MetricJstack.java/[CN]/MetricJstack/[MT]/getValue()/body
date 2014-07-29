@@ -1,0 +1,8 @@
+{
+  try {
+    return dumpThread();
+  }
+ catch (  Exception e) {
+    return "Failed to get jstack thread info";
+  }
+}

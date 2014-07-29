@@ -1,0 +1,12 @@
+{
+  if (active.get() == false) {
+    return;
+  }
+  for (  Entry<String,DisruptorQueue> entry : queues.entrySet()) {
+    String name=entry.getKey();
+    DisruptorQueue queue=entry.getValue();
+    Tick tick=new Tick(name);
+    queue.publish(tick);
+    LOG.debug("Issue time tick " + name);
+  }
+}

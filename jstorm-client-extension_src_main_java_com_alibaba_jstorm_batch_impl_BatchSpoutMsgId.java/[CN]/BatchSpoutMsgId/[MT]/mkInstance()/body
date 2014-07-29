@@ -1,0 +1,5 @@
+{
+  BatchId batchId=BatchId.mkInstance();
+  BatchStatus batchStatus=BatchStatus.COMPUTING;
+  return new BatchSpoutMsgId(batchId,batchStatus);
+}

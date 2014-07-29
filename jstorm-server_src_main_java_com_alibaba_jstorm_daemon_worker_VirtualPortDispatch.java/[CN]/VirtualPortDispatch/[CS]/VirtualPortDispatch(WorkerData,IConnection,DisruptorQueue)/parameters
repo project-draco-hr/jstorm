@@ -1,0 +1,3 @@
+WorkerData workerData
+IConnection recvConnection
+DisruptorQueue recvQueue

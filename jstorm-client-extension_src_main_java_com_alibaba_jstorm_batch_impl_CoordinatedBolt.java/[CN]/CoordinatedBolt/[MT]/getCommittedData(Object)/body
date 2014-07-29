@@ -1,0 +1,11 @@
+{
+  try {
+    String path=getCommitPath((BatchId)id);
+    byte[] data=zkClient.get_data(path,false);
+    return data;
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to visit ZK,",e);
+    return null;
+  }
+}

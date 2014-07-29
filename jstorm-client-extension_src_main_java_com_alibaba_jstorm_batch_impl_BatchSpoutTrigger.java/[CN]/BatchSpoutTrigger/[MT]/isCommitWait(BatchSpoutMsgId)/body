@@ -1,0 +1,9 @@
+{
+  if (isCommitStatus(msgId.getBatchStatus()) == false) {
+    return false;
+  }
+  if (currentBatchId.getId() >= msgId.getBatchId().getId()) {
+    return false;
+  }
+  return true;
+}

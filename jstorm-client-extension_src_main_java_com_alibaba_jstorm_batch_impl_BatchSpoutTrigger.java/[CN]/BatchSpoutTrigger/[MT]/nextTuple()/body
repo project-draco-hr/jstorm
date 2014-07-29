@@ -1,0 +1,28 @@
+{
+  BatchSpoutMsgId msgId=null;
+  try {
+    msgId=batchQueue.poll(10,TimeUnit.MILLISECONDS);
+  }
+ catch (  InterruptedException e) {
+    LOG.error("",e);
+  }
+  if (msgId == null) {
+    return;
+  }
+  if (isCommitWait(msgId)) {
+    batchQueue.offer(msgId);
+    if (intervalCheck.check()) {
+      LOG.info("Current msgId " + msgId + ", but current commit BatchId is "+ currentBatchId);
+    }
+ else {
+      LOG.debug("Current msgId " + msgId + ", but current commit BatchId is "+ currentBatchId);
+    }
+    return;
+  }
+  String streamId=getStreamId(msgId.getBatchStatus());
+  List<Integer> outTasks=collector.emit(streamId,new Values(msgId.getBatchId()),msgId);
+  if (outTasks.isEmpty()) {
+    forward(msgId);
+  }
+  return;
+}

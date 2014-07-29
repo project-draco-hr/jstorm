@@ -1,0 +1,9 @@
+{
+  if (msgId instanceof BatchSpoutMsgId) {
+    handleFail((BatchSpoutMsgId)msgId);
+  }
+ else {
+    LOG.warn("Unknown type msgId " + msgId.getClass().getName() + ":"+ msgId);
+    return;
+  }
+}

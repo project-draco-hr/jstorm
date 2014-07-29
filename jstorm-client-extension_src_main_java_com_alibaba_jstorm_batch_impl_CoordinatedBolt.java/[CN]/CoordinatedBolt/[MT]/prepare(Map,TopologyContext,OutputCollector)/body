@@ -1,0 +1,12 @@
+{
+  taskId=String.valueOf(context.getThisTaskId());
+  taskName=context.getThisComponentId() + "_" + context.getThisTaskId();
+  this.basicCollector=new BasicOutputCollector(collector);
+  this.collector=collector;
+  if (delegate instanceof ICommitter) {
+    isCommiter=true;
+    commited=new TimeCacheMap<Object,Object>(context.maxTopologyMessageTimeout());
+    mkCommitDir(conf);
+  }
+  delegate.prepare(conf,context);
+}

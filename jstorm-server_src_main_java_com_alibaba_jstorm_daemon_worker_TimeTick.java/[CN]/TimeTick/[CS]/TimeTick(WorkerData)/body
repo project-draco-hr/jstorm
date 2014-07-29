@@ -1,0 +1,9 @@
+{
+  active=workerData.getActive();
+  Map conf=workerData.getStormConf();
+  int msgTimeOut=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
+  frequence=(msgTimeOut) / Acker.TIMEOUT_BUCKET_NUM;
+  if (frequence <= 0) {
+    frequence=1;
+  }
+}

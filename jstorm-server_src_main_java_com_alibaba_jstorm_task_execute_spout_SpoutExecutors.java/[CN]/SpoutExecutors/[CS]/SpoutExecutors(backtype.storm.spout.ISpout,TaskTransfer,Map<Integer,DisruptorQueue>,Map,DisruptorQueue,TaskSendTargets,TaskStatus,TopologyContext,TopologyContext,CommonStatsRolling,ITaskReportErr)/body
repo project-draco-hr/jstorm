@@ -1,0 +1,10 @@
+{
+  super(_transfer_fn,_storm_conf,_puller,innerTaskTransfer,topology_context,_user_context,_task_stats,taskStatus,_report_error);
+  this.spout=_spout;
+  this.max_spout_pending=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
+  this.nextTupleTimer=Metrics.registerTimer(idStr + "-nextTuple-timer");
+  this.ackerTimer=Metrics.registerTimer(idStr + "-acker-timer");
+  this.emptyCpuCounter=new TimerRatio();
+  Metrics.register(idStr + "-empty-cputime-ratio",emptyCpuCounter);
+  TimeTick.registerTimer(idStr + "-acker-tick",exeQueue);
+}

@@ -1,0 +1,5 @@
+{
+  Map<String,Object> map=new HashMap<String,Object>();
+  ConfigExtension.setSpoutSingleThread(map,true);
+  return map;
+}

@@ -1,0 +1,3 @@
+String id
+IBatchSpout spout
+int paralel

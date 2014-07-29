@@ -1,0 +1,32 @@
+{
+  if (firstTime == true) {
+    int delayRun=ConfigExtension.getSpoutDelayRunSeconds(storm_conf);
+    JStormUtils.sleepMs(delayRun * 1000);
+    firstTime=false;
+    emptyCpuCounter.init();
+    LOG.info(idStr + " is ready ");
+  }
+  if (taskStatus.isRun() == false) {
+    JStormUtils.sleepMs(1);
+    return;
+  }
+  if (max_spout_pending == null || pending.size() < max_spout_pending) {
+    emptyCpuCounter.stop();
+    nextTupleTimer.start();
+    try {
+      spout.nextTuple();
+    }
+ catch (    Exception e) {
+      error=e;
+      LOG.error("spout execute error ",e);
+      report_error.report(e);
+    }
+ finally {
+      nextTupleTimer.stop();
+    }
+    return;
+  }
+ else {
+    emptyCpuCounter.start();
+  }
+}

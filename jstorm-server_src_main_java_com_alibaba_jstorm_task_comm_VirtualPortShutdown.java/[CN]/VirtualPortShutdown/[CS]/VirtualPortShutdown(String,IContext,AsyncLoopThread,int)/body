@@ -1,6 +1,0 @@
-{
-  this.topologyId=topologyId;
-  this.context=context;
-  this.vthread=vthread;
-  this.port=port;
-}

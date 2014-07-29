@@ -1,0 +1,5 @@
+{
+  LOG.info("Register Metric " + name);
+  Timer instance=metrics.timer(name);
+  return new JStormTimer(name,instance);
+}

@@ -1,0 +1,10 @@
+{
+  this.readDir=readDir;
+  if (StringUtils.isBlank(readDir) == true) {
+    LOG.warn("ReadDir is empty");
+    return;
+  }
+ else {
+    LOG.info("ReadDir is " + readDir);
+  }
+}

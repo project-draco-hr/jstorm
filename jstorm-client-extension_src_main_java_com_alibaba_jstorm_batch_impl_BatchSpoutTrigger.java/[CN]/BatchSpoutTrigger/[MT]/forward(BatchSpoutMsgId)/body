@@ -1,0 +1,13 @@
+{
+  BatchStatus status=msgId.getBatchStatus();
+  BatchStatus newStatus=status.forward();
+  if (newStatus == null) {
+    mkMsgId(msgId);
+    LOG.info("Finish old batch " + msgId);
+  }
+ else {
+    msgId.setBatchStatus(newStatus);
+    batchQueue.offer(msgId);
+    LOG.info("Forward batch " + msgId);
+  }
+}

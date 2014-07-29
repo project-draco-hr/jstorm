@@ -1,0 +1,18 @@
+{
+  String streamId=tuple.getSourceStreamId();
+  if (streamId.equals(BatchDef.PREPARE_STREAM_ID)) {
+    return BatchStatus.PREPARE_COMMIT;
+  }
+ else   if (streamId.equals(BatchDef.COMMIT_STREAM_ID)) {
+    return BatchStatus.COMMIT;
+  }
+ else   if (streamId.equals(BatchDef.REVERT_STREAM_ID)) {
+    return BatchStatus.REVERT_COMMIT;
+  }
+ else   if (streamId.equals(BatchDef.POST_STREAM_ID)) {
+    return BatchStatus.POST_COMMIT;
+  }
+ else {
+    return BatchStatus.COMPUTING;
+  }
+}

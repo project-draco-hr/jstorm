@@ -1,0 +1,26 @@
+{
+  Long zkMsgId=null;
+  byte[] data=zkClient.get_data(ZK_NODE_PATH,false);
+  if (data != null) {
+    String value=new String(data);
+    try {
+      zkMsgId=Long.valueOf(value);
+      LOG.info("ZK msgId:" + zkMsgId);
+    }
+ catch (    Exception e) {
+      LOG.warn("Failed to get msgId ",e);
+    }
+  }
+  if (zkMsgId != null) {
+    BatchId.updateId(zkMsgId);
+  }
+  int max_spout_pending=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING),1);
+  for (int i=0; i < max_spout_pending; i++) {
+    BatchSpoutMsgId msgId=BatchSpoutMsgId.mkInstance();
+    if (currentBatchId == null) {
+      currentBatchId=msgId.getBatchId();
+    }
+    batchQueue.offer(msgId);
+    LOG.info("Push into queue," + msgId);
+  }
+}

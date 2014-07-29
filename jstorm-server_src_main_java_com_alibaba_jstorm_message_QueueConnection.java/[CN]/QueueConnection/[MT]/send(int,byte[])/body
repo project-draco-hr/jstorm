@@ -1,3 +1,0 @@
-{
-  disruptorQueue.publish(message);
-}

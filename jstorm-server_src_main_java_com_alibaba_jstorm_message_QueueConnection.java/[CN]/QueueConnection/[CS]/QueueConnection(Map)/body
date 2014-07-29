@@ -1,5 +1,0 @@
-{
-  queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
-  waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  disruptorQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(queue_size),waitStrategy);
-}

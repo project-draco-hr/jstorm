@@ -1,3 +1,0 @@
-{
-  s=ctx.socket(ZMQ.PULL);
-}

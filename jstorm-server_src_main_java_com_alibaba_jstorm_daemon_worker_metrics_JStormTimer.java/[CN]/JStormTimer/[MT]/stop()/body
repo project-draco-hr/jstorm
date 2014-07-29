@@ -1,0 +1,6 @@
+{
+  Timer.Context context=timerContext.getAndSet(null);
+  if (context != null) {
+    context.stop();
+  }
+}

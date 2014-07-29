@@ -1,0 +1,16 @@
+{
+  LOG.info("Successfully start reconnect thread");
+  while (closed == false) {
+    NettyClient client=null;
+    try {
+      client=queue.take();
+    }
+ catch (    InterruptedException e) {
+      continue;
+    }
+    if (client != null) {
+      client.doReconnect();
+    }
+  }
+  LOG.info("Successfully shutdown reconnect thread");
+}

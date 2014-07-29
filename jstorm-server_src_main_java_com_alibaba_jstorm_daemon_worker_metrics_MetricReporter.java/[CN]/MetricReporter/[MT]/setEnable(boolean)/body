@@ -1,0 +1,5 @@
+{
+  this.isEnable=isEnable;
+  JStormTimer.setEnable(isEnable);
+  JStormHistogram.setEnable(isEnable);
+}

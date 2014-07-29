@@ -1,3 +1,0 @@
-{
-  context=ZMQ.context(zmqThreads);
-}

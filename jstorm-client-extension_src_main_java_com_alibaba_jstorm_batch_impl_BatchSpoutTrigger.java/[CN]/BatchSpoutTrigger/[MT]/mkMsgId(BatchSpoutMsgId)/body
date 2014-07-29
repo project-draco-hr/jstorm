@@ -1,0 +1,24 @@
+{
+synchronized (BatchSpoutMsgId.class) {
+    if (currentBatchId.getId() <= oldMsgId.getBatchId().getId()) {
+      byte[] data=String.valueOf(currentBatchId.getId()).getBytes();
+      try {
+        zkClient.set_data(ZK_NODE_PATH,data);
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to update to ZK " + oldMsgId,e);
+      }
+      currentBatchId=BatchId.incBatchId(oldMsgId.getBatchId());
+    }
+ else {
+    }
+  }
+  BatchSpoutMsgId newMsgId=BatchSpoutMsgId.mkInstance();
+  batchQueue.offer(newMsgId);
+  StringBuilder sb=new StringBuilder();
+  sb.append("Create new BatchId,");
+  sb.append("old:").append(oldMsgId);
+  sb.append("new:").append(newMsgId);
+  sb.append("currentBatchId:").append(currentBatchId);
+  LOG.info(sb.toString());
+}

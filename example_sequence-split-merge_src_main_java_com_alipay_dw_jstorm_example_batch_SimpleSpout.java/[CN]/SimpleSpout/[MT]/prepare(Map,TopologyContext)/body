@@ -1,0 +1,4 @@
+{
+  rand=new Random();
+  rand.setSeed(System.currentTimeMillis());
+}

@@ -1,0 +1,19 @@
+{
+  try {
+    Object id=tuple.getValue(0);
+    byte[] commitResult=null;
+    if (commited.containsKey(id)) {
+      commitResult=(byte[])commited.get(id);
+    }
+ else {
+      commitResult=getCommittedData(id);
+    }
+    if (commitResult != null) {
+      ((ICommitter)delegate).revert((BatchId)id,commitResult);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to revert,",e);
+  }
+  collector.ack(tuple);
+}

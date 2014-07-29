@@ -1,0 +1,14 @@
+{
+  basicCollector.setContext(tuple);
+  try {
+    BatchId id=(BatchId)tuple.getValue(0);
+    ((IPrepareCommit)delegate).prepareCommit(id,basicCollector);
+    collector.ack(tuple);
+  }
+ catch (  FailedException e) {
+    if (e instanceof ReportedFailedException) {
+      collector.reportError(e);
+    }
+    collector.fail(tuple);
+  }
+}

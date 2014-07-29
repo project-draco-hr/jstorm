@@ -1,0 +1,21 @@
+{
+  BatchStatus batchStatus=getBatchStatus(tuple);
+  if (batchStatus == BatchStatus.COMPUTING) {
+    handleRegular(tuple);
+  }
+ else   if (batchStatus == BatchStatus.PREPARE_COMMIT) {
+    handlePrepareCommit(tuple);
+  }
+ else   if (batchStatus == BatchStatus.COMMIT) {
+    handleCommit(tuple);
+  }
+ else   if (batchStatus == BatchStatus.REVERT_COMMIT) {
+    handleRevert(tuple);
+  }
+ else   if (batchStatus == BatchStatus.POST_COMMIT) {
+    handlePostCommit(tuple);
+  }
+ else {
+    throw new RuntimeException("Receive commit tuple, but not committer");
+  }
+}

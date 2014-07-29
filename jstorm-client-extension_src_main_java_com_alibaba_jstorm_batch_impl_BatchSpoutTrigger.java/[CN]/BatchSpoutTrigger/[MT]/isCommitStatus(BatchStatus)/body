@@ -1,0 +1,11 @@
+{
+  if (batchStatus == BatchStatus.COMMIT) {
+    return true;
+  }
+ else   if (batchStatus == BatchStatus.REVERT_COMMIT) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

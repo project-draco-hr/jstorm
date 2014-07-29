@@ -1,0 +1,39 @@
+{
+  final Random random=new Random();
+  random.setSeed(System.currentTimeMillis());
+  Thread thread=new Thread(new Runnable(){
+    final JStormTimer timer=Metrics.registerTimer("timer");
+    final Meter meter=Metrics.registerMeter("meter");
+    LatencyRatio latency=Metrics.getMetrics().register("latency",new LatencyRatio(timer.getInstance()));
+    @Override public void run(){
+      System.out.println("Begin to run");
+      int counter=0;
+      while (counter++ < 40000) {
+        meter.mark();
+        timer.start();
+        int rand=random.nextInt(10);
+        try {
+          Thread.sleep(rand * 1);
+        }
+ catch (        InterruptedException e) {
+        }
+ finally {
+          timer.stop();
+        }
+        try {
+          Thread.sleep(2);
+        }
+ catch (        InterruptedException e) {
+        }
+        if (counter % 1000 == 0) {
+          System.out.println("Done " + counter);
+        }
+      }
+    }
+  }
+);
+  Metrics.getMetrics().registerAll(Metrics.getJstack());
+  final ConsoleReporter reporter=ConsoleReporter.forRegistry(Metrics.getMetrics()).convertRatesTo(TimeUnit.SECONDS).convertDurationsTo(TimeUnit.MILLISECONDS).build();
+  reporter.start(1,TimeUnit.MINUTES);
+  thread.start();
+}

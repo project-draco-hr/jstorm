@@ -1,0 +1,7 @@
+{
+  BatchId batchId=(BatchId)input.getValue(0);
+  for (int i=0; i < batchSize; i++) {
+    long value=rand.nextInt(10);
+    collector.emit(new Values(batchId,value));
+  }
+}
