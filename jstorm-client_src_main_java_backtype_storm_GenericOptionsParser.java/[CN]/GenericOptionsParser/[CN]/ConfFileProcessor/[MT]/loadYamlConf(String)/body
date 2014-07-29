@@ -1,0 +1,11 @@
+{
+  InputStreamReader reader=null;
+  try {
+    FileInputStream fis=new FileInputStream(f);
+    reader=new InputStreamReader(fis,UTF8);
+    return (Map)yaml.load(reader);
+  }
+  finally {
+    if (reader != null)     reader.close();
+  }
+}

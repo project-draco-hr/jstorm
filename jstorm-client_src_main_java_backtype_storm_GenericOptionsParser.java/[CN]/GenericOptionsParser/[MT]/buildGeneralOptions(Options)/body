@@ -1,0 +1,14 @@
+{
+  Options r=new Options();
+  for (  Object o : opts.getOptions())   r.addOption((Option)o);
+  Option libjars=OptionBuilder.withArgName("paths").hasArg().withDescription("comma separated jars to be used by the submitted topology").create("libjars");
+  r.addOption(libjars);
+  optionProcessors.put("libjars",new LibjarsProcessor());
+  Option conf=OptionBuilder.withArgName("configuration file").hasArg().withDescription("an application configuration file").create("conf");
+  r.addOption(conf);
+  optionProcessors.put("conf",new ConfFileProcessor());
+  Option extraConfig=OptionBuilder.withArgName("D").hasArg().withDescription("extra configurations (preserving types)").create("D");
+  r.addOption(extraConfig);
+  optionProcessors.put("D",new ExtraConfigProcessor());
+  return r;
+}

@@ -1,0 +1,4 @@
+{
+  if (f.endsWith(".yaml"))   return loadYamlConf(f);
+  throw new IOException("Unknown configuration file type: " + f + " does not end with either .yaml");
+}

@@ -1,0 +1,3 @@
+{
+  for (  Map.Entry<String,OptionProcessor> e : optionProcessors.entrySet())   if (commandLine.hasOption(e.getKey()))   e.getValue().process(conf,commandLine);
+}

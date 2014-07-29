@@ -1,0 +1,6 @@
+{
+  opts=buildGeneralOptions(opts);
+  CommandLineParser parser=new GnuParser();
+  commandLine=parser.parse(opts,args,true);
+  processGeneralOptions(conf,commandLine);
+}
