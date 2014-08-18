@@ -1,5 +1,5 @@
 {
-  this.rotateTime=1000L * message_timeout_secs;
+  this.rotateTime=1000L * message_timeout_secs / (Acker.TIMEOUT_BUCKET_NUM - 1);
   this.reportError=report_error;
   this.sendTargets=_send_fn;
   this.storm_conf=_storm_conf;
@@ -12,4 +12,6 @@
   this.ackerNum=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
   String componentId=topologyContext.getThisComponentId();
   timer=Metrics.registerTimer(JStormServerUtils.getName(componentId,task_id) + "-emit-timer");
+  random=new Random();
+  random.setSeed(System.currentTimeMillis());
 }

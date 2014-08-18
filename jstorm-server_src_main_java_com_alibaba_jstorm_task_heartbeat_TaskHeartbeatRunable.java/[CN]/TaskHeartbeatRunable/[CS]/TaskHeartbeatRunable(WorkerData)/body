@@ -1,0 +1,11 @@
+{
+  this.zkCluster=workerData.getZkCluster();
+  this.topology_id=workerData.getTopologyId();
+  this.uptime=new UptimeComputer();
+  ;
+  this.storm_conf=workerData.getStormConf();
+  this.active=workerData.getActive();
+  String key=Config.TASK_HEARTBEAT_FREQUENCY_SECS;
+  Object time=storm_conf.get(key);
+  frequence=JStormUtils.parseInt(time,10);
+}

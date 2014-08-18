@@ -23,6 +23,25 @@
       }
       LOG.info("Find :" + str);
       String[] fields=StringUtils.split(str);
+      boolean find=false;
+      int i=0;
+      for (; i < fields.length; i++) {
+        String field=fields[i];
+        LOG.debug("Filed, " + i + ":"+ field);
+        if (field.contains(Worker.class.getName()) == true) {
+          if (i + 3 >= fields.length) {
+            LOG.info("Failed to find port ");
+          }
+ else           if (fields[i + 3].equals(String.valueOf(port))) {
+            find=true;
+          }
+          break;
+        }
+      }
+      if (find == false) {
+        LOG.info("No old port worker");
+        continue;
+      }
       if (fields.length >= 2) {
         try {
           if (currPid.equals(fields[1])) {

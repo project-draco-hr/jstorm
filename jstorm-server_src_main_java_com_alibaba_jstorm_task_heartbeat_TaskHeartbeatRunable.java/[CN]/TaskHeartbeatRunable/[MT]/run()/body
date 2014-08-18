@@ -1,13 +1,18 @@
 {
   Integer currtime=TimeUtils.current_time_secs();
-  TaskHeartbeat hb=new TaskHeartbeat(currtime,uptime.uptime(),task_stats.render_stats());
-  try {
-    zkCluster.task_heartbeat(topology_id,task_id,hb);
+  for (  Entry<Integer,CommonStatsRolling> entry : taskStatsMap.entrySet()) {
+    Integer taskId=entry.getKey();
+    CommonStatsRolling taskStats=entry.getValue();
+    String idStr=" " + topology_id + ":"+ taskId+ " ";
+    try {
+      TaskHeartbeat hb=new TaskHeartbeat(currtime,uptime.uptime(),taskStats.render_stats());
+      zkCluster.task_heartbeat(topology_id,taskId,hb);
+    }
+ catch (    Exception e) {
+      String errMsg="Failed to update heartbeat to ZK " + idStr + "\n";
+      LOG.error(errMsg,e);
+      continue;
+    }
   }
- catch (  Exception e) {
-    String errMsg="Failed to update heartbeat to ZK " + idStr + "\n";
-    LOG.error(errMsg,e);
-    return;
-  }
-  LOG.info("task hearbeat task_id=" + idStr + " ts "+ currtime);
+  LOG.info("update all task hearbeat ts " + currtime);
 }

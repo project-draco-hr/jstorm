@@ -1,6 +1,8 @@
 {
   BatchTopologyBuilder topologyBuilder=new BatchTopologyBuilder(topologyName);
-  BoltDeclarer boltDeclarer=topologyBuilder.setSpout("Spout",new SimpleSpout(),3);
-  topologyBuilder.setBolt("Bolt",new SimpleBolt(),1).shuffleGrouping("Spout");
+  int spoutParallel=JStormUtils.parseInt(conf.get("topology.spout.parallel"),1);
+  BoltDeclarer boltDeclarer=topologyBuilder.setSpout("Spout",new SimpleSpout(),spoutParallel);
+  int boltParallel=JStormUtils.parseInt(conf.get("topology.bolt.parallel"),2);
+  topologyBuilder.setBolt("Bolt",new SimpleBolt(),boltParallel).shuffleGrouping("Spout");
   return topologyBuilder.getTopologyBuilder();
 }

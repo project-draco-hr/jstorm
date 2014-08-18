@@ -1,3 +1,7 @@
 {
-  return base_sleep_ms * retries.incrementAndGet();
+  int sleepMs=base_sleep_ms * retries.incrementAndGet();
+  if (sleepMs > 1000) {
+    sleepMs=1000;
+  }
+  return sleepMs;
 }

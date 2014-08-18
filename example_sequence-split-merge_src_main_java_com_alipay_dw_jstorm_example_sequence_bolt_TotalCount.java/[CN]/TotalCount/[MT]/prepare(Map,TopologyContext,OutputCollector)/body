@@ -1,5 +1,6 @@
 {
   this.collector=collector;
   tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
+  checkTupleId=JStormUtils.parseBoolean(stormConf.get("bolt.check.tupleId"),false);
   LOG.info("Finished preparation");
 }

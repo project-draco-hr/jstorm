@@ -1,5 +1,6 @@
 {
   if (requests == null || requests.isEmpty())   return;
+  histogram.update(requests.getEncoded_length());
   long pending=pendings.incrementAndGet();
   LOG.debug("Flush pending {}, this message size:{}",pending,requests.getEncoded_length());
   ChannelFuture future=channel.write(requests);

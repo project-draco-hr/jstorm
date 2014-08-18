@@ -5,7 +5,8 @@
       Thread.sleep(sleepTime);
       if (data.isLeader()) {
         data.getStormClusterState().unregister_nimbus_host(hostPort);
-        return;
+        checkOwnMaster();
+        continue;
       }
       if (!data.getStormClusterState().leader_existed()) {
         this.tryToBeLeader(data.getConf());

@@ -9,12 +9,6 @@
   }
   isFinished=false;
   tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
-  Object max_spout_pending=conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING);
-  if (max_spout_pending == null) {
-    MAX_PENDING_COUNTER=Long.MAX_VALUE;
-  }
- else {
-    MAX_PENDING_COUNTER=Long.valueOf(Utils.getInt(max_spout_pending));
-  }
+  MAX_PENDING_COUNTER=getMaxPending(conf);
   LOG.info("Finish open");
 }

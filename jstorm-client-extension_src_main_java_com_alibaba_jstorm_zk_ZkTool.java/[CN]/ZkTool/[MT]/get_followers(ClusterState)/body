@@ -1,12 +1,15 @@
 {
   Map<String,String> ret=Maps.newHashMap();
+  if (!cluster_state.node_existed(ZkConstant.NIMBUS_SLAVE_SUBTREE,false))   return ret;
   List<String> followers=cluster_state.get_children(ZkConstant.NIMBUS_SLAVE_SUBTREE,false);
   if (followers == null || followers.size() == 0) {
     return ret;
   }
   for (  String follower : followers) {
-    String uptime=new String(cluster_state.get_data(ZkConstant.NIMBUS_SLAVE_SUBTREE + ZkConstant.ZK_SEPERATOR + follower,false));
-    ret.put(follower,uptime);
+    if (follower != null) {
+      String uptime=new String(cluster_state.get_data(ZkConstant.NIMBUS_SLAVE_SUBTREE + ZkConstant.ZK_SEPERATOR + follower,false));
+      ret.put(follower,uptime);
+    }
   }
   return ret;
 }

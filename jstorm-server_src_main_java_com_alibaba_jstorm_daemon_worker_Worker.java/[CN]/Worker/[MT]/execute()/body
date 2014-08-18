@@ -1,15 +1,10 @@
 {
   List<AsyncLoopThread> threads=new ArrayList<AsyncLoopThread>();
+  AsyncLoopThread dispatcher=startDispatchThread();
+  threads.add(dispatcher);
   RefreshConnections refreshConn=makeRefreshConnections();
   AsyncLoopThread refreshconn=new AsyncLoopThread(refreshConn,false,Thread.MIN_PRIORITY,true);
   threads.add(refreshconn);
-  List<TaskShutdownDameon> shutdowntasks=createTasks();
-  workerData.setShutdownTasks(shutdowntasks);
-  AsyncLoopThread dispatcher=startDispatchThread();
-  threads.add(dispatcher);
-  RunnableCallback heartbeat_fn=new WorkerHeartbeatRunable(workerData);
-  AsyncLoopThread hb=new AsyncLoopThread(heartbeat_fn,false,null,Thread.NORM_PRIORITY,true);
-  threads.add(hb);
   TimeTick timeTick=new TimeTick(workerData);
   AsyncLoopThread tick=new AsyncLoopThread(timeTick);
   threads.add(tick);
@@ -31,5 +26,14 @@
   metricReporter.setEnable(isMetricsEnable);
   metricReporter.start();
   LOG.info("Start metrics reporter, enable performance metrics: " + isMetricsEnable);
+  TaskHeartbeatRunable taskHB=new TaskHeartbeatRunable(workerData);
+  AsyncLoopThread taskHBThread=new AsyncLoopThread(taskHB);
+  threads.add(taskHBThread);
+  RunnableCallback heartbeat_fn=new WorkerHeartbeatRunable(workerData);
+  AsyncLoopThread hb=new AsyncLoopThread(heartbeat_fn,false,null,Thread.NORM_PRIORITY,true);
+  threads.add(hb);
+  List<TaskShutdownDameon> shutdowntasks=createTasks();
+  workerData.setShutdownTasks(shutdowntasks);
+  dispatcher.start();
   return new WorkerShutdown(workerData,shutdowntasks,threads,metricReporter);
 }

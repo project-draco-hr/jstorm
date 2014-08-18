@@ -1,0 +1,17 @@
+{
+  int retry_times=10;
+  StormClusterState zkClient=data.getStormClusterState();
+  for (int i=0; i < retry_times; i++, JStormUtils.sleepMs(sleepTime)) {
+    if (zkClient.leader_existed() == false) {
+      continue;
+    }
+    String zkHost=zkClient.get_leader_host();
+    if (hostPort.equals(zkHost) == true) {
+      return;
+    }
+    LOG.warn("Current Nimbus has start thrift, but fail to own zk master :" + zkHost);
+  }
+  String err="Current Nimubs fail to own nimbus_master, should halt process";
+  LOG.error(err);
+  JStormUtils.halt_process(0,err);
+}

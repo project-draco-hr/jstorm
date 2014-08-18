@@ -31,5 +31,6 @@
  catch (  Throwable e) {
     String errMsg="Failed to create worker, " + sb.toString();
     LOG.error(errMsg,e);
+    JStormUtils.halt_process(-1,errMsg);
   }
 }

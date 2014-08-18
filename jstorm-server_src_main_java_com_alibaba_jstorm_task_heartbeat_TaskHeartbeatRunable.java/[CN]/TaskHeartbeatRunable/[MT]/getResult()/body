@@ -1,9 +1,9 @@
 {
-  if (taskStatus.isShutdown() == false) {
+  if (active.get() == true) {
     return frequence;
   }
  else {
-    LOG.info("Successfully shutdown Task's headbeat thread" + idStr);
+    LOG.info("Successfully shutdown Task's headbeat thread");
     return -1;
   }
 }

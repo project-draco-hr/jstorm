@@ -2,6 +2,11 @@
   if (active.get() == false) {
     return;
   }
+  if (isFirstTime == true) {
+    isFirstTime=false;
+    JStormUtils.sleepMs(firstSleep * 1000);
+    LOG.info("Start TimeTick");
+  }
   for (  Entry<String,DisruptorQueue> entry : queues.entrySet()) {
     String name=entry.getKey();
     DisruptorQueue queue=entry.getValue();

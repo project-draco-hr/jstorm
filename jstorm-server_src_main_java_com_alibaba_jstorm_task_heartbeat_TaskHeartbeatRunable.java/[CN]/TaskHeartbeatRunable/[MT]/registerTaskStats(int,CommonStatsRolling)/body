@@ -1,0 +1,3 @@
+{
+  taskStatsMap.put(taskId,taskStats);
+}

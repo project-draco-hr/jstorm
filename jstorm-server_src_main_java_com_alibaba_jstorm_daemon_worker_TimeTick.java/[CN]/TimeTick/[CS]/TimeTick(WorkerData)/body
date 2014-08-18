@@ -2,8 +2,11 @@
   active=workerData.getActive();
   Map conf=workerData.getStormConf();
   int msgTimeOut=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
-  frequence=(msgTimeOut) / Acker.TIMEOUT_BUCKET_NUM;
+  frequence=(msgTimeOut) / (Acker.TIMEOUT_BUCKET_NUM - 1);
   if (frequence <= 0) {
     frequence=1;
   }
+  firstSleep=JStormUtils.parseInt(conf.get(Config.SUPERVISOR_WORKER_START_TIMEOUT_SECS),120);
+  firstSleep+=frequence;
+  LOG.info("TimeTick frequence " + frequence);
 }

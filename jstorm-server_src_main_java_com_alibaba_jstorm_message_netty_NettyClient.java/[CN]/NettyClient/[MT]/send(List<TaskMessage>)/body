@@ -12,6 +12,5 @@
   }
  finally {
     sendTimer.stop();
-    histogram.update(messages.size());
   }
 }

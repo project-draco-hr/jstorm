@@ -1,0 +1,14 @@
+{
+  if (ConfigExtension.isSpoutSingleThread(conf)) {
+    return Long.MAX_VALUE;
+  }
+  Object pending=conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING);
+  if (pending == null) {
+    return Long.MAX_VALUE;
+  }
+  int pendingNum=JStormUtils.parseInt(pending);
+  if (pendingNum == 1) {
+    return Long.MAX_VALUE;
+  }
+  return pendingNum;
+}

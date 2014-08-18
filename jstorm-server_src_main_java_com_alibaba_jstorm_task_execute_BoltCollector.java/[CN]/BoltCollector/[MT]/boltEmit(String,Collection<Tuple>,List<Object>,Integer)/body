@@ -12,7 +12,7 @@
       Map<Long,Long> anchors_to_ids=new HashMap<Long,Long>();
       if (anchors != null) {
         for (        Tuple a : anchors) {
-          Long edge_id=MessageId.generateId();
+          Long edge_id=MessageId.generateId(random);
           long now=System.currentTimeMillis();
           if (now - lastRotate > rotateTime) {
             pending_acks.rotate();

@@ -19,7 +19,9 @@
       LOG.info(sb);
       try {
         shutWorker(conf,supervisorId,workerid,workerThreadPids);
-        if (cgroupManager != null)         cgroupManager.shutDownWorker(workerid);
+        if (cgroupManager != null) {
+          cgroupManager.shutDownWorker(workerid);
+        }
       }
  catch (      IOException e) {
         String errMsg="Failed to shutdown worker workId:" + workerid + ",supervisorId: "+ supervisorId+ ",workerThreadPids:"+ workerThreadPids;

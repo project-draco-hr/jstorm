@@ -1,5 +1,4 @@
 {
-  Thread.currentThread().setName(component_id + "-" + taskId+ "-recvThread");
   WorkerClassLoader.switchThreadContext();
   LOG.info("Successfully start recvThread of " + idStr);
   while (taskStatus.isShutdown() == false) {
