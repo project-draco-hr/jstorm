@@ -10,18 +10,6 @@ case NUM_WORKERS:
 return Integer.valueOf(get_num_workers());
 case NUM_USED_WORKERS:
 return Integer.valueOf(get_num_used_workers());
-case NUM_CPU:
-return Integer.valueOf(get_num_cpu());
-case NUM_USED_CPU:
-return Integer.valueOf(get_num_used_cpu());
-case NUM_MEM:
-return Integer.valueOf(get_num_mem());
-case NUM_USED_MEM:
-return Integer.valueOf(get_num_used_mem());
-case NUM_DISK:
-return Integer.valueOf(get_num_disk());
-case NUM_USED_DISK:
-return Integer.valueOf(get_num_used_disk());
 }
 throw new IllegalStateException();
 }

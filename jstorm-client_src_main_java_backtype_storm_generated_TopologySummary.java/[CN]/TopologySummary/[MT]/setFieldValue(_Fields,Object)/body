@@ -48,37 +48,5 @@ unset_num_workers();
 set_num_workers((Integer)value);
 }
 break;
-case NUM_CPU:
-if (value == null) {
-unset_num_cpu();
-}
- else {
-set_num_cpu((Integer)value);
-}
-break;
-case NUM_MEM:
-if (value == null) {
-unset_num_mem();
-}
- else {
-set_num_mem((Integer)value);
-}
-break;
-case NUM_DISK:
-if (value == null) {
-unset_num_disk();
-}
- else {
-set_num_disk((Integer)value);
-}
-break;
-case GROUP:
-if (value == null) {
-unset_group();
-}
- else {
-set_group((String)value);
-}
-break;
 }
 }

@@ -10,28 +10,25 @@ synchronized (this) {
         LOG.error(errMsg);
         return;
       }
-      Map<Integer,ResourceAssignment> taskToResource=assignment.getTaskToResource();
-      if (taskToResource == null) {
+      Set<ResourceWorkerSlot> workers=assignment.getWorkers();
+      if (workers == null) {
         String errMsg="Failed to get taskToResource of " + topologyId;
         LOG.error(errMsg);
         return;
       }
-      workerData.getTaskToResource().putAll(taskToResource);
+      workerData.getWorkerToResource().addAll(workers);
       Map<Integer,WorkerSlot> my_assignment=new HashMap<Integer,WorkerSlot>();
       Map<String,String> node=assignment.getNodeHost();
       Set<WorkerSlot> need_connections=new HashSet<WorkerSlot>();
       Set<Integer> localNodeTasks=new HashSet<Integer>();
-      if (taskToResource != null && outboundTasks != null) {
-        for (        Entry<Integer,ResourceAssignment> mm : taskToResource.entrySet()) {
-          int taks_id=mm.getKey();
-          ResourceAssignment resource=mm.getValue();
-          if (outboundTasks.contains(taks_id)) {
-            WorkerSlot workerSlot=new WorkerSlot(resource.getSupervisorId(),resource.getPort());
-            my_assignment.put(taks_id,workerSlot);
-            need_connections.add(workerSlot);
-          }
-          if (supervisorId.equals(resource.getSupervisorId())) {
-            localNodeTasks.add(taks_id);
+      if (workers != null && outboundTasks != null) {
+        for (        ResourceWorkerSlot worker : workers) {
+          if (supervisorId.equals(worker.getNodeId()))           localNodeTasks.addAll(worker.getTasks());
+          for (          Integer id : worker.getTasks()) {
+            if (outboundTasks.contains(id)) {
+              my_assignment.put(id,worker);
+              need_connections.add(worker);
+            }
           }
         }
       }

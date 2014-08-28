@@ -1,0 +1,21 @@
+{
+  if (this == obj)   return true;
+  if (!super.equals(obj))   return false;
+  if (getClass() != obj.getClass())   return false;
+  WorkerAssignment other=(WorkerAssignment)obj;
+  if (componentToNum == null) {
+    if (other.componentToNum != null)     return false;
+  }
+ else   if (!componentToNum.equals(other.componentToNum))   return false;
+  if (cpu != other.cpu)   return false;
+  if (hostName == null) {
+    if (other.hostName != null)     return false;
+  }
+ else   if (!hostName.equals(other.hostName))   return false;
+  if (jvm == null) {
+    if (other.jvm != null)     return false;
+  }
+ else   if (!jvm.equals(other.jvm))   return false;
+  if (mem != other.mem)   return false;
+  return true;
+}

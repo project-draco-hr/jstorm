@@ -24,12 +24,12 @@ unset_uptime_secs();
 set_uptime_secs((Integer)value);
 }
 break;
-case TASKS:
+case WORKERS:
 if (value == null) {
-unset_tasks();
+unset_workers();
 }
  else {
-set_tasks((List<TaskSummary>)value);
+set_workers((List<WorkerSummary>)value);
 }
 break;
 case STATUS:
@@ -38,6 +38,14 @@ unset_status();
 }
  else {
 set_status((String)value);
+}
+break;
+case TASKS:
+if (value == null) {
+unset_tasks();
+}
+ else {
+set_tasks((List<TaskSummary>)value);
 }
 break;
 }

@@ -1,40 +1,32 @@
 {
-  List<TaskSummary> taskSummaries=new ArrayList<TaskSummary>();
-  Map<Integer,ResourceAssignment> taskToResource=assignment.getTaskToResource();
-  for (  Entry<Integer,ResourceAssignment> entry : taskToResource.entrySet()) {
-    Integer taskId=entry.getKey();
-    ResourceAssignment resource=entry.getValue();
-    TaskHeartbeat heartbeat=zkClusterState.task_heartbeat(topologyId,taskId);
-    if (heartbeat == null) {
-      LOG.warn("Topology " + topologyId + " task "+ taskId+ " hasn't been started");
-      continue;
-    }
-    List<TaskError> errors=zkClusterState.task_errors(topologyId,taskId);
-    List<ErrorInfo> newErrors=new ArrayList<ErrorInfo>();
-    if (errors != null) {
-      int size=errors.size();
-      for (int i=0; i < size; i++) {
-        TaskError e=(TaskError)errors.get(i);
-        newErrors.add(new ErrorInfo(e.getError(),e.getTimSecs()));
+  Map<Integer,TaskSummary> taskSummaries=new TreeMap<Integer,TaskSummary>();
+  Set<ResourceWorkerSlot> workers=assignment.getWorkers();
+  for (  ResourceWorkerSlot worker : workers) {
+    for (    Integer taskId : worker.getTasks()) {
+      TaskHeartbeat heartbeat=zkClusterState.task_heartbeat(topologyId,taskId);
+      if (heartbeat == null) {
+        LOG.warn("Topology " + topologyId + " task "+ taskId+ " hasn't been started");
+        continue;
       }
+      List<TaskError> errors=zkClusterState.task_errors(topologyId,taskId);
+      List<ErrorInfo> newErrors=new ArrayList<ErrorInfo>();
+      if (errors != null) {
+        int size=errors.size();
+        for (int i=0; i < size; i++) {
+          TaskError e=(TaskError)errors.get(i);
+          newErrors.add(new ErrorInfo(e.getError(),e.getTimSecs()));
+        }
+      }
+      TaskSummary taskSummary=new TaskSummary();
+      taskSummary.set_task_id(taskId);
+      taskSummary.set_component_id(taskToComponent.get(taskId));
+      taskSummary.set_host(worker.getHostname());
+      taskSummary.set_port(worker.getPort());
+      taskSummary.set_uptime_secs(heartbeat.getUptimeSecs());
+      taskSummary.set_stats(heartbeat.getStats().getTaskStats());
+      taskSummary.set_errors(newErrors);
+      taskSummaries.put(taskId,taskSummary);
     }
-    TaskSummary taskSummary=new TaskSummary();
-    taskSummary.set_task_id(taskId);
-    taskSummary.set_component_id(taskToComponent.get(taskId));
-    taskSummary.set_host(assignment.getNodeHost().get(resource.getSupervisorId()));
-    taskSummary.set_cpu(resource.getCpuSlotNum());
-    taskSummary.set_mem(resource.getMemSlotNum());
-    if (resource.getDiskSlot() == null) {
-      taskSummary.set_disk("");
-    }
- else {
-      taskSummary.set_disk(resource.getDiskSlot());
-    }
-    taskSummary.set_port(resource.getPort());
-    taskSummary.set_uptime_secs(heartbeat.getUptimeSecs());
-    taskSummary.set_stats(heartbeat.getStats().getTaskStats());
-    taskSummary.set_errors(newErrors);
-    taskSummaries.add(taskSummary);
   }
   return taskSummaries;
 }

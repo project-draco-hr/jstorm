@@ -9,14 +9,6 @@ case NIMBUS_UPTIME_SECS:
   return is_set_nimbus_uptime_secs();
 case TOPOLOGIES:
 return is_set_topologies();
-case GROUP_TO_TOPOLOGY:
-return is_set_groupToTopology();
-case GROUP_TO_RESOURCE:
-return is_set_groupToResource();
-case GROUP_TO_USED_RESOURCE:
-return is_set_groupToUsedResource();
-case IS_GROUP_MODEL:
-return is_set_isGroupModel();
 }
 throw new IllegalStateException();
 }

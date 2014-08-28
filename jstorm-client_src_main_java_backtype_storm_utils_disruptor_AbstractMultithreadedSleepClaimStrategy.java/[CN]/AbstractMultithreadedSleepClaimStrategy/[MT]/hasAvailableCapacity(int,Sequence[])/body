@@ -1,0 +1,3 @@
+{
+  return hasAvailableCapacity(claimSequence.get(),availableCapacity,dependentSequences);
+}

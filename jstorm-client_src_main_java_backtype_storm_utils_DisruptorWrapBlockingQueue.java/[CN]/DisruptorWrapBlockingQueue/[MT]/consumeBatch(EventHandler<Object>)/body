@@ -1,0 +1,3 @@
+{
+  consumeBatchToCursor(0,handler);
+}

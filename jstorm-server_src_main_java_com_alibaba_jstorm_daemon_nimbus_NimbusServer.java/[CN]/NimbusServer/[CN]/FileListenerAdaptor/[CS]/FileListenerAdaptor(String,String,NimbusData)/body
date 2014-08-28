@@ -1,6 +1,0 @@
-{
-  super();
-  this.fileName=fileName;
-  this.filePath=filePath;
-  this.data=data;
-}

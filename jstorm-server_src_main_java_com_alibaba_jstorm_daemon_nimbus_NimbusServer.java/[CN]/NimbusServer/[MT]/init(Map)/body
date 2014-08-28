@@ -6,7 +6,6 @@
   serviceHandler=new ServiceHandler(data);
   if (!data.isLocalMode()) {
     initMonitor(conf);
-    initGroup(conf);
     initThrift(conf);
   }
 }

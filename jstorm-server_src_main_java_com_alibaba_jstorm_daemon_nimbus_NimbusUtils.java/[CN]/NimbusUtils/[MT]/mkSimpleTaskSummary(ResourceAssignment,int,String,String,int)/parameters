@@ -1,5 +1,0 @@
-ResourceAssignment resource
-int taskId
-String component
-String host
-int uptime

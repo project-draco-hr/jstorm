@@ -3,20 +3,17 @@
   canFree.addAll(context.getAllTaskIds());
   canFree.removeAll(context.getUnstoppedTaskIds());
   Map<String,SupervisorInfo> cluster=context.getCluster();
-  Map<Integer,ResourceAssignment> oldAssigns=context.getOldAssignment().getTaskToResource();
+  Assignment oldAssigns=context.getOldAssignment();
   for (  Integer task : canFree) {
-    ResourceAssignment oldAssign=oldAssigns.get(task);
-    if (oldAssign == null) {
+    ResourceWorkerSlot worker=oldAssigns.getWorkerByTaskId(task);
+    if (worker == null) {
       LOG.warn("When free rebalance resource, no ResourceAssignment of task " + task);
       continue;
     }
-    SupervisorInfo supervisorInfo=cluster.get(oldAssign.getSupervisorId());
+    SupervisorInfo supervisorInfo=cluster.get(worker.getNodeId());
     if (supervisorInfo == null) {
       continue;
     }
-    supervisorInfo.getCpuPool().free(oldAssign.getCpuSlotNum(),context);
-    supervisorInfo.getMemPool().free(oldAssign.getMemSlotNum(),context);
-    supervisorInfo.getDiskPool().free(oldAssign.getDiskSlot(),context);
-    supervisorInfo.getNetPool().free(oldAssign.getPort(),context);
+    supervisorInfo.getWorkerPorts().add(worker.getPort());
   }
 }

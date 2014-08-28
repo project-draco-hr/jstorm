@@ -34,32 +34,6 @@ org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 break;
 case 4:
 if (field.type == org.apache.thrift7.protocol.TType.I32) {
-this.cpu=iprot.readI32();
-set_cpu_isSet(true);
-}
- else {
-org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
-}
-break;
-case 5:
-if (field.type == org.apache.thrift7.protocol.TType.I32) {
-this.mem=iprot.readI32();
-set_mem_isSet(true);
-}
- else {
-org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
-}
-break;
-case 6:
-if (field.type == org.apache.thrift7.protocol.TType.STRING) {
-this.disk=iprot.readString();
-}
- else {
-org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
-}
-break;
-case 7:
-if (field.type == org.apache.thrift7.protocol.TType.I32) {
 this.port=iprot.readI32();
 set_port_isSet(true);
 }
@@ -67,7 +41,7 @@ set_port_isSet(true);
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }
 break;
-case 8:
+case 5:
 if (field.type == org.apache.thrift7.protocol.TType.I32) {
 this.uptime_secs=iprot.readI32();
 set_uptime_secs_isSet(true);
@@ -76,16 +50,16 @@ set_uptime_secs_isSet(true);
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }
 break;
-case 9:
+case 6:
 if (field.type == org.apache.thrift7.protocol.TType.LIST) {
 {
-org.apache.thrift7.protocol.TList _list220=iprot.readListBegin();
-this.errors=new ArrayList<ErrorInfo>(_list220.size);
-for (int _i221=0; _i221 < _list220.size; ++_i221) {
-ErrorInfo _elem222;
-_elem222=new ErrorInfo();
-_elem222.read(iprot);
-this.errors.add(_elem222);
+org.apache.thrift7.protocol.TList _list185=iprot.readListBegin();
+this.errors=new ArrayList<ErrorInfo>(_list185.size);
+for (int _i186=0; _i186 < _list185.size; ++_i186) {
+ErrorInfo _elem187;
+_elem187=new ErrorInfo();
+_elem187.read(iprot);
+this.errors.add(_elem187);
 }
 iprot.readListEnd();
 }
@@ -94,7 +68,7 @@ iprot.readListEnd();
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }
 break;
-case 10:
+case 7:
 if (field.type == org.apache.thrift7.protocol.TType.STRUCT) {
 this.stats=new TaskStats();
 this.stats.read(iprot);

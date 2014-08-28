@@ -1,6 +1,0 @@
-{
-  if (this.groupToTopology == null) {
-    this.groupToTopology=new HashMap<String,Map<String,Map<ThriftResourceType,Integer>>>();
-  }
-  this.groupToTopology.put(key,val);
-}

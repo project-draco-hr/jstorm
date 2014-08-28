@@ -12,14 +12,6 @@ case NUM_TASKS:
 return Integer.valueOf(get_num_tasks());
 case NUM_WORKERS:
 return Integer.valueOf(get_num_workers());
-case NUM_CPU:
-return Integer.valueOf(get_num_cpu());
-case NUM_MEM:
-return Integer.valueOf(get_num_mem());
-case NUM_DISK:
-return Integer.valueOf(get_num_disk());
-case GROUP:
-return get_group();
 }
 throw new IllegalStateException();
 }

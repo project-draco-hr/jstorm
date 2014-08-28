@@ -1,0 +1,21 @@
+{
+  int workersNum=getWorkersNum(context,num);
+  if (workersNum == 0) {
+    throw new FailedAssignTopologyException("there's no enough worker");
+  }
+  LOG.info("worker num is: " + workersNum);
+  List<ResourceWorkerSlot> result=new ArrayList<ResourceWorkerSlot>();
+  this.getRightWorkers(context,needAssign,result,workersNum,getUserDefineWorkers(context,JStromServerConfigExtension.getUserDefineAssignment(context.getStormConf())));
+  if (JStromServerConfigExtension.isUseOldAssignment(context.getStormConf())) {
+    this.getRightWorkers(context,needAssign,result,workersNum,context.getOldWorkers());
+  }
+  int defaultWorkerNum=Math.min(workersNum - result.size(),needAssign.size());
+  LOG.info("Get workers from user define and old assignments: " + result);
+  LOG.info("Tasks: " + needAssign + " will be scheduled by default"+ " in "+ defaultWorkerNum+ " workers");
+  for (int i=0; i < defaultWorkerNum; i++) {
+    result.add(new ResourceWorkerSlot());
+  }
+  this.putAllWorkerToSupervisor(result,this.getCanUseSupervisors(context.getCluster()));
+  this.setAllWorkerMemAndCpu(context.getStormConf(),result);
+  return result;
+}

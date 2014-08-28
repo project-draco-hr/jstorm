@@ -3,11 +3,6 @@
   this.task_id=0;
   this.component_id=null;
   this.host=null;
-  set_cpu_isSet(false);
-  this.cpu=0;
-  set_mem_isSet(false);
-  this.mem=0;
-  this.disk=null;
   set_port_isSet(false);
   this.port=0;
   set_uptime_secs_isSet(false);

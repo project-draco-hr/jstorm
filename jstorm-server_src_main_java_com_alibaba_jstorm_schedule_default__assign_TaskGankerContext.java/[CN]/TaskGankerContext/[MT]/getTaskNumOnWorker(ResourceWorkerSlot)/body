@@ -1,0 +1,3 @@
+{
+  return worker.getTasks() == null ? 0 : worker.getTasks().size();
+}

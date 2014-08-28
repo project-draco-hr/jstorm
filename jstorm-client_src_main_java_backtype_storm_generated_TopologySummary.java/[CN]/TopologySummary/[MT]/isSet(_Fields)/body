@@ -15,14 +15,6 @@ case NUM_TASKS:
 return is_set_num_tasks();
 case NUM_WORKERS:
 return is_set_num_workers();
-case NUM_CPU:
-return is_set_num_cpu();
-case NUM_MEM:
-return is_set_num_mem();
-case NUM_DISK:
-return is_set_num_disk();
-case GROUP:
-return is_set_group();
 }
 throw new IllegalStateException();
 }

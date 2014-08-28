@@ -1,4 +1,0 @@
-{
-  SupervisorSummary summary=new SupervisorSummary(supervisorInfo.getHostName(),supervisorId,supervisorInfo.getUptimeSecs(),supervisorInfo.getNetPool().getTotalNum(),supervisorInfo.getNetPool().getUsedNum(),supervisorInfo.getCpuPool().getTotalNum(),supervisorInfo.getCpuPool().getUsedNum(),supervisorInfo.getMemPool().getTotalNum(),supervisorInfo.getMemPool().getUsedNum(),supervisorInfo.getDiskPool().getTotalNum(),supervisorInfo.getDiskPool().getUsedNum());
-  return summary;
-}

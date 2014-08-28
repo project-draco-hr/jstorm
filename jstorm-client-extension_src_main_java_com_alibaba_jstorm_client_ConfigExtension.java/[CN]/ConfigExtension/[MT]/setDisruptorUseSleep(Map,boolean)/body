@@ -1,0 +1,3 @@
+{
+  conf.put(DISRUPTOR_USE_SLEEP,useSleep);
+}

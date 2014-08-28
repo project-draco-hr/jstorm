@@ -1,3 +1,0 @@
-{
-  conf.put(TASK_ALLOC_DISK_SLOT,Boolean.valueOf(alloc));
-}

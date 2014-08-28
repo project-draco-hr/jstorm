@@ -1,0 +1,31 @@
+{
+  Map<Integer,Integer> startTimes=new TreeMap<Integer,Integer>();
+  if (context.getAssignType() == TopologyAssignContext.ASSIGN_TYPE_NEW) {
+    int nowSecs=TimeUtils.current_time_secs();
+    for (    ResourceWorkerSlot worker : workers) {
+      for (      Integer changedTaskId : worker.getTasks()) {
+        startTimes.put(changedTaskId,nowSecs);
+      }
+    }
+    return startTimes;
+  }
+  Set<ResourceWorkerSlot> oldWorkers=new HashSet<ResourceWorkerSlot>();
+  if (existingAssignment != null) {
+    Map<Integer,Integer> taskStartTimeSecs=existingAssignment.getTaskStartTimeSecs();
+    if (taskStartTimeSecs != null) {
+      startTimes.putAll(taskStartTimeSecs);
+    }
+    if (existingAssignment.getWorkers() != null) {
+      oldWorkers=existingAssignment.getWorkers();
+    }
+  }
+  StormClusterState zkClusterState=nimbusData.getStormClusterState();
+  Set<Integer> changeTaskIds=getChangeTaskIds(oldWorkers,workers);
+  int nowSecs=TimeUtils.current_time_secs();
+  for (  Integer changedTaskId : changeTaskIds) {
+    startTimes.put(changedTaskId,nowSecs);
+    zkClusterState.remove_task_heartbeat(topologyId,changedTaskId);
+  }
+  LOG.info("Task assignment has been changed " + changeTaskIds);
+  return startTimes;
+}

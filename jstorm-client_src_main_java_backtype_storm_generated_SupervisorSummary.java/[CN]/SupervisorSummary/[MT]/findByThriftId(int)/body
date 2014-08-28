@@ -10,18 +10,6 @@ case 4:
 return NUM_WORKERS;
 case 5:
 return NUM_USED_WORKERS;
-case 6:
-return NUM_CPU;
-case 7:
-return NUM_USED_CPU;
-case 8:
-return NUM_MEM;
-case 9:
-return NUM_USED_MEM;
-case 10:
-return NUM_DISK;
-case 11:
-return NUM_USED_DISK;
 default :
 return null;
 }

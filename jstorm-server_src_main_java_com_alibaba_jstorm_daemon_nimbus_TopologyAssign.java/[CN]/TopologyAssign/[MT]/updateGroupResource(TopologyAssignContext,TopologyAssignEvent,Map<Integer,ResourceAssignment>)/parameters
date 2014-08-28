@@ -1,3 +1,0 @@
-TopologyAssignContext context
-TopologyAssignEvent event
-Map<Integer,ResourceAssignment> taskAssignments

@@ -1,0 +1,13 @@
+{
+  Set<Integer> result=new HashSet<Integer>();
+  for (  Integer task : tasks) {
+    Map conf=Common.getComponentMap(context,task);
+    if (ConfigExtension.isTaskOnDifferentNode(conf))     result.add(task);
+  }
+  for (  Integer task : result) {
+    String name=context.getTaskToComponent().get(task);
+    ResourceWorkerSlot worker=this.chooseWorker(name,this.getDifferentNodeTaskWokres(name));
+    this.pushTaskToWorker(task,name,worker);
+  }
+  return result;
+}

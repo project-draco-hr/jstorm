@@ -1,9 +1,0 @@
-{
-  StormBase topology=nimbusData.getStormClusterState().storm_base(topologyId,null);
-  String topologyName=topology.getStormName();
-  String groupName=topology.getGroup();
-  Map<ThriftResourceType,Integer> used=nimbusData.getGroupToUsedResource().get(groupName);
-  Map<ThriftResourceType,Integer> topologyResource=NimbusUtils.getTopologyResource(null,assignment);
-  NimbusUtils.releaseGroupResource(nimbusData,topologyName,groupName);
-  takeTopologyResource(groupName,topologyResource,used,topologyName);
-}

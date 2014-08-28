@@ -1,0 +1,6 @@
+{
+  for (  ResourceWorkerSlot worker : workers) {
+    if (worker.getTasks().contains(taskId))     return worker;
+  }
+  return null;
+}

@@ -58,41 +58,6 @@ set_num_workers_isSet(true);
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }
 break;
-case 7:
-if (field.type == org.apache.thrift7.protocol.TType.I32) {
-this.num_cpu=iprot.readI32();
-set_num_cpu_isSet(true);
-}
- else {
-org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
-}
-break;
-case 8:
-if (field.type == org.apache.thrift7.protocol.TType.I32) {
-this.num_mem=iprot.readI32();
-set_num_mem_isSet(true);
-}
- else {
-org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
-}
-break;
-case 9:
-if (field.type == org.apache.thrift7.protocol.TType.I32) {
-this.num_disk=iprot.readI32();
-set_num_disk_isSet(true);
-}
- else {
-org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
-}
-break;
-case 10:
-if (field.type == org.apache.thrift7.protocol.TType.STRING) {
-this.group=iprot.readString();
-}
- else {
-org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
-}
-break;
 default :
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }

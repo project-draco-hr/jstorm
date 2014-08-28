@@ -8,11 +8,6 @@
   if (other.is_set_host()) {
     this.host=other.host;
   }
-  this.cpu=other.cpu;
-  this.mem=other.mem;
-  if (other.is_set_disk()) {
-    this.disk=other.disk;
-  }
   this.port=other.port;
   this.uptime_secs=other.uptime_secs;
   if (other.is_set_errors()) {

@@ -1,0 +1,2 @@
+Set<ResourceWorkerSlot> oldWorkers
+Set<ResourceWorkerSlot> workers

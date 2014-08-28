@@ -1,0 +1,11 @@
+{
+  boolean isSuccess=queue.offer(obj);
+  while (isSuccess == false) {
+    try {
+      Thread.sleep(1);
+    }
+ catch (    InterruptedException e) {
+    }
+    isSuccess=queue.offer(obj);
+  }
+}

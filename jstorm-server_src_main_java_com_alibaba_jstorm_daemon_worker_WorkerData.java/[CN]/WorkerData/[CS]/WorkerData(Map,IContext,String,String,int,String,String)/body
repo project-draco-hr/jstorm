@@ -40,6 +40,9 @@
   if (this.context == null) {
     this.context=TransportFactory.makeContext(stormConf);
   }
+  boolean disruptorUseSleep=ConfigExtension.isDisruptorUseSleep(stormConf);
+  DisruptorQueue.setUseSleep(disruptorUseSleep);
+  LOG.info("Disruptor use sleep " + disruptorUseSleep);
   int buffer_size=Utils.getInt(conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   this.transferQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(buffer_size),waitStrategy);
@@ -47,7 +50,7 @@
   this.sendingQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(buffer_size),waitStrategy);
   this.nodeportSocket=new ConcurrentHashMap<WorkerSlot,IConnection>();
   this.taskNodeport=new ConcurrentHashMap<Integer,WorkerSlot>();
-  this.taskToResource=new ConcurrentHashMap<Integer,ResourceAssignment>();
+  this.workerToResource=new ConcurrentSkipListSet<ResourceWorkerSlot>();
   this.innerTaskTransfer=new ConcurrentHashMap<Integer,DisruptorQueue>();
   this.deserializeQueues=new ConcurrentHashMap<Integer,DisruptorQueue>();
   Assignment assignment=zkCluster.assignment_info(topologyId,null);
@@ -56,8 +59,8 @@
     LOG.error(errMsg);
     throw new RuntimeException(errMsg);
   }
-  taskToResource.putAll(assignment.getTaskToResource());
-  this.taskids=assignment.getCurrentWokerTasks(supervisorId,port);
+  workerToResource.addAll(assignment.getWorkers());
+  this.taskids=assignment.getCurrentWorkerTasks(supervisorId,port);
   if (taskids.size() == 0) {
     throw new RuntimeException("No tasks running current workers");
   }

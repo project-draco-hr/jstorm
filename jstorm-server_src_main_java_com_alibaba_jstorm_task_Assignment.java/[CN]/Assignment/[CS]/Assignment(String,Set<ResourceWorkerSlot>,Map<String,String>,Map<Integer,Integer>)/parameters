@@ -1,0 +1,4 @@
+String masterCodeDir
+Set<ResourceWorkerSlot> workers
+Map<String,String> nodeHost
+Map<Integer,Integer> taskStartTimeSecs

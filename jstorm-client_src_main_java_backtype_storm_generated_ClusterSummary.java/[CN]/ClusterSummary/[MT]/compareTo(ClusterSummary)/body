@@ -34,45 +34,5 @@
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_groupToTopology()).compareTo(typedOther.is_set_groupToTopology());
-  if (lastComparison != 0) {
-    return lastComparison;
-  }
-  if (is_set_groupToTopology()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.groupToTopology,typedOther.groupToTopology);
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-  }
-  lastComparison=Boolean.valueOf(is_set_groupToResource()).compareTo(typedOther.is_set_groupToResource());
-  if (lastComparison != 0) {
-    return lastComparison;
-  }
-  if (is_set_groupToResource()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.groupToResource,typedOther.groupToResource);
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-  }
-  lastComparison=Boolean.valueOf(is_set_groupToUsedResource()).compareTo(typedOther.is_set_groupToUsedResource());
-  if (lastComparison != 0) {
-    return lastComparison;
-  }
-  if (is_set_groupToUsedResource()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.groupToUsedResource,typedOther.groupToUsedResource);
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-  }
-  lastComparison=Boolean.valueOf(is_set_isGroupModel()).compareTo(typedOther.is_set_isGroupModel());
-  if (lastComparison != 0) {
-    return lastComparison;
-  }
-  if (is_set_isGroupModel()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.isGroupModel,typedOther.isGroupModel);
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-  }
   return 0;
 }

@@ -6,9 +6,8 @@
   totalConf.putAll(conf);
   totalConf.putAll(stormConf);
   String stormhome=System.getProperty("jstorm.home");
-  long memSlotSize=ConfigExtension.getMemSlotSize(totalConf);
-  long memSize=memSlotSize * assignment.getMemSlotNum();
-  int cpuNum=assignment.getCpuSlotNum();
+  long memSize=assignment.getMem();
+  int cpuNum=assignment.getCpu();
   String childopts=getChildOpts(totalConf);
   childopts+=getGcDumpParam(totalConf);
   childopts=childopts.replace("%ID%",port.toString());
@@ -44,7 +43,8 @@
   commandSB.append(" -Xmn" + memSize / 3 + " ");
   commandSB.append(" -XX:PermSize=" + memSize / 16);
   commandSB.append(" -XX:MaxPermSize=" + memSize / 8);
-  commandSB.append(childopts);
+  commandSB.append(" " + childopts);
+  commandSB.append(" " + (assignment.getJvm() == null ? "" : assignment.getJvm()));
   commandSB.append(" -Djava.library.path=");
   commandSB.append((String)totalConf.get(Config.JAVA_LIBRARY_PATH));
   commandSB.append(" -Dlogfile.name=");

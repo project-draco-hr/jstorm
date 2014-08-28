@@ -39,27 +39,6 @@
   sb.append("num_workers:");
   sb.append(this.num_workers);
   first=false;
-  if (!first)   sb.append(", ");
-  sb.append("num_cpu:");
-  sb.append(this.num_cpu);
-  first=false;
-  if (!first)   sb.append(", ");
-  sb.append("num_mem:");
-  sb.append(this.num_mem);
-  first=false;
-  if (!first)   sb.append(", ");
-  sb.append("num_disk:");
-  sb.append(this.num_disk);
-  first=false;
-  if (!first)   sb.append(", ");
-  sb.append("group:");
-  if (this.group == null) {
-    sb.append("null");
-  }
- else {
-    sb.append(this.group);
-  }
-  first=false;
   sb.append(")");
   return sb.toString();
 }

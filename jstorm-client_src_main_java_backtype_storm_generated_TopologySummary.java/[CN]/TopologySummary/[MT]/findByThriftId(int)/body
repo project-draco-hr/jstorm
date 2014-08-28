@@ -12,14 +12,6 @@ case 5:
 return NUM_TASKS;
 case 6:
 return NUM_WORKERS;
-case 7:
-return NUM_CPU;
-case 8:
-return NUM_MEM;
-case 9:
-return NUM_DISK;
-case 10:
-return GROUP;
 default :
 return null;
 }

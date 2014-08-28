@@ -20,24 +20,6 @@
   oprot.writeFieldBegin(NUM_USED_WORKERS_FIELD_DESC);
   oprot.writeI32(this.num_used_workers);
   oprot.writeFieldEnd();
-  oprot.writeFieldBegin(NUM_CPU_FIELD_DESC);
-  oprot.writeI32(this.num_cpu);
-  oprot.writeFieldEnd();
-  oprot.writeFieldBegin(NUM_USED_CPU_FIELD_DESC);
-  oprot.writeI32(this.num_used_cpu);
-  oprot.writeFieldEnd();
-  oprot.writeFieldBegin(NUM_MEM_FIELD_DESC);
-  oprot.writeI32(this.num_mem);
-  oprot.writeFieldEnd();
-  oprot.writeFieldBegin(NUM_USED_MEM_FIELD_DESC);
-  oprot.writeI32(this.num_used_mem);
-  oprot.writeFieldEnd();
-  oprot.writeFieldBegin(NUM_DISK_FIELD_DESC);
-  oprot.writeI32(this.num_disk);
-  oprot.writeFieldEnd();
-  oprot.writeFieldBegin(NUM_USED_DISK_FIELD_DESC);
-  oprot.writeI32(this.num_used_disk);
-  oprot.writeFieldEnd();
   oprot.writeFieldStop();
   oprot.writeStructEnd();
 }

@@ -1,0 +1,10 @@
+{
+  TaskSummary ret=new TaskSummary();
+  ret.set_task_id(taskId);
+  ret.set_component_id(component);
+  ret.set_host(host);
+  ret.set_port(resource.getPort());
+  ret.set_uptime_secs(uptime);
+  ret.set_errors(new ArrayList<ErrorInfo>());
+  return ret;
+}

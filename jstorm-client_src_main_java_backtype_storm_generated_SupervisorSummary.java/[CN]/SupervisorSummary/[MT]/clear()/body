@@ -7,16 +7,4 @@
   this.num_workers=0;
   set_num_used_workers_isSet(false);
   this.num_used_workers=0;
-  set_num_cpu_isSet(false);
-  this.num_cpu=0;
-  set_num_used_cpu_isSet(false);
-  this.num_used_cpu=0;
-  set_num_mem_isSet(false);
-  this.num_mem=0;
-  set_num_used_mem_isSet(false);
-  this.num_used_mem=0;
-  set_num_disk_isSet(false);
-  this.num_disk=0;
-  set_num_used_disk_isSet(false);
-  this.num_used_disk=0;
 }

@@ -18,29 +18,5 @@
     if (!(this_present_topologies && that_present_topologies))     return false;
     if (!this.topologies.equals(that.topologies))     return false;
   }
-  boolean this_present_groupToTopology=true && this.is_set_groupToTopology();
-  boolean that_present_groupToTopology=true && that.is_set_groupToTopology();
-  if (this_present_groupToTopology || that_present_groupToTopology) {
-    if (!(this_present_groupToTopology && that_present_groupToTopology))     return false;
-    if (!this.groupToTopology.equals(that.groupToTopology))     return false;
-  }
-  boolean this_present_groupToResource=true && this.is_set_groupToResource();
-  boolean that_present_groupToResource=true && that.is_set_groupToResource();
-  if (this_present_groupToResource || that_present_groupToResource) {
-    if (!(this_present_groupToResource && that_present_groupToResource))     return false;
-    if (!this.groupToResource.equals(that.groupToResource))     return false;
-  }
-  boolean this_present_groupToUsedResource=true && this.is_set_groupToUsedResource();
-  boolean that_present_groupToUsedResource=true && that.is_set_groupToUsedResource();
-  if (this_present_groupToUsedResource || that_present_groupToUsedResource) {
-    if (!(this_present_groupToUsedResource && that_present_groupToUsedResource))     return false;
-    if (!this.groupToUsedResource.equals(that.groupToUsedResource))     return false;
-  }
-  boolean this_present_isGroupModel=true;
-  boolean that_present_isGroupModel=true;
-  if (this_present_isGroupModel || that_present_isGroupModel) {
-    if (!(this_present_isGroupModel && that_present_isGroupModel))     return false;
-    if (this.isGroupModel != that.isGroupModel)     return false;
-  }
   return true;
 }

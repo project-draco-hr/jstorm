@@ -8,11 +8,4 @@
   this.num_tasks=0;
   set_num_workers_isSet(false);
   this.num_workers=0;
-  set_num_cpu_isSet(false);
-  this.num_cpu=0;
-  set_num_mem_isSet(false);
-  this.num_mem=0;
-  set_num_disk_isSet(false);
-  this.num_disk=0;
-  this.group=null;
 }

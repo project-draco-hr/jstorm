@@ -1,4 +1,0 @@
-String group
-Map<ThriftResourceType,Integer> topologyResource
-Map<ThriftResourceType,Integer> usedResource
-String topologyName

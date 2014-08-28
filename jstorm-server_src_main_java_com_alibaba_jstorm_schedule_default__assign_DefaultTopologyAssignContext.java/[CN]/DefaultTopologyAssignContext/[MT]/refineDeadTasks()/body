@@ -7,9 +7,9 @@
     if (unstoppedTasks.contains(task)) {
       continue;
     }
-    for (    List<Integer> workerTasks : oldWorkerTasks.values()) {
-      if (workerTasks.contains(task)) {
-        refineDeadTasks.addAll(workerTasks);
+    for (    ResourceWorkerSlot worker : oldWorkers) {
+      if (worker.getTasks().contains(task)) {
+        refineDeadTasks.addAll(worker.getTasks());
       }
     }
   }

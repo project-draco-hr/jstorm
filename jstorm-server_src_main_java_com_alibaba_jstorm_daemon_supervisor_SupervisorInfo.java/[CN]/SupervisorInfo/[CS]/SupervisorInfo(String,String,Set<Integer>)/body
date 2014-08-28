@@ -1,0 +1,5 @@
+{
+  this.hostName=hostName;
+  this.supervisorId=supervisorId;
+  this.workerPorts=workerPorts;
+}

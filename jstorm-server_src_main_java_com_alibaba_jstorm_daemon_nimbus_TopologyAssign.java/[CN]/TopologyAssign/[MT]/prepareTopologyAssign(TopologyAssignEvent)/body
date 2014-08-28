@@ -1,12 +1,13 @@
 {
   TopologyAssignContext ret=new TopologyAssignContext();
   String topologyId=event.getTopologyId();
-  Map<Object,Object> conf=nimbusData.getConf();
-  StormTopology rawTopology=StormConfig.read_nimbus_topology_code(conf,topologyId);
+  Map<Object,Object> nimbusConf=nimbusData.getConf();
+  Map<Object,Object> topologyConf=StormConfig.read_nimbus_topology_conf(nimbusConf,topologyId);
+  StormTopology rawTopology=StormConfig.read_nimbus_topology_code(nimbusConf,topologyId);
   ret.setRawTopology(rawTopology);
   Map stormConf=new HashMap();
-  stormConf.putAll(conf);
-  stormConf.putAll(StormConfig.read_nimbus_topology_conf(conf,topologyId));
+  stormConf.putAll(nimbusConf);
+  stormConf.putAll(topologyConf);
   ret.setStormConf(stormConf);
   StormClusterState stormClusterState=nimbusData.getStormClusterState();
   Map<String,SupervisorInfo> supInfos=Cluster.allSupervisorInfo(stormClusterState,null);
@@ -45,7 +46,7 @@
       }
     }
  catch (    Exception e) {
-      LOG.warn("Failed to get old Assignment,",e);
+      LOG.warn("Fail to get old assignment",e);
     }
   }
  else {

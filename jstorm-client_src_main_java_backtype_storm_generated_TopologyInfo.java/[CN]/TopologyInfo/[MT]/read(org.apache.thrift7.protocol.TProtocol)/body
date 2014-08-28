@@ -35,13 +35,13 @@ break;
 case 4:
 if (field.type == org.apache.thrift7.protocol.TType.LIST) {
 {
-org.apache.thrift7.protocol.TList _list224=iprot.readListBegin();
-this.tasks=new ArrayList<TaskSummary>(_list224.size);
-for (int _i225=0; _i225 < _list224.size; ++_i225) {
-TaskSummary _elem226;
-_elem226=new TaskSummary();
-_elem226.read(iprot);
-this.tasks.add(_elem226);
+org.apache.thrift7.protocol.TList _list193=iprot.readListBegin();
+this.workers=new ArrayList<WorkerSummary>(_list193.size);
+for (int _i194=0; _i194 < _list193.size; ++_i194) {
+WorkerSummary _elem195;
+_elem195=new WorkerSummary();
+_elem195.read(iprot);
+this.workers.add(_elem195);
 }
 iprot.readListEnd();
 }
@@ -53,6 +53,24 @@ break;
 case 5:
 if (field.type == org.apache.thrift7.protocol.TType.STRING) {
 this.status=iprot.readString();
+}
+ else {
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+case 6:
+if (field.type == org.apache.thrift7.protocol.TType.LIST) {
+{
+org.apache.thrift7.protocol.TList _list196=iprot.readListBegin();
+this.tasks=new ArrayList<TaskSummary>(_list196.size);
+for (int _i197=0; _i197 < _list196.size; ++_i197) {
+TaskSummary _elem198;
+_elem198=new TaskSummary();
+_elem198.read(iprot);
+this.tasks.add(_elem198);
+}
+iprot.readListEnd();
+}
 }
  else {
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);

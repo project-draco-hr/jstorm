@@ -18,24 +18,6 @@
     if (!(this_present_host && that_present_host))     return false;
     if (!this.host.equals(that.host))     return false;
   }
-  boolean this_present_cpu=true;
-  boolean that_present_cpu=true;
-  if (this_present_cpu || that_present_cpu) {
-    if (!(this_present_cpu && that_present_cpu))     return false;
-    if (this.cpu != that.cpu)     return false;
-  }
-  boolean this_present_mem=true;
-  boolean that_present_mem=true;
-  if (this_present_mem || that_present_mem) {
-    if (!(this_present_mem && that_present_mem))     return false;
-    if (this.mem != that.mem)     return false;
-  }
-  boolean this_present_disk=true && this.is_set_disk();
-  boolean that_present_disk=true && that.is_set_disk();
-  if (this_present_disk || that_present_disk) {
-    if (!(this_present_disk && that_present_disk))     return false;
-    if (!this.disk.equals(that.disk))     return false;
-  }
   boolean this_present_port=true;
   boolean that_present_port=true;
   if (this_present_port || that_present_port) {

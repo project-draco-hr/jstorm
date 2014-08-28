@@ -1,6 +1,5 @@
 {
   StormTopology ret=topology.deepCopy();
-  boolean isSingleNode=ConfigExtension.isUseSingleNode(stormConf);
   Map<String,Object> components=ThriftTopologyUtils.getComponents(ret);
   for (  Entry<String,Object> entry : components.entrySet()) {
     Object component=entry.getValue();
@@ -24,24 +23,6 @@
     componentMap.put(Config.TOPOLOGY_TASKS,taskNum);
     common.set_parallelism_hint(taskNum);
     LOG.info("Set " + componentName + " parallelism "+ taskNum);
-    normalizeComponentResouce(componentMap,componentName);
-    boolean allocDisk=ConfigExtension.isTaskAllocDisk(componentMap);
-    if (allocDisk == true) {
-      LOG.info("Topology:" + stormConf.get(Config.TOPOLOGY_NAME) + " alloc disk slot");
-      ConfigExtension.setTaskOnDifferentNode(componentMap,true);
-      ConfigExtension.setUseOldAssignment(componentMap,true);
-    }
-    if (isSingleNode == true) {
-      boolean isTaskOnDiff=ConfigExtension.isTaskOnDifferentNode(componentMap);
-      if (isTaskOnDiff == true && taskNum > 1) {
-        StringBuilder sb=new StringBuilder();
-        sb.append(componentName);
-        sb.append(" has set TASK_ON_DIFFERENT_NODE ");
-        sb.append(" which is conflict with global setting USE_SINGLE_NODE ");
-        LOG.info(sb.toString());
-        throw new FailedAssignTopologyException(sb.toString());
-      }
-    }
     common.set_json_conf(JStormUtils.to_json(componentMap));
   }
   return ret;

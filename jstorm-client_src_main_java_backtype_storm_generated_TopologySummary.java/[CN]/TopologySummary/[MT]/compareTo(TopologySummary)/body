@@ -64,45 +64,5 @@
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_num_cpu()).compareTo(typedOther.is_set_num_cpu());
-  if (lastComparison != 0) {
-    return lastComparison;
-  }
-  if (is_set_num_cpu()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.num_cpu,typedOther.num_cpu);
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-  }
-  lastComparison=Boolean.valueOf(is_set_num_mem()).compareTo(typedOther.is_set_num_mem());
-  if (lastComparison != 0) {
-    return lastComparison;
-  }
-  if (is_set_num_mem()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.num_mem,typedOther.num_mem);
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-  }
-  lastComparison=Boolean.valueOf(is_set_num_disk()).compareTo(typedOther.is_set_num_disk());
-  if (lastComparison != 0) {
-    return lastComparison;
-  }
-  if (is_set_num_disk()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.num_disk,typedOther.num_disk);
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-  }
-  lastComparison=Boolean.valueOf(is_set_group()).compareTo(typedOther.is_set_group());
-  if (lastComparison != 0) {
-    return lastComparison;
-  }
-  if (is_set_group()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.group,typedOther.group);
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-  }
   return 0;
 }

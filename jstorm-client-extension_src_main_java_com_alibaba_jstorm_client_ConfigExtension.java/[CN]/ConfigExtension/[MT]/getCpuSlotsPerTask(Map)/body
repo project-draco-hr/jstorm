@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(CPU_SLOTS_PER_TASK),1);
-}

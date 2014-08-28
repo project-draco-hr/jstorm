@@ -1,0 +1,17 @@
+{
+  super(worker.getNodeId(),worker.getPort());
+  this.hostname=worker.getHostName();
+  this.tasks=new HashSet<Integer>();
+  this.cpu=worker.getCpu();
+  this.memSize=worker.getMem();
+  this.jvm=worker.getJvm();
+  for (  Entry<String,Integer> entry : worker.getComponentToNum().entrySet()) {
+    List<Integer> tasks=componentToTask.get(entry.getKey());
+    if (tasks == null || tasks.size() == 0)     continue;
+    int num=Math.min(tasks.size(),entry.getValue().intValue());
+    List<Integer> cTasks=new ArrayList<Integer>();
+    cTasks.addAll(tasks.subList(0,num));
+    this.tasks.addAll(cTasks);
+    tasks.removeAll(cTasks);
+  }
+}

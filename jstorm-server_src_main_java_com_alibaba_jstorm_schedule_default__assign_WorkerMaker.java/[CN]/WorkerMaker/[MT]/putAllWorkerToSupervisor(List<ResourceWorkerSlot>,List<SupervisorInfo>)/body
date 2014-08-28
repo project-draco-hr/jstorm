@@ -1,0 +1,20 @@
+{
+  for (  ResourceWorkerSlot worker : result) {
+    if (worker.getHostname() != null) {
+      for (      SupervisorInfo supervisor : supervisors) {
+        if (supervisor.getHostName().equals(worker.getHostname()) && supervisor.getWorkerPorts().size() > 0) {
+          this.putWorkerToSupervisor(supervisor,worker);
+          break;
+        }
+      }
+    }
+  }
+  supervisors=this.getCanUseSupervisors(supervisors);
+  Collections.sort(supervisors,new Comparator<SupervisorInfo>(){
+    @Override public int compare(    SupervisorInfo o1,    SupervisorInfo o2){
+      return -NumberUtils.compare(o1.getWorkerPorts().size(),o2.getWorkerPorts().size());
+    }
+  }
+);
+  this.putWorkerToSupervisor(result,supervisors);
+}

@@ -1,3 +1,0 @@
-{
-  conf.put(USER_PASSWORD,userPassword);
-}

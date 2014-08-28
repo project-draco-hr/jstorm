@@ -8,15 +8,6 @@
   if (!is_set_host()) {
     throw new org.apache.thrift7.protocol.TProtocolException("Required field 'host' is unset! Struct:" + toString());
   }
-  if (!is_set_cpu()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'cpu' is unset! Struct:" + toString());
-  }
-  if (!is_set_mem()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'mem' is unset! Struct:" + toString());
-  }
-  if (!is_set_disk()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'disk' is unset! Struct:" + toString());
-  }
   if (!is_set_port()) {
     throw new org.apache.thrift7.protocol.TProtocolException("Required field 'port' is unset! Struct:" + toString());
   }

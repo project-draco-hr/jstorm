@@ -1,0 +1,8 @@
+{
+  if (block == true) {
+    publish(obj);
+  }
+ else {
+    tryPublish(obj);
+  }
+}

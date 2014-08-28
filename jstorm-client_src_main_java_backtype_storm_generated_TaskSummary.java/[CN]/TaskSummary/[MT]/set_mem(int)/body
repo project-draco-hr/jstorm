@@ -1,4 +1,0 @@
-{
-  this.mem=mem;
-  set_mem_isSet(true);
-}

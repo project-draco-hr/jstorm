@@ -1,17 +1,17 @@
 {
   Set<Integer> ret=new HashSet<Integer>();
-  Map<Integer,ResourceAssignment> oldAssignment=existAssignment.getTaskToResource();
+  Set<ResourceWorkerSlot> oldWorkers=existAssignment.getWorkers();
   Set<String> aliveSupervisors=supInfos.keySet();
-  for (  Entry<Integer,ResourceAssignment> entry : oldAssignment.entrySet()) {
-    Integer taskId=entry.getKey();
-    ResourceAssignment resource=entry.getValue();
-    if (aliveTasks.contains(taskId) == false) {
-      continue;
-    }
-    String oldTaskSupervisorId=resource.getSupervisorId();
-    if (aliveSupervisors.contains(oldTaskSupervisorId) == false) {
-      ret.add(taskId);
-      continue;
+  for (  ResourceWorkerSlot worker : oldWorkers) {
+    for (    Integer taskId : worker.getTasks()) {
+      if (aliveTasks.contains(taskId) == false) {
+        continue;
+      }
+      String oldTaskSupervisorId=worker.getNodeId();
+      if (aliveSupervisors.contains(oldTaskSupervisorId) == false) {
+        ret.add(taskId);
+        continue;
+      }
     }
   }
   return ret;

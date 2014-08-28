@@ -1,0 +1,8 @@
+{
+  Map<String,SupervisorInfo> supervisors=context.getCluster();
+  int slotNum=0;
+  for (  Entry<String,SupervisorInfo> entry : supervisors.entrySet()) {
+    slotNum=slotNum + entry.getValue().getWorkerPorts().size();
+  }
+  return Math.min(slotNum,workersNum);
+}

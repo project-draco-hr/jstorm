@@ -1,6 +1,27 @@
 {
-  if (hb instanceof SupervisorInfo && ((SupervisorInfo)hb).timeSecs.equals(timeSecs) && ((SupervisorInfo)hb).hostName.equals(hostName)&& ((SupervisorInfo)hb).cpuPool.equals(cpuPool)&& ((SupervisorInfo)hb).memPool.equals(memPool)&& ((SupervisorInfo)hb).diskPool.equals(diskPool)&& ((SupervisorInfo)hb).netPool.equals(netPool)&& ((SupervisorInfo)hb).uptimeSecs.equals(uptimeSecs)) {
-    return true;
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  SupervisorInfo other=(SupervisorInfo)obj;
+  if (hostName == null) {
+    if (other.hostName != null)     return false;
   }
-  return false;
+ else   if (!hostName.equals(other.hostName))   return false;
+  if (supervisorId == null) {
+    if (other.supervisorId != null)     return false;
+  }
+ else   if (!supervisorId.equals(other.supervisorId))   return false;
+  if (timeSecs == null) {
+    if (other.timeSecs != null)     return false;
+  }
+ else   if (!timeSecs.equals(other.timeSecs))   return false;
+  if (uptimeSecs == null) {
+    if (other.uptimeSecs != null)     return false;
+  }
+ else   if (!uptimeSecs.equals(other.uptimeSecs))   return false;
+  if (workerPorts == null) {
+    if (other.workerPorts != null)     return false;
+  }
+ else   if (!workerPorts.equals(other.workerPorts))   return false;
+  return true;
 }

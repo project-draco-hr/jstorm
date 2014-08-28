@@ -1,10 +1,7 @@
 {
-  Set<WorkerSlot> deadSupervisorWorkerSlots=new HashSet<WorkerSlot>();
   for (  Integer task : unstoppedTaskIds) {
-    ResourceAssignment resourceAssignment=oldAssignment.getTaskToResource().get(task);
-    unstoppedAssignments.put(task,resourceAssignment);
-    WorkerSlot workerSlot=new WorkerSlot(resourceAssignment.getSupervisorId(),resourceAssignment.getPort());
-    deadSupervisorWorkerSlots.add(workerSlot);
+    ResourceWorkerSlot worker=oldAssignment.getWorkerByTaskId(task);
+    unstoppedWorkers.add(worker);
   }
-  return deadSupervisorWorkerSlots.size();
+  return unstoppedWorkers.size();
 }

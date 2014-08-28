@@ -9,15 +9,6 @@
   boolean present_host=true && (is_set_host());
   builder.append(present_host);
   if (present_host)   builder.append(host);
-  boolean present_cpu=true;
-  builder.append(present_cpu);
-  if (present_cpu)   builder.append(cpu);
-  boolean present_mem=true;
-  builder.append(present_mem);
-  if (present_mem)   builder.append(mem);
-  boolean present_disk=true && (is_set_disk());
-  builder.append(present_disk);
-  if (present_disk)   builder.append(disk);
   boolean present_port=true;
   builder.append(present_port);
   if (present_port)   builder.append(port);

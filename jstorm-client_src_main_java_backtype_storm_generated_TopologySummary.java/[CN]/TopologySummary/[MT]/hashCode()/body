@@ -18,17 +18,5 @@
   boolean present_num_workers=true;
   builder.append(present_num_workers);
   if (present_num_workers)   builder.append(num_workers);
-  boolean present_num_cpu=true;
-  builder.append(present_num_cpu);
-  if (present_num_cpu)   builder.append(num_cpu);
-  boolean present_num_mem=true;
-  builder.append(present_num_mem);
-  if (present_num_mem)   builder.append(num_mem);
-  boolean present_num_disk=true;
-  builder.append(present_num_disk);
-  if (present_num_disk)   builder.append(num_disk);
-  boolean present_group=true && (is_set_group());
-  builder.append(present_group);
-  if (present_group)   builder.append(group);
   return builder.toHashCode();
 }

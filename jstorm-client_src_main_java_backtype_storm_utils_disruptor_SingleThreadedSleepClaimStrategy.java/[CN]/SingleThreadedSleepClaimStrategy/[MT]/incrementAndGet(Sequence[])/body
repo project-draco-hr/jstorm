@@ -1,0 +1,6 @@
+{
+  long nextSequence=claimSequence.get() + 1L;
+  claimSequence.set(nextSequence);
+  waitForFreeSlotAt(nextSequence,dependentSequences);
+  return nextSequence;
+}

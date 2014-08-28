@@ -1,6 +1,0 @@
-Assignment assignment
-String topologyId
-String topologyName
-String status
-int uptime_secs
-String group

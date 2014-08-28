@@ -9,10 +9,12 @@ case NAME:
   return is_set_name();
 case UPTIME_SECS:
 return is_set_uptime_secs();
-case TASKS:
-return is_set_tasks();
+case WORKERS:
+return is_set_workers();
 case STATUS:
 return is_set_status();
+case TASKS:
+return is_set_tasks();
 }
 throw new IllegalStateException();
 }

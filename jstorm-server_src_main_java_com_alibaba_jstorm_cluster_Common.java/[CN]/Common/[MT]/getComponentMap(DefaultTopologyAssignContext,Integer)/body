@@ -1,0 +1,9 @@
+{
+  String componentName=context.getTaskToComponent().get(task);
+  ComponentCommon componentCommon=ThriftTopologyUtils.getComponentCommon(context.getSysTopology(),componentName);
+  Map componentMap=(Map)JStormUtils.from_json(componentCommon.get_json_conf());
+  if (componentMap == null) {
+    componentMap=Maps.newHashMap();
+  }
+  return componentMap;
+}

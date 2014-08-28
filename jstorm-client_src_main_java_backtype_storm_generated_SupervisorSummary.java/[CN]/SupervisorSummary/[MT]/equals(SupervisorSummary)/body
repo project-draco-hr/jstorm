@@ -30,41 +30,5 @@
     if (!(this_present_num_used_workers && that_present_num_used_workers))     return false;
     if (this.num_used_workers != that.num_used_workers)     return false;
   }
-  boolean this_present_num_cpu=true;
-  boolean that_present_num_cpu=true;
-  if (this_present_num_cpu || that_present_num_cpu) {
-    if (!(this_present_num_cpu && that_present_num_cpu))     return false;
-    if (this.num_cpu != that.num_cpu)     return false;
-  }
-  boolean this_present_num_used_cpu=true;
-  boolean that_present_num_used_cpu=true;
-  if (this_present_num_used_cpu || that_present_num_used_cpu) {
-    if (!(this_present_num_used_cpu && that_present_num_used_cpu))     return false;
-    if (this.num_used_cpu != that.num_used_cpu)     return false;
-  }
-  boolean this_present_num_mem=true;
-  boolean that_present_num_mem=true;
-  if (this_present_num_mem || that_present_num_mem) {
-    if (!(this_present_num_mem && that_present_num_mem))     return false;
-    if (this.num_mem != that.num_mem)     return false;
-  }
-  boolean this_present_num_used_mem=true;
-  boolean that_present_num_used_mem=true;
-  if (this_present_num_used_mem || that_present_num_used_mem) {
-    if (!(this_present_num_used_mem && that_present_num_used_mem))     return false;
-    if (this.num_used_mem != that.num_used_mem)     return false;
-  }
-  boolean this_present_num_disk=true;
-  boolean that_present_num_disk=true;
-  if (this_present_num_disk || that_present_num_disk) {
-    if (!(this_present_num_disk && that_present_num_disk))     return false;
-    if (this.num_disk != that.num_disk)     return false;
-  }
-  boolean this_present_num_used_disk=true;
-  boolean that_present_num_used_disk=true;
-  if (this_present_num_used_disk || that_present_num_used_disk) {
-    if (!(this_present_num_used_disk && that_present_num_used_disk))     return false;
-    if (this.num_used_disk != that.num_used_disk)     return false;
-  }
   return true;
 }

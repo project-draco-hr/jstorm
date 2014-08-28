@@ -1,0 +1,6 @@
+{
+  int result=0;
+  Map<String,Integer> componentNum=workerToComponentNum.get(worker);
+  if (componentNum != null && componentNum.get(name) != null)   result=componentNum.get(name);
+  return result;
+}

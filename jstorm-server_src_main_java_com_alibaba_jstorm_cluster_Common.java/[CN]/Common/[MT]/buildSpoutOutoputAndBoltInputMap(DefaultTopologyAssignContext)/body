@@ -1,0 +1,29 @@
+{
+  Set<String> bolts=context.getRawTopology().get_bolts().keySet();
+  Set<String> spouts=context.getRawTopology().get_spouts().keySet();
+  Map<String,Set<String>> relationship=new HashMap<String,Set<String>>();
+  for (  Entry<String,Bolt> entry : context.getRawTopology().get_bolts().entrySet()) {
+    Map<GlobalStreamId,Grouping> inputs=entry.getValue().get_common().get_inputs();
+    Set<String> input=new HashSet<String>();
+    relationship.put(entry.getKey(),input);
+    for (    Entry<GlobalStreamId,Grouping> inEntry : inputs.entrySet()) {
+      String component=inEntry.getKey().get_componentId();
+      input.add(component);
+      if (!bolts.contains(component)) {
+        Set<String> spoutOutput=relationship.get(component);
+        if (spoutOutput == null) {
+          spoutOutput=new HashSet<String>();
+          relationship.put(component,spoutOutput);
+        }
+        spoutOutput.add(entry.getKey());
+      }
+    }
+  }
+  for (  String spout : spouts) {
+    if (relationship.get(spout) == null)     relationship.put(spout,new HashSet<String>());
+  }
+  for (  String bolt : bolts) {
+    if (relationship.get(bolt) == null)     relationship.put(bolt,new HashSet<String>());
+  }
+  return relationship;
+}

@@ -1,6 +1,25 @@
 {
-  if (localAssignment instanceof LocalAssignment && ((LocalAssignment)localAssignment).getTopologyId().equals(topologyId) && ((LocalAssignment)localAssignment).getTaskIds().equals(taskIds)) {
-    return true;
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  LocalAssignment other=(LocalAssignment)obj;
+  if (cpu != other.cpu)   return false;
+  if (jvm == null) {
+    if (other.jvm != null)     return false;
   }
-  return false;
+ else   if (!jvm.equals(other.jvm))   return false;
+  if (mem != other.mem)   return false;
+  if (taskIds == null) {
+    if (other.taskIds != null)     return false;
+  }
+ else   if (!taskIds.equals(other.taskIds))   return false;
+  if (topologyId == null) {
+    if (other.topologyId != null)     return false;
+  }
+ else   if (!topologyId.equals(other.topologyId))   return false;
+  if (topologyName == null) {
+    if (other.topologyName != null)     return false;
+  }
+ else   if (!topologyName.equals(other.topologyName))   return false;
+  return true;
 }

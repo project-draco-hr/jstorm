@@ -1,0 +1,28 @@
+{
+  Set<Integer> assigned=new HashSet<Integer>();
+  Set<ResourceWorkerSlot> users=new HashSet<ResourceWorkerSlot>();
+  if (workers == null)   return;
+  for (  ResourceWorkerSlot worker : workers) {
+    boolean right=true;
+    Set<Integer> tasks=worker.getTasks();
+    if (tasks == null)     continue;
+    for (    Integer task : tasks) {
+      if (!needAssign.contains(task) || assigned.contains(task)) {
+        right=false;
+        break;
+      }
+    }
+    if (right) {
+      assigned.addAll(tasks);
+      users.add(worker);
+    }
+  }
+  if (users.size() + result.size() > workersNum) {
+    return;
+  }
+  if (users.size() + result.size() == workersNum && assigned.size() != needAssign.size()) {
+    return;
+  }
+  result.addAll(users);
+  needAssign.removeAll(assigned);
+}

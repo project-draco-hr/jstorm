@@ -15,8 +15,14 @@
       throw new TException("Failed to get StormBase from ZK of " + topologyId);
     }
     Map<Integer,String> taskInfo=Cluster.topology_task_info(stormClusterState,topologyId);
-    List<TaskSummary> tasks=NimbusUtils.mkTaskSummary(stormClusterState,assignment,taskInfo,topologyId);
-    topologyInfo.set_tasks(tasks);
+    Map<Integer,TaskSummary> tasks=NimbusUtils.mkTaskSummary(stormClusterState,assignment,taskInfo,topologyId);
+    List<TaskSummary> taskSumms=new ArrayList<TaskSummary>();
+    for (    Entry<Integer,TaskSummary> entry : tasks.entrySet()) {
+      taskSumms.add(entry.getValue());
+    }
+    topologyInfo.set_tasks(taskSumms);
+    List<WorkerSummary> workers=NimbusUtils.mkWorkerSummary(topologyId,assignment,tasks);
+    topologyInfo.set_workers(workers);
     return topologyInfo;
   }
  catch (  TException e) {

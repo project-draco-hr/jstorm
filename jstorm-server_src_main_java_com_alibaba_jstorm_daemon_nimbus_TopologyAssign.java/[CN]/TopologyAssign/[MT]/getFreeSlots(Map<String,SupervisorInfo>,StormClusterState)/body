@@ -3,16 +3,13 @@
   for (  Entry<String,Assignment> entry : assignments.entrySet()) {
     String topologyId=entry.getKey();
     Assignment assignment=entry.getValue();
-    Map<Integer,ResourceAssignment> taskAssignments=assignment.getTaskToResource();
-    for (    ResourceAssignment resource : taskAssignments.values()) {
-      SupervisorInfo supervisorInfo=supervisorInfos.get(resource.getSupervisorId());
+    Set<ResourceWorkerSlot> workers=assignment.getWorkers();
+    for (    ResourceWorkerSlot worker : workers) {
+      SupervisorInfo supervisorInfo=supervisorInfos.get(worker.getNodeId());
       if (supervisorInfo == null) {
         continue;
       }
-      supervisorInfo.getCpuPool().alloc(resource.getCpuSlotNum(),null);
-      supervisorInfo.getMemPool().alloc(resource.getMemSlotNum(),null);
-      supervisorInfo.getDiskPool().alloc(resource.getDiskSlot(),null);
-      supervisorInfo.getNetPool().alloc(resource.getPort(),null);
+      supervisorInfo.getWorkerPorts().remove(worker.getPort());
     }
   }
 }

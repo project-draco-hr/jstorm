@@ -1,0 +1,3 @@
+SupervisorInfo supervisorInfo
+String supervisorId
+Map<String,Integer> supervisorToUsedSlotNum

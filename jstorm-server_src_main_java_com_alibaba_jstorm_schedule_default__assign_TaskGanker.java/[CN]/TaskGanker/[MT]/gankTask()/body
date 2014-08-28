@@ -1,0 +1,18 @@
+{
+  if (tasks.size() == 0)   return assignments;
+  Set<Integer> hadGanked=this.gankOnDifferentNodeTask();
+  tasks.removeAll(hadGanked);
+  Set<Integer> ackers=new HashSet<Integer>();
+  for (  Integer task : tasks) {
+    String name=context.getTaskToComponent().get(task);
+    if (name.equals(TaskGanker.ACKER_NAME)) {
+      ackers.add(task);
+      continue;
+    }
+    this.beginGank(name,task);
+  }
+  for (  Integer task : ackers) {
+    this.beginGank(TaskGanker.ACKER_NAME,task);
+  }
+  return assignments;
+}

@@ -1,0 +1,6 @@
+{
+  this.workers=workers;
+  this.nodeHost=nodeHost;
+  this.taskStartTimeSecs=taskStartTimeSecs;
+  this.masterCodeDir=masterCodeDir;
+}

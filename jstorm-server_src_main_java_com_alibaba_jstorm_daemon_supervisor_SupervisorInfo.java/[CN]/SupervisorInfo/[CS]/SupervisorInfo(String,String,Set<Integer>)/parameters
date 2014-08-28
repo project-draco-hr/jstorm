@@ -1,0 +1,3 @@
+String hostName
+String supervisorId
+Set<Integer> workerPorts

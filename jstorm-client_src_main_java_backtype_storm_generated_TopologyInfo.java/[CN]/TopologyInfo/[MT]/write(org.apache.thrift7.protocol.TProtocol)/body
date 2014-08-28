@@ -14,12 +14,12 @@
   oprot.writeFieldBegin(UPTIME_SECS_FIELD_DESC);
   oprot.writeI32(this.uptime_secs);
   oprot.writeFieldEnd();
-  if (this.tasks != null) {
-    oprot.writeFieldBegin(TASKS_FIELD_DESC);
+  if (this.workers != null) {
+    oprot.writeFieldBegin(WORKERS_FIELD_DESC);
 {
-      oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.tasks.size()));
-      for (      TaskSummary _iter227 : this.tasks) {
-        _iter227.write(oprot);
+      oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.workers.size()));
+      for (      WorkerSummary _iter199 : this.workers) {
+        _iter199.write(oprot);
       }
       oprot.writeListEnd();
     }
@@ -28,6 +28,17 @@
   if (this.status != null) {
     oprot.writeFieldBegin(STATUS_FIELD_DESC);
     oprot.writeString(this.status);
+    oprot.writeFieldEnd();
+  }
+  if (this.tasks != null) {
+    oprot.writeFieldBegin(TASKS_FIELD_DESC);
+{
+      oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.tasks.size()));
+      for (      TaskSummary _iter200 : this.tasks) {
+        _iter200.write(oprot);
+      }
+      oprot.writeListEnd();
+    }
     oprot.writeFieldEnd();
   }
   oprot.writeFieldStop();

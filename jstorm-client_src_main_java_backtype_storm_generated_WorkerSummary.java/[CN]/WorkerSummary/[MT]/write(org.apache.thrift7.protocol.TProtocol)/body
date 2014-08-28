@@ -13,8 +13,8 @@
     oprot.writeFieldBegin(TASKS_FIELD_DESC);
 {
       oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.tasks.size()));
-      for (      TaskSummary _iter231 : this.tasks) {
-        _iter231.write(oprot);
+      for (      TaskSummary _iter192 : this.tasks) {
+        _iter192.write(oprot);
       }
       oprot.writeListEnd();
     }

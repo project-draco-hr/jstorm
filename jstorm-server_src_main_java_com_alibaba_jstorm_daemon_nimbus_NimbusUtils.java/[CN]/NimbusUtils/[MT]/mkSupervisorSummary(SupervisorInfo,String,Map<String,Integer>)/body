@@ -1,0 +1,5 @@
+{
+  Integer usedNum=supervisorToUsedSlotNum.get(supervisorId);
+  SupervisorSummary summary=new SupervisorSummary(supervisorInfo.getHostName(),supervisorId,supervisorInfo.getUptimeSecs(),supervisorInfo.getWorkerPorts().size(),usedNum == null ? 0 : usedNum);
+  return summary;
+}

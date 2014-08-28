@@ -1,0 +1,6 @@
+{
+  boolean isSuccess=queue.offer(obj);
+  if (isSuccess == false) {
+    throw InsufficientCapacityException.INSTANCE;
+  }
+}

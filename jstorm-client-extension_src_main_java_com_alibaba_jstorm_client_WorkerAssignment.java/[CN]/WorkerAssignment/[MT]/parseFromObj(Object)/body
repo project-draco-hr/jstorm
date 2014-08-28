@@ -1,0 +1,35 @@
+{
+  if (obj == null) {
+    return null;
+  }
+  if (obj instanceof List<?> == false) {
+    return null;
+  }
+  try {
+    List list=(List)obj;
+    if (list.size() < 6) {
+      return null;
+    }
+    String supervisorId=getStringFromJson((String)list.get(0));
+    String hostname=getStringFromJson((String)list.get(1));
+    int port=Integer.parseInt(((String)list.get(2)));
+    String jvm=getStringFromJson((String)list.get(3));
+    long mem=Long.parseLong((String)list.get(4));
+    int cpu=Integer.parseInt(((String)list.get(5)));
+    Map<String,String> componentToNum=(Map<String,String>)list.get(6);
+    WorkerAssignment ret=new WorkerAssignment(supervisorId,port);
+    ret.hostName=hostname;
+    ret.setNodeId(supervisorId);
+    ret.setPort(port);
+    ret.setJvm(jvm);
+    ret.setMem(mem);
+    ret.setCpu(cpu);
+    for (    Entry<String,String> entry : componentToNum.entrySet()) {
+      ret.addComponent(entry.getKey(),Integer.valueOf(entry.getValue()));
+    }
+    return ret;
+  }
+ catch (  Exception e) {
+    return null;
+  }
+}

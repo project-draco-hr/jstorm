@@ -1,5 +1,0 @@
-{
-  int slotNum=getMemSlotNum(conf);
-  SharedResourcePool ret=new SharedResourcePool(ResourceType.MEM,slotNum);
-  return ret;
-}

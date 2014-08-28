@@ -1,5 +1,0 @@
-TopologyAssignContext context
-NimbusData nimbusData
-String topologyId
-Assignment existingAssignment
-Map<Integer,ResourceAssignment> taskWorkerSlot

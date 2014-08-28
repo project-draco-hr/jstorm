@@ -1,0 +1,5 @@
+{
+  final long nextSequence=claimSequence.incrementAndGet();
+  waitForFreeSlotAt(nextSequence,dependentSequences,minGatingSequenceThreadLocal.get());
+  return nextSequence;
+}

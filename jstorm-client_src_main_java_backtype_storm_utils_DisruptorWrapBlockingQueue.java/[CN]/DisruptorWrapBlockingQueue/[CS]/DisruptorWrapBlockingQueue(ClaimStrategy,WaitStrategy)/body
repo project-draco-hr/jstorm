@@ -1,0 +1,4 @@
+{
+  queue=new LinkedBlockingDeque<Object>(QUEUE_CAPACITY);
+  LOG.info("Use LinkedBlockingDeque, capacity:" + QUEUE_CAPACITY);
+}

@@ -2,7 +2,7 @@
   LOG.info("Starting inprocess zookeeper at port " + port + " and dir "+ localdir);
   File localfile=new File(localdir);
   ZooKeeperServer zk=new ZooKeeperServer(localfile,localfile,2000);
-  NIOServerCnxn.Factory factory=new NIOServerCnxn.Factory(new InetSocketAddress(port));
+  Factory factory=new Factory(new InetSocketAddress(port),0);
   factory.startup(zk);
   return factory;
 }

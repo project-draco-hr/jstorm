@@ -7,9 +7,11 @@ case 2:
 case 3:
 return UPTIME_SECS;
 case 4:
-return TASKS;
+return WORKERS;
 case 5:
 return STATUS;
+case 6:
+return TASKS;
 default :
 return null;
 }

@@ -15,9 +15,9 @@
     if (other.taskStartTimeSecs != null)     return false;
   }
  else   if (!taskStartTimeSecs.equals(other.taskStartTimeSecs))   return false;
-  if (taskToResource == null) {
-    if (other.taskToResource != null)     return false;
+  if (workers == null) {
+    if (other.workers != null)     return false;
   }
- else   if (!taskToResource.equals(other.taskToResource))   return false;
+ else   if (!workers.equals(other.workers))   return false;
   return true;
 }

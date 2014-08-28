@@ -1,0 +1,6 @@
+{
+  for (  ResourceWorkerSlot worker : workers) {
+    if (worker.getNodeId().equals(supervisorId) && worker.getPort() == port)     return worker.getTasks();
+  }
+  return new HashSet<Integer>();
+}

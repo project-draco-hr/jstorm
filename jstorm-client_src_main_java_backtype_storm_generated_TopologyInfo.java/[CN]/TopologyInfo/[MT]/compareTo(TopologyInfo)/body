@@ -34,12 +34,12 @@
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_tasks()).compareTo(typedOther.is_set_tasks());
+  lastComparison=Boolean.valueOf(is_set_workers()).compareTo(typedOther.is_set_workers());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_tasks()) {
-    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.tasks,typedOther.tasks);
+  if (is_set_workers()) {
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.workers,typedOther.workers);
     if (lastComparison != 0) {
       return lastComparison;
     }
@@ -50,6 +50,16 @@
   }
   if (is_set_status()) {
     lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.status,typedOther.status);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_tasks()).compareTo(typedOther.is_set_tasks());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_tasks()) {
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.tasks,typedOther.tasks);
     if (lastComparison != 0) {
       return lastComparison;
     }

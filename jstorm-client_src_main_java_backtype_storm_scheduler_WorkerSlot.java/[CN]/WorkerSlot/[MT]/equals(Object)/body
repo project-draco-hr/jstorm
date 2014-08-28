@@ -1,4 +1,12 @@
 {
-  WorkerSlot other=(WorkerSlot)o;
-  return this.port == other.port && this.nodeId.equals(other.nodeId);
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  WorkerSlot other=(WorkerSlot)obj;
+  if (nodeId == null) {
+    if (other.nodeId != null)     return false;
+  }
+ else   if (!nodeId.equals(other.nodeId))   return false;
+  if (port != other.port)   return false;
+  return true;
 }

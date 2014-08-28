@@ -23,12 +23,12 @@
   sb.append(this.uptime_secs);
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("tasks:");
-  if (this.tasks == null) {
+  sb.append("workers:");
+  if (this.workers == null) {
     sb.append("null");
   }
  else {
-    sb.append(this.tasks);
+    sb.append(this.workers);
   }
   first=false;
   if (!first)   sb.append(", ");
@@ -38,6 +38,15 @@
   }
  else {
     sb.append(this.status);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("tasks:");
+  if (this.tasks == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.tasks);
   }
   first=false;
   sb.append(")");

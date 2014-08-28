@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseLong(conf.get(MEM_SLOT_PER_SIZE),JStormUtils.SIZE_1_G);
-}

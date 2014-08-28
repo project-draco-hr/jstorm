@@ -1,0 +1,10 @@
+{
+  final int prime=31;
+  int result=super.hashCode();
+  result=prime * result + ((componentToNum == null) ? 0 : componentToNum.hashCode());
+  result=prime * result + cpu;
+  result=prime * result + ((hostName == null) ? 0 : hostName.hashCode());
+  result=prime * result + ((jvm == null) ? 0 : jvm.hashCode());
+  result=prime * result + (int)(mem ^ (mem >>> 32));
+  return result;
+}

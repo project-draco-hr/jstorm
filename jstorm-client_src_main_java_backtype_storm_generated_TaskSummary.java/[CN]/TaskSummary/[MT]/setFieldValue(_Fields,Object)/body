@@ -24,30 +24,6 @@ unset_host();
 set_host((String)value);
 }
 break;
-case CPU:
-if (value == null) {
-unset_cpu();
-}
- else {
-set_cpu((Integer)value);
-}
-break;
-case MEM:
-if (value == null) {
-unset_mem();
-}
- else {
-set_mem((Integer)value);
-}
-break;
-case DISK:
-if (value == null) {
-unset_disk();
-}
- else {
-set_disk((String)value);
-}
-break;
 case PORT:
 if (value == null) {
 unset_port();

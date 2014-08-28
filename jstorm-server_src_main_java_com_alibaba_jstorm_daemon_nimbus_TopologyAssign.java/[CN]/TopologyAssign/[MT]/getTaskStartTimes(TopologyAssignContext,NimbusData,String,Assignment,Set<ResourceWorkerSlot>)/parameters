@@ -1,0 +1,5 @@
+TopologyAssignContext context
+NimbusData nimbusData
+String topologyId
+Assignment existingAssignment
+Set<ResourceWorkerSlot> workers

@@ -1,5 +1,5 @@
 {
-  Map<Integer,ResourceAssignment> result=new HashMap<Integer,ResourceAssignment>();
+  Set<ResourceWorkerSlot> result=new HashSet<ResourceWorkerSlot>();
   Map<String,SupervisorInfo> cluster=context.getCluster();
   if (cluster.size() != 1)   throw new RuntimeException();
   SupervisorInfo localSupervisor=null;
@@ -8,15 +8,10 @@
     supervisorId=entry.getKey();
     localSupervisor=entry.getValue();
   }
-  int port=localSupervisor.getNetPool().alloc(null);
-  for (  Integer task : context.getAllTaskIds()) {
-    ResourceAssignment resourceAssignment=new ResourceAssignment();
-    resourceAssignment.setHostname(localSupervisor.getHostName());
-    resourceAssignment.setSupervisorId(supervisorId);
-    resourceAssignment.setPort(port);
-    resourceAssignment.setCpuSlotNum(0);
-    resourceAssignment.setMemSlotNum(0);
-    result.put(task,resourceAssignment);
-  }
+  int port=localSupervisor.getWorkerPorts().iterator().next();
+  ResourceWorkerSlot worker=new ResourceWorkerSlot(supervisorId,port);
+  worker.setTasks(new HashSet<Integer>(context.getAllTaskIds()));
+  worker.setHostname(localSupervisor.getHostName());
+  result.add(worker);
   return result;
 }

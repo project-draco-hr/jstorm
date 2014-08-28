@@ -1,7 +1,12 @@
 {
   this.data=data;
   this.sleepTime=sleepTime;
-  this.hostPort=NetWorkUtils.hostname() + ":" + String.valueOf(Utils.getInt(data.getConf().get(Config.NIMBUS_THRIFT_PORT)));
+  if (!ConfigExtension.isNimbusUseIp(data.getConf())) {
+    this.hostPort=NetWorkUtils.hostname() + ":" + String.valueOf(Utils.getInt(data.getConf().get(Config.NIMBUS_THRIFT_PORT)));
+  }
+ else {
+    this.hostPort=NetWorkUtils.ip() + ":" + String.valueOf(Utils.getInt(data.getConf().get(Config.NIMBUS_THRIFT_PORT)));
+  }
   try {
     this.tryToBeLeader(data.getConf());
   }

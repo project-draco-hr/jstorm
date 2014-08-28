@@ -10,10 +10,4 @@
   this.uptime_secs=other.uptime_secs;
   this.num_workers=other.num_workers;
   this.num_used_workers=other.num_used_workers;
-  this.num_cpu=other.num_cpu;
-  this.num_used_cpu=other.num_used_cpu;
-  this.num_mem=other.num_mem;
-  this.num_used_mem=other.num_used_mem;
-  this.num_disk=other.num_disk;
-  this.num_used_disk=other.num_used_disk;
 }

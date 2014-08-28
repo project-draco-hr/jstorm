@@ -1,4 +1,0 @@
-{
-  this.num_used_disk=num_used_disk;
-  set_num_used_disk_isSet(true);
-}

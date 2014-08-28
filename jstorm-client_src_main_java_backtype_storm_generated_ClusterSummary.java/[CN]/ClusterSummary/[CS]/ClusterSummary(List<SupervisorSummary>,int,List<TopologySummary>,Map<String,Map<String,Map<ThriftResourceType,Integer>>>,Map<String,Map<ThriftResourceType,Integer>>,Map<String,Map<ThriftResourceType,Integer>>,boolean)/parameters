@@ -1,7 +1,0 @@
-List<SupervisorSummary> supervisors
-int nimbus_uptime_secs
-List<TopologySummary> topologies
-Map<String,Map<String,Map<ThriftResourceType,Integer>>> groupToTopology
-Map<String,Map<ThriftResourceType,Integer>> groupToResource
-Map<String,Map<ThriftResourceType,Integer>> groupToUsedResource
-boolean isGroupModel

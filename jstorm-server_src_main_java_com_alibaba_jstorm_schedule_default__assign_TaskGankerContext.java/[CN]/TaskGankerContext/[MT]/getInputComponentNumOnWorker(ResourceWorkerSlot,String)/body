@@ -1,0 +1,5 @@
+{
+  int result=0;
+  for (  String component : relationship.get(name))   result=result + this.getComponentNumOnWorker(worker,component);
+  return result;
+}

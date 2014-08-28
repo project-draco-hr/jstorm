@@ -8,14 +8,21 @@
     this.name=other.name;
   }
   this.uptime_secs=other.uptime_secs;
+  if (other.is_set_workers()) {
+    List<WorkerSummary> __this__workers=new ArrayList<WorkerSummary>();
+    for (    WorkerSummary other_element : other.workers) {
+      __this__workers.add(new WorkerSummary(other_element));
+    }
+    this.workers=__this__workers;
+  }
+  if (other.is_set_status()) {
+    this.status=other.status;
+  }
   if (other.is_set_tasks()) {
     List<TaskSummary> __this__tasks=new ArrayList<TaskSummary>();
     for (    TaskSummary other_element : other.tasks) {
       __this__tasks.add(new TaskSummary(other_element));
     }
     this.tasks=__this__tasks;
-  }
-  if (other.is_set_status()) {
-    this.status=other.status;
   }
 }

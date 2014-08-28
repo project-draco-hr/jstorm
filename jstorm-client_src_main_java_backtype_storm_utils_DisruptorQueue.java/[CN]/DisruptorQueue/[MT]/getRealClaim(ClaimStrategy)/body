@@ -1,0 +1,13 @@
+{
+  ClaimStrategy ret=claim;
+  if (useSleep == false) {
+    return ret;
+  }
+  if (claim instanceof SingleThreadedClaimStrategy) {
+    ret=new SingleThreadedSleepClaimStrategy(claim);
+  }
+ else {
+    ret=new MultiThreadedSleepClaimStrategy(claim);
+  }
+  return ret;
+}

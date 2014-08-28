@@ -13,4 +13,7 @@
   long now=System.currentTimeMillis();
   long spend=now - tradeCustomer.getTimestamp();
   tpsCounter.count(spend);
+  if (slowDonw) {
+    JStormUtils.sleepMs(20);
+  }
 }

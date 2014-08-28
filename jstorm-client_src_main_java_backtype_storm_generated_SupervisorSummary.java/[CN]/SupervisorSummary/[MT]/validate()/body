@@ -14,22 +14,4 @@
   if (!is_set_num_used_workers()) {
     throw new org.apache.thrift7.protocol.TProtocolException("Required field 'num_used_workers' is unset! Struct:" + toString());
   }
-  if (!is_set_num_cpu()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'num_cpu' is unset! Struct:" + toString());
-  }
-  if (!is_set_num_used_cpu()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'num_used_cpu' is unset! Struct:" + toString());
-  }
-  if (!is_set_num_mem()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'num_mem' is unset! Struct:" + toString());
-  }
-  if (!is_set_num_used_mem()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'num_used_mem' is unset! Struct:" + toString());
-  }
-  if (!is_set_num_disk()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'num_disk' is unset! Struct:" + toString());
-  }
-  if (!is_set_num_used_disk()) {
-    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'num_used_disk' is unset! Struct:" + toString());
-  }
 }

@@ -1,3 +1,0 @@
-{
-  conf.put(USE_USERDEFINE_ASSIGNMENT,userDefines);
-}

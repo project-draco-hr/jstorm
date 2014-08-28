@@ -1,0 +1,14 @@
+{
+  final long wrapPoint=sequence - bufferSize;
+  if (wrapPoint > minGatingSequence.get()) {
+    long minSequence;
+    while (wrapPoint > (minSequence=getMinimumSequence(dependentSequences))) {
+      try {
+        Thread.sleep(1);
+      }
+ catch (      InterruptedException e) {
+      }
+    }
+    minGatingSequence.set(minSequence);
+  }
+}

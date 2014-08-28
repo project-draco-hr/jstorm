@@ -1,13 +1,5 @@
 {
   super(context);
-  DISK_WEIGHT=ConfigExtension.getTopologyDiskWeight(stormConf);
-  CPU_WEIGHT=ConfigExtension.getTopologyCpuWeight(stormConf);
-  MEM_WEIGHT=ConfigExtension.getTopologyMemWeight(stormConf);
-  PORT_WEIGHT=ConfigExtension.getTopologyPortWeight(stormConf);
-  DEFAULT_WEIGHT=CPU_WEIGHT + MEM_WEIGHT;
-  TASK_ON_DIFFERENT_NODE_WEIGHT=JStormServerConfig.getTopologyTaskOnDiffWeight(stormConf);
-  USE_OLD_ASSIGN_RATIO_WEIGHT=JStormServerConfig.getTopologyUseOldAssignWeight(stormConf);
-  USER_DEFINE_ASSIGN_RATIO_WEIGHT=JStormServerConfig.getTopologyUserDefineAssignWeight(stormConf);
   try {
     sysTopology=Common.system_topology(stormConf,rawTopology);
   }
@@ -16,21 +8,12 @@
   }
   sidToHostname=generateSidToHost();
   hostToSid=JStormUtils.reverse_map(sidToHostname);
-  Map<WorkerSlot,List<Integer>> oldTasks=new HashMap<WorkerSlot,List<Integer>>();
-  if (oldAssignment != null) {
-    try {
-      oldTasks=Assignment.getWorkerTasks(oldAssignment.getTaskToResource());
-    }
- catch (    Exception e) {
-      StringBuilder sb=new StringBuilder();
-      sb.append("Failed to get oldWorkerTasks from assignment ");
-      sb.append(oldAssignment);
-      sb.append("Reset oldAssignment as null");
-      LOG.warn(sb.toString(),e);
-      oldAssignment=null;
-    }
+  if (oldAssignment != null && oldAssignment.getWorkers() != null) {
+    oldWorkers=oldAssignment.getWorkers();
   }
-  oldWorkerTasks=oldTasks;
+ else {
+    oldWorkers=new HashSet<ResourceWorkerSlot>();
+  }
   refineDeadTasks();
   componentTasks=JStormUtils.reverse_map(context.getTaskToComponent());
   for (  Entry<String,List<Integer>> entry : componentTasks.entrySet()) {

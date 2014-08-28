@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseBoolean(conf.get(NIMBUS_USE_IP),false);
+}

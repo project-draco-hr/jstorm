@@ -1,0 +1,18 @@
+{
+  Map<String,Set<ResourceWorkerSlot>> supervisorToWorker=new HashMap<String,Set<ResourceWorkerSlot>>();
+  for (  ResourceWorkerSlot worker : workers) {
+    if (worker.getTasks() == null || worker.getTasks().size() == 0) {
+      Set<ResourceWorkerSlot> supervisor=supervisorToWorker.get(worker.getNodeId());
+      if (supervisor == null) {
+        supervisor=new HashSet<ResourceWorkerSlot>();
+        supervisorToWorker.put(worker.getNodeId(),supervisor);
+      }
+      supervisor.add(worker);
+    }
+ else {
+      assignments.add(worker);
+    }
+  }
+  this.workerNum=workers.size() - assignments.size();
+  return supervisorToWorker;
+}

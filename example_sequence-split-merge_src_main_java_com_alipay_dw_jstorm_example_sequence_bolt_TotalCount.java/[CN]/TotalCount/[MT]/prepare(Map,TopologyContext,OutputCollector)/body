@@ -2,5 +2,6 @@
   this.collector=collector;
   tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
   checkTupleId=JStormUtils.parseBoolean(stormConf.get("bolt.check.tupleId"),false);
+  slowDonw=JStormUtils.parseBoolean(stormConf.get("bolt.slow.down"),false);
   LOG.info("Finished preparation");
 }

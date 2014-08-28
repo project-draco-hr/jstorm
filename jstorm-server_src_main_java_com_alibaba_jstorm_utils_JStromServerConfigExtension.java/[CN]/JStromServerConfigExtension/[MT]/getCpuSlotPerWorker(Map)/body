@@ -1,0 +1,4 @@
+{
+  int slot=JStormUtils.parseInt(conf.get(CPU_SLOT_PER_WORKER),1);
+  return slot > 0 ? slot : 1;
+}

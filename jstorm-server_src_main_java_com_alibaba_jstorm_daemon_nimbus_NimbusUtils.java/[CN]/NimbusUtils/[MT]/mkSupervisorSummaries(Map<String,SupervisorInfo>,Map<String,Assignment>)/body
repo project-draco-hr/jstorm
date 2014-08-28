@@ -1,21 +1,26 @@
 {
+  Map<String,Integer> supervisorToLeftSlotNum=new HashMap<String,Integer>();
   for (  Entry<String,Assignment> entry : assignments.entrySet()) {
-    Map<Integer,ResourceAssignment> taskToResource=entry.getValue().getTaskToResource();
-    for (    Entry<Integer,ResourceAssignment> resourceEntry : taskToResource.entrySet()) {
-      ResourceAssignment resource=resourceEntry.getValue();
-      String supervisorId=resource.getSupervisorId();
+    Set<ResourceWorkerSlot> workers=entry.getValue().getWorkers();
+    for (    ResourceWorkerSlot worker : workers) {
+      String supervisorId=worker.getNodeId();
       SupervisorInfo supervisorInfo=supervisorInfos.get(supervisorId);
       if (supervisorInfo == null) {
         continue;
       }
-      supervisorInfo.allocResource(resource);
+      Integer slots=supervisorToLeftSlotNum.get(supervisorId);
+      if (slots == null) {
+        slots=0;
+        supervisorToLeftSlotNum.put(supervisorId,slots);
+      }
+      supervisorToLeftSlotNum.put(supervisorId,++slots);
     }
   }
   List<SupervisorSummary> ret=new ArrayList<SupervisorSummary>();
   for (  Entry<String,SupervisorInfo> entry : supervisorInfos.entrySet()) {
     String supervisorId=entry.getKey();
     SupervisorInfo supervisorInfo=entry.getValue();
-    SupervisorSummary summary=mkSupervisorSummary(supervisorInfo,supervisorId);
+    SupervisorSummary summary=mkSupervisorSummary(supervisorInfo,supervisorId,supervisorToLeftSlotNum);
     ret.add(summary);
   }
   Collections.sort(ret,new Comparator<SupervisorSummary>(){

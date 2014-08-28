@@ -1,0 +1,5 @@
+DefaultTopologyAssignContext context
+Set<Integer> needAssign
+List<ResourceWorkerSlot> result
+int workersNum
+Collection<ResourceWorkerSlot> workers

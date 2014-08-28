@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseBoolean(conf.get(TASK_ALLOC_DISK_SLOT),false);
-}

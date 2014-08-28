@@ -1,0 +1,9 @@
+{
+  Map<Integer,ResourceWorkerSlot> result=new HashMap<Integer,ResourceWorkerSlot>();
+  for (  ResourceWorkerSlot worker : workers) {
+    if (worker.getNodeId().equals(supervisorId)) {
+      result.put(worker.getPort(),worker);
+    }
+  }
+  return result;
+}

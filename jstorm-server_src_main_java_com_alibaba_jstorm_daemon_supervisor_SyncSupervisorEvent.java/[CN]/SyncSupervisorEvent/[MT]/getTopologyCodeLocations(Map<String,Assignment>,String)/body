@@ -3,9 +3,9 @@
   for (  Entry<String,Assignment> entry : assignments.entrySet()) {
     String topologyid=entry.getKey();
     Assignment assignmenInfo=entry.getValue();
-    Map<Integer,ResourceAssignment> taskToNodePort=assignmenInfo.getTaskToResource();
-    for (    Entry<Integer,ResourceAssignment> nodePort : taskToNodePort.entrySet()) {
-      String node=nodePort.getValue().getSupervisorId();
+    Set<ResourceWorkerSlot> workers=assignmenInfo.getWorkers();
+    for (    ResourceWorkerSlot worker : workers) {
+      String node=worker.getNodeId();
       if (supervisorId.equals(node)) {
         rtn.put(topologyid,assignmenInfo.getMasterCodeDir());
         break;

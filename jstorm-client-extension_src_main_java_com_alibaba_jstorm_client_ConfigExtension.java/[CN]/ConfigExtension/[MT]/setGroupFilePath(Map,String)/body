@@ -1,3 +1,0 @@
-{
-  conf.put(NIMBUS_GROUPFILE_PATH,path);
-}

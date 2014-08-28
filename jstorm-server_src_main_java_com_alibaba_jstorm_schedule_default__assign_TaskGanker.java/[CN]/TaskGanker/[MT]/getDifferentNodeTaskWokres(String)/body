@@ -1,0 +1,9 @@
+{
+  Set<ResourceWorkerSlot> workers=new HashSet<ResourceWorkerSlot>();
+  workers.addAll(taskContext.getWorkerToTaskNum().keySet());
+  for (  Entry<String,Set<ResourceWorkerSlot>> entry : taskContext.getSupervisorToWorker().entrySet()) {
+    if (taskContext.getComponentNumOnSupervisor(entry.getKey(),name) != 0)     workers.removeAll(entry.getValue());
+  }
+  if (workers.size() == 0)   throw new FailedAssignTopologyException("there's no enough supervisor for making component: " + name + " 's tasks on different node");
+  return workers;
+}

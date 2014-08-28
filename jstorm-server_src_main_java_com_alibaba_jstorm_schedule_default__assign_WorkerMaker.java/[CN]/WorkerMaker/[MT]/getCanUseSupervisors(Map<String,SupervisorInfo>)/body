@@ -1,0 +1,8 @@
+{
+  List<SupervisorInfo> canUseSupervisors=new ArrayList<SupervisorInfo>();
+  for (  Entry<String,SupervisorInfo> entry : supervisors.entrySet()) {
+    SupervisorInfo supervisor=entry.getValue();
+    if (supervisor.getWorkerPorts().size() > 0)     canUseSupervisors.add(entry.getValue());
+  }
+  return canUseSupervisors;
+}

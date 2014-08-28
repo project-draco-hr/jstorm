@@ -22,37 +22,6 @@
     sb.append(this.topologies);
   }
   first=false;
-  if (!first)   sb.append(", ");
-  sb.append("groupToTopology:");
-  if (this.groupToTopology == null) {
-    sb.append("null");
-  }
- else {
-    sb.append(this.groupToTopology);
-  }
-  first=false;
-  if (!first)   sb.append(", ");
-  sb.append("groupToResource:");
-  if (this.groupToResource == null) {
-    sb.append("null");
-  }
- else {
-    sb.append(this.groupToResource);
-  }
-  first=false;
-  if (!first)   sb.append(", ");
-  sb.append("groupToUsedResource:");
-  if (this.groupToUsedResource == null) {
-    sb.append("null");
-  }
- else {
-    sb.append(this.groupToUsedResource);
-  }
-  first=false;
-  if (!first)   sb.append(", ");
-  sb.append("isGroupModel:");
-  sb.append(this.isGroupModel);
-  first=false;
   sb.append(")");
   return sb.toString();
 }

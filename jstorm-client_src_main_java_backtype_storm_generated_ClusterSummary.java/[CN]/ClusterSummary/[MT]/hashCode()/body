@@ -9,17 +9,5 @@
   boolean present_topologies=true && (is_set_topologies());
   builder.append(present_topologies);
   if (present_topologies)   builder.append(topologies);
-  boolean present_groupToTopology=true && (is_set_groupToTopology());
-  builder.append(present_groupToTopology);
-  if (present_groupToTopology)   builder.append(groupToTopology);
-  boolean present_groupToResource=true && (is_set_groupToResource());
-  builder.append(present_groupToResource);
-  if (present_groupToResource)   builder.append(groupToResource);
-  boolean present_groupToUsedResource=true && (is_set_groupToUsedResource());
-  builder.append(present_groupToUsedResource);
-  if (present_groupToUsedResource)   builder.append(groupToUsedResource);
-  boolean present_isGroupModel=true;
-  builder.append(present_isGroupModel);
-  if (present_isGroupModel)   builder.append(isGroupModel);
   return builder.toHashCode();
 }

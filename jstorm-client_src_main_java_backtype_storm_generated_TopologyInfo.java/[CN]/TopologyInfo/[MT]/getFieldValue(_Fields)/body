@@ -6,10 +6,12 @@ case NAME:
   return get_name();
 case UPTIME_SECS:
 return Integer.valueOf(get_uptime_secs());
-case TASKS:
-return get_tasks();
+case WORKERS:
+return get_workers();
 case STATUS:
 return get_status();
+case TASKS:
+return get_tasks();
 }
 throw new IllegalStateException();
 }

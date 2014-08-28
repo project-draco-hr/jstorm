@@ -1,3 +1,0 @@
-Map<String,SupervisorInfo> supervisorMap
-Assignment existingAssignment
-Map<Integer,ResourceAssignment> taskWorkerSlot

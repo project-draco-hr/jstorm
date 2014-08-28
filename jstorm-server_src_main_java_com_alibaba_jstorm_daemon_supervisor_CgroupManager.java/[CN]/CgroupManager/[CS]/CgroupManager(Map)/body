@@ -1,6 +1,5 @@
 {
   LOG.info("running on cgroup mode");
-  this.CPU_SLOT_PER_WEIGHT=ConfigExtension.getCpuSlotPerWeight(conf);
   root_dir=ConfigExtension.getCgroupRootDir(conf);
   if (root_dir == null)   throw new RuntimeException("Check configuration file. The supervisor.cgroup.rootdir is missing.");
   File file=new File(JSTORM_CPU_HIERARCHY_DIR + "/" + root_dir);

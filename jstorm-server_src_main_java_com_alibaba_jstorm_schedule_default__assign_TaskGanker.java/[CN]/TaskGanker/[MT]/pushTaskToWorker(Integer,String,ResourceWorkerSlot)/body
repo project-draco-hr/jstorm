@@ -1,0 +1,43 @@
+{
+  Set<Integer> tasks=worker.getTasks();
+  if (tasks == null) {
+    tasks=new HashSet<Integer>();
+    worker.setTasks(tasks);
+  }
+  tasks.add(task);
+  int taskNum=taskContext.getWorkerToTaskNum().get(worker);
+  taskContext.getWorkerToTaskNum().put(worker,++taskNum);
+  if (otherNum <= 0) {
+    if (taskNum == baseNum) {
+      taskContext.getWorkerToTaskNum().remove(worker);
+      assignments.add(worker);
+    }
+  }
+ else {
+    if (taskNum == (baseNum + 1)) {
+      taskContext.getWorkerToTaskNum().remove(worker);
+      otherNum--;
+      assignments.add(worker);
+    }
+    if (otherNum <= 0) {
+      Set<ResourceWorkerSlot> needDelete=new HashSet<ResourceWorkerSlot>();
+      for (      Entry<ResourceWorkerSlot,Integer> entry : taskContext.getWorkerToTaskNum().entrySet()) {
+        if (entry.getValue() == baseNum)         needDelete.add(entry.getKey());
+      }
+      for (      ResourceWorkerSlot workerToDelete : needDelete) {
+        taskContext.getWorkerToTaskNum().remove(workerToDelete);
+        assignments.add(workerToDelete);
+      }
+    }
+  }
+  Map<String,Integer> components=taskContext.getWorkerToComponentNum().get(worker);
+  if (components == null) {
+    components=new HashMap<String,Integer>();
+    taskContext.getWorkerToComponentNum().put(worker,components);
+  }
+  Integer componentNum=components.get(name);
+  if (componentNum == null) {
+    componentNum=0;
+  }
+  components.put(name,++componentNum);
+}

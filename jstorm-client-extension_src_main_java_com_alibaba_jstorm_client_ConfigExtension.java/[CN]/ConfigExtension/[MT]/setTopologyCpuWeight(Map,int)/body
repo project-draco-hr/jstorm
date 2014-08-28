@@ -1,3 +1,0 @@
-{
-  conf.put(TOPOLOGY_CPU_WEIGHT,Integer.valueOf(weight));
-}
