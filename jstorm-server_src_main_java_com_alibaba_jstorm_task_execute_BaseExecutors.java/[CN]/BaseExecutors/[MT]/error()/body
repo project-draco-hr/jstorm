@@ -1,3 +1,6 @@
 {
-  return error;
+  if (error == null) {
+    return null;
+  }
+  return new Exception(error);
 }

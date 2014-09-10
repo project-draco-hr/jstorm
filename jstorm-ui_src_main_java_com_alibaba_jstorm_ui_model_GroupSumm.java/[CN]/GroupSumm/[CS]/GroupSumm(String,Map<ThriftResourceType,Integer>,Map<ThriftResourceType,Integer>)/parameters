@@ -1,3 +1,0 @@
-String name
-Map<ThriftResourceType,Integer> total
-Map<ThriftResourceType,Integer> used

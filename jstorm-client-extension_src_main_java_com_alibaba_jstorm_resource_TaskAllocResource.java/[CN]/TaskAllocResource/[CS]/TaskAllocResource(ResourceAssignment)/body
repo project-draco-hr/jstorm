@@ -1,6 +1,0 @@
-{
-  super();
-  this.allocDisk=!StringUtils.isBlank(resourceAssignment.getDiskSlot());
-  this.cpuSlotNum=resourceAssignment.getCpuSlotNum();
-  this.memSlotNum=resourceAssignment.getMemSlotNum();
-}

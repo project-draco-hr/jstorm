@@ -1,9 +1,0 @@
-{
-  Set<WorkerSlot> result=new HashSet<WorkerSlot>();
-  for (  WorkerSlot slot : slots) {
-    if (!cluster.isBlackListed(slot.getNodeId())) {
-      if (cluster.getSupervisorById(slot.getNodeId()).getAllPorts().contains(slot.getPort()))       result.add(slot);
-    }
-  }
-  return result;
-}

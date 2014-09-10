@@ -1,3 +1,0 @@
-DefaultTopologyAssignContext defaultContext
-Map<Integer,ResourceAssignment> newAssigns
-int allocWorkerNum

@@ -16,7 +16,7 @@
     try {
       spout.nextTuple();
     }
- catch (    Exception e) {
+ catch (    Throwable e) {
       error=e;
       LOG.error("spout execute error ",e);
       report_error.report(e);

@@ -2,17 +2,5 @@
   Channel channel=event.getChannel();
   client.setChannel(channel);
   LOG.info("connection established to :{}, local port:{}",client.getRemoteAddr(),channel.getLocalAddress());
-  if (client.isNoResponse()) {
-    return;
-  }
-  try {
-    sendRequests(channel,client.takeMessages());
-  }
- catch (  Exception e) {
-    if (being_closed.get() == false) {
-      LOG.warn("Occur channel error\n",e);
-      channel.close();
-      throw new RuntimeException(e);
-    }
-  }
+  client.handleResponse();
 }

@@ -1,3 +1,3 @@
 {
-  return JStormUtils.parseLong(conf.get(NETTY_BUFFER_THRESHOLD_SIZE),33554432);
+  return JStormUtils.parseLong(conf.get(NETTY_BUFFER_THRESHOLD_SIZE),8 * JStormUtils.SIZE_1_M);
 }

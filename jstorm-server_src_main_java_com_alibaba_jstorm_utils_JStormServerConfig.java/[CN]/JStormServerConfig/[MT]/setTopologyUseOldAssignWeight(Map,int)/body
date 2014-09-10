@@ -1,3 +1,0 @@
-{
-  conf.put(TOPOLOGY_USE_OLD_ASSIGN_RATIO_WEIGHT,Integer.valueOf(weight));
-}

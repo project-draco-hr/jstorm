@@ -1,3 +1,8 @@
 {
-  return new NettyClient(storm_conf,clientChannelFactory,clientScheduleService,host,port,reconnector);
+  if (isSyncMode == true) {
+    return new NettyClientSync(storm_conf,clientChannelFactory,clientScheduleService,host,port,reconnector);
+  }
+ else {
+    return new NettyClientAsync(storm_conf,clientChannelFactory,clientScheduleService,host,port,reconnector);
+  }
 }

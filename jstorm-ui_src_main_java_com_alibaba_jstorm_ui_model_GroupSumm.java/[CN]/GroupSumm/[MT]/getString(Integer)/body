@@ -1,3 +1,0 @@
-{
-  return (a.intValue() == Integer.MAX_VALUE) ? "N/A" : String.valueOf(a);
-}

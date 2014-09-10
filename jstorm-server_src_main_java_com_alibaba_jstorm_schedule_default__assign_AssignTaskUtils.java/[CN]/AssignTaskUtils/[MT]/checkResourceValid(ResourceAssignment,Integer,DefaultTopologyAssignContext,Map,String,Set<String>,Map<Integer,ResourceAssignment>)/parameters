@@ -1,7 +1,0 @@
-ResourceAssignment taskAlloc
-Integer task
-DefaultTopologyAssignContext defaultContext
-Map componentMap
-String componentName
-Set<String> canUsedSupervisorIds
-Map<Integer,ResourceAssignment> alreadyAssign

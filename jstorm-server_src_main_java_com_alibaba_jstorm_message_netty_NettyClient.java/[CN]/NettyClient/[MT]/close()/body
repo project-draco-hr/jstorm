@@ -1,12 +1,12 @@
 {
   LOG.info("Close netty connection to {}",name());
-  Metrics.unregister(pendingGaugeName);
-  Metrics.unregister(histogramName);
-  Metrics.unregister(sendTimerName);
   if (isClosed() == true) {
     return;
   }
   being_closed.set(true);
+  Metrics.unregister(pendingGaugeName);
+  Metrics.unregister(histogramName);
+  Metrics.unregister(sendTimerName);
   Channel channel=channelRef.get();
   if (channel == null) {
     LOG.info("Channel {} has been closed before",name());

@@ -5,7 +5,7 @@
     try {
       deserializeQueue.consumeBatchWhenAvailable(this);
     }
- catch (    Exception e) {
+ catch (    Throwable e) {
       if (taskStatus.isShutdown() == false) {
         LOG.error("Unknow exception ",e);
         report_error.report(e);

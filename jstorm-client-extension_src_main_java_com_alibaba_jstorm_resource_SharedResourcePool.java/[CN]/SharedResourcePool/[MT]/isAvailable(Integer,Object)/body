@@ -1,8 +1,0 @@
-{
-  if (slotNum == null) {
-    LOG.info(context + " check available " + type+ ":"+ slotNum);
-    return true;
-  }
-  if (freeSlotNum.get() >= slotNum)   return true;
- else   return false;
-}

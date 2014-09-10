@@ -11,7 +11,7 @@
     WorkerClassLoader.switchThreadContext();
     bolt.prepare(storm_conf,userTopologyCxt,outputCollector);
   }
- catch (  Exception e) {
+ catch (  Throwable e) {
     error=e;
     LOG.error("bolt prepare error ",e);
     report_error.report(e);

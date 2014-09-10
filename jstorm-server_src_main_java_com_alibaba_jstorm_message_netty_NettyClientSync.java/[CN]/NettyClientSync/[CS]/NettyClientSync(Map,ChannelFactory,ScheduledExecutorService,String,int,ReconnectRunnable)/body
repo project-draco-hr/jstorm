@@ -1,0 +1,27 @@
+{
+  super(storm_conf,factory,scheduler,host,port,reconnector);
+  batchQueue=new ConcurrentLinkedQueue<MessageBatch>();
+  batchQueueName=JStormServerUtils.getName(host,port) + "-batchQueue-counter";
+  Metrics.register(batchQueueName,new Gauge<Integer>(){
+    @Override public Integer getValue(){
+      return batchQueue.size();
+    }
+  }
+);
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+  disruptorQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(MAX_SEND_PENDING * 8),waitStrategy);
+  disruptorQueueName=JStormServerUtils.getName(host,port) + "-disruptorQueue";
+  Metrics.registerQueue(disruptorQueueName,disruptorQueue);
+  Runnable trigger=new Runnable(){
+    @Override public void run(){
+      trigger();
+    }
+  }
+;
+  scheduler.scheduleWithFixedDelay(trigger,10,1,TimeUnit.SECONDS);
+  ThreadFactory bossFactory=new NettyRenameThreadFactory(PREFIX + JStormServerUtils.getName(host,port) + "-boss");
+  ThreadFactory workerFactory=new NettyRenameThreadFactory(PREFIX + JStormServerUtils.getName(host,port) + "-worker");
+  clientChannelFactory=new NioClientSocketChannelFactory(Executors.newCachedThreadPool(bossFactory),Executors.newCachedThreadPool(workerFactory),1);
+  start();
+  LOG.info(this.toString());
+}

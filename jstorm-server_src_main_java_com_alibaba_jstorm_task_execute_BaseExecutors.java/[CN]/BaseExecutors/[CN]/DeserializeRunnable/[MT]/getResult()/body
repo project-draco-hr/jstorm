@@ -1,3 +1,4 @@
 {
+  LOG.info("Begin to shutdown recvThread of " + idStr);
   return -1;
 }

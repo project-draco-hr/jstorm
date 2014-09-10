@@ -1,0 +1,23 @@
+{
+  this.storm_conf=storm_conf;
+  this.port=port;
+  this.isSyncMode=isSyncMode;
+  int buffer_size=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE));
+  int maxWorkers=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_SERVER_WORKER_THREADS));
+  ThreadFactory bossFactory=new NettyRenameThreadFactory("server" + "-boss");
+  ThreadFactory workerFactory=new NettyRenameThreadFactory("server" + "-worker");
+  if (maxWorkers > 0) {
+    factory=new NioServerSocketChannelFactory(Executors.newCachedThreadPool(bossFactory),Executors.newCachedThreadPool(workerFactory),maxWorkers);
+  }
+ else {
+    factory=new NioServerSocketChannelFactory(Executors.newCachedThreadPool(bossFactory),Executors.newCachedThreadPool(workerFactory));
+  }
+  bootstrap=new ServerBootstrap(factory);
+  bootstrap.setOption("child.tcpNoDelay",true);
+  bootstrap.setOption("child.receiveBufferSize",buffer_size);
+  bootstrap.setOption("child.keepAlive",true);
+  bootstrap.setPipelineFactory(new StormServerPipelineFactory(this));
+  Channel channel=bootstrap.bind(new InetSocketAddress(port));
+  allChannels.add(channel);
+  LOG.info("Successfull bind {}, buffer_size:{}, maxWorkers:{}",port,buffer_size,maxWorkers);
+}

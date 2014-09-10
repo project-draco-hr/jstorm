@@ -1,5 +1,0 @@
-DefaultTopologyAssignContext defaultContext
-Map<Integer,ResourceAssignment> newAssigns
-int allocWorkerNum
-Map<String,List<Integer>> supervisorTasks
-Map<String,Integer> supervisorAssignSlotNumMap

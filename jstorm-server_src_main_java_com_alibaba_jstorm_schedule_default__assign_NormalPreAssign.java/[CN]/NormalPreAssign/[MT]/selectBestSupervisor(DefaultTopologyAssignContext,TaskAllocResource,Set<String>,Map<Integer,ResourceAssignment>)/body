@@ -1,9 +1,0 @@
-{
-  boolean isByLevel=isSelectByLevel(defaultContext.getStormConf());
-  if (isByLevel == false) {
-    return selectBestSupervisorByWeight(defaultContext,taskAllocResource,supervisors,newAssigns);
-  }
- else {
-    return selectBestSupervisorByLevel(defaultContext,taskAllocResource,supervisors,newAssigns);
-  }
-}

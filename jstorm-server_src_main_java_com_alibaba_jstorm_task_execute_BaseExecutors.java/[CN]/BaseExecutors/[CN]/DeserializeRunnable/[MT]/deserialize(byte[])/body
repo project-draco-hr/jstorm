@@ -19,7 +19,7 @@
     }
     return tuple;
   }
- catch (  Exception e) {
+ catch (  Throwable e) {
     if (taskStatus.isShutdown() == false) {
       LOG.error(idStr + " recv thread error " + JStormUtils.toPrintableString(ser_msg)+ "\n",e);
     }

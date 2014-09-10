@@ -1,3 +1,7 @@
 {
-  return queue.pctFull();
+  Float ret=queue.pctFull();
+  if (ret > 0.8) {
+    DEFAULT_LOG.info("Queue " + name + "is full "+ ret);
+  }
+  return ret;
 }

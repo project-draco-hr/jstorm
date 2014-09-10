@@ -4,7 +4,7 @@
     try {
       exeQueue.consumeBatchWhenAvailable(this);
     }
- catch (    Exception e) {
+ catch (    Throwable e) {
       if (taskStatus.isShutdown() == false) {
         LOG.error(idStr + " bolt exeutor  error",e);
       }

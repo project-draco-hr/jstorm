@@ -1,6 +1,3 @@
 {
-  if (null != remote_addr) {
-    return PREFIX + remote_addr.toString();
-  }
-  return "";
+  return name;
 }

@@ -1,8 +1,0 @@
-{
-  final int prime=31;
-  int result=1;
-  result=prime * result + (allocDisk ? 1231 : 1237);
-  result=prime * result + cpuSlotNum;
-  result=prime * result + memSlotNum;
-  return result;
-}

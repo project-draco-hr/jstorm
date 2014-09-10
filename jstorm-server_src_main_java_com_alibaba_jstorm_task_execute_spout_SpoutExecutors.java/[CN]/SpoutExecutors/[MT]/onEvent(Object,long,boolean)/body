@@ -48,7 +48,7 @@
     }
     runnable.run();
   }
- catch (  Exception e) {
+ catch (  Throwable e) {
     if (taskStatus.isShutdown() == false) {
       LOG.info("Unknow excpetion ",e);
       report_error.report(e);

@@ -1,6 +1,0 @@
-{
-  this.type=type;
-  this.totalSlotNum=totalSlotNum;
-  this.freeSlotNum=new AtomicInteger(totalSlotNum);
-  LOG.info("Successfully init " + this.getClass().getSimpleName() + ":"+ this.toString());
-}

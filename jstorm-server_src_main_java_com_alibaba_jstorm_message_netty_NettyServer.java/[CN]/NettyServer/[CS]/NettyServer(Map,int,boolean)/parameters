@@ -1,0 +1,3 @@
+Map storm_conf
+int port
+boolean isSyncMode

@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(SUPERVISOR_CPU_SLOT_NUM));
-}

@@ -13,6 +13,7 @@
   List<TaskMessage> list=new ArrayList<TaskMessage>();
   TaskMessage message=new TaskMessage(task,req_msg.getBytes());
   list.add(message);
+  LOG.info("Client send data");
   client.send(message);
   TaskMessage recv=server.recv(0);
   Assert.assertEquals(req_msg,new String(recv.message()));

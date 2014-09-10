@@ -1,7 +1,0 @@
-{
-  if (obj instanceof SlotResourcePool<?> == false) {
-    return false;
-  }
-  SlotResourcePool<K> otherPool=(SlotResourcePool<K>)obj;
-  return otherPool.getType().equals(type) && otherPool.slots.equals(slots);
-}

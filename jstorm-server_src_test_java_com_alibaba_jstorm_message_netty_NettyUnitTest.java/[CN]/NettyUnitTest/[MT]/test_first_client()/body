@@ -1,16 +1,23 @@
 {
   System.out.println("!!!!!!!!Start test_first_client !!!!!!!!!!!");
-  String req_msg=setupLargMsg();
-  IContext context=TransportFactory.makeContext(storm_conf);
+  final String req_msg=setupLargMsg();
+  final IContext context=TransportFactory.makeContext(storm_conf);
+  new Thread(new Runnable(){
+    @Override public void run(){
+      IConnection client=context.connect(null,"localhost",port);
+      List<TaskMessage> list=new ArrayList<TaskMessage>();
+      TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+      list.add(message);
+      client.send(message);
+      System.out.println("!!Client has sent data");
+      JStormUtils.sleepMs(1000);
+      client.close();
+    }
+  }
+).start();
   IConnection server=null;
-  IConnection client=null;
-  client=context.connect(null,"localhost",port);
-  List<TaskMessage> list=new ArrayList<TaskMessage>();
-  TaskMessage message=new TaskMessage(task,req_msg.getBytes());
-  list.add(message);
-  client.send(message);
   JStormUtils.sleepMs(1000);
-  System.out.println("!!Client has sent data, but server no start!!!!!");
+  System.out.println("!!server begin start!!!!!");
   server=context.bind(null,port);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(1024),waitStrategy);
@@ -18,7 +25,6 @@
   TaskMessage recv=server.recv(0);
   Assert.assertEquals(req_msg,new String(recv.message()));
   server.close();
-  client.close();
   context.term();
   System.out.println("!!!!!!!!!!!!End test_first_client!!!!!!!!!!!!!");
 }

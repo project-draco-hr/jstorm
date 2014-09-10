@@ -1,0 +1,20 @@
+{
+  if (event == null) {
+    return;
+  }
+  TaskMessage message=(TaskMessage)event;
+  MessageBatch messageBatch=messageBatchRef.getAndSet(null);
+  if (null == messageBatch) {
+    messageBatch=new MessageBatch(messageBatchSize);
+  }
+  messageBatch.add(message);
+  if (messageBatch.isFull()) {
+    batchQueue.offer(messageBatch);
+  }
+ else   if (endOfBatch == true) {
+    batchQueue.offer(messageBatch);
+  }
+ else {
+    messageBatchRef.set(messageBatch);
+  }
+}

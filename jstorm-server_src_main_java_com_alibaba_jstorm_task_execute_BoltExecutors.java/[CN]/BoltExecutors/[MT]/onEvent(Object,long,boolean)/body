@@ -20,7 +20,7 @@
     try {
       bolt.execute(tuple);
     }
- catch (    Exception e) {
+ catch (    Throwable e) {
       error=e;
       LOG.error("bolt execute error ",e);
       report_error.report(e);

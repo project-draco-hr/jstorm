@@ -6,23 +6,16 @@
   channelRef=new AtomicReference<Channel>(null);
   being_closed=new AtomicBoolean(false);
   pendings=new AtomicLong(0);
-  flush_later=new AtomicBoolean(false);
   buffer_size=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE));
   max_retries=Math.min(30,Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MAX_RETRIES)));
   base_sleep_ms=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MIN_SLEEP_MS));
   max_sleep_ms=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MAX_SLEEP_MS));
-  BATCH_THREASHOLD_WARN=ConfigExtension.getNettyBufferThresholdSize(storm_conf);
-  directlySend=isDirectSend(storm_conf);
+  timeoutSecond=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
+  MAX_SEND_PENDING=(int)ConfigExtension.getNettyMaxSendPending(storm_conf);
   this.messageBatchSize=Utils.getInt(storm_conf.get(Config.STORM_NETTY_MESSAGE_BATCH_SIZE),262144);
-  flushCheckInterval=Utils.getInt(storm_conf.get(Config.STORM_NETTY_FLUSH_CHECK_INTERVAL_MS),10);
   messageBatchRef=new AtomicReference<MessageBatch>();
-  bootstrap=new ClientBootstrap(factory);
-  bootstrap.setOption("tcpNoDelay",true);
-  bootstrap.setOption("sendBufferSize",buffer_size);
-  bootstrap.setOption("keepAlive",true);
-  bootstrap.setPipelineFactory(new StormClientPipelineFactory(this));
   remote_addr=new InetSocketAddress(host,port);
-  bootstrap.connect(remote_addr);
+  name=remote_addr.toString();
   sendTimerName=JStormServerUtils.getName(host,port) + "-netty-send-timer";
   sendTimer=Metrics.registerTimer(sendTimerName);
   histogramName=JStormServerUtils.getName(host,port) + "-netty-send-histogram";
@@ -34,19 +27,4 @@
     }
   }
 );
-  StringBuilder sb=new StringBuilder();
-  sb.append("New Netty Client, connect to ").append(remote_addr);
-  sb.append(", netty buffer size").append(buffer_size);
-  sb.append(", batch size:").append(messageBatchSize);
-  sb.append(", directlySend:").append(directlySend);
-  sb.append(", slow down buffer threshold size:").append(BATCH_THREASHOLD_WARN);
-  LOG.info(sb.toString());
-  Runnable flusher=new Runnable(){
-    @Override public void run(){
-      flush();
-    }
-  }
-;
-  long initialDelay=Math.min(1000,max_sleep_ms * max_retries);
-  scheduler.scheduleWithFixedDelay(flusher,initialDelay,flushCheckInterval,TimeUnit.MILLISECONDS);
 }

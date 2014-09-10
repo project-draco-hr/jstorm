@@ -1,3 +1,0 @@
-{
-  conf.put(SUPERVISOR_MEM_SLOT_NUM,Integer.valueOf(slotNum));
-}

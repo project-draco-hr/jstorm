@@ -1,3 +1,0 @@
-{
-  return ("null".equals(str) ? null : Integer.parseInt(str));
-}

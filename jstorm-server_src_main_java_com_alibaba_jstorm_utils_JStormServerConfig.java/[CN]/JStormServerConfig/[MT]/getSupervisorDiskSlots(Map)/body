@@ -1,3 +1,0 @@
-{
-  return (List<String>)conf.get(SUPERVISOR_DISK_SLOTS);
-}

@@ -1,3 +1,0 @@
-{
-  conf.put(SUPERVISOR_DISK_SLOTS,slots);
-}

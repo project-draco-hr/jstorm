@@ -1,0 +1,3 @@
+{
+  final DisruptorQueue disruptorQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(1024),new BlockingWaitStrategy());
+}

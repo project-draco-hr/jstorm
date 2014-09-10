@@ -1,0 +1,19 @@
+{
+  if (isClosed() == true) {
+    return;
+  }
+  long emitTime=emitTs.get();
+  if (emitTime == 0) {
+    return;
+  }
+  long now=System.currentTimeMillis();
+  long delt=now - emitTime;
+  if (delt < timeoutSecond * 500) {
+    return;
+  }
+  Channel channel=channelRef.get();
+  if (channel != null) {
+    LOG.warn("Long time no response of {}, {}s",name,delt / 1000);
+    channel.write(ControlMessage.EOB_MESSAGE);
+  }
+}

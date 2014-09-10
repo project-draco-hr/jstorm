@@ -1,5 +1,4 @@
 {
   this.client=client;
   being_closed=client.getBeing_closed();
-  start_time=System.currentTimeMillis();
 }

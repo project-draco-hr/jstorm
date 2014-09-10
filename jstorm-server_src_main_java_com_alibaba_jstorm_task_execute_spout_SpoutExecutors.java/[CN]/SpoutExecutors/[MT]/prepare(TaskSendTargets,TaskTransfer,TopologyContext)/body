@@ -4,7 +4,7 @@
     WorkerClassLoader.switchThreadContext();
     this.spout.open(storm_conf,userTopologyCtx,new SpoutOutputCollector(output_collector));
   }
- catch (  Exception e) {
+ catch (  Throwable e) {
     error=e;
     LOG.error("spout open error ",e);
     report_error.report(e);

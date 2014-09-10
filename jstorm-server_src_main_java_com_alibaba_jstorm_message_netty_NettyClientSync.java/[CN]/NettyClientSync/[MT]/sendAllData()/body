@@ -1,0 +1,28 @@
+{
+  sendTimer.start();
+  try {
+    disruptorQueue.consumeBatchWhenAvailableTimeout(this,10);
+    MessageBatch batch=batchQueue.poll();
+    while (batch != null) {
+      Channel channel=channelRef.get();
+      if (channel == null) {
+        LOG.info("No channel {} to flush all data",name);
+        return;
+      }
+ else       if (channel.isWritable() == false) {
+        LOG.info("Channel {} is no writable",name);
+        return;
+      }
+      flushBatch(batch,channel);
+      batch=batchQueue.poll();
+    }
+  }
+ catch (  Throwable e) {
+    LOG.error("Occur e",e);
+    String err=name + " nettyclient occur unknow exception";
+    JStormUtils.halt_process(-1,err);
+  }
+ finally {
+    sendTimer.stop();
+  }
+}

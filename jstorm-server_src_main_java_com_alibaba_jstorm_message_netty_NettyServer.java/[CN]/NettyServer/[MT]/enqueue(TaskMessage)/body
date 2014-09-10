@@ -1,4 +1,3 @@
 {
-  LOG.debug("message received with task: {},  receive: {} ",message.task(),counter.incrementAndGet());
   recvQueue.publish(message);
 }

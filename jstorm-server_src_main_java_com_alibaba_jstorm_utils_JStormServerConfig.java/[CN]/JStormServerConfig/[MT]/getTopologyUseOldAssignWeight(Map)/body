@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(TOPOLOGY_USE_OLD_ASSIGN_RATIO_WEIGHT),DEFAULT_USE_OLD_ASSIGN_RATIO_WEIGHT);
-}

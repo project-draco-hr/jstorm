@@ -1,7 +1,7 @@
 {
   IConnection retConnection=null;
   try {
-    retConnection=new NettyServer(storm_conf,port);
+    retConnection=new NettyServer(storm_conf,port,isSyncMode);
   }
  catch (  Throwable e) {
     JStormUtils.halt_process(-1,"Failed to bind " + port);

@@ -1,3 +1,0 @@
-{
-  return totalSlotNum - freeSlotNum.get();
-}

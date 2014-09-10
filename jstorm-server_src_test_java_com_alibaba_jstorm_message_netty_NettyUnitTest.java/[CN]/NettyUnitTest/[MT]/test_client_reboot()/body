@@ -1,30 +1,53 @@
 {
   System.out.println("!!!!!!!!!!Start client reboot test!!!!!!!!");
-  String req_msg=setupLargMsg();
-  IContext context=TransportFactory.makeContext(storm_conf);
+  final String req_msg=setupLargMsg();
+  final IContext context=TransportFactory.makeContext(storm_conf);
+  final Semaphore semp=new Semaphore(1);
+  new Thread(new Runnable(){
+    @Override public void run(){
+      try {
+        semp.acquire();
+      }
+ catch (      InterruptedException e1) {
+      }
+      IConnection client=null;
+      client=context.connect(null,"localhost",port);
+      List<TaskMessage> list=new ArrayList<TaskMessage>();
+      TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+      list.add(message);
+      client.send(message);
+      System.out.println("Send first");
+      try {
+        Thread.sleep(1000);
+      }
+ catch (      InterruptedException e) {
+      }
+      client.close();
+      IConnection client2=context.connect(null,"localhost",port);
+      System.out.println("!!!!!!! restart client !!!!!!!!!!");
+      client2.send(message);
+      System.out.println("Send second");
+      JStormUtils.sleepMs(1000);
+      client2.close();
+      semp.release();
+    }
+  }
+).start();
   IConnection server=null;
-  IConnection client=null;
   server=context.bind(null,port);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(1024),waitStrategy);
   server.registerQueue(recvQueue);
-  client=context.connect(null,"localhost",port);
-  List<TaskMessage> list=new ArrayList<TaskMessage>();
-  TaskMessage message=new TaskMessage(task,req_msg.getBytes());
-  list.add(message);
-  client.send(message);
   TaskMessage recv=server.recv(0);
+  System.out.println("Sever receive first");
   Assert.assertEquals(req_msg,new String(recv.message()));
-  client.close();
-  Thread.sleep(1000);
-  IConnection client2=context.connect(null,"localhost",port);
-  System.out.println("!!!!!!! restart client !!!!!!!!!!");
-  client2.send(message);
   Thread.sleep(1000);
   TaskMessage recv2=server.recv(0);
+  System.out.println("Sever receive second");
   Assert.assertEquals(req_msg,new String(recv2.message()));
-  client2.close();
   server.close();
+  semp.acquire();
   context.term();
+  semp.release();
   System.out.println("!!!!!!!!!!End client reboot test!!!!!!!!");
 }

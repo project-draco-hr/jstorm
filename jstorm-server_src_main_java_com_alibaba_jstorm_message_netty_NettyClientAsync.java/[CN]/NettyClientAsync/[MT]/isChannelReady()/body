@@ -1,0 +1,13 @@
+{
+  Channel channel=channelRef.get();
+  if (channel == null) {
+    return null;
+  }
+  if (channel.isWritable() == false) {
+    return null;
+  }
+  if (isWithAcker == true && pendings.get() >= MAX_SEND_PENDING) {
+    return null;
+  }
+  return channel;
+}

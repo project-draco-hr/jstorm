@@ -1,4 +1,0 @@
-DefaultTopologyAssignContext defaultContext
-TaskAllocResource taskAllocResource
-Set<String> supervisors
-Map<Integer,ResourceAssignment> newAssigns

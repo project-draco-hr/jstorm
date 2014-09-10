@@ -1,2 +1,0 @@
-Map<Integer,Map<String,Integer>> weightResourceMap
-Set<String> supervisorIds

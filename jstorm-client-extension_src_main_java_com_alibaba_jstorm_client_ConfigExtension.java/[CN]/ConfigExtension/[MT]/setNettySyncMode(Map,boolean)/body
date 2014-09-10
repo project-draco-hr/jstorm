@@ -1,0 +1,3 @@
+{
+  conf.put(NETTY_SYNC_MODE,sync);
+}

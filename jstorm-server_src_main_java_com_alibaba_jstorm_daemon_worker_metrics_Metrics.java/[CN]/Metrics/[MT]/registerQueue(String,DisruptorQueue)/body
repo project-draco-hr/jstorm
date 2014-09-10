@@ -1,4 +1,4 @@
 {
   LOG.info("Register Metric " + name);
-  return metrics.register(name,new QueueGauge(queue));
+  return metrics.register(name,new QueueGauge(name,queue));
 }
