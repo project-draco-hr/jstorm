@@ -1,7 +1,7 @@
 {
   super(storm_conf,factory,scheduler,host,port,reconnector);
   BATCH_THREASHOLD_WARN=ConfigExtension.getNettyBufferThresholdSize(storm_conf);
-  isWithAcker=ConfigExtension.isTopologyContainAcker(storm_conf);
+  blockSend=isBlockSend(storm_conf);
   directlySend=isDirectSend(storm_conf);
   flush_later=new AtomicBoolean(false);
   flushCheckInterval=Utils.getInt(storm_conf.get(Config.STORM_NETTY_FLUSH_CHECK_INTERVAL_MS),10);

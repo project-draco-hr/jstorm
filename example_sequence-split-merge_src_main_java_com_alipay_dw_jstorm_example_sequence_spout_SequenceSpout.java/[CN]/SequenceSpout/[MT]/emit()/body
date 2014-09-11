@@ -1,9 +1,18 @@
 {
+  String buffer=null;
+  if (bufferLen > 0) {
+    byte[] byteBuffer=new byte[bufferLen];
+    for (int i=0; i < bufferLen; i++) {
+      byteBuffer[i]=(byte)random.nextInt(200);
+    }
+    buffer=new String(byteBuffer);
+  }
   Pair trade=PairMaker.makeTradeInstance();
   Pair customer=PairMaker.makeCustomerInstance();
   TradeCustomer tradeCustomer=new TradeCustomer();
   tradeCustomer.setTrade(trade);
   tradeCustomer.setCustomer(customer);
+  tradeCustomer.setBuffer(buffer);
   tradeSum.addAndGet(trade.getValue());
   customerSum.addAndGet(customer.getValue());
   collector.emit(new Values(tupleId,tradeCustomer),Long.valueOf(tupleId));

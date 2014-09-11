@@ -10,5 +10,8 @@
   isFinished=false;
   tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
   MAX_PENDING_COUNTER=getMaxPending(conf);
-  LOG.info("Finish open");
+  bufferLen=JStormUtils.parseInt(conf.get("byte.buffer.len"),0);
+  random=new Random();
+  random.setSeed(System.currentTimeMillis());
+  LOG.info("Finish open, buffer Len:" + bufferLen);
 }

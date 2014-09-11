@@ -1,0 +1,6 @@
+{
+  if (ConfigExtension.isTopologyContainAcker(storm_conf) == false) {
+    return false;
+  }
+  return ConfigExtension.isNettyASyncBlock(storm_conf);
+}
