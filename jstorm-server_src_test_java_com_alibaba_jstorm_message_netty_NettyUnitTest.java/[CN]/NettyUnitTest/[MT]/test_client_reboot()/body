@@ -2,16 +2,10 @@
   System.out.println("!!!!!!!!!!Start client reboot test!!!!!!!!");
   final String req_msg=setupLargMsg();
   final IContext context=TransportFactory.makeContext(storm_conf);
-  final Semaphore semp=new Semaphore(1);
   new Thread(new Runnable(){
     @Override public void run(){
-      try {
-        semp.acquire();
-      }
- catch (      InterruptedException e1) {
-      }
-      IConnection client=null;
-      client=context.connect(null,"localhost",port);
+      IConnection client=context.connect(null,"localhost",port);
+      lock.lock();
       List<TaskMessage> list=new ArrayList<TaskMessage>();
       TaskMessage message=new TaskMessage(task,req_msg.getBytes());
       list.add(message);
@@ -28,8 +22,15 @@
       client2.send(message);
       System.out.println("Send second");
       JStormUtils.sleepMs(1000);
+      try {
+        clientClose.await();
+      }
+ catch (      InterruptedException e) {
+        e.printStackTrace();
+      }
       client2.close();
-      semp.release();
+      contextClose.signal();
+      lock.unlock();
     }
   }
 ).start();
@@ -45,9 +46,11 @@
   TaskMessage recv2=server.recv(0);
   System.out.println("Sever receive second");
   Assert.assertEquals(req_msg,new String(recv2.message()));
+  lock.lock();
+  clientClose.signal();
   server.close();
-  semp.acquire();
+  contextClose.await();
   context.term();
-  semp.release();
+  lock.unlock();
   System.out.println("!!!!!!!!!!End client reboot test!!!!!!!!");
 }

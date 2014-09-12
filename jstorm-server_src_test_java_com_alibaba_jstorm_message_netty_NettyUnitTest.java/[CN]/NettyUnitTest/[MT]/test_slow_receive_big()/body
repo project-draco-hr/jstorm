@@ -4,12 +4,13 @@
   final String req_msg=setupLargMsg();
   final IContext context=TransportFactory.makeContext(storm_conf);
   final IConnection server=context.bind(null,port);
-  final IConnection client=context.connect(null,"localhost",port);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(2),waitStrategy);
   server.registerQueue(recvQueue);
   new Thread(new Runnable(){
     @Override public void run(){
+      final IConnection client=context.connect(null,"localhost",port);
+      lock.lock();
       for (int i=1; i < base; i++) {
         TaskMessage message=new TaskMessage(i,req_msg.getBytes());
         System.out.println("send " + i);
@@ -17,6 +18,15 @@
       }
       System.out.println("Finish Send ");
       JStormUtils.sleepMs(1000);
+      try {
+        clientClose.await();
+      }
+ catch (      InterruptedException e) {
+        e.printStackTrace();
+      }
+      client.close();
+      contextClose.signal();
+      lock.unlock();
     }
   }
 ).start();
@@ -27,8 +37,11 @@
     System.out.println("receive " + message.task());
   }
   System.out.println("Finish Receive ");
+  lock.lock();
+  clientClose.signal();
   server.close();
-  client.close();
+  contextClose.await();
   context.term();
+  lock.unlock();
   System.out.println("!!!!!!!!!!End test_slow_receive_big message test!!!!!!!!");
 }

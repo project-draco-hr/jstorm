@@ -3,9 +3,10 @@
   final String req_msg=setupLargMsg();
   final IContext context=TransportFactory.makeContext(storm_conf);
   IConnection server=null;
-  final IConnection client=context.connect(null,"localhost",port);
   new Thread(new Runnable(){
     @Override public void run(){
+      final IConnection client=context.connect(null,"localhost",port);
+      lock.lock();
       List<TaskMessage> list=new ArrayList<TaskMessage>();
       TaskMessage message=new TaskMessage(task,req_msg.getBytes());
       list.add(message);
@@ -18,6 +19,15 @@
       JStormUtils.sleepMs(15000);
       client.send(message);
       System.out.println("Send third time");
+      try {
+        clientClose.await();
+      }
+ catch (      InterruptedException e) {
+        e.printStackTrace();
+      }
+      client.close();
+      contextClose.signal();
+      lock.unlock();
     }
   }
 ).start();
@@ -36,8 +46,11 @@
   System.out.println("!!!!!!!!!!!!!!!!!!!! restart server !!!!!!!!!!!");
   TaskMessage recv2=server2.recv(0);
   Assert.assertEquals(req_msg,new String(recv2.message()));
+  lock.lock();
+  clientClose.signal();
   server2.close();
-  client.close();
+  contextClose.await();
   context.term();
+  lock.unlock();
   System.out.println("!!!!!!!!!!End server reboot test!!!!!!!!");
 }

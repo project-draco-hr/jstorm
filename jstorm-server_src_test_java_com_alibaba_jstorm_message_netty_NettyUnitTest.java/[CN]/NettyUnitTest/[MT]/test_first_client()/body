@@ -4,6 +4,7 @@
   final IContext context=TransportFactory.makeContext(storm_conf);
   new Thread(new Runnable(){
     @Override public void run(){
+      lock.lock();
       IConnection client=context.connect(null,"localhost",port);
       List<TaskMessage> list=new ArrayList<TaskMessage>();
       TaskMessage message=new TaskMessage(task,req_msg.getBytes());
@@ -11,7 +12,15 @@
       client.send(message);
       System.out.println("!!Client has sent data");
       JStormUtils.sleepMs(1000);
+      try {
+        clientClose.await();
+      }
+ catch (      InterruptedException e) {
+        e.printStackTrace();
+      }
       client.close();
+      contextClose.signal();
+      lock.unlock();
     }
   }
 ).start();
@@ -24,7 +33,11 @@
   server.registerQueue(recvQueue);
   TaskMessage recv=server.recv(0);
   Assert.assertEquals(req_msg,new String(recv.message()));
+  lock.lock();
+  clientClose.signal();
   server.close();
+  contextClose.await();
   context.term();
+  lock.unlock();
   System.out.println("!!!!!!!!!!!!End test_first_client!!!!!!!!!!!!!");
 }

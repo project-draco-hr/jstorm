@@ -6,16 +6,9 @@
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(1024),waitStrategy);
   server.registerQueue(recvQueue);
-  final Semaphore semp=new Semaphore(1);
   new Thread(new Runnable(){
-    @Override public void run(){
-      try {
-        semp.acquire();
-      }
- catch (      InterruptedException e) {
-      }
-      IConnection client=null;
-      client=context.connect(null,"localhost",port);
+    public void send(){
+      final IConnection client=context.connect(null,"localhost",port);
       List<TaskMessage> list=new ArrayList<TaskMessage>();
       for (int i=1; i < Short.MAX_VALUE; i++) {
         String req_msg=String.valueOf(i + base);
@@ -25,8 +18,23 @@
       client.send(list);
       System.out.println("Finish Send ");
       JStormUtils.sleepMs(1000);
+      try {
+        clientClose.await();
+      }
+ catch (      InterruptedException e) {
+        e.printStackTrace();
+      }
       client.close();
-      semp.release();
+      contextClose.signal();
+    }
+    @Override public void run(){
+      lock.lock();
+      try {
+        send();
+      }
+  finally {
+        lock.unlock();
+      }
     }
   }
 ).start();
@@ -38,9 +46,11 @@
     }
   }
   System.out.println("Finish Receive ");
+  lock.lock();
+  clientClose.signal();
   server.close();
-  semp.acquire();
+  contextClose.await();
   context.term();
-  semp.release();
+  lock.unlock();
   System.out.println("!!!!!!!!!!End batch message test!!!!!!!!");
 }
