@@ -1,0 +1,8 @@
+{
+  Double ret=new Double(0);
+  Map<String,Double> allTimeSendTps=get_send_tps().get(StatBuckets.ALL_WINDOW_STR);
+  for (  Entry<String,Double> entry : allTimeSendTps.entrySet()) {
+    ret+=entry.getValue();
+  }
+  return ret;
+}

@@ -4,5 +4,5 @@
   bootstrap.setOption("sendBufferSize",buffer_size);
   bootstrap.setOption("keepAlive",true);
   bootstrap.setPipelineFactory(new StormClientPipelineFactory(this));
-  doReconnect();
+  reconnect();
 }

@@ -1,11 +1,5 @@
 {
-  String myHostName=ConfigExtension.getSupervisorHost(conf);
-  if (myHostName == null) {
-    myHostName=NetWorkUtils.hostname();
-  }
-  if (ConfigExtension.isSupervisorUseIp(conf)) {
-    myHostName=NetWorkUtils.ip();
-  }
+  String myHostName=JStormServerUtils.getHostName(conf);
   this.stormClusterState=stormClusterState;
   this.supervisorId=supervisorId;
   this.conf=conf;

@@ -1,0 +1,18 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  MonitorOptions typedOther=(MonitorOptions)other;
+  lastComparison=Boolean.valueOf(is_set_isEnable()).compareTo(typedOther.is_set_isEnable());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_isEnable()) {
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.isEnable,typedOther.isEnable);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

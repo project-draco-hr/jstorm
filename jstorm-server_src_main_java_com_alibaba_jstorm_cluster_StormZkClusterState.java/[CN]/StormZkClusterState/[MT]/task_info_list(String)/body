@@ -1,0 +1,9 @@
+{
+  Map<Integer,TaskInfo> taskInfoList=new HashMap<Integer,TaskInfo>();
+  List<Integer> taskIds=task_ids(topologyId);
+  for (  Integer taskId : taskIds) {
+    TaskInfo taskInfo=task_info(topologyId,taskId);
+    taskInfoList.put(taskId,taskInfo);
+  }
+  return taskInfoList;
+}

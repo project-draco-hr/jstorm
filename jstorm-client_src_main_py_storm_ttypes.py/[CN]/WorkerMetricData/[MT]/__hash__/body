@@ -1,0 +1,2 @@
+def __hash__(self):
+    return (((((((0 + hash(self.hostname)) + hash(self.port)) + hash(self.gauge)) + hash(self.counter)) + hash(self.meter)) + hash(self.timer)) + hash(self.histogram))

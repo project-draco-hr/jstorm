@@ -1,0 +1,5 @@
+{
+  for (  Entry<String,Long> entry : counterMapKV.entrySet()) {
+    kVMap.put(entry.getKey(),entry.getValue());
+  }
+}

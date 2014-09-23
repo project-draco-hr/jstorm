@@ -1,0 +1,8 @@
+{
+  String metricName;
+  if (prefix == null)   metricName=name;
+ else   metricName=prefix + "-" + name;
+  JStormHistogram ret=registerHistograms(metricName);
+  updateMetric(prefix,name,metricType,ret.getInstance(),idStr);
+  return ret;
+}

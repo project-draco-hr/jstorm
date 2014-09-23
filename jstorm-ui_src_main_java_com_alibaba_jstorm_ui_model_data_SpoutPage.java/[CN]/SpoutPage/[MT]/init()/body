@@ -5,12 +5,15 @@
     client=NimbusClient.getConfiguredClient(conf);
     TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
     StormTopology topology=client.getClient().getTopology(topologyid);
+    TopologyMetricInfo topologyMetricInfo=client.getClient().getTopologyMetric(topologyid);
     String type=UIUtils.componentType(topology,componentid);
     List<TaskSummary> ts=UIUtils.getTaskList(summ.get_tasks(),componentid);
     coms=getComponentSummaries(summ,ts);
     cts=getComponentTasks(ts,window);
     comstats=getWinComponentStats(ts,window);
     getOutputSummary(ts,window);
+    List<TaskMetricData> totoaltaskmetrics=topologyMetricInfo.get_task_metric_list();
+    taskmetrics=getTaskMetricsList(totoaltaskmetrics);
   }
  catch (  TException e) {
     LOG.error(e.getCause(),e);

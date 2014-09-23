@@ -4,9 +4,9 @@
     return;
   }
   being_closed.set(true);
-  Metrics.unregister(pendingGaugeName);
-  Metrics.unregister(histogramName);
-  Metrics.unregister(sendTimerName);
+  Metrics.unregister(address,MetricDef.NETTY_CLI_SEND_TIME,null,Metrics.MetricType.WORKER);
+  Metrics.unregister(address,MetricDef.NETTY_CLI_BATCH_SIZE,null,Metrics.MetricType.WORKER);
+  Metrics.unregister(address,MetricDef.NETTY_CLI_SEND_PENDING,null,Metrics.MetricType.WORKER);
   Channel channel=channelRef.get();
   if (channel == null) {
     LOG.info("Channel {} has been closed before",name());

@@ -1,0 +1,5 @@
+String prefix
+String name
+DisruptorQueue queue
+String idStr
+MetricType metricType

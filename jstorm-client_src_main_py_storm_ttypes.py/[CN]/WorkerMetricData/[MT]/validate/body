@@ -1,0 +1,16 @@
+def validate(self):
+    if (self.hostname is None):
+        raise TProtocol.TProtocolException(message='Required field hostname is unset!')
+    if (self.port is None):
+        raise TProtocol.TProtocolException(message='Required field port is unset!')
+    if (self.gauge is None):
+        raise TProtocol.TProtocolException(message='Required field gauge is unset!')
+    if (self.counter is None):
+        raise TProtocol.TProtocolException(message='Required field counter is unset!')
+    if (self.meter is None):
+        raise TProtocol.TProtocolException(message='Required field meter is unset!')
+    if (self.timer is None):
+        raise TProtocol.TProtocolException(message='Required field timer is unset!')
+    if (self.histogram is None):
+        raise TProtocol.TProtocolException(message='Required field histogram is unset!')
+    return

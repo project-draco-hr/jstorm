@@ -1,0 +1,36 @@
+{
+  String name=metricInfo.getName();
+  Metric metric=metricInfo.getMetric();
+  LOG.debug("Metric name=" + name);
+  if (metric instanceof QueueGauge) {
+    float queueRatio=(((QueueGauge)metric).getValue()) * 100;
+    sum(gaugeData,name,(double)queueRatio);
+  }
+ else   if (metric instanceof Gauge<?>) {
+    Double value=JStormUtils.convertToDouble(((Gauge)metric).getValue());
+    if (value == null) {
+      LOG.warn("gauge value is null or unknow type.");
+    }
+ else {
+      sum(gaugeData,name,value);
+    }
+  }
+ else   if (metric instanceof Timer) {
+    Snapshot snapshot=((Timer)metric).getSnapshot();
+    sum(timerData,name,(snapshot.getMean()) / 1000000);
+  }
+ else   if (metric instanceof Counter) {
+    Double value=((Long)((Counter)metric).getCount()).doubleValue();
+    sum(counterData,name,value);
+  }
+ else   if (metric instanceof Meter) {
+    sum(meterData,name,((Meter)metric).getMeanRate());
+  }
+ else   if (metric instanceof Histogram) {
+    Snapshot snapshot=((Histogram)metric).getSnapshot();
+    sum(histogramData,name,snapshot.getMean());
+  }
+ else {
+    LOG.warn("Unknown metric type, name:" + name);
+  }
+}

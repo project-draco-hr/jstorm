@@ -14,8 +14,8 @@ def write(self, oprot):
     if (self.tasks is not None):
         oprot.writeFieldBegin('tasks', TType.LIST, 3)
         oprot.writeListBegin(TType.STRUCT, len(self.tasks))
-        for iter208 in self.tasks:
-            iter208.write(oprot)
+        for iter345 in self.tasks:
+            iter345.write(oprot)
         oprot.writeListEnd()
         oprot.writeFieldEnd()
     oprot.writeFieldStop()

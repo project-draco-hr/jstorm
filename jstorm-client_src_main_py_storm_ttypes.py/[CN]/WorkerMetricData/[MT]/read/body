@@ -1,0 +1,78 @@
+def read(self, iprot):
+    if ((iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and isinstance(iprot.trans, TTransport.CReadableTransport) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+        return
+    iprot.readStructBegin()
+    while True:
+        (fname, ftype, fid) = iprot.readFieldBegin()
+        if (ftype == TType.STOP):
+            break
+        if (fid == 1):
+            if (ftype == TType.STRING):
+                self.hostname = iprot.readString().decode('utf-8')
+            else:
+                iprot.skip(ftype)
+        elif (fid == 2):
+            if (ftype == TType.I32):
+                self.port = iprot.readI32()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 3):
+            if (ftype == TType.MAP):
+                self.gauge = {}
+                (_ktype413, _vtype414, _size412) = iprot.readMapBegin()
+                for _i416 in xrange(_size412):
+                    _key417 = iprot.readString().decode('utf-8')
+                    _val418 = iprot.readDouble()
+                    self.gauge[_key417] = _val418
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 4):
+            if (ftype == TType.MAP):
+                self.counter = {}
+                (_ktype420, _vtype421, _size419) = iprot.readMapBegin()
+                for _i423 in xrange(_size419):
+                    _key424 = iprot.readString().decode('utf-8')
+                    _val425 = iprot.readDouble()
+                    self.counter[_key424] = _val425
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 5):
+            if (ftype == TType.MAP):
+                self.meter = {}
+                (_ktype427, _vtype428, _size426) = iprot.readMapBegin()
+                for _i430 in xrange(_size426):
+                    _key431 = iprot.readString().decode('utf-8')
+                    _val432 = iprot.readDouble()
+                    self.meter[_key431] = _val432
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 6):
+            if (ftype == TType.MAP):
+                self.timer = {}
+                (_ktype434, _vtype435, _size433) = iprot.readMapBegin()
+                for _i437 in xrange(_size433):
+                    _key438 = iprot.readString().decode('utf-8')
+                    _val439 = iprot.readDouble()
+                    self.timer[_key438] = _val439
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 7):
+            if (ftype == TType.MAP):
+                self.histogram = {}
+                (_ktype441, _vtype442, _size440) = iprot.readMapBegin()
+                for _i444 in xrange(_size440):
+                    _key445 = iprot.readString().decode('utf-8')
+                    _val446 = iprot.readDouble()
+                    self.histogram[_key445] = _val446
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        else:
+            iprot.skip(ftype)
+        iprot.readFieldEnd()
+    iprot.readStructEnd()

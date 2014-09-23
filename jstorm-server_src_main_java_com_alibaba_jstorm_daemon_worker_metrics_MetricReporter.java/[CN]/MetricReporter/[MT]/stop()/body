@@ -1,0 +1,4 @@
+{
+  reporter1Minute.stop();
+  reporter10Minute.stop();
+}

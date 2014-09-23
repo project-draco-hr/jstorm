@@ -1,0 +1,4 @@
+{
+  LOG.info("Unregister metric " + name);
+  return metrics.remove(name);
+}

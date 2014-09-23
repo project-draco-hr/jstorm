@@ -1,0 +1,3 @@
+{
+  timerMap.put(name,timer);
+}

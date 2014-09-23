@@ -1,0 +1,6 @@
+{
+  String userMetricName=getMetricName(taskid,name);
+  Gauge<?> ret=Metrics.registerGauge(userMetricName,gauge);
+  Metrics.registerUserDefine(userMetricName,gauge,callback);
+  return ret;
+}

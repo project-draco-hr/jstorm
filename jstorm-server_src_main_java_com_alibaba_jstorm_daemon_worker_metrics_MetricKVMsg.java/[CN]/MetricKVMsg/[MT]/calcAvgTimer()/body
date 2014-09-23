@@ -1,0 +1,13 @@
+{
+  for (  Entry<String,Map<MetricType,Double>> entry : timerMapKV.entrySet()) {
+    String userDefName=entry.getKey();
+    Map<MetricType,Double> valueMap=entry.getValue();
+    Integer count=countMap.get(userDefName);
+    if (count == null) {
+      Log.warn("Name=" + userDefName + " is not found in countMap for timer.");
+      continue;
+    }
+    double meanValue=(valueMap.get(MetricType.mean)) / count;
+    valueMap.put(MetricType.mean,convertDurationFromNsToMs(meanValue));
+  }
+}

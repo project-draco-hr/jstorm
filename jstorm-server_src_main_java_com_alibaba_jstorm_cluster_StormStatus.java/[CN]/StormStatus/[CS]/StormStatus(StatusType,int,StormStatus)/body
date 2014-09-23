@@ -1,5 +1,6 @@
 {
   this.type=type;
   this.delaySecs=delaySecs;
+  this.killTimeSecs=delaySecs;
   this.oldStatus=oldStatus;
 }

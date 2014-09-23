@@ -1,0 +1,12 @@
+{
+  if (isClosed()) {
+    return;
+  }
+  if (channel == channelRef.get()) {
+    setChannel(null);
+    reconnect();
+  }
+ else {
+    closeChannel(channel);
+  }
+}

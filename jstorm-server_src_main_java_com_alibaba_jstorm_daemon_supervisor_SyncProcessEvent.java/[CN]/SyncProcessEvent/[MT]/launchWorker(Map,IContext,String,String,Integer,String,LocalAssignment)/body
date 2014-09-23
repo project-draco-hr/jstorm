@@ -25,7 +25,7 @@
  else {
     environment.put("REDIRECT","false");
   }
-  String logFileName=topologyId + "-worker-" + port+ ".log";
+  String logFileName=JStormUtils.genLogName(assignment.getTopologyName(),port);
   environment.put("LD_LIBRARY_PATH",(String)totalConf.get(Config.JAVA_LIBRARY_PATH));
   StringBuilder commandSB=new StringBuilder();
   try {

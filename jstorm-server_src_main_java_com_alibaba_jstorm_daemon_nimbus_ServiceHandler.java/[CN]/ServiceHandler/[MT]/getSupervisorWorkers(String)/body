@@ -35,31 +35,33 @@
       String topologyId=entry.getKey();
       Assignment assignment=entry.getValue();
       Map<Integer,String> taskToComponent=Cluster.topology_task_info(stormClusterState,topologyId);
+      Map<Integer,String> taskToComponentType=Cluster.topology_task_compType(stormClusterState,topologyId);
       Set<ResourceWorkerSlot> workers=assignment.getWorkers();
       for (      ResourceWorkerSlot worker : workers) {
+        if (supervisorId.equals(worker.getNodeId()) == false) {
+          continue;
+        }
+        Integer slotNum=supervisorToUsedSlotNum.get(supervisorId);
+        if (slotNum == null) {
+          slotNum=0;
+          supervisorToUsedSlotNum.put(supervisorId,slotNum);
+        }
+        supervisorToUsedSlotNum.put(supervisorId,++slotNum);
+        Integer port=worker.getPort();
+        WorkerSummary workerSummary=portWorkerSummarys.get(port);
+        if (workerSummary == null) {
+          workerSummary=new WorkerSummary();
+          workerSummary.set_port(port);
+          workerSummary.set_topology(topologyId);
+          workerSummary.set_tasks(new ArrayList<TaskSummary>());
+          portWorkerSummarys.put(port,workerSummary);
+        }
         for (        Integer taskId : worker.getTasks()) {
-          if (supervisorId.equals(worker.getNodeId()) == false) {
-            continue;
-          }
-          Integer slotNum=supervisorToUsedSlotNum.get(supervisorId);
-          if (slotNum == null) {
-            slotNum=0;
-            supervisorToUsedSlotNum.put(supervisorId,slotNum);
-          }
-          supervisorToUsedSlotNum.put(supervisorId,++slotNum);
-          Integer port=worker.getPort();
-          WorkerSummary workerSummary=portWorkerSummarys.get(port);
-          if (workerSummary == null) {
-            workerSummary=new WorkerSummary();
-            workerSummary.set_port(port);
-            workerSummary.set_topology(topologyId);
-            workerSummary.set_tasks(new ArrayList<TaskSummary>());
-            portWorkerSummarys.put(port,workerSummary);
-          }
           String componentName=taskToComponent.get(taskId);
+          String componentType=taskToComponentType.get(taskId);
           int uptime=TimeUtils.time_delta(assignment.getTaskStartTimeSecs().get(taskId));
           List<TaskSummary> tasks=workerSummary.get_tasks();
-          TaskSummary taskSummary=NimbusUtils.mkSimpleTaskSummary(worker,taskId,componentName,host,uptime);
+          TaskSummary taskSummary=NimbusUtils.mkSimpleTaskSummary(worker,taskId,componentName,componentType,host,uptime);
           tasks.add(taskSummary);
         }
       }

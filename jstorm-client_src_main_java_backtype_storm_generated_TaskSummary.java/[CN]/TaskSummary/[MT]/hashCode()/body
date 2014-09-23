@@ -21,5 +21,8 @@
   boolean present_stats=true && (is_set_stats());
   builder.append(present_stats);
   if (present_stats)   builder.append(stats);
+  boolean present_component_type=true && (is_set_component_type());
+  builder.append(present_component_type);
+  if (present_component_type)   builder.append(component_type);
   return builder.toHashCode();
 }

@@ -1,0 +1,74 @@
+{
+  validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  oprot.writeFieldBegin(TASK_ID_FIELD_DESC);
+  oprot.writeI32(this.task_id);
+  oprot.writeFieldEnd();
+  if (this.component_id != null) {
+    oprot.writeFieldBegin(COMPONENT_ID_FIELD_DESC);
+    oprot.writeString(this.component_id);
+    oprot.writeFieldEnd();
+  }
+  if (this.gauge != null) {
+    oprot.writeFieldBegin(GAUGE_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift7.protocol.TMap(org.apache.thrift7.protocol.TType.STRING,org.apache.thrift7.protocol.TType.DOUBLE,this.gauge.size()));
+      for (      Map.Entry<String,Double> _iter225 : this.gauge.entrySet()) {
+        oprot.writeString(_iter225.getKey());
+        oprot.writeDouble(_iter225.getValue());
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.counter != null) {
+    oprot.writeFieldBegin(COUNTER_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift7.protocol.TMap(org.apache.thrift7.protocol.TType.STRING,org.apache.thrift7.protocol.TType.DOUBLE,this.counter.size()));
+      for (      Map.Entry<String,Double> _iter226 : this.counter.entrySet()) {
+        oprot.writeString(_iter226.getKey());
+        oprot.writeDouble(_iter226.getValue());
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.meter != null) {
+    oprot.writeFieldBegin(METER_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift7.protocol.TMap(org.apache.thrift7.protocol.TType.STRING,org.apache.thrift7.protocol.TType.DOUBLE,this.meter.size()));
+      for (      Map.Entry<String,Double> _iter227 : this.meter.entrySet()) {
+        oprot.writeString(_iter227.getKey());
+        oprot.writeDouble(_iter227.getValue());
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.timer != null) {
+    oprot.writeFieldBegin(TIMER_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift7.protocol.TMap(org.apache.thrift7.protocol.TType.STRING,org.apache.thrift7.protocol.TType.DOUBLE,this.timer.size()));
+      for (      Map.Entry<String,Double> _iter228 : this.timer.entrySet()) {
+        oprot.writeString(_iter228.getKey());
+        oprot.writeDouble(_iter228.getValue());
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (this.histogram != null) {
+    oprot.writeFieldBegin(HISTOGRAM_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift7.protocol.TMap(org.apache.thrift7.protocol.TType.STRING,org.apache.thrift7.protocol.TType.DOUBLE,this.histogram.size()));
+      for (      Map.Entry<String,Double> _iter229 : this.histogram.entrySet()) {
+        oprot.writeString(_iter229.getKey());
+        oprot.writeDouble(_iter229.getValue());
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

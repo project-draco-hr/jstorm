@@ -1,0 +1,3 @@
+{
+  gaugeMap.put(name,gauge);
+}

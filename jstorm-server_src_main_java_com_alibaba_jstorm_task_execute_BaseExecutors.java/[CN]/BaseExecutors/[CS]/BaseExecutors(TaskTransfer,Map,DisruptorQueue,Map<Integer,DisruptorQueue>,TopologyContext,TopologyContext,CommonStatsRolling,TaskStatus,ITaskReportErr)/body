@@ -19,7 +19,7 @@
   this.exeQueue.consumerStarted();
   this.registerInnerTransfer(exeQueue);
   deserializeThread=new AsyncLoopThread(new DeserializeRunnable(deserializeQueue,exeQueue));
-  deserializeTimer=Metrics.registerTimer(idStr + "-deserialize-timer");
-  Metrics.registerQueue(idStr + "-deserialize-queue",deserializeQueue);
-  Metrics.registerQueue(idStr + "-exe-queue",exeQueue);
+  deserializeTimer=Metrics.registerTimer(idStr,MetricDef.DESERIALIZE_TIME,String.valueOf(taskId),Metrics.MetricType.TASK);
+  Metrics.registerQueue(idStr,MetricDef.DESERIALIZE_QUEUE,deserializeQueue,String.valueOf(taskId),Metrics.MetricType.TASK);
+  Metrics.registerQueue(idStr,MetricDef.EXECUTE_QUEUE,exeQueue,String.valueOf(taskId),Metrics.MetricType.TASK);
 }

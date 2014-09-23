@@ -1,13 +1,13 @@
 {
-  Channel oldChannel=channelRef.getAndSet(newChannel);
+  final Channel oldChannel=channelRef.getAndSet(newChannel);
   if (newChannel != null) {
     retries.set(0);
   }
-  String oldLocalAddres=(oldChannel == null) ? "null" : oldChannel.getLocalAddress().toString();
+  final String oldLocalAddres=(oldChannel == null) ? "null" : oldChannel.getLocalAddress().toString();
   String newLocalAddress=(newChannel == null) ? "null" : newChannel.getLocalAddress().toString();
   LOG.info("Use new channel {} replace old channel {}",newLocalAddress,oldLocalAddres);
   if (oldChannel != newChannel && oldChannel != null) {
-    oldChannel.close();
-    LOG.info("Close old channel " + oldLocalAddres);
+    closeChannel(oldChannel);
+    LOG.info("Successfully close old channel " + oldLocalAddres);
   }
 }

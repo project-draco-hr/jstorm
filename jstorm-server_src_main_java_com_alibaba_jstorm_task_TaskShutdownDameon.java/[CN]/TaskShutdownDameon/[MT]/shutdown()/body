@@ -1,7 +1,12 @@
 {
+synchronized (this) {
+    if (isClosed == true) {
+      return;
+    }
+    isClosed=true;
+  }
   LOG.info("Begin to shut down task " + topology_id + ":"+ task_id);
   taskStatus.setStatus(TaskStatus.SHUTDOWN);
-  closeComponent(task_obj);
   try {
     Thread.sleep(100);
   }
@@ -12,14 +17,11 @@
     thr.cleanup();
     JStormUtils.sleepMs(10);
     thr.interrupt();
-    try {
-      thr.getThread().stop();
-    }
- catch (    Exception e) {
-    }
     LOG.info("Successfully shutdown " + thr.getThread().getName());
   }
+  closeComponent(task_obj);
   try {
+    TaskHeartbeatRunable.unregisterTaskStats(task_id);
     zkCluster.remove_task_heartbeat(topology_id,task_id);
     zkCluster.disconnect();
   }

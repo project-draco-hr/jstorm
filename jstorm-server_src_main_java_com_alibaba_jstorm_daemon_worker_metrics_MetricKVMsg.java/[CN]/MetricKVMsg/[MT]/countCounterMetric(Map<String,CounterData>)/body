@@ -1,0 +1,11 @@
+{
+  for (  Entry<String,CounterData> entry : counterMap.entrySet()) {
+    String taskMetricName=entry.getKey();
+    String userDefName=taskMetricName.substring(taskMetricName.indexOf(":") + 1);
+    Long value=entry.getValue().getValue();
+    if (counterMapKV.containsKey(userDefName)) {
+      value=value + counterMapKV.get(userDefName);
+    }
+    counterMapKV.put(userDefName,value);
+  }
+}

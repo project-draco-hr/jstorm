@@ -1,0 +1,15 @@
+{
+  for (  Entry<String,MeterData> entry : meterMap.entrySet()) {
+    String taskMetricName=entry.getKey();
+    String userDefName=taskMetricName.substring(taskMetricName.indexOf(":") + 1);
+    Double meanRate=entry.getValue().getMeanRate();
+    Map<MetricType,Double> temMap=meterMapKV.get(userDefName);
+    if (temMap == null) {
+      temMap=new HashMap<MetricType,Double>();
+      meterMapKV.put(userDefName,temMap);
+    }
+    meanRate+=(temMap.get(MetricType.mean) == null ? 0.0 : temMap.get(MetricType.mean));
+    temMap.put(MetricType.mean,meanRate);
+    meterMapKV.put(userDefName,temMap);
+  }
+}

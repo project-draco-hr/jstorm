@@ -1,0 +1,3 @@
+int collection_flag
+String error_message
+List<Map<String,Object>> msgList

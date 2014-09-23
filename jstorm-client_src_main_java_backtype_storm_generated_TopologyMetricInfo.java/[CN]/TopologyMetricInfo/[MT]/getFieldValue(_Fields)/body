@@ -1,0 +1,11 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    return get_topology_id();
+case TASK_METRIC_LIST:
+  return get_task_metric_list();
+case WORKER_METRIC_LIST:
+return get_worker_metric_list();
+}
+throw new IllegalStateException();
+}

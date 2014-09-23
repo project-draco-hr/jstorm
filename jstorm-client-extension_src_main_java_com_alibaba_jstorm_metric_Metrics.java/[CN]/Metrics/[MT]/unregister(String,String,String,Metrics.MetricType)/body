@@ -1,0 +1,38 @@
+{
+  String MetricName;
+  if (prefix == null)   MetricName=name;
+ else   MetricName=prefix + "-" + name;
+  boolean ret=unregister(MetricName);
+  if (ret == true) {
+    List<MetricInfo> metricList=null;
+    if (type == MetricType.WORKER) {
+      metricList=workerMetricList;
+    }
+ else {
+      metricList=taskMetricMap.get(id);
+    }
+    boolean found=false;
+    if (metricList != null) {
+      for (      MetricInfo metric : metricList) {
+        if (metric.getName().equals(name)) {
+          if (prefix != null) {
+            if (metric.getPrefix().equals(prefix)) {
+              metricList.remove(metric);
+              found=true;
+              break;
+            }
+          }
+ else {
+            if (metric.getPrefix() == null) {
+              metricList.remove(metric);
+              found=true;
+              break;
+            }
+          }
+        }
+      }
+    }
+    if (found != true)     LOG.warn("Name " + name + " is not found when unregister from metricList");
+  }
+  return ret;
+}

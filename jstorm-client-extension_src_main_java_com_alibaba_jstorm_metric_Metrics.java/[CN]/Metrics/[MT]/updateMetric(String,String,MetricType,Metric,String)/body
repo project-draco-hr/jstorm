@@ -1,0 +1,21 @@
+{
+  Map<String,List<MetricInfo>> metricMap;
+  List<MetricInfo> metricList;
+  if (metricType == MetricType.TASK) {
+    metricMap=taskMetricMap;
+    metricList=metricMap.get(idStr);
+    if (null == metricList) {
+      metricList=new ArrayList<MetricInfo>();
+      metricMap.put(idStr,metricList);
+    }
+  }
+ else   if (metricType == MetricType.WORKER) {
+    metricList=workerMetricList;
+  }
+ else {
+    LOG.error("updateMetricMap: unknown metric type");
+    return;
+  }
+  MetricInfo metricInfo=new MetricInfo(prefix,name,metric);
+  metricList.add(metricInfo);
+}

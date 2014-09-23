@@ -2,5 +2,6 @@ self
 id
 name
 uptime_secs
-tasks
+workers
 status
+tasks

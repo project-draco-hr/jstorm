@@ -23,7 +23,6 @@
   sb.append("workerId:" + worker_id + ", ");
   sb.append("jar_path:" + jar_path + "\n");
   try {
-    redirectOutput(port_str);
     WorkerShutdown sd=mk_worker(conf,null,topology_id,supervisor_id,Integer.parseInt(port_str),worker_id,jar_path);
     sd.join();
     LOG.info("Successfully shutdown worker " + sb.toString());

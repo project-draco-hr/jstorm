@@ -1,0 +1,7 @@
+{
+  HashCodeBuilder builder=new HashCodeBuilder();
+  boolean present_isEnable=true && (is_set_isEnable());
+  builder.append(present_isEnable);
+  if (present_isEnable)   builder.append(isEnable);
+  return builder.toHashCode();
+}

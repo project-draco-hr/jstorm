@@ -1,17 +1,15 @@
 {
   super(storm_conf,factory,scheduler,host,port,reconnector);
   batchQueue=new ConcurrentLinkedQueue<MessageBatch>();
-  batchQueueName=JStormServerUtils.getName(host,port) + "-batchQueue-counter";
-  Metrics.register(batchQueueName,new Gauge<Integer>(){
+  Metrics.register(address,MetricDef.NETTY_CLI_SYNC_BATCH_QUEUE,new Gauge<Integer>(){
     @Override public Integer getValue(){
       return batchQueue.size();
     }
   }
-);
+,null,Metrics.MetricType.WORKER);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   disruptorQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(MAX_SEND_PENDING * 8),waitStrategy);
-  disruptorQueueName=JStormServerUtils.getName(host,port) + "-disruptorQueue";
-  Metrics.registerQueue(disruptorQueueName,disruptorQueue);
+  Metrics.registerQueue(address,MetricDef.NETTY_CLI_SYNC_DISR_QUEUE,disruptorQueue,null,Metrics.MetricType.WORKER);
   Runnable trigger=new Runnable(){
     @Override public void run(){
       trigger();

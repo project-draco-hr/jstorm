@@ -1,0 +1,20 @@
+{
+synchronized (this) {
+    if (closingChannel.contains(channel)) {
+      LOG.info(channel.toString() + " is already closed");
+      return;
+    }
+    closingChannel.add(channel);
+  }
+  LOG.debug(channel.toString() + " begin to closed");
+  ChannelFuture closeFuture=channel.close();
+  closeFuture.addListener(new ChannelFutureListener(){
+    public void operationComplete(    ChannelFuture future) throws Exception {
+synchronized (this) {
+        closingChannel.remove(channel);
+      }
+      LOG.debug(channel.toString() + " finish closed");
+    }
+  }
+);
+}

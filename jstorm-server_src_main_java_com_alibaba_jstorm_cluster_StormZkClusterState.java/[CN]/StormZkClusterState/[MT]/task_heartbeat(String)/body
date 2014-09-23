@@ -1,0 +1,15 @@
+{
+  Map<String,TaskHeartbeat> ret=new HashMap<String,TaskHeartbeat>();
+  String topoTbPath=Cluster.taskbeat_storm_root(topologyId);
+  List<String> taskList=cluster_state.get_children(topoTbPath,false);
+  for (  String taskId : taskList) {
+    String taskbeatPath=Cluster.taskbeat_path(topologyId,Integer.parseInt(taskId));
+    byte[] znodeData=cluster_state.get_data(taskbeatPath,false);
+    Object data=Cluster.maybe_deserialize(znodeData);
+    if (data == null) {
+      continue;
+    }
+    ret.put(taskId,(TaskHeartbeat)data);
+  }
+  return ret;
+}

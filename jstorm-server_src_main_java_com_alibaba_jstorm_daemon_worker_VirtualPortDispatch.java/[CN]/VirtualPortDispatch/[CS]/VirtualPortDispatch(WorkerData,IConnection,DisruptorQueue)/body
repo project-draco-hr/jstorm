@@ -1,5 +1,6 @@
 {
-  super(recvQueue,VirtualPortDispatch.class.getSimpleName(),workerData.getActive());
+  super(recvQueue,timer,VirtualPortDispatch.class.getSimpleName(),workerData.getActive());
   this.recvConnection=recvConnection;
   this.deserializeQueues=workerData.getDeserializeQueues();
+  Metrics.registerQueue(null,MetricDef.DISPATCH_QUEUE,queue,null,Metrics.MetricType.WORKER);
 }

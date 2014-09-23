@@ -1,0 +1,11 @@
+{
+  this();
+  this.hostname=hostname;
+  this.port=port;
+  set_port_isSet(true);
+  this.gauge=gauge;
+  this.counter=counter;
+  this.meter=meter;
+  this.timer=timer;
+  this.histogram=histogram;
+}

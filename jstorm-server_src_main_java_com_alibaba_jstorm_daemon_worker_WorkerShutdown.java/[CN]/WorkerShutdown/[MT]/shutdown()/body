@@ -1,19 +1,21 @@
 {
   active.set(false);
   metricReporter.shutdown();
+  for (  ShutdownableDameon task : shutdowntasks) {
+    task.shutdown();
+  }
+  for (  AsyncLoopThread t : threads) {
+    LOG.info("Begin to shutdown " + t.getThread().getName());
+    t.cleanup();
+    JStormUtils.sleepMs(100);
+    t.interrupt();
+    LOG.info("Successfully " + t.getThread().getName());
+  }
   for (  WorkerSlot k : nodeportSocket.keySet()) {
     IConnection value=nodeportSocket.get(k);
     value.close();
   }
   context.term();
-  for (  ShutdownableDameon task : shutdowntasks) {
-    task.shutdown();
-  }
-  for (  AsyncLoopThread t : threads) {
-    t.cleanup();
-    JStormUtils.sleepMs(100);
-    t.interrupt();
-  }
   try {
     zkCluster.disconnect();
     cluster_state.close();

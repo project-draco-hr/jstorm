@@ -1,0 +1,23 @@
+{
+  if (!is_set_task_id()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'task_id' is unset! Struct:" + toString());
+  }
+  if (!is_set_component_id()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'component_id' is unset! Struct:" + toString());
+  }
+  if (!is_set_gauge()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'gauge' is unset! Struct:" + toString());
+  }
+  if (!is_set_counter()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'counter' is unset! Struct:" + toString());
+  }
+  if (!is_set_meter()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'meter' is unset! Struct:" + toString());
+  }
+  if (!is_set_timer()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'timer' is unset! Struct:" + toString());
+  }
+  if (!is_set_histogram()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'histogram' is unset! Struct:" + toString());
+  }
+}

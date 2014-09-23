@@ -42,5 +42,11 @@
     if (!(this_present_stats && that_present_stats))     return false;
     if (!this.stats.equals(that.stats))     return false;
   }
+  boolean this_present_component_type=true && this.is_set_component_type();
+  boolean that_present_component_type=true && that.is_set_component_type();
+  if (this_present_component_type || that_present_component_type) {
+    if (!(this_present_component_type && that_present_component_type))     return false;
+    if (!this.component_type.equals(that.component_type))     return false;
+  }
   return true;
 }

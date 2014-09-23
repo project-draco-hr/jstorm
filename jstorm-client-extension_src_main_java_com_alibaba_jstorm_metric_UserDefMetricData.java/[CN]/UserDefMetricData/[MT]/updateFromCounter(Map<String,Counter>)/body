@@ -1,0 +1,7 @@
+{
+  for (  Entry<String,Counter> entry : counterMap.entrySet()) {
+    CounterData counterData=new CounterData();
+    counterData.setValue(entry.getValue().getCount());
+    counterDataMap.put(entry.getKey(),counterData);
+  }
+}

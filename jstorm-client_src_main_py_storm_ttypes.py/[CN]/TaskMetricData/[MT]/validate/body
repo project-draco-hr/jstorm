@@ -1,0 +1,16 @@
+def validate(self):
+    if (self.task_id is None):
+        raise TProtocol.TProtocolException(message='Required field task_id is unset!')
+    if (self.component_id is None):
+        raise TProtocol.TProtocolException(message='Required field component_id is unset!')
+    if (self.gauge is None):
+        raise TProtocol.TProtocolException(message='Required field gauge is unset!')
+    if (self.counter is None):
+        raise TProtocol.TProtocolException(message='Required field counter is unset!')
+    if (self.meter is None):
+        raise TProtocol.TProtocolException(message='Required field meter is unset!')
+    if (self.timer is None):
+        raise TProtocol.TProtocolException(message='Required field timer is unset!')
+    if (self.histogram is None):
+        raise TProtocol.TProtocolException(message='Required field histogram is unset!')
+    return

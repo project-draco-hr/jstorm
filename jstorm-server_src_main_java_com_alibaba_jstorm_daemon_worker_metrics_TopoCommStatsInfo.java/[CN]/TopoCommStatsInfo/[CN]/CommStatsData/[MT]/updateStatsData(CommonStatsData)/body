@@ -1,0 +1,6 @@
+{
+  sendTps+=commStatsData.get_total_send_tps();
+  recvTps+=commStatsData.get_total_recv_tps();
+  failed+=commStatsData.get_total_failed();
+  latency+=commStatsData.get_avg_latency();
+}

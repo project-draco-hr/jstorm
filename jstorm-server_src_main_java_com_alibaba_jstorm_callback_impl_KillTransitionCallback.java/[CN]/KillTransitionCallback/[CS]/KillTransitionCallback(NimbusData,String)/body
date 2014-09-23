@@ -1,4 +1,3 @@
 {
-  this.data=data;
-  this.topologyid=topologyid;
+  super(data,topologyid,null,StatusType.killed,StatusType.remove);
 }

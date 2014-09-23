@@ -1,0 +1,19 @@
+{
+  for (  Entry<String,Map<String,TaskHeartbeat>> Entry : HbMap.entrySet()) {
+    String componentId=Entry.getKey();
+    Map<String,TaskHeartbeat> compList=Entry.getValue();
+    CommStatsData comStatsData=statsDataMap.get(componentId);
+    if (comStatsData == null) {
+      comStatsData=new CommStatsData();
+      statsDataMap.put(componentId,comStatsData);
+    }
+    comStatsData.resetData();
+    for (    Entry<String,TaskHeartbeat> compEntry : compList.entrySet()) {
+      TaskHeartbeat taskHb=compEntry.getValue();
+      CommonStatsData statsData=taskHb.getStats();
+      comStatsData.updateStatsData(statsData);
+    }
+    double avgLatency=(comStatsData.getLatency()) / (compList.size());
+    comStatsData.updateLatency(avgLatency);
+  }
+}

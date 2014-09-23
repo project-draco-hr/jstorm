@@ -1,0 +1,2 @@
+def __init__(self, isEnable=None):
+    self.isEnable = isEnable

@@ -1,0 +1,8 @@
+{
+  if (taskObj instanceof IBolt) {
+    componentType="bolt";
+  }
+ else   if (taskObj instanceof ISpout) {
+    componentType="spout";
+  }
+}

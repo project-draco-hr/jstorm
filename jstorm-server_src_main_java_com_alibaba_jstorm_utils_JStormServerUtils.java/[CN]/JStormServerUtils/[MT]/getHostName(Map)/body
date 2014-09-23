@@ -1,0 +1,10 @@
+{
+  String hostName=ConfigExtension.getSupervisorHost(conf);
+  if (hostName == null) {
+    hostName=NetWorkUtils.hostname();
+  }
+  if (ConfigExtension.isSupervisorUseIp(conf)) {
+    hostName=NetWorkUtils.ip();
+  }
+  return hostName;
+}

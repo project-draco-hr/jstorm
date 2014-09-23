@@ -35,11 +35,11 @@ def read(self, iprot):
         elif (fid == 6):
             if (ftype == TType.LIST):
                 self.errors = []
-                (_etype191, _size188) = iprot.readListBegin()
-                for _i192 in xrange(_size188):
-                    _elem193 = ErrorInfo()
-                    _elem193.read(iprot)
-                    self.errors.append(_elem193)
+                (_etype335, _size332) = iprot.readListBegin()
+                for _i336 in xrange(_size332):
+                    _elem337 = ErrorInfo()
+                    _elem337.read(iprot)
+                    self.errors.append(_elem337)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)
@@ -47,6 +47,11 @@ def read(self, iprot):
             if (ftype == TType.STRUCT):
                 self.stats = TaskStats()
                 self.stats.read(iprot)
+            else:
+                iprot.skip(ftype)
+        elif (fid == 8):
+            if (ftype == TType.STRING):
+                self.component_type = iprot.readString().decode('utf-8')
             else:
                 iprot.skip(ftype)
         else:

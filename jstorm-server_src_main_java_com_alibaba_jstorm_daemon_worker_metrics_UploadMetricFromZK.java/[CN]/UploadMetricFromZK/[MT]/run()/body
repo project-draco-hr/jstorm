@@ -1,0 +1,4 @@
+{
+  uploadCommStats();
+  uploadUseDefMetric(clusterState);
+}

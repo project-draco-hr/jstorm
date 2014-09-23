@@ -1,0 +1,23 @@
+{
+  for (  Integer taskId : taskSet) {
+    try {
+      TaskMetricInfo taskMetric=cluster.get_task_metric(topologyId,taskId);
+      if (taskMetric == null)       continue;
+      Map<String,Object> taskKV=new HashMap<String,Object>();
+      taskKV.put("Topology_Name",topologyId);
+      taskKV.put("Task_Id",String.valueOf(taskId));
+      taskKV.put("Component",taskMetric.getComponent());
+      taskKV.putAll(taskMetric.getGaugeData());
+      taskKV.putAll(taskMetric.getCounterData());
+      taskKV.putAll(taskMetric.getMeterData());
+      if (metricPerf == true) {
+        taskKV.putAll(taskMetric.getTimerData());
+        taskKV.putAll(taskMetric.getHistogramData());
+      }
+      jsonMsgTasks.add(taskKV);
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to buildTaskJsonMsg, taskID=" + taskId + ", e="+ e);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  List<Integer> taskList=new ArrayList<Integer>();
+  List<String> workerList=new ArrayList<String>();
+  StormClusterState clusterState=data.getStormClusterState();
+  Set<ResourceWorkerSlot> workerSlotSet=assignment.getWorkers();
+  for (  ResourceWorkerSlot workerSlot : workerSlotSet) {
+    String workerId=workerSlot.getHostname() + ":" + workerSlot.getPort();
+    workerList.add(workerId);
+    taskList.addAll(workerSlot.getTasks());
+  }
+  try {
+    List<String> metricTaskList=clusterState.get_metric_taskIds(topologyId);
+    for (    String task : metricTaskList) {
+      Integer taskId=Integer.valueOf(task);
+      if (taskList.contains(taskId) == false)       clusterState.remove_metric_task(topologyId,String.valueOf(taskId));
+    }
+    List<String> metricWorkerList=clusterState.get_metric_workerIds(topologyId);
+    for (    String workerId : metricWorkerList) {
+      if (workerList.contains(workerId) == false)       clusterState.remove_metric_worker(topologyId,workerId);
+    }
+    List<String> metricUserList=clusterState.get_metric_users(topologyId);
+    for (    String workerId : metricUserList) {
+      if (workerList.contains(workerId) == false)       clusterState.remove_metric_user(topologyId,workerId);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to update metrics info when rebalance or reassignment, topologyId=" + topologyId,e);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  long count=cachedSize / BATCH_THREASHOLD_WARN;
+  long sleepMs=(long)(Math.pow(2,count) * 10);
+  if (sleepMs > 1000) {
+    sleepMs=1000;
+  }
+  return sleepMs;
+}

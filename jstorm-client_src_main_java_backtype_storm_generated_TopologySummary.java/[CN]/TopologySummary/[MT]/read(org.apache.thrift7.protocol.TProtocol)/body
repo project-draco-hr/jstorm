@@ -58,6 +58,14 @@ set_num_workers_isSet(true);
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }
 break;
+case 7:
+if (field.type == org.apache.thrift7.protocol.TType.STRING) {
+this.error_info=iprot.readString();
+}
+ else {
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
 default :
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }

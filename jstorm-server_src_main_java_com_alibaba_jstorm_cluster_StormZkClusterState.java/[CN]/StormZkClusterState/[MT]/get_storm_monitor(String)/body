@@ -1,0 +1,6 @@
+{
+  String monitorPath=Cluster.monitor_path(topologyId);
+  byte[] metricsMonitorData=cluster_state.get_data(monitorPath,false);
+  Object metricsMonitor=Cluster.maybe_deserialize(metricsMonitorData);
+  return (StormMonitor)metricsMonitor;
+}

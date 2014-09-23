@@ -1,0 +1,18 @@
+{
+  hostName=metricData.get_hostname();
+  port=metricData.get_port();
+  usedCpu=UIUtils.getDoubleValue(metricData.get_gauge().get(MetricDef.CPU_USED_RATIO));
+  usedMem=UIUtils.getDoubleValue(metricData.get_gauge().get(MetricDef.MEMORY_USED));
+  usedMem=JStormUtils.formatDoubleDecPoint2(usedMem / (1024 * 1204));
+  batchTupleQueue=UIUtils.getDoubleValue(metricData.get_gauge().get(MetricDef.BATCH_TUPLE_QUEUE));
+  batchTupleTime=UIUtils.getDoubleValue(metricData.get_timer().get(MetricDef.BATCH_TUPLE_TIME));
+  dispatchQueue=UIUtils.getDoubleValue(metricData.get_gauge().get(MetricDef.DISPATCH_QUEUE));
+  dispatchTime=UIUtils.getDoubleValue(metricData.get_timer().get(MetricDef.DISPATCH_TIME));
+  nettycliBatchSize=UIUtils.getDoubleValue(metricData.get_histogram().get(MetricDef.NETTY_CLI_BATCH_SIZE));
+  nettycliSendTime=UIUtils.getDoubleValue(metricData.get_timer().get(MetricDef.NETTY_CLI_SEND_TIME));
+  nettyservDecodeTime=UIUtils.getDoubleValue(metricData.get_timer().get(MetricDef.NETTY_SERV_DECODE_TIME));
+  nettyservMsgTransTime=UIUtils.getDoubleValue(metricData.get_histogram().get(MetricDef.NETWORK_MSG_TRANS_TIME));
+  nettycliSendPending=UIUtils.getDoubleValue(metricData.get_gauge().get(MetricDef.NETTY_CLI_SEND_PENDING));
+  nettycliSyncBatchQueue=UIUtils.getDoubleValue(metricData.get_gauge().get(MetricDef.NETTY_CLI_SYNC_BATCH_QUEUE));
+  nettycliSyncDisrpQueue=UIUtils.getDoubleValue(metricData.get_gauge().get(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE));
+}

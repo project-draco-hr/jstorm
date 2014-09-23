@@ -1,0 +1,11 @@
+{
+  this();
+  this.task_id=task_id;
+  set_task_id_isSet(true);
+  this.component_id=component_id;
+  this.gauge=gauge;
+  this.counter=counter;
+  this.meter=meter;
+  this.timer=timer;
+  this.histogram=histogram;
+}

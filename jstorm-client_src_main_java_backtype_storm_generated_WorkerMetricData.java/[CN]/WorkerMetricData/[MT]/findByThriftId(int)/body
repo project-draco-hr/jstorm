@@ -1,0 +1,20 @@
+{
+switch (fieldId) {
+case 1:
+    return HOSTNAME;
+case 2:
+  return PORT;
+case 3:
+return GAUGE;
+case 4:
+return COUNTER;
+case 5:
+return METER;
+case 6:
+return TIMER;
+case 7:
+return HISTOGRAM;
+default :
+return null;
+}
+}

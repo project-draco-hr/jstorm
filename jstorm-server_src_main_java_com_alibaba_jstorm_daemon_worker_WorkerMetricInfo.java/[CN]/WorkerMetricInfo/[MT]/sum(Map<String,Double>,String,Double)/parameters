@@ -1,0 +1,3 @@
+Map<String,Double> dataMap
+String name
+Double value

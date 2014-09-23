@@ -1,0 +1,15 @@
+{
+  CgroupCommon workerGroup=new CgroupCommon(workerId,h,this.rootCgroup);
+  try {
+    if (isKilled == false) {
+      for (      Integer pid : workerGroup.getTasks()) {
+        JStormUtils.kill(pid);
+      }
+      JStormUtils.sleepMs(1500);
+    }
+    center.delete(workerGroup);
+  }
+ catch (  Exception e) {
+    LOG.info("No task of " + workerId);
+  }
+}

@@ -25,6 +25,11 @@
   oprot.writeFieldBegin(NUM_WORKERS_FIELD_DESC);
   oprot.writeI32(this.num_workers);
   oprot.writeFieldEnd();
+  if (this.error_info != null) {
+    oprot.writeFieldBegin(ERROR_INFO_FIELD_DESC);
+    oprot.writeString(this.error_info);
+    oprot.writeFieldEnd();
+  }
   oprot.writeFieldStop();
   oprot.writeStructEnd();
 }

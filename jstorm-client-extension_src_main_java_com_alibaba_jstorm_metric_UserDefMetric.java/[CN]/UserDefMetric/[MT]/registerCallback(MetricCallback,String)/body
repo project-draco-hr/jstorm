@@ -1,0 +1,5 @@
+{
+  if (callbacks.containsKey(name) != true) {
+    callbacks.put(name,callback);
+  }
+}

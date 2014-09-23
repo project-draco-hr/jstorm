@@ -1,0 +1,10 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case IS_ENABLE:
+    return is_set_isEnable();
+}
+throw new IllegalStateException();
+}

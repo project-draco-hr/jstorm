@@ -1,0 +1,7 @@
+{
+  for (  Entry<String,Gauge<?>> entry : gaugeMap.entrySet()) {
+    GaugeData gaugeData=new GaugeData();
+    gaugeData.setValue((Double)(entry.getValue().getValue()));
+    gaugeDataMap.put(entry.getKey(),gaugeData);
+  }
+}

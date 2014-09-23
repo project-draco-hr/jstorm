@@ -16,11 +16,11 @@ def read(self, iprot):
         elif (fid == 2):
             if (ftype == TType.LIST):
                 self.workers = []
-                (_etype212, _size209) = iprot.readListBegin()
-                for _i213 in xrange(_size209):
-                    _elem214 = WorkerSummary()
-                    _elem214.read(iprot)
-                    self.workers.append(_elem214)
+                (_etype363, _size360) = iprot.readListBegin()
+                for _i364 in xrange(_size360):
+                    _elem365 = WorkerSummary()
+                    _elem365.read(iprot)
+                    self.workers.append(_elem365)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)

@@ -14,5 +14,5 @@
   random=new Random();
   random.setSeed(System.currentTimeMillis());
   String componentId=topology_context.getThisComponentId();
-  emitTotalTimer=Metrics.registerTimer(JStormServerUtils.getName(componentId,task_id) + "-emit-timer");
+  emitTotalTimer=Metrics.registerTimer(JStormServerUtils.getName(componentId,task_id),MetricDef.EMIT_TIME,String.valueOf(task_id),Metrics.MetricType.TASK);
 }

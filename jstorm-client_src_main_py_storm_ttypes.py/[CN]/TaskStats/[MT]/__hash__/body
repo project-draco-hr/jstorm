@@ -1,0 +1,2 @@
+def __hash__(self):
+    return ((((((0 + hash(self.emitted)) + hash(self.send_tps)) + hash(self.recv_tps)) + hash(self.acked)) + hash(self.failed)) + hash(self.process_ms_avg))

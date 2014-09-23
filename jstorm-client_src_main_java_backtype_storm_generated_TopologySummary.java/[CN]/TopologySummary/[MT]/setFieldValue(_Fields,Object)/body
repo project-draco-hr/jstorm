@@ -48,5 +48,13 @@ unset_num_workers();
 set_num_workers((Integer)value);
 }
 break;
+case ERROR_INFO:
+if (value == null) {
+unset_error_info();
+}
+ else {
+set_error_info((String)value);
+}
+break;
 }
 }

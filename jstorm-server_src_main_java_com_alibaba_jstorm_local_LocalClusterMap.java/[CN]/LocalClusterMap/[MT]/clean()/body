@@ -1,8 +1,10 @@
 {
-  if (nimbusServer != null)   nimbusServer.cleanup();
   if (supervisor != null) {
     supervisor.ShutdownAllWorkers();
     supervisor.shutdown();
+  }
+  if (nimbusServer != null) {
+    nimbusServer.cleanup();
   }
   if (zookeeper != null)   zookeeper.shutdown();
   if (tmpDir != null) {

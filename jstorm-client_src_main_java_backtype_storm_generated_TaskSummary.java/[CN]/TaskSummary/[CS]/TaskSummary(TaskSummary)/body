@@ -20,4 +20,7 @@
   if (other.is_set_stats()) {
     this.stats=new TaskStats(other.stats);
   }
+  if (other.is_set_component_type()) {
+    this.component_type=other.component_type;
+  }
 }

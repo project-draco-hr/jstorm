@@ -31,5 +31,10 @@
   int port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
   Httpserver httpserver=new Httpserver(port);
   httpserver.start();
+  if (ConfigExtension.isAlimonitorMetricsPost(conf)) {
+    UploadSupervMetric uploadMetric=new UploadSupervMetric(stormClusterState,supervisorId,active,60);
+    AsyncLoopThread uploadMetricThread=new AsyncLoopThread(uploadMetric);
+    threads.add(uploadMetricThread);
+  }
   return new SupervisorManger(conf,supervisorId,active,threads,syncSupEventManager,processEventManager,httpserver,stormClusterState,workerThreadPids);
 }

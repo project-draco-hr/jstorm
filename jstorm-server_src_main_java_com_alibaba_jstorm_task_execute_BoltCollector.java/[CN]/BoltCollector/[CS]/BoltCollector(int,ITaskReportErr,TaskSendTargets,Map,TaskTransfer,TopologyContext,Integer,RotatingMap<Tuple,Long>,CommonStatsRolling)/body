@@ -11,7 +11,7 @@
   this.tuple_start_times=tuple_start_times;
   this.ackerNum=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
   String componentId=topologyContext.getThisComponentId();
-  timer=Metrics.registerTimer(JStormServerUtils.getName(componentId,task_id) + "-emit-timer");
+  timer=Metrics.registerTimer(JStormServerUtils.getName(componentId,task_id),MetricDef.EMIT_TIME,String.valueOf(task_id),Metrics.MetricType.TASK);
   random=new Random();
   random.setSeed(System.currentTimeMillis());
 }

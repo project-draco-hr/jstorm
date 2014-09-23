@@ -8,8 +8,9 @@
   int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_SEND_BUFFER_SIZE));
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   this.serializeQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(queue_size),waitStrategy);
-  Metrics.registerQueue(taskName + "-serialize-queue",serializeQueue);
-  timer=Metrics.registerTimer(taskName + "-serialize-timer");
+  String taskId=taskName.substring(taskName.indexOf(":") + 1);
+  Metrics.registerQueue(taskName,MetricDef.SERIALIZE_QUEUE,serializeQueue,taskId,Metrics.MetricType.TASK);
+  timer=Metrics.registerTimer(taskName,MetricDef.SERIALIZE_TIME,taskId,Metrics.MetricType.TASK);
   serializeThread=new AsyncLoopThread(new TransferRunnable());
   LOG.info("Successfully start TaskTransfer thread");
 }

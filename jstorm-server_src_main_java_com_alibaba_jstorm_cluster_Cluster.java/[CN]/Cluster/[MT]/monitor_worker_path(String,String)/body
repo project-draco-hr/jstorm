@@ -1,0 +1,3 @@
+{
+  return monitor_workerdir_path(topology_id) + ZK_SEPERATOR + worker_id;
+}

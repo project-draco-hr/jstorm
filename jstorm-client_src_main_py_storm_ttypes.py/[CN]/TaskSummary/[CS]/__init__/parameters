@@ -6,3 +6,4 @@ port
 uptime_secs
 errors
 stats
+component_type

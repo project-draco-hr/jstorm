@@ -1,5 +1,3 @@
 {
-  this.data=data;
-  this.topologyid=topologyid;
-  this.oldStatus=status;
+  super(data,topologyid,status,StatusType.rebalancing,StatusType.do_rebalance);
 }

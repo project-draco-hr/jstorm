@@ -1,0 +1,12 @@
+{
+switch (field) {
+case IS_ENABLE:
+    if (value == null) {
+      unset_isEnable();
+    }
+ else {
+      set_isEnable((Boolean)value);
+    }
+  break;
+}
+}

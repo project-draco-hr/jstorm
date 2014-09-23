@@ -17,4 +17,7 @@
   if (!is_set_num_workers()) {
     throw new org.apache.thrift7.protocol.TProtocolException("Required field 'num_workers' is unset! Struct:" + toString());
   }
+  if (!is_set_error_info()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'error_info' is unset! Struct:" + toString());
+  }
 }

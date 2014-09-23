@@ -26,6 +26,10 @@
     follower.clean();
     LOG.info("Successfully shutdown follower thread");
   }
+  if (uploadMetric != null) {
+    uploadMetric.clean();
+    LOG.info("Successfully shutdown UploadMetric thread");
+  }
   if (data != null) {
     data.cleanup();
     LOG.info("Successfully shutdown NimbusData");

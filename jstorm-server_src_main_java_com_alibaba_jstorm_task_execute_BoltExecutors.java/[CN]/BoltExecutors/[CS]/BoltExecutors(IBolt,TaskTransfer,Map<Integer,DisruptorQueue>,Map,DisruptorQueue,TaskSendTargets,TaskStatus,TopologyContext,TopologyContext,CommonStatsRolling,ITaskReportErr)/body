@@ -5,7 +5,7 @@
   this.ackerNum=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
   IOutputCollector output_collector=new BoltCollector(message_timeout_secs,_report_error,_send_fn,storm_conf,_transfer_fn,sysTopologyCxt,taskId,tuple_start_times,_task_stats);
   outputCollector=new OutputCollector(output_collector);
-  boltExeTimer=Metrics.registerTimer(idStr + "-exe-timer");
+  boltExeTimer=Metrics.registerTimer(idStr,MetricDef.EXECUTE_TIME,String.valueOf(taskId),Metrics.MetricType.TASK);
   TimeTick.registerTimer(idStr + "-sampling-tick",exeQueue);
   try {
     WorkerClassLoader.switchThreadContext();

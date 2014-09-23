@@ -1,0 +1,29 @@
+{
+  if (metric instanceof Gauge<?>) {
+    userDefMetric.addToGauge(name,(Gauge<?>)metric);
+  }
+ else   if (metric instanceof Timer) {
+    userDefMetric.addToTimer(name,(Timer)metric);
+  }
+ else   if (metric instanceof Counter) {
+    userDefMetric.addToCounter(name,(Counter)metric);
+  }
+ else   if (metric instanceof Meter) {
+    userDefMetric.addToMeter(name,(Meter)metric);
+  }
+ else   if (metric instanceof Histogram) {
+    userDefMetric.addToHistogram(name,(Histogram)metric);
+  }
+ else   if (metric instanceof JStormTimer) {
+    userDefMetric.addToTimer(name,((JStormTimer)metric).getInstance());
+  }
+ else   if (metric instanceof JStormHistogram) {
+    userDefMetric.addToHistogram(name,((JStormHistogram)metric).getInstance());
+  }
+ else {
+    LOG.warn("registerUserDefine, unknow Metric type, name=" + name);
+  }
+  if (callback != null) {
+    userDefMetric.registerCallback(callback,name);
+  }
+}

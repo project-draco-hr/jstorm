@@ -1,0 +1,45 @@
+{
+  boolean ret=false;
+  StringBuilder sb=new StringBuilder();
+  sb.append("{");
+  sb.append("\'").append(MSG).append("\'");
+  sb.append(':');
+  sb.append("[");
+  for (  Map<String,Object> msg : msgList) {
+    sb.append("{");
+    for (    Entry<String,Object> entry : msg.entrySet()) {
+      sb.append("\'").append(entry.getKey()).append("\'");
+      sb.append(":");
+      if (entry.getValue() instanceof String)       sb.append("\"").append(entry.getValue()).append("\"");
+ else       sb.append(entry.getValue());
+      sb.append(",");
+    }
+    if (msg.size() > 0)     sb.deleteCharAt(sb.length() - 1);
+    sb.append("}");
+    sb.append(",");
+  }
+  if (msgList.size() > 0)   sb.deleteCharAt(sb.length() - 1);
+  sb.append("]");
+  sb.append(',');
+  sb.append("\'").append(COLLECTION_FLAG).append("\'");
+  sb.append(':');
+  sb.append(collection_flag);
+  sb.append(',');
+  sb.append("\'").append(ERROR_INFO).append("\'");
+  sb.append(':').append("\'").append(error_message).append("\'");
+  sb.append("}");
+  String msg=sb.toString();
+  LOG.debug(msg);
+  if (post == true) {
+    String url=buildURL();
+    ret=httpPost(url,msg);
+  }
+ else {
+    String request=buildRqstAddr();
+    StringBuilder postAddr=new StringBuilder();
+    postAddr.append(request);
+    postAddr.append(URLEncoder.encode(msg));
+    ret=httpGet(postAddr);
+  }
+  return ret;
+}

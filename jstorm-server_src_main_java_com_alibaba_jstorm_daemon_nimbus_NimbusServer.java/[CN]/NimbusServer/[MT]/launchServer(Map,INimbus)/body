@@ -11,6 +11,7 @@
     hs=new Httpserver(port);
     hs.start();
     initContainerHBThread(conf);
+    if (ConfigExtension.isAlimonitorMetricsPost(conf))     initUploadMetricThread(data);
     while (!data.isLeader())     Utils.sleep(5000);
     init(conf);
   }

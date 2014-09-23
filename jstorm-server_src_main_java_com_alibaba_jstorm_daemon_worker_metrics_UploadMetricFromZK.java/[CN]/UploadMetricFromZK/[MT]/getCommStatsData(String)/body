@@ -1,0 +1,34 @@
+{
+  try {
+    String taskId;
+    String componentId;
+    TaskHeartbeat taskHb;
+    TopoCommStatsInfo commStatsInfo=topologyMap.get(topologyId);
+    if (commStatsInfo == null) {
+      LOG.warn("commStatsInfo is null, topoId=" + topologyId);
+    }
+    Map<String,TaskHeartbeat> heartbeats=clusterState.task_heartbeat(topologyId);
+    if (heartbeats == null || heartbeats.size() == 0)     return null;
+    for (    Entry<String,TaskHeartbeat> entry : heartbeats.entrySet()) {
+      taskId=entry.getKey();
+      taskHb=entry.getValue();
+      TaskInfo taskInfo=clusterState.task_info(topologyId,Integer.parseInt(taskId));
+      if (taskInfo == null) {
+        LOG.warn("Task information can not be found in ZK for task-" + taskId);
+        continue;
+      }
+      componentId=taskInfo.getComponentId();
+      if (taskHb.getComponentType().equals("spout")) {
+        commStatsInfo.addToSpoutList(componentId,taskId,taskHb);
+      }
+ else {
+        commStatsInfo.addToBoltList(componentId,taskId,taskHb);
+      }
+    }
+    return commStatsInfo;
+  }
+ catch (  Exception e) {
+    LOG.warn("getCommStatsData, failed to read data from ZK.",e);
+    return null;
+  }
+}

@@ -12,6 +12,27 @@
  else {
       newTopologyStatus=base.getStatus().getStatusType();
     }
+    try {
+      StormMonitor monitor=zkCluster.get_storm_monitor(topologyId);
+      if (null != monitor) {
+        boolean newMetricsMonitor=monitor.getMetrics();
+        MetricReporter metricReporter=workerData.getMetricsReporter();
+        boolean oldMetricsMonitor=metricReporter.isEnable();
+        if (oldMetricsMonitor != newMetricsMonitor) {
+          metricReporter.setEnable(newMetricsMonitor);
+          if (true == newMetricsMonitor) {
+            LOG.info("Start metrics reporter");
+          }
+ else {
+            LOG.info("Stop metrics reporter");
+          }
+        }
+      }
+    }
+ catch (    Exception e) {
+      LOG.warn("Failed to get monitor status of topology " + topologyId);
+      LOG.debug(e);
+    }
     StatusType oldTopologyStatus=workerData.getTopologyStatus();
     if (newTopologyStatus.equals(oldTopologyStatus)) {
       return;

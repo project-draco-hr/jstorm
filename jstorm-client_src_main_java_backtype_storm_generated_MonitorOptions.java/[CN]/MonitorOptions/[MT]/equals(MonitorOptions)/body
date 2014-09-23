@@ -1,0 +1,10 @@
+{
+  if (that == null)   return false;
+  boolean this_present_isEnable=true && this.is_set_isEnable();
+  boolean that_present_isEnable=true && that.is_set_isEnable();
+  if (this_present_isEnable || that_present_isEnable) {
+    if (!(this_present_isEnable && that_present_isEnable))     return false;
+    if (this.isEnable != that.isEnable)     return false;
+  }
+  return true;
+}

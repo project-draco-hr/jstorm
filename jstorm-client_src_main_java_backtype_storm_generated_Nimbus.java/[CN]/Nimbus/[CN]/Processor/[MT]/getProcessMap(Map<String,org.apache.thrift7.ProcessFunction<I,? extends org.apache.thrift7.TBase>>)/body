@@ -6,6 +6,7 @@
   processMap.put("activate",new activate());
   processMap.put("deactivate",new deactivate());
   processMap.put("rebalance",new rebalance());
+  processMap.put("metricMonitor",new metricMonitor());
   processMap.put("beginLibUpload",new beginLibUpload());
   processMap.put("beginFileUpload",new beginFileUpload());
   processMap.put("uploadChunk",new uploadChunk());
@@ -19,5 +20,6 @@
   processMap.put("getTopologyConf",new getTopologyConf());
   processMap.put("getTopology",new getTopology());
   processMap.put("getUserTopology",new getUserTopology());
+  processMap.put("getTopologyMetric",new getTopologyMetric());
   return processMap;
 }

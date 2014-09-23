@@ -1,0 +1,13 @@
+{
+  if (totalTskMetrList == null)   return null;
+  List<TaskMetrics> ret=new ArrayList<TaskMetrics>();
+  LOG.debug("get task metrics list: component ID: " + this.componentid);
+  for (  TaskMetricData taskMetricData : totalTskMetrList) {
+    if ((taskMetricData.get_component_id()).equals(this.componentid)) {
+      TaskMetrics taskMetircs=new TaskMetrics();
+      taskMetircs.updateTaskMetricData(taskMetricData);
+      ret.add(taskMetircs);
+    }
+  }
+  return ret;
+}

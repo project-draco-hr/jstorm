@@ -1,0 +1,10 @@
+{
+  try {
+    java.text.DecimalFormat form=new java.text.DecimalFormat("###.0000");
+    String s=form.format(value);
+    return Double.valueOf(s);
+  }
+ catch (  Exception e) {
+    return 0.0;
+  }
+}

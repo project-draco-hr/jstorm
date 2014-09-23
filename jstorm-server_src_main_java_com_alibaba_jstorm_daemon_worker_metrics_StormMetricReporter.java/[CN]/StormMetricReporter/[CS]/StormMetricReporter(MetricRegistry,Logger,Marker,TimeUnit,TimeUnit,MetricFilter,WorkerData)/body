@@ -1,0 +1,6 @@
+{
+  super(registry,"logger-reporter",filter,rateUnit,durationUnit);
+  this.logger=logger;
+  this.marker=marker;
+  this.workerData=workerData;
+}

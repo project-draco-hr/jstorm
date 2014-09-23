@@ -1,5 +1,5 @@
 {
-  if (assignment instanceof TaskInfo && ((TaskInfo)assignment).getComponentId().equals(getComponentId())) {
+  if (assignment instanceof TaskInfo && ((TaskInfo)assignment).getComponentId().equals(getComponentId()) && ((TaskInfo)assignment).getComponentType().equals(componentType)) {
     return true;
   }
   return false;

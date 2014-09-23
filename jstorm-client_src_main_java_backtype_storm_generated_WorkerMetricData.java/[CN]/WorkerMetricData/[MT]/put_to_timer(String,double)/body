@@ -1,0 +1,6 @@
+{
+  if (this.timer == null) {
+    this.timer=new HashMap<String,Double>();
+  }
+  this.timer.put(key,val);
+}

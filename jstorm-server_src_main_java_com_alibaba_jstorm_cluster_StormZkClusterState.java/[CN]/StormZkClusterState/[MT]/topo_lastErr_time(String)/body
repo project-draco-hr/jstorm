@@ -1,0 +1,7 @@
+{
+  String path=Cluster.taskerror_storm_root(topologyId);
+  String lastErrTime=null;
+  byte[] data=cluster_state.get_data(path + "/" + "last_error",false);
+  if (data != null)   lastErrTime=new String(data);
+  return lastErrTime;
+}

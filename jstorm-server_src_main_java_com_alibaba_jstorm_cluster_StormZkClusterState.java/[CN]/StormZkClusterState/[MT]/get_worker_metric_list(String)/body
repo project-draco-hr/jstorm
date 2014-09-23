@@ -1,0 +1,18 @@
+{
+  List<WorkerMetricInfo> workerMetricList=new ArrayList<WorkerMetricInfo>();
+  String monitorWorkerDirPath=Cluster.monitor_workerdir_path(topologyId);
+  List<String> workerList=cluster_state.get_children(monitorWorkerDirPath,false);
+  for (  String workerId : workerList) {
+    byte[] byteArray=cluster_state.get_data(Cluster.monitor_worker_path(topologyId,workerId),false);
+    if (byteArray != null) {
+      WorkerMetricInfo workerMetric=(WorkerMetricInfo)Cluster.maybe_deserialize(byteArray);
+      if (workerMetric != null) {
+        workerMetricList.add(workerMetric);
+      }
+    }
+ else {
+      LOG.warn("get_worker_metric_list failed, workerMetric is null, topoId: " + topologyId + " workerId:"+ workerId);
+    }
+  }
+  return workerMetricList;
+}

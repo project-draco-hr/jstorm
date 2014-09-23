@@ -1,0 +1,4 @@
+Map<Object,Object> stormConf
+Map<String,?> cidSpec
+Map<Integer,TaskInfo> rtn
+Integer cnt

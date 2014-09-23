@@ -21,7 +21,7 @@
   if (syncContainerHbThread != null) {
     threads.add(syncContainerHbThread);
   }
-  MetricReporter metricReporter=new MetricReporter();
+  MetricReporter metricReporter=workerData.getMetricsReporter();
   boolean isMetricsEnable=ConfigExtension.isEnablePerformanceMetrics(workerData.getStormConf());
   metricReporter.setEnable(isMetricsEnable);
   metricReporter.start();

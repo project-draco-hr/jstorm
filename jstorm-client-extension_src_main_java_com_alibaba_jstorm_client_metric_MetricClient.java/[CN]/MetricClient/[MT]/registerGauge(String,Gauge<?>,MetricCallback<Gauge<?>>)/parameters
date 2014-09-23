@@ -1,0 +1,3 @@
+String name
+Gauge<?> gauge
+MetricCallback<Gauge<?>> callback

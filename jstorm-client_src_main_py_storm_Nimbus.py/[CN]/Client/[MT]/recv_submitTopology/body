@@ -12,4 +12,6 @@ def recv_submitTopology(self):
         raise result.e
     if (result.ite is not None):
         raise result.ite
+    if (result.tae is not None):
+        raise result.tae
     return

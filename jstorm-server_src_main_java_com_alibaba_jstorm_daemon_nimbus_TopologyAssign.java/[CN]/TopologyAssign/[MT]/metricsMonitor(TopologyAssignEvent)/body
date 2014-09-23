@@ -1,0 +1,13 @@
+{
+  String topologyId=event.getTopologyId();
+  try {
+    Map<Object,Object> conf=nimbusData.getConf();
+    boolean isEnable=ConfigExtension.isEnablePerformanceMetrics(conf);
+    StormClusterState zkClusterState=nimbusData.getStormClusterState();
+    StormMonitor monitor=new StormMonitor(isEnable);
+    zkClusterState.set_storm_monitor(topologyId,monitor);
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to update metrics monitor status of " + topologyId,e);
+  }
+}

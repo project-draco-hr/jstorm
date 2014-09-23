@@ -1,4 +1,0 @@
-{
-  reporter1Minute=Slf4jReporter.forRegistry(Metrics.getMetrics()).outputTo(LoggerFactory.getLogger(MetricReporter.class)).convertRatesTo(TimeUnit.SECONDS).convertDurationsTo(TimeUnit.MILLISECONDS).build();
-  reporter10Minute=Slf4jReporter.forRegistry(Metrics.getJstack()).outputTo(LoggerFactory.getLogger(MetricReporter.class)).convertRatesTo(TimeUnit.SECONDS).convertDurationsTo(TimeUnit.MILLISECONDS).build();
-}

@@ -1,0 +1,13 @@
+{
+  String cmd="kill " + signal + " "+ pid;
+  try {
+    exec_command(cmd);
+    LOG.info(cmd);
+  }
+ catch (  ExecuteException e) {
+    LOG.info("Error when run " + cmd + ". Process has been killed. ");
+  }
+catch (  Exception e) {
+    LOG.info("Error when run " + cmd + ". Exception ",e);
+  }
+}

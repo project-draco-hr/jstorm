@@ -1,0 +1,7 @@
+{
+  Set<Integer> workerSet=new HashSet<Integer>();
+  for (  ResourceWorkerSlot worker : workers) {
+    if (worker.getNodeId().equals(supervisorId))     workerSet.add(worker.getPort());
+  }
+  return workerSet;
+}

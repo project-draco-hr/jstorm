@@ -1,3 +1,0 @@
-DisruptorQueue queue
-String idStr
-AtomicBoolean active

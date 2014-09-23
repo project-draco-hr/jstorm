@@ -12,6 +12,8 @@ case 5:
 return NUM_TASKS;
 case 6:
 return NUM_WORKERS;
+case 7:
+return ERROR_INFO;
 default :
 return null;
 }

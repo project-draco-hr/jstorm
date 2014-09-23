@@ -1,0 +1,6 @@
+{
+  ScheduledExecutorService scheduleService=data.getScheduExec();
+  uploadMetric=new UploadMetricFromZK(data);
+  scheduleService.scheduleWithFixedDelay(uploadMetric,120,60,TimeUnit.SECONDS);
+  LOG.info("Successfully init metrics uploading thread");
+}

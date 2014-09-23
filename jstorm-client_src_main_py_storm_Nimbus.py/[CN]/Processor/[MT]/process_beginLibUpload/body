@@ -1,0 +1,10 @@
+def process_beginLibUpload(self, seqid, iprot, oprot):
+    args = beginLibUpload_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = beginLibUpload_result()
+    self._handler.beginLibUpload(args.libName)
+    oprot.writeMessageBegin('beginLibUpload', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

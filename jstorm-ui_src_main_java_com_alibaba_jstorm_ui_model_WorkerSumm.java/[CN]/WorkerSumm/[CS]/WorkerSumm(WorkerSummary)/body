@@ -5,7 +5,8 @@
   StringBuilder componentSB=new StringBuilder();
   boolean isFirst=true;
   int minUptime=0;
-  for (  TaskSummary taskSummary : workerSummary.get_tasks()) {
+  taskSummList=workerSummary.get_tasks();
+  for (  TaskSummary taskSummary : taskSummList) {
     if (isFirst == false) {
       taskSB.append(',');
       componentSB.append(',');

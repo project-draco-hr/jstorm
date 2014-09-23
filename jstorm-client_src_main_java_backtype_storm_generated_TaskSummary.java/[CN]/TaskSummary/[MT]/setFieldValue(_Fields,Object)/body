@@ -56,5 +56,13 @@ unset_stats();
 set_stats((TaskStats)value);
 }
 break;
+case COMPONENT_TYPE:
+if (value == null) {
+unset_component_type();
+}
+ else {
+set_component_type((String)value);
+}
+break;
 }
 }

@@ -14,6 +14,8 @@ case 6:
 return ERRORS;
 case 7:
 return STATS;
+case 8:
+return COMPONENT_TYPE;
 default :
 return null;
 }

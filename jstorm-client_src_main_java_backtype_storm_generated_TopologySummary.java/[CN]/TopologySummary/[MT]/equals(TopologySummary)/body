@@ -36,5 +36,11 @@
     if (!(this_present_num_workers && that_present_num_workers))     return false;
     if (this.num_workers != that.num_workers)     return false;
   }
+  boolean this_present_error_info=true && this.is_set_error_info();
+  boolean that_present_error_info=true && that.is_set_error_info();
+  if (this_present_error_info || that_present_error_info) {
+    if (!(this_present_error_info && that_present_error_info))     return false;
+    if (!this.error_info.equals(that.error_info))     return false;
+  }
   return true;
 }

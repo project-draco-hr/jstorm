@@ -2,5 +2,6 @@
   cluster_state.delete_node(Cluster.assignment_path(topologyId));
   JStormUtils.sleepMs(10000);
   cluster_state.delete_node(Cluster.storm_task_root(topologyId));
+  cluster_state.delete_node(Cluster.monitor_path(topologyId));
   this.remove_storm_base(topologyId);
 }

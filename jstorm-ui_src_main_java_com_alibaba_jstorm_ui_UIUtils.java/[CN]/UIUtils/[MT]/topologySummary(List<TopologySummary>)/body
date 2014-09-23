@@ -9,6 +9,7 @@
       topologySumm.setUptime(StatBuckets.prettyUptimeStr(t.get_uptime_secs()));
       topologySumm.setNumWorkers(String.valueOf(t.get_num_workers()));
       topologySumm.setNumTasks(String.valueOf(t.get_num_tasks()));
+      topologySumm.setErrorInfo(t.get_error_info());
       tsumm.add(topologySumm);
     }
   }

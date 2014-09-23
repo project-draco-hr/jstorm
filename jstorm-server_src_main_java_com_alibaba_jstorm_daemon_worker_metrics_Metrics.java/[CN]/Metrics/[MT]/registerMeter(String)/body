@@ -1,5 +1,0 @@
-{
-  LOG.info("Register Metric " + name);
-  Meter ret=metrics.meter(name);
-  return ret;
-}

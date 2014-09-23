@@ -1,0 +1,8 @@
+{
+  String metricName;
+  if (prefix == null)   metricName=name;
+ else   metricName=prefix + "-" + name;
+  T ret=register(metricName,metric);
+  updateMetric(prefix,name,metricType,ret,idStr);
+  return ret;
+}

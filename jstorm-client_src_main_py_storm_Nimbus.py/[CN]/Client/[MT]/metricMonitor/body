@@ -1,0 +1,4 @@
+def metricMonitor(self, name, options):
+    '\n    Parameters:\n     - name\n     - options\n    '
+    self.send_metricMonitor(name, options)
+    self.recv_metricMonitor()

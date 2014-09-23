@@ -1,0 +1,11 @@
+{
+  for (  Entry<String,GaugeData> entry : gaugeMap.entrySet()) {
+    String taskMetricName=entry.getKey();
+    String userDefName=taskMetricName.substring(taskMetricName.indexOf(":") + 1);
+    Double value=entry.getValue().getValue();
+    if (gaugeMapKV.containsKey(userDefName)) {
+      value=value + gaugeMapKV.get(userDefName);
+    }
+    gaugeMapKV.put(userDefName,value);
+  }
+}

@@ -5,7 +5,9 @@
   TreeMap<Integer,String> map=new TreeMap<Integer,String>(new DescendComparator());
   for (  ErrorInfo einfo : errList) {
     long current=System.currentTimeMillis() / 1000;
-    if (current - einfo.get_error_time_secs() < maxErrortime) {
+    int maxTime=maxErrortime;
+    if (einfo.get_error().indexOf("queue is full") != -1)     maxTime=maxErrortime / 10;
+    if (current - einfo.get_error_time_secs() < maxTime) {
       map.put(new Integer(einfo.get_error_time_secs()),einfo.get_error());
     }
   }

@@ -1,0 +1,8 @@
+{
+  Map<String,TaskHeartbeat> taskMap=boltHbMap.get(componentId);
+  if (taskMap == null) {
+    taskMap=new HashMap<String,TaskHeartbeat>();
+    boltHbMap.put(componentId,taskMap);
+  }
+  taskMap.put(taskId,taskHb);
+}

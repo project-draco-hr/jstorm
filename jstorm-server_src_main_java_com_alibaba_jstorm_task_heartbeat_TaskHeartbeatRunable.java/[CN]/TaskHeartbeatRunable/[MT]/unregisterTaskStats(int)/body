@@ -1,0 +1,3 @@
+{
+  taskStatsMap.remove(taskId);
+}

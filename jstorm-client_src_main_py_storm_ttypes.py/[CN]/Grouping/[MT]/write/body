@@ -38,5 +38,9 @@ def write(self, oprot):
         oprot.writeFieldBegin('local_or_shuffle', TType.STRUCT, 8)
         self.local_or_shuffle.write(oprot)
         oprot.writeFieldEnd()
+    if (self.localFirst is not None):
+        oprot.writeFieldBegin('localFirst', TType.STRUCT, 9)
+        self.localFirst.write(oprot)
+        oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()

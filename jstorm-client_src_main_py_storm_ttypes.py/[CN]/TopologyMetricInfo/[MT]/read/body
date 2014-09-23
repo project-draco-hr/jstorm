@@ -1,0 +1,40 @@
+def read(self, iprot):
+    if ((iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and isinstance(iprot.trans, TTransport.CReadableTransport) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+        return
+    iprot.readStructBegin()
+    while True:
+        (fname, ftype, fid) = iprot.readFieldBegin()
+        if (ftype == TType.STOP):
+            break
+        if (fid == 1):
+            if (ftype == TType.STRING):
+                self.topology_id = iprot.readString().decode('utf-8')
+            else:
+                iprot.skip(ftype)
+        elif (fid == 2):
+            if (ftype == TType.LIST):
+                self.task_metric_list = []
+                (_etype460, _size457) = iprot.readListBegin()
+                for _i461 in xrange(_size457):
+                    _elem462 = TaskMetricData()
+                    _elem462.read(iprot)
+                    self.task_metric_list.append(_elem462)
+                iprot.readListEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 3):
+            if (ftype == TType.LIST):
+                self.worker_metric_list = []
+                (_etype466, _size463) = iprot.readListBegin()
+                for _i467 in xrange(_size463):
+                    _elem468 = WorkerMetricData()
+                    _elem468.read(iprot)
+                    self.worker_metric_list.append(_elem468)
+                iprot.readListEnd()
+            else:
+                iprot.skip(ftype)
+        else:
+            iprot.skip(ftype)
+        iprot.readFieldEnd()
+    iprot.readStructEnd()

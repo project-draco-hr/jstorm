@@ -1,0 +1,5 @@
+{
+  this.topology_id=null;
+  this.task_metric_list=null;
+  this.worker_metric_list=null;
+}

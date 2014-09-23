@@ -18,6 +18,8 @@
   StormClusterState stormClusterState=nimbusData.getStormClusterState();
   stormClusterState.set_assignment(topologyId,assignment);
   NimbusUtils.updateTaskHbStartTime(nimbusData,assignment,topologyId);
+  if (context.getAssignType() == TopologyAssignContext.ASSIGN_TYPE_REBALANCE || context.getAssignType() == TopologyAssignContext.ASSIGN_TYPE_MONITOR)   NimbusUtils.updateMetricsInfo(nimbusData,topologyId,assignment);
+ else   metricsMonitor(event);
   LOG.info("Successfully make assignment for topology id " + topologyId + ": "+ assignment);
   return assignment;
 }

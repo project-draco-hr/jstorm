@@ -1,0 +1,3 @@
+def getTopologyMetric(self, id):
+    '\n    Parameters:\n     - id\n    '
+    pass

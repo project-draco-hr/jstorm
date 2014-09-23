@@ -1,0 +1,6 @@
+{
+  WorkerMetricInfo workerMetric=null;
+  String monitorWorkerPath=Cluster.monitor_worker_path(topologyId,workerId);
+  workerMetric=(WorkerMetricInfo)(Cluster.maybe_deserialize(cluster_state.get_data(monitorWorkerPath,false)));
+  return workerMetric;
+}

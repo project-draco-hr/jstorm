@@ -1,0 +1,4 @@
+{
+  this.isEnable=isEnable;
+  set_isEnable_isSet(true);
+}

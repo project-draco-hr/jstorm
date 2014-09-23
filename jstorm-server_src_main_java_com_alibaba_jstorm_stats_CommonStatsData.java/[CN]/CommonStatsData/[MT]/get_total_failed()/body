@@ -1,0 +1,8 @@
+{
+  Long ret=new Long(0);
+  Map<GlobalStreamId,Long> allTimeFailed=get_failed().get(StatBuckets.ALL_WINDOW_STR);
+  for (  Entry<GlobalStreamId,Long> entry : allTimeFailed.entrySet()) {
+    ret+=entry.getValue();
+  }
+  return ret;
+}

@@ -18,5 +18,8 @@
   boolean present_num_workers=true;
   builder.append(present_num_workers);
   if (present_num_workers)   builder.append(num_workers);
+  boolean present_error_info=true && (is_set_error_info());
+  builder.append(present_error_info);
+  if (present_error_info)   builder.append(error_info);
   return builder.toHashCode();
 }

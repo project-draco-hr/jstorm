@@ -1,0 +1,9 @@
+{
+  this.registry=registry;
+  this.logger=LoggerFactory.getLogger("metrics");
+  this.marker=null;
+  this.rateUnit=TimeUnit.SECONDS;
+  this.durationUnit=TimeUnit.MILLISECONDS;
+  this.filter=MetricFilter.ALL;
+  this.workerData=null;
+}

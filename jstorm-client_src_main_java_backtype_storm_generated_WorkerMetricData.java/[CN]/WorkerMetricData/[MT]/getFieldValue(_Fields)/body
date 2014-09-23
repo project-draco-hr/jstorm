@@ -1,0 +1,19 @@
+{
+switch (field) {
+case HOSTNAME:
+    return get_hostname();
+case PORT:
+  return Integer.valueOf(get_port());
+case GAUGE:
+return get_gauge();
+case COUNTER:
+return get_counter();
+case METER:
+return get_meter();
+case TIMER:
+return get_timer();
+case HISTOGRAM:
+return get_histogram();
+}
+throw new IllegalStateException();
+}

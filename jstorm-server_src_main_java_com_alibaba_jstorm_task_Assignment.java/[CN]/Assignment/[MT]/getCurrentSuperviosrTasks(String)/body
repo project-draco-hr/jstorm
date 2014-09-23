@@ -1,0 +1,7 @@
+{
+  Set<Integer> Tasks=new HashSet<Integer>();
+  for (  ResourceWorkerSlot worker : workers) {
+    if (worker.getNodeId().equals(supervisorId))     Tasks.addAll(worker.getTasks());
+  }
+  return Tasks;
+}

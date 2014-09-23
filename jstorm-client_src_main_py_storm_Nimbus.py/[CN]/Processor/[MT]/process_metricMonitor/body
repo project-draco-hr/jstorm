@@ -1,0 +1,13 @@
+def process_metricMonitor(self, seqid, iprot, oprot):
+    args = metricMonitor_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = metricMonitor_result()
+    try:
+        self._handler.metricMonitor(args.name, args.options)
+    except NotAliveException as e:
+        result.e = e
+    oprot.writeMessageBegin('metricMonitor', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

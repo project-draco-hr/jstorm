@@ -1,18 +1,36 @@
 {
   long available=buf.readableBytes();
-  if (available < 2) {
+  if (available < 6) {
     return null;
   }
   timer.start();
   try {
     buf.markReaderIndex();
     short code=buf.readShort();
+    available-=2;
     ControlMessage ctrl_msg=ControlMessage.mkMessage(code);
     if (ctrl_msg != null) {
+      if (available < 8) {
+        buf.resetReaderIndex();
+        return null;
+      }
+      long timeStamp=buf.readLong();
+      available-=8;
+      if (ctrl_msg == ControlMessage.EOB_MESSAGE) {
+        InetSocketAddress sockAddr=(InetSocketAddress)(channel.getRemoteAddress());
+        String remoteAddr=sockAddr.getHostName() + ":" + sockAddr.getPort();
+        long interval=System.currentTimeMillis() - timeStamp;
+        if (interval < 0)         interval=0;
+        JStormHistogram netTransTime=networkTransmitTimeMap.get(remoteAddr);
+        if (netTransTime == null) {
+          netTransTime=Metrics.registerHistograms(remoteAddr,MetricDef.NETWORK_MSG_TRANS_TIME,null,Metrics.MetricType.WORKER);
+          networkTransmitTimeMap.put(remoteAddr,netTransTime);
+        }
+        netTransTime.update(interval);
+      }
       return ctrl_msg;
     }
     short task=code;
-    available-=2;
     if (available < 4) {
       buf.resetReaderIndex();
       return null;

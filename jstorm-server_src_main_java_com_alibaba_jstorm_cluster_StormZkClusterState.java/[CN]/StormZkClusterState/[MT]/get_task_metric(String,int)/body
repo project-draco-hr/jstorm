@@ -1,0 +1,6 @@
+{
+  TaskMetricInfo taskMetric=null;
+  String monitorTaskPath=Cluster.monitor_task_path(topologyId,String.valueOf(taskId));
+  taskMetric=(TaskMetricInfo)(Cluster.maybe_deserialize(cluster_state.get_data(monitorTaskPath,false)));
+  return taskMetric;
+}

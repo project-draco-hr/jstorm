@@ -1,0 +1,9 @@
+{
+  try {
+    client.setMonitorName("jstorm_metric");
+    client.sendRequest(0,AlimonitorClient.ERROR_MSG,listMapMsg);
+  }
+ catch (  Exception e) {
+    LOG.warn("Error when sending common statistic data.",e);
+  }
+}

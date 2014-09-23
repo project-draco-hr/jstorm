@@ -1,6 +1,6 @@
 {
-  this.workerData=workerData;
   openOrPrepareWasCalled=new Atom(Boolean.valueOf(false));
+  this.workerData=workerData;
   this.topologyContext=workerData.getContextMaker().makeTopologyContext(workerData.getSysTopology(),taskId,openOrPrepareWasCalled);
   this.userContext=workerData.getContextMaker().makeTopologyContext(workerData.getRawTopology(),taskId,openOrPrepareWasCalled);
   this.taskid=taskId;
@@ -17,4 +17,5 @@
   this.taskObj=Common.get_task_object(topologyContext.getRawTopology(),componentid,WorkerClassLoader.getInstance());
   int samplerate=StormConfig.sampling_rate(stormConf);
   this.taskStats=new CommonStatsRolling(samplerate);
+  LOG.info("Loading task " + componentid + ":"+ taskid);
 }

@@ -1,0 +1,4 @@
+def beginLibUpload(self, libName):
+    '\n    Parameters:\n     - libName\n    '
+    self.send_beginLibUpload(libName)
+    self.recv_beginLibUpload()

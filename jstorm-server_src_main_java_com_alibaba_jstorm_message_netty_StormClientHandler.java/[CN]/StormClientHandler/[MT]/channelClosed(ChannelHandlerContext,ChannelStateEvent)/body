@@ -1,4 +1,4 @@
 {
-  LOG.info("Connection to {} has been closed",client.getRemoteAddr());
+  LOG.info("Connection to {} has been closed, channel = {}",client.getRemoteAddr(),e.getChannel());
   super.channelClosed(ctx,e);
 }

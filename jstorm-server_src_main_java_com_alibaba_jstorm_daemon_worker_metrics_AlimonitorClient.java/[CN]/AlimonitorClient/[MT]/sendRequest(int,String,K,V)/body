@@ -1,0 +1,5 @@
+{
+  Map msg=new HashMap<K,V>();
+  msg.put(key,value);
+  return sendRequest(collection_flag,error_message,msg);
+}

@@ -1,0 +1,26 @@
+{
+  String workerId=null;
+  for (  Integer port : workerSet) {
+    try {
+      workerId=hostName + ":" + port;
+      WorkerMetricInfo workerMetric=cluster.get_worker_metric(topologyId,workerId);
+      if (workerMetric == null)       continue;
+      Map<String,Object> workerKV=new HashMap<String,Object>();
+      workerKV.put("Topology_Name",topologyId);
+      workerKV.put("Port",String.valueOf(port));
+      workerKV.put(MetricDef.MEMORY_USED,workerMetric.getUsedMem());
+      workerKV.put(MetricDef.CPU_USED_RATIO,workerMetric.getUsedCpu());
+      workerKV.putAll(workerMetric.getGaugeData());
+      workerKV.putAll(workerMetric.getCounterData());
+      workerKV.putAll(workerMetric.getMeterData());
+      if (metricPerf == true) {
+        workerKV.putAll(workerMetric.getTimerData());
+        workerKV.putAll(workerMetric.getHistogramData());
+      }
+      jsonMsgWorkers.add(workerKV);
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to buildWorkerJsonMsg, workerId=" + workerId + ", e="+ e);
+    }
+  }
+}

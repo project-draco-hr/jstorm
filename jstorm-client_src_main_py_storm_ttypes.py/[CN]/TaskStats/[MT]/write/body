@@ -6,72 +6,72 @@ def write(self, oprot):
     if (self.emitted is not None):
         oprot.writeFieldBegin('emitted', TType.MAP, 1)
         oprot.writeMapBegin(TType.STRING, TType.MAP, len(self.emitted))
-        for (kiter164, viter165) in self.emitted.items():
-            oprot.writeString(kiter164.encode('utf-8'))
-            oprot.writeMapBegin(TType.STRING, TType.I64, len(viter165))
-            for (kiter166, viter167) in viter165.items():
-                oprot.writeString(kiter166.encode('utf-8'))
-                oprot.writeI64(viter167)
+        for (kiter308, viter309) in self.emitted.items():
+            oprot.writeString(kiter308.encode('utf-8'))
+            oprot.writeMapBegin(TType.STRING, TType.I64, len(viter309))
+            for (kiter310, viter311) in viter309.items():
+                oprot.writeString(kiter310.encode('utf-8'))
+                oprot.writeI64(viter311)
             oprot.writeMapEnd()
         oprot.writeMapEnd()
         oprot.writeFieldEnd()
     if (self.send_tps is not None):
         oprot.writeFieldBegin('send_tps', TType.MAP, 2)
         oprot.writeMapBegin(TType.STRING, TType.MAP, len(self.send_tps))
-        for (kiter168, viter169) in self.send_tps.items():
-            oprot.writeString(kiter168.encode('utf-8'))
-            oprot.writeMapBegin(TType.STRING, TType.DOUBLE, len(viter169))
-            for (kiter170, viter171) in viter169.items():
-                oprot.writeString(kiter170.encode('utf-8'))
-                oprot.writeDouble(viter171)
+        for (kiter312, viter313) in self.send_tps.items():
+            oprot.writeString(kiter312.encode('utf-8'))
+            oprot.writeMapBegin(TType.STRING, TType.DOUBLE, len(viter313))
+            for (kiter314, viter315) in viter313.items():
+                oprot.writeString(kiter314.encode('utf-8'))
+                oprot.writeDouble(viter315)
             oprot.writeMapEnd()
         oprot.writeMapEnd()
         oprot.writeFieldEnd()
     if (self.recv_tps is not None):
         oprot.writeFieldBegin('recv_tps', TType.MAP, 3)
         oprot.writeMapBegin(TType.STRING, TType.MAP, len(self.recv_tps))
-        for (kiter172, viter173) in self.recv_tps.items():
-            oprot.writeString(kiter172.encode('utf-8'))
-            oprot.writeMapBegin(TType.STRUCT, TType.DOUBLE, len(viter173))
-            for (kiter174, viter175) in viter173.items():
-                kiter174.write(oprot)
-                oprot.writeDouble(viter175)
+        for (kiter316, viter317) in self.recv_tps.items():
+            oprot.writeString(kiter316.encode('utf-8'))
+            oprot.writeMapBegin(TType.STRUCT, TType.DOUBLE, len(viter317))
+            for (kiter318, viter319) in viter317.items():
+                kiter318.write(oprot)
+                oprot.writeDouble(viter319)
             oprot.writeMapEnd()
         oprot.writeMapEnd()
         oprot.writeFieldEnd()
     if (self.acked is not None):
         oprot.writeFieldBegin('acked', TType.MAP, 4)
         oprot.writeMapBegin(TType.STRING, TType.MAP, len(self.acked))
-        for (kiter176, viter177) in self.acked.items():
-            oprot.writeString(kiter176.encode('utf-8'))
-            oprot.writeMapBegin(TType.STRUCT, TType.I64, len(viter177))
-            for (kiter178, viter179) in viter177.items():
-                kiter178.write(oprot)
-                oprot.writeI64(viter179)
+        for (kiter320, viter321) in self.acked.items():
+            oprot.writeString(kiter320.encode('utf-8'))
+            oprot.writeMapBegin(TType.STRUCT, TType.I64, len(viter321))
+            for (kiter322, viter323) in viter321.items():
+                kiter322.write(oprot)
+                oprot.writeI64(viter323)
             oprot.writeMapEnd()
         oprot.writeMapEnd()
         oprot.writeFieldEnd()
     if (self.failed is not None):
         oprot.writeFieldBegin('failed', TType.MAP, 5)
         oprot.writeMapBegin(TType.STRING, TType.MAP, len(self.failed))
-        for (kiter180, viter181) in self.failed.items():
-            oprot.writeString(kiter180.encode('utf-8'))
-            oprot.writeMapBegin(TType.STRUCT, TType.I64, len(viter181))
-            for (kiter182, viter183) in viter181.items():
-                kiter182.write(oprot)
-                oprot.writeI64(viter183)
+        for (kiter324, viter325) in self.failed.items():
+            oprot.writeString(kiter324.encode('utf-8'))
+            oprot.writeMapBegin(TType.STRUCT, TType.I64, len(viter325))
+            for (kiter326, viter327) in viter325.items():
+                kiter326.write(oprot)
+                oprot.writeI64(viter327)
             oprot.writeMapEnd()
         oprot.writeMapEnd()
         oprot.writeFieldEnd()
     if (self.process_ms_avg is not None):
         oprot.writeFieldBegin('process_ms_avg', TType.MAP, 6)
         oprot.writeMapBegin(TType.STRING, TType.MAP, len(self.process_ms_avg))
-        for (kiter184, viter185) in self.process_ms_avg.items():
-            oprot.writeString(kiter184.encode('utf-8'))
-            oprot.writeMapBegin(TType.STRUCT, TType.DOUBLE, len(viter185))
-            for (kiter186, viter187) in viter185.items():
-                kiter186.write(oprot)
-                oprot.writeDouble(viter187)
+        for (kiter328, viter329) in self.process_ms_avg.items():
+            oprot.writeString(kiter328.encode('utf-8'))
+            oprot.writeMapBegin(TType.STRUCT, TType.DOUBLE, len(viter329))
+            for (kiter330, viter331) in viter329.items():
+                kiter330.write(oprot)
+                oprot.writeDouble(viter331)
             oprot.writeMapEnd()
         oprot.writeMapEnd()
         oprot.writeFieldEnd()

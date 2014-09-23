@@ -1,0 +1,28 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    if (value == null) {
+      unset_topology_id();
+    }
+ else {
+      set_topology_id((String)value);
+    }
+  break;
+case TASK_METRIC_LIST:
+if (value == null) {
+  unset_task_metric_list();
+}
+ else {
+  set_task_metric_list((List<TaskMetricData>)value);
+}
+break;
+case WORKER_METRIC_LIST:
+if (value == null) {
+unset_worker_metric_list();
+}
+ else {
+set_worker_metric_list((List<WorkerMetricData>)value);
+}
+break;
+}
+}

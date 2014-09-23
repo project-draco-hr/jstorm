@@ -1,0 +1,16 @@
+{
+  if (topologyList == null)   return;
+  if (topologyMetricsList == null) {
+    topologyMetricsList=new ArrayList<TopologyMetricInfo>();
+  }
+  for (  String topologyId : topologyList) {
+    try {
+      TopologyMetricInfo topoMetrInfo=client.getClient().getTopologyMetric(topologyId);
+      topologyMetricsList.add(topoMetrInfo);
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to get topology metrics information:",e);
+      throw e;
+    }
+  }
+}

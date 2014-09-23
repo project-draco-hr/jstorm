@@ -39,6 +39,15 @@
   sb.append("num_workers:");
   sb.append(this.num_workers);
   first=false;
+  if (!first)   sb.append(", ");
+  sb.append("error_info:");
+  if (this.error_info == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.error_info);
+  }
+  first=false;
   sb.append(")");
   return sb.toString();
 }

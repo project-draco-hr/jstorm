@@ -1,0 +1,5 @@
+NimbusData data
+String topologyid
+StormStatus oldStatus
+StatusType newType
+StatusType nextAction

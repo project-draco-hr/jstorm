@@ -9,4 +9,5 @@
   this.uptime_secs=0;
   this.errors=null;
   this.stats=null;
+  this.component_type=null;
 }

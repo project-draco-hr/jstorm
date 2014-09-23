@@ -1,0 +1,6 @@
+{
+  if (this.histogram == null) {
+    this.histogram=new HashMap<String,Double>();
+  }
+  this.histogram.put(key,val);
+}

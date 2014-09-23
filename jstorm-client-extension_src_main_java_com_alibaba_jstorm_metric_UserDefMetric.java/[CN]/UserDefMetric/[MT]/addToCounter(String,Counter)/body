@@ -1,0 +1,3 @@
+{
+  counterMap.put(name,counter);
+}

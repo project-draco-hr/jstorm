@@ -1,0 +1,12 @@
+{
+  for (  Entry<String,Meter> entry : meterMap.entrySet()) {
+    Meter meter=entry.getValue();
+    MeterData meterData=new MeterData();
+    meterData.setCount(meter.getCount());
+    meterData.setMeanRate(meter.getMeanRate());
+    meterData.setOneMinuteRate(meter.getOneMinuteRate());
+    meterData.setFiveMinuteRate(meter.getFiveMinuteRate());
+    meterData.setFifteenMinuteRate(meter.getFifteenMinuteRate());
+    meterDataMap.put(entry.getKey(),meterData);
+  }
+}

@@ -1,2 +1,2 @@
-int killTimeSecs
+int delaySecs
 StatusType type

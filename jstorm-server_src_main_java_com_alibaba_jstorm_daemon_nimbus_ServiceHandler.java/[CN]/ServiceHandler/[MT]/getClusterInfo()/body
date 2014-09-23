@@ -14,7 +14,8 @@
         continue;
       }
       assignments.put(topologyId,assignment);
-      TopologySummary topology=NimbusUtils.mkTopologySummary(assignment,topologyId,base.getStormName(),base.getStatusString(),TimeUtils.time_delta(base.getLanchTimeSecs()));
+      String lastErrTimeStamp=stormClusterState.topo_lastErr_time(topologyId);
+      TopologySummary topology=NimbusUtils.mkTopologySummary(assignment,topologyId,base.getStormName(),base.getStatusString(),TimeUtils.time_delta(base.getLanchTimeSecs()),lastErrTimeStamp);
       topologySummaries.add(topology);
     }
     Map<String,SupervisorInfo> supervisorInfos=Cluster.allSupervisorInfo(stormClusterState,null);

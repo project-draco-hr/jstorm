@@ -1,0 +1,6 @@
+{
+  Double currentValue=dataMap.get(name);
+  if (currentValue != null)   value=value + currentValue;
+  value=JStormUtils.formatDoubleDecPoint4(value);
+  dataMap.put(name,value);
+}

@@ -13,4 +13,7 @@
   this.uptime_secs=other.uptime_secs;
   this.num_tasks=other.num_tasks;
   this.num_workers=other.num_workers;
+  if (other.is_set_error_info()) {
+    this.error_info=other.error_info;
+  }
 }

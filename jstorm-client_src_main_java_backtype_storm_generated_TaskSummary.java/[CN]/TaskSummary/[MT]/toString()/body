@@ -50,6 +50,17 @@
     }
     first=false;
   }
+  if (is_set_component_type()) {
+    if (!first)     sb.append(", ");
+    sb.append("component_type:");
+    if (this.component_type == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.component_type);
+    }
+    first=false;
+  }
   sb.append(")");
   return sb.toString();
 }

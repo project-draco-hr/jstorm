@@ -1,0 +1,3 @@
+{
+  this.nettycliSyncBatchQueue=value;
+}

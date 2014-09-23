@@ -1,0 +1,3 @@
+{
+  updateStatsData(spoutHbMap,spoutStatsDataMap);
+}

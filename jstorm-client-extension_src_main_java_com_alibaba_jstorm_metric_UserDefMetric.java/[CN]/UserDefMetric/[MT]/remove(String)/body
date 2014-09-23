@@ -1,0 +1,20 @@
+{
+  if (gaugeMap.containsKey(name)) {
+    gaugeMap.remove(name);
+  }
+ else   if (counterMap.containsKey(name)) {
+    counterMap.remove(name);
+  }
+ else   if (histogramMap.containsKey(name)) {
+    histogramMap.remove(name);
+  }
+ else   if (timerMap.containsKey(name)) {
+    timerMap.remove(name);
+  }
+ else   if (meterMap.containsKey(name)) {
+    meterMap.remove(name);
+  }
+  if (callbacks.containsKey(name)) {
+    callbacks.remove(name);
+  }
+}

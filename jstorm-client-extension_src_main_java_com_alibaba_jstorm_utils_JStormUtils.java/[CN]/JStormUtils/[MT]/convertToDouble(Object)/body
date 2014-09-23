@@ -1,0 +1,24 @@
+{
+  Double ret;
+  if (value == null) {
+    ret=null;
+  }
+ else {
+    if (value instanceof Integer) {
+      ret=((Integer)value).doubleValue();
+    }
+ else     if (value instanceof Long) {
+      ret=((Long)value).doubleValue();
+    }
+ else     if (value instanceof Float) {
+      ret=((Float)value).doubleValue();
+    }
+ else     if (value instanceof Double) {
+      ret=(Double)value;
+    }
+ else {
+      ret=null;
+    }
+  }
+  return ret;
+}

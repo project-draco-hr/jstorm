@@ -1,0 +1,4 @@
+{
+  this.componentType=componentType;
+  this.taskStats=taskStats;
+}

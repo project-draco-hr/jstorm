@@ -1,0 +1,3 @@
+{
+  return __isset_bit_vector.get(__ISENABLE_ISSET_ID);
+}

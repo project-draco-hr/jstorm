@@ -1,0 +1,4 @@
+int timeSecs
+int uptimeSecs
+CommonStatsData stats
+String componentType

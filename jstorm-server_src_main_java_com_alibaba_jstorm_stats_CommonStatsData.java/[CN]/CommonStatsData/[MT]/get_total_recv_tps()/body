@@ -1,0 +1,8 @@
+{
+  Double ret=new Double(0);
+  Map<GlobalStreamId,Double> allTimeRecvTps=get_recv_tps().get(StatBuckets.ALL_WINDOW_STR);
+  for (  Entry<GlobalStreamId,Double> entry : allTimeRecvTps.entrySet()) {
+    ret+=entry.getValue();
+  }
+  return ret;
+}

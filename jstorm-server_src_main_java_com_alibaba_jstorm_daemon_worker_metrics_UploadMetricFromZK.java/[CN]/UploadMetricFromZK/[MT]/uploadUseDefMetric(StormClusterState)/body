@@ -1,0 +1,34 @@
+{
+  try {
+    List<String> active_topologys=clusterState.active_storms();
+    if (active_topologys == null) {
+      return;
+    }
+    Map<String,Object> totalMsg=new HashMap<String,Object>();
+    for (    String topologyId : active_topologys) {
+      Map<String,Map<String,Metric>> compont_metrics=new HashMap<String,Map<String,Metric>>();
+      List<String> workerIds=clusterState.monitor_user_workers(topologyId);
+      if (workerIds == null)       continue;
+      MetricKVMsg topologyMetricMsg=new MetricKVMsg();
+      for (      String workerId : workerIds) {
+        UserDefMetricData useWorkDefMetric=clusterState.get_userDef_metric(topologyId,workerId);
+        topologyMetricMsg.countGangeMetric(useWorkDefMetric.getGaugeDataMap());
+        topologyMetricMsg.countCounterMetric(useWorkDefMetric.getCounterDataMap());
+        topologyMetricMsg.countHistogramMetric(useWorkDefMetric.getHistogramDataMap());
+        topologyMetricMsg.countTimerMetric(useWorkDefMetric.getTimerDataMap());
+        topologyMetricMsg.countMeterMetric(useWorkDefMetric.getMeterDataMap());
+      }
+      topologyMetricMsg.calcAvgTimer();
+      topologyMetricMsg.emptyCountMap();
+      Map<String,Object> ret=topologyMetricMsg.convertToKVMap();
+      if (ret.size() > 0)       totalMsg.putAll(ret);
+    }
+    if (totalMsg.size() > 0) {
+      client.setMonitorName("jstorm_user_metric");
+      client.sendRequest(0," ",totalMsg);
+    }
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+}

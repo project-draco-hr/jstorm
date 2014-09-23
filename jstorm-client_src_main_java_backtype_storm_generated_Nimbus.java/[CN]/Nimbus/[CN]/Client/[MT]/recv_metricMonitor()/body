@@ -1,0 +1,8 @@
+{
+  metricMonitor_result result=new metricMonitor_result();
+  receiveBase(result,"metricMonitor");
+  if (result.e != null) {
+    throw result.e;
+  }
+  return;
+}

@@ -3,6 +3,6 @@
     setChannel(null);
   }
  else {
-    channel.close();
+    closeChannel(channel);
   }
 }

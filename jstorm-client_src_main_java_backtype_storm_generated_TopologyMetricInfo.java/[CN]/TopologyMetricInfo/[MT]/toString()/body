@@ -1,0 +1,36 @@
+{
+  StringBuilder sb=new StringBuilder("TopologyMetricInfo(");
+  boolean first=true;
+  sb.append("topology_id:");
+  if (this.topology_id == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.topology_id);
+  }
+  first=false;
+  if (is_set_task_metric_list()) {
+    if (!first)     sb.append(", ");
+    sb.append("task_metric_list:");
+    if (this.task_metric_list == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.task_metric_list);
+    }
+    first=false;
+  }
+  if (is_set_worker_metric_list()) {
+    if (!first)     sb.append(", ");
+    sb.append("worker_metric_list:");
+    if (this.worker_metric_list == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.worker_metric_list);
+    }
+    first=false;
+  }
+  sb.append(")");
+  return sb.toString();
+}

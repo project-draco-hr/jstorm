@@ -12,6 +12,8 @@ case NUM_TASKS:
 return Integer.valueOf(get_num_tasks());
 case NUM_WORKERS:
 return Integer.valueOf(get_num_workers());
+case ERROR_INFO:
+return get_error_info();
 }
 throw new IllegalStateException();
 }

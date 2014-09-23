@@ -1,0 +1,3 @@
+{
+  updateStatsData(boltHbMap,boltStatsDataMap);
+}

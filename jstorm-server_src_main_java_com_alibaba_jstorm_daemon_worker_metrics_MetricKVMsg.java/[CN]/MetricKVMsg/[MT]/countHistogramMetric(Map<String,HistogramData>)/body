@@ -1,0 +1,20 @@
+{
+  for (  Entry<String,HistogramData> entry : histogramMap.entrySet()) {
+    String taskMetricName=entry.getKey();
+    String userDefName=taskMetricName.substring(taskMetricName.indexOf(":") + 1);
+    long maxValue=entry.getValue().getMax();
+    long minValue=entry.getValue().getMin();
+    long meanValue=(long)entry.getValue().getMean();
+    Map<MetricType,Long> temMap=histogramMapKV.get(userDefName);
+    if (temMap == null) {
+      temMap=new HashMap<MetricType,Long>();
+      histogramMapKV.put(userDefName,temMap);
+    }
+    maxValue+=(temMap.get(MetricType.max) == null ? 0l : temMap.get(MetricType.max));
+    minValue+=(temMap.get(MetricType.min) == null ? 0l : temMap.get(MetricType.max));
+    meanValue+=(temMap.get(MetricType.mean) == null ? 0l : temMap.get(MetricType.mean));
+    temMap.put(MetricType.max,maxValue);
+    temMap.put(MetricType.min,minValue);
+    temMap.put(MetricType.mean,meanValue);
+  }
+}

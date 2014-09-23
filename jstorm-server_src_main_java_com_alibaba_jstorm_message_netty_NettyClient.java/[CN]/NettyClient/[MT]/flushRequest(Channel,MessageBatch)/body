@@ -7,10 +7,10 @@
     public void operationComplete(    ChannelFuture future) throws Exception {
       pendings.decrementAndGet();
       if (!future.isSuccess()) {
-        if (isClosed() == false) {
-          LOG.info("Failed to send requests to " + name + ": ",future.getCause());
-        }
         Channel channel=future.getChannel();
+        if (isClosed() == false) {
+          LOG.info("Failed to send requests to " + name + ": "+ channel.toString()+ ":",future.getCause());
+        }
         if (null != channel) {
           exceptionChannel(channel);
         }

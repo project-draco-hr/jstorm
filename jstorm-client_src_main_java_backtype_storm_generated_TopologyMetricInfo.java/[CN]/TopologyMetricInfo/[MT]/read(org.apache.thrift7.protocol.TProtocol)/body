@@ -1,0 +1,61 @@
+{
+  org.apache.thrift7.protocol.TField field;
+  iprot.readStructBegin();
+  while (true) {
+    field=iprot.readFieldBegin();
+    if (field.type == org.apache.thrift7.protocol.TType.STOP) {
+      break;
+    }
+switch (field.id) {
+case 1:
+      if (field.type == org.apache.thrift7.protocol.TType.STRING) {
+        this.topology_id=iprot.readString();
+      }
+ else {
+        org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+      }
+    break;
+case 2:
+  if (field.type == org.apache.thrift7.protocol.TType.LIST) {
+{
+      org.apache.thrift7.protocol.TList _list255=iprot.readListBegin();
+      this.task_metric_list=new ArrayList<TaskMetricData>(_list255.size);
+      for (int _i256=0; _i256 < _list255.size; ++_i256) {
+        TaskMetricData _elem257;
+        _elem257=new TaskMetricData();
+        _elem257.read(iprot);
+        this.task_metric_list.add(_elem257);
+      }
+      iprot.readListEnd();
+    }
+  }
+ else {
+    org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+  }
+break;
+case 3:
+if (field.type == org.apache.thrift7.protocol.TType.LIST) {
+{
+  org.apache.thrift7.protocol.TList _list258=iprot.readListBegin();
+  this.worker_metric_list=new ArrayList<WorkerMetricData>(_list258.size);
+  for (int _i259=0; _i259 < _list258.size; ++_i259) {
+    WorkerMetricData _elem260;
+    _elem260=new WorkerMetricData();
+    _elem260.read(iprot);
+    this.worker_metric_list.add(_elem260);
+  }
+  iprot.readListEnd();
+}
+}
+ else {
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
+default :
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+iprot.readFieldEnd();
+}
+iprot.readStructEnd();
+validate();
+}

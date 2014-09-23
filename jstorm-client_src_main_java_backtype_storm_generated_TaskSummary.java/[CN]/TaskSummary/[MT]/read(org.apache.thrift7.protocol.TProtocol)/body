@@ -77,6 +77,14 @@ this.stats.read(iprot);
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }
 break;
+case 8:
+if (field.type == org.apache.thrift7.protocol.TType.STRING) {
+this.component_type=iprot.readString();
+}
+ else {
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
 default :
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }

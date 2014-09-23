@@ -1,4 +1,4 @@
-def __init__(self, task_id=None, component_id=None, host=None, port=None, uptime_secs=None, errors=None, stats=None):
+def __init__(self, task_id=None, component_id=None, host=None, port=None, uptime_secs=None, errors=None, stats=None, component_type=None):
     self.task_id = task_id
     self.component_id = component_id
     self.host = host
@@ -6,3 +6,4 @@ def __init__(self, task_id=None, component_id=None, host=None, port=None, uptime
     self.uptime_secs = uptime_secs
     self.errors = errors
     self.stats = stats
+    self.component_type = component_type

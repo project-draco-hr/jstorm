@@ -1,0 +1,3 @@
+String name
+MonitorOptions options
+org.apache.thrift7.async.AsyncMethodCallback<AsyncClient.metricMonitor_call> resultHandler

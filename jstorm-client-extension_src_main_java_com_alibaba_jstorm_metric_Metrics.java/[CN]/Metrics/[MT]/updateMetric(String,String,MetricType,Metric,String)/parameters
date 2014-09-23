@@ -1,0 +1,5 @@
+String prefix
+String name
+MetricType metricType
+Metric metric
+String idStr

@@ -60,7 +60,7 @@
     }
   }
 );
-  String[] pathlist=JStormUtils.mk_arr(Cluster.ASSIGNMENTS_SUBTREE,Cluster.TASKS_SUBTREE,Cluster.STORMS_SUBTREE,Cluster.SUPERVISORS_SUBTREE,Cluster.TASKBEATS_SUBTREE,Cluster.TASKERRORS_SUBTREE);
+  String[] pathlist=JStormUtils.mk_arr(Cluster.ASSIGNMENTS_SUBTREE,Cluster.TASKS_SUBTREE,Cluster.STORMS_SUBTREE,Cluster.SUPERVISORS_SUBTREE,Cluster.TASKBEATS_SUBTREE,Cluster.TASKERRORS_SUBTREE,Cluster.MONITOR_SUBTREE);
   for (  String path : pathlist) {
     cluster_state.mkdirs(path);
   }

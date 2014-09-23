@@ -1,7 +1,8 @@
 self
 id
 name
+status
+uptime_secs
 num_tasks
 num_workers
-uptime_secs
-status
+error_info

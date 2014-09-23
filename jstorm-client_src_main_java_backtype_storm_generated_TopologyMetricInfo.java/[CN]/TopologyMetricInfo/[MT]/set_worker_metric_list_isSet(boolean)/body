@@ -1,0 +1,5 @@
+{
+  if (!value) {
+    this.worker_metric_list=null;
+  }
+}

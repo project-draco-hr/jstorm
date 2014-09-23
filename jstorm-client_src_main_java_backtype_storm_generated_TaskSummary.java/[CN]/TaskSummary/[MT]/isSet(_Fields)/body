@@ -17,6 +17,8 @@ case ERRORS:
 return is_set_errors();
 case STATS:
 return is_set_stats();
+case COMPONENT_TYPE:
+return is_set_component_type();
 }
 throw new IllegalStateException();
 }

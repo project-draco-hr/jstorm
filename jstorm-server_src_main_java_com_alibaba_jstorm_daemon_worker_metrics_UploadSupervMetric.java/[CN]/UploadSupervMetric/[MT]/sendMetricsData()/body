@@ -1,0 +1,36 @@
+{
+  try {
+    List<String> topologys=cluster.active_storms();
+    for (    String topologyId : topologys) {
+      StormMonitor monitor=cluster.get_storm_monitor(topologyId);
+      if (monitor == null)       continue;
+      boolean metricPerf=monitor.getMetrics();
+      Assignment assignment=cluster.assignment_info(topologyId,null);
+      if (assignment != null) {
+        Set<Integer> taskSet=new HashSet<Integer>();
+        Set<Integer> workerSet=new HashSet<Integer>();
+        Set<Integer> tempTaskSet=assignment.getCurrentSuperviosrTasks(supervisorId);
+        taskSet.addAll(tempTaskSet);
+        Set<Integer> tempWorkerSet=assignment.getCurrentSuperviosrWorkers(supervisorId);
+        workerSet.addAll(tempWorkerSet);
+        buildTaskJsonMsg(topologyId,taskSet,metricPerf);
+        buildWorkerJsonMsg(topologyId,workerSet,metricPerf);
+      }
+    }
+    if (jsonMsgTasks.size() != 0) {
+      client.setMonitorName(TASK_MONITOR_NAME);
+      client.sendRequest(0,"",jsonMsgTasks);
+    }
+    if (jsonMsgWorkers.size() != 0) {
+      client.setMonitorName(WORKER_MONITOR_NAME);
+      client.sendRequest(0,"",jsonMsgWorkers);
+    }
+    jsonMsgTasks.clear();
+    jsonMsgWorkers.clear();
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to upload worker&task metrics data",e);
+    jsonMsgTasks.clear();
+    jsonMsgWorkers.clear();
+  }
+}

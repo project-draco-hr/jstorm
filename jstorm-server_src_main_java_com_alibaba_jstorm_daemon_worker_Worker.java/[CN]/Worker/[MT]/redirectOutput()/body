@@ -1,0 +1,44 @@
+{
+  if (System.getenv("REDIRECT") == null || !System.getenv("REDIRECT").equals("true")) {
+    return;
+  }
+  String DEFAULT_OUT_TARGET_FILE=JStormUtils.getLogFileName();
+  if (DEFAULT_OUT_TARGET_FILE == null) {
+    DEFAULT_OUT_TARGET_FILE="/dev/null";
+  }
+ else {
+    DEFAULT_OUT_TARGET_FILE+=".out";
+  }
+  String outputFile=ConfigExtension.getWorkerRedirectOutputFile(workerData.getStormConf());
+  if (outputFile == null) {
+    outputFile=DEFAULT_OUT_TARGET_FILE;
+  }
+ else {
+    try {
+      File file=new File(outputFile);
+      if (file.exists() == false) {
+        PathUtils.touch(outputFile);
+      }
+ else {
+        if (file.isDirectory() == true) {
+          LOG.warn("Failed to write " + outputFile);
+          outputFile=DEFAULT_OUT_TARGET_FILE;
+        }
+ else         if (file.canWrite() == false) {
+          LOG.warn("Failed to write " + outputFile);
+          outputFile=DEFAULT_OUT_TARGET_FILE;
+        }
+      }
+    }
+ catch (    Exception e) {
+      LOG.warn("Failed to touch " + outputFile,e);
+      outputFile=DEFAULT_OUT_TARGET_FILE;
+    }
+  }
+  try {
+    JStormUtils.redirectOutput(outputFile);
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to redirect to " + outputFile,e);
+  }
+}

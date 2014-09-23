@@ -1,0 +1,9 @@
+{
+  this.topologyId=topologyId;
+  this.topologyName=topologyName;
+  topoStatsData=new CommStatsData();
+  spoutHbMap=new HashMap<String,Map<String,TaskHeartbeat>>();
+  boltHbMap=new HashMap<String,Map<String,TaskHeartbeat>>();
+  spoutStatsDataMap=new HashMap<String,CommStatsData>();
+  boltStatsDataMap=new HashMap<String,CommStatsData>();
+}

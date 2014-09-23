@@ -74,5 +74,15 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_component_type()).compareTo(typedOther.is_set_component_type());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_component_type()) {
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.component_type,typedOther.component_type);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   return 0;
 }

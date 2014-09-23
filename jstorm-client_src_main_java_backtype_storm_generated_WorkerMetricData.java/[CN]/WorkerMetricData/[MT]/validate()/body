@@ -1,0 +1,23 @@
+{
+  if (!is_set_hostname()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'hostname' is unset! Struct:" + toString());
+  }
+  if (!is_set_port()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'port' is unset! Struct:" + toString());
+  }
+  if (!is_set_gauge()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'gauge' is unset! Struct:" + toString());
+  }
+  if (!is_set_counter()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'counter' is unset! Struct:" + toString());
+  }
+  if (!is_set_meter()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'meter' is unset! Struct:" + toString());
+  }
+  if (!is_set_timer()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'timer' is unset! Struct:" + toString());
+  }
+  if (!is_set_histogram()) {
+    throw new org.apache.thrift7.protocol.TProtocolException("Required field 'histogram' is unset! Struct:" + toString());
+  }
+}

@@ -38,6 +38,13 @@
       oprot.writeFieldEnd();
     }
   }
+  if (this.component_type != null) {
+    if (is_set_component_type()) {
+      oprot.writeFieldBegin(COMPONENT_TYPE_FIELD_DESC);
+      oprot.writeString(this.component_type);
+      oprot.writeFieldEnd();
+    }
+  }
   oprot.writeFieldStop();
   oprot.writeStructEnd();
 }

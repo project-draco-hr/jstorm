@@ -1,0 +1,8 @@
+{
+  boolean ret=unregister(name);
+  if (ret == true) {
+    userDefMetric.remove(name);
+    userDefMetric.unregisterCallback(name);
+  }
+  return ret;
+}

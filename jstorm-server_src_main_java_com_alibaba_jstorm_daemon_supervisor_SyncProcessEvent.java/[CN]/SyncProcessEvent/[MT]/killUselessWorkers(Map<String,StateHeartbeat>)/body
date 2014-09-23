@@ -1,5 +1,5 @@
 {
-  Set<String> removed=new HashSet<String>();
+  Map<String,String> removed=new HashMap<String,String>();
   Set<Integer> keepPorts=new HashSet<Integer>();
   for (  Entry<String,StateHeartbeat> entry : localWorkerStats.entrySet()) {
     String workerid=entry.getKey();
@@ -8,28 +8,17 @@
       keepPorts.add(hbstate.getHeartbeat().getPort());
     }
  else {
-      removed.add(workerid);
+      removed.put(workerid,hbstate.getHeartbeat().getTopologyId());
       StringBuilder sb=new StringBuilder();
       sb.append("Shutting down and clearing state for id ");
       sb.append(workerid);
       sb.append(";State:");
-      sb.append(hbstate.getState());
-      sb.append(";Heartbeat");
-      sb.append(hbstate.getHeartbeat());
+      sb.append(hbstate);
       LOG.info(sb);
-      try {
-        shutWorker(conf,supervisorId,workerid,workerThreadPids);
-        if (cgroupManager != null) {
-          cgroupManager.shutDownWorker(workerid);
-        }
-      }
- catch (      IOException e) {
-        String errMsg="Failed to shutdown worker workId:" + workerid + ",supervisorId: "+ supervisorId+ ",workerThreadPids:"+ workerThreadPids;
-        LOG.error(errMsg,e);
-      }
     }
   }
-  for (  String removedWorkerId : removed) {
+  shutWorker(conf,supervisorId,removed,workerThreadPids,cgroupManager);
+  for (  String removedWorkerId : removed.keySet()) {
     localWorkerStats.remove(removedWorkerId);
   }
   return keepPorts;

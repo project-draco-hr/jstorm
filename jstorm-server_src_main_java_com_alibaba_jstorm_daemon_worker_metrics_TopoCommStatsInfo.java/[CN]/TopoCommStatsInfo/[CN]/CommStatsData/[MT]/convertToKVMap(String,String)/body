@@ -1,0 +1,10 @@
+{
+  Map<String,Object> ret=new HashMap<String,Object>();
+  ret.put(TOPOLOGYNAME,topoloygName);
+  ret.put(COMPONTENT,componentId);
+  ret.put(SEND_TPS,sendTps);
+  ret.put(RECV_TPS,recvTps);
+  ret.put(FAILED,failed);
+  ret.put(LATENCY,latency);
+  return ret;
+}

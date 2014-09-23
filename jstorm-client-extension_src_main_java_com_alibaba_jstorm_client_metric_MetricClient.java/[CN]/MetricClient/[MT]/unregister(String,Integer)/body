@@ -1,0 +1,4 @@
+{
+  String userMetricName=getMetricName(taskid,name);
+  return Metrics.unregisterUserDefine(userMetricName);
+}

@@ -16,15 +16,14 @@
   messageBatchRef=new AtomicReference<MessageBatch>();
   remote_addr=new InetSocketAddress(host,port);
   name=remote_addr.toString();
-  sendTimerName=JStormServerUtils.getName(host,port) + "-netty-send-timer";
-  sendTimer=Metrics.registerTimer(sendTimerName);
-  histogramName=JStormServerUtils.getName(host,port) + "-netty-send-histogram";
-  histogram=Metrics.registerHistograms(histogramName);
-  pendingGaugeName=JStormServerUtils.getName(host,port) + "-netty-send-pending-gauge";
-  Metrics.register(pendingGaugeName,new Gauge<Long>(){
+  address=JStormServerUtils.getName(host,port);
+  sendTimer=Metrics.registerTimer(address,MetricDef.NETTY_CLI_SEND_TIME,null,Metrics.MetricType.WORKER);
+  histogram=Metrics.registerHistograms(address,MetricDef.NETTY_CLI_BATCH_SIZE,null,Metrics.MetricType.WORKER);
+  Metrics.register(address,MetricDef.NETTY_CLI_SEND_PENDING,new Gauge<Long>(){
     @Override public Long getValue(){
       return pendings.get();
     }
   }
-);
+,null,Metrics.MetricType.WORKER);
+  closingChannel=new HashSet<Channel>();
 }

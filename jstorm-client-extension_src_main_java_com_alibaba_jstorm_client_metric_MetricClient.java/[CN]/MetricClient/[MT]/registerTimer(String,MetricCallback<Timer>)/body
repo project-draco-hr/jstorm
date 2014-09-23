@@ -1,0 +1,6 @@
+{
+  String userMetricName=getMetricName(taskid,name);
+  JStormTimer ret=Metrics.registerTimer(userMetricName);
+  Metrics.registerUserDefine(userMetricName,ret,callback);
+  return ret;
+}

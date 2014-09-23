@@ -1,0 +1,21 @@
+{
+  UserDefMetric userDefMetric=Metrics.getUserDefMetric();
+  for (  Entry<String,Gauge> entry : gauges.entrySet()) {
+    logGauge(entry.getKey(),entry.getValue());
+  }
+  for (  Entry<String,Counter> entry : counters.entrySet()) {
+    logCounter(entry.getKey(),entry.getValue());
+  }
+  for (  Entry<String,Meter> entry : meters.entrySet()) {
+    logMeter(entry.getKey(),entry.getValue());
+  }
+  if (metricPerf == true) {
+    for (    Entry<String,Histogram> entry : histograms.entrySet()) {
+      logHistogram(entry.getKey(),entry.getValue());
+    }
+    for (    Entry<String,Timer> entry : timers.entrySet()) {
+      Map<String,Timer> timerMap=userDefMetric.getTimer();
+      logTimer(entry.getKey(),entry.getValue());
+    }
+  }
+}

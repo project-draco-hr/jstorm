@@ -1,0 +1,63 @@
+{
+  StringBuilder sb=new StringBuilder("WorkerMetricData(");
+  boolean first=true;
+  sb.append("hostname:");
+  if (this.hostname == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.hostname);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("port:");
+  sb.append(this.port);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("gauge:");
+  if (this.gauge == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.gauge);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("counter:");
+  if (this.counter == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.counter);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("meter:");
+  if (this.meter == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.meter);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("timer:");
+  if (this.timer == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.timer);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("histogram:");
+  if (this.histogram == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.histogram);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

@@ -69,5 +69,6 @@
   sysTopology=Common.system_topology(stormConf,rawTopology);
   generateMaps();
   contextMaker=new ContextMaker(this);
+  metricReporter=new MetricReporter(this);
   LOG.info("Successfully create WorkerData");
 }

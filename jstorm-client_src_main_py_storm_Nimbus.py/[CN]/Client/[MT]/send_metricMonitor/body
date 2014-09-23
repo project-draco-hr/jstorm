@@ -1,0 +1,8 @@
+def send_metricMonitor(self, name, options):
+    self._oprot.writeMessageBegin('metricMonitor', TMessageType.CALL, self._seqid)
+    args = metricMonitor_args()
+    args.name = name
+    args.options = options
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

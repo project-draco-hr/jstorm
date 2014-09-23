@@ -1,0 +1,9 @@
+{
+  Map<String,Object> ret=new HashMap<String,Object>();
+  addGaugeToKVMap(ret);
+  addCounterToKVMap(ret);
+  addHistogramToKVMap(ret);
+  addTimerToKVMap(ret);
+  addMeterToKVMap(ret);
+  return ret;
+}

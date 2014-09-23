@@ -1,0 +1,7 @@
+def send_beginLibUpload(self, libName):
+    self._oprot.writeMessageBegin('beginLibUpload', TMessageType.CALL, self._seqid)
+    args = beginLibUpload_args()
+    args.libName = libName
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

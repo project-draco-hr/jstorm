@@ -1,0 +1,4 @@
+{
+  LOG.info("Register Metric " + name);
+  return metrics.meter(name);
+}

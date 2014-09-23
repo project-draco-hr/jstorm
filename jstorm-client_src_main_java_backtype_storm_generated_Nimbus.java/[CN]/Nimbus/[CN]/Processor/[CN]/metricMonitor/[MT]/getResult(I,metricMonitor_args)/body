@@ -1,0 +1,10 @@
+{
+  metricMonitor_result result=new metricMonitor_result();
+  try {
+    iface.metricMonitor(args.name,args.options);
+  }
+ catch (  NotAliveException e) {
+    result.e=e;
+  }
+  return result;
+}

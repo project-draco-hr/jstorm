@@ -1,0 +1,6 @@
+{
+  if (this.counter == null) {
+    this.counter=new HashMap<String,Double>();
+  }
+  this.counter.put(key,val);
+}

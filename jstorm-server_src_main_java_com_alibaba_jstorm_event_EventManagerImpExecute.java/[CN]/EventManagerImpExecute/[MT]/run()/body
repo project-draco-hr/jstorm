@@ -3,7 +3,7 @@
     while (manager.isRunning()) {
       RunnableCallback r=null;
       try {
-        r=manager.poll();
+        r=manager.take();
       }
  catch (      InterruptedException e) {
       }

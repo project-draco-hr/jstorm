@@ -1,0 +1,7 @@
+{
+switch (field) {
+case IS_ENABLE:
+    return Boolean.valueOf(is_isEnable());
+}
+throw new IllegalStateException();
+}
