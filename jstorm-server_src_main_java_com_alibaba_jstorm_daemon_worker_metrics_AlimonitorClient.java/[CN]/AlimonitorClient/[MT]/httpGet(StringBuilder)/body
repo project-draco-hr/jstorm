@@ -1,28 +1,4 @@
 {
   boolean ret=false;
-  CloseableHttpClient httpClient=HttpClientBuilder.create().build();
-  CloseableHttpResponse response=null;
-  try {
-    HttpGet request=new HttpGet(postAddr.toString());
-    response=httpClient.execute(request);
-    HttpEntity entity=response.getEntity();
-    if (entity != null) {
-      LOG.debug(EntityUtils.toString(entity));
-    }
-    EntityUtils.consume(entity);
-    ret=true;
-  }
- catch (  Exception e) {
-    LOG.error("Exception when sending http request to alimonitor",e);
-  }
- finally {
-    try {
-      if (response != null)       response.close();
-      httpClient.close();
-    }
- catch (    Exception e) {
-      LOG.error("Exception when closing httpclient",e);
-    }
-  }
   return ret;
 }

@@ -1,4 +1,14 @@
 {
+  Event event=eventQueue.poll();
+  while (event != null) {
+    if (event.getType() == Event.REGISTER_TYPE) {
+      taskStatsMap.put(event.getTaskId(),event.getTaskStats());
+    }
+ else {
+      taskStatsMap.remove(event.getTaskId());
+    }
+    event=eventQueue.poll();
+  }
   Integer currtime=TimeUtils.current_time_secs();
   for (  Entry<Integer,TaskStats> entry : taskStatsMap.entrySet()) {
     Integer taskId=entry.getKey();
