@@ -1,0 +1,4 @@
+{
+  TopologyBuilder builder=SetBuilder();
+  StormSubmitter.submitTopology(topologyName,conf,builder.createTopology());
+}

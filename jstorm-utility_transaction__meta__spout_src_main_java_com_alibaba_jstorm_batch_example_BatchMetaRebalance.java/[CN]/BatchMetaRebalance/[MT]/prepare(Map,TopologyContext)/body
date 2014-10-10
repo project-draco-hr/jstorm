@@ -1,0 +1,12 @@
+{
+  isNeedRebalance=new AtomicBoolean(false);
+  CheckRebalanceTimer timer=new CheckRebalanceTimer();
+  int rebalanceTimeInterval=JStormUtils.parseInt(stormConf.get("meta.rebalance.frequency.sec"),3600);
+  long now=System.currentTimeMillis();
+  long next=(now / (rebalanceTimeInterval * 1000) + 1) * rebalanceTimeInterval * 1000;
+  long diff=(next - now) / 1000;
+  ScheduledExecutorService scheduExec=null;
+  scheduExec=Executors.newSingleThreadScheduledExecutor();
+  scheduExec.scheduleAtFixedRate(timer,diff,rebalanceTimeInterval,TimeUnit.SECONDS);
+  LOG.info("Successfully init rebalance timer");
+}

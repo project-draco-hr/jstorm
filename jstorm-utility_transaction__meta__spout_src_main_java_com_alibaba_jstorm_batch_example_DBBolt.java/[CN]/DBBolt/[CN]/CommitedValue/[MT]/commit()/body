@@ -1,0 +1,24 @@
+{
+  boolean doCount=false;
+  boolean doSum=false;
+  try {
+    long countValue=dbCounter.addAndGet(counter.get());
+    doCount=true;
+    long sumValue=dbSum.addAndGet(sum.get());
+    doSum=true;
+    LOG.info("Successfully commit " + this);
+    LOG.info("DB counter:" + countValue + ", sum:"+ sumValue);
+  }
+ catch (  Exception e) {
+    if (doSum) {
+      dbSum.addAndGet(-sum.get());
+      LOG.info("Revert sum, " + sum.get());
+    }
+    if (doCount) {
+      dbCounter.addAndGet(-counter.get());
+      LOG.info("Revert count," + counter.get());
+    }
+    LOG.warn(e.getCause(),e);
+    throw e;
+  }
+}

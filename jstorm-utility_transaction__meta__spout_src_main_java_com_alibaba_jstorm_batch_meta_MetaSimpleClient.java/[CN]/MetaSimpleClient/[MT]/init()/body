@@ -1,0 +1,8 @@
+{
+  initMetaConsumer();
+  frontOffsets=initOffset();
+  currentOffsets=frontOffsets;
+  backendOffset=new HashMap<MessageQueue,Long>();
+  backendOffset.putAll(frontOffsets);
+  oneQueueFetchSize=getOneQueueFetchSize();
+}

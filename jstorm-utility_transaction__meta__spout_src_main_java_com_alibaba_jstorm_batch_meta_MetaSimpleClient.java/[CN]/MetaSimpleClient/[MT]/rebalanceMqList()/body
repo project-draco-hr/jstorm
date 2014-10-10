@@ -1,0 +1,27 @@
+{
+  LOG.info("Begin to do rebalance operation");
+  Set<MessageQueue> newMqs=getMQ();
+  Set<MessageQueue> oldMqs=currentOffsets.keySet();
+  if (oldMqs.equals(newMqs) == true) {
+    LOG.info("No change of meta queues " + newMqs);
+    return;
+  }
+  Set<MessageQueue> removeMqs=new HashSet<MessageQueue>();
+  removeMqs.addAll(oldMqs);
+  removeMqs.removeAll(newMqs);
+  Set<MessageQueue> addMqs=new HashSet<MessageQueue>();
+  addMqs.addAll(newMqs);
+  addMqs.removeAll(oldMqs);
+  LOG.info("Remove " + removeMqs);
+  for (  MessageQueue mq : removeMqs) {
+    Long offset=frontOffsets.remove(mq);
+    updateOffsetToZk(mq,offset);
+    backendOffset.remove(mq);
+  }
+  LOG.info("Add " + addMqs);
+  for (  MessageQueue mq : addMqs) {
+    long offset=getOffsetFromZk(mq);
+    frontOffsets.put(mq,offset);
+    backendOffset.put(mq,offset);
+  }
+}

@@ -1,0 +1,16 @@
+{
+  LOG.info("MetaSpoutConfig:" + metaSpoutConfig);
+  consumer=new MetaPullConsumer(metaSpoutConfig.getConsumerGroup());
+  consumer.setInstanceName(taskIndex + "." + JStormUtils.process_pid());
+  if (metaSpoutConfig.getNameServer() != null) {
+    if (nameServer == null) {
+      nameServer=metaSpoutConfig.getNameServer();
+      System.setProperty("rocketmq.namesrv.domain",metaSpoutConfig.getNameServer());
+    }
+ else     if (metaSpoutConfig.getNameServer().equals(nameServer) == false) {
+      throw new RuntimeException("Different nameserver address in the same worker " + nameServer + ":"+ metaSpoutConfig.getNameServer());
+    }
+  }
+  consumer.start();
+  LOG.info("Successfully start meta consumer");
+}

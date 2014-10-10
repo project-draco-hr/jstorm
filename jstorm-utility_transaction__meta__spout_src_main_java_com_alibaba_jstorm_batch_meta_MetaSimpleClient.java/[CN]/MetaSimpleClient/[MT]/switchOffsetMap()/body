@@ -1,0 +1,6 @@
+{
+  Map<MessageQueue,Long> tmp=frontOffsets;
+  frontOffsets=backendOffset;
+  backendOffset=tmp;
+  currentOffsets=frontOffsets;
+}

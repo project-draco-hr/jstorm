@@ -1,0 +1,42 @@
+{
+  List<MessageExt> ret=new ArrayList<MessageExt>();
+  String subexpress=metaSpoutConfig.getSubExpress();
+  for (  Entry<MessageQueue,Long> entry : currentOffsets.entrySet()) {
+    MessageQueue mq=entry.getKey();
+    Long offset=entry.getValue();
+    int fetchSize=0;
+    int oneFetchSize=Math.min(oneQueueFetchSize,32);
+    while (fetchSize < oneQueueFetchSize) {
+      PullResult pullResult=null;
+      try {
+        pullResult=consumer.pullBlockIfNotFound(mq,subexpress,offset,oneFetchSize);
+        offset=pullResult.getNextBeginOffset();
+        PullStatus status=pullResult.getPullStatus();
+        if (status == PullStatus.FOUND) {
+          List<MessageExt> msgList=pullResult.getMsgFoundList();
+          ret.addAll(msgList);
+          fetchSize+=msgList.size();
+          continue;
+        }
+ else         if (status == PullStatus.NO_MATCHED_MSG) {
+          continue;
+        }
+ else         if (status == PullStatus.NO_NEW_MSG) {
+          break;
+        }
+ else         if (status == PullStatus.OFFSET_ILLEGAL) {
+          break;
+        }
+ else {
+          break;
+        }
+      }
+ catch (      Exception e) {
+        LOG.warn("Failed to fetch messages of " + mq + ":"+ offset,e);
+        break;
+      }
+    }
+    backendOffset.put(mq,offset);
+  }
+  return ret;
+}

@@ -1,0 +1,3 @@
+{
+  BatchMetaRebalance.this.isNeedRebalance.set(true);
+}

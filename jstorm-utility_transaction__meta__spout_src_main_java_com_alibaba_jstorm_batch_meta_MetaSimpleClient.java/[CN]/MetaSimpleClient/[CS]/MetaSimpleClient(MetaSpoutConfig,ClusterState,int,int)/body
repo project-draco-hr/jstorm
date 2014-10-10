@@ -1,0 +1,6 @@
+{
+  this.metaSpoutConfig=config;
+  this.zkClient=zkClient;
+  this.taskIndex=taskIndex;
+  this.taskParallel=taskParall;
+}

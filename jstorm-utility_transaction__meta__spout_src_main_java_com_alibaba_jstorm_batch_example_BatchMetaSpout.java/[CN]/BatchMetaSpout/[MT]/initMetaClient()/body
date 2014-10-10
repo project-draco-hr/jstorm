@@ -1,0 +1,6 @@
+{
+  ClusterState zkClient=BatchCommon.getZkClient(conf);
+  metaClient=new MetaSimpleClient(metaSpoutConfig,zkClient,taskIndex,taskParallel);
+  metaClient.init();
+  LOG.info("Successfully init meta client " + taskName);
+}

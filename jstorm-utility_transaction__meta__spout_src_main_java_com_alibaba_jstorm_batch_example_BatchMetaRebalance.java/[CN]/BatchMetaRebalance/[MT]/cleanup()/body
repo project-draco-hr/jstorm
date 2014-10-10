@@ -1,0 +1,4 @@
+{
+  scheduExec.shutdown();
+  LOG.info("Successfully do cleanup");
+}

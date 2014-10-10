@@ -1,0 +1,19 @@
+{
+  String consumerGroup=(String)conf.get("meta.consumer.group");
+  String topic=(String)conf.get("meta.topic");
+  String nameServer=(String)conf.get("meta.nameserver");
+  String subExpress=(String)conf.get("meta.subexpress");
+  String startTimestampStr=(String)conf.get("meta.start.timestamp");
+  Long startTimeStamp=null;
+  if (startTimestampStr != null) {
+    Date date=TimeFormat.getSecond(startTimestampStr);
+    startTimeStamp=date.getTime();
+  }
+  int batchMessageNum=JStormUtils.parseInt(conf.get("meta.batch.message.num"),1024);
+  int maxFailTimes=JStormUtils.parseInt(conf.get("meta.max.fail.times"),10);
+  MetaSpoutConfig ret=new MetaSpoutConfig(consumerGroup,nameServer,topic,subExpress);
+  ret.setStartTimeStamp(startTimeStamp);
+  ret.setBatchMsgNum(batchMessageNum);
+  ret.setMaxFailTimes(maxFailTimes);
+  return ret;
+}

@@ -1,0 +1,30 @@
+{
+  Set<MessageQueue> queues=getMQ();
+  Map<MessageQueue,Long> ret=new HashMap<MessageQueue,Long>();
+  Set<MessageQueue> noOffsetQueues=new HashSet<MessageQueue>();
+  if (metaSpoutConfig.getStartTimeStamp() != null) {
+    Long timeStamp=metaSpoutConfig.getStartTimeStamp();
+    for (    MessageQueue mq : queues) {
+      long offset=consumer.searchOffset(mq,timeStamp);
+      if (offset >= 0) {
+        LOG.info("Successfully get " + mq + " offset of timestamp "+ new Date(timeStamp));
+        ret.put(mq,offset);
+      }
+ else {
+        LOG.info("Failed to get " + mq + " offset of timestamp "+ new Date(timeStamp));
+        noOffsetQueues.add(mq);
+      }
+    }
+  }
+ else {
+    noOffsetQueues.addAll(queues);
+  }
+  if (noOffsetQueues.size() == 0) {
+    return ret;
+  }
+  for (  MessageQueue mq : noOffsetQueues) {
+    long offset=getOffsetFromZk(mq);
+    ret.put(mq,offset);
+  }
+  return ret;
+}

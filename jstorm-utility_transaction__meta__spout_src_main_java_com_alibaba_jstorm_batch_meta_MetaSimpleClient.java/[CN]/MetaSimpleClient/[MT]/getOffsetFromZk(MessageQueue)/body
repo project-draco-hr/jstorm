@@ -1,0 +1,17 @@
+{
+  String path=getZkPath(mq);
+  try {
+    if (zkClient.node_existed(path,false) == false) {
+      LOG.info("No zk node of " + path);
+      return 0;
+    }
+    byte[] data=zkClient.get_data(path,false);
+    String value=new String(data);
+    long ret=Long.valueOf(value);
+    return ret;
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to get offset,",e);
+    return 0;
+  }
+}

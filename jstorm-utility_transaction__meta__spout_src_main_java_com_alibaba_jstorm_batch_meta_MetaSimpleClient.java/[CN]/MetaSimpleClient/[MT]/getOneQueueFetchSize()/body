@@ -1,0 +1,9 @@
+{
+  int batchSize=metaSpoutConfig.getBatchMsgNum();
+  int oneFetchSize=batchSize / (taskParallel * currentOffsets.size());
+  if (oneFetchSize <= 0) {
+    oneFetchSize=1;
+  }
+  LOG.info("One queue fetch size:" + oneFetchSize);
+  return oneFetchSize;
+}

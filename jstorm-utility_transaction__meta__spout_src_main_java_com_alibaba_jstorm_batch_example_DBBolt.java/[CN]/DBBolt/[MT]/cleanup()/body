@@ -1,0 +1,10 @@
+{
+  LOG.info("Begin to exit ");
+  isRunRevert.set(false);
+  try {
+    revertThread.join();
+  }
+ catch (  InterruptedException e) {
+  }
+  LOG.info("Successfully exit ");
+}

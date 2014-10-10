@@ -1,0 +1,10 @@
+{
+  StringBuffer sb=new StringBuffer();
+  sb.append(BatchDef.ZK_SEPERATOR);
+  sb.append(metaSpoutConfig.getConsumerGroup());
+  sb.append(BatchDef.ZK_SEPERATOR);
+  sb.append(mq.getBrokerName());
+  sb.append(BatchDef.ZK_SEPERATOR);
+  sb.append(mq.getQueueId());
+  return sb.toString();
+}

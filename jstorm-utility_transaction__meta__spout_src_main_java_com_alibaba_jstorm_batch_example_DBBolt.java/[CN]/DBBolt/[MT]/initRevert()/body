@@ -1,0 +1,7 @@
+{
+  revertQueue=new LinkedBlockingQueue<DBBolt.CommitedValue>();
+  isRunRevert=new AtomicBoolean(false);
+  revertThread=new Thread(this);
+  revertThread.start();
+  LOG.info("Successfully init revert thread");
+}

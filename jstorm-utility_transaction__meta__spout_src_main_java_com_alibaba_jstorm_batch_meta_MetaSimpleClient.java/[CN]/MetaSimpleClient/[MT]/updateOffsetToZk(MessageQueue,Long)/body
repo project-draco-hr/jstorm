@@ -1,0 +1,5 @@
+{
+  String path=getZkPath(mq);
+  byte[] data=String.valueOf(offset).getBytes();
+  zkClient.set_data(path,data);
+}

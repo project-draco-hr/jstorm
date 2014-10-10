@@ -1,0 +1,7 @@
+{
+  if (isNeedRebalance.get() == true) {
+    isNeedRebalance.set(false);
+    collector.emit(REBALANCE_STREAM_ID,new Values(id));
+    LOG.info("Emit rebalance command");
+  }
+}

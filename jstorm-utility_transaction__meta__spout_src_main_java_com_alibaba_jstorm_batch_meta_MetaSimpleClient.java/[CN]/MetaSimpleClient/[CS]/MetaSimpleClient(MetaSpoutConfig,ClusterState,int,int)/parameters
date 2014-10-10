@@ -1,0 +1,4 @@
+MetaSpoutConfig config
+ClusterState zkClient
+int taskIndex
+int taskParall

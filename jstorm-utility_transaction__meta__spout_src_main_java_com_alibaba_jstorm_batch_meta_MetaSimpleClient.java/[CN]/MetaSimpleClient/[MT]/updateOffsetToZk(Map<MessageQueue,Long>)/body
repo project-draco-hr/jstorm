@@ -1,0 +1,8 @@
+{
+  for (  Entry<MessageQueue,Long> entry : mqs.entrySet()) {
+    MessageQueue mq=entry.getKey();
+    Long offset=entry.getValue();
+    updateOffsetToZk(mq,offset);
+  }
+  LOG.info("Update zk offset," + mqs);
+}

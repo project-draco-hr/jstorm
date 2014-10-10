@@ -1,0 +1,19 @@
+{
+  BatchTopologyBuilder batchTopologyBuilder=new BatchTopologyBuilder(topologyName);
+  MetaSpoutConfig metaSpoutConfig=getMetaSpoutConfig(conf);
+  BoltDeclarer rebalanceDeclarer=batchTopologyBuilder.setBolt(BatchMetaRebalance.BOLT_NAME,new BatchMetaRebalance(),1);
+  IBatchSpout batchSpout=new BatchMetaSpout(metaSpoutConfig);
+  int spoutParal=JStormUtils.parseInt(conf.get("topology.spout.parallel"),1);
+  BoltDeclarer spoutDeclarer=batchTopologyBuilder.setSpout(BatchMetaSpout.SPOUT_NAME,batchSpout,spoutParal);
+  spoutDeclarer.allGrouping(BatchMetaRebalance.BOLT_NAME,BatchMetaRebalance.REBALANCE_STREAM_ID);
+  int boltParallel=JStormUtils.parseInt(conf.get("topology.bolt.parallel"),1);
+  BoltDeclarer transformDeclarer=batchTopologyBuilder.setBolt(TransformBolt.BOLT_NAME,new TransformBolt(),boltParallel);
+  transformDeclarer.shuffleGrouping(BatchMetaSpout.SPOUT_NAME);
+  BoltDeclarer countDeclarer=batchTopologyBuilder.setBolt(CountBolt.COUNT_BOLT_NAME,new CountBolt(),boltParallel);
+  countDeclarer.shuffleGrouping(TransformBolt.BOLT_NAME);
+  BoltDeclarer sumDeclarer=batchTopologyBuilder.setBolt(CountBolt.SUM_BOLT_NAME,new CountBolt(),boltParallel);
+  sumDeclarer.shuffleGrouping(TransformBolt.BOLT_NAME);
+  BoltDeclarer dbDeclarer=batchTopologyBuilder.setBolt(DBBolt.BOLT_NAME,new DBBolt(),1);
+  dbDeclarer.shuffleGrouping(CountBolt.COUNT_BOLT_NAME).shuffleGrouping(CountBolt.SUM_BOLT_NAME);
+  return batchTopologyBuilder.getTopologyBuilder();
+}

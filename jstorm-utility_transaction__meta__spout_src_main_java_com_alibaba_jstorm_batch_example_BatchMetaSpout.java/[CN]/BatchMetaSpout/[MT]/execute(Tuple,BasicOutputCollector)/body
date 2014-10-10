@@ -1,0 +1,15 @@
+{
+  String streamId=input.getSourceStreamId();
+  if (streamId.equals(BatchMetaRebalance.REBALANCE_STREAM_ID)) {
+    try {
+      metaClient.rebalanceMqList();
+    }
+ catch (    Exception e) {
+      LOG.warn("Failed to do rebalance operation",e);
+    }
+  }
+ else {
+    BatchId batchId=(BatchId)input.getValue(0);
+    emitBatch(batchId,collector);
+  }
+}

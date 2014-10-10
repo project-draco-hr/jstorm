@@ -1,0 +1,25 @@
+{
+  LOG.info("Begin to run revert thread");
+  isRunRevert.set(true);
+  while (isRunRevert.get() == true) {
+    CommitedValue commitedValue=null;
+    try {
+      commitedValue=revertQueue.take();
+    }
+ catch (    InterruptedException e1) {
+    }
+    if (commitedValue == null) {
+      continue;
+    }
+    try {
+      commitedValue.revert();
+      LOG.info("Successfully revert " + commitedValue);
+    }
+ catch (    Exception e) {
+      LOG.info("Failed to do revert " + commitedValue);
+      JStormUtils.sleepMs(100);
+      revertQueue.offer(commitedValue);
+    }
+  }
+  LOG.info("Successfully quit revert thread");
+}

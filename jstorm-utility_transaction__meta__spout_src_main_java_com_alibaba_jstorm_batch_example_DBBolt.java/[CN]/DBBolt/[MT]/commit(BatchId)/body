@@ -1,0 +1,19 @@
+{
+  AtomicLong count=(AtomicLong)counters.remove(id);
+  if (count == null) {
+    count=new AtomicLong(0);
+  }
+  AtomicLong sum=(AtomicLong)sums.remove(id);
+  if (sum == null) {
+    sum=new AtomicLong(0);
+  }
+  CommitedValue commitedValue=new CommitedValue(count,sum);
+  try {
+    commitedValue.commit();
+    return Utils.serialize(commitedValue);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to commit " + commitedValue,e);
+    throw new FailedException(e);
+  }
+}

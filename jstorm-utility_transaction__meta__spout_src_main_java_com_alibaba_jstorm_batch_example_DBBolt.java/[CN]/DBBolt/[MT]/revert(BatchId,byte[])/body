@@ -1,0 +1,8 @@
+{
+  CommitedValue commitedValue=(CommitedValue)Utils.deserialize(commitResult);
+  if (commitedValue == null) {
+    LOG.warn("Failed to deserialize commited value");
+    return;
+  }
+  revertQueue.offer(commitedValue);
+}

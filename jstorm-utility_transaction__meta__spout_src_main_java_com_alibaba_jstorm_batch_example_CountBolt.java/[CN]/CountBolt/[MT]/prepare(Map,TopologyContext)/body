@@ -1,0 +1,6 @@
+{
+  this.conf=stormConf;
+  int timeoutSeconds=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
+  counters=new TimeCacheMap<BatchId,AtomicLong>(timeoutSeconds);
+  LOG.info("Successfully do prepare");
+}

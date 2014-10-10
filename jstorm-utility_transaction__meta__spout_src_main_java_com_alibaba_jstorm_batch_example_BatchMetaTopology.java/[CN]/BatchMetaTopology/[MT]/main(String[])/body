@@ -1,0 +1,15 @@
+{
+  if (args.length < 1) {
+    System.err.println("Please input parameters topology.yaml");
+    System.exit(-1);
+  }
+  LoadYaml(args[0]);
+  boolean isLocal=StormConfig.local_mode(conf);
+  if (isLocal) {
+    SetLocalTopology();
+    return;
+  }
+ else {
+    SetRemoteTopology();
+  }
+}

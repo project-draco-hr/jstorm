@@ -1,0 +1,7 @@
+{
+  AtomicLong counter=(AtomicLong)counters.remove(id);
+  if (counter == null) {
+    counter=new AtomicLong(0);
+  }
+  collector.emit(new Values(id,counter.get()));
+}

@@ -1,0 +1,14 @@
+{
+  this.conf=stormConf;
+  taskName=context.getThisComponentId() + "_" + context.getThisTaskId();
+  taskIndex=context.getThisTaskIndex();
+  taskParallel=context.getComponentTasks(context.getThisComponentId()).size();
+  try {
+    initMetaClient();
+  }
+ catch (  Exception e) {
+    LOG.info("Failed to init Meta Client,",e);
+    throw new RuntimeException(e);
+  }
+  LOG.info(taskName + " successfully do prepare ");
+}

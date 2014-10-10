@@ -1,0 +1,6 @@
+{
+  List<MessageExt> msgs=metaClient.fetchOneBatch();
+  for (  MessageExt msgExt : msgs) {
+    collector.emit(new Values(batchId,msgExt));
+  }
+}

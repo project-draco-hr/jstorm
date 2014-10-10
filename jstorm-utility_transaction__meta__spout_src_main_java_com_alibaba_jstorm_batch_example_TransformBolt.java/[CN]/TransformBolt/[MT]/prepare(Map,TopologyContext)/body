@@ -1,0 +1,6 @@
+{
+  this.conf=stormConf;
+  this.rand=new Random();
+  rand.setSeed(System.currentTimeMillis());
+  LOG.info("Successfully do prepare");
+}

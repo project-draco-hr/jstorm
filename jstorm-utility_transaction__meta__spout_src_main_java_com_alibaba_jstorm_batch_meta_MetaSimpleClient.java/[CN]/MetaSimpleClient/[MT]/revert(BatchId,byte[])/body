@@ -1,0 +1,10 @@
+{
+  try {
+    switchOffsetMap();
+    updateOffsetToZk(currentOffsets);
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to update offset to ZK",e);
+    throw new FailedException(e);
+  }
+}

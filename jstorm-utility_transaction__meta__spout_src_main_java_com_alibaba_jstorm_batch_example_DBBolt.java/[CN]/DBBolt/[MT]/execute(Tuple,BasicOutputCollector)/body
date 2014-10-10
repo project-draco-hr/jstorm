@@ -1,0 +1,24 @@
+{
+  BatchId batchId=(BatchId)input.getValue(0);
+  if (input.getSourceComponent().equals(CountBolt.COUNT_BOLT_NAME)) {
+    AtomicLong counter=counters.get(batchId);
+    if (counter == null) {
+      counter=new AtomicLong(0);
+      counters.put(batchId,counter);
+    }
+    long value=input.getLong(1);
+    counter.addAndGet(value);
+  }
+ else   if (input.getSourceComponent().equals(CountBolt.SUM_BOLT_NAME)) {
+    AtomicLong sum=sums.get(batchId);
+    if (sum == null) {
+      sum=new AtomicLong(0);
+      sums.put(batchId,sum);
+    }
+    long value=input.getLong(1);
+    sum.addAndGet(value);
+  }
+ else {
+    LOG.warn("Unknow source type");
+  }
+}

@@ -1,0 +1,15 @@
+{
+  Set<MessageQueue> mqs=consumer.fetchSubscribeMessageQueues(metaSpoutConfig.getTopic());
+  if (taskParallel > mqs.size()) {
+    throw new RuntimeException("Two much task to fetch " + metaSpoutConfig);
+  }
+  List<MessageQueue> mqList=JStormUtils.mk_list(mqs);
+  Set<MessageQueue> ret=new HashSet<MessageQueue>();
+  for (int i=taskIndex; i < mqList.size(); i+=taskParallel) {
+    ret.add(mqList.get(i));
+  }
+  if (ret.size() == 0) {
+    throw new RuntimeException("No meta queue need to be consume");
+  }
+  return ret;
+}
