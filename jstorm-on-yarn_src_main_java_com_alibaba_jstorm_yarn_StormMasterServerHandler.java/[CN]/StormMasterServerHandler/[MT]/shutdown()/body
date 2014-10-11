@@ -1,0 +1,4 @@
+{
+  LOG.info("shutdown storm master...");
+  _masterServer.stop();
+}

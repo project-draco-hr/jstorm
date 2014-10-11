@@ -1,0 +1,12 @@
+{
+synchronized (this) {
+    if (nimbusProcess == null)     return;
+    LOG.info("stopping nimbus...");
+    if (!nimbusProcess.isAlive()) {
+      LOG.info("Received a request to stop nimbus, but it is not running now");
+      return;
+    }
+    nimbusProcess.stopJStormProcess();
+    nimbusProcess=null;
+  }
+}

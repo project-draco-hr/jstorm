@@ -1,0 +1,3 @@
+ApplicationAttemptId appAttemptID
+Map storm_conf
+YarnConfiguration hadoopConf

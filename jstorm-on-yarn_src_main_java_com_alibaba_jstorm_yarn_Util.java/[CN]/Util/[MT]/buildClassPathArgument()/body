@@ -1,0 +1,9 @@
+{
+  List<String> paths=new ArrayList<String>();
+  paths.add(new File(JSTORM_CONF_PATH_STRING).getParent());
+  paths.add(getJStormHome());
+  for (  String jarPath : findAllJarsInPaths(getJStormHome(),getJStormHome() + File.separator + "lib")) {
+    paths.add(jarPath);
+  }
+  return Joiner.on(File.pathSeparatorChar).join(paths);
+}

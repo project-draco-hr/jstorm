@@ -1,0 +1,7 @@
+{
+  String ret=System.getProperty("jstorm.home");
+  if (ret == null) {
+    throw new RuntimeException("jstorm.home is not set");
+  }
+  return ret;
+}

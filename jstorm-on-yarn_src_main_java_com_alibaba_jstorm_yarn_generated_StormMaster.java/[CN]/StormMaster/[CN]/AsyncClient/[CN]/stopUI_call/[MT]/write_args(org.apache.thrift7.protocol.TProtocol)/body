@@ -1,0 +1,6 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift7.protocol.TMessage("stopUI",org.apache.thrift7.protocol.TMessageType.CALL,0));
+  stopUI_args args=new stopUI_args();
+  args.write(prot);
+  prot.writeMessageEnd();
+}

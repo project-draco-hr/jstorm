@@ -1,0 +1,14 @@
+{
+  LOG.info("setting configuration...");
+  stopSupervisors();
+  stopUI();
+  stopNimbus();
+  Object json=JSONValue.parse(storm_conf);
+  Map<?,?> new_conf=(Map<?,?>)json;
+  _storm_conf.putAll(new_conf);
+  Util.rmNulls(_storm_conf);
+  setStormHostConf();
+  startNimbus();
+  startUI();
+  startSupervisors();
+}

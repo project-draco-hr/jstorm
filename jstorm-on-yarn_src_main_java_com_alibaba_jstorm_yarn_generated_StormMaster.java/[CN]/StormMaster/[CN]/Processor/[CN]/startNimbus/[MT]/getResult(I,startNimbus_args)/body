@@ -1,0 +1,5 @@
+{
+  startNimbus_result result=new startNimbus_result();
+  iface.startNimbus();
+  return result;
+}

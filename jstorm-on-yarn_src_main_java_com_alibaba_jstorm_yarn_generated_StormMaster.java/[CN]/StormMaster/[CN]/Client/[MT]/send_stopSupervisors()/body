@@ -1,0 +1,4 @@
+{
+  stopSupervisors_args args=new stopSupervisors_args();
+  sendBase("stopSupervisors",args);
+}

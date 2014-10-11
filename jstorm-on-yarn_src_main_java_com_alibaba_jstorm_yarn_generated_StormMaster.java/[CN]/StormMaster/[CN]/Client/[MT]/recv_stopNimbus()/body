@@ -1,0 +1,5 @@
+{
+  stopNimbus_result result=new stopNimbus_result();
+  receiveBase(result,"stopNimbus");
+  return;
+}

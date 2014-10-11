@@ -1,0 +1,7 @@
+{
+  int num=numSupervisors.getAndSet(0);
+  for (int i=0; i < num; i++) {
+    ContainerRequest req=new ContainerRequest(this.defaultResource,null,null,DEFAULT_PRIORITY);
+    super.addContainerRequest(req);
+  }
+}

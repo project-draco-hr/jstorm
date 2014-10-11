@@ -1,0 +1,5 @@
+{
+  LOG.debug("Stopping all supervisors, releasing all containers...");
+  this.supervisorsAreToRun=false;
+  releaseAllSupervisorsRequest();
+}

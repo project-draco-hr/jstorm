@@ -1,0 +1,7 @@
+{
+switch (field) {
+case NUMBER:
+    return Integer.valueOf(get_number());
+}
+throw new IllegalStateException();
+}

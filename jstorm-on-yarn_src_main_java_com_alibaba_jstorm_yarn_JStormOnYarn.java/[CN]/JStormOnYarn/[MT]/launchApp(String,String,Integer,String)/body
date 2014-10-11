@@ -1,0 +1,107 @@
+{
+  LOG.debug("JStormOnYarn:launchApp() ...");
+  YarnClientApplication client_app=_yarn.createApplication();
+  GetNewApplicationResponse app=client_app.getNewApplicationResponse();
+  _appId=app.getApplicationId();
+  LOG.debug("_appId:" + _appId);
+  if (amMB > app.getMaximumResourceCapability().getMemory()) {
+    amMB=app.getMaximumResourceCapability().getMemory();
+  }
+  ApplicationSubmissionContext appContext=Records.newRecord(ApplicationSubmissionContext.class);
+  appContext.setApplicationId(app.getApplicationId());
+  appContext.setApplicationName(appName);
+  appContext.setQueue(queue);
+  ContainerLaunchContext amContainer=Records.newRecord(ContainerLaunchContext.class);
+  Map<String,LocalResource> localResources=new HashMap<String,LocalResource>();
+  LOG.info("Copy App Master jar from local filesystem and add to local environment");
+  String appMasterJar=findContainingJar(MasterServer.class);
+  FileSystem fs=FileSystem.get(_hadoopConf);
+  Path src=new Path(appMasterJar);
+  String appHome=Util.getApplicationHomeForId(_appId.toString());
+  Path dst=new Path(fs.getHomeDirectory(),appHome + Path.SEPARATOR + "AppMaster.jar");
+  fs.copyFromLocalFile(false,true,src,dst);
+  localResources.put("AppMaster.jar",Util.newYarnAppResource(fs,dst));
+  Version jstormVersion=Util.getJStormVersion();
+  Path zip;
+  if (storm_zip_location != null) {
+    zip=new Path(storm_zip_location);
+  }
+ else {
+    zip=new Path("/lib/jstorm/" + jstormVersion + "/jstorm.zip");
+  }
+  _jstormConf.put("jstorm.zip.path",zip.makeQualified(fs).toUri().getPath());
+  LocalResourceVisibility visibility=LocalResourceVisibility.PUBLIC;
+  _jstormConf.put("jstorm.zip.visibility","PUBLIC");
+  if (!Util.isPublic(fs,zip)) {
+    visibility=LocalResourceVisibility.APPLICATION;
+    _jstormConf.put("jstorm.zip.visibility","APPLICATION");
+  }
+  localResources.put("jstorm",Util.newYarnAppResource(fs,zip,LocalResourceType.ARCHIVE,visibility));
+  Path confDst=Util.createConfigurationFileInFs(fs,appHome,_jstormConf,_hadoopConf);
+  localResources.put("conf",Util.newYarnAppResource(fs,confDst));
+  LOG.info("appHome is: " + appHome);
+  Path[] paths=new Path[3];
+  paths[0]=dst;
+  paths[1]=zip;
+  paths[2]=confDst;
+  Credentials credentials=new Credentials();
+  TokenCache.obtainTokensForNamenodes(credentials,paths,_hadoopConf);
+  DataOutputBuffer dob=new DataOutputBuffer();
+  credentials.writeTokenStorageToStream(dob);
+  ByteBuffer securityTokens=ByteBuffer.wrap(dob.getData(),0,dob.getLength());
+  amContainer.setTokens(securityTokens);
+  amContainer.setLocalResources(localResources);
+  LOG.info("Set the environment for the application master");
+  Map<String,String> env=new HashMap<String,String>();
+  Apps.addToEnvironment(env,Environment.CLASSPATH.name(),"./conf");
+  Apps.addToEnvironment(env,Environment.CLASSPATH.name(),"./AppMaster.jar");
+  List<String> yarn_classpath_cmd=java.util.Arrays.asList("yarn","classpath");
+  ProcessBuilder pb=new ProcessBuilder(yarn_classpath_cmd);
+  LOG.info("YARN CLASSPATH COMMAND = [" + yarn_classpath_cmd + "]");
+  pb.environment().putAll(System.getenv());
+  Process proc=pb.start();
+  Util.redirectStreamAsync(proc.getErrorStream(),System.err);
+  BufferedReader reader=new BufferedReader(new InputStreamReader(proc.getInputStream(),"UTF-8"));
+  String line="";
+  String yarn_class_path=(String)_jstormConf.get("jstorm.yarn.yarn_classpath");
+  if (yarn_class_path == null) {
+    StringBuilder yarn_class_path_builder=new StringBuilder();
+    while ((line=reader.readLine()) != null) {
+      yarn_class_path_builder.append(line);
+    }
+    yarn_class_path=yarn_class_path_builder.toString();
+  }
+  LOG.info("YARN CLASSPATH = [" + yarn_class_path + "]");
+  proc.waitFor();
+  reader.close();
+  Apps.addToEnvironment(env,Environment.CLASSPATH.name(),yarn_class_path);
+  String stormHomeInZip=Util.getJStormHomeInZip(fs,zip,jstormVersion.version());
+  Apps.addToEnvironment(env,Environment.CLASSPATH.name(),"./jstorm/" + stormHomeInZip + "/*");
+  Apps.addToEnvironment(env,Environment.CLASSPATH.name(),"./jstorm/" + stormHomeInZip + "/lib/*");
+  String java_home=(String)_jstormConf.get("jstorm.yarn.java_home");
+  if (java_home == null)   java_home=System.getenv("JAVA_HOME");
+  if (java_home != null && !java_home.isEmpty())   env.put("JAVA_HOME",java_home);
+  LOG.info("Using JAVA_HOME = [" + env.get("JAVA_HOME") + "]");
+  env.put("appJar",appMasterJar);
+  env.put("appName",appName);
+  env.put("appId",new Integer(_appId.getId()).toString());
+  env.put("JSTORM_LOG_DIR",ApplicationConstants.LOG_DIR_EXPANSION_VAR);
+  amContainer.setEnvironment(env);
+  LOG.info("appMaster env:" + env);
+  Vector<String> vargs=new Vector<String>();
+  if (java_home != null && !java_home.isEmpty())   vargs.add(env.get("JAVA_HOME") + "/bin/java");
+ else   vargs.add("java");
+  vargs.add("-Djstorm.home=./jstorm/" + stormHomeInZip + "/");
+  vargs.add("-Dlogfile.name=" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/master.log");
+  vargs.add("com.alibaba.jstorm.yarn.MasterServer");
+  vargs.add("1>" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/stdout");
+  vargs.add("2>" + ApplicationConstants.LOG_DIR_EXPANSION_VAR + "/stderr");
+  LOG.info("Setting up app master command:" + vargs);
+  amContainer.setCommands(vargs);
+  Resource capability=Records.newRecord(Resource.class);
+  capability.setMemory(amMB);
+  capability.setVirtualCores(1);
+  appContext.setResource(capability);
+  appContext.setAMContainerSpec(amContainer);
+  _yarn.submitApplication(appContext);
+}

@@ -1,0 +1,3 @@
+{
+  return Util.newYarnAppResource(fs,path,LocalResourceType.FILE,LocalResourceVisibility.APPLICATION);
+}

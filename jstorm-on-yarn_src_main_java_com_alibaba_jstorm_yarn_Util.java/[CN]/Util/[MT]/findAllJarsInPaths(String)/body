@@ -1,0 +1,21 @@
+{
+  final LinkedHashSet<String> pathSet=new LinkedHashSet<String>();
+  FileVisitor visitor=new FileVisitor(){
+    @Override public void visit(    File file){
+      String name=file.getName();
+      if (name.endsWith(".jar")) {
+        pathSet.add(file.getPath());
+      }
+    }
+  }
+;
+  for (  String path : pathStrs) {
+    File file=new File(path);
+    traverse(file,visitor);
+  }
+  final List<String> toRet=new ArrayList<String>();
+  for (  String p : pathSet) {
+    toRet.add(p);
+  }
+  return toRet;
+}

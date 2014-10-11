@@ -1,0 +1,4 @@
+{
+  super(storm_conf,masterHost,masterPort,timeout);
+  _client=new StormMaster.Client(_protocol);
+}

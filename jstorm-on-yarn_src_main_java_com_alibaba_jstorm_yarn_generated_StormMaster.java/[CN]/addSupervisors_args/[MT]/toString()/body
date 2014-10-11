@@ -1,0 +1,9 @@
+{
+  StringBuilder sb=new StringBuilder("addSupervisors_args(");
+  boolean first=true;
+  sb.append("number:");
+  sb.append(this.number);
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

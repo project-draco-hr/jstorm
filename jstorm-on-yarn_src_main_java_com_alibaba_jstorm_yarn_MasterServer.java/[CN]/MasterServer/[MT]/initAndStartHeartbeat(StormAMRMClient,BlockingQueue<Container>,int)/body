@@ -1,0 +1,44 @@
+{
+  Thread thread=new Thread(){
+    @Override public void run(){
+      try {
+        while (client.getServiceState() == Service.STATE.STARTED && !Thread.currentThread().isInterrupted()) {
+          Thread.sleep(heartBeatIntervalMs);
+          AllocateResponse allocResponse=client.allocate(0.5f);
+          AMCommand am_command=allocResponse.getAMCommand();
+          if (am_command != null && (am_command == AMCommand.AM_SHUTDOWN || am_command == AMCommand.AM_RESYNC)) {
+            LOG.info("Got AM_SHUTDOWN or AM_RESYNC from the RM");
+            _handler.stop();
+            System.exit(0);
+          }
+          List<Container> allocatedContainers=allocResponse.getAllocatedContainers();
+          if (allocatedContainers.size() > 0) {
+            LOG.info("HB: Received allocated containers (" + allocatedContainers.size() + ")");
+            client.addAllocatedContainers(allocatedContainers);
+            if (client.supervisorsAreToRun()) {
+              LOG.info("HB: Supervisors are to run, so queueing (" + allocatedContainers.size() + ") containers...");
+              launcherQueue.addAll(allocatedContainers);
+            }
+ else {
+              LOG.info("HB: Supervisors are to stop, so releasing all containers...");
+              client.stopAllSupervisors();
+            }
+          }
+          List<ContainerStatus> completedContainers=allocResponse.getCompletedContainersStatuses();
+          if (completedContainers.size() > 0 && client.supervisorsAreToRun()) {
+            LOG.debug("HB: Containers completed (" + completedContainers.size() + "), so releasing them.");
+            client.startAllSupervisors();
+          }
+        }
+      }
+ catch (      Throwable t) {
+        LOG.error("Unhandled error in AM: ",t);
+        _handler.stop();
+        System.exit(1);
+      }
+    }
+  }
+;
+  thread.start();
+  return thread;
+}

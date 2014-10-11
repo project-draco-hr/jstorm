@@ -1,0 +1,4 @@
+{
+  set_number_isSet(false);
+  this.number=0;
+}

@@ -1,0 +1,4 @@
+{
+  this();
+  this.storm_conf=storm_conf;
+}

@@ -1,0 +1,3 @@
+{
+  this(storm_conf,new StormMasterServerHandler(storm_conf,client));
+}

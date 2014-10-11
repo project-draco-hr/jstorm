@@ -1,0 +1,10 @@
+{
+  int num=numSupervisors.addAndGet(number);
+  if (this.supervisorsAreToRun) {
+    LOG.info("Added " + num + " supervisors, and requesting containers...");
+    addSupervisorsRequest();
+  }
+ else {
+    LOG.info("Added " + num + " supervisors, but not requesting containers now.");
+  }
+}

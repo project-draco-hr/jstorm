@@ -1,0 +1,4 @@
+{
+  getStormConf_args args=new getStormConf_args();
+  sendBase("getStormConf",args);
+}

@@ -1,0 +1,7 @@
+{
+  for (int i=0; i < containers.size(); i++) {
+    ContainerRequest req=new ContainerRequest(this.defaultResource,null,null,DEFAULT_PRIORITY);
+    super.removeContainerRequest(req);
+  }
+  return this.containers.addAll(containers);
+}

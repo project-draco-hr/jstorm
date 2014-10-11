@@ -1,0 +1,6 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift7.protocol.TMessage("startSupervisors",org.apache.thrift7.protocol.TMessageType.CALL,0));
+  startSupervisors_args args=new startSupervisors_args();
+  args.write(prot);
+  prot.writeMessageEnd();
+}

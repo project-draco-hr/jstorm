@@ -1,0 +1,6 @@
+{
+  List<String> toRet=buildCommandPrefix(conf,backtype.storm.Config.NIMBUS_CHILDOPTS);
+  toRet.add("-Dlogfile.name=" + System.getenv("JSTORM_LOG_DIR") + "/nimbus.log");
+  toRet.add("com.alibaba.jstorm.daemon.nimbus.NimbusServer");
+  return toRet;
+}

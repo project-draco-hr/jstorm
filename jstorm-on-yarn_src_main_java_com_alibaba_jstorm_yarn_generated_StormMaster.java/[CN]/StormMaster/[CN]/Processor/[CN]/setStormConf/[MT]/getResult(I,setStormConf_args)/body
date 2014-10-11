@@ -1,0 +1,5 @@
+{
+  setStormConf_result result=new setStormConf_result();
+  iface.setStormConf(args.storm_conf);
+  return result;
+}

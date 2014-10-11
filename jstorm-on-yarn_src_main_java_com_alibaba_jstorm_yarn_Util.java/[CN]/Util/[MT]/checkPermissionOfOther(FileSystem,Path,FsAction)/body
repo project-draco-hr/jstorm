@@ -1,0 +1,9 @@
+{
+  FileStatus status=fs.getFileStatus(path);
+  FsPermission perms=status.getPermission();
+  FsAction otherAction=perms.getOtherAction();
+  if (otherAction.implies(action)) {
+    return true;
+  }
+  return false;
+}

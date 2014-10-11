@@ -1,0 +1,12 @@
+{
+switch (field) {
+case STORM_CONF:
+    if (value == null) {
+      unset_storm_conf();
+    }
+ else {
+      set_storm_conf((String)value);
+    }
+  break;
+}
+}

@@ -1,0 +1,10 @@
+{
+  if (that == null)   return false;
+  boolean this_present_number=true;
+  boolean that_present_number=true;
+  if (this_present_number || that_present_number) {
+    if (!(this_present_number && that_present_number))     return false;
+    if (this.number != that.number)     return false;
+  }
+  return true;
+}

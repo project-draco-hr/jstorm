@@ -1,0 +1,31 @@
+{
+  String conf_str="Not Avaialble";
+  try {
+    conf_str=client.getStormConf();
+  }
+ catch (  TTransportException ex) {
+    LOG.error("Exception in downloading storm.yaml",ex);
+  }
+catch (  TException ex) {
+    LOG.error("Exception in downloading storm.yaml",ex);
+  }
+  try {
+    Object json=JSONValue.parse(conf_str);
+    Map<?,?> conf=(Map<?,?>)json;
+    Yaml yaml=new Yaml();
+    if (storm_yaml_output == null) {
+      LOG.info("storm.yaml downloaded:");
+      System.out.println(yaml.dump(conf));
+    }
+ else {
+      FileWriter out=new FileWriter(storm_yaml_output);
+      yaml.dump(conf,out);
+      out.flush();
+      out.close();
+      LOG.info("storm.yaml downloaded into " + storm_yaml_output);
+    }
+  }
+ catch (  Exception ex) {
+    LOG.error("Exception in storing storm.yaml. ",ex);
+  }
+}

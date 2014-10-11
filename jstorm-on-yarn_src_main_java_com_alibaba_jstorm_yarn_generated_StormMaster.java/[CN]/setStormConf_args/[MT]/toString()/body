@@ -1,0 +1,14 @@
+{
+  StringBuilder sb=new StringBuilder("setStormConf_args(");
+  boolean first=true;
+  sb.append("storm_conf:");
+  if (this.storm_conf == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.storm_conf);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

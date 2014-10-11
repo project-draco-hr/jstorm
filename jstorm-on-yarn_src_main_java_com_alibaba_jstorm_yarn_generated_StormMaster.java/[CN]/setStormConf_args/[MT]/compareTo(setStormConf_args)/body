@@ -1,0 +1,18 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  setStormConf_args typedOther=(setStormConf_args)other;
+  lastComparison=Boolean.valueOf(is_set_storm_conf()).compareTo(typedOther.is_set_storm_conf());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_storm_conf()) {
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.storm_conf,typedOther.storm_conf);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

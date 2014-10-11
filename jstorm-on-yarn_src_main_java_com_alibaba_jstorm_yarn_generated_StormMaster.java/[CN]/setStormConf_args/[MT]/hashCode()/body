@@ -1,0 +1,7 @@
+{
+  HashCodeBuilder builder=new HashCodeBuilder();
+  boolean present_storm_conf=true && (is_set_storm_conf());
+  builder.append(present_storm_conf);
+  if (present_storm_conf)   builder.append(storm_conf);
+  return builder.toHashCode();
+}

@@ -1,0 +1,4 @@
+{
+  LOG.info("adding " + number + " supervisors...");
+  _client.addSupervisors(number);
+}

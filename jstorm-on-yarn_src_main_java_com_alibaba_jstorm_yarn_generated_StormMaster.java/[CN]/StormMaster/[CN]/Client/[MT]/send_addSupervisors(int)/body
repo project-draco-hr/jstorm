@@ -1,0 +1,5 @@
+{
+  addSupervisors_args args=new addSupervisors_args();
+  args.set_number(number);
+  sendBase("addSupervisors",args);
+}

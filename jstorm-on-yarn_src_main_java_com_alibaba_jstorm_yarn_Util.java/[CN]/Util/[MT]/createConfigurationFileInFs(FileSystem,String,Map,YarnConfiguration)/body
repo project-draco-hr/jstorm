@@ -1,0 +1,23 @@
+{
+  Path confDst=new Path(fs.getHomeDirectory(),appHome + Path.SEPARATOR + JSTORM_CONF_PATH_STRING);
+  Path dirDst=confDst.getParent();
+  fs.mkdirs(dirDst);
+  FSDataOutputStream out=fs.create(confDst);
+  Yaml yaml=new Yaml();
+  OutputStreamWriter writer=new OutputStreamWriter(out);
+  rmNulls(stormConf);
+  yaml.dump(stormConf,writer);
+  writer.close();
+  out.close();
+  Path yarn_site_xml=new Path(dirDst,"yarn-site.xml");
+  out=fs.create(yarn_site_xml);
+  writer=new OutputStreamWriter(out);
+  yarnConf.writeXml(writer);
+  writer.close();
+  out.close();
+  Path logback_xml=new Path(dirDst,"logback.xml");
+  out=fs.create(logback_xml);
+  CreateLogbackXML(out);
+  out.close();
+  return dirDst;
+}

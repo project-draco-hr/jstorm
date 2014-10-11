@@ -1,0 +1,43 @@
+{
+  if (_client == null) {
+    String host=null;
+    int port=0;
+    int max_wait_for_report=Utils.getInt(_jstormConf.get(Config.YARN_REPORT_WAIT_MILLIS));
+    int waited=0;
+    while (waited < max_wait_for_report) {
+      ApplicationReport report=_yarn.getApplicationReport(_appId);
+      host=report.getHost();
+      port=report.getRpcPort();
+      if (host == null || port == 0) {
+        try {
+          Thread.sleep(1000);
+        }
+ catch (        InterruptedException e) {
+        }
+        waited+=1000;
+      }
+ else {
+        break;
+      }
+    }
+    if (host == null || port == 0) {
+      LOG.info("No host/port returned for Application Master " + _appId);
+      return null;
+    }
+    LOG.info("application report for " + _appId + " :"+ host+ ":"+ port);
+    if (_jstormConf == null) {
+      _jstormConf=new HashMap<Object,Object>();
+    }
+    _jstormConf.put(Config.MASTER_HOST,host);
+    _jstormConf.put(Config.MASTER_THRIFT_PORT,port);
+    LOG.info("Attaching to " + host + ":"+ port+ " to talk to app master "+ _appId);
+    try {
+      _client=MasterClient.getConfiguredClient(_jstormConf);
+    }
+ catch (    Exception e) {
+      e.printStackTrace();
+      LOG.error(host,e.getStackTrace());
+    }
+  }
+  return _client.getClient();
+}

@@ -1,0 +1,27 @@
+{
+  String versionNumber="Unknown";
+  System.out.println(getJStormHome());
+  File releaseFile=new File(getJStormHome(),"RELEASE");
+  if (releaseFile.exists()) {
+    BufferedReader reader=new BufferedReader(new FileReader(releaseFile));
+    try {
+      versionNumber=reader.readLine().trim();
+    }
+  finally {
+      reader.close();
+    }
+  }
+  File buildFile=new File(getJStormHome(),"BUILD");
+  String buildNumber=null;
+  if (buildFile.exists()) {
+    BufferedReader reader=new BufferedReader(new FileReader(buildFile));
+    try {
+      buildNumber=reader.readLine().trim();
+    }
+  finally {
+      reader.close();
+    }
+  }
+  Version version=new Version(versionNumber,buildNumber);
+  return version;
+}

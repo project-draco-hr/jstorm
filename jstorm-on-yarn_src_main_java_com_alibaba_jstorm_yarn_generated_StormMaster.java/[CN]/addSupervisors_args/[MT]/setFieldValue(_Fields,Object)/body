@@ -1,0 +1,12 @@
+{
+switch (field) {
+case NUMBER:
+    if (value == null) {
+      unset_number();
+    }
+ else {
+      set_number((Integer)value);
+    }
+  break;
+}
+}

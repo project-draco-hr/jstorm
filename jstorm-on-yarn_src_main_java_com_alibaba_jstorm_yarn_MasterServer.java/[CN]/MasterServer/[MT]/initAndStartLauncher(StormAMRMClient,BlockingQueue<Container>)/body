@@ -1,0 +1,33 @@
+{
+  Thread thread=new Thread(){
+    Container container;
+    @Override public void run(){
+      while (client.getServiceState() == Service.STATE.STARTED && !Thread.currentThread().isInterrupted()) {
+        try {
+          container=launcherQueue.take();
+          LOG.info("LAUNCHER: Taking container with id (" + container.getId() + ") from the queue.");
+          if (client.supervisorsAreToRun()) {
+            LOG.info("LAUNCHER: Supervisors are to run, so launching container id (" + container.getId() + ")");
+            client.launchSupervisorOnContainer(container);
+          }
+ else {
+            LOG.info("LAUNCHER: Supervisors are not to run, so not launching container id (" + container.getId() + ")");
+          }
+        }
+ catch (        InterruptedException e) {
+          if (client.getServiceState() == Service.STATE.STARTED) {
+            LOG.error("Launcher thread interrupted : ",e);
+            System.exit(1);
+          }
+          return;
+        }
+catch (        IOException e) {
+          LOG.error("Launcher thread I/O exception : ",e);
+          System.exit(1);
+        }
+      }
+    }
+  }
+;
+  thread.start();
+}

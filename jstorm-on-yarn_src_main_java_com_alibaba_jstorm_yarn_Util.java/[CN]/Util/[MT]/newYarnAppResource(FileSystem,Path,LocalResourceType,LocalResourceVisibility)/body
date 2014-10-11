@@ -1,0 +1,11 @@
+{
+  Path qualified=fs.makeQualified(path);
+  FileStatus status=fs.getFileStatus(qualified);
+  LocalResource resource=Records.newRecord(LocalResource.class);
+  resource.setType(type);
+  resource.setVisibility(vis);
+  resource.setResource(ConverterUtils.getYarnUrlFromPath(qualified));
+  resource.setTimestamp(status.getModificationTime());
+  resource.setSize(status.getLen());
+  return resource;
+}

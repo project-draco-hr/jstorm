@@ -1,0 +1,5 @@
+{
+  getStormConf_result result=new getStormConf_result();
+  result.success=iface.getStormConf();
+  return result;
+}

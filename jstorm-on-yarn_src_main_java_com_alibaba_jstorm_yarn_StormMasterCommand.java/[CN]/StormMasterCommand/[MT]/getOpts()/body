@@ -1,0 +1,7 @@
+{
+  Options opts=new Options();
+  opts.addOption("appId",true,"(Required) The storm clusters app ID");
+  opts.addOption("output",true,"Output file");
+  opts.addOption("supervisors",true,"(Required for addSupervisors) The # of supervisors to be added");
+  return opts;
+}

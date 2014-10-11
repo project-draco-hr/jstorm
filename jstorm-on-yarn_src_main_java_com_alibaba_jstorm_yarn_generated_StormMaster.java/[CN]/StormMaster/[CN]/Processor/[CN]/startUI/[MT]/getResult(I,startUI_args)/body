@@ -1,0 +1,5 @@
+{
+  startUI_result result=new startUI_result();
+  iface.startUI();
+  return result;
+}

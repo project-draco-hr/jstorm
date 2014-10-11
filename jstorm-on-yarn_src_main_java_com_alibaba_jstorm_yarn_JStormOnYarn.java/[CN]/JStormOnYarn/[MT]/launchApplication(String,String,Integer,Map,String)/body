@@ -1,0 +1,9 @@
+{
+  JStormOnYarn storm=new JStormOnYarn(stormConf);
+  storm.launchApp(appName,queue,amSize,storm_zip_location);
+  List<String> test=new ArrayList<String>();
+  test.add("abc");
+  test.add("def");
+  LOG.info("test List:" + test);
+  return storm;
+}

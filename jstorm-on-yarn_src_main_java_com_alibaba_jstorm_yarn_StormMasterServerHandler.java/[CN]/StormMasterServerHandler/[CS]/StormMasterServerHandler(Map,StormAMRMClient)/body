@@ -1,0 +1,6 @@
+{
+  _storm_conf=storm_conf;
+  setStormHostConf();
+  Util.rmNulls(_storm_conf);
+  _client=client;
+}

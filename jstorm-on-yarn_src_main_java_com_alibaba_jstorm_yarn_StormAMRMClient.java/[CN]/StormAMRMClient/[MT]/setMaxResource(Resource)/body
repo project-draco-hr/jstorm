@@ -1,0 +1,7 @@
+{
+  this.maxResourceCapability=maximumResourceCapability;
+  this.defaultResource=maximumResourceCapability;
+  this.defaultResource.setMemory(1024);
+  this.defaultResource.setVirtualCores(1);
+  LOG.info("Max Capability is now " + this.maxResourceCapability);
+}

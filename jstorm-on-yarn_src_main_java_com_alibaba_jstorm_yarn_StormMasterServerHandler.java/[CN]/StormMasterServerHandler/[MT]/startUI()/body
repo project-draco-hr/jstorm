@@ -1,0 +1,11 @@
+{
+  LOG.info("starting UI...");
+synchronized (this) {
+    if (uiProcess != null && uiProcess.isAlive()) {
+      LOG.info("Received a request to start UI, but it is running now");
+      return;
+    }
+    uiProcess=new JStormProcess("ui");
+    uiProcess.start();
+  }
+}

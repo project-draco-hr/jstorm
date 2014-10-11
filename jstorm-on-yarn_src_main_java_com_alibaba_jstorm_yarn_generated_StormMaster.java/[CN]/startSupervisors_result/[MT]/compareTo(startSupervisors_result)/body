@@ -1,0 +1,8 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  startSupervisors_result typedOther=(startSupervisors_result)other;
+  return 0;
+}

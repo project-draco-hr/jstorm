@@ -1,0 +1,13 @@
+{
+  String jstormHomePath=getJStormHome();
+  List<String> toRet=new ArrayList<String>();
+  if (System.getenv("JAVA_HOME") != null)   toRet.add(System.getenv("JAVA_HOME") + "/bin/java");
+ else   toRet.add("java");
+  toRet.add("-server");
+  toRet.add("-Djstorm.home=" + jstormHomePath);
+  toRet.add("-Djava.library.path=" + conf.get(backtype.storm.Config.JAVA_LIBRARY_PATH));
+  toRet.add("-Djstorm.conf.file=" + new File(JSTORM_CONF_PATH_STRING).getName());
+  toRet.add("-cp");
+  toRet.add(buildClassPathArgument());
+  return toRet;
+}

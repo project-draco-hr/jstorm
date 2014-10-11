@@ -1,0 +1,4 @@
+FileSystem fs
+Path path
+LocalResourceType type
+LocalResourceVisibility vis

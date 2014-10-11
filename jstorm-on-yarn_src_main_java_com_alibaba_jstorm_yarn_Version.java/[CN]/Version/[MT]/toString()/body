@@ -1,0 +1,8 @@
+{
+  if (null == build || build.isEmpty()) {
+    return version;
+  }
+ else {
+    return version + "-" + build;
+  }
+}

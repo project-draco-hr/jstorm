@@ -1,0 +1,4 @@
+Map storm_conf
+String masterHost
+int masterPort
+Integer timeout

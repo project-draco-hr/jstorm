@@ -1,0 +1,7 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift7.protocol.TMessage("setStormConf",org.apache.thrift7.protocol.TMessageType.CALL,0));
+  setStormConf_args args=new setStormConf_args();
+  args.set_storm_conf(storm_conf);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

@@ -1,0 +1,10 @@
+{
+  if (that == null)   return false;
+  boolean this_present_storm_conf=true && this.is_set_storm_conf();
+  boolean that_present_storm_conf=true && that.is_set_storm_conf();
+  if (this_present_storm_conf || that_present_storm_conf) {
+    if (!(this_present_storm_conf && that_present_storm_conf))     return false;
+    if (!this.storm_conf.equals(that.storm_conf))     return false;
+  }
+  return true;
+}

@@ -1,0 +1,5 @@
+{
+  stopSupervisors_result result=new stopSupervisors_result();
+  receiveBase(result,"stopSupervisors");
+  return;
+}

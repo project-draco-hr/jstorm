@@ -1,0 +1,5 @@
+{
+  stopNimbus_result result=new stopNimbus_result();
+  iface.stopNimbus();
+  return result;
+}

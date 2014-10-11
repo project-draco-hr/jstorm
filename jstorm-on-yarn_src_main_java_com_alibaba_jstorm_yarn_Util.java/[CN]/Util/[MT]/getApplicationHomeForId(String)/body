@@ -1,0 +1,6 @@
+{
+  if (id.isEmpty()) {
+    throw new IllegalArgumentException("The ID of the application cannot be empty.");
+  }
+  return ".jstorm" + Path.SEPARATOR + id;
+}

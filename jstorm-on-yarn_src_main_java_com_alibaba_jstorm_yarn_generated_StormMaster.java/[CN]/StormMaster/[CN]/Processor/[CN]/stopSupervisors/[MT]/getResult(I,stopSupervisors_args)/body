@@ -1,0 +1,5 @@
+{
+  stopSupervisors_result result=new stopSupervisors_result();
+  iface.stopSupervisors();
+  return result;
+}

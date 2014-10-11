@@ -1,0 +1,13 @@
+{
+  processMap.put("getStormConf",new getStormConf());
+  processMap.put("setStormConf",new setStormConf());
+  processMap.put("addSupervisors",new addSupervisors());
+  processMap.put("startNimbus",new startNimbus());
+  processMap.put("stopNimbus",new stopNimbus());
+  processMap.put("startUI",new startUI());
+  processMap.put("stopUI",new stopUI());
+  processMap.put("startSupervisors",new startSupervisors());
+  processMap.put("stopSupervisors",new stopSupervisors());
+  processMap.put("shutdown",new shutdown());
+  return processMap;
+}

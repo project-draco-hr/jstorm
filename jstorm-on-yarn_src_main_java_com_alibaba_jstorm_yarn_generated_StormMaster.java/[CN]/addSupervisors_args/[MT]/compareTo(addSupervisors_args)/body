@@ -1,0 +1,18 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  addSupervisors_args typedOther=(addSupervisors_args)other;
+  lastComparison=Boolean.valueOf(is_set_number()).compareTo(typedOther.is_set_number());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_number()) {
+    lastComparison=org.apache.thrift7.TBaseHelper.compareTo(this.number,typedOther.number);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

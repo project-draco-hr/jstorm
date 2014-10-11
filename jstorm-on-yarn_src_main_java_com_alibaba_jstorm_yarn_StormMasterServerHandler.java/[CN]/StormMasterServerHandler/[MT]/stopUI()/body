@@ -1,0 +1,12 @@
+{
+synchronized (this) {
+    if (uiProcess == null)     return;
+    LOG.info("stopping UI...");
+    if (!uiProcess.isAlive()) {
+      LOG.info("Received a request to stop UI, but it is not running now");
+      return;
+    }
+    uiProcess.stopJStormProcess();
+    uiProcess=null;
+  }
+}

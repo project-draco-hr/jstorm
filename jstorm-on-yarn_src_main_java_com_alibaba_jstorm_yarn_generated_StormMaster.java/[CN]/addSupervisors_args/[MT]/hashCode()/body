@@ -1,0 +1,7 @@
+{
+  HashCodeBuilder builder=new HashCodeBuilder();
+  boolean present_number=true;
+  builder.append(present_number);
+  if (present_number)   builder.append(number);
+  return builder.toHashCode();
+}

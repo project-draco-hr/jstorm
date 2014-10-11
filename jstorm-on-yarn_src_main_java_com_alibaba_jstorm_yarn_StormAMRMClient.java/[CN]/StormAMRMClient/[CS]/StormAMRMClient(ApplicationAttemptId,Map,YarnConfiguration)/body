@@ -1,0 +1,12 @@
+{
+  this.appAttemptId=appAttemptID;
+  this.storm_conf=storm_conf;
+  this.hadoopConf=hadoopConf;
+  Integer pri=Utils.getInt(storm_conf.get(Config.MASTER_CONTAINER_PRIORITY));
+  this.DEFAULT_PRIORITY.setPriority(pri);
+  this.containers=new TreeSet<Container>();
+  numSupervisors=new AtomicInteger(0);
+  nmClient=(NMClientImpl)NMClient.createNMClient();
+  nmClient.init(hadoopConf);
+  nmClient.start();
+}

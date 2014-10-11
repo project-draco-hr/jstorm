@@ -1,0 +1,3 @@
+StormAMRMClient client
+BlockingQueue<Container> launcherQueue
+int heartBeatIntervalMs

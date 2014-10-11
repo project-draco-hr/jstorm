@@ -1,0 +1,10 @@
+{
+  try {
+    stopSupervisors();
+    stopUI();
+    stopNimbus();
+  }
+ catch (  TException e) {
+    e.printStackTrace();
+  }
+}

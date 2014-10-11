@@ -1,0 +1,11 @@
+{
+  startJStormProcess();
+  try {
+    _process.waitFor();
+    LOG.info("Storm process " + _name + " stopped");
+  }
+ catch (  InterruptedException e) {
+    LOG.info("Interrupted => will stop the storm process too");
+    _process.destroy();
+  }
+}

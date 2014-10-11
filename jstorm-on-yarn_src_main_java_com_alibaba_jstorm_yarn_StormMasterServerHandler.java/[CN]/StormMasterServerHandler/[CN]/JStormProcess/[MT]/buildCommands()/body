@@ -1,0 +1,9 @@
+{
+  if (_name == "nimbus") {
+    return Util.buildNimbusCommands(_storm_conf);
+  }
+ else   if (_name == "ui") {
+    return Util.buildUICommands(_storm_conf);
+  }
+  throw new IllegalArgumentException("Cannot build command list for \"" + _name + "\"");
+}

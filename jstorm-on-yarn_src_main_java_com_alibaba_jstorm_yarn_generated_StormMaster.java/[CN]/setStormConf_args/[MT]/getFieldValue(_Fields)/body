@@ -1,0 +1,7 @@
+{
+switch (field) {
+case STORM_CONF:
+    return get_storm_conf();
+}
+throw new IllegalStateException();
+}

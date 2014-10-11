@@ -1,0 +1,10 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case STORM_CONF:
+    return is_set_storm_conf();
+}
+throw new IllegalStateException();
+}

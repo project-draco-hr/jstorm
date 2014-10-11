@@ -1,0 +1,8 @@
+{
+  _hadoopConf=new YarnConfiguration();
+  _yarn=YarnClient.createYarnClient();
+  _jstormConf=stormConf;
+  _appId=appId;
+  _yarn.init(_hadoopConf);
+  _yarn.start();
+}

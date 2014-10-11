@@ -1,0 +1,5 @@
+{
+  stopUI_result result=new stopUI_result();
+  receiveBase(result,"stopUI");
+  return;
+}

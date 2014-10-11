@@ -1,0 +1,6 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift7.protocol.TMessage("startUI",org.apache.thrift7.protocol.TMessageType.CALL,0));
+  startUI_args args=new startUI_args();
+  args.write(prot);
+  prot.writeMessageEnd();
+}

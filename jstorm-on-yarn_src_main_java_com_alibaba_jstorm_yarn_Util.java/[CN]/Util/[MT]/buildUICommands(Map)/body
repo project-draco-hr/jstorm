@@ -1,0 +1,7 @@
+{
+  List<String> toRet=buildCommandPrefix(conf,backtype.storm.Config.UI_CHILDOPTS);
+  toRet.add("-Dstorm.options=" + backtype.storm.Config.NIMBUS_HOST + "=localhost");
+  toRet.add("-Dlogfile.name=" + System.getenv("JSTORM_LOG_DIR") + "/ui.log");
+  toRet.add("backtype.storm.ui.core");
+  return toRet;
+}

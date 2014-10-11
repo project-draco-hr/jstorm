@@ -1,0 +1,8 @@
+{
+  Set s=map.entrySet();
+  Iterator it=s.iterator();
+  while (it.hasNext()) {
+    Map.Entry m=(Map.Entry)it.next();
+    if (m.getValue() == null)     it.remove();
+  }
+}

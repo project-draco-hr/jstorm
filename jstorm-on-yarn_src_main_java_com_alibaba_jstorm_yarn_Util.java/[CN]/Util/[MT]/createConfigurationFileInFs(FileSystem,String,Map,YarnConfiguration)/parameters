@@ -1,0 +1,4 @@
+FileSystem fs
+String appHome
+Map stormConf
+YarnConfiguration yarnConf

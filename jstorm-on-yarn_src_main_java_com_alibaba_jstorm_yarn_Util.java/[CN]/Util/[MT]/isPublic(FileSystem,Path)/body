@@ -1,0 +1,6 @@
+{
+  if (!checkPermissionOfOther(fs,path,FsAction.READ)) {
+    return false;
+  }
+  return ancestorsHaveExecutePermissions(fs,path.getParent());
+}

@@ -1,0 +1,15 @@
+{
+  if (args == null || args.size() < 1) {
+    args=_commands.keySet();
+  }
+  HelpFormatter f=new HelpFormatter();
+  for (  String command : args) {
+    ClientCommand c=_commands.get(command);
+    if (c != null) {
+      f.printHelp(command,c.getHeaderDescription(),c.getOpts(),null);
+    }
+ else {
+      System.err.println("ERROR: " + c + " is not a supported command.");
+    }
+  }
+}

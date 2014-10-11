@@ -1,0 +1,4 @@
+{
+  stopNimbus_args args=new stopNimbus_args();
+  sendBase("stopNimbus",args);
+}

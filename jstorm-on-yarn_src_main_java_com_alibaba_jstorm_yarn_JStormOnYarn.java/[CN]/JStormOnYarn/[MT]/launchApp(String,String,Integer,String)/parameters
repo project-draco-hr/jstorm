@@ -1,0 +1,4 @@
+String appName
+String queue
+Integer amMB
+String storm_zip_location

@@ -1,0 +1,5 @@
+{
+  addSupervisors_result result=new addSupervisors_result();
+  receiveBase(result,"addSupervisors");
+  return;
+}

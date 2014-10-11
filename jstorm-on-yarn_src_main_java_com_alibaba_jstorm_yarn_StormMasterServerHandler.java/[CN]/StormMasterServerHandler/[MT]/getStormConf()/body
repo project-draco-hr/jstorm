@@ -1,0 +1,4 @@
+{
+  LOG.info("getting configuration...");
+  return JSONValue.toJSONString(_storm_conf);
+}

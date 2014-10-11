@@ -1,0 +1,11 @@
+{
+  try {
+    LOG.info("Running: " + Joiner.on(" ").join(buildCommands()));
+    LOG.info("current working dir:" + System.getProperty("user.dir"));
+    ProcessBuilder builder=new ProcessBuilder(buildCommands());
+    _process=builder.start();
+  }
+ catch (  IOException e) {
+    LOG.warn("Error starting nimbus process ",e);
+  }
+}

@@ -1,0 +1,9 @@
+{
+  validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  oprot.writeFieldBegin(NUMBER_FIELD_DESC);
+  oprot.writeI32(this.number);
+  oprot.writeFieldEnd();
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

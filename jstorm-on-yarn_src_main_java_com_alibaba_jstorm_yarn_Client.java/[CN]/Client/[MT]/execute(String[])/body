@@ -1,0 +1,44 @@
+{
+  HashMap<String,ClientCommand> commands=new HashMap<String,ClientCommand>();
+  HelpCommand help=new HelpCommand(commands);
+  commands.put("help",help);
+  commands.put("launch",new LaunchCommand());
+  commands.put("setStormConfig",new StormMasterCommand(StormMasterCommand.COMMAND.SET_STORM_CONFIG));
+  commands.put("getStormConfig",new StormMasterCommand(StormMasterCommand.COMMAND.GET_STORM_CONFIG));
+  commands.put("addSupervisors",new StormMasterCommand(StormMasterCommand.COMMAND.ADD_SUPERVISORS));
+  commands.put("startNimbus",new StormMasterCommand(StormMasterCommand.COMMAND.START_NIMBUS));
+  commands.put("stopNimbus",new StormMasterCommand(StormMasterCommand.COMMAND.STOP_NIMBUS));
+  commands.put("startUI",new StormMasterCommand(StormMasterCommand.COMMAND.START_UI));
+  commands.put("stopUI",new StormMasterCommand(StormMasterCommand.COMMAND.STOP_UI));
+  commands.put("startSupervisors",new StormMasterCommand(StormMasterCommand.COMMAND.START_SUPERVISORS));
+  commands.put("stopSupervisors",new StormMasterCommand(StormMasterCommand.COMMAND.STOP_SUPERVISORS));
+  commands.put("shutdown",new StormMasterCommand(StormMasterCommand.COMMAND.SHUTDOWN));
+  commands.put("version",new VersionCommand());
+  String commandName=null;
+  String[] commandArgs=null;
+  if (args.length < 1) {
+    commandName="help";
+    commandArgs=new String[0];
+  }
+ else {
+    commandName=args[0];
+    commandArgs=Arrays.copyOfRange(args,1,args.length);
+  }
+  ClientCommand command=commands.get(commandName);
+  if (command == null) {
+    LOG.error("ERROR: " + commandName + " is not a supported command.");
+    help.printHelpFor(null);
+    System.exit(1);
+  }
+  Options opts=command.getOpts();
+  if (!opts.hasOption("h")) {
+    opts.addOption("h","help",false,"print out a help message");
+  }
+  CommandLine cl=new GnuParser().parse(command.getOpts(),commandArgs);
+  if (cl.hasOption("help")) {
+    help.printHelpFor(Arrays.asList(commandName));
+  }
+ else {
+    command.process(cl);
+  }
+}

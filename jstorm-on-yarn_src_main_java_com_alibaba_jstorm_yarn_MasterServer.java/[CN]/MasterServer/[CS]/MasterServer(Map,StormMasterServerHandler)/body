@@ -1,0 +1,17 @@
+{
+  super(storm_conf,new Processor<StormMaster.Iface>(handler),Utils.getInt(storm_conf.get(Config.MASTER_THRIFT_PORT)));
+  try {
+    _handler=handler;
+    _handler.init(this);
+    LOG.info("launch nimbus");
+    _handler.startNimbus();
+    LOG.info("launch ui");
+    _handler.startUI();
+    int numSupervisors=Utils.getInt(storm_conf.get(Config.MASTER_NUM_SUPERVISORS));
+    LOG.info("launch " + numSupervisors + " supervisors");
+    _handler.addSupervisors(numSupervisors);
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

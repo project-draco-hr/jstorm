@@ -1,0 +1,5 @@
+{
+  setStormConf_args args=new setStormConf_args();
+  args.set_storm_conf(storm_conf);
+  sendBase("setStormConf",args);
+}

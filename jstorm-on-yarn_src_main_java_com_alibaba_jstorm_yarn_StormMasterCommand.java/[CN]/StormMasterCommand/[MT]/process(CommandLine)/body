@@ -1,0 +1,101 @@
+{
+  String config_file=null;
+  List remaining_args=cl.getArgList();
+  if (remaining_args != null && !remaining_args.isEmpty()) {
+    config_file=(String)remaining_args.get(0);
+  }
+  Map stormConf=Config.readJStormConfig(null);
+  String appId=cl.getOptionValue("appId");
+  if (appId == null) {
+    throw new IllegalArgumentException("-appId is required");
+  }
+  JStormOnYarn storm=null;
+  try {
+    storm=JStormOnYarn.attachToApp(appId,stormConf);
+    StormMaster.Client client=storm.getClient();
+switch (cmd) {
+case GET_STORM_CONFIG:
+      downloadStormYaml(client,cl.getOptionValue("output"));
+    break;
+case SET_STORM_CONFIG:
+  String storm_conf_str=JSONValue.toJSONString(stormConf);
+try {
+  client.setStormConf(storm_conf_str);
+}
+ catch (TTransportException ex) {
+  LOG.info(ex.toString());
+}
+break;
+case ADD_SUPERVISORS:
+String supversiors=cl.getOptionValue("supervisors","1");
+try {
+client.addSupervisors(new Integer(supversiors).intValue());
+}
+ catch (TTransportException ex) {
+LOG.info(ex.toString());
+}
+break;
+case START_NIMBUS:
+try {
+client.startNimbus();
+}
+ catch (TTransportException ex) {
+LOG.info(ex.toString());
+}
+break;
+case STOP_NIMBUS:
+try {
+client.stopNimbus();
+}
+ catch (TTransportException ex) {
+LOG.info(ex.toString());
+}
+break;
+case START_UI:
+try {
+client.startUI();
+}
+ catch (TTransportException ex) {
+LOG.info(ex.toString());
+}
+break;
+case STOP_UI:
+try {
+client.stopUI();
+}
+ catch (TTransportException ex) {
+LOG.info(ex.toString());
+}
+break;
+case START_SUPERVISORS:
+try {
+client.startSupervisors();
+}
+ catch (TTransportException ex) {
+LOG.info(ex.toString());
+}
+break;
+case STOP_SUPERVISORS:
+try {
+client.stopSupervisors();
+}
+ catch (TTransportException ex) {
+LOG.info(ex.toString());
+}
+break;
+case SHUTDOWN:
+try {
+client.shutdown();
+}
+ catch (TTransportException ex) {
+LOG.info(ex.toString());
+}
+break;
+}
+}
+  finally {
+if (storm != null) {
+storm.stop();
+}
+}
+}

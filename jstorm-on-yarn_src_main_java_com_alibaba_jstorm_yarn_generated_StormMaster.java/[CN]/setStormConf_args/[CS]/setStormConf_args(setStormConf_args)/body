@@ -1,0 +1,5 @@
+{
+  if (other.is_set_storm_conf()) {
+    this.storm_conf=other.storm_conf;
+  }
+}

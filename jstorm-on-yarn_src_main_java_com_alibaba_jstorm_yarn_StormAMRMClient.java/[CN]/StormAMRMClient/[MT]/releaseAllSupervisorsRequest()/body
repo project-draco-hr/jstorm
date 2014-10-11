@@ -1,0 +1,10 @@
+{
+  Iterator<Container> it=this.containers.iterator();
+  ContainerId id;
+  while (it.hasNext()) {
+    id=it.next().getId();
+    LOG.debug("Releasing container (id:" + id + ")");
+    releaseAssignedContainer(id);
+    it.remove();
+  }
+}

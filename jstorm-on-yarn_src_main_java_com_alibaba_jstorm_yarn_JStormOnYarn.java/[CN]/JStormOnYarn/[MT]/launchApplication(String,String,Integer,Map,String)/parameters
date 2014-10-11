@@ -1,0 +1,5 @@
+String appName
+String queue
+Integer amSize
+Map stormConf
+String storm_zip_location

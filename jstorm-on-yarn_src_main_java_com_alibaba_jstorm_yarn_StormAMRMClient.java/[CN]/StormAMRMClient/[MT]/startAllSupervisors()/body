@@ -1,0 +1,5 @@
+{
+  LOG.debug("Starting all supervisors, requesting containers...");
+  this.supervisorsAreToRun=true;
+  this.addSupervisorsRequest();
+}

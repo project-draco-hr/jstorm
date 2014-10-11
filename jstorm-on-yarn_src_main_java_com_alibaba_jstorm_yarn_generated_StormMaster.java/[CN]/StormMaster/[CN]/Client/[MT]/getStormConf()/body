@@ -1,0 +1,4 @@
+{
+  send_getStormConf();
+  return recv_getStormConf();
+}

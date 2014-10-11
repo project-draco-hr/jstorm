@@ -1,0 +1,5 @@
+{
+  if (that == null)   return false;
+  if (that instanceof stopNimbus_args)   return this.equals((stopNimbus_args)that);
+  return false;
+}

@@ -1,0 +1,35 @@
+{
+  Enumeration<URL> logback_xml_urls;
+  logback_xml_urls=Thread.currentThread().getContextClassLoader().getResources("logback.xml");
+  while (logback_xml_urls.hasMoreElements()) {
+    URL logback_xml_url=logback_xml_urls.nextElement();
+    if (logback_xml_url.getProtocol().equals("file")) {
+      FileInputStream is=new FileInputStream(logback_xml_url.getPath());
+      while (is.available() > 0) {
+        out.write(is.read());
+      }
+      is.close();
+      return;
+    }
+    if (logback_xml_url.getProtocol().equals("jar")) {
+      String path=logback_xml_url.getPath();
+      String jarFile=path.substring("file:".length(),path.indexOf("!"));
+      java.util.jar.JarFile jar=new java.util.jar.JarFile(jarFile);
+      Enumeration<JarEntry> enums=jar.entries();
+      while (enums.hasMoreElements()) {
+        java.util.jar.JarEntry file=enums.nextElement();
+        if (!file.isDirectory() && file.getName().equals("logback.xml")) {
+          InputStream is=jar.getInputStream(file);
+          while (is.available() > 0) {
+            out.write(is.read());
+          }
+          is.close();
+          jar.close();
+          return;
+        }
+      }
+      jar.close();
+    }
+  }
+  throw new IOException("Failed to locate a logback.xml");
+}

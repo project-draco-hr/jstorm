@@ -1,0 +1,10 @@
+{
+  Path current=path;
+  while (current != null) {
+    if (!checkPermissionOfOther(fs,current,FsAction.EXECUTE)) {
+      return false;
+    }
+    current=current.getParent();
+  }
+  return true;
+}

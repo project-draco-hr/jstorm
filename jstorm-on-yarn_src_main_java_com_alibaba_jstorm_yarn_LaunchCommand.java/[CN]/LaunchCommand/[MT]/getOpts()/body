@@ -1,0 +1,10 @@
+{
+  Options opts=new Options();
+  opts.addOption("appname",true,"Application Name. Default value - JStorm-on-Yarn");
+  opts.addOption("queue",true,"RM Queue in which this application is to be submitted");
+  opts.addOption("jstormHome",true,"JStorm Home Directory");
+  opts.addOption("output",true,"Output file");
+  opts.addOption("jstormConfOutput",true,"storm.yaml file");
+  opts.addOption("jstormZip",true,"file path of jstorm.zip");
+  return opts;
+}

@@ -1,0 +1,46 @@
+{
+  ContainerLaunchContext launchContext=Records.newRecord(ContainerLaunchContext.class);
+  UserGroupInformation user=UserGroupInformation.getCurrentUser();
+  try {
+    Credentials credentials=user.getCredentials();
+    DataOutputBuffer dob=new DataOutputBuffer();
+    credentials.writeTokenStorageToStream(dob);
+    ByteBuffer securityTokens=ByteBuffer.wrap(dob.getData(),0,dob.getLength());
+    launchContext.setTokens(securityTokens);
+  }
+ catch (  IOException e) {
+    LOG.warn("Getting current user info failed when trying to launch the container" + e.getMessage());
+  }
+  Map<String,String> env=new HashMap<String,String>();
+  env.put("JSTORM_LOG_DIR",ApplicationConstants.LOG_DIR_EXPANSION_VAR);
+  launchContext.setEnvironment(env);
+  LOG.info("container launch env:" + env);
+  Map<String,LocalResource> localResources=new HashMap<String,LocalResource>();
+  String jstorm_zip_path=(String)storm_conf.get("jstorm.zip.path");
+  Path zip=new Path(jstorm_zip_path);
+  FileSystem fs=FileSystem.get(hadoopConf);
+  String vis=(String)storm_conf.get("jstorm.zip.visibility");
+  if (vis.equals("PUBLIC"))   localResources.put("jstorm",Util.newYarnAppResource(fs,zip,LocalResourceType.ARCHIVE,LocalResourceVisibility.PUBLIC));
+ else   if (vis.equals("PRIVATE"))   localResources.put("jstorm",Util.newYarnAppResource(fs,zip,LocalResourceType.ARCHIVE,LocalResourceVisibility.PRIVATE));
+ else   if (vis.equals("APPLICATION"))   localResources.put("jstorm",Util.newYarnAppResource(fs,zip,LocalResourceType.ARCHIVE,LocalResourceVisibility.APPLICATION));
+  LOG.info("local resources:" + localResources);
+  LOG.info("appAttemptId:" + appAttemptId);
+  String appHome=Util.getApplicationHomeForId(appAttemptId.toString());
+  String containerHome=appHome + Path.SEPARATOR + container.getId().getId();
+  Path confDst=Util.createConfigurationFileInFs(fs,containerHome,this.storm_conf,this.hadoopConf);
+  localResources.put("conf",Util.newYarnAppResource(fs,confDst));
+  launchContext.setLocalResources(localResources);
+  List<String> supervisorArgs=Util.buildSupervisorCommands(this.storm_conf);
+  LOG.info("start supervisor command: " + supervisorArgs);
+  launchContext.setCommands(supervisorArgs);
+  try {
+    LOG.info("Use NMClient to launch supervisors in container. ");
+    nmClient.startContainer(container,launchContext);
+    String userShortName=user.getShortUserName();
+    if (userShortName != null)     LOG.info("Supervisor log: http://" + container.getNodeHttpAddress() + "/node/containerlogs/"+ container.getId().toString()+ "/"+ userShortName+ "/supervisor.log");
+  }
+ catch (  Exception e) {
+    LOG.error("Caught an exception while trying to start a container",e);
+    System.exit(-1);
+  }
+}

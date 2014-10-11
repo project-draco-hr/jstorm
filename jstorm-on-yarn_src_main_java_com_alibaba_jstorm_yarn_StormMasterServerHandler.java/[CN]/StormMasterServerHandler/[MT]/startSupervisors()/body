@@ -1,0 +1,4 @@
+{
+  LOG.info("starting supervisors...");
+  _client.startAllSupervisors();
+}

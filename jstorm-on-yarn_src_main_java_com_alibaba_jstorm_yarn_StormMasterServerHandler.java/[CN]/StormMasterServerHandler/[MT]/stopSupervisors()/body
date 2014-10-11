@@ -1,0 +1,4 @@
+{
+  LOG.info("stopping supervisors...");
+  _client.stopAllSupervisors();
+}

@@ -1,0 +1,6 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift7.protocol.TMessage("stopNimbus",org.apache.thrift7.protocol.TMessageType.CALL,0));
+  stopNimbus_args args=new stopNimbus_args();
+  args.write(prot);
+  prot.writeMessageEnd();
+}

@@ -1,0 +1,15 @@
+{
+  FSDataInputStream fsInputStream=fs.open(zip);
+  ZipInputStream zipInputStream=new ZipInputStream(fsInputStream);
+  ZipEntry entry=zipInputStream.getNextEntry();
+  while (entry != null) {
+    String entryName=entry.getName();
+    if (entryName.matches("^jstorm(-" + jstormVersion + ")?/")) {
+      fsInputStream.close();
+      return entryName.replace("/","");
+    }
+    entry=zipInputStream.getNextEntry();
+  }
+  fsInputStream.close();
+  throw new RuntimeException("Can not find jstorm home entry in jstorm zip file.");
+}

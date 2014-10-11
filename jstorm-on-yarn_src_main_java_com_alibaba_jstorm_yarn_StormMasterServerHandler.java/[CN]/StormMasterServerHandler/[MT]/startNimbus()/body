@@ -1,0 +1,11 @@
+{
+  LOG.info("starting nimbus...");
+synchronized (this) {
+    if (nimbusProcess != null && nimbusProcess.isAlive()) {
+      LOG.info("Received a request to start nimbus, but it is running now");
+      return;
+    }
+    nimbusProcess=new JStormProcess("nimbus");
+    nimbusProcess.start();
+  }
+}
