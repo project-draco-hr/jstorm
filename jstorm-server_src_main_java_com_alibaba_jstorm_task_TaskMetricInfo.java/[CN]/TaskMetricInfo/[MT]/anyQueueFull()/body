@@ -1,7 +1,14 @@
 {
-  String ret=null;
-  if (gaugeData.get(MetricDef.DESERIALIZE_QUEUE) == FULL_RATIO || gaugeData.get(MetricDef.SERIALIZE_QUEUE) == FULL_RATIO || gaugeData.get(MetricDef.EXECUTE_QUEUE) == FULL_RATIO) {
-    ret=component + "-" + taskId+ ": queue is full";
+  List<String> ret=new ArrayList<String>();
+  String taskInfo=component + "-" + taskId+ ": ";
+  if (gaugeData.get(MetricDef.DESERIALIZE_QUEUE) == FULL_RATIO) {
+    ret.add(taskInfo + "deserialize-" + QEUEU_IS_FULL);
+  }
+ else   if (gaugeData.get(MetricDef.SERIALIZE_QUEUE) == FULL_RATIO) {
+    ret.add(taskInfo + "serialize-" + QEUEU_IS_FULL);
+  }
+ else   if (gaugeData.get(MetricDef.EXECUTE_QUEUE) == FULL_RATIO) {
+    ret.add(taskInfo + "execute-" + QEUEU_IS_FULL);
   }
   return ret;
 }

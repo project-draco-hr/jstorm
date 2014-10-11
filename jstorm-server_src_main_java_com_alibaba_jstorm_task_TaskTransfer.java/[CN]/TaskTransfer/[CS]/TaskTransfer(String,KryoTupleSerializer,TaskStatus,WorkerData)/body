@@ -7,7 +7,8 @@
   this.innerTaskTransfer=workerData.getInnerTaskTransfer();
   int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_SEND_BUFFER_SIZE));
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  this.serializeQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(queue_size),waitStrategy);
+  this.serializeQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(queue_size),waitStrategy);
+  this.serializeQueue.consumerStarted();
   String taskId=taskName.substring(taskName.indexOf(":") + 1);
   Metrics.registerQueue(taskName,MetricDef.SERIALIZE_QUEUE,serializeQueue,taskId,Metrics.MetricType.TASK);
   timer=Metrics.registerTimer(taskName,MetricDef.SERIALIZE_TIME,taskId,Metrics.MetricType.TASK);

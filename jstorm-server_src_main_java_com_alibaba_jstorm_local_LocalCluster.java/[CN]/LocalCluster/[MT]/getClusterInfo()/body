@@ -1,9 +1,0 @@
-{
-  try {
-    return state.getNimbus().getClusterInfo();
-  }
- catch (  TException e) {
-    LOG.error("fail to get cluster info",e);
-  }
-  return null;
-}

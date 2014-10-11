@@ -22,6 +22,17 @@
     sb.append(this.topologies);
   }
   first=false;
+  if (is_set_version()) {
+    if (!first)     sb.append(", ");
+    sb.append("version:");
+    if (this.version == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.version);
+    }
+    first=false;
+  }
   sb.append(")");
   return sb.toString();
 }

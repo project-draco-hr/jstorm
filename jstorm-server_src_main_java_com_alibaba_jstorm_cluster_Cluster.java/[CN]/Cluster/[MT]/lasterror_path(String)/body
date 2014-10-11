@@ -1,0 +1,3 @@
+{
+  return taskerror_storm_root(topology_id) + ZK_SEPERATOR + LAST_ERROR;
+}

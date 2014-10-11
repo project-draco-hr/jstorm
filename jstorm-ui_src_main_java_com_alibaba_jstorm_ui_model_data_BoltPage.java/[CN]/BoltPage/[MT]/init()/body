@@ -2,6 +2,9 @@
   NimbusClient client=null;
   try {
     Map conf=UIUtils.readUiConfig();
+    if (clusterName != null && !(clusterName.equals(""))) {
+      UIUtils.getClusterInfoByName(conf,clusterName);
+    }
     client=NimbusClient.getConfiguredClient(conf);
     TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
     StormTopology topology=client.getClient().getTopology(topologyid);

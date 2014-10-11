@@ -25,6 +25,5 @@
     }
     cluster_state.set_data(timestampPath,error.getBytes());
   }
-  String taskErrTopoPath=Cluster.taskerror_storm_root(topologyId);
-  cluster_state.set_data(taskErrTopoPath + "/" + "last_error",timeStamp.getBytes());
+  setLastErrInfo(topologyId,error,timeStamp);
 }

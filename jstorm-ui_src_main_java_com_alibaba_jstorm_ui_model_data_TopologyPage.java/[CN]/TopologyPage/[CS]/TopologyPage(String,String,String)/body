@@ -1,0 +1,7 @@
+{
+  this.clusterName=clusterName;
+  this.topologyid=topologyId;
+  this.window=window;
+  LOG.info("Window:" + window);
+  init();
+}

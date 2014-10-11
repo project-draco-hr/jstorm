@@ -1,6 +1,6 @@
 {
   try {
-    TopologyPage instance=new TopologyPage("sequence_test-1-1386516240",StatBuckets.ALL_WINDOW_STR);
+    TopologyPage instance=new TopologyPage("jstorm","sequence_test-1-1386516240",StatBuckets.ALL_WINDOW_STR);
   }
  catch (  Exception e) {
     e.printStackTrace();

@@ -1,3 +1,4 @@
 {
-  return _topology.addSourcedNode(this,new ProcessorNode(_topology.getUniqueStreamId(),TridentUtils.fieldsConcat(getOutputFields(),functionFields),functionFields,new EachProcessor(inputFields,function)));
+  projectionValidation(inputFields);
+  return _topology.addSourcedNode(this,new ProcessorNode(_topology.getUniqueStreamId(),_name,TridentUtils.fieldsConcat(getOutputFields(),functionFields),functionFields,new EachProcessor(inputFields,function)));
 }

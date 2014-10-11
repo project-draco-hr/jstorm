@@ -1,8 +1,0 @@
-{
-  try {
-    state.getNimbus().killTopologyWithOpts(name,options);
-  }
- catch (  TException e) {
-    LOG.error("fail to kill Topology " + name,e);
-  }
-}

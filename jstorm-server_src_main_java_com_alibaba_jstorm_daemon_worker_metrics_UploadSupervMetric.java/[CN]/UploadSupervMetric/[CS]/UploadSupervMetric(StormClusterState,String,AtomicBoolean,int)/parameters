@@ -1,4 +1,0 @@
-StormClusterState cluster
-String supervisorId
-AtomicBoolean active
-int frequence

@@ -3,7 +3,7 @@
   if (available < 6) {
     return null;
   }
-  timer.start();
+  if (timer != null)   timer.start();
   try {
     buf.markReaderIndex();
     short code=buf.readShort();
@@ -51,6 +51,6 @@
     return ret;
   }
   finally {
-    timer.stop();
+    if (timer != null)     timer.stop();
   }
 }

@@ -1,6 +1,7 @@
 {
   int key=0;
   for (  ResourceWorkerSlot worker : result) {
+    if (supervisors.size() == 0)     return;
     if (worker.getNodeId() != null)     continue;
     if (key >= supervisors.size())     key=0;
     SupervisorInfo supervisor=supervisors.get(key);

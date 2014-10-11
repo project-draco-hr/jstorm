@@ -1,6 +1,0 @@
-{
-  BasicConfigurator.configure();
-  Logger.getRootLogger().setLevel(Level.INFO);
-  this.state=LocalUtils.prepareLocalCluster();
-  if (this.state == null)   throw new RuntimeException("prepareLocalCluster error");
-}

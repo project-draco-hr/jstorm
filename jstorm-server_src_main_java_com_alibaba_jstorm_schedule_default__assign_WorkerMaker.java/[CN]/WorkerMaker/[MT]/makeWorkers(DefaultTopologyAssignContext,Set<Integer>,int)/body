@@ -15,6 +15,7 @@
   for (int i=0; i < defaultWorkerNum; i++) {
     result.add(new ResourceWorkerSlot());
   }
+  this.putAllWorkerToSupervisor(result,this.getIsolationSupervisors(context));
   this.putAllWorkerToSupervisor(result,this.getCanUseSupervisors(context.getCluster()));
   this.setAllWorkerMemAndCpu(context.getStormConf(),result);
   return result;

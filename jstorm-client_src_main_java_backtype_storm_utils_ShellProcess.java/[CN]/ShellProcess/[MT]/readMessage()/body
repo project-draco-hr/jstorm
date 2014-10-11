@@ -1,6 +1,6 @@
 {
   String string=readString();
-  JSONObject msg=(JSONObject)JSONValue.parse(string);
+  JSONObject msg=(JSONObject)JSON.parse(string);
   if (msg != null) {
     return msg;
   }

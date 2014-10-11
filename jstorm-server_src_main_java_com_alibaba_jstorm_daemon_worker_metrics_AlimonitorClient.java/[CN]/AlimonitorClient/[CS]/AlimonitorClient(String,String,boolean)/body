@@ -1,0 +1,8 @@
+{
+  this.requestIP=requestIP;
+  this.port=port;
+  this.post=post;
+  this.monitorName=null;
+  this.collectionFlag=0;
+  this.errorInfo=null;
+}

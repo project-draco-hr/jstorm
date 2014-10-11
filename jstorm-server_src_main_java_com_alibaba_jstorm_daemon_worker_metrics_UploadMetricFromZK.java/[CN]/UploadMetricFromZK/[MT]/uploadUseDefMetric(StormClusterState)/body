@@ -24,11 +24,15 @@
       if (ret.size() > 0)       totalMsg.putAll(ret);
     }
     if (totalMsg.size() > 0) {
-      client.setMonitorName("jstorm_user_metric");
-      client.sendRequest(0," ",totalMsg);
+      if (client instanceof AlimonitorClient) {
+        ((AlimonitorClient)client).setMonitorName(MetricDef.USER_MONITOR_NAME);
+        ((AlimonitorClient)client).setCollectionFlag(0);
+        ((AlimonitorClient)client).setErrorInfo("");
+      }
+      client.send(totalMsg);
     }
   }
  catch (  Exception e) {
-    e.printStackTrace();
+    LOG.warn("Failed to upload user define metric data",e);
   }
 }

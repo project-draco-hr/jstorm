@@ -1,6 +1,6 @@
 {
   try {
-    BoltPage instance=new BoltPage("sequence_test-3-1363789458","Total",StatBuckets.ALL_WINDOW_STR);
+    BoltPage instance=new BoltPage("/jstorm","sequence_test-3-1363789458","Total",StatBuckets.ALL_WINDOW_STR);
   }
  catch (  TException e) {
     e.printStackTrace();

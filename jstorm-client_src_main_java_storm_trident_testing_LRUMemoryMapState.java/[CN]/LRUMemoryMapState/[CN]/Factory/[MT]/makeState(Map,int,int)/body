@@ -1,3 +1,0 @@
-{
-  return new SnapshottableMap(OpaqueMap.build(new CachedMap(new LRUMemoryMapState(_maxSize,_id),10)),new Values("$MEMORY-MAP-STATE-GLOBAL$"));
-}

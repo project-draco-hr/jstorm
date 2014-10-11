@@ -1,7 +1,7 @@
 {
   try {
     String s=new String(b,"UTF-8");
-    List deser=(List)JSONValue.parse(s);
+    List deser=(List)JSON.parse(s);
     return new OpaqueValue((Long)deser.get(0),deser.get(1),deser.get(2));
   }
  catch (  UnsupportedEncodingException e) {

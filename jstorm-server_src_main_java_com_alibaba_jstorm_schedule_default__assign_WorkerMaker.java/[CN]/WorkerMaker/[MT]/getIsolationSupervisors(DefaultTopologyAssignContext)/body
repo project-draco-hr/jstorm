@@ -1,0 +1,12 @@
+{
+  List<String> isolationHosts=(List<String>)context.getStormConf().get(Config.ISOLATION_SCHEDULER_MACHINES);
+  LOG.info("Isolation machines: " + isolationHosts);
+  if (isolationHosts == null)   return new ArrayList<SupervisorInfo>();
+  List<SupervisorInfo> isolationSupervisors=new ArrayList<SupervisorInfo>();
+  for (  SupervisorInfo supervisor : this.getCanUseSupervisors(context.getCluster())) {
+    if (isolationHosts.contains(supervisor.getHostName())) {
+      isolationSupervisors.add(supervisor);
+    }
+  }
+  return isolationSupervisors;
+}

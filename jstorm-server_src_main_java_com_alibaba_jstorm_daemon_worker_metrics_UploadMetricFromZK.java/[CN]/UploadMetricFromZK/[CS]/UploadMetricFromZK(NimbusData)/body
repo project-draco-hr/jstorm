@@ -1,5 +1,0 @@
-{
-  this.data=data;
-  clusterState=data.getStormClusterState();
-  topologyMap=new HashMap<String,TopoCommStatsInfo>();
-}

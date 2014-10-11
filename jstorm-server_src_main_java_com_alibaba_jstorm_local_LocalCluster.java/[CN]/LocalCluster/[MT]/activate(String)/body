@@ -1,8 +1,0 @@
-{
-  try {
-    state.getNimbus().activate(topologyName);
-  }
- catch (  TException e) {
-    LOG.error("fail to activate " + topologyName,e);
-  }
-}

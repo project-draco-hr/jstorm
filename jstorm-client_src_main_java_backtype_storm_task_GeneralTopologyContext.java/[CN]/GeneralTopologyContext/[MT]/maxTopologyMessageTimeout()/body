@@ -4,7 +4,7 @@
     ComponentCommon common=getComponentCommon(spout);
     String jsonConf=common.get_json_conf();
     if (jsonConf != null) {
-      Map conf=(Map)JSONValue.parse(jsonConf);
+      Map conf=(Map)JSON.parse(jsonConf);
       Object comp=conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS);
       if (comp != null) {
         max=Math.max(Utils.getInt(comp),max);

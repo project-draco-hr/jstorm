@@ -1,4 +1,9 @@
 {
-  if (object instanceof Device && ((Device)object).major == major && ((Device)object).minor == minor)   return true;
-  return false;
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  Device other=(Device)obj;
+  if (major != other.major)   return false;
+  if (minor != other.minor)   return false;
+  return true;
 }

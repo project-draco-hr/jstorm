@@ -1,0 +1,5 @@
+Object id
+ISpout _spout
+TupleInfo _tupleInfo
+CommonStatsRolling _task_stats
+boolean _isDebug

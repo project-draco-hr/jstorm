@@ -1,0 +1,7 @@
+{
+  JSONObject ret=new JSONObject();
+  ret.put(COLLECTION_FLAG,collection_flag);
+  ret.put(ERROR_INFO,error_message);
+  ret.put(MSG,null);
+  return ret;
+}

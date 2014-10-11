@@ -4,6 +4,9 @@
   try {
     LOG.info("MainPage init...");
     Map conf=UIUtils.readUiConfig();
+    if (clusterName != null && !(clusterName.equals(""))) {
+      UIUtils.getClusterInfoByName(conf,clusterName);
+    }
     client=NimbusClient.getConfiguredClient(conf);
     summ=client.getClient().getClusterInfo();
     tsumm=UIUtils.topologySummary(summ.get_topologies());
@@ -15,8 +18,11 @@
     zkPort=String.valueOf(conf.get(Config.STORM_ZOOKEEPER_PORT));
   }
  catch (  Exception e) {
-    LOG.error("Failed to get cluster information:",e);
-    throw e;
+    String errorInfo=e.getMessage();
+    if (errorInfo.indexOf("No alive nimbus") == -1) {
+      LOG.error("Failed to get cluster information:",e);
+      throw e;
+    }
   }
  finally {
     if (client != null) {

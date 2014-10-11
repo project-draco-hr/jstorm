@@ -43,6 +43,7 @@
   clusterSumm.setTotalPortSlotNum(String.valueOf(totalPortSlots));
   clusterSumm.setUsedPortSlotNum(String.valueOf(usePortSlots));
   clusterSumm.setFreePortSlotNum(String.valueOf(freePortSlots));
+  clusterSumm.setVersion(summ.get_version());
   clusumms.add(clusterSumm);
   return clusumms;
 }

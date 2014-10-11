@@ -2,7 +2,7 @@
   path="/" + path;
   byte[] ser;
   try {
-    ser=JSONValue.toJSONString(obj).getBytes("UTF-8");
+    ser=JSON.toJSONString(obj).getBytes("UTF-8");
   }
  catch (  UnsupportedEncodingException e) {
     throw new RuntimeException(e);

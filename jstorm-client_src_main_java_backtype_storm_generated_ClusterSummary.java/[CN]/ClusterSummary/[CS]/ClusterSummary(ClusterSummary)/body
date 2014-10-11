@@ -16,4 +16,7 @@
     }
     this.topologies=__this__topologies;
   }
+  if (other.is_set_version()) {
+    this.version=other.version;
+  }
 }

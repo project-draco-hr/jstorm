@@ -47,7 +47,8 @@
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   this.transferQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(buffer_size),waitStrategy);
   this.transferQueue.consumerStarted();
-  this.sendingQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(buffer_size),waitStrategy);
+  this.sendingQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(buffer_size),waitStrategy);
+  this.sendingQueue.consumerStarted();
   this.nodeportSocket=new ConcurrentHashMap<WorkerSlot,IConnection>();
   this.taskNodeport=new ConcurrentHashMap<Integer,WorkerSlot>();
   this.workerToResource=new ConcurrentSkipListSet<ResourceWorkerSlot>();

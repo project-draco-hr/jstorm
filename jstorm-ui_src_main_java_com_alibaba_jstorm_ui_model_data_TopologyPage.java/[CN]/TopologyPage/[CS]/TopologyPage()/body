@@ -1,9 +1,12 @@
 {
   FacesContext ctx=FacesContext.getCurrentInstance();
+  if (ctx.getExternalContext().getRequestParameterMap().get("clusterName") != null) {
+    clusterName=(String)ctx.getExternalContext().getRequestParameterMap().get("clusterName");
+  }
   if (ctx.getExternalContext().getRequestParameterMap().get("topologyid") != null) {
     topologyid=(String)ctx.getExternalContext().getRequestParameterMap().get("topologyid");
-    LOG.debug("Query topology " + topologyid);
   }
+  LOG.debug("Query clusterName=" + clusterName + ", topology="+ topologyid);
   window=UIUtils.getWindow(ctx);
   LOG.info("Window:" + window);
   if (topologyid == null) {

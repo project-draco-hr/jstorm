@@ -1,0 +1,18 @@
+{
+  System.out.println("Begin testConsumerHang");
+  final AtomicBoolean messageConsumed=new AtomicBoolean(false);
+  DisruptorQueue queue=createQueue("consumerHang",1);
+  queue.consumerStarted();
+  Runnable producer=new Producer(queue,"msg");
+  Runnable consumer=new Consumer(queue,new EventHandler<Object>(){
+    long count=0;
+    @Override public void onEvent(    Object obj,    long sequence,    boolean endOfBatch) throws Exception {
+      System.out.println("Consume " + count++);
+      messageConsumed.set(true);
+    }
+  }
+);
+  run(producer,consumer);
+  Assert.assertTrue("disruptor message is never consumed due to consumer thread hangs",messageConsumed.get());
+  System.out.println("End testConsumerHang");
+}

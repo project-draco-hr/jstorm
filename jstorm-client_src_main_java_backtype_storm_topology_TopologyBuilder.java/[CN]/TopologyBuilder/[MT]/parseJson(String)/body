@@ -1,4 +1,4 @@
 {
   if (json == null)   return new HashMap();
- else   return (Map)JSONValue.parse(json);
+ else   return (Map)JSON.parse(json);
 }

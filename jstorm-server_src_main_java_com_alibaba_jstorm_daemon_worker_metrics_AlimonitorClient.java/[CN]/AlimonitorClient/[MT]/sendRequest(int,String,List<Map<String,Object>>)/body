@@ -1,4 +1,20 @@
 {
   boolean ret=false;
+  if (msgList.size() == 0)   return ret;
+  JSONObject jsonObj=buildAliMonitorMsg(collection_flag,error_message);
+  addMsgData(jsonObj,msgList);
+  String jsonMsg=jsonObj.toJSONString();
+  LOG.info(jsonMsg);
+  if (post == true) {
+    String url=buildURL();
+    ret=httpPost(url,jsonMsg);
+  }
+ else {
+    String request=buildRqstAddr();
+    StringBuilder postAddr=new StringBuilder();
+    postAddr.append(request);
+    postAddr.append(URLEncoder.encode(jsonMsg));
+    ret=httpGet(postAddr);
+  }
   return ret;
 }

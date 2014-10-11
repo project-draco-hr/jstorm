@@ -1,6 +1,6 @@
 {
   try {
-    SpoutPage instance=new SpoutPage("sequence_test-3-1363789458","SequenceSpoutge",StatBuckets.ALL_WINDOW_STR);
+    SpoutPage instance=new SpoutPage("/jstorm","sequence_test-3-1363789458","SequenceSpoutge",StatBuckets.ALL_WINDOW_STR);
   }
  catch (  TException e) {
     e.printStackTrace();

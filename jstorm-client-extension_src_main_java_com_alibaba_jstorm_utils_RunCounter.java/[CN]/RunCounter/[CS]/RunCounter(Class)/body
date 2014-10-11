@@ -1,3 +1,3 @@
 {
-  this("",tclass);
+  this(tclass.getName(),tclass);
 }

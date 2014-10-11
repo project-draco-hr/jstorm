@@ -1,5 +1,6 @@
 {
-  long batchId=_rand.nextLong();
+  long batchIdVal=_rand.nextLong();
+  Object batchId=new RichSpoutBatchId(batchIdVal);
   FinishCondition finish=new FinishCondition();
   finish.msgId=msgId;
   List<Integer> tasks=_collector.emit(_stream,new ConsList(batchId,values));
@@ -12,7 +13,8 @@
     long r=_rand.nextLong();
     _collector.emitDirect(t,_coordStream,new Values(batchId,count),r);
     finish.vals.add(r);
+    _msgIdToBatchId.put(r,batchIdVal);
   }
-  _finishConditions.put(batchId,finish);
+  _finishConditions.put(batchIdVal,finish);
   return tasks;
 }

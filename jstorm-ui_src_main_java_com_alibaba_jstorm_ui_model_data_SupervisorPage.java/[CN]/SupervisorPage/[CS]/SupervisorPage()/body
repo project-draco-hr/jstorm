@@ -1,5 +1,8 @@
 {
   FacesContext ctx=FacesContext.getCurrentInstance();
+  if (ctx.getExternalContext().getRequestParameterMap().get("clusterName") != null) {
+    clusterName=(String)ctx.getExternalContext().getRequestParameterMap().get("clusterName");
+  }
   if (ctx.getExternalContext().getRequestParameterMap().get("host") != null) {
     host=(String)ctx.getExternalContext().getRequestParameterMap().get("host");
   }

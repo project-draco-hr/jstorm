@@ -6,6 +6,8 @@ case NIMBUS_UPTIME_SECS:
   return Integer.valueOf(get_nimbus_uptime_secs());
 case TOPOLOGIES:
 return get_topologies();
+case VERSION:
+return get_version();
 }
 throw new IllegalStateException();
 }

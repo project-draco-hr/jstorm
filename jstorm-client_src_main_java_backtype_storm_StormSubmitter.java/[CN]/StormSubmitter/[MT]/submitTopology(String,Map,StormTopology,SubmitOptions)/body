@@ -8,7 +8,7 @@
   conf.putAll(stormConf);
   putUserInfo(conf,stormConf);
   try {
-    String serConf=JSONValue.toJSONString(stormConf);
+    String serConf=JSON.toJSONString(stormConf);
     if (localNimbus != null) {
       LOG.info("Submitting topology " + name + " in local mode");
       localNimbus.submitTopology(name,null,serConf,topology);
@@ -28,25 +28,26 @@
           client.getClient().submitTopology(name,path,serConf,topology);
         }
       }
- catch (      InvalidTopologyException e) {
-        LOG.warn("Topology submission exception",e);
-        throw e;
-      }
-catch (      AlreadyAliveException e) {
-        LOG.warn("Topology already alive exception",e);
-        throw e;
-      }
-catch (      TopologyAssignException e) {
-        LOG.warn("Failed to assign ",e.get_msg());
-        throw e;
-      }
- finally {
+  finally {
         client.close();
       }
     }
     LOG.info("Finished submitting topology: " + name);
   }
- catch (  TException e) {
+ catch (  InvalidTopologyException e) {
+    LOG.warn("Topology submission exception",e);
+    throw e;
+  }
+catch (  AlreadyAliveException e) {
+    LOG.warn("Topology already alive exception",e);
+    throw e;
+  }
+catch (  TopologyAssignException e) {
+    LOG.warn("Failed to assign " + e.get_msg(),e);
+    throw new RuntimeException(e);
+  }
+catch (  TException e) {
+    LOG.warn("Failed to assign ",e);
     throw new RuntimeException(e);
   }
 }

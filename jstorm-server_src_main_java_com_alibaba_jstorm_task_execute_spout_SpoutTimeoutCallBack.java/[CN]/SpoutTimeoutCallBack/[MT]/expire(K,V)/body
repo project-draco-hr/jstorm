@@ -4,7 +4,7 @@
   }
   try {
     TupleInfo tupleInfo=(TupleInfo)val;
-    FailSpoutMsg fail=new FailSpoutMsg(spout,(TupleInfo)tupleInfo,task_stats,isDebug);
+    FailSpoutMsg fail=new FailSpoutMsg(key,spout,(TupleInfo)tupleInfo,task_stats,isDebug);
     disruptorEventQueue.publish(fail);
   }
  catch (  Exception e) {
