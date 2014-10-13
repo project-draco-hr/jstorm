@@ -1,0 +1,8 @@
+{
+  if (!(Boolean)conf.get(Config.STORM_LOCAL_MODE_ZMQ)) {
+    IContext result=new NettyContext();
+    result.prepare(conf);
+    return result;
+  }
+  return null;
+}

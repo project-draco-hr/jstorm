@@ -1,0 +1,9 @@
+{
+  try {
+    return handler.execute(functionName,funcArgs);
+  }
+ catch (  Exception e) {
+    LOG.error("",e);
+    throw new RuntimeException(e);
+  }
+}

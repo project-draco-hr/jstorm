@@ -1,0 +1,9 @@
+{
+  try {
+    state.getNimbus().activate(topologyName);
+  }
+ catch (  Exception e) {
+    LOG.error("fail to activate " + topologyName,e);
+    throw new RuntimeException(e);
+  }
+}

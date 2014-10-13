@@ -1,0 +1,9 @@
+{
+  try {
+    ClusterPage c=new ClusterPage();
+    System.out.println(c.getClusterInfo());
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+}

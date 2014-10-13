@@ -1,0 +1,9 @@
+{
+  try {
+    return state.getNimbus().getTopologyConf(id);
+  }
+ catch (  Exception e) {
+    LOG.error("fail to get topology Conf of topologId: " + id,e);
+  }
+  return null;
+}

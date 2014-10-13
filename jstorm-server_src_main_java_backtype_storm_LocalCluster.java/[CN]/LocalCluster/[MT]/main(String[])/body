@@ -1,0 +1,11 @@
+{
+  LocalCluster localCluster=null;
+  try {
+    localCluster=new LocalCluster();
+  }
+  finally {
+    if (localCluster != null) {
+      localCluster.shutdown();
+    }
+  }
+}

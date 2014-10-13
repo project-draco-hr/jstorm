@@ -1,0 +1,11 @@
+{
+  for (int i=2000; i < 65535; i++) {
+    try {
+      return Zookeeper.mkInprocessZookeeper(tmpDir,i);
+    }
+ catch (    Exception e) {
+      LOG.error("fail to launch zookeeper at port: " + i,e);
+    }
+  }
+  throw new RuntimeException("No port is available to launch an inprocess zookeeper.");
+}

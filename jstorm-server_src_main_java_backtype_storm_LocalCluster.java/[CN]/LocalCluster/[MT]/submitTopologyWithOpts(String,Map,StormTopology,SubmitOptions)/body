@@ -1,0 +1,15 @@
+{
+  if (!Utils.isValidConf(conf))   throw new RuntimeException("Topology conf is not json-serializable");
+  try {
+    if (submitOpts == null) {
+      state.getNimbus().submitTopology(topologyName,null,JSON.toJSONString(conf),topology);
+    }
+ else {
+      state.getNimbus().submitTopologyWithOpts(topologyName,null,JSON.toJSONString(conf),topology,submitOpts);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to submit topology " + topologyName,e);
+    throw new RuntimeException(e);
+  }
+}

@@ -1,0 +1,9 @@
+{
+  try {
+    state.getNimbus().rebalance(name,options);
+  }
+ catch (  Exception e) {
+    LOG.error("fail to rebalance " + name,e);
+    throw new RuntimeException(e);
+  }
+}

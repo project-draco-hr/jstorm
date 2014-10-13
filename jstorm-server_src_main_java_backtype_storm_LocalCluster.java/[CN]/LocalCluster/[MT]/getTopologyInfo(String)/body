@@ -1,0 +1,12 @@
+{
+  try {
+    return state.getNimbus().getTopologyInfo(id);
+  }
+ catch (  NotAliveException e) {
+    LOG.error("fail to get topology info of topologyId: " + id,e);
+  }
+catch (  TException e) {
+    LOG.error("fail to get topology info of topologyId: " + id,e);
+  }
+  return null;
+}

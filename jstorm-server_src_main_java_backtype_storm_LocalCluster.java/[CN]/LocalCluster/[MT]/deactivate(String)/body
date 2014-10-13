@@ -1,0 +1,9 @@
+{
+  try {
+    state.getNimbus().deactivate(topologyName);
+  }
+ catch (  Exception e) {
+    LOG.error("fail to deactivate " + topologyName,e);
+    throw new RuntimeException(e);
+  }
+}
