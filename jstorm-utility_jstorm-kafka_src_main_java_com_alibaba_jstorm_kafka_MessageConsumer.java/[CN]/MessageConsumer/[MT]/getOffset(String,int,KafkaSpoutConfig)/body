@@ -1,0 +1,7 @@
+{
+  long startOffsetTime=kafka.api.OffsetRequest.LatestTime();
+  if (config.fromBeginning) {
+    startOffsetTime=config.startOffsetTime;
+  }
+  return getOffset(topic,partition,startOffsetTime);
+}

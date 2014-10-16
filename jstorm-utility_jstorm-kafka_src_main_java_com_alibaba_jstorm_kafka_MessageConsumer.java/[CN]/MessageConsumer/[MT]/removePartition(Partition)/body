@@ -1,0 +1,3 @@
+{
+  partitions.remove(partition);
+}

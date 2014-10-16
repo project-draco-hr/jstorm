@@ -1,0 +1,15 @@
+{
+  try {
+    if (_curator.checkExists().forPath(path) == null) {
+      CreateBuilder builder=_curator.create();
+      ProtectACLCreateModePathAndBytesable<String> createAble=(ProtectACLCreateModePathAndBytesable<String>)builder.creatingParentsIfNeeded();
+      createAble.withMode(CreateMode.PERSISTENT).forPath(path,bytes);
+    }
+ else {
+      _curator.setData().forPath(path,bytes);
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

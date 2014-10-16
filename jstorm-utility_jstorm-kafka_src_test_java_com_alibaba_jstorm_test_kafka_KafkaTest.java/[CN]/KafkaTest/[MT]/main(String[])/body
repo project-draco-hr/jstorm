@@ -1,0 +1,4 @@
+{
+  KafkaTest test=new KafkaTest();
+  test.run();
+}

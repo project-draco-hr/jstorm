@@ -1,0 +1,4 @@
+{
+  this.setPartition(partition);
+  this.setOffset(offset);
+}

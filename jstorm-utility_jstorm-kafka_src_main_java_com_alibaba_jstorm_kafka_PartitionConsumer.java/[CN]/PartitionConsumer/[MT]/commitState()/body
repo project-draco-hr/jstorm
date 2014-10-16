@@ -1,0 +1,19 @@
+{
+  long lastOffset=0;
+  if (pendingOffsets.isEmpty()) {
+    lastOffset=emittingOffset;
+  }
+ else {
+    lastOffset=pendingOffsets.first();
+  }
+  if (lastOffset != lastCommittedOffset) {
+    Map<Object,Object> data=new HashMap<Object,Object>();
+    data.put("topology",stormConf.get(Config.TOPOLOGY_NAME));
+    data.put("offset",lastOffset);
+    data.put("partition",partition.getPartition());
+    data.put("broker",ImmutableMap.of("host",partition.getBroker().getHost(),"port",partition.getBroker().getPort()));
+    data.put("topic",config.topic);
+    zkState.writeJSON(zkPath(),data);
+    lastCommittedOffset=lastOffset;
+  }
+}

@@ -1,0 +1,7 @@
+{
+  this.config=config;
+  kafkaConsumerMap=new HashMap<Host,MessageConsumer>();
+  partitionConsumers=new LinkedList<PartitionConsumer>();
+  this.zkState=zkState;
+  createConsumers(conf,context);
+}

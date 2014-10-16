@@ -1,0 +1,16 @@
+{
+  ByteBufferMessageSet msgs;
+  try {
+    msgs=consumer.fetchMessages(partition.getPartition(),emittingOffset + 1);
+    LOG.debug("fetch message from offset " + emittingOffset);
+    for (    MessageAndOffset msg : msgs) {
+      emittingMessages.add(msg);
+      emittingOffset=msg.offset();
+      pendingOffsets.add(emittingOffset);
+      LOG.debug("===== fetched a message: " + msg.message().toString() + " offset:"+ msg.offset());
+    }
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+}
