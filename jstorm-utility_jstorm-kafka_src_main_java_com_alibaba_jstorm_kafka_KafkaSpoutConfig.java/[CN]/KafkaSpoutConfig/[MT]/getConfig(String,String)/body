@@ -1,0 +1,11 @@
+{
+  if (properties != null && properties.containsKey(key)) {
+    return properties.getProperty(key);
+  }
+ else   if (stormConf.containsKey(key)) {
+    return String.valueOf(stormConf.get(key));
+  }
+ else {
+    return defaultValue;
+  }
+}

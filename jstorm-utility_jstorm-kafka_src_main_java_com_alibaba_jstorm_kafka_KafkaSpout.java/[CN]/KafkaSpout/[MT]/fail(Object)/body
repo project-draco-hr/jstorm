@@ -1,0 +1,5 @@
+{
+  KafkaMessageId messageId=(KafkaMessageId)msgId;
+  PartitionConsumer consumer=coordinator.getConsumer(messageId.getPartition());
+  consumer.fail(messageId.getOffset());
+}

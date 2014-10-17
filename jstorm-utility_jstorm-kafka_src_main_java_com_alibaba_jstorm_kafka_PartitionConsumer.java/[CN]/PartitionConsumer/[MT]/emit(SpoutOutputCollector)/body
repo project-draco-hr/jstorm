@@ -1,0 +1,23 @@
+{
+  if (emittingMessages.isEmpty()) {
+    fillMessages();
+  }
+  if (emittingMessages.isEmpty()) {
+    return EmitState.EMIT_NONE;
+  }
+  while (true) {
+    MessageAndOffset toEmitMsg=emittingMessages.pollFirst();
+    if (toEmitMsg == null) {
+      return EmitState.EMIT_END;
+    }
+    Iterable<List<Object>> tups=generateTuples(toEmitMsg.message());
+    if (tups != null) {
+      for (      List<Object> tuple : tups) {
+        collector.emit(tuple,new KafkaMessageId(partition,toEmitMsg.offset()));
+      }
+    }
+ else {
+      ack(toEmitMsg.offset());
+    }
+  }
+}

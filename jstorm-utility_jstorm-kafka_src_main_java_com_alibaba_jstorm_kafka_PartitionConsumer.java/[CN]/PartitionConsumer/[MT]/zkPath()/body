@@ -1,0 +1,3 @@
+{
+  return config.zkRoot + "/" + config.topic+ "/id_"+ config.clientId+ "/"+ partition.getPartition()+ "/offset";
+}

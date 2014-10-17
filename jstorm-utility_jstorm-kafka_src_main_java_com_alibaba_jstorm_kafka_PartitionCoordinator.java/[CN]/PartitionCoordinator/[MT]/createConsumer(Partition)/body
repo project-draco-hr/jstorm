@@ -1,0 +1,12 @@
+{
+  MessageConsumer consumer=null;
+  if (!kafkaConsumerMap.containsKey(partition.getBroker())) {
+    consumer=new MessageConsumer(config,partition.getBroker());
+    kafkaConsumerMap.put(partition.getBroker(),consumer);
+  }
+ else {
+    consumer=kafkaConsumerMap.get(partition.getBroker());
+  }
+  consumer.addPartition(partition);
+  return consumer;
+}

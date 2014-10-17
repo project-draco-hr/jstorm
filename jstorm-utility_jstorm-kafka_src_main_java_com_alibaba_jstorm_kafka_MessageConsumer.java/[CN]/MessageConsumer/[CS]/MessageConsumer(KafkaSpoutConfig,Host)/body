@@ -1,0 +1,6 @@
+{
+  this.config=config;
+  this.broker=broker;
+  partitions=new HashSet<Partition>();
+  consumer=new SimpleConsumer(broker.getHost(),broker.getPort(),config.socketTimeoutMs,config.socketReceiveBufferBytes,config.clientId);
+}

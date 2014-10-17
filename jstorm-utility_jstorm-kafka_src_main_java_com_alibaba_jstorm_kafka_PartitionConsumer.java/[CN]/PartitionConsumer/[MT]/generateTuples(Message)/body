@@ -1,0 +1,14 @@
+{
+  Iterable<List<Object>> tups=null;
+  ByteBuffer payload=msg.payload();
+  if (payload == null) {
+    return null;
+  }
+  ByteBuffer key=msg.key();
+  if (key != null) {
+  }
+ else {
+    tups=config.scheme.deserialize(Utils.toByteArray(payload));
+  }
+  return tups;
+}

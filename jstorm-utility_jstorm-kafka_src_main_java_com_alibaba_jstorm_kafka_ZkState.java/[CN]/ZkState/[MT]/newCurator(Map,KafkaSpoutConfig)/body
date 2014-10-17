@@ -1,0 +1,8 @@
+{
+  String serverPorts="";
+  List<Host> zkServers=config.zkServers;
+  for (  Host server : zkServers) {
+    serverPorts=serverPorts + server.getHost() + ":"+ server.getPort()+ ",";
+  }
+  return CuratorFrameworkFactory.newClient(serverPorts,Utils.getInt(conf.get(Config.STORM_ZOOKEEPER_SESSION_TIMEOUT)),15000,new RetryNTimes(Utils.getInt(conf.get(Config.STORM_ZOOKEEPER_RETRY_TIMES)),Utils.getInt(conf.get(Config.STORM_ZOOKEEPER_RETRY_INTERVAL))));
+}

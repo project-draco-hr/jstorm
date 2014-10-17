@@ -1,0 +1,19 @@
+{
+  List<Host> hostList=new ArrayList<Host>();
+  String[] hostArr=hosts.split(",");
+  for (  String s : hostArr) {
+    Host host;
+    String[] spec=s.split(":");
+    if (spec.length == 1) {
+      host=new Host(spec[0],defaultPort);
+    }
+ else     if (spec.length == 2) {
+      host=new Host(spec[0],JStormUtils.parseInt(spec[1]));
+    }
+ else {
+      throw new IllegalArgumentException("Invalid host specification: " + s);
+    }
+    hostList.add(host);
+  }
+  return hostList;
+}

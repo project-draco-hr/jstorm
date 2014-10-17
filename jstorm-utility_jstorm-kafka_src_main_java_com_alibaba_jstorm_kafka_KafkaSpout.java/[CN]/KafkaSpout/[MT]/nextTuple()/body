@@ -1,0 +1,8 @@
+{
+  Collection<PartitionConsumer> partitionConsumers=coordinator.getPartitionConsumers();
+  for (  PartitionConsumer consumer : partitionConsumers) {
+    EmitState state=consumer.emit(collector);
+    LOG.debug("====== partition " + consumer.getPartition().getPartition() + " emit message state is "+ state);
+  }
+  commitState();
+}
