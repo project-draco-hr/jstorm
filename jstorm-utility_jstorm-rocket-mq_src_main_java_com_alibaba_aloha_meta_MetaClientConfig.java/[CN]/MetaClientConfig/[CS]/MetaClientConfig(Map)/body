@@ -1,0 +1,33 @@
+{
+  topic=(String)conf.get(META_TOPIC);
+  consumerGroup=(String)conf.get(META_CONSUMER_GROUP);
+  subExpress=(String)conf.get(META_SUBEXPRESS);
+  if (StringUtils.isBlank((String)conf.get(META_NAMESERVER)) == false) {
+    nameServer=(String)conf.get(META_NAMESERVER);
+  }
+ else {
+    nameServer=null;
+  }
+  maxFailTimes=JStormUtils.parseInt(conf.get(META_MAX_FAIL_TIMES),DEFAULT_FAIL_TIME);
+  queueSize=JStormUtils.parseInt(conf.get(META_INTERNAL_QUEUE_SIZE),DEFAULT_QUEUE_SIZE);
+  sendBatchSize=JStormUtils.parseInt(conf.get(META_BATCH_SEND_MSG_SIZE),DEFAULT_BATCH_MSG_NUM);
+  pullBatchSize=JStormUtils.parseInt(conf.get(META_BATCH_PULL_MSG_SIZE),DEFAULT_BATCH_MSG_NUM);
+  pullInterval=JStormUtils.parseInt(conf.get(META_PULL_INTERVAL),0);
+  pullThreadNum=JStormUtils.parseInt(conf.get(META_PULL_THREAD_NUM),DEFAULT_PULL_THREAD_NUM);
+  String ts=(String)conf.get(META_CONSUMER_START_TIMESTAMP);
+  if (ts != null) {
+    Date date=null;
+    try {
+      date=TimeFormat.getSecond(ts);
+    }
+ catch (    Exception e) {
+    }
+    if (date != null) {
+      startTimeStamp=date;
+    }
+  }
+  Object prop=conf.get(META_EXTRA_PROPERTIES);
+  if (prop != null && prop instanceof Properties) {
+    peroperties=(Properties)prop;
+  }
+}

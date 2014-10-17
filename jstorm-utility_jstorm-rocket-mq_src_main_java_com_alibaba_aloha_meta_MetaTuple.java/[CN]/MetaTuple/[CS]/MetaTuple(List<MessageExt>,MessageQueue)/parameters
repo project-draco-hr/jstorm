@@ -1,0 +1,2 @@
+List<MessageExt> msgList
+MessageQueue mq

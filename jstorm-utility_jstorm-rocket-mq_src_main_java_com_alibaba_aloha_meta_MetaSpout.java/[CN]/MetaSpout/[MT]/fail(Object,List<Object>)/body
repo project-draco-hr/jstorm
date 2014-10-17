@@ -1,0 +1,16 @@
+{
+  MetaTuple metaTuple=(MetaTuple)values.get(0);
+  AtomicInteger failTimes=metaTuple.getFailureTimes();
+  int failNum=failTimes.incrementAndGet();
+  if (failNum > metaClientConfig.getMaxFailTimes()) {
+    LOG.warn("Message " + metaTuple.getMq() + " fail times "+ failNum);
+    finishTuple(metaTuple);
+    return;
+  }
+  if (flowControl) {
+    sendingQueue.offer(metaTuple);
+  }
+ else {
+    sendTuple(metaTuple);
+  }
+}

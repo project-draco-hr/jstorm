@@ -1,0 +1,4 @@
+{
+  metaTuple.updateEmitMs();
+  collector.emit(new Values(metaTuple),metaTuple.getCreateMs());
+}

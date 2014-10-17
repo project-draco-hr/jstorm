@@ -1,0 +1,16 @@
+{
+  try {
+    if (local_mode(conf)) {
+      LocalCluster cluster=new LocalCluster();
+      cluster.submitTopology(String.valueOf(conf.get("topology.name")),conf,builder.createTopology());
+      Thread.sleep(200000);
+      cluster.shutdown();
+    }
+ else {
+      StormSubmitter.submitTopology(String.valueOf(conf.get("topology.name")),conf,builder.createTopology());
+    }
+  }
+ catch (  Exception e) {
+    LOG.error(e.getMessage(),e.getCause());
+  }
+}

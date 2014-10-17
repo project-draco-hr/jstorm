@@ -1,0 +1,6 @@
+{
+  this.consumerGroup=consumerGroup;
+  this.nameServer=nameServer;
+  this.topic=topic;
+  this.subExpress=subExpress;
+}

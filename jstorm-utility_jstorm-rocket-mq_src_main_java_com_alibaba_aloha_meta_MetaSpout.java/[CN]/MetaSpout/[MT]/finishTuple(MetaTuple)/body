@@ -1,0 +1,5 @@
+{
+  waithHistogram.update(metaTuple.getEmitMs() - metaTuple.getCreateMs());
+  processHistogram.update(System.currentTimeMillis() - metaTuple.emitMs);
+  metaTuple.done();
+}

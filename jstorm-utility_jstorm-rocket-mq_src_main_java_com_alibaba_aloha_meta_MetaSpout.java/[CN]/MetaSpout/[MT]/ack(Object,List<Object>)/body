@@ -1,0 +1,4 @@
+{
+  MetaTuple metaTuple=(MetaTuple)values.get(0);
+  finishTuple(metaTuple);
+}

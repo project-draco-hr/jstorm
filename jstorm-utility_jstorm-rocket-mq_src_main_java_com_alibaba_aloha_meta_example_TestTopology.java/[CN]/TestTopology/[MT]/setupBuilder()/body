@@ -1,0 +1,8 @@
+{
+  TopologyBuilder builder=new TopologyBuilder();
+  int writerParallel=JStormUtils.parseInt(conf.get("topology.writer.parallel"),1);
+  int spoutParallel=JStormUtils.parseInt(conf.get("topology.spout.parallel"),1);
+  builder.setSpout("MetaSpout",new MetaSpout(),spoutParallel);
+  builder.setBolt(WRITER_COMPONENT,new WriterBolt(),writerParallel).shuffleGrouping("MetaSpout");
+  return builder;
+}

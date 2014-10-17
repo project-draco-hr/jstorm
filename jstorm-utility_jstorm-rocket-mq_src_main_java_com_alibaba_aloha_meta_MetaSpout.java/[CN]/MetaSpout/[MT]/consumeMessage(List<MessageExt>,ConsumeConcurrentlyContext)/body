@@ -1,0 +1,27 @@
+{
+  try {
+    MetaTuple metaTuple=new MetaTuple(msgs,context.getMessageQueue());
+    if (flowControl) {
+      sendingQueue.offer(metaTuple);
+    }
+ else {
+      sendTuple(metaTuple);
+    }
+    if (autoAck) {
+      return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+    }
+ else {
+      metaTuple.waitFinish();
+      if (metaTuple.isSuccess() == true) {
+        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+      }
+ else {
+        return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to emit " + id,e);
+    return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+  }
+}

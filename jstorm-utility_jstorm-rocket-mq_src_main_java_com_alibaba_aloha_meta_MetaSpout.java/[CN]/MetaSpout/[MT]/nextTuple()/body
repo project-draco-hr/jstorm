@@ -1,0 +1,12 @@
+{
+  MetaTuple metaTuple=null;
+  try {
+    metaTuple=sendingQueue.take();
+  }
+ catch (  InterruptedException e) {
+  }
+  if (metaTuple == null) {
+    return;
+  }
+  sendTuple(metaTuple);
+}

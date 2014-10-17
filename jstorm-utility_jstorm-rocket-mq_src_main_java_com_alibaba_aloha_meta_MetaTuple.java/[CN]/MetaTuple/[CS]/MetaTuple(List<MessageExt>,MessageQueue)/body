@@ -1,0 +1,8 @@
+{
+  this.msgList=msgList;
+  this.mq=mq;
+  this.failureTimes=new AtomicInteger(0);
+  this.createMs=System.currentTimeMillis();
+  this.latch=new CountDownLatch(1);
+  this.isSuccess=false;
+}

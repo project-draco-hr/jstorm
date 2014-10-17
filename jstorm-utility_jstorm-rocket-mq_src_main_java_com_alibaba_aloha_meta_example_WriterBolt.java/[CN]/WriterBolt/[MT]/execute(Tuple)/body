@@ -1,0 +1,11 @@
+{
+  MetaTuple metaTuple=(MetaTuple)tuple.getValue(0);
+  try {
+    LOG.info("Messages:" + metaTuple);
+  }
+ catch (  Exception e) {
+    collector.fail(tuple);
+    return;
+  }
+  collector.ack(tuple);
+}

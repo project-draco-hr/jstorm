@@ -1,0 +1,9 @@
+{
+  if (args.length == 0) {
+    System.err.println("Please input configuration file");
+    System.exit(-1);
+  }
+  LoadConf(args[0]);
+  TopologyBuilder builder=setupBuilder();
+  submitTopology(builder);
+}
