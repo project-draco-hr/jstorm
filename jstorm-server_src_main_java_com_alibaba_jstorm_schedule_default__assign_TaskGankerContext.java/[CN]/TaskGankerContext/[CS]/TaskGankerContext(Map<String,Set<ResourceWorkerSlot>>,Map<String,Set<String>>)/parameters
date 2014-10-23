@@ -1,2 +1,0 @@
-Map<String,Set<ResourceWorkerSlot>> supervisorToWorker
-Map<String,Set<String>> relationship

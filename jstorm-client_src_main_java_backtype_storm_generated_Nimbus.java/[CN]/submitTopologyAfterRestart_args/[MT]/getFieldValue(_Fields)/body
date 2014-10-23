@@ -1,0 +1,9 @@
+{
+switch (field) {
+case NAME:
+    return get_name();
+case JSON_CONF:
+  return get_jsonConf();
+}
+throw new IllegalStateException();
+}

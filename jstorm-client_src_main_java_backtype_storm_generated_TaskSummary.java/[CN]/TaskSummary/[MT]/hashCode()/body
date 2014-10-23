@@ -12,7 +12,7 @@
   boolean present_port=true;
   builder.append(present_port);
   if (present_port)   builder.append(port);
-  boolean present_uptime_secs=true;
+  boolean present_uptime_secs=true && (is_set_uptime_secs());
   builder.append(present_uptime_secs);
   if (present_uptime_secs)   builder.append(uptime_secs);
   boolean present_errors=true && (is_set_errors());
@@ -24,5 +24,8 @@
   boolean present_component_type=true && (is_set_component_type());
   builder.append(present_component_type);
   if (present_component_type)   builder.append(component_type);
+  boolean present_status=true && (is_set_status());
+  builder.append(present_status);
+  if (present_status)   builder.append(status);
   return builder.toHashCode();
 }

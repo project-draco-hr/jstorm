@@ -1,0 +1,8 @@
+{
+  if (args.length == 0) {
+    testRestartProcess();
+  }
+ else {
+    testJar(args[0]);
+  }
+}

@@ -1,0 +1,5 @@
+{
+  String master_stormdist_root=StormConfig.masterStormdistRoot(data.getConf());
+  List<String> files=PathUtils.read_dir_contents(master_stormdist_root);
+  return files;
+}

@@ -10,4 +10,5 @@
   this.errors=null;
   this.stats=null;
   this.component_type=null;
+  this.status=null;
 }

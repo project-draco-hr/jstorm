@@ -1,0 +1,24 @@
+{
+  Map ret=new HashMap<Object,Object>();
+  Properties properties=new Properties();
+  try {
+    InputStream stream=new FileInputStream(prop);
+    properties.load(stream);
+    if (properties.size() == 0) {
+      System.out.println("WARN: Config file is empty");
+      return null;
+    }
+ else {
+      ret.putAll(properties);
+    }
+  }
+ catch (  FileNotFoundException e) {
+    System.out.println("No such file " + prop);
+    throw new RuntimeException(e.getMessage());
+  }
+catch (  Exception e1) {
+    e1.printStackTrace();
+    throw new RuntimeException(e1.getMessage());
+  }
+  return ret;
+}

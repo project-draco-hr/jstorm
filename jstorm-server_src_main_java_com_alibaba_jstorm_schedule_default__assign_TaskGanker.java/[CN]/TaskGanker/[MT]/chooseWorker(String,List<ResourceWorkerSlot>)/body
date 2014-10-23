@@ -1,0 +1,6 @@
+{
+  List<ResourceWorkerSlot> result=this.componentSelector.select(workers,name);
+  result=this.totalTaskNumSelector.select(result,name);
+  if (name.equals(TaskGanker.ACKER_NAME))   return result.iterator().next();
+  return this.inputComponentSelector.select(result,name).iterator().next();
+}

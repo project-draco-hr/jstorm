@@ -1,0 +1,6 @@
+{
+  Map<Long,String> map=new HashMap<Long,String>();
+  for (long l=0; l < 1000000; l++) {
+    map.put(l,String.valueOf(l));
+  }
+}

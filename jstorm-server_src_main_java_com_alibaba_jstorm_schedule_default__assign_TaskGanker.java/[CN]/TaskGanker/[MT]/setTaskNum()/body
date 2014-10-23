@@ -1,7 +1,7 @@
 {
   this.baseNum=tasks.size() / workerNum;
   this.otherNum=tasks.size() % workerNum;
-  for (  Entry<String,Set<ResourceWorkerSlot>> entry : taskContext.getSupervisorToWorker().entrySet()) {
+  for (  Entry<String,List<ResourceWorkerSlot>> entry : taskContext.getSupervisorToWorker().entrySet()) {
     for (    ResourceWorkerSlot worker : entry.getValue()) {
       taskContext.getWorkerToTaskNum().put(worker,0);
     }

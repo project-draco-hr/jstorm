@@ -1,6 +1,6 @@
 {
   int result=0;
-  Set<ResourceWorkerSlot> workers=supervisorToWorker.get(supervisor);
+  List<ResourceWorkerSlot> workers=supervisorToWorker.get(supervisor);
   if (workers == null)   return 0;
   for (  ResourceWorkerSlot worker : workers)   result=result + this.getInputComponentNumOnWorker(worker,name);
   return result;

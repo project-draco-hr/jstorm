@@ -1,0 +1,4 @@
+{
+  send_restart(name,jsonConf);
+  recv_restart();
+}

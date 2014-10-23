@@ -29,7 +29,7 @@
   AsyncLoopThread syncSupervisorThread=new AsyncLoopThread(syncSupervisorPusher);
   threads.add(syncSupervisorThread);
   int port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
-  Httpserver httpserver=new Httpserver(port);
+  Httpserver httpserver=new Httpserver(port,conf);
   httpserver.start();
   MetricSendClient client;
   if (ConfigExtension.isAlimonitorMetricsPost(conf)) {
@@ -38,7 +38,7 @@
  else {
     client=new MetricSendClient();
   }
-  UploadSupervMetric uploadMetric=new UploadSupervMetric(stormClusterState,supervisorId,active,60,client);
+  UploadSupervMetric uploadMetric=new UploadSupervMetric(conf,stormClusterState,supervisorId,active,60,client);
   AsyncLoopThread uploadMetricThread=new AsyncLoopThread(uploadMetric);
   threads.add(uploadMetricThread);
   return new SupervisorManger(conf,supervisorId,active,threads,syncSupEventManager,processEventManager,httpserver,stormClusterState,workerThreadPids);

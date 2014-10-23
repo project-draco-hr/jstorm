@@ -1,0 +1,5 @@
+{
+  logDir=JStormUtils.getLogDir();
+  this.conf=conf;
+  LOG.info("logview logDir=" + logDir);
+}

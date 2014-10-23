@@ -9,8 +9,10 @@
       Tuple tuple=(Tuple)event;
       Object id=tuple.getValue(0);
       Object obj=pending.remove((Long)id);
-      if (obj == null && isDebug) {
-        LOG.info("Pending map no entry:" + id);
+      if (obj == null) {
+        if (isDebug) {
+          LOG.info("Pending map no entry:" + id);
+        }
         return;
       }
       TupleInfo tupleInfo=(TupleInfo)obj;

@@ -22,6 +22,10 @@
   }
   String topologyid=null;
   String taskid=null;
+  String clusterName=null;
+  if (ctx.getExternalContext().getRequestParameterMap().get("clusterName") != null) {
+    clusterName=(String)ctx.getExternalContext().getRequestParameterMap().get("clusterName");
+  }
   if (ctx.getExternalContext().getRequestParameterMap().get("topologyid") != null) {
     topologyid=ctx.getExternalContext().getRequestParameterMap().get("topologyid");
   }
@@ -36,6 +40,9 @@
   }
   NimbusClient client=null;
   try {
+    if (clusterName != null && !(clusterName.equals(""))) {
+      UIUtils.getClusterInfoByName(conf,clusterName);
+    }
     client=NimbusClient.getConfiguredClient(conf);
     TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
     TaskSummary taskSummary=null;

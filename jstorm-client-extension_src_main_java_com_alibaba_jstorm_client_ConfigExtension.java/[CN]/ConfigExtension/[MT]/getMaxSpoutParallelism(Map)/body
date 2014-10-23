@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(MAX_SPOUT_PARALLELISM));
+}

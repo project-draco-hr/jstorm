@@ -1,0 +1,27 @@
+{
+  String topologyId=null;
+  try {
+    topologyId=NimbusUtils.findTopoFileInStormdist(data,name);
+    if (topologyId != null) {
+      String srcDir=StormConfig.masterStormdistRoot(conf,topologyId);
+      String destDir=StormConfig.masterStormTmpRoot(conf,name);
+      FileUtils.copyDirectory(new File(srcDir),new File(destDir));
+    }
+ else {
+      String errorInfo="Topology=" + name + " is not exist!";
+      throw new InvalidTopologyException(errorInfo);
+    }
+  }
+ catch (  Exception e) {
+    LOG.info("InvalidTopologyException: " + e.getMessage());
+    throw new InvalidTopologyException(e.getMessage());
+  }
+  deactivate(name);
+  JStormUtils.sleepMs(5000);
+  KillOptions options=new KillOptions();
+  options.set_wait_secs(1);
+  killTopologyWithOpts(name,options);
+  int delay=(JStormUtils.parseInt(conf.get(Config.SUPERVISOR_MONITOR_FREQUENCY_SECS))) * 1000 + 5000;
+  JStormUtils.sleepMs(delay);
+  submitTopologyAfterRestart(name,jsonConf);
+}

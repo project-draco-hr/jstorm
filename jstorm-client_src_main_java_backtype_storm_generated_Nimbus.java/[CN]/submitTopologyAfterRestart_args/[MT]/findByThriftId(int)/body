@@ -1,0 +1,10 @@
+{
+switch (fieldId) {
+case 1:
+    return NAME;
+case 2:
+  return JSON_CONF;
+default :
+return null;
+}
+}

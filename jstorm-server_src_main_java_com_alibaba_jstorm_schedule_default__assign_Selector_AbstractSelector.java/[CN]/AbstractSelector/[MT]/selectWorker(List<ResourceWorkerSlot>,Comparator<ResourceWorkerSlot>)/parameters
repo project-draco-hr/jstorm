@@ -1,0 +1,2 @@
+List<ResourceWorkerSlot> list
+Comparator<ResourceWorkerSlot> c

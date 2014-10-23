@@ -16,6 +16,8 @@ case STATS:
 return get_stats();
 case COMPONENT_TYPE:
 return get_component_type();
+case STATUS:
+return get_status();
 }
 throw new IllegalStateException();
 }

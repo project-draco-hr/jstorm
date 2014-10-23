@@ -1,0 +1,16 @@
+{
+  restart_result result=new restart_result();
+  try {
+    iface.restart(args.name,args.jsonConf);
+  }
+ catch (  NotAliveException e) {
+    result.e=e;
+  }
+catch (  InvalidTopologyException ite) {
+    result.ite=ite;
+  }
+catch (  TopologyAssignException tae) {
+    result.tae=tae;
+  }
+  return result;
+}

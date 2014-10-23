@@ -8,6 +8,7 @@
   List<Map<GlobalStreamId,Long>> failedList=new ArrayList<Map<GlobalStreamId,Long>>();
   List<Map<GlobalStreamId,Double>> processList=new ArrayList<Map<GlobalStreamId,Double>>();
   for (  TaskSummary taskSummary : taskSummaries) {
+    if (taskSummary.get_status().equals(ConfigExtension.TASK_STATUS_ACTIVE) == false)     continue;
     TaskStats taskStats=taskSummary.get_stats();
     emittedList.add(taskStats.get_emitted().get(window));
     sendTpsList.add(taskStats.get_send_tps().get(window));

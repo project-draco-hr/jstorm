@@ -1,0 +1,12 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case ITE:
+    return is_set_ite();
+case TAE:
+  return is_set_tae();
+}
+throw new IllegalStateException();
+}

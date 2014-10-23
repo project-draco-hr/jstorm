@@ -1,0 +1,48 @@
+{
+  final int intervalSec=Integer.valueOf("10");
+  new Thread(new Runnable(){
+    @Override public void run(){
+      LOG.info("Begin to start fork thread");
+      Map<String,String> environment=new HashMap<String,String>();
+      while (forkTimes < RESTART_TIMES) {
+        try {
+          JStormUtils.launch_process(cmd + " " + forkTimes,environment);
+        }
+ catch (        IOException e) {
+          LOG.error("Failed to fork process " + cmd + forkTimes,e);
+          continue;
+        }
+        LOG.info("Successfully launch " + forkTimes);
+        JStormUtils.sleepMs(1000);
+        forkTimes++;
+      }
+      LOG.info("Successfully shutdown fok thread");
+    }
+  }
+).start();
+  new Thread(new Runnable(){
+    @Override public void run(){
+      LOG.info("Begin to start killing thread");
+      File file=new File(pidDir);
+      while (killedTimes < RESTART_TIMES) {
+        File[] pids=file.listFiles();
+        if (pids == null) {
+          JStormUtils.sleepMs(100);
+          continue;
+        }
+        for (        File pidFile : pids) {
+          String pid=pidFile.getName();
+          JStormUtils.ensure_process_killed(Integer.valueOf(pid));
+          killedTimes++;
+          pidFile.delete();
+        }
+        JStormUtils.sleepMs(100);
+      }
+      LOG.info("Successfully shutdown killing thread");
+    }
+  }
+).start();
+  while (killedTimes < RESTART_TIMES) {
+    JStormUtils.sleepMs(100);
+  }
+}

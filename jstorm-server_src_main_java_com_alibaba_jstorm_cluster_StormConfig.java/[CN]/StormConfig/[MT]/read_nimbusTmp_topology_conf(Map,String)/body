@@ -1,0 +1,4 @@
+{
+  String topologyRoot=StormConfig.masterStormTmpRoot(conf,topologyId);
+  return read_topology_conf(topologyRoot,topologyId);
+}

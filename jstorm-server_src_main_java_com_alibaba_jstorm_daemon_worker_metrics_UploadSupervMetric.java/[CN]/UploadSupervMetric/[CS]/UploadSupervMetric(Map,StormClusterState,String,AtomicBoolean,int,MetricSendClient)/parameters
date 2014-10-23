@@ -1,0 +1,6 @@
+Map conf
+StormClusterState cluster
+String supervisorId
+AtomicBoolean active
+int frequence
+MetricSendClient client
