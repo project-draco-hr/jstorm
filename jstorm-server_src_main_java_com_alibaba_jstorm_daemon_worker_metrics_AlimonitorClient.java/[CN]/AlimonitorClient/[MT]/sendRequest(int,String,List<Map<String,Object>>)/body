@@ -1,9 +1,9 @@
 {
   boolean ret=false;
   if (msgList.size() == 0)   return ret;
-  JSONObject jsonObj=buildAliMonitorMsg(collection_flag,error_message);
+  Map jsonObj=buildAliMonitorMsg(collection_flag,error_message);
   addMsgData(jsonObj,msgList);
-  String jsonMsg=jsonObj.toJSONString();
+  String jsonMsg=Utils.to_json(jsonObj);
   LOG.info(jsonMsg);
   if (post == true) {
     String url=buildURL();

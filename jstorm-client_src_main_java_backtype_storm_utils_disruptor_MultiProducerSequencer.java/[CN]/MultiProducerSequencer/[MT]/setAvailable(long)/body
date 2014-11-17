@@ -1,0 +1,3 @@
+{
+  setAvailableBufferValue(calculateIndex(sequence),calculateAvailabilityFlag(sequence));
+}

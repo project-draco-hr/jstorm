@@ -7,7 +7,7 @@
   IConnection client=null;
   server=context.bind(null,port);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(1024),waitStrategy);
+  DisruptorQueue recvQueue=new DisruptorQueue("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
   server.registerQueue(recvQueue);
   client=context.connect(null,"localhost",port);
   List<TaskMessage> list=new ArrayList<TaskMessage>();

@@ -1,3 +1,0 @@
-{
-  this(bufferSize,1024);
-}

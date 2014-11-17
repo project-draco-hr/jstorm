@@ -13,7 +13,7 @@
     public void run(){
       while (_running) {
         try {
-          JSONObject action=_process.readMessage();
+          Map action=_process.readMessage();
           if (action == null) {
           }
           String command=(String)action.get("command");

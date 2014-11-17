@@ -1,0 +1,2 @@
+EventTranslatorVararg<E> translator
+Object[] args

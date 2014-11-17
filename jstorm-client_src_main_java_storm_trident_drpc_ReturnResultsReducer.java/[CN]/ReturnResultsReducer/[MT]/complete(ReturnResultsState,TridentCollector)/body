@@ -1,7 +1,7 @@
 {
   if (state.returnInfo != null) {
-    String result=JSON.toJSONString(state.results);
-    Map retMap=(Map)JSON.parse(state.returnInfo);
+    String result=Utils.to_json(state.results);
+    Map retMap=(Map)Utils.from_json(state.returnInfo);
     final String host=(String)retMap.get("host");
     final int port=Utils.getInt(retMap.get("port"));
     String id=(String)retMap.get("id");

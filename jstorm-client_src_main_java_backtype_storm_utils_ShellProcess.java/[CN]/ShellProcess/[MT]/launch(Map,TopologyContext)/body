@@ -5,10 +5,17 @@
   processIn=new DataOutputStream(_subprocess.getOutputStream());
   processOut=new BufferedReader(new InputStreamReader(_subprocess.getInputStream()));
   processErrorStream=_subprocess.getErrorStream();
-  JSONObject setupInfo=new JSONObject();
+  Map setupInfo=new HashMap();
   setupInfo.put("pidDir",context.getPIDDir());
   setupInfo.put("conf",conf);
   setupInfo.put("context",context);
   writeMessage(setupInfo);
+  StringBuffer sb=new StringBuffer();
+  sb.append("Begin to run command:");
+  for (  String cmd : command) {
+    sb.append(cmd);
+  }
+  sb.append(setupInfo);
+  LOG.info(sb.toString());
   return (Number)readMessage().get("pid");
 }

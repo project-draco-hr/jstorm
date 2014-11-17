@@ -1,0 +1,8 @@
+{
+  if (json == null) {
+    return null;
+  }
+ else {
+    return JSONValue.parse(json);
+  }
+}

@@ -1,6 +1,6 @@
 {
   if (_next == null) {
-    _next=new JSONObject();
+    _next=new HashMap();
     _next.put("command","next");
   }
   querySubprocess(_next);

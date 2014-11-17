@@ -1,0 +1,8 @@
+{
+  for (long sequence=lowerBound; sequence <= availableSequence; sequence++) {
+    if (!isAvailable(sequence)) {
+      return sequence - 1;
+    }
+  }
+  return availableSequence;
+}

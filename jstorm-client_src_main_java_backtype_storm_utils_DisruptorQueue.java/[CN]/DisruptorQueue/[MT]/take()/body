@@ -12,7 +12,12 @@
 catch (  InterruptedException e) {
     return null;
   }
+catch (  TimeoutException e) {
+    return null;
+  }
   MutableObject mo=_buffer.get(nextSequence);
   _consumer.set(nextSequence);
-  return mo.o;
+  Object ret=mo.o;
+  mo.setObject(null);
+  return ret;
 }

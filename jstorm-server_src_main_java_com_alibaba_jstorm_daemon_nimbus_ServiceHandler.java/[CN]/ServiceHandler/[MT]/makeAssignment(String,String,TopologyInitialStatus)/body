@@ -1,0 +1,15 @@
+{
+  TopologyAssignEvent assignEvent=new TopologyAssignEvent();
+  assignEvent.setTopologyId(topologyId);
+  assignEvent.setScratch(false);
+  assignEvent.setTopologyName(topologyName);
+  assignEvent.setOldStatus(Thrift.topologyInitialStatusToStormStatus(status));
+  TopologyAssign.push(assignEvent);
+  boolean isSuccess=assignEvent.waitFinish();
+  if (isSuccess == true) {
+    LOG.info("Finish submit for " + topologyName);
+  }
+ else {
+    throw new FailedAssignTopologyException(assignEvent.getErrorMsg());
+  }
+}

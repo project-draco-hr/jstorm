@@ -1,0 +1,13 @@
+{
+  final long initialSequence=finalSequence - (batchSize - 1);
+  try {
+    long sequence=initialSequence;
+    final int batchEndsAt=batchStartsAt + batchSize;
+    for (int i=batchStartsAt; i < batchEndsAt; i++) {
+      translator.translateTo(get(sequence),sequence++,arg0[i]);
+    }
+  }
+  finally {
+    sequencer.publish(initialSequence,finalSequence);
+  }
+}

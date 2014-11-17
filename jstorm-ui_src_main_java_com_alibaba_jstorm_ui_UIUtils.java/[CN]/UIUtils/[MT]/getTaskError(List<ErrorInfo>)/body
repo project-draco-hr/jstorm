@@ -2,23 +2,23 @@
   if (errList == null) {
     return "";
   }
-  TreeMap<Integer,String> map=new TreeMap<Integer,String>(new DescendComparator());
+  List<String> errors=new ArrayList<String>();
   for (  ErrorInfo einfo : errList) {
     long current=System.currentTimeMillis() / 1000;
-    int maxTime=maxErrortime;
-    if (einfo.get_error().indexOf("queue is full") != -1)     maxTime=maxErrortime / 10;
+    int maxTime=JStormUtils.MIN_30;
+    if (einfo.get_error().indexOf("queue is full") != -1)     maxTime=JStormUtils.MIN_1 * 3;
+ else     if (einfo.get_error().indexOf("is dead on") != -1)     maxTime=JStormUtils.DAY_1 * 3;
     if (current - einfo.get_error_time_secs() < maxTime) {
-      map.put(new Integer(einfo.get_error_time_secs()),einfo.get_error());
+      errors.add(einfo.get_error());
     }
   }
   String rtn="";
-  Collection<String> values=map.values();
   int size=0;
-  for (  String s : values) {
+  for (  String e : errors) {
     if (size >= maxErrornum) {
       break;
     }
-    rtn+=s + ";";
+    rtn+=e + ";";
     size++;
   }
   return rtn;

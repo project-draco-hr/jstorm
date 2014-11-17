@@ -27,6 +27,9 @@
     return;
   }
  else {
+    if (isSpoutFullSleep) {
+      JStormUtils.sleepMs(1);
+    }
     emptyCpuCounter.start();
   }
 }

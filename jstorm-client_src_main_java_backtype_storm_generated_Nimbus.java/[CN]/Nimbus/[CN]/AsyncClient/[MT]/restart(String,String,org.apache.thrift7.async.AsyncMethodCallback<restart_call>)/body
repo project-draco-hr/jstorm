@@ -1,0 +1,6 @@
+{
+  checkReady();
+  restart_call method_call=new restart_call(name,jsonConf,resultHandler,this,___protocolFactory,___transport);
+  this.___currentMethod=method_call;
+  ___manager.call(method_call);
+}

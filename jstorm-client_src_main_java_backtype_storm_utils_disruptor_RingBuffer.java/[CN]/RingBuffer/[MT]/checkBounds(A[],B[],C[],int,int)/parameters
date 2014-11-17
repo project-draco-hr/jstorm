@@ -1,0 +1,5 @@
+A[] arg0
+B[] arg1
+C[] arg2
+int batchStartsAt
+int batchSize

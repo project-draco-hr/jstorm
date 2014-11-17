@@ -1,6 +1,6 @@
 {
-  Map<String,JSONObject> map=(Map<String,JSONObject>)JStormUtils.from_json(input);
-  for (  JSONObject jobj : map.values()) {
+  Map<String,Map> map=(Map<String,Map>)JStormUtils.from_json(input);
+  for (  Map jobj : map.values()) {
     FileAttribute attribute=FileAttribute.fromJSONObject(jobj);
     if (attribute != null) {
       if (JStormUtils.parseBoolean(attribute.getIsDir(),false) == true) {

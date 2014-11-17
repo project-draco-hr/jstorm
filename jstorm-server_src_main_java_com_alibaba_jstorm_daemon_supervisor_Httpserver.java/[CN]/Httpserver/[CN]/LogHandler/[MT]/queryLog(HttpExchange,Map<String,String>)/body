@@ -31,7 +31,8 @@
     fout=fc.map(FileChannel.MapMode.READ_ONLY,position,size);
     ret=new byte[(int)size];
     fout.get(ret);
-    return new Pair<Long,byte[]>(fileSize,ret);
+    String str=new String(ret,ConfigExtension.getLogViewEncoding(conf));
+    return new Pair<Long,byte[]>(fileSize,str.getBytes());
   }
  catch (  FileNotFoundException e) {
     LOG.warn(e);

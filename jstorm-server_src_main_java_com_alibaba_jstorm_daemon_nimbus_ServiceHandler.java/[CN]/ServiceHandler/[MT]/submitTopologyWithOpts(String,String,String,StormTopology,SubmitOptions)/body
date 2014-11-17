@@ -25,25 +25,13 @@ catch (  Throwable e) {
     stormConf=NimbusUtils.normalizeConf(conf,serializedConf,topology);
     Map<Object,Object> totalStormConf=new HashMap<Object,Object>(conf);
     totalStormConf.putAll(stormConf);
-    StormTopology normalizedTopology=NimbusUtils.normalizeTopology(stormConf,topology);
+    StormTopology normalizedTopology=NimbusUtils.normalizeTopology(stormConf,topology,false);
     Common.validate_basic(normalizedTopology,totalStormConf,topologyId);
     StormClusterState stormClusterState=data.getStormClusterState();
     setupStormCode(conf,topologyId,uploadedJarLocation,stormConf,normalizedTopology);
     setupZkTaskInfo(conf,topologyId,stormClusterState);
-    TopologyAssignEvent assignEvent=new TopologyAssignEvent();
-    assignEvent.setTopologyId(topologyId);
-    assignEvent.setScratch(false);
-    assignEvent.setTopologyName(topologyname);
-    assignEvent.setOldStatus(Thrift.topologyInitialStatusToStormStatus(options.get_initial_status()));
-    TopologyAssign.push(assignEvent);
     LOG.info("Submit for " + topologyname + " with conf "+ serializedConf);
-    boolean isSuccess=assignEvent.waitFinish();
-    if (isSuccess == true) {
-      LOG.info("Finish submit for " + topologyname);
-    }
- else {
-      throw new FailedAssignTopologyException(assignEvent.getErrorMsg());
-    }
+    makeAssignment(topologyname,topologyId,options.get_initial_status());
   }
  catch (  FailedAssignTopologyException e) {
     StringBuilder sb=new StringBuilder();

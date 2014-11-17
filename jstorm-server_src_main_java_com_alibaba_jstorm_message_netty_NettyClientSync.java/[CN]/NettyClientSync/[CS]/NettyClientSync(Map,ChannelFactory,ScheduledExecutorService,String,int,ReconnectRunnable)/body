@@ -8,7 +8,7 @@
   }
 ,null,Metrics.MetricType.WORKER);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  disruptorQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(MAX_SEND_PENDING * 8),waitStrategy);
+  disruptorQueue=new DisruptorQueue(name,ProducerType.MULTI,MAX_SEND_PENDING * 8,waitStrategy);
   Metrics.registerQueue(address,MetricDef.NETTY_CLI_SYNC_DISR_QUEUE,disruptorQueue,null,Metrics.MetricType.WORKER);
   Runnable trigger=new Runnable(){
     @Override public void run(){

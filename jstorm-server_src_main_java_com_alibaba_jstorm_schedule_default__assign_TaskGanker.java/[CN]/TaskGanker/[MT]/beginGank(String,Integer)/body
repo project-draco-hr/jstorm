@@ -1,4 +1,4 @@
 {
-  ResourceWorkerSlot worker=this.chooseWorker(name,taskContext.getWorkerToTaskNum().keySet());
+  ResourceWorkerSlot worker=this.chooseWorker(name,new ArrayList<ResourceWorkerSlot>(taskContext.getWorkerToTaskNum().keySet()));
   this.pushTaskToWorker(task,name,worker);
 }

@@ -1,5 +1,5 @@
 {
   Map obj=new HashMap();
   obj.put("task->component",_taskToComponent);
-  return JSON.toJSONString(obj);
+  return Utils.to_json(obj);
 }

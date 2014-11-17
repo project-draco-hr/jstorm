@@ -1,0 +1,6 @@
+EventTranslatorThreeArg<E,A,B,C> translator
+int batchStartsAt
+int batchSize
+A[] arg0
+B[] arg1
+C[] arg2

@@ -18,6 +18,6 @@ if (not os.path.exists((JSTORM_DIR + '/RELEASE'))):
     print '\nYou can download a JStorm release '
     print '******************************************'
     sys.exit(1)
-COMMANDS = {'jar': jar, 'kill': kill, 'nimbus': nimbus, 'zktool': zktool, 'drpc': drpc, 'supervisor': supervisor, 'localconfvalue': print_localconfvalue, 'remoteconfvalue': print_remoteconfvalue, 'classpath': print_classpath, 'activate': activate, 'deactivate': deactivate, 'rebalance': rebalance, 'help': print_usage, 'metricsMonitor': metrics_Monitor, 'list': list, }
+COMMANDS = {'jar': jar, 'kill': kill, 'nimbus': nimbus, 'zktool': zktool, 'drpc': drpc, 'supervisor': supervisor, 'localconfvalue': print_localconfvalue, 'remoteconfvalue': print_remoteconfvalue, 'classpath': print_classpath, 'activate': activate, 'deactivate': deactivate, 'rebalance': rebalance, 'help': print_usage, 'metricsMonitor': metrics_Monitor, 'list': list, 'restart': restart, }
 if (__name__ == '__main__'):
     main()

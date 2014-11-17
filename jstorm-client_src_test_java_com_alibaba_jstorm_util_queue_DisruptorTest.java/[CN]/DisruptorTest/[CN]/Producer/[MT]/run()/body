@@ -1,0 +1,16 @@
+{
+  long count=0;
+  try {
+    while (true) {
+      String msg=String.valueOf(Thread.currentThread().getId()) + "@" + count;
+      queue.publish(msg,false);
+      produceNum.incrementAndGet();
+      System.out.println(msg);
+      count++;
+    }
+  }
+ catch (  InsufficientCapacityException e) {
+    System.out.println(Thread.currentThread().getId() + " quit, insufficientCapacityException " + count);
+    return;
+  }
+}

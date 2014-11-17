@@ -10,7 +10,8 @@
     lastErrInfo=null;
   }
   if (lastErrInfo == null)   lastErrInfo=new HashMap<Integer,String>();
-  if (error.indexOf(TaskMetricInfo.QEUEU_IS_FULL) != -1)   lastErrInfo.put(180,timeStamp);
- else   lastErrInfo.put(1800,timeStamp);
+  if (error.indexOf(TaskMetricInfo.QEUEU_IS_FULL) != -1)   lastErrInfo.put(JStormUtils.MIN_1 * 3,timeStamp);
+ else   if (error.indexOf(TASK_IS_DEAD) != -1)   lastErrInfo.put(JStormUtils.DAY_1 * 3,timeStamp);
+ else   lastErrInfo.put(JStormUtils.MIN_30,timeStamp);
   cluster_state.set_data(lastErrTopoPath,Utils.serialize(lastErrInfo));
 }

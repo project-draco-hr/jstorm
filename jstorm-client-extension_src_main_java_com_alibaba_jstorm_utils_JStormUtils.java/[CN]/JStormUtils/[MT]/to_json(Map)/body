@@ -1,3 +1,3 @@
 {
-  return JSON.toJSONString(m);
+  return Utils.to_json(m);
 }

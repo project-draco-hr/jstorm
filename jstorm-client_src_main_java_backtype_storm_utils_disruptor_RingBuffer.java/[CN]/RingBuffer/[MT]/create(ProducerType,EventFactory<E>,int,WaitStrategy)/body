@@ -1,0 +1,10 @@
+{
+switch (producerType) {
+case SINGLE:
+    return createSingleProducer(factory,bufferSize,waitStrategy);
+case MULTI:
+  return createMultiProducer(factory,bufferSize,waitStrategy);
+default :
+throw new IllegalStateException(producerType.toString());
+}
+}

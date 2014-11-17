@@ -1,0 +1,21 @@
+{
+  String workerPort=paramMap.get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_WORKER_PORT);
+  if (workerPort == null) {
+    handlFailure(t,"Not set worker's port");
+    return;
+  }
+  LOG.info("Begin to get jstack of " + workerPort);
+  StringBuffer sb=new StringBuffer();
+  List<Integer> pids=Worker.getOldPortPids(workerPort);
+  for (  Integer pid : pids) {
+    sb.append("!!!!!!!!!!!!!!!!!!\r\n");
+    sb.append("WorkerPort:" + workerPort + ", pid:"+ pid);
+    sb.append("\r\n!!!!!!!!!!!!!!!!!!\r\n");
+    handleJstack(sb,pid);
+  }
+  byte[] data=sb.toString().getBytes();
+  t.sendResponseHeaders(HttpURLConnection.HTTP_OK,data.length);
+  OutputStream os=t.getResponseBody();
+  os.write(data);
+  os.close();
+}

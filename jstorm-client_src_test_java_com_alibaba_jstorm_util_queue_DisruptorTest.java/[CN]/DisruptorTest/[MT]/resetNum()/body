@@ -1,0 +1,5 @@
+{
+  produceNum.set(0);
+  consumerNum.set(0);
+  handler.reset();
+}

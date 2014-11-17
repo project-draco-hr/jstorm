@@ -1,0 +1,4 @@
+{
+  setAvailable(sequence);
+  waitStrategy.signalAllWhenBlocking();
+}

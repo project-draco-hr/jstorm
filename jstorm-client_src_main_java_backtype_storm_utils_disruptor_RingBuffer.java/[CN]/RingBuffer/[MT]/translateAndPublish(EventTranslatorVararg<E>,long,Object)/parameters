@@ -1,0 +1,3 @@
+EventTranslatorVararg<E> translator
+long sequence
+Object args

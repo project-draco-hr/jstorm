@@ -1,0 +1,2 @@
+Map<String,List<ResourceWorkerSlot>> supervisorToWorker
+Map<String,Set<String>> relationship

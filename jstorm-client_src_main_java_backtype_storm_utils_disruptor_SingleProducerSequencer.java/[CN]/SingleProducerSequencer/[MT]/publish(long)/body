@@ -1,0 +1,4 @@
+{
+  cursor.set(sequence);
+  waitStrategy.signalAllWhenBlocking();
+}

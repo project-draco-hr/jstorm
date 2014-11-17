@@ -1,0 +1,3 @@
+EventTranslatorTwoArg<E,A,B> translator
+A arg0
+B arg1

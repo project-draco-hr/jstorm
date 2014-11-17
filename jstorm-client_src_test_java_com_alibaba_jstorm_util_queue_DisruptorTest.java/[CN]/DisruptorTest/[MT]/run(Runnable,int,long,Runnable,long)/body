@@ -1,0 +1,25 @@
+{
+  try {
+    resetNum();
+    Thread[] producerThreads=new Thread[producerNum];
+    for (int i=0; i < producerNum; i++) {
+      producerThreads[i]=new Thread(producer);
+      producerThreads[i].start();
+    }
+    Thread consumerThread=new Thread(consumer);
+    consumerThread.start();
+    System.out.println("Please wait seconds" + produceMs / 1000);
+    Thread.sleep(produceMs);
+    for (int i=0; i < producerNum; i++) {
+      producerThreads[i].interrupt();
+      producerThreads[i].join(TIMEOUT);
+    }
+    Thread.sleep(waitMs);
+    System.out.println("Please wait seconds" + waitMs / 1000);
+    consumerThread.interrupt();
+    consumerThread.join(TIMEOUT);
+  }
+ catch (  Throwable e) {
+    e.printStackTrace();
+  }
+}

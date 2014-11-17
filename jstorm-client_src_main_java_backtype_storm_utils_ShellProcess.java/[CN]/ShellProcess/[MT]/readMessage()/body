@@ -1,6 +1,6 @@
 {
   String string=readString();
-  JSONObject msg=(JSONObject)JSON.parse(string);
+  Map msg=(Map)Utils.from_json(string);
   if (msg != null) {
     return msg;
   }

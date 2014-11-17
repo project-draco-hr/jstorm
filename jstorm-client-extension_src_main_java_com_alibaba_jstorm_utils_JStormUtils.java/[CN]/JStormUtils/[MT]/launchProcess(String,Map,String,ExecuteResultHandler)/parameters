@@ -1,0 +1,4 @@
+String command
+Map environment
+String workDir
+ExecuteResultHandler resultHandler

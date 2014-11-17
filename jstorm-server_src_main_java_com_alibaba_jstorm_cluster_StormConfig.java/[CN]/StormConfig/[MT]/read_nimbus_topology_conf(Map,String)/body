@@ -1,5 +1,4 @@
 {
   String topologyRoot=StormConfig.masterStormdistRoot(conf,topologyId);
-  String readFile=StormConfig.stormconf_path(topologyRoot);
-  return (Map)readLocalObject(topologyId,readFile);
+  return read_topology_conf(topologyRoot,topologyId);
 }

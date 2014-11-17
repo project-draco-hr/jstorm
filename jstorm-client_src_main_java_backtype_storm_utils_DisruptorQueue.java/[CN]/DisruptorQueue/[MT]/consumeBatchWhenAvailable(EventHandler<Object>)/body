@@ -12,4 +12,7 @@
 catch (  InterruptedException e) {
     return;
   }
+catch (  TimeoutException e) {
+    return;
+  }
 }

@@ -1,5 +1,5 @@
 {
-  JSONObject ret=new JSONObject();
+  Map ret=new HashMap();
   ret.put(COLLECTION_FLAG,collection_flag);
   ret.put(ERROR_INFO,error_message);
   ret.put(MSG,null);

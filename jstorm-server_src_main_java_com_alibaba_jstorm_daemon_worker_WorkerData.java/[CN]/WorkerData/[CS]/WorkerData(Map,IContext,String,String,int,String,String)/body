@@ -45,9 +45,9 @@
   LOG.info("Disruptor use sleep " + disruptorUseSleep);
   int buffer_size=Utils.getInt(conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  this.transferQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(buffer_size),waitStrategy);
+  this.transferQueue=new DisruptorQueue("TotalTransfer",ProducerType.MULTI,buffer_size,waitStrategy);
   this.transferQueue.consumerStarted();
-  this.sendingQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(buffer_size),waitStrategy);
+  this.sendingQueue=new DisruptorQueue("TotalSending",ProducerType.MULTI,buffer_size,waitStrategy);
   this.sendingQueue.consumerStarted();
   this.nodeportSocket=new ConcurrentHashMap<WorkerSlot,IConnection>();
   this.taskNodeport=new ConcurrentHashMap<Integer,WorkerSlot>();

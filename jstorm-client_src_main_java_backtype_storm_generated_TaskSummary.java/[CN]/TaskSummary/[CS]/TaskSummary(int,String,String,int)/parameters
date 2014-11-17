@@ -1,0 +1,4 @@
+int task_id
+String component_id
+String host
+int port

@@ -1,0 +1,4 @@
+{
+  final long sequence=sequencer.next();
+  translateAndPublish(translator,sequence);
+}

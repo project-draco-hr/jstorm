@@ -1,6 +1,0 @@
-{
-  if (!hasAvailableCapacity(availableCapacity,dependentSequences)) {
-    throw InsufficientCapacityException.INSTANCE;
-  }
-  return incrementAndGet(delta,dependentSequences);
-}

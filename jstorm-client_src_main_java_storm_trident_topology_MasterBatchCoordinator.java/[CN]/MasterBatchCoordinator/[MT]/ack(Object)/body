@@ -2,10 +2,10 @@
   TransactionAttempt tx=(TransactionAttempt)msgId;
   TransactionStatus status=_activeTx.get(tx.getTransactionId());
   if (status != null && tx.equals(status.attempt)) {
-    if (status.status == AttemptStatus.PROCESSING) {
+    if (status.status == AttemptStatus.PROCESSING && sendCommit) {
       status.status=AttemptStatus.PROCESSED;
     }
- else     if (status.status == AttemptStatus.COMMITTING) {
+ else     if (status.status == AttemptStatus.COMMITTING || (status.status == AttemptStatus.PROCESSING && !sendCommit)) {
       _activeTx.remove(tx.getTransactionId());
       _attemptIds.remove(tx.getTransactionId());
       _collector.emit(SUCCESS_STREAM_ID,new Values(tx));

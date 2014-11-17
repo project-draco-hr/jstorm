@@ -1,0 +1,4 @@
+{
+  long bufferAddress=(index * SCALE) + BASE;
+  UNSAFE.putOrderedInt(availableBuffer,bufferAddress,flag);
+}

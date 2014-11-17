@@ -15,7 +15,7 @@
   message_timeout_secs=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
   int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_RECEIVE_BUFFER_SIZE),256);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  this.exeQueue=new DisruptorQueue(new MultiThreadedClaimStrategy(queue_size),waitStrategy);
+  this.exeQueue=new DisruptorQueue(idStr,ProducerType.MULTI,queue_size,waitStrategy);
   this.exeQueue.consumerStarted();
   this.registerInnerTransfer(exeQueue);
   deserializeThread=new AsyncLoopThread(new DeserializeRunnable(deserializeQueue,exeQueue));

@@ -1,0 +1,10 @@
+{
+  try {
+    final long sequence=sequencer.tryNext();
+    translateAndPublish(translator,sequence,args);
+    return true;
+  }
+ catch (  InsufficientCapacityException e) {
+    return false;
+  }
+}

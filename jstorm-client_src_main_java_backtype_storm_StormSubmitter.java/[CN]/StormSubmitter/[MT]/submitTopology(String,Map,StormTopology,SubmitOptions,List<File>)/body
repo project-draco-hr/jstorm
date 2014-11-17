@@ -1,0 +1,17 @@
+{
+  Map<String,String> jars=new HashMap<String,String>(jarFiles.size());
+  List<String> names=new ArrayList<String>(jarFiles.size());
+  if (jarFiles == null)   jarFiles=new ArrayList<File>();
+  for (  File f : jarFiles) {
+    if (!f.exists()) {
+      LOG.info(f.getName() + " is not existed: " + f.getAbsolutePath());
+      continue;
+    }
+    jars.put(f.getName(),f.getAbsolutePath());
+    names.add(f.getName());
+  }
+  LOG.info("Files: " + names + " will be loaded");
+  stormConf.put(GenericOptionsParser.TOPOLOGY_LIB_PATH,jars);
+  stormConf.put(GenericOptionsParser.TOPOLOGY_LIB_NAME,names);
+  submitTopology(name,stormConf,topology,opts);
+}

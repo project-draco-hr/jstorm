@@ -23,4 +23,7 @@
   if (other.is_set_component_type()) {
     this.component_type=other.component_type;
   }
+  if (other.is_set_status()) {
+    this.status=other.status;
+  }
 }

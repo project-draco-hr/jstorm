@@ -8,7 +8,7 @@
   conf.putAll(stormConf);
   putUserInfo(conf,stormConf);
   try {
-    String serConf=JSON.toJSONString(stormConf);
+    String serConf=Utils.to_json(stormConf);
     if (localNimbus != null) {
       LOG.info("Submitting topology " + name + " in local mode");
       localNimbus.submitTopology(name,null,serConf,topology);

@@ -5,7 +5,7 @@
   String genId=Long.toString(_rand.nextLong());
   _inputs.put(genId,input);
   try {
-    JSONObject obj=new JSONObject();
+    Map obj=new HashMap();
     obj.put("id",genId);
     obj.put("comp",input.getSourceComponent());
     obj.put("stream",input.getSourceStreamId());

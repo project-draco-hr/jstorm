@@ -1,0 +1,40 @@
+{
+  System.out.println("!!!!!!!!!!!!!!!!Begin testMessageDisorder!!!!!!!!!!");
+  DisruptorQueue queue=createQueue("messageOrder",ProducerType.MULTI,128);
+  queue.publish("1");
+  Runnable producer=new Producer(queue);
+  final Object[] result=new Object[1];
+  Runnable consumer=new Consumer(queue,new EventHandler<Object>(){
+    private boolean head=true;
+    private Map<String,Long> lastIdMap=new HashMap<String,Long>();
+    @Override public void onEvent(    Object obj,    long sequence,    boolean endOfBatch) throws Exception {
+      consumerNum.incrementAndGet();
+      if (head) {
+        head=false;
+        result[0]=obj;
+      }
+ else {
+        String event=(String)obj;
+        String[] item=event.split("@");
+        Long current=Long.valueOf(item[1]);
+        Long last=lastIdMap.get(item[0]);
+        if (last != null) {
+          if (current <= last) {
+            String msg="Consume disorder of " + item[0] + ", current"+ current+ ",last:"+ last;
+            System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            System.err.println(msg);
+            System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            Assert.fail(msg);
+          }
+        }
+        lastIdMap.put(item[0],current);
+      }
+    }
+  }
+);
+  run(producer,PRODUCER_NUM,10000,consumer,30000);
+  Assert.assertEquals("We expect to receive first published message first, but received " + result[0],"1",result[0]);
+  produceNum.incrementAndGet();
+  Assert.assertEquals("produce: " + produceNum.get() + ", consume:"+ consumerNum.get(),produceNum.get(),consumerNum.get());
+  System.out.println("!!!!!!!!!!!!!!End testMessageDisorder!!!!!!!!!!!!");
+}

@@ -1,0 +1,8 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift7.protocol.TMessage("restart",org.apache.thrift7.protocol.TMessageType.CALL,0));
+  restart_args args=new restart_args();
+  args.set_name(name);
+  args.set_jsonConf(jsonConf);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

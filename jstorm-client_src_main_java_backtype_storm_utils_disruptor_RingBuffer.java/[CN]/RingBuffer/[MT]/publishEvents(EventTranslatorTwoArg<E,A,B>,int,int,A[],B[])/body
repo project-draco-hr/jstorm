@@ -1,0 +1,5 @@
+{
+  checkBounds(arg0,arg1,batchStartsAt,batchSize);
+  final long finalSequence=sequencer.next(batchSize);
+  translateAndPublishBatch(translator,arg0,arg1,batchStartsAt,batchSize,finalSequence);
+}

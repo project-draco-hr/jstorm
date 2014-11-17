@@ -8,7 +8,7 @@
     data=createNimbusData(conf,inimbus);
     initFollowerThread(conf);
     int port=ConfigExtension.getNimbusDeamonHttpserverPort(conf);
-    hs=new Httpserver(port);
+    hs=new Httpserver(port,conf);
     hs.start();
     initContainerHBThread(conf);
     while (!data.isLeader())     Utils.sleep(5000);

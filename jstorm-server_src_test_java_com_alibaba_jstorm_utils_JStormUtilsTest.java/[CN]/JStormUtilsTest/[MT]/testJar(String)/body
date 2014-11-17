@@ -1,0 +1,29 @@
+{
+  try {
+    PathUtils.local_mkdirs(pidDir);
+  }
+ catch (  IOException e) {
+    LOG.error("Failed to rmr " + pidDir,e);
+  }
+  fillData();
+  LOG.info("Finish load data");
+  String pid=JStormUtils.process_pid();
+  String pidFile=pidDir + File.separator + pid;
+  try {
+    PathUtils.touch(pidFile);
+  }
+ catch (  IOException e) {
+    LOG.error("Failed to touch " + pidFile,e);
+  }
+  try {
+    DataOutputStream raf=new DataOutputStream(new BufferedOutputStream(new FileOutputStream(new File(pidFile),true)));
+    raf.writeBytes(pid);
+  }
+ catch (  Exception e) {
+    LOG.error("",e);
+  }
+  while (true) {
+    JStormUtils.sleepMs(1000);
+    LOG.info(id + " is living");
+  }
+}

@@ -1,6 +1,6 @@
 {
   if (_ack == null) {
-    _ack=new JSONObject();
+    _ack=new HashMap();
     _ack.put("command","ack");
   }
   _ack.put("id",msgId);

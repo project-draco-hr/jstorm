@@ -1,0 +1,3 @@
+{
+  return masterStormTmpRoot(conf) + FILE_SEPERATEOR + topologyId;
+}

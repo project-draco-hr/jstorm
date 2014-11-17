@@ -1,6 +1,6 @@
 {
   try {
-    return JSON.parse(new String(b,"UTF-8"));
+    return Utils.from_json(new String(b,"UTF-8"));
   }
  catch (  UnsupportedEncodingException e) {
     throw new RuntimeException(e);

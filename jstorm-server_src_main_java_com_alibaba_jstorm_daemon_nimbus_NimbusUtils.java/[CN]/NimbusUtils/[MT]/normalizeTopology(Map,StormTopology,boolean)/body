@@ -1,0 +1,41 @@
+{
+  StormTopology ret=topology.deepCopy();
+  Map<String,Object> components=ThriftTopologyUtils.getComponents(ret);
+  for (  Entry<String,Object> entry : components.entrySet()) {
+    Object component=entry.getValue();
+    String componentName=entry.getKey();
+    ComponentCommon common=null;
+    if (component instanceof Bolt) {
+      common=((Bolt)component).get_common();
+      if (fromConf) {
+        Integer paraNum=ConfigExtension.getBoltParallelism(stormConf,componentName);
+        if (paraNum != null)         common.set_parallelism_hint(paraNum);
+      }
+    }
+    if (component instanceof SpoutSpec) {
+      common=((SpoutSpec)component).get_common();
+      if (fromConf) {
+        Integer paraNum=ConfigExtension.getSpoutParallelism(stormConf,componentName);
+        if (paraNum != null)         common.set_parallelism_hint(paraNum);
+      }
+    }
+    if (component instanceof StateSpoutSpec) {
+      common=((StateSpoutSpec)component).get_common();
+      if (fromConf) {
+        Integer paraNum=ConfigExtension.getSpoutParallelism(stormConf,componentName);
+        if (paraNum != null)         common.set_parallelism_hint(paraNum);
+      }
+    }
+    Map componentMap=new HashMap();
+    String jsonConfString=common.get_json_conf();
+    if (jsonConfString != null) {
+      componentMap.putAll((Map)JStormUtils.from_json(jsonConfString));
+    }
+    Integer taskNum=componentParalism(stormConf,common);
+    componentMap.put(Config.TOPOLOGY_TASKS,taskNum);
+    common.set_parallelism_hint(taskNum);
+    LOG.info("Set " + componentName + " parallelism "+ taskNum);
+    common.set_json_conf(JStormUtils.to_json(componentMap));
+  }
+  return ret;
+}

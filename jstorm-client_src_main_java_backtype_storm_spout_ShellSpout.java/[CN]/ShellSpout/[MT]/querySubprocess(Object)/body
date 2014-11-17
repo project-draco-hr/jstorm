@@ -2,7 +2,7 @@
   try {
     _process.writeMessage(query);
     while (true) {
-      JSONObject action=_process.readMessage();
+      Map action=_process.readMessage();
       String command=(String)action.get("command");
       if (command.equals("sync")) {
         return;

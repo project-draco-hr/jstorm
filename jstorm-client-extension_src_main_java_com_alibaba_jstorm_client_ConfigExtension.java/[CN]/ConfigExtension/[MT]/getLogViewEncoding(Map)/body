@@ -1,0 +1,5 @@
+{
+  String ret=(String)conf.get(LOGVIEW_ENCODING);
+  if (ret == null)   ret=UTF8;
+  return ret;
+}

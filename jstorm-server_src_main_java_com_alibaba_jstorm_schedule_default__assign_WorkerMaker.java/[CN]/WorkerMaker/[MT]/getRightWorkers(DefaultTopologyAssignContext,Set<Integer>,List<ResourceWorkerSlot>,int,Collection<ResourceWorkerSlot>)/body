@@ -1,6 +1,6 @@
 {
   Set<Integer> assigned=new HashSet<Integer>();
-  Set<ResourceWorkerSlot> users=new HashSet<ResourceWorkerSlot>();
+  List<ResourceWorkerSlot> users=new ArrayList<ResourceWorkerSlot>();
   if (workers == null)   return;
   for (  ResourceWorkerSlot worker : workers) {
     boolean right=true;

@@ -1,0 +1,4 @@
+{
+  sequencer.claim(sequence);
+  sequencer.publish(sequence);
+}

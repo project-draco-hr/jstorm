@@ -1,12 +1,14 @@
 {
   processMap.put("submitTopology",new submitTopology());
   processMap.put("submitTopologyWithOpts",new submitTopologyWithOpts());
+  processMap.put("submitTopologyAfterRestart",new submitTopologyAfterRestart());
   processMap.put("killTopology",new killTopology());
   processMap.put("killTopologyWithOpts",new killTopologyWithOpts());
   processMap.put("activate",new activate());
   processMap.put("deactivate",new deactivate());
   processMap.put("rebalance",new rebalance());
   processMap.put("metricMonitor",new metricMonitor());
+  processMap.put("restart",new restart());
   processMap.put("beginLibUpload",new beginLibUpload());
   processMap.put("beginFileUpload",new beginFileUpload());
   processMap.put("uploadChunk",new uploadChunk());

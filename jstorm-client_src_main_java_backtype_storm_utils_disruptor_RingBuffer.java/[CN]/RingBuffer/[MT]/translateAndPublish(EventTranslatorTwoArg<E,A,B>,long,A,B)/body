@@ -1,0 +1,8 @@
+{
+  try {
+    translator.translateTo(get(sequence),sequence,arg0,arg1);
+  }
+  finally {
+    sequencer.publish(sequence);
+  }
+}

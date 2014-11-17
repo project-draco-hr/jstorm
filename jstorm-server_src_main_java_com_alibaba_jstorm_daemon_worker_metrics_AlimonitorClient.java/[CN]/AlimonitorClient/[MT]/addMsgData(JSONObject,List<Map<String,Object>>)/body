@@ -1,7 +1,0 @@
-{
-  JSONArray jsonArray=new JSONArray();
-  for (  Map<String,Object> map : mapList) {
-    jsonArray.add(map);
-  }
-  jsonObj.put(MSG,jsonArray);
-}

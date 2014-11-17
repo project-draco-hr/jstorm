@@ -1,0 +1,4 @@
+EventTranslatorOneArg<E,A> translator
+int batchStartsAt
+int batchSize
+A[] arg0

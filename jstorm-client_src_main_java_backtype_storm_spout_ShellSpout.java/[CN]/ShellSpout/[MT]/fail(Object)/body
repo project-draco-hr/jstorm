@@ -1,6 +1,6 @@
 {
   if (_fail == null) {
-    _fail=new JSONObject();
+    _fail=new HashMap();
     _fail.put("command","fail");
   }
   _fail.put("id",msgId);

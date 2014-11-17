@@ -1,0 +1,5 @@
+{
+  this();
+  this.ite=ite;
+  this.tae=tae;
+}

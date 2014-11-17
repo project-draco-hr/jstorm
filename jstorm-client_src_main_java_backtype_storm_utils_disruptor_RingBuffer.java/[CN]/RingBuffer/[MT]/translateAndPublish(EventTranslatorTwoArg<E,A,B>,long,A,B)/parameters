@@ -1,0 +1,4 @@
+EventTranslatorTwoArg<E,A,B> translator
+long sequence
+A arg0
+B arg1

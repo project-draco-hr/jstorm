@@ -1,10 +1,10 @@
 {
-  Map<String,Set<ResourceWorkerSlot>> supervisorToWorker=new HashMap<String,Set<ResourceWorkerSlot>>();
+  Map<String,List<ResourceWorkerSlot>> supervisorToWorker=new HashMap<String,List<ResourceWorkerSlot>>();
   for (  ResourceWorkerSlot worker : workers) {
     if (worker.getTasks() == null || worker.getTasks().size() == 0) {
-      Set<ResourceWorkerSlot> supervisor=supervisorToWorker.get(worker.getNodeId());
+      List<ResourceWorkerSlot> supervisor=supervisorToWorker.get(worker.getNodeId());
       if (supervisor == null) {
-        supervisor=new HashSet<ResourceWorkerSlot>();
+        supervisor=new ArrayList<ResourceWorkerSlot>();
         supervisorToWorker.put(worker.getNodeId(),supervisor);
       }
       supervisor.add(worker);

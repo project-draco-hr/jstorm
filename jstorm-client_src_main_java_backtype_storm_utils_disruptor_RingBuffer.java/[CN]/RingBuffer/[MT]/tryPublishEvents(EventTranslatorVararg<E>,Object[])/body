@@ -1,0 +1,3 @@
+{
+  return tryPublishEvents(translator,0,args.length,args);
+}

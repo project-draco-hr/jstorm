@@ -1,8 +1,8 @@
 {
   WorkerAssignment input=new WorkerAssignment();
-  String outString=JSON.toJSONString(input);
+  String outString=Utils.to_json(input);
   System.out.println(input);
-  Object object=JSON.parse(outString);
+  Object object=Utils.from_json(outString);
   System.out.println(parseFromObj(object));
   System.out.print(input.equals(parseFromObj(object)));
 }

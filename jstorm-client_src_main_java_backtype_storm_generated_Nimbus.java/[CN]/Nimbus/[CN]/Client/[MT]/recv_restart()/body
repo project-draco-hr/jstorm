@@ -1,0 +1,14 @@
+{
+  restart_result result=new restart_result();
+  receiveBase(result,"restart");
+  if (result.e != null) {
+    throw result.e;
+  }
+  if (result.ite != null) {
+    throw result.ite;
+  }
+  if (result.tae != null) {
+    throw result.tae;
+  }
+  return;
+}

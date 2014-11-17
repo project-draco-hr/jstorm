@@ -17,19 +17,23 @@
   oprot.writeFieldBegin(PORT_FIELD_DESC);
   oprot.writeI32(this.port);
   oprot.writeFieldEnd();
-  oprot.writeFieldBegin(UPTIME_SECS_FIELD_DESC);
-  oprot.writeI32(this.uptime_secs);
-  oprot.writeFieldEnd();
-  if (this.errors != null) {
-    oprot.writeFieldBegin(ERRORS_FIELD_DESC);
-{
-      oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.errors.size()));
-      for (      ErrorInfo _iter188 : this.errors) {
-        _iter188.write(oprot);
-      }
-      oprot.writeListEnd();
-    }
+  if (is_set_uptime_secs()) {
+    oprot.writeFieldBegin(UPTIME_SECS_FIELD_DESC);
+    oprot.writeI32(this.uptime_secs);
     oprot.writeFieldEnd();
+  }
+  if (this.errors != null) {
+    if (is_set_errors()) {
+      oprot.writeFieldBegin(ERRORS_FIELD_DESC);
+{
+        oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.errors.size()));
+        for (        ErrorInfo _iter188 : this.errors) {
+          _iter188.write(oprot);
+        }
+        oprot.writeListEnd();
+      }
+      oprot.writeFieldEnd();
+    }
   }
   if (this.stats != null) {
     if (is_set_stats()) {
@@ -42,6 +46,13 @@
     if (is_set_component_type()) {
       oprot.writeFieldBegin(COMPONENT_TYPE_FIELD_DESC);
       oprot.writeString(this.component_type);
+      oprot.writeFieldEnd();
+    }
+  }
+  if (this.status != null) {
+    if (is_set_status()) {
+      oprot.writeFieldBegin(STATUS_FIELD_DESC);
+      oprot.writeString(this.status);
       oprot.writeFieldEnd();
     }
   }

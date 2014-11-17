@@ -1,6 +1,6 @@
 {
   try {
-    return JSON.toJSONString(obj).getBytes("UTF-8");
+    return Utils.to_json(obj).getBytes("UTF-8");
   }
  catch (  UnsupportedEncodingException e) {
     throw new RuntimeException(e);

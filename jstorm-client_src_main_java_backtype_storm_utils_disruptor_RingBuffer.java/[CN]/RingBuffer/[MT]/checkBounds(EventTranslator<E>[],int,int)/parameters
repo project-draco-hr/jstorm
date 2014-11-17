@@ -1,0 +1,3 @@
+EventTranslator<E>[] translators
+int batchStartsAt
+int batchSize

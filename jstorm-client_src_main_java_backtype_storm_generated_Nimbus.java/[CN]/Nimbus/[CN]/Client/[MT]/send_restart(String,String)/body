@@ -1,0 +1,6 @@
+{
+  restart_args args=new restart_args();
+  args.set_name(name);
+  args.set_jsonConf(jsonConf);
+  sendBase("restart",args);
+}

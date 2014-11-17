@@ -1,0 +1,13 @@
+{
+  FacesContext ctx=FacesContext.getCurrentInstance();
+  if (ctx.getExternalContext().getRequestParameterMap().get("host") != null) {
+    host=ctx.getExternalContext().getRequestParameterMap().get("host");
+  }
+  if (ctx.getExternalContext().getRequestParameterMap().get("port") != null) {
+    port=JStormUtils.parseInt(ctx.getExternalContext().getRequestParameterMap().get("port"),0);
+  }
+  if (ctx.getExternalContext().getRequestParameterMap().get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_WORKER_PORT) != null) {
+    workerPort=JStormUtils.parseInt(ctx.getExternalContext().getRequestParameterMap().get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_WORKER_PORT));
+  }
+  init();
+}

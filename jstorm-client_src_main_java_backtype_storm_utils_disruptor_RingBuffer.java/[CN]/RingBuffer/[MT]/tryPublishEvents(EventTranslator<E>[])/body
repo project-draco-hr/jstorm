@@ -1,0 +1,3 @@
+{
+  return tryPublishEvents(translators,0,translators.length);
+}

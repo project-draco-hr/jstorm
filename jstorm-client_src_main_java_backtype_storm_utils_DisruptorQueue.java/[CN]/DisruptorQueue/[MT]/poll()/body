@@ -6,7 +6,9 @@
   if (nextSequence <= _barrier.getCursor()) {
     MutableObject mo=_buffer.get(nextSequence);
     _consumer.set(nextSequence);
-    return mo.o;
+    Object ret=mo.o;
+    mo.setObject(null);
+    return ret;
   }
   return null;
 }

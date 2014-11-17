@@ -1,0 +1,6 @@
+{
+  long nextValue=pad.nextValue;
+  long consumed=Util.getMinimumSequence(gatingSequences,nextValue);
+  long produced=nextValue;
+  return getBufferSize() - (produced - consumed);
+}

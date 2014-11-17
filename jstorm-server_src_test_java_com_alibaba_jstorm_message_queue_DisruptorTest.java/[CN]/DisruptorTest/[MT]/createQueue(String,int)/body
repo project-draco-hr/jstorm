@@ -1,3 +1,0 @@
-{
-  return new DisruptorQueue(new MultiThreadedClaimStrategy(queueSize),new BlockingWaitStrategy());
-}

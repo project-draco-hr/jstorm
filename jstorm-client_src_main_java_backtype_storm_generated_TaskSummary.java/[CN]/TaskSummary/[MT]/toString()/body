@@ -26,19 +26,23 @@
   sb.append("port:");
   sb.append(this.port);
   first=false;
-  if (!first)   sb.append(", ");
-  sb.append("uptime_secs:");
-  sb.append(this.uptime_secs);
-  first=false;
-  if (!first)   sb.append(", ");
-  sb.append("errors:");
-  if (this.errors == null) {
-    sb.append("null");
+  if (is_set_uptime_secs()) {
+    if (!first)     sb.append(", ");
+    sb.append("uptime_secs:");
+    sb.append(this.uptime_secs);
+    first=false;
   }
+  if (is_set_errors()) {
+    if (!first)     sb.append(", ");
+    sb.append("errors:");
+    if (this.errors == null) {
+      sb.append("null");
+    }
  else {
-    sb.append(this.errors);
+      sb.append(this.errors);
+    }
+    first=false;
   }
-  first=false;
   if (is_set_stats()) {
     if (!first)     sb.append(", ");
     sb.append("stats:");
@@ -58,6 +62,17 @@
     }
  else {
       sb.append(this.component_type);
+    }
+    first=false;
+  }
+  if (is_set_status()) {
+    if (!first)     sb.append(", ");
+    sb.append("status:");
+    if (this.status == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.status);
     }
     first=false;
   }

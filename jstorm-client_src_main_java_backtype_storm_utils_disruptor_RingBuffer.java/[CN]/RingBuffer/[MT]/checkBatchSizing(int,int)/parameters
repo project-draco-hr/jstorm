@@ -1,0 +1,2 @@
+int batchStartsAt
+int batchSize

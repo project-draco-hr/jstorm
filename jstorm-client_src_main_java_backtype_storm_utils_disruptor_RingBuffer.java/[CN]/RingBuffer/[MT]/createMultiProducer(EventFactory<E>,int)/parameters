@@ -1,0 +1,2 @@
+EventFactory<E> factory
+int bufferSize

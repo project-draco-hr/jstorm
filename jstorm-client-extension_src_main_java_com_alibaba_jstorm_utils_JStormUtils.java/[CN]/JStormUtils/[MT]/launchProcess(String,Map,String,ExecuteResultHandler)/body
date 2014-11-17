@@ -1,0 +1,30 @@
+{
+  String[] cmdlist=command.split(" ");
+  CommandLine cmd=new CommandLine(cmdlist[0]);
+  for (  String cmdItem : cmdlist) {
+    if (StringUtils.isBlank(cmdItem) == false) {
+      cmd.addArgument(cmdItem);
+    }
+  }
+  DefaultExecutor executor=new DefaultExecutor();
+  executor.setExitValue(0);
+  if (StringUtils.isBlank(workDir) == false) {
+    executor.setWorkingDirectory(new File(workDir));
+  }
+  ByteArrayOutputStream out=new ByteArrayOutputStream();
+  PumpStreamHandler streamHandler=new PumpStreamHandler(out,out);
+  if (streamHandler != null) {
+    executor.setStreamHandler(streamHandler);
+  }
+  try {
+    if (resultHandler == null) {
+      executor.execute(cmd,environment);
+    }
+ else {
+      executor.execute(cmd,environment,resultHandler);
+    }
+  }
+ catch (  ExecuteException e) {
+  }
+  return out;
+}

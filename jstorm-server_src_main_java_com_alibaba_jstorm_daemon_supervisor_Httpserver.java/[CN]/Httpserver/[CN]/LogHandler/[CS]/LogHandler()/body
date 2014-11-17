@@ -1,4 +1,0 @@
-{
-  logDir=JStormUtils.getLogDir();
-  LOG.info("logview logDir=" + logDir);
-}

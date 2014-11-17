@@ -1,0 +1,13 @@
+{
+  long nextValue=pad.nextValue;
+  long wrapPoint=(nextValue + requiredCapacity) - bufferSize;
+  long cachedGatingSequence=pad.cachedValue;
+  if (wrapPoint > cachedGatingSequence || cachedGatingSequence > nextValue) {
+    long minSequence=Util.getMinimumSequence(gatingSequences,nextValue);
+    pad.cachedValue=minSequence;
+    if (wrapPoint > minSequence) {
+      return false;
+    }
+  }
+  return true;
+}

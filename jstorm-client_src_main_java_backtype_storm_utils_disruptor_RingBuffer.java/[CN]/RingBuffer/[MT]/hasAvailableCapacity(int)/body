@@ -1,0 +1,3 @@
+{
+  return sequencer.hasAvailableCapacity(requiredCapacity);
+}

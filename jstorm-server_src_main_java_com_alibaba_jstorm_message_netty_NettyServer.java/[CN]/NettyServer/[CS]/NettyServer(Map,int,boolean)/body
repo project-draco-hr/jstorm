@@ -13,6 +13,7 @@
     factory=new NioServerSocketChannelFactory(Executors.newCachedThreadPool(bossFactory),Executors.newCachedThreadPool(workerFactory));
   }
   bootstrap=new ServerBootstrap(factory);
+  bootstrap.setOption("reuserAddress",true);
   bootstrap.setOption("child.tcpNoDelay",true);
   bootstrap.setOption("child.receiveBufferSize",buffer_size);
   bootstrap.setOption("child.keepAlive",true);

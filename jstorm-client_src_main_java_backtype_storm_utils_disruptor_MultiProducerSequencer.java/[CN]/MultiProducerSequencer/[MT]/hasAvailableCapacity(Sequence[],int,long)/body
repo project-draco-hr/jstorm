@@ -1,0 +1,12 @@
+{
+  long wrapPoint=(cursorValue + requiredCapacity) - bufferSize;
+  long cachedGatingSequence=gatingSequenceCache.get();
+  if (wrapPoint > cachedGatingSequence || cachedGatingSequence > cursorValue) {
+    long minSequence=Util.getMinimumSequence(gatingSequences,cursorValue);
+    gatingSequenceCache.set(minSequence);
+    if (wrapPoint > minSequence) {
+      return false;
+    }
+  }
+  return true;
+}

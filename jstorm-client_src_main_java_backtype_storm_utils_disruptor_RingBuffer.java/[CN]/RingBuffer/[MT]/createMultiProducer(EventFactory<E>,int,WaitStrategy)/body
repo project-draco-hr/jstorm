@@ -1,0 +1,4 @@
+{
+  MultiProducerSequencer sequencer=new MultiProducerSequencer(bufferSize,waitStrategy);
+  return new RingBuffer<E>(factory,sequencer);
+}

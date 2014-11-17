@@ -4,7 +4,7 @@
   toSer.add(obj.curr);
   toSer.add(obj.prev);
   try {
-    return JSON.toJSONString(toSer).getBytes("UTF-8");
+    return Utils.to_json(toSer).getBytes("UTF-8");
   }
  catch (  UnsupportedEncodingException e) {
     throw new RuntimeException(e);

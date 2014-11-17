@@ -1,0 +1,21 @@
+{
+  Map ret=new HashMap<Object,Object>();
+  Yaml yaml=new Yaml();
+  try {
+    InputStream stream=new FileInputStream(confPath);
+    ret=(Map)yaml.load(stream);
+    if (ret == null || ret.isEmpty() == true) {
+      System.out.println("WARN: Config file is empty");
+      return null;
+    }
+  }
+ catch (  FileNotFoundException e) {
+    System.out.println("No such file " + confPath);
+    throw new RuntimeException("No config file");
+  }
+catch (  Exception e1) {
+    e1.printStackTrace();
+    throw new RuntimeException("Failed to read config file");
+  }
+  return ret;
+}

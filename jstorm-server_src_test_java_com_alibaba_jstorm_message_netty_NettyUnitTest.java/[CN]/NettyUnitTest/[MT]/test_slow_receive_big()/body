@@ -5,7 +5,7 @@
   final IContext context=TransportFactory.makeContext(storm_conf);
   final IConnection server=context.bind(null,port);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  DisruptorQueue recvQueue=new DisruptorQueue(new SingleThreadedClaimStrategy(2),waitStrategy);
+  DisruptorQueue recvQueue=new DisruptorQueue("NettyJunitTest",ProducerType.SINGLE,4,waitStrategy);
   server.registerQueue(recvQueue);
   new Thread(new Runnable(){
     @Override public void run(){

@@ -5,7 +5,7 @@
   sb.append("ps -Af ");
   try {
     LOG.info("Begin to execute " + sb.toString());
-    Process process=JStormUtils.launch_process(sb.toString(),new HashMap<String,String>());
+    Process process=JStormUtils.launch_process(sb.toString(),new HashMap<String,String>(),false);
     InputStream stdin=process.getInputStream();
     BufferedReader reader=new BufferedReader(new InputStreamReader(stdin));
     JStormUtils.sleepMs(1000);

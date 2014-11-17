@@ -1,0 +1,10 @@
+{
+  Map ret=null;
+  if (arg.endsWith("yaml")) {
+    ret=LoadYaml(arg);
+  }
+ else {
+    ret=LoadProperty(arg);
+  }
+  return ret;
+}

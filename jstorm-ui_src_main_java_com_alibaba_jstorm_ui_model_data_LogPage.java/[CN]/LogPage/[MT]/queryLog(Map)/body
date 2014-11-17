@@ -1,0 +1,25 @@
+{
+  String baseUrl=String.format(PROXY_URL,host,port,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW,logFileName);
+  String url=baseUrl;
+  if (position != null) {
+    url+=("&" + HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_POS + "="+ position);
+  }
+  try {
+    HttpClient client=HttpClientBuilder.create().build();
+    HttpPost post=new HttpPost(url);
+    HttpResponse response=client.execute(post);
+    if (response.getStatusLine().getStatusCode() == 200) {
+      String data=EntityUtils.toString(response.getEntity(),ConfigExtension.getLogViewEncoding(conf));
+      String sizeStr=data.substring(0,16);
+      genPageUrl(sizeStr);
+      setLog(data);
+    }
+ else {
+      setLog(EntityUtils.toString(response.getEntity()));
+    }
+  }
+ catch (  Exception e) {
+    setLog(e.getMessage());
+    LOG.error(e.getCause(),e);
+  }
+}

@@ -1,0 +1,6 @@
+EventTranslatorTwoArg<E,A,B> translator
+A[] arg0
+B[] arg1
+int batchStartsAt
+int batchSize
+long finalSequence

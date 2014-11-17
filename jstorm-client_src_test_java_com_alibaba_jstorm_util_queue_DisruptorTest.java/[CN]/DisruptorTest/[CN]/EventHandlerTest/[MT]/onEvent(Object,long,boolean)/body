@@ -1,0 +1,17 @@
+{
+  String event=(String)obj;
+  String[] item=event.split("@");
+  Long current=Long.valueOf(item[1]);
+  Long last=lastIdMap.get(item[0]);
+  if (last != null) {
+    if (current <= last) {
+      String msg="Consume disorder of " + item[0] + ", current"+ current+ ",last:"+ last;
+      System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      System.err.println(msg + "," + event);
+      System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      Assert.fail(msg);
+    }
+  }
+  lastIdMap.put(item[0],current);
+  consumerNum.incrementAndGet();
+}

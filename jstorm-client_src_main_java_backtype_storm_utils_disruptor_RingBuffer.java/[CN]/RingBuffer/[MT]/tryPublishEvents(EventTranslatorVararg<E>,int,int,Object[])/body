@@ -1,0 +1,11 @@
+{
+  checkBounds(args,batchStartsAt,batchSize);
+  try {
+    final long finalSequence=sequencer.tryNext(batchSize);
+    translateAndPublishBatch(translator,batchStartsAt,batchSize,finalSequence,args);
+    return true;
+  }
+ catch (  InsufficientCapacityException e) {
+    return false;
+  }
+}

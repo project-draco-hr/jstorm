@@ -1,0 +1,6 @@
+{
+  for (long l=lo; l <= hi; l++) {
+    setAvailable(l);
+  }
+  waitStrategy.signalAllWhenBlocking();
+}

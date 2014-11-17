@@ -1,0 +1,3 @@
+{
+  final DisruptorQueue disruptorQueue=createQueue("test",ProducerType.MULTI,1024);
+}

@@ -1,0 +1,23 @@
+{
+  StringBuilder sb=new StringBuilder("submitTopologyAfterRestart_result(");
+  boolean first=true;
+  sb.append("ite:");
+  if (this.ite == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.ite);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("tae:");
+  if (this.tae == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.tae);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

@@ -24,8 +24,8 @@
     if (!(this_present_port && that_present_port))     return false;
     if (this.port != that.port)     return false;
   }
-  boolean this_present_uptime_secs=true;
-  boolean that_present_uptime_secs=true;
+  boolean this_present_uptime_secs=true && this.is_set_uptime_secs();
+  boolean that_present_uptime_secs=true && that.is_set_uptime_secs();
   if (this_present_uptime_secs || that_present_uptime_secs) {
     if (!(this_present_uptime_secs && that_present_uptime_secs))     return false;
     if (this.uptime_secs != that.uptime_secs)     return false;
@@ -47,6 +47,12 @@
   if (this_present_component_type || that_present_component_type) {
     if (!(this_present_component_type && that_present_component_type))     return false;
     if (!this.component_type.equals(that.component_type))     return false;
+  }
+  boolean this_present_status=true && this.is_set_status();
+  boolean that_present_status=true && that.is_set_status();
+  if (this_present_status || that_present_status) {
+    if (!(this_present_status && that_present_status))     return false;
+    if (!this.status.equals(that.status))     return false;
   }
   return true;
 }

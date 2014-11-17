@@ -1,4 +1,0 @@
-{
-  claimSequence.set(sequence);
-  waitForFreeSlotAt(sequence,dependentSequences,minGatingSequenceThreadLocal.get());
-}

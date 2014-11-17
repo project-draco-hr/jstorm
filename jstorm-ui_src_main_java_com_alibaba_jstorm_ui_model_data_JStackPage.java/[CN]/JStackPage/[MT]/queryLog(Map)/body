@@ -1,0 +1,14 @@
+{
+  String baseUrl=String.format(PROXY_URL,host,port,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_JSTACK,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_WORKER_PORT,workerPort);
+  String url=baseUrl;
+  try {
+    HttpClient client=HttpClientBuilder.create().build();
+    HttpPost post=new HttpPost(url);
+    HttpResponse response=client.execute(post);
+    setData(EntityUtils.toString(response.getEntity()));
+  }
+ catch (  Exception e) {
+    setData(e.getMessage());
+    LOG.error(e.getCause(),e);
+  }
+}

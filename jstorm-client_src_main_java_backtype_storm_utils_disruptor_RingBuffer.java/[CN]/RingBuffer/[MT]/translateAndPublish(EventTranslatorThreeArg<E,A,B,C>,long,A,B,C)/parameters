@@ -1,0 +1,5 @@
+EventTranslatorThreeArg<E,A,B,C> translator
+long sequence
+A arg0
+B arg1
+C arg2

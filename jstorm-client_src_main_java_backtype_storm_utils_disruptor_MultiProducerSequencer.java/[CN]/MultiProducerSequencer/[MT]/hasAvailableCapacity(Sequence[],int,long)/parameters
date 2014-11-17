@@ -1,0 +1,3 @@
+Sequence[] gatingSequences
+int requiredCapacity
+long cursorValue

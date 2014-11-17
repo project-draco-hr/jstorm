@@ -1,0 +1,5 @@
+EventTranslatorVararg<E> translator
+int batchStartsAt
+int batchSize
+long finalSequence
+Object[][] args

@@ -1,7 +1,7 @@
 {
   sendTimer.start();
   try {
-    disruptorQueue.consumeBatchWhenAvailableTimeout(this,10);
+    disruptorQueue.consumeBatch(this);
     MessageBatch batch=batchQueue.poll();
     while (batch != null) {
       Channel channel=channelRef.get();

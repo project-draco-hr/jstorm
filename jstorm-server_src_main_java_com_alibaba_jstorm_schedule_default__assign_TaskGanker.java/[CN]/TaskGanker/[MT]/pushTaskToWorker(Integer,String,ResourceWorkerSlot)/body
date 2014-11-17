@@ -20,7 +20,7 @@
       assignments.add(worker);
     }
     if (otherNum <= 0) {
-      Set<ResourceWorkerSlot> needDelete=new HashSet<ResourceWorkerSlot>();
+      List<ResourceWorkerSlot> needDelete=new ArrayList<ResourceWorkerSlot>();
       for (      Entry<ResourceWorkerSlot,Integer> entry : taskContext.getWorkerToTaskNum().entrySet()) {
         if (entry.getValue() == baseNum)         needDelete.add(entry.getKey());
       }

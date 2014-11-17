@@ -1,0 +1,6 @@
+{
+  int index=calculateIndex(sequence);
+  int flag=calculateAvailabilityFlag(sequence);
+  long bufferAddress=(index * SCALE) + BASE;
+  return UNSAFE.getIntVolatile(availableBuffer,bufferAddress) == flag;
+}

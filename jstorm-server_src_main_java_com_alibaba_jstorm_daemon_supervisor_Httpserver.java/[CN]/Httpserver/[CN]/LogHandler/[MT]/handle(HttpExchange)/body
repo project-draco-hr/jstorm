@@ -14,6 +14,10 @@
     handleListDir(t,paramMap);
     return;
   }
+ else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_JSTACK.equals(cmd)) {
+    handleJstack(t,paramMap);
+    return;
+  }
   handlFailure(t,"Bad Request, Not support command type " + cmd);
   return;
 }

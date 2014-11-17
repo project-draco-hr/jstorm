@@ -6,6 +6,6 @@
     common.set_parallelism_hint(Integer.valueOf(1));
   }
   Map conf=component.getComponentConfiguration();
-  if (conf != null)   common.set_json_conf(JSON.toJSONString(conf));
+  if (conf != null)   common.set_json_conf(Utils.to_json(conf));
   _commons.put(id,common);
 }

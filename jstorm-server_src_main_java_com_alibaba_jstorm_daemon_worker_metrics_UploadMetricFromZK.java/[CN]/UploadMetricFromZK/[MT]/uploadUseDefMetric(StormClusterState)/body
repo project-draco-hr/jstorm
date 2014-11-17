@@ -25,7 +25,7 @@
     }
     if (totalMsg.size() > 0) {
       if (client instanceof AlimonitorClient) {
-        ((AlimonitorClient)client).setMonitorName(MetricDef.USER_MONITOR_NAME);
+        ((AlimonitorClient)client).setMonitorName(ConfigExtension.getAlmonUserMetricName(data.getConf()));
         ((AlimonitorClient)client).setCollectionFlag(0);
         ((AlimonitorClient)client).setErrorInfo("");
       }

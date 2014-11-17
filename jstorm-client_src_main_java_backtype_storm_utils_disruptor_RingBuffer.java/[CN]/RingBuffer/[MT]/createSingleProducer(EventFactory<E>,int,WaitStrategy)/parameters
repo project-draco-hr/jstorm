@@ -1,0 +1,3 @@
+EventFactory<E> factory
+int bufferSize
+WaitStrategy waitStrategy

@@ -4,7 +4,7 @@
   Executor executor=Executors.newFixedThreadPool(numHandler);
   try {
     hs=HttpServer.create(socketAddr,0);
-    hs.createContext(HttpserverUtils.HTTPSERVER_CONTEXT_PATH_LOGVIEW,new LogHandler());
+    hs.createContext(HttpserverUtils.HTTPSERVER_CONTEXT_PATH_LOGVIEW,new LogHandler(conf));
     hs.setExecutor(executor);
     hs.start();
   }
