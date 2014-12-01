@@ -29,9 +29,17 @@
       if (ctx.getExternalContext().getRequestParameterMap().get("topologyId") != null) {
         topologyId=ctx.getExternalContext().getRequestParameterMap().get("topologyId");
       }
-      NimbusClient client=NimbusClient.getConfiguredClient(conf);
-      TopologyInfo summ=client.getClient().getTopologyInfo(topologyId);
-      logFileName=JStormUtils.genLogName(summ.get_name(),Integer.valueOf(workerPort));
+      NimbusClient client=null;
+      try {
+        client=UIUtils.getNimbusClient(conf,clusterName);
+        TopologyInfo summ=client.getClient().getTopologyInfo(topologyId);
+        logFileName=JStormUtils.genLogName(summ.get_name(),Integer.valueOf(workerPort));
+      }
+  finally {
+        if (client != null) {
+          client.close();
+        }
+      }
     }
     return;
   }
@@ -55,10 +63,7 @@
   }
   NimbusClient client=null;
   try {
-    if (clusterName != null && !(clusterName.equals(""))) {
-      UIUtils.getClusterInfoByName(conf,clusterName);
-    }
-    client=NimbusClient.getConfiguredClient(conf);
+    client=UIUtils.getNimbusClient(conf,clusterName);
     TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
     TaskSummary taskSummary=null;
     for (    TaskSummary _taskSummary : summ.get_tasks()) {

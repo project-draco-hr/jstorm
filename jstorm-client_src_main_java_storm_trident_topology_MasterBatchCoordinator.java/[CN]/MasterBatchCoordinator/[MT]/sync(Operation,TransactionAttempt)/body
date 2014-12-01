@@ -1,0 +1,79 @@
+{
+  TransactionStatus status;
+  long txid;
+switch (op) {
+case FAIL:
+    txid=attempt.getTransactionId();
+  status=_activeTx.remove(txid);
+if (status != null && status.attempt.equals(status.attempt)) {
+  _activeTx.tailMap(txid).clear();
+}
+break;
+case ACK:
+txid=attempt.getTransactionId();
+status=_activeTx.get(txid);
+if (status != null && attempt.equals(status.attempt)) {
+if (status.status == AttemptStatus.PROCESSING) {
+status.status=AttemptStatus.PROCESSED;
+}
+ else if (status.status == AttemptStatus.COMMITTING) {
+status.status=AttemptStatus.COMMITTED;
+}
+}
+break;
+case NEXTTUPLE:
+status=_activeTx.get(_currTransaction);
+if (status != null) {
+if (status.status == AttemptStatus.PROCESSED) {
+status.status=AttemptStatus.COMMITTING;
+_collector.emit(COMMIT_STREAM_ID,new Values(status.attempt),status.attempt);
+}
+ else if (status.status == AttemptStatus.COMMITTED) {
+_activeTx.remove(status.attempt.getTransactionId());
+_attemptIds.remove(status.attempt.getTransactionId());
+_collector.emit(SUCCESS_STREAM_ID,new Values(status.attempt));
+_currTransaction=nextTransactionId(status.attempt.getTransactionId());
+for (TransactionalState state : _states) {
+state.setData(CURRENT_TX,_currTransaction);
+}
+}
+}
+if (_active) {
+if (_activeTx.size() < _maxTransactionActive) {
+Long curr=_currTransaction;
+for (int i=0; i < _maxTransactionActive; i++) {
+if (batchDelay()) {
+break;
+}
+if (isReady(curr)) {
+if (!_activeTx.containsKey(curr)) {
+Integer attemptId=_attemptIds.get(curr);
+if (attemptId == null) {
+attemptId=0;
+}
+ else {
+attemptId++;
+}
+_attemptIds.put(curr,attemptId);
+for (TransactionalState state : _states) {
+state.setData(CURRENT_ATTEMPTS,_attemptIds);
+}
+TransactionAttempt currAttempt=new TransactionAttempt(curr,attemptId);
+_activeTx.put(curr,new TransactionStatus(currAttempt));
+_collector.emit(BATCH_STREAM_ID,new Values(currAttempt),currAttempt);
+_throttler.markEvent();
+break;
+}
+}
+curr=nextTransactionId(curr);
+}
+}
+ else {
+}
+}
+break;
+default :
+LOG.warn("Unknow Operation code=" + op);
+break;
+}
+}

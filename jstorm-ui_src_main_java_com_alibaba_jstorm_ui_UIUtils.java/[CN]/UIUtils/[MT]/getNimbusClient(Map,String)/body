@@ -1,0 +1,6 @@
+{
+  if (StringUtils.isBlank(clusterName) == false) {
+    getClusterInfoByName(conf,clusterName);
+  }
+  return NimbusClient.getConfiguredClient(conf);
+}

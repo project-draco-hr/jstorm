@@ -2,24 +2,24 @@
   if (obj instanceof StateSpoutSpec) {
     StateSpoutSpec spec=(StateSpoutSpec)obj;
     for (    String id : spec.get_common().get_streams().keySet()) {
-      if (system_id(id)) {
-        throw new InvalidTopologyException(id + " is not a valid component id");
+      if (system_id(id) || !charComponentValidate(id)) {
+        throw new InvalidTopologyException(id + " is not a valid component id. " + compErrorInfo);
       }
     }
   }
  else   if (obj instanceof SpoutSpec) {
     SpoutSpec spec=(SpoutSpec)obj;
     for (    String id : spec.get_common().get_streams().keySet()) {
-      if (system_id(id)) {
-        throw new InvalidTopologyException(id + " is not a valid component id");
+      if (system_id(id) || !charComponentValidate(id)) {
+        throw new InvalidTopologyException(id + " is not a valid component id. " + compErrorInfo);
       }
     }
   }
  else   if (obj instanceof Bolt) {
     Bolt spec=(Bolt)obj;
     for (    String id : spec.get_common().get_streams().keySet()) {
-      if (system_id(id)) {
-        throw new InvalidTopologyException(id + " is not a valid component id");
+      if (system_id(id) || !charComponentValidate(id)) {
+        throw new InvalidTopologyException(id + " is not a valid component id. " + compErrorInfo);
       }
     }
   }

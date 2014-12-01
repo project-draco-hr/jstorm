@@ -1,12 +1,11 @@
 {
   System.out.println("!!!!!!!!!!Start delay message test!!!!!!!!");
   String req_msg=setupLargMsg();
-  IContext context=TransportFactory.makeContext(storm_conf);
   IConnection server=null;
   IConnection client=null;
   server=context.bind(null,port);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  DisruptorQueue recvQueue=new DisruptorQueue("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
+  DisruptorQueue recvQueue=DisruptorQueue.mkInstance("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
   server.registerQueue(recvQueue);
   client=context.connect(null,"localhost",port);
   List<TaskMessage> list=new ArrayList<TaskMessage>();
@@ -19,6 +18,5 @@
   Assert.assertEquals(req_msg,new String(recv.message()));
   server.close();
   client.close();
-  context.term();
   System.out.println("!!!!!!!!!!End delay message test!!!!!!!!");
 }

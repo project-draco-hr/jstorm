@@ -12,7 +12,7 @@ catch (  Throwable e) {
     throw new TException(e);
   }
   int counter=data.getSubmittedCount().incrementAndGet();
-  String topologyId=topologyname + "-" + counter+ "-"+ TimeUtils.current_time_secs();
+  String topologyId=Common.TopologyNameToId(topologyname,counter);
   try {
     Map<Object,Object> serializedConf=(Map<Object,Object>)JStormUtils.from_json(jsonConf);
     if (serializedConf == null) {
@@ -58,6 +58,10 @@ catch (  InvalidParameterException e) {
     sb.append(", uploadedJarLocation:" + uploadedJarLocation + "\n");
     LOG.error(sb.toString(),e);
     throw new InvalidParameterException(sb.toString());
+  }
+catch (  InvalidTopologyException e) {
+    LOG.error("Topology is invalid. " + e.get_msg());
+    throw e;
   }
 catch (  Throwable e) {
     StringBuilder sb=new StringBuilder();

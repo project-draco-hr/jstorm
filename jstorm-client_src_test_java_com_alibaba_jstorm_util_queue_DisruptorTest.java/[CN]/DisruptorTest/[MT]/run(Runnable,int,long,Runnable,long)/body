@@ -12,11 +12,13 @@
     Thread.sleep(produceMs);
     for (int i=0; i < producerNum; i++) {
       producerThreads[i].interrupt();
+      producerThreads[i].stop();
       producerThreads[i].join(TIMEOUT);
     }
     Thread.sleep(waitMs);
     System.out.println("Please wait seconds" + waitMs / 1000);
     consumerThread.interrupt();
+    consumerThread.stop();
     consumerThread.join(TIMEOUT);
   }
  catch (  Throwable e) {

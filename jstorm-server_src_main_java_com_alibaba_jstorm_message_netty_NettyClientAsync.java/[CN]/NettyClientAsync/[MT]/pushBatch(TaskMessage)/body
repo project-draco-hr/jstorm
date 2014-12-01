@@ -20,8 +20,8 @@
     flushRequest(channel,messageBatch);
   }
  else {
-    messageBatchRef.compareAndSet(null,messageBatch);
-    flush_later.set(true);
+    if (messageBatchRef.compareAndSet(null,messageBatch))     flush_later.set(true);
+ else     LOG.error("MessageBatch will be lost. This should not happen.");
   }
   return;
 }

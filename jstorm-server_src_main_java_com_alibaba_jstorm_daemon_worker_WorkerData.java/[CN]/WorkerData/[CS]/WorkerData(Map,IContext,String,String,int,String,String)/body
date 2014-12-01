@@ -42,12 +42,14 @@
   }
   boolean disruptorUseSleep=ConfigExtension.isDisruptorUseSleep(stormConf);
   DisruptorQueue.setUseSleep(disruptorUseSleep);
-  LOG.info("Disruptor use sleep " + disruptorUseSleep);
+  boolean isLimited=ConfigExtension.getTopologyBufferSizeLimited(stormConf);
+  DisruptorQueue.setLimited(isLimited);
+  LOG.info("Disruptor use sleep:" + disruptorUseSleep + ", limited size:"+ isLimited);
   int buffer_size=Utils.getInt(conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  this.transferQueue=new DisruptorQueue("TotalTransfer",ProducerType.MULTI,buffer_size,waitStrategy);
+  this.transferQueue=DisruptorQueue.mkInstance("TotalTransfer",ProducerType.MULTI,buffer_size,waitStrategy);
   this.transferQueue.consumerStarted();
-  this.sendingQueue=new DisruptorQueue("TotalSending",ProducerType.MULTI,buffer_size,waitStrategy);
+  this.sendingQueue=DisruptorQueue.mkInstance("TotalSending",ProducerType.MULTI,buffer_size,waitStrategy);
   this.sendingQueue.consumerStarted();
   this.nodeportSocket=new ConcurrentHashMap<WorkerSlot,IConnection>();
   this.taskNodeport=new ConcurrentHashMap<Integer,WorkerSlot>();

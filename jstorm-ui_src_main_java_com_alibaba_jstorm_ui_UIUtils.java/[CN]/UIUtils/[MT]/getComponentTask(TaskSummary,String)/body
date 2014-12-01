@@ -5,6 +5,9 @@
   componentTask.setHost(task.get_host());
   componentTask.setPort(String.valueOf(task.get_port()));
   componentTask.setStatus(task.get_status());
+  if (componentTask.getStatus() == null) {
+    componentTask.setStatus(ConfigExtension.TASK_STATUS_ACTIVE);
+  }
   if (componentTask.getStatus().equals(ConfigExtension.TASK_STATUS_ACTIVE)) {
     componentTask.setUptime(StatBuckets.prettyUptimeStr(task.get_uptime_secs()));
     componentTask.setLastErr(UIUtils.getTaskError(task.get_errors()));

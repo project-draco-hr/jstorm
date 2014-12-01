@@ -5,6 +5,6 @@
       queue.consumeBatchWhenAvailable(handler);
     }
   }
- catch (  RuntimeException e) {
+ catch (  Exception e) {
   }
 }

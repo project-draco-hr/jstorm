@@ -1,18 +1,4 @@
 {
-  boolean handled=false;
   Object object=queue.poll();
-  while (object != null) {
-    handled=true;
-    try {
-      handler.onEvent(object,0,false);
-      object=queue.poll();
-    }
- catch (    InterruptedException e) {
-      LOG.warn("Occur interrupt error");
-    }
-catch (    Exception e) {
-      throw new RuntimeException(e);
-    }
-  }
-  return handled;
+  drainQueue(object,handler);
 }

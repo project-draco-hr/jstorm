@@ -2,34 +2,38 @@
   if (obj == null) {
     return null;
   }
-  if (obj instanceof List<?> == false) {
+  if (obj instanceof Map == false) {
     return null;
   }
   try {
-    List list=(List)obj;
-    if (list.size() < 6) {
-      return null;
-    }
-    String supervisorId=getStringFromJson((String)list.get(0));
-    String hostname=getStringFromJson((String)list.get(1));
-    int port=Integer.parseInt(((String)list.get(2)));
-    String jvm=getStringFromJson((String)list.get(3));
-    long mem=Long.parseLong((String)list.get(4));
-    int cpu=Integer.parseInt(((String)list.get(5)));
-    Map<String,String> componentToNum=(Map<String,String>)list.get(6);
+    Map<String,String> map=(Map<String,String>)obj;
+    String supervisorId=map.get(NODEID_TAG);
+    String hostname=map.get(HOSTNAME_TAG);
+    Integer port=JStormUtils.parseInt(map.get(PORT_TAG));
+    String jvm=map.get(JVM_TAG);
+    Long mem=JStormUtils.parseLong(map.get(MEM_TAG));
+    Integer cpu=JStormUtils.parseInt(map.get(CPU_TAG));
+    Map<String,Object> componentToNum=(Map<String,Object>)Utils.from_json(map.get(COMPONENTTONUM_TAG));
     WorkerAssignment ret=new WorkerAssignment(supervisorId,port);
     ret.hostName=hostname;
     ret.setNodeId(supervisorId);
-    ret.setPort(port);
     ret.setJvm(jvm);
-    ret.setMem(mem);
-    ret.setCpu(cpu);
-    for (    Entry<String,String> entry : componentToNum.entrySet()) {
-      ret.addComponent(entry.getKey(),Integer.valueOf(entry.getValue()));
+    if (port != null) {
+      ret.setPort(port);
+    }
+    if (mem != null) {
+      ret.setMem(mem);
+    }
+    if (cpu != null) {
+      ret.setCpu(cpu);
+    }
+    for (    Entry<String,Object> entry : componentToNum.entrySet()) {
+      ret.addComponent(entry.getKey(),JStormUtils.parseInt(entry.getValue()));
     }
     return ret;
   }
  catch (  Exception e) {
+    LOG.error("Failed to convert to WorkerAssignment,  raw:" + obj,e);
     return null;
   }
 }

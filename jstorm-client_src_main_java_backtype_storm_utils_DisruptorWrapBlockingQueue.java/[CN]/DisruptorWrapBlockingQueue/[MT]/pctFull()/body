@@ -1,3 +1,9 @@
 {
-  return (1.0F * population() / capacity());
+  long used=queue.size();
+  if (used < QUEUE_CAPACITY) {
+    return (1.0F * used / QUEUE_CAPACITY);
+  }
+ else {
+    return 1.0f;
+  }
 }

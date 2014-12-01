@@ -1,0 +1,12 @@
+{
+  bossExecutor.shutdownNow();
+  workerExecutor.shutdownNow();
+  try {
+    bossExecutor.awaitTermination(1,TimeUnit.SECONDS);
+    workerExecutor.awaitTermination(1,TimeUnit.SECONDS);
+  }
+ catch (  InterruptedException e) {
+    LOG.error("Error when shutting down client scheduler",e);
+  }
+  clientChannelFactory.releaseExternalResources();
+}

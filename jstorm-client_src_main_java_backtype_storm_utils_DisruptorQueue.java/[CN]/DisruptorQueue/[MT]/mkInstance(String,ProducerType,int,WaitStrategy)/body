@@ -1,0 +1,8 @@
+{
+  if (CAPACITY_LIMITED == true) {
+    return new DisruptorQueueImpl(queueName,producerType,bufferSize,wait);
+  }
+ else {
+    return new DisruptorWrapBlockingQueue(queueName,producerType,bufferSize,wait);
+  }
+}

@@ -19,7 +19,6 @@
       if (future.isSuccess()) {
         LOG.info("Connection established, channel = :{}",channel);
         setChannel(channel);
-        handleResponse();
       }
  else {
         LOG.info("Failed to reconnect ... [{}], {}, channel = {}, cause = {}",retries.get(),name,channel,future.getCause());

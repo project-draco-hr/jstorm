@@ -1,8 +1,13 @@
 {
   WorkerAssignment input=new WorkerAssignment();
+  input.setJvm("sb");
+  input.setCpu(1);
+  input.setMem(2);
+  input.addComponent("2b",2);
   String outString=Utils.to_json(input);
   System.out.println(input);
   Object object=Utils.from_json(outString);
+  System.out.println(object);
   System.out.println(parseFromObj(object));
   System.out.print(input.equals(parseFromObj(object)));
 }

@@ -1,0 +1,15 @@
+{
+  while (object != null) {
+    try {
+      handler.onEvent(object,0,false);
+      object=queue.poll();
+    }
+ catch (    InterruptedException e) {
+      LOG.warn("Occur interrupt error, " + object);
+      break;
+    }
+catch (    Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+}

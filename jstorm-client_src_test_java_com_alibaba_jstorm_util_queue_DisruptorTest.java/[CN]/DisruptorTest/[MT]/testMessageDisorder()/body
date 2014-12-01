@@ -32,7 +32,7 @@
     }
   }
 );
-  run(producer,PRODUCER_NUM,10000,consumer,30000);
+  run(producer,PRODUCER_NUM,1000,consumer,30000);
   Assert.assertEquals("We expect to receive first published message first, but received " + result[0],"1",result[0]);
   produceNum.incrementAndGet();
   Assert.assertEquals("produce: " + produceNum.get() + ", consume:"+ consumerNum.get(),produceNum.get(),consumerNum.get());

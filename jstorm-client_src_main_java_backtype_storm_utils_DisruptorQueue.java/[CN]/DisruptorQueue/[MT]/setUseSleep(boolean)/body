@@ -1,3 +1,3 @@
 {
-  AbstractSequencerExt.setWaitSleep(useSleep);
+  DisruptorQueueImpl.setUseSleep(useSleep);
 }

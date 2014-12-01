@@ -1,4 +1,6 @@
 {
+  Integer ret=null;
   Map<String,String> map=(Map<String,String>)(conf.get(SPOUT_PARALLELISM));
-  return JStormUtils.parseInt(map.get(componentName));
+  if (map != null)   ret=JStormUtils.parseInt(map.get(componentName));
+  return ret;
 }

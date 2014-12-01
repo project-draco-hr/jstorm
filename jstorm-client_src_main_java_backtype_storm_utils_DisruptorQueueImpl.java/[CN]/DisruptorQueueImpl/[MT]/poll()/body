@@ -1,0 +1,14 @@
+{
+  if (consumerStartedFlag == false) {
+    return _cache.poll();
+  }
+  final long nextSequence=_consumer.get() + 1;
+  if (nextSequence <= _barrier.getCursor()) {
+    MutableObject mo=_buffer.get(nextSequence);
+    _consumer.set(nextSequence);
+    Object ret=mo.o;
+    mo.setObject(null);
+    return ret;
+  }
+  return null;
+}

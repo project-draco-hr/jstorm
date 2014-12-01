@@ -1,5 +1,5 @@
 {
-  validate_ids(topology);
+  validate_ids(topology,topologyid);
   for (  StormTopology._Fields field : Thrift.SPOUT_FIELDS) {
     Object value=topology.getFieldValue(field);
     if (value != null) {

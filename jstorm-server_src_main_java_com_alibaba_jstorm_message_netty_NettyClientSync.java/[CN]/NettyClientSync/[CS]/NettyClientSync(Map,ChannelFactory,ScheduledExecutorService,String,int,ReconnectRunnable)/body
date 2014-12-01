@@ -8,7 +8,8 @@
   }
 ,null,Metrics.MetricType.WORKER);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  disruptorQueue=new DisruptorQueue(name,ProducerType.MULTI,MAX_SEND_PENDING * 8,waitStrategy);
+  disruptorQueue=DisruptorQueue.mkInstance(name,ProducerType.MULTI,MAX_SEND_PENDING * 8,waitStrategy);
+  disruptorQueue.consumerStarted();
   Metrics.registerQueue(address,MetricDef.NETTY_CLI_SYNC_DISR_QUEUE,disruptorQueue,null,Metrics.MetricType.WORKER);
   Runnable trigger=new Runnable(){
     @Override public void run(){
@@ -18,8 +19,10 @@
 ;
   scheduler.scheduleWithFixedDelay(trigger,10,1,TimeUnit.SECONDS);
   ThreadFactory bossFactory=new NettyRenameThreadFactory(PREFIX + JStormServerUtils.getName(host,port) + "-boss");
+  bossExecutor=Executors.newCachedThreadPool(bossFactory);
   ThreadFactory workerFactory=new NettyRenameThreadFactory(PREFIX + JStormServerUtils.getName(host,port) + "-worker");
-  clientChannelFactory=new NioClientSocketChannelFactory(Executors.newCachedThreadPool(bossFactory),Executors.newCachedThreadPool(workerFactory),1);
+  workerExecutor=Executors.newCachedThreadPool(workerFactory);
+  clientChannelFactory=new NioClientSocketChannelFactory(bossExecutor,workerExecutor,1);
   start();
   LOG.info(this.toString());
 }

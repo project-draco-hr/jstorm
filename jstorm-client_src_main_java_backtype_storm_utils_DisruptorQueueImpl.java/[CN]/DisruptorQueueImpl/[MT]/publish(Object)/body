@@ -1,0 +1,8 @@
+{
+  try {
+    publish(obj,true);
+  }
+ catch (  InsufficientCapacityException ex) {
+    throw new RuntimeException("This code should be unreachable!");
+  }
+}

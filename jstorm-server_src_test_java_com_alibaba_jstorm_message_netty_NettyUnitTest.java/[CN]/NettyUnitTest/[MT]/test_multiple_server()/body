@@ -1,0 +1,44 @@
+{
+  System.out.println("!!!!!!!!Start test_multiple_server !!!!!!!!!!!");
+  final String req_msg=setupLargMsg();
+  final int clientNum=3;
+  final AtomicLong received=new AtomicLong(clientNum);
+  for (int i=0; i < clientNum; i++) {
+    final int realPort=port + i;
+    new Thread(new Runnable(){
+      @Override public void run(){
+        IConnection server=null;
+        JStormUtils.sleepMs(1000);
+        System.out.println("!!server begin start!!!!!");
+        server=context.bind(null,realPort);
+        WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
+        DisruptorQueue recvQueue=DisruptorQueue.mkInstance("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
+        server.registerQueue(recvQueue);
+        TaskMessage recv=server.recv(0);
+        Assert.assertEquals(req_msg,new String(recv.message()));
+        received.decrementAndGet();
+        System.out.println("!!server received !!!!!" + realPort);
+        server.close();
+      }
+    }
+).start();
+  }
+  List<TaskMessage> list=new ArrayList<TaskMessage>();
+  TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+  list.add(message);
+  List<IConnection> clients=new ArrayList<IConnection>();
+  for (int i=0; i < clientNum; i++) {
+    final int realPort=port + i;
+    IConnection client=context.connect(null,"localhost",realPort);
+    clients.add(client);
+    client.send(message);
+    System.out.println("!!Client has sent data to " + realPort);
+  }
+  while (received.get() != 0) {
+    JStormUtils.sleepMs(1000);
+  }
+  for (int i=0; i < clientNum; i++) {
+    clients.get(i).close();
+  }
+  System.out.println("!!!!!!!!!!!!End test_multiple_server!!!!!!!!!!!!!");
+}

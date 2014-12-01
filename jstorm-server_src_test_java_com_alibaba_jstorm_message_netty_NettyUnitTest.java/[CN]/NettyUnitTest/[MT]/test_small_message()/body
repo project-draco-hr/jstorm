@@ -1,12 +1,11 @@
 {
   System.out.println("!!!!!!!!Start test_small_message !!!!!!!!!!!");
   String req_msg="Aloha is the most Hawaiian word.";
-  IContext context=TransportFactory.makeContext(storm_conf);
   IConnection server=null;
   IConnection client=null;
   server=context.bind(null,port);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  DisruptorQueue recvQueue=new DisruptorQueue("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
+  DisruptorQueue recvQueue=DisruptorQueue.mkInstance("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
   server.registerQueue(recvQueue);
   client=context.connect(null,"localhost",port);
   List<TaskMessage> list=new ArrayList<TaskMessage>();
@@ -18,6 +17,5 @@
   System.out.println("!!!!!!!!!!!!!!!!!!Test one time!!!!!!!!!!!!!!!!!");
   server.close();
   client.close();
-  context.term();
   System.out.println("!!!!!!!!!!!!End test_small_message!!!!!!!!!!!!!");
 }

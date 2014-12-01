@@ -1,0 +1,5 @@
+{
+  while (population() != 0L) {
+    poll();
+  }
+}

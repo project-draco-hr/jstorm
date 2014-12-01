@@ -29,7 +29,7 @@
   System.out.println("!!server begin start!!!!!");
   server=context.bind(null,port);
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
-  DisruptorQueue recvQueue=new DisruptorQueue("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
+  DisruptorQueue recvQueue=DisruptorQueue.mkInstance("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
   server.registerQueue(recvQueue);
   TaskMessage recv=server.recv(0);
   Assert.assertEquals(req_msg,new String(recv.message()));

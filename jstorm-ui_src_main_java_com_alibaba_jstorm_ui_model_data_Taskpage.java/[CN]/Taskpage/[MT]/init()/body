@@ -2,7 +2,7 @@
   NimbusClient client=null;
   try {
     Map conf=Utils.readStormConfig();
-    client=NimbusClient.getConfiguredClient(conf);
+    client=UIUtils.getNimbusClient(conf,clusterName);
     TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
     List<TaskSummary> ts=summ.get_tasks();
     if (ts == null) {
@@ -27,6 +27,10 @@
 catch (  NotAliveException e) {
     LOG.error(e.getCause(),e);
     throw e;
+  }
+catch (  Exception e) {
+    LOG.error(e.getCause(),e);
+    throw new TException(e);
   }
  finally {
     if (client != null) {

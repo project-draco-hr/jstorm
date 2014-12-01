@@ -9,7 +9,7 @@
   if (channel == null) {
     return;
   }
+  flush_later.set(false);
   MessageBatch toBeFlushed=messageBatchRef.getAndSet(null);
   flushRequest(channel,toBeFlushed);
-  flush_later.set(false);
 }

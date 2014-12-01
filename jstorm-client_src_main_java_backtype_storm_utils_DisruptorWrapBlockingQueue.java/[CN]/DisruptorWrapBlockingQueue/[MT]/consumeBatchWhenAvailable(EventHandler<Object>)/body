@@ -1,16 +1,15 @@
 {
-  boolean handled=consumeBatchToCursor(0,handler);
-  ;
-  if (handled == false) {
+  Object object=queue.poll();
+  if (object == null) {
     try {
-      Object object=queue.take();
-      handler.onEvent(object,0,false);
+      object=queue.take();
     }
  catch (    InterruptedException e) {
-      LOG.warn("Occur interrupt error");
+      LOG.warn("Occur interrupt error, " + object);
     }
 catch (    Exception e) {
       throw new RuntimeException(e);
     }
   }
+  drainQueue(object,handler);
 }

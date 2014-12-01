@@ -1,5 +1,8 @@
 {
   FacesContext ctx=FacesContext.getCurrentInstance();
+  if (ctx.getExternalContext().getRequestParameterMap().get("clusterName") != null) {
+    clusterName=(String)ctx.getExternalContext().getRequestParameterMap().get("clusterName");
+  }
   if (ctx.getExternalContext().getRequestParameterMap().get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_POS) != null) {
     position=ctx.getExternalContext().getRequestParameterMap().get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_POS);
   }

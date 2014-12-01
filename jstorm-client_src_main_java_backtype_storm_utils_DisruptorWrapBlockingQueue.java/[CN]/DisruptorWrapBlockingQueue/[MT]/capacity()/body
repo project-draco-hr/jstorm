@@ -1,3 +1,9 @@
 {
-  return QUEUE_CAPACITY;
+  long used=queue.size();
+  if (used < QUEUE_CAPACITY) {
+    return QUEUE_CAPACITY;
+  }
+ else {
+    return used;
+  }
 }

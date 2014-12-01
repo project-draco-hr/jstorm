@@ -2,7 +2,7 @@
   conf=storm_conf;
   String root=String.valueOf(storm_conf.get(Config.STORM_ZOOKEEPER_ROOT));
   zkMasterDir=root + MASTER_PATH;
-  LOG.info("zkServer:" + (List<String>)storm_conf.get(Config.STORM_ZOOKEEPER_SERVERS) + ", zkPort:"+ (Integer)storm_conf.get(Config.STORM_ZOOKEEPER_PORT));
+  LOG.info("zkServer:" + (List<String>)storm_conf.get(Config.STORM_ZOOKEEPER_SERVERS) + ", zkPort:"+ Utils.getInt(storm_conf.get(Config.STORM_ZOOKEEPER_PORT)));
   zkobj=Utils.newCurator(storm_conf,(List<String>)storm_conf.get(Config.STORM_ZOOKEEPER_SERVERS),storm_conf.get(Config.STORM_ZOOKEEPER_PORT),zkMasterDir);
   zkobj.start();
   if (zkobj.checkExists().forPath("/") == null)   throw new RuntimeException("No alive nimbus ");
