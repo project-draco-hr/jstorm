@@ -1,0 +1,5 @@
+{
+  this.config=config;
+  this.brokerList=new LinkedList<Host>(config.brokers);
+  this.brokerIndex=0;
+}

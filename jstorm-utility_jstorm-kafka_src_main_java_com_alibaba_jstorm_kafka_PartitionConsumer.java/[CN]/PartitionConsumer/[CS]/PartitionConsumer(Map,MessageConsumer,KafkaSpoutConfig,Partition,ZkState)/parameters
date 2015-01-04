@@ -1,5 +1,0 @@
-Map conf
-MessageConsumer consumer
-KafkaSpoutConfig config
-Partition partition
-ZkState offsetState

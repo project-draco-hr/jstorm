@@ -1,4 +1,5 @@
 {
+  lastUpdateMs=System.currentTimeMillis();
   for (  PartitionConsumer consumer : coordinator.getPartitionConsumers()) {
     consumer.commitState();
   }

@@ -2,22 +2,31 @@
   if (emittingMessages.isEmpty()) {
     fillMessages();
   }
-  if (emittingMessages.isEmpty()) {
-    return EmitState.EMIT_NONE;
-  }
+  int count=0;
   while (true) {
     MessageAndOffset toEmitMsg=emittingMessages.pollFirst();
     if (toEmitMsg == null) {
       return EmitState.EMIT_END;
     }
+    count++;
     Iterable<List<Object>> tups=generateTuples(toEmitMsg.message());
     if (tups != null) {
       for (      List<Object> tuple : tups) {
+        LOG.debug("emit message {}",new String(Utils.toByteArray(toEmitMsg.message().payload())));
         collector.emit(tuple,new KafkaMessageId(partition,toEmitMsg.offset()));
+      }
+      if (count >= config.batchSendCount) {
+        break;
       }
     }
  else {
       ack(toEmitMsg.offset());
     }
+  }
+  if (emittingMessages.isEmpty()) {
+    return EmitState.EMIT_END;
+  }
+ else {
+    return EmitState.EMIT_MORE;
   }
 }

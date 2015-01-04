@@ -1,3 +1,4 @@
 {
   coordinator.removeConsumer(partition);
+  consumer.close();
 }

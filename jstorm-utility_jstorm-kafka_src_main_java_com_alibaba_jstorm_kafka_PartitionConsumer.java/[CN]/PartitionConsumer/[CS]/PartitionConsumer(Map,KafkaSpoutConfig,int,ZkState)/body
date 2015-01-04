@@ -1,0 +1,34 @@
+{
+  this.stormConf=conf;
+  this.config=config;
+  this.partition=partition;
+  this.consumer=new KafkaConsumer(config);
+  this.zkState=offsetState;
+  Long jsonOffset=null;
+  try {
+    Map<Object,Object> json=offsetState.readJSON(zkPath());
+    if (json != null) {
+      jsonOffset=(Long)json.get("offset");
+    }
+  }
+ catch (  Throwable e) {
+    LOG.warn("Error reading and/or parsing at ZkNode: " + zkPath(),e);
+  }
+  try {
+    if (config.fromBeginning) {
+      emittingOffset=consumer.getOffset(config.topic,partition,kafka.api.OffsetRequest.EarliestTime());
+    }
+ else {
+      if (jsonOffset == null) {
+        lastCommittedOffset=consumer.getOffset(config.topic,partition,kafka.api.OffsetRequest.LatestTime());
+      }
+ else {
+        lastCommittedOffset=jsonOffset;
+      }
+      emittingOffset=lastCommittedOffset;
+    }
+  }
+ catch (  Exception e) {
+    LOG.error(e.getMessage(),e);
+  }
+}

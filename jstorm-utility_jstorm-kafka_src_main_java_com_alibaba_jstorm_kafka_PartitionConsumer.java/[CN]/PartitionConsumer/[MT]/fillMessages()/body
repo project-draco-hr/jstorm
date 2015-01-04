@@ -1,16 +1,25 @@
 {
   ByteBufferMessageSet msgs;
   try {
-    msgs=consumer.fetchMessages(partition.getPartition(),emittingOffset + 1);
-    LOG.debug("fetch message from offset " + emittingOffset);
+    long start=System.currentTimeMillis();
+    msgs=consumer.fetchMessages(partition,emittingOffset + 1);
+    if (msgs == null) {
+      LOG.error("fetch null message from offset {}",emittingOffset);
+      return;
+    }
+    int count=0;
     for (    MessageAndOffset msg : msgs) {
+      count+=1;
       emittingMessages.add(msg);
       emittingOffset=msg.offset();
       pendingOffsets.add(emittingOffset);
-      LOG.debug("===== fetched a message: " + msg.message().toString() + " offset:"+ msg.offset());
+      LOG.debug("fillmessage fetched a message:{}, offset:{}",msg.message().toString(),msg.offset());
     }
+    long end=System.currentTimeMillis();
+    LOG.info("fetch message from partition:" + partition + ", offset:"+ emittingOffset+ ", size:"+ msgs.sizeInBytes()+ ", count:"+ count+ ", time:"+ (end - start));
   }
- catch (  IOException e) {
+ catch (  Exception e) {
     e.printStackTrace();
+    LOG.error(e.getMessage(),e);
   }
 }

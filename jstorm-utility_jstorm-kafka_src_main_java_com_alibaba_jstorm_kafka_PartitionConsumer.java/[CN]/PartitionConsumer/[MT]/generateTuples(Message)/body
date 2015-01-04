@@ -4,11 +4,6 @@
   if (payload == null) {
     return null;
   }
-  ByteBuffer key=msg.key();
-  if (key != null) {
-  }
- else {
-    tups=config.scheme.deserialize(Utils.toByteArray(payload));
-  }
+  tups=Arrays.asList(Utils.tuple(Utils.toByteArray(payload)));
   return tups;
 }

@@ -1,0 +1,20 @@
+{
+  try {
+    if (consumer != null) {
+      return consumer;
+    }
+    PartitionMetadata metadata=findLeader(partition);
+    if (metadata == null) {
+      leaderBroker=null;
+      consumer=null;
+      return null;
+    }
+    leaderBroker=metadata.leader();
+    consumer=new SimpleConsumer(leaderBroker.host(),leaderBroker.port(),config.socketTimeoutMs,config.socketReceiveBufferBytes,config.clientId);
+    return consumer;
+  }
+ catch (  Exception e) {
+    LOG.error(e.getMessage(),e);
+  }
+  return null;
+}

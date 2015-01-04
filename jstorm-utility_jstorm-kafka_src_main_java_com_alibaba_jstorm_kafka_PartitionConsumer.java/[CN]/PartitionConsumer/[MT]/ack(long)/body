@@ -1,3 +1,8 @@
 {
-  pendingOffsets.remove(offset);
+  try {
+    pendingOffsets.remove(offset);
+  }
+ catch (  Exception e) {
+    LOG.error("offset ack error " + offset);
+  }
 }

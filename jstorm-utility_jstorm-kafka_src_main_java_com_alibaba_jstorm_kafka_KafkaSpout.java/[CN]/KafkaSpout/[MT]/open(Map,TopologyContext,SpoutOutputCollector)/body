@@ -3,4 +3,5 @@
   config.configure(conf);
   zkState=new ZkState(conf,config);
   coordinator=new PartitionCoordinator(conf,config,context,zkState);
+  lastUpdateMs=System.currentTimeMillis();
 }

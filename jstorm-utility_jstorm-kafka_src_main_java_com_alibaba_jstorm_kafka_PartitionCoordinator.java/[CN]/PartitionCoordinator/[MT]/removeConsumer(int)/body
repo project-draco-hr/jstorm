@@ -1,0 +1,5 @@
+{
+  PartitionConsumer partitionConsumer=partitionConsumerMap.get(partition);
+  partitionConsumers.remove(partitionConsumer);
+  partitionConsumerMap.remove(partition);
+}

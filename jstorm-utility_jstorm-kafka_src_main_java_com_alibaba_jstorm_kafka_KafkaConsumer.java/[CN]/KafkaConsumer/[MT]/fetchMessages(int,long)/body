@@ -1,0 +1,44 @@
+{
+  String topic=config.topic;
+  FetchRequest req=new FetchRequestBuilder().clientId(config.clientId).addFetch(topic,partition,offset,config.fetchMaxBytes).maxWait(config.fetchWaitMaxMs).build();
+  FetchResponse fetchResponse=null;
+  SimpleConsumer simpleConsumer=null;
+  try {
+    simpleConsumer=findLeaderConsumer(partition);
+    if (simpleConsumer == null) {
+      return null;
+    }
+    fetchResponse=simpleConsumer.fetch(req);
+  }
+ catch (  Exception e) {
+    if (e instanceof ConnectException || e instanceof SocketTimeoutException || e instanceof IOException|| e instanceof UnresolvedAddressException) {
+      LOG.warn("Network error when fetching messages:",e);
+      if (simpleConsumer != null) {
+        String host=simpleConsumer.host();
+        int port=simpleConsumer.port();
+        simpleConsumer=null;
+        throw new KafkaException("Network error when fetching messages: " + host + ":"+ port+ " , "+ e.getMessage(),e);
+      }
+    }
+ else {
+      throw new RuntimeException(e);
+    }
+  }
+  if (fetchResponse.hasError()) {
+    short code=fetchResponse.errorCode(topic,partition);
+    if (code == ErrorMapping.OffsetOutOfRangeCode() && config.resetOffsetIfOutOfRange) {
+      long startOffset=getOffset(topic,partition,config.startOffsetTime);
+      offset=startOffset;
+    }
+    if (leaderBroker != null) {
+      LOG.error("fetch data from kafka topic[" + config.topic + "] host["+ leaderBroker.host()+ ":"+ leaderBroker.port()+ "] partition["+ partition+ "] error:"+ code);
+    }
+ else {
+    }
+    return null;
+  }
+ else {
+    ByteBufferMessageSet msgs=fetchResponse.messageSet(topic,partition);
+    return msgs;
+  }
+}
