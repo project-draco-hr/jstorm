@@ -1,0 +1,2 @@
+WorkerAssignment worker
+Map<Integer,String> taskToComponent

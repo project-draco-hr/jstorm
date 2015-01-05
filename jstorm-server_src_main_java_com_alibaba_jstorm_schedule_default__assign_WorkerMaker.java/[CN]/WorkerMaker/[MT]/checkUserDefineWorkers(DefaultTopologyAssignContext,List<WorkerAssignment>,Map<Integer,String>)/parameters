@@ -1,0 +1,3 @@
+DefaultTopologyAssignContext context
+List<WorkerAssignment> workers
+Map<Integer,String> taskToComponent

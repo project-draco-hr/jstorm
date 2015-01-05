@@ -26,15 +26,18 @@
   Set<Integer> aliveTasks=new HashSet<Integer>();
   Set<Integer> unstoppedTasks=new HashSet<Integer>();
   Set<Integer> deadTasks=new HashSet<Integer>();
+  Set<ResourceWorkerSlot> unstoppedWorkers=new HashSet<ResourceWorkerSlot>();
   Assignment existingAssignment=stormClusterState.assignment_info(topologyId,null);
   if (existingAssignment != null) {
     aliveTasks=getAliveTasks(topologyId,allTaskIds);
     unstoppedTasks=getUnstoppedSlots(aliveTasks,supInfos,existingAssignment);
+    unstoppedWorkers=getUnstoppedWorkers(unstoppedTasks,existingAssignment);
     deadTasks.addAll(allTaskIds);
     deadTasks.removeAll(aliveTasks);
   }
   ret.setDeadTaskIds(deadTasks);
   ret.setUnstoppedTaskIds(unstoppedTasks);
+  ret.setUnstoppedWorkers(unstoppedWorkers);
   getFreeSlots(supInfos,stormClusterState);
   ret.setCluster(supInfos);
   if (existingAssignment == null) {

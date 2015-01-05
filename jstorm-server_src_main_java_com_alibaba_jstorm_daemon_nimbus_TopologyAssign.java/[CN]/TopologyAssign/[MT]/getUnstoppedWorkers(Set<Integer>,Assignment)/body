@@ -1,0 +1,16 @@
+{
+  Set<ResourceWorkerSlot> ret=new HashSet<ResourceWorkerSlot>();
+  for (  ResourceWorkerSlot worker : existAssignment.getWorkers()) {
+    boolean alive=true;
+    for (    Integer task : worker.getTasks()) {
+      if (!aliveTasks.contains(task)) {
+        alive=false;
+        break;
+      }
+    }
+    if (alive) {
+      ret.add(worker);
+    }
+  }
+  return ret;
+}
