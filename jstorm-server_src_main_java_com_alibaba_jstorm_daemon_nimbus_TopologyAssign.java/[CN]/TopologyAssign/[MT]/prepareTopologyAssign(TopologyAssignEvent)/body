@@ -31,13 +31,11 @@
   if (existingAssignment != null) {
     aliveTasks=getAliveTasks(topologyId,allTaskIds);
     unstoppedTasks=getUnstoppedSlots(aliveTasks,supInfos,existingAssignment);
-    unstoppedWorkers=getUnstoppedWorkers(unstoppedTasks,existingAssignment);
     deadTasks.addAll(allTaskIds);
     deadTasks.removeAll(aliveTasks);
   }
   ret.setDeadTaskIds(deadTasks);
   ret.setUnstoppedTaskIds(unstoppedTasks);
-  ret.setUnstoppedWorkers(unstoppedWorkers);
   getFreeSlots(supInfos,stormClusterState);
   ret.setCluster(supInfos);
   if (existingAssignment == null) {
@@ -56,9 +54,13 @@
     ret.setOldAssignment(existingAssignment);
     if (event.isScratch()) {
       ret.setAssignType(TopologyAssignContext.ASSIGN_TYPE_REBALANCE);
+      unstoppedWorkers=getUnstoppedWorkers(unstoppedTasks,existingAssignment);
+      ret.setUnstoppedWorkers(unstoppedWorkers);
     }
  else {
       ret.setAssignType(TopologyAssignContext.ASSIGN_TYPE_MONITOR);
+      unstoppedWorkers=getUnstoppedWorkers(allTaskIds,existingAssignment);
+      ret.setUnstoppedWorkers(unstoppedWorkers);
     }
   }
   return ret;
