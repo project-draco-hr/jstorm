@@ -19,13 +19,13 @@ case 1:
 case 2:
   if (field.type == org.apache.thrift7.protocol.TType.LIST) {
 {
-      org.apache.thrift7.protocol.TList _list201=iprot.readListBegin();
-      this.workers=new ArrayList<WorkerSummary>(_list201.size);
-      for (int _i202=0; _i202 < _list201.size; ++_i202) {
-        WorkerSummary _elem203;
-        _elem203=new WorkerSummary();
-        _elem203.read(iprot);
-        this.workers.add(_elem203);
+      org.apache.thrift7.protocol.TList _list205=iprot.readListBegin();
+      this.workers=new ArrayList<WorkerSummary>(_list205.size);
+      for (int _i206=0; _i206 < _list205.size; ++_i206) {
+        WorkerSummary _elem207;
+        _elem207=new WorkerSummary();
+        _elem207.read(iprot);
+        this.workers.add(_elem207);
       }
       iprot.readListEnd();
     }

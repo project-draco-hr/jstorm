@@ -6,4 +6,5 @@
   this.workers=null;
   this.status=null;
   this.tasks=null;
+  this.userDefMetric=null;
 }

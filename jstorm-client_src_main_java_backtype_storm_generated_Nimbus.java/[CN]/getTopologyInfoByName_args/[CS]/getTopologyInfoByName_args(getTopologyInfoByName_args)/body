@@ -1,0 +1,5 @@
+{
+  if (other.is_set_topologyName()) {
+    this.topologyName=other.topologyName;
+  }
+}

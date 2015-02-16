@@ -1,0 +1,11 @@
+{
+  this.name=name;
+  this.queue=queue;
+  if (frequence <= 0) {
+    LOG.warn(" The frequence of " + name + " is invalid");
+    frequence=1;
+  }
+  this.firstTime=frequence;
+  this.frequence=frequence;
+  this.topologyContext=topologyContext;
+}

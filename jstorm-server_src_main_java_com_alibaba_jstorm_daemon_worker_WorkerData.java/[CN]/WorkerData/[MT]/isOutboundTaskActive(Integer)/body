@@ -1,0 +1,3 @@
+{
+  return outTaskStatus.get(taskId) != null ? outTaskStatus.get(taskId) : false;
+}

@@ -23,6 +23,7 @@
     }
     LOG.debug("Allocated: " + localWorkerStats);
     Set<Integer> keepPorts=killUselessWorkers(localWorkerStats);
+    checkNewWorkers(conf);
     startNewWorkers(keepPorts,localAssignments);
   }
  catch (  Exception e) {

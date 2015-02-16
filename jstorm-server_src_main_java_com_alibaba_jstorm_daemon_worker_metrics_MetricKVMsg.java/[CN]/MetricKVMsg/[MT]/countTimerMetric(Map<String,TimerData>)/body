@@ -8,10 +8,12 @@
       temMap=new HashMap<MetricType,Double>();
       timerMapKV.put(userDefName,temMap);
     }
+    if (meanValue != 0.0) {
+      Integer count=(countMap.get(userDefName) == null ? 0 : countMap.get(userDefName));
+      count++;
+      countMap.put(userDefName,count);
+    }
     meanValue+=(temMap.get(MetricType.mean) == null ? 0.0 : temMap.get(MetricType.mean));
     temMap.put(MetricType.mean,meanValue);
-    Integer count=(countMap.get(userDefName) == null ? 0 : countMap.get(userDefName));
-    count++;
-    countMap.put(userDefName,count);
   }
 }

@@ -1,6 +1,7 @@
 {
   URI uri=t.getRequestURI();
   Map<String,String> paramMap=parseRawQuery(uri.getRawQuery());
+  LOG.info("Receive command " + paramMap);
   String cmd=paramMap.get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD);
   if (StringUtils.isBlank(cmd) == true) {
     handlFailure(t,"Bad Request, Not set command type");
@@ -16,6 +17,10 @@
   }
  else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_JSTACK.equals(cmd)) {
     handleJstack(t,paramMap);
+    return;
+  }
+ else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW_CONF.equals(cmd)) {
+    handleShowConf(t,paramMap);
     return;
   }
   handlFailure(t,"Bad Request, Not support command type " + cmd);

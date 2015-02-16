@@ -6,7 +6,6 @@
   this.ackerTimer=Metrics.registerTimer(idStr,MetricDef.ACKER_TIME,String.valueOf(taskId),Metrics.MetricType.TASK);
   this.emptyCpuCounter=new TimerRatio();
   Metrics.register(idStr,MetricDef.EMPTY_CPU_RATIO,emptyCpuCounter,String.valueOf(taskId),Metrics.MetricType.TASK);
-  TimeTick.registerTimer(idStr + "-acker-tick",exeQueue);
   isSpoutFullSleep=ConfigExtension.isSpoutPendFullSleep(storm_conf);
   LOG.info("isSpoutFullSleep:" + isSpoutFullSleep);
 }

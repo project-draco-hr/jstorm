@@ -1,8 +1,7 @@
 {
   StormTopology ret=topology.deepCopy();
-  String key=Config.TOPOLOGY_ACKER_EXECUTORS;
-  Integer ackercount=JStormUtils.parseInt(storm_conf.get(key),0);
-  add_acker(ackercount,ret);
-  add_system_streams(ret);
+  add_acker(storm_conf,ret);
+  add_metrics_component(ret);
+  add_system_components(ret);
   return ret;
 }

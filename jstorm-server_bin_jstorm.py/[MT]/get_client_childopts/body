@@ -1,0 +1,5 @@
+def get_client_childopts():
+    ret = (' -Dstorm.root.logger=INFO,stdout -Dlog4j.configuration=File:%s/conf/aloha_log4j.properties ' % JSTORM_DIR)
+    if (CLIENT_CONF_FILE != ''):
+        ret += (' -Dstorm.conf.file=' + CLIENT_CONF_FILE)
+    return ret

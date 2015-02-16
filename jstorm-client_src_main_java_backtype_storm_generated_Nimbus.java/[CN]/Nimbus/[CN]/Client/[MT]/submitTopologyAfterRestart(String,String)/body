@@ -1,4 +1,0 @@
-{
-  send_submitTopologyAfterRestart(name,jsonConf);
-  recv_submitTopologyAfterRestart();
-}

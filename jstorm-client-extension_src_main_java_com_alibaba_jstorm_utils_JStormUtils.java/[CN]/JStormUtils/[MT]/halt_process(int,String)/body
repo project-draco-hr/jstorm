@@ -4,7 +4,10 @@
     Thread.sleep(1000);
   }
  catch (  InterruptedException e) {
-    LOG.error("halt_process",e);
   }
-  Runtime.getRuntime().halt(val);
+  if (localMode && val == 0) {
+  }
+ else {
+    haltProcess(val);
+  }
 }

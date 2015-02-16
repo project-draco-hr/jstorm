@@ -1,0 +1,6 @@
+{
+  int startTime=TimeUtils.current_time_secs();
+  for (  Entry<Integer,String> entry : workerIds.entrySet()) {
+    workerIdToStartTimeAndPort.put(entry.getValue(),new Pair<Integer,Integer>(startTime,entry.getKey()));
+  }
+}

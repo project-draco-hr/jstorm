@@ -3,8 +3,8 @@
     String userDefName=entry.getKey();
     Map<MetricType,Double> valueMap=entry.getValue();
     Integer count=countMap.get(userDefName);
-    if (count == null) {
-      Log.warn("Name=" + userDefName + " is not found in countMap for timer.");
+    if (count == null || count == 0) {
+      LOG.warn("Name=" + userDefName + " is not found in countMap for timer, or count is zero");
       continue;
     }
     double meanValue=(valueMap.get(MetricType.mean)) / count;

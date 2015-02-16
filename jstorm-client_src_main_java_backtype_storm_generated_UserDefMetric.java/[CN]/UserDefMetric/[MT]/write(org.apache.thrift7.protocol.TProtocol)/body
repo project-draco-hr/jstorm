@@ -1,0 +1,19 @@
+{
+  validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (this.type != null) {
+    oprot.writeFieldBegin(TYPE_FIELD_DESC);
+    oprot.writeString(this.type);
+    oprot.writeFieldEnd();
+  }
+  if (this.name != null) {
+    oprot.writeFieldBegin(NAME_FIELD_DESC);
+    oprot.writeString(this.name);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldBegin(VALUE_FIELD_DESC);
+  oprot.writeDouble(this.value);
+  oprot.writeFieldEnd();
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

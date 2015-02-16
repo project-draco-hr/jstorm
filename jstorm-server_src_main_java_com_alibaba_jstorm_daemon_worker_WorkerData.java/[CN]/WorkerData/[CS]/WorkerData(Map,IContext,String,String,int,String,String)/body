@@ -19,6 +19,13 @@
   this.stormConf.putAll(rawConf);
   LOG.info("Worker Configuration " + stormConf);
   try {
+    boolean enableClassloader=ConfigExtension.isEnableTopologyClassLoader(stormConf);
+    boolean enableDebugClassloader=ConfigExtension.isEnableClassloaderDebug(stormConf);
+    if (jar_path == null && enableClassloader == true) {
+      LOG.error("enable classloader, but not app jar");
+      throw new InvalidParameterException();
+    }
+    URL[] urlArray=new URL[0];
     if (jar_path != null) {
       String[] paths=jar_path.split(":");
       Set<URL> urls=new HashSet<URL>();
@@ -27,11 +34,9 @@
         URL url=new URL("File:" + path);
         urls.add(url);
       }
-      WorkerClassLoader.mkInstance(urls.toArray(new URL[0]),ClassLoader.getSystemClassLoader(),ClassLoader.getSystemClassLoader().getParent(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
+      urlArray=urls.toArray(new URL[0]);
     }
- else {
-      WorkerClassLoader.mkInstance(new URL[0],ClassLoader.getSystemClassLoader(),ClassLoader.getSystemClassLoader().getParent(),ConfigExtension.isEnableTopologyClassLoader(stormConf));
-    }
+    WorkerClassLoader.mkInstance(urlArray,ClassLoader.getSystemClassLoader(),ClassLoader.getSystemClassLoader().getParent(),enableClassloader,enableDebugClassloader);
   }
  catch (  Exception e) {
     LOG.error("init jarClassLoader error!",e);
@@ -73,5 +78,8 @@
   generateMaps();
   contextMaker=new ContextMaker(this);
   metricReporter=new MetricReporter(this);
+  outTaskStatus=new HashMap<Integer,Boolean>();
+  threadPool=Executors.newScheduledThreadPool(THREAD_POOL_NUM);
+  TimerTrigger.setScheduledExecutorService(threadPool);
   LOG.info("Successfully create WorkerData");
 }

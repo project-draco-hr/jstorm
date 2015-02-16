@@ -1,0 +1,5 @@
+{
+  super(workerData);
+  outTasks=allOutTasks;
+  randomrange=new RandomRange(outTasks.size());
+}

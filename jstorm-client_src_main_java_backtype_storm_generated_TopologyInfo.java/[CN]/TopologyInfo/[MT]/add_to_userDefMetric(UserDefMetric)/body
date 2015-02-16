@@ -1,0 +1,6 @@
+{
+  if (this.userDefMetric == null) {
+    this.userDefMetric=new ArrayList<UserDefMetric>();
+  }
+  this.userDefMetric.add(elem);
+}

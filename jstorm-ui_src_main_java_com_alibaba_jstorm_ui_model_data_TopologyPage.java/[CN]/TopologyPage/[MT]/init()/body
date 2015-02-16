@@ -6,6 +6,7 @@
     TopologyInfo summ=client.getClient().getTopologyInfo(topologyid);
     StormTopology topology=client.getClient().getTopology(topologyid);
     List<TaskSummary> ts=summ.get_tasks();
+    udm=summ.get_userDefMetric();
     tsumm=UIUtils.topologySummary(summ);
     getComponents(ts,topology);
     tstats=topologyStatsTable(scom,bcom);

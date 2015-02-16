@@ -2,8 +2,14 @@
   if (firstTime == true) {
     int delayRun=ConfigExtension.getSpoutDelayRunSeconds(storm_conf);
     JStormUtils.sleepMs(delayRun * 1000);
-    firstTime=false;
     emptyCpuCounter.init();
+    if (taskStatus.isRun() == true) {
+      spout.activate();
+    }
+ else {
+      spout.deactivate();
+    }
+    firstTime=false;
     LOG.info(idStr + " is ready ");
   }
   if (taskStatus.isRun() == false) {

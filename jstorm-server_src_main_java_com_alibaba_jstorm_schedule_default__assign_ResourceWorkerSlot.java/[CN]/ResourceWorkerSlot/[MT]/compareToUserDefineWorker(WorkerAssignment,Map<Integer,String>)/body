@@ -6,7 +6,7 @@
   String jvm=worker.getJvm();
   if (jvm != null && !jvm.equals(this.jvm))   return false;
   String hostName=worker.getHostName();
-  if (hostName != null && !hostName.equals(this.hostname))   return false;
+  if (NetWorkUtils.equals(hostname,hostName) == false)   return false;
   int port=worker.getPort();
   if (port != 0 && port != this.getPort())   return false;
   Map<String,Integer> componentToNum=worker.getComponentToNum();
@@ -19,9 +19,5 @@
     }
     myComponentToNum.put(component,++i);
   }
-  if (componentToNum.size() != myComponentToNum.size())   return false;
-  for (  Entry<String,Integer> entry : componentToNum.entrySet()) {
-    if (myComponentToNum.get(entry.getKey()) == null || myComponentToNum.get(entry.getKey()) != entry.getValue())     return false;
-  }
-  return true;
+  return myComponentToNum.equals(componentToNum);
 }

@@ -1,27 +1,39 @@
 {
   Class<?> result=null;
-  result=this.findLoadedClass(name);
-  if (result != null && result.getClassLoader() == this) {
-    return result;
-  }
- else {
-    result=null;
-  }
   try {
-    result=JDKClassLoader.loadClass(name);
-    if (result != null)     return result;
-  }
- catch (  Exception e) {
-  }
-  try {
-    if (name.startsWith("org.slf4j") == false && name.startsWith("org.apache.log4j") == false && name.startsWith("ch.qos.logback") == false && name.startsWith("backtype.storm") == false && name.startsWith("com.alibaba.jstorm") == false) {
-      result=findClass(name);
-      if (result != null) {
-        return result;
+    result=this.findLoadedClass(name);
+    if (result != null) {
+      return result;
+    }
+    try {
+      result=JDKClassLoader.loadClass(name);
+      if (result != null)       return result;
+    }
+ catch (    Exception e) {
+    }
+    try {
+      if (name.startsWith("org.apache.log4j") == false && name.startsWith("backtype.storm") == false && name.startsWith("com.alibaba.jstorm") == false) {
+        result=findClass(name);
+        if (result != null) {
+          return result;
+        }
       }
     }
+ catch (    Exception e) {
+    }
+    result=defaultClassLoader.loadClass(name);
+    return result;
   }
- catch (  Exception e) {
+  finally {
+    if (result != null) {
+      ClassLoader resultClassLoader=result.getClassLoader();
+      LOG.info("Successfully load class " + name + " by "+ resultClassLoader+ ",threadContextLoader:"+ Thread.currentThread().getContextClassLoader());
+    }
+ else {
+      LOG.warn("Failed to load class " + name + ",threadContextLoader:"+ Thread.currentThread().getContextClassLoader());
+    }
+    if (isDebug) {
+      LOG.info(Utils.printStack());
+    }
   }
-  return defaultClassLoader.loadClass(name);
 }

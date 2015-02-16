@@ -16,7 +16,12 @@
       state=State.timedOut;
     }
  else {
-      state=State.valid;
+      if (isWorkerDead(workerid)) {
+        state=State.timedOut;
+      }
+ else {
+        state=State.valid;
+      }
     }
     if (state != State.valid) {
       LOG.info("Worker:" + workerid + " state:"+ state+ " WorkerHeartbeat: "+ whb+ " at supervisor time-secs "+ now);

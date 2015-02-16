@@ -1,3 +1,8 @@
 {
-  return singleCount == ((CoordType)o).singleCount;
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  CoordType other=(CoordType)obj;
+  if (singleCount != other.singleCount)   return false;
+  return true;
 }

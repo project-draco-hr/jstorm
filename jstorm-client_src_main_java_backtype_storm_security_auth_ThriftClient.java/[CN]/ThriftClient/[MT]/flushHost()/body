@@ -1,3 +1,0 @@
-{
-  masterHost=new String(zkobj.getData().forPath("/"));
-}

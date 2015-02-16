@@ -1,0 +1,5 @@
+{
+  getTopologyInfoByName_args args=new getTopologyInfoByName_args();
+  args.set_topologyName(topologyName);
+  sendBase("getTopologyInfoByName",args);
+}

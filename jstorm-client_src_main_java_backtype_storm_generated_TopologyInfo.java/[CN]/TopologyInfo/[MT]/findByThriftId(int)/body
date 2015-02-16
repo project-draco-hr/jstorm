@@ -12,6 +12,8 @@ case 5:
 return STATUS;
 case 6:
 return TASKS;
+case 7:
+return USER_DEF_METRIC;
 default :
 return null;
 }

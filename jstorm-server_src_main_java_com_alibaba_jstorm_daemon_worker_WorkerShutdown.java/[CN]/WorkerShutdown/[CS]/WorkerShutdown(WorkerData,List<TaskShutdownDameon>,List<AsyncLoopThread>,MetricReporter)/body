@@ -6,6 +6,7 @@
   this.context=workerData.getContext();
   this.zkCluster=workerData.getZkCluster();
   this.cluster_state=workerData.getZkClusterstate();
+  this.threadPool=workerData.getThreadPool();
   this.metricReporter=metricReporter;
   Runtime.getRuntime().addShutdownHook(new Thread(this));
 }

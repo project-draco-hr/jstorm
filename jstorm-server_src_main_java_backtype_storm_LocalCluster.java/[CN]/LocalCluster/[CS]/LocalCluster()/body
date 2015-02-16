@@ -1,6 +1,6 @@
 {
-  BasicConfigurator.configure();
-  Logger.getRootLogger().setLevel(Level.INFO);
+  setLogger();
+  System.setProperty("java.net.preferIPv4Stack","true");
   this.state=LocalUtils.prepareLocalCluster();
   if (this.state == null)   throw new RuntimeException("prepareLocalCluster error");
 }

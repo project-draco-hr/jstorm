@@ -1,5 +1,5 @@
 {
-  List<Integer> portList=(List<Integer>)conf.get(Config.SUPERVISOR_SLOTS_PORTS);
+  List<Integer> portList=JStormUtils.getSupervisorPortList(conf);
   if (!StormConfig.local_mode(conf)) {
     Set<Integer> ports=JStormUtils.listToSet(portList);
     supervisorInfo=new SupervisorInfo(myHostName,supervisorId,ports);

@@ -9,5 +9,7 @@
   conf.put(Config.ZMQ_LINGER_MILLIS,0);
   conf.put(Config.TOPOLOGY_ENABLE_MESSAGE_TIMEOUTS,false);
   conf.put(Config.TOPOLOGY_TRIDENT_BATCH_EMIT_INTERVAL_MILLIS,50);
+  ConfigExtension.setSpoutDelayRunSeconds(conf,0);
+  ConfigExtension.setTaskCleanupTimeoutSec(conf,0);
   return conf;
 }

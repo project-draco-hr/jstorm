@@ -1,18 +1,15 @@
 {
+  if (active.getAndSet(false) == false) {
+    LOG.info("Supervisor has been shutdown before " + supervisorId);
+    return;
+  }
   LOG.info("Shutting down supervisor " + supervisorId);
-  active.set(false);
   int size=threads.size();
-  for (int i=0; i < size; i++) {
-    SmartThread thread=threads.elementAt(i);
+  for (  AsyncLoopThread thread : threads) {
     thread.cleanup();
     JStormUtils.sleepMs(10);
     thread.interrupt();
-    try {
-      thread.join();
-    }
- catch (    InterruptedException e) {
-      LOG.error(e.getMessage(),e);
-    }
+    LOG.info("Successfully shutdown thread:" + thread.getThread().getName());
   }
   eventManager.shutdown();
   processesEventManager.shutdown();
@@ -22,7 +19,9 @@
  catch (  Exception e) {
     LOG.error("Failed to shutdown ZK client",e);
   }
-  httpserver.shutdown();
+  if (httpserver != null) {
+    httpserver.shutdown();
+  }
   isFinishShutdown=true;
   JStormUtils.halt_process(0,"!!!Shutdown!!!");
 }

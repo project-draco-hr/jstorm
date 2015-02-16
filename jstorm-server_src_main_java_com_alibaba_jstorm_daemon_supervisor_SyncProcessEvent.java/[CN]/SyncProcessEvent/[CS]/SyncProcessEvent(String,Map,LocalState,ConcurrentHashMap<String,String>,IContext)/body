@@ -5,6 +5,7 @@
   this.workerThreadPids=workerThreadPids;
   this.sharedContext=sharedContext;
   this.sandBoxMaker=new SandBoxMaker(conf);
+  this.workerIdToStartTimeAndPort=new HashMap<String,Pair<Integer,Integer>>();
   if (ConfigExtension.isEnableCgroup(conf)) {
     cgroupManager=new CgroupManager(conf);
   }

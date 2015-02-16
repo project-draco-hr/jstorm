@@ -3,5 +3,5 @@
   if (isSynchronized == true) {
     return true;
   }
-  return JStormUtils.parseBoolean(conf.get(TOPOLOGY_BUFFER_SIZE_LIMITED),false);
+  return JStormUtils.parseBoolean(conf.get(TOPOLOGY_BUFFER_SIZE_LIMITED),true);
 }

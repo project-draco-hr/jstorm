@@ -1,0 +1,4 @@
+TopologyContext topologyContext
+int frequence
+String name
+DisruptorQueue queue

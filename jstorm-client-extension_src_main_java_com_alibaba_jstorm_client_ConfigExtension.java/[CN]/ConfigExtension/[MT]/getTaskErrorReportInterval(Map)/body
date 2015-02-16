@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(TASK_ERROR_INFO_REPORT_INTERVAL),60);
+}

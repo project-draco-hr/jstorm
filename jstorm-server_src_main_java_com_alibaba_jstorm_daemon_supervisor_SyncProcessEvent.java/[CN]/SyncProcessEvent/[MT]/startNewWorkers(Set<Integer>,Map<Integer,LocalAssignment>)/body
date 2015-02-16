@@ -38,14 +38,5 @@
       throw e;
     }
   }
-  Collection<String> workerIds=newWorkerIds.values();
-  try {
-    waitForWorkersLaunch(conf,workerIds);
-  }
- catch (  IOException e) {
-    LOG.error(e + " waitForWorkersLaunch failed");
-  }
-catch (  InterruptedException e) {
-    LOG.error(e + " waitForWorkersLaunch failed");
-  }
+  markAllNewWorkers(newWorkerIds);
 }

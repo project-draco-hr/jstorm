@@ -2,11 +2,12 @@
   StormClusterState clusterState=workerData.getZkCluster();
   String topologyId=workerData.getTopologyId();
   String hostName;
-  hostName=JStormServerUtils.getHostName(workerData.getConf());
+  hostName=NetWorkUtils.ip();
   String workerId=hostName + ":" + workerData.getPort();
   WorkerMetricInfo workerMetricInfo=new WorkerMetricInfo(hostName,workerData.getPort());
   try {
     for (    MetricInfo metricInfo : metricList) {
+      if (metricPerf == false && ((metricInfo.getMetric() instanceof Timer) || (metricInfo.getMetric() instanceof Histogram)))       continue;
       workerMetricInfo.updateMetricData(metricInfo);
     }
     Runtime rt=Runtime.getRuntime();

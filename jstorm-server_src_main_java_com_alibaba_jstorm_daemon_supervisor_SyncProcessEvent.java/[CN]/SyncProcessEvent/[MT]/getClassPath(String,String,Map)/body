@@ -3,6 +3,9 @@
   String[] classpathes=classpath.split(":");
   Set<String> classSet=new HashSet<String>();
   for (  String classJar : classpathes) {
+    if (StringUtils.isBlank(classJar) == true) {
+      continue;
+    }
     classSet.add(classJar);
   }
   if (stormHome != null) {
@@ -19,27 +22,14 @@
       }
     }
   }
-  String filterJarKeyword=null;
-  String transport_plugin_klassName=(String)totalConf.get(Config.STORM_MESSAGING_TRANSPORT);
-  if (transport_plugin_klassName.equals(MQContext.class.getCanonicalName())) {
-    filterJarKeyword="jeromq";
-  }
- else   if (transport_plugin_klassName.equals("com.alibaba.jstorm.message.jeroMq.JMQContext")) {
-    filterJarKeyword="jzmq";
-  }
+  Set<String> filterJars=setFilterJars(totalConf);
   StringBuilder sb=new StringBuilder();
-  if (filterJarKeyword != null) {
-    for (    String jar : classSet) {
-      if (jar.contains(filterJarKeyword)) {
-        continue;
-      }
-      sb.append(jar + ":");
+  for (  String jar : classSet) {
+    if (isKeyContain(filterJars,jar)) {
+      LOG.info("Remove " + jar);
+      continue;
     }
-  }
- else {
-    for (    String jar : classSet) {
-      sb.append(jar + ":");
-    }
+    sb.append(jar + ":");
   }
   if (ConfigExtension.isEnableTopologyClassLoader(totalConf)) {
     return sb.toString().substring(0,sb.length() - 1);

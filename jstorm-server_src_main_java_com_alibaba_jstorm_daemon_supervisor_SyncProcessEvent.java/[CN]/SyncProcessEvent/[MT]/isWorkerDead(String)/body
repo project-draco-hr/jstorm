@@ -1,0 +1,22 @@
+{
+  try {
+    List<String> pids=getPid(conf,workerId);
+    if (pids == null || pids.size() == 0) {
+      return false;
+    }
+    for (    String pid : pids) {
+      boolean isDead=JStormUtils.isProcDead(pid);
+      if (isDead == true) {
+        LOG.info("Found " + workerId + " is dead ");
+      }
+ else {
+        return false;
+      }
+    }
+    return true;
+  }
+ catch (  IOException e) {
+    LOG.info("Failed to check whether worker is dead through /proc/pid",e);
+    return false;
+  }
+}

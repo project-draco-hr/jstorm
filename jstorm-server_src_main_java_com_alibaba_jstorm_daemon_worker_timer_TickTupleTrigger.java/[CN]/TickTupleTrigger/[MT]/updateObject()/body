@@ -1,0 +1,3 @@
+{
+  this.object=new TupleImplExt(topologyContext,new Values(TimeUtils.current_time_secs()),(int)Constants.SYSTEM_TASK_ID,Constants.SYSTEM_TICK_STREAM_ID);
+}

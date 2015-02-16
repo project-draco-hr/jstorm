@@ -1,0 +1,28 @@
+{
+switch (field) {
+case TYPE:
+    if (value == null) {
+      unset_type();
+    }
+ else {
+      set_type((String)value);
+    }
+  break;
+case NAME:
+if (value == null) {
+  unset_name();
+}
+ else {
+  set_name((String)value);
+}
+break;
+case VALUE:
+if (value == null) {
+unset_value();
+}
+ else {
+set_value((Double)value);
+}
+break;
+}
+}

@@ -1,7 +1,12 @@
 {
   for (  Entry<String,Gauge<?>> entry : gaugeMap.entrySet()) {
-    GaugeData gaugeData=new GaugeData();
-    gaugeData.setValue((Double)(entry.getValue().getValue()));
-    gaugeDataMap.put(entry.getKey(),gaugeData);
+    try {
+      GaugeData gaugeData=new GaugeData();
+      gaugeData.setValue(JStormUtils.parseDouble(entry.getValue().getValue()));
+      gaugeDataMap.put(entry.getKey(),gaugeData);
+    }
+ catch (    Throwable e) {
+      LOG.error("updateFromGauge exception ",e);
+    }
   }
 }

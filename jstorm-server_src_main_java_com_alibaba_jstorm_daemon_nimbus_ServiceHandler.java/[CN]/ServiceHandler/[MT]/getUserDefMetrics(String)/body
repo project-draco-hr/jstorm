@@ -1,0 +1,12 @@
+{
+  List<UserDefMetric> userDefMetrics=null;
+  StormClusterState clusterState=data.getStormClusterState();
+  try {
+    MetricKVMsg topologyMetricMsg=MetricKVMsg.getMetricKVMsg(topologyId,clusterState);
+    userDefMetrics=topologyMetricMsg.convertToUserDefMetric();
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to get user defined metrics for topology=" + topologyId);
+  }
+  return userDefMetrics;
+}

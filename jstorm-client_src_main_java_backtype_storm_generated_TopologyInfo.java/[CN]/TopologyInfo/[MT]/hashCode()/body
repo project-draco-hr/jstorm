@@ -18,5 +18,8 @@
   boolean present_tasks=true && (is_set_tasks());
   builder.append(present_tasks);
   if (present_tasks)   builder.append(tasks);
+  boolean present_userDefMetric=true && (is_set_userDefMetric());
+  builder.append(present_userDefMetric);
+  if (present_userDefMetric)   builder.append(userDefMetric);
   return builder.toHashCode();
 }

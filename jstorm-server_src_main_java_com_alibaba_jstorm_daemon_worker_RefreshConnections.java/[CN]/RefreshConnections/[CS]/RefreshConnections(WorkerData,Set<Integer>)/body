@@ -10,4 +10,6 @@
   this.taskNodeport=workerData.getTaskNodeport();
   this.supervisorId=workerData.getSupervisorId();
   frequence=JStormUtils.parseInt(conf.get(Config.TASK_REFRESH_POLL_SECS),5);
+  taskTimeoutSecs=JStormUtils.parseInt(conf.get(Config.TASK_HEARTBEAT_FREQUENCY_SECS),10);
+  taskTimeoutSecs=taskTimeoutSecs * 3;
 }

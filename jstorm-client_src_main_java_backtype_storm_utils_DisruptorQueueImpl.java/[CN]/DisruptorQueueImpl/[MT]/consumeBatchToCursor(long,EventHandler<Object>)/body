@@ -20,7 +20,7 @@
       }
     }
  catch (    InterruptedException e) {
-      LOG.error(e.getCause(),e);
+      LOG.error(e.getCause());
       return;
     }
 catch (    Exception e) {

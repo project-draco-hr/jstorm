@@ -25,4 +25,11 @@
     }
     this.tasks=__this__tasks;
   }
+  if (other.is_set_userDefMetric()) {
+    List<UserDefMetric> __this__userDefMetric=new ArrayList<UserDefMetric>();
+    for (    UserDefMetric other_element : other.userDefMetric) {
+      __this__userDefMetric.add(new UserDefMetric(other_element));
+    }
+    this.userDefMetric=__this__userDefMetric;
+  }
 }

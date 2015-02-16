@@ -4,5 +4,11 @@
   }
  catch (  Exception e) {
   }
-  scheduExec.shutdown();
+  try {
+    scheduExec.shutdown();
+  }
+ catch (  Exception e) {
+  }
+  uploaders.cleanup();
+  downloaders.cleanup();
 }

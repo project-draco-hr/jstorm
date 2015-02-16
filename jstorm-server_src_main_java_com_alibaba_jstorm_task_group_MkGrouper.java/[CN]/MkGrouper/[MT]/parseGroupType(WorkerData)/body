@@ -15,8 +15,8 @@
     grouperType=GrouperType.all;
   }
  else   if (Grouping._Fields.SHUFFLE.equals(fields)) {
-    this.randomrange=new RandomRange(out_tasks.size());
     grouperType=GrouperType.shuffle;
+    shuffer=new MkShuffer(out_tasks,workerData);
   }
  else   if (Grouping._Fields.NONE.equals(fields)) {
     this.random=new Random();
@@ -45,7 +45,7 @@
   }
  else   if (Grouping._Fields.LOCAL_OR_SHUFFLE.equals(fields)) {
     grouperType=GrouperType.local_or_shuffle;
-    local_shuffer_grouper=new MkLocalShuffer(local_tasks,out_tasks);
+    local_shuffer_grouper=new MkLocalShuffer(local_tasks,out_tasks,workerData);
   }
  else   if (Grouping._Fields.LOCAL_FIRST.equals(fields)) {
     grouperType=GrouperType.localFirst;

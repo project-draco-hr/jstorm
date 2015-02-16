@@ -8,4 +8,5 @@
   this.active=active;
   this.frequence=JStormUtils.parseInt(conf.get(Config.SUPERVISOR_HEARTBEAT_FREQUENCY_SECS));
   initSupervisorInfo(conf);
+  LOG.info("Successfully init supervisor heartbeat thread, " + supervisorInfo);
 }

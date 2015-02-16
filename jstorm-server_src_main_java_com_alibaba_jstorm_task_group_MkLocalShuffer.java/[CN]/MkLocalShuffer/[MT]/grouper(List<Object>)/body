@@ -1,4 +1,5 @@
 {
-  int index=randomrange.nextInt();
+  int index=getActiveTask(randomrange,outTasks);
+  if (index == -1)   index=randomrange.nextInt();
   return JStormUtils.mk_list(outTasks.get(index));
 }

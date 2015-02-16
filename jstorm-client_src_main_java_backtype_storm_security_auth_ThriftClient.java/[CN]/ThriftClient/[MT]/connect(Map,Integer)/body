@@ -1,0 +1,30 @@
+{
+  try {
+    String[] host_port=masterHost.split(":");
+    if (host_port.length != 2) {
+      throw new InvalidParameterException("Host format error: " + masterHost);
+    }
+    String host=host_port[0];
+    int port=Integer.parseInt(host_port[1]);
+    LOG.info("Begin to connect " + host + ":"+ port);
+    Configuration login_conf=AuthUtils.GetConfiguration(storm_conf);
+    ITransportPlugin transportPlugin=AuthUtils.GetTransportPlugin(storm_conf,login_conf);
+    if (host == null) {
+      throw new IllegalArgumentException("host is not set");
+    }
+    if (port <= 0) {
+      throw new IllegalArgumentException("invalid port: " + port);
+    }
+    TSocket socket=new TSocket(host,port);
+    if (timeout != null) {
+      socket.setTimeout(timeout);
+    }
+    final TTransport underlyingTransport=socket;
+    _transport=transportPlugin.connect(underlyingTransport,host);
+  }
+ catch (  IOException ex) {
+    throw new RuntimeException("Create transport error");
+  }
+  _protocol=null;
+  if (_transport != null)   _protocol=new TBinaryProtocol(_transport);
+}

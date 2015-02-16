@@ -1,0 +1,11 @@
+{
+  if (StringUtils.equalsIgnoreCase(host1,host2) == true) {
+    return true;
+  }
+  if (host1 == null || host2 == null) {
+    return false;
+  }
+  String ip1=host2Ip(host1);
+  String ip2=host2Ip(host2);
+  return StringUtils.equalsIgnoreCase(ip1,ip2);
+}

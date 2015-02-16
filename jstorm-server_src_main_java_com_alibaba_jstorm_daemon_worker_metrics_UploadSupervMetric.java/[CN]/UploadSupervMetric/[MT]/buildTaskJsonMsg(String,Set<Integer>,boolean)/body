@@ -14,6 +14,7 @@
         taskKV.putAll(taskMetric.getTimerData());
         taskKV.putAll(taskMetric.getHistogramData());
       }
+      taskKV.put("Task_Error_Info",getTaskErrInfo(topologyId,taskId));
       jsonMsgTasks.add(taskKV);
     }
  catch (    Exception e) {

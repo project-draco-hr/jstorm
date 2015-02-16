@@ -1,0 +1,6 @@
+def check_java():
+    check_java_cmd = 'which java'
+    ret = os.system(check_java_cmd)
+    if (ret != 0):
+        print 'Failed to find java, please add java to PATH'
+        sys.exit((-1))

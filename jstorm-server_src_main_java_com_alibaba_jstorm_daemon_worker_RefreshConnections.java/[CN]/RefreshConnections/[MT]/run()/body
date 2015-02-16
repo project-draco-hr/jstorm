@@ -58,6 +58,16 @@ synchronized (this) {
         LOG.info("Remove connection to " + node_port);
         nodeportSocket.remove(node_port).close();
       }
+      for (      Integer taskId : outboundTasks) {
+        boolean isActive=false;
+        int currentTime=TimeUtils.current_time_secs();
+        TaskHeartbeat tHB=zkCluster.task_heartbeat(topologyId,taskId);
+        if (tHB != null) {
+          int taskReportTime=tHB.getTimeSecs();
+          if ((currentTime - taskReportTime) < taskTimeoutSecs)           isActive=true;
+        }
+        workerData.updateOutboundTaskStatus(taskId,isActive);
+      }
     }
   }
  catch (  Exception e) {

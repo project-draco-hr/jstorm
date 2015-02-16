@@ -11,5 +11,5 @@
     }
   }
 ;
-  data.setLeader(data.getStormClusterState().try_to_be_leader(Cluster.MASTER_SUBTREE,hostPort,masterCallback));
+  data.getStormClusterState().try_to_be_leader(Cluster.MASTER_SUBTREE,hostPort,masterCallback);
 }

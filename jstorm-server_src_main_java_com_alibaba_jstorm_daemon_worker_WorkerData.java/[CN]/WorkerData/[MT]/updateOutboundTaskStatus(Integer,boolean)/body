@@ -1,0 +1,3 @@
+{
+  outTaskStatus.put(taskId,isActive);
+}

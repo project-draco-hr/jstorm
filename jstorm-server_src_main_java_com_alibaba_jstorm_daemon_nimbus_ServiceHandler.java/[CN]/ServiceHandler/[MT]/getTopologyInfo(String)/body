@@ -1,29 +1,11 @@
 {
-  TopologyInfo topologyInfo=new TopologyInfo();
   StormClusterState stormClusterState=data.getStormClusterState();
   try {
     StormBase base=stormClusterState.storm_base(topologyId,null);
     if (base == null) {
       throw new NotAliveException("No topology of " + topologyId);
     }
-    topologyInfo.set_id(topologyId);
-    topologyInfo.set_name(base.getStormName());
-    topologyInfo.set_uptime_secs(TimeUtils.time_delta(base.getLanchTimeSecs()));
-    topologyInfo.set_status(base.getStatusString());
-    Assignment assignment=stormClusterState.assignment_info(topologyId,null);
-    if (assignment == null) {
-      throw new TException("Failed to get StormBase from ZK of " + topologyId);
-    }
-    Map<Integer,String> taskInfo=Cluster.topology_task_info(stormClusterState,topologyId);
-    Map<Integer,TaskSummary> tasks=NimbusUtils.mkTaskSummary(stormClusterState,assignment,taskInfo,topologyId);
-    List<TaskSummary> taskSumms=new ArrayList<TaskSummary>();
-    for (    Entry<Integer,TaskSummary> entry : tasks.entrySet()) {
-      taskSumms.add(entry.getValue());
-    }
-    topologyInfo.set_tasks(taskSumms);
-    List<WorkerSummary> workers=NimbusUtils.mkWorkerSummary(topologyId,assignment,tasks);
-    topologyInfo.set_workers(workers);
-    return topologyInfo;
+    return getTopologyInfo(topologyId,base);
   }
  catch (  TException e) {
     LOG.info("Failed to get topologyInfo " + topologyId,e);

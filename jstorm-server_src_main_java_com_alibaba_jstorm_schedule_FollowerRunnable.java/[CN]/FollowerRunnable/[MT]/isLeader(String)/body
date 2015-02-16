@@ -1,0 +1,10 @@
+{
+  if (StringUtils.isBlank(zkMaster) == true) {
+    return false;
+  }
+  if (hostPort.equalsIgnoreCase(zkMaster) == true) {
+    return true;
+  }
+  String[] part=zkMaster.split(":");
+  return NetWorkUtils.equals(part[0],NetWorkUtils.ip());
+}

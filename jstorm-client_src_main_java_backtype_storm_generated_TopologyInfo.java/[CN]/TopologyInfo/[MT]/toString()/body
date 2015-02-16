@@ -49,6 +49,17 @@
     sb.append(this.tasks);
   }
   first=false;
+  if (is_set_userDefMetric()) {
+    if (!first)     sb.append(", ");
+    sb.append("userDefMetric:");
+    if (this.userDefMetric == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.userDefMetric);
+    }
+    first=false;
+  }
   sb.append(")");
   return sb.toString();
 }

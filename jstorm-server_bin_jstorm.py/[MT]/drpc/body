@@ -1,5 +1,5 @@
 def drpc():
     'Syntax: [jstorm drpc]\n\n    Launches a DRPC daemon. This command should be run under supervision \n    with a tool like daemontools or monit. \n\n    See Distributed RPC for more information.\n    (https://github.com/alibaba/jstorm/wiki/JStorm-Chinese-Documentation)\n    '
     cppaths = [JSTORM_CONF_DIR]
-    childopts = (confvalue('drpc.childopts', cppaths) + (' -Dlogfile.name=drpc.log -Dlog4j.configuration=File:%s/conf/jstorm.log4j.properties ' % JSTORM_DIR))
+    childopts = (confvalue('drpc.childopts', cppaths) + get_server_childopts('drpc.log'))
     exec_storm_class('com.alibaba.jstorm.drpc.Drpc', jvmtype='-server', extrajars=cppaths, childopts=childopts)

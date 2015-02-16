@@ -1,21 +1,20 @@
 {
   ProcessBuilder builder=new ProcessBuilder(command);
   builder.directory(new File(context.getCodeDir()));
-  _subprocess=builder.start();
-  processIn=new DataOutputStream(_subprocess.getOutputStream());
-  processOut=new BufferedReader(new InputStreamReader(_subprocess.getInputStream()));
-  processErrorStream=_subprocess.getErrorStream();
-  Map setupInfo=new HashMap();
-  setupInfo.put("pidDir",context.getPIDDir());
-  setupInfo.put("conf",conf);
-  setupInfo.put("context",context);
-  writeMessage(setupInfo);
-  StringBuffer sb=new StringBuffer();
-  sb.append("Begin to run command:");
-  for (  String cmd : command) {
-    sb.append(cmd);
+  ShellLogger=Logger.getLogger(context.getThisComponentId());
+  this.componentName=context.getThisComponentId();
+  this.serializer=getSerializer(conf);
+  try {
+    _subprocess=builder.start();
+    processErrorStream=_subprocess.getErrorStream();
+    serializer.initialize(_subprocess.getOutputStream(),_subprocess.getInputStream());
+    this.pid=serializer.connect(conf,context);
   }
-  sb.append(setupInfo);
-  LOG.info(sb.toString());
-  return (Number)readMessage().get("pid");
+ catch (  IOException e) {
+    throw new RuntimeException("Error when launching multilang subprocess\n" + getErrorsString(),e);
+  }
+catch (  NoOutputException e) {
+    throw new RuntimeException(e + getErrorsString() + "\n");
+  }
+  return this.pid;
 }

@@ -1,0 +1,22 @@
+{
+  if (o == null) {
+    return null;
+  }
+  if (o instanceof String) {
+    return Double.valueOf(String.valueOf(o));
+  }
+ else   if (o instanceof Integer) {
+    Number value=(Integer)o;
+    return value.doubleValue();
+  }
+ else   if (o instanceof Long) {
+    Number value=(Long)o;
+    return value.doubleValue();
+  }
+ else   if (o instanceof Double) {
+    return (Double)o;
+  }
+ else {
+    throw new RuntimeException("Invalid value " + o.getClass().getName() + " "+ o);
+  }
+}

@@ -29,7 +29,7 @@
       }
       task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
     }
- else     if (event instanceof TimeTick.Tick) {
+ else     if (event instanceof RotatingMapTrigger.Tick) {
       Map<Long,TupleInfo> timeoutMap=pending.rotate();
       for (      java.util.Map.Entry<Long,TupleInfo> entry : timeoutMap.entrySet()) {
         TupleInfo tupleInfo=entry.getValue();

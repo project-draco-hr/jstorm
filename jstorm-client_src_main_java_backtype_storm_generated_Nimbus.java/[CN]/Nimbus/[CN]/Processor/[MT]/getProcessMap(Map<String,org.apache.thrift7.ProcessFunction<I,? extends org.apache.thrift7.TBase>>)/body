@@ -1,7 +1,6 @@
 {
   processMap.put("submitTopology",new submitTopology());
   processMap.put("submitTopologyWithOpts",new submitTopologyWithOpts());
-  processMap.put("submitTopologyAfterRestart",new submitTopologyAfterRestart());
   processMap.put("killTopology",new killTopology());
   processMap.put("killTopologyWithOpts",new killTopologyWithOpts());
   processMap.put("activate",new activate());
@@ -18,6 +17,7 @@
   processMap.put("getNimbusConf",new getNimbusConf());
   processMap.put("getClusterInfo",new getClusterInfo());
   processMap.put("getTopologyInfo",new getTopologyInfo());
+  processMap.put("getTopologyInfoByName",new getTopologyInfoByName());
   processMap.put("getSupervisorWorkers",new getSupervisorWorkers());
   processMap.put("getTopologyConf",new getTopologyConf());
   processMap.put("getTopology",new getTopology());

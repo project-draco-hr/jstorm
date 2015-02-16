@@ -6,10 +6,15 @@
   IOutputCollector output_collector=new BoltCollector(message_timeout_secs,_report_error,_send_fn,storm_conf,_transfer_fn,sysTopologyCxt,taskId,tuple_start_times,_task_stats);
   outputCollector=new OutputCollector(output_collector);
   boltExeTimer=Metrics.registerTimer(idStr,MetricDef.EXECUTE_TIME,String.valueOf(taskId),Metrics.MetricType.TASK);
-  TimeTick.registerTimer(idStr + "-sampling-tick",exeQueue);
+  Object tickFrequence=storm_conf.get(Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS);
+  if (tickFrequence != null) {
+    Integer frequence=JStormUtils.parseInt(tickFrequence);
+    TickTupleTrigger tickTupleTrigger=new TickTupleTrigger(sysTopologyCxt,frequence,idStr + Constants.SYSTEM_TICK_STREAM_ID,exeQueue);
+    tickTupleTrigger.register();
+  }
   try {
     WorkerClassLoader.switchThreadContext();
-    bolt.prepare(storm_conf,userTopologyCxt,outputCollector);
+    bolt.prepare(storm_conf,userTopologyCtx,outputCollector);
   }
  catch (  Throwable e) {
     error=e;

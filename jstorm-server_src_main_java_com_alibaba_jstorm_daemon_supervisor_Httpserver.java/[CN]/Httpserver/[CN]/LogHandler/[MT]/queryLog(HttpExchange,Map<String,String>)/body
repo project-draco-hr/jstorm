@@ -5,6 +5,7 @@
     return null;
   }
   String logFile=Joiner.on(File.separator).join(logDir,fileParam);
+  accessCheck(logFile);
   FileChannel fc=null;
   MappedByteBuffer fout=null;
   long fileSize=0;
@@ -21,7 +22,7 @@
       }
     }
  catch (    Exception e) {
-      LOG.warn("Invalide position ");
+      LOG.warn("Invalide position " + position);
     }
     if (position < 0) {
       position=0L;

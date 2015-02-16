@@ -59,7 +59,7 @@
     }
  else {
       ret.setAssignType(TopologyAssignContext.ASSIGN_TYPE_MONITOR);
-      unstoppedWorkers=getUnstoppedWorkers(allTaskIds,existingAssignment);
+      unstoppedWorkers=getUnstoppedWorkers(aliveTasks,existingAssignment);
       ret.setUnstoppedWorkers(unstoppedWorkers);
     }
   }

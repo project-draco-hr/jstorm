@@ -1,0 +1,11 @@
+{
+  Map<Object,Object> remoteConf=(Map)Utils.from_json(jsonData);
+  StringBuilder sb=new StringBuilder();
+  for (  Entry entry : remoteConf.entrySet()) {
+    sb.append(entry.getKey());
+    sb.append(":");
+    sb.append(entry.getValue());
+    sb.append("\n");
+  }
+  return sb.toString();
+}

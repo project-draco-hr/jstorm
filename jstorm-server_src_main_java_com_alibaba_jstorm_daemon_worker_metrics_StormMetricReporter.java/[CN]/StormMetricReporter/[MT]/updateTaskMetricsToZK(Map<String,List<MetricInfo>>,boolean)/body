@@ -5,9 +5,10 @@
     String taskId=entry.getKey();
     List<MetricInfo> MetricList=entry.getValue();
     try {
-      String component=clusterState.task_info(topologyId,Integer.valueOf(taskId)).getComponentId();
+      String component=workerData.getTasksToComponent().get(Integer.valueOf(taskId));
       TaskMetricInfo taskMetricInfo=new TaskMetricInfo(taskId,component);
       for (      MetricInfo metricInfo : MetricList) {
+        if (metricPerf == false && ((metricInfo.getMetric() instanceof Timer) || (metricInfo.getMetric() instanceof Histogram)))         continue;
         taskMetricInfo.updateMetricData(metricInfo);
       }
       List<String> errors=taskMetricInfo.anyQueueFull();

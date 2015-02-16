@@ -2,8 +2,11 @@
   TopologyBuilder builder=new TopologyBuilder();
   conf.put(TOPOLOGY_BOLT_PARALLELISM_HINT,Integer.valueOf(1));
   SetBuilder(builder,conf);
+  LOG.debug("test");
+  LOG.info("Submit log");
   LocalCluster cluster=new LocalCluster();
   cluster.submitTopology("SplitMerge",conf,builder.createTopology());
   Thread.sleep(60000);
+  cluster.killTopology("SplitMerge");
   cluster.shutdown();
 }

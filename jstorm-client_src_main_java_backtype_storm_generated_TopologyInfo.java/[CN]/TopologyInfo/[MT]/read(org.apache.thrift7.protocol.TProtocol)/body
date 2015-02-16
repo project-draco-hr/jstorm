@@ -76,6 +76,24 @@ iprot.readListEnd();
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }
 break;
+case 7:
+if (field.type == org.apache.thrift7.protocol.TType.LIST) {
+{
+org.apache.thrift7.protocol.TList _list199=iprot.readListBegin();
+this.userDefMetric=new ArrayList<UserDefMetric>(_list199.size);
+for (int _i200=0; _i200 < _list199.size; ++_i200) {
+UserDefMetric _elem201;
+_elem201=new UserDefMetric();
+_elem201.read(iprot);
+this.userDefMetric.add(_elem201);
+}
+iprot.readListEnd();
+}
+}
+ else {
+org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
+}
+break;
 default :
 org.apache.thrift7.protocol.TProtocolUtil.skip(iprot,field.type);
 }

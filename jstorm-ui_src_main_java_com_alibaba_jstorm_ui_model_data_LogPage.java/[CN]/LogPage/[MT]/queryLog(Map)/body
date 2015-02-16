@@ -1,5 +1,5 @@
 {
-  String baseUrl=String.format(PROXY_URL,host,port,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW,logFileName);
+  String baseUrl=String.format(PROXY_URL,NetWorkUtils.host2Ip(host),port,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW,logFileName);
   String url=baseUrl;
   if (position != null) {
     url+=("&" + HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_POS + "="+ position);

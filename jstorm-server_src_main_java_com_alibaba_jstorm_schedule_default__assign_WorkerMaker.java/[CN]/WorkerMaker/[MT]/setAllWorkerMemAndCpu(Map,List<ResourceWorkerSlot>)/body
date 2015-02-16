@@ -1,6 +1,6 @@
 {
-  long defaultSize=JStromServerConfigExtension.getMemSizePerWorker(conf);
-  int defaultCpu=JStromServerConfigExtension.getCpuSlotPerWorker(conf);
+  long defaultSize=ConfigExtension.getMemSizePerWorker(conf);
+  int defaultCpu=ConfigExtension.getCpuSlotPerWorker(conf);
   for (  ResourceWorkerSlot worker : result) {
     if (worker.getMemSize() <= 0)     worker.setMemSize(defaultSize);
     if (worker.getCpu() <= 0)     worker.setCpu(defaultCpu);

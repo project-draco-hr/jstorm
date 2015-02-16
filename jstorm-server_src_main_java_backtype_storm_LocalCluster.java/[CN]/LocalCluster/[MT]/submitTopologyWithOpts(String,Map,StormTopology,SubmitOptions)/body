@@ -1,5 +1,6 @@
 {
   if (!Utils.isValidConf(conf))   throw new RuntimeException("Topology conf is not json-serializable");
+  JStormUtils.setLocalMode(true);
   try {
     if (submitOpts == null) {
       state.getNimbus().submitTopology(topologyName,null,Utils.to_json(conf),topology);

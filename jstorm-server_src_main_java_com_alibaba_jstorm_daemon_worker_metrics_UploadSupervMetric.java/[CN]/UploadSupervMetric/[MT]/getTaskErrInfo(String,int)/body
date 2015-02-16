@@ -1,0 +1,21 @@
+{
+  String ret=null;
+  long currTime=System.currentTimeMillis() / 1000;
+  try {
+    List<String> errorTimeStamps=cluster.task_error_time(topologyId,taskId);
+    for (    String time : errorTimeStamps) {
+      long errTime=JStormUtils.parseLong(time);
+      if (currTime - errTime < ConfigExtension.getTaskErrorReportInterval(conf)) {
+        String errInfo=cluster.task_error_info(topologyId,taskId,errTime);
+        if (errInfo.indexOf("queue is full") == -1) {
+          if (ret == null)           ret=errInfo;
+ else           ret=ret + "; " + errInfo;
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to read task error info for topo=" + topologyId + ", taskId="+ taskId+ ". Cause is \""+ e.getMessage()+ "\"");
+  }
+  return ret;
+}

@@ -1,0 +1,16 @@
+{
+  byte[] json="Failed to get configuration".getBytes();
+  try {
+    String tmp=Utils.to_json(conf);
+    json=tmp.getBytes();
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to get configuration",e);
+    handlFailure(t,"Failed to get configuration");
+    return;
+  }
+  t.sendResponseHeaders(HttpURLConnection.HTTP_OK,json.length);
+  OutputStream os=t.getResponseBody();
+  os.write(json);
+  os.close();
+}

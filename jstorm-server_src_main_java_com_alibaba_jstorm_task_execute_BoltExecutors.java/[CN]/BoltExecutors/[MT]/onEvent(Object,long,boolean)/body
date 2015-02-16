@@ -4,7 +4,7 @@
   }
   boltExeTimer.start();
   try {
-    if (event instanceof TimeTick.Tick) {
+    if (event instanceof RotatingMapTrigger.Tick) {
       Map<Tuple,Long> timeoutMap=tuple_start_times.rotate();
       if (ackerNum > 0) {
         for (        Entry<Tuple,Long> entry : timeoutMap.entrySet()) {

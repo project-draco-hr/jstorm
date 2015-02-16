@@ -1,3 +1,0 @@
-{
-  return new submitTopologyAfterRestart_args(this);
-}

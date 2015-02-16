@@ -1,0 +1,7 @@
+{
+  this();
+  this.type=type;
+  this.name=name;
+  this.value=value;
+  set_value_isSet(true);
+}

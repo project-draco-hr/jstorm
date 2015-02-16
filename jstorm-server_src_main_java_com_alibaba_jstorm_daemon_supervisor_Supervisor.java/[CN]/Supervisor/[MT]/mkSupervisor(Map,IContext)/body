@@ -10,7 +10,7 @@
     supervisorId=UUID.randomUUID().toString();
     localState.put(Common.LS_ID,supervisorId);
   }
-  Vector<SmartThread> threads=new Vector<SmartThread>();
+  Vector<AsyncLoopThread> threads=new Vector<AsyncLoopThread>();
   Heartbeat hb=new Heartbeat(conf,stormClusterState,supervisorId,active);
   hb.update();
   AsyncLoopThread heartbeat=new AsyncLoopThread(hb,false,null,Thread.MIN_PRIORITY,true);
@@ -28,18 +28,21 @@
   EventManagerPusher syncSupervisorPusher=new EventManagerPusher(syncSupEventManager,syncSupervisorEvent,active,syncFrequence);
   AsyncLoopThread syncSupervisorThread=new AsyncLoopThread(syncSupervisorPusher);
   threads.add(syncSupervisorThread);
-  int port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
-  Httpserver httpserver=new Httpserver(port,conf);
-  httpserver.start();
-  MetricSendClient client;
-  if (ConfigExtension.isAlimonitorMetricsPost(conf)) {
-    client=new AlimonitorClient(AlimonitorClient.DEFAUT_ADDR,AlimonitorClient.DEFAULT_PORT,true);
-  }
+  Httpserver httpserver=null;
+  if (StormConfig.local_mode(conf) == false) {
+    int port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
+    httpserver=new Httpserver(port,conf);
+    httpserver.start();
+    MetricSendClient client;
+    if (ConfigExtension.isAlimonitorMetricsPost(conf)) {
+      client=new AlimonitorClient(AlimonitorClient.DEFAUT_ADDR,AlimonitorClient.DEFAULT_PORT,true);
+    }
  else {
-    client=new MetricSendClient();
+      client=new MetricSendClient();
+    }
+    UploadSupervMetric uploadMetric=new UploadSupervMetric(conf,stormClusterState,supervisorId,active,60,client);
+    AsyncLoopThread uploadMetricThread=new AsyncLoopThread(uploadMetric);
+    threads.add(uploadMetricThread);
   }
-  UploadSupervMetric uploadMetric=new UploadSupervMetric(conf,stormClusterState,supervisorId,active,60,client);
-  AsyncLoopThread uploadMetricThread=new AsyncLoopThread(uploadMetric);
-  threads.add(uploadMetricThread);
   return new SupervisorManger(conf,supervisorId,active,threads,syncSupEventManager,processEventManager,httpserver,stormClusterState,workerThreadPids);
 }

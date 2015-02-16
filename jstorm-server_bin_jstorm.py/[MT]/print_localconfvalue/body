@@ -1,3 +1,3 @@
 def print_localconfvalue(name):
     'Syntax: [jstorm localconfvalue conf-name]\n\n    Prints out the value for conf-name in the local JStorm configs. \n    The local JStorm configs are the ones in ~/.jstorm/storm.yaml merged \n    in with the configs in defaults.yaml.\n    '
-    print ((name + ': ') + confvalue(name, [CONF_DIR]))
+    print ((name + ': ') + confvalue(name, [JSTORM_CONF_DIR]))

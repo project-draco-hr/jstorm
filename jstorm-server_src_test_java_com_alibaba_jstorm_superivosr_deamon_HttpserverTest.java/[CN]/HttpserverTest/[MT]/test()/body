@@ -1,3 +1,0 @@
-{
-  System.out.println(Enum.valueOf(ViewMode.class,"LAST_4K"));
-}

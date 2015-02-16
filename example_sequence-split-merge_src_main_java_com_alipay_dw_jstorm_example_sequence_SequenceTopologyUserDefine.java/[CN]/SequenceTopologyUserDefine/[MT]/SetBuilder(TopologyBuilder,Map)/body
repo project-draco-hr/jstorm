@@ -1,0 +1,13 @@
+{
+  SequenceTopology.SetBuilder(builder,conf);
+  List<WorkerAssignment> userDefinedWorks=new ArrayList<WorkerAssignment>();
+  WorkerAssignment spoutWorkerAssignment=new WorkerAssignment();
+  spoutWorkerAssignment.addComponent(SequenceTopologyDef.SEQUENCE_SPOUT_NAME,1);
+  spoutWorkerAssignment.setHostName((String)conf.get("spout.host"));
+  userDefinedWorks.add(spoutWorkerAssignment);
+  WorkerAssignment totalWorkerAssignment=new WorkerAssignment();
+  totalWorkerAssignment.addComponent(SequenceTopologyDef.TOTAL_BOLT_NAME,2);
+  totalWorkerAssignment.setHostName((String)conf.get("total.host"));
+  userDefinedWorks.add(totalWorkerAssignment);
+  ConfigExtension.setUserDefineAssignment(conf,userDefinedWorks);
+}

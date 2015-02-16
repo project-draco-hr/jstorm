@@ -1,9 +1,11 @@
 {
   try {
+    String parent=PathUtils.parent_path(libName);
+    PathUtils.local_mkdirs(parent);
     data.getUploaders().put(libName,Channels.newChannel(new FileOutputStream(libName)));
     LOG.info("Begin upload file from client to " + libName);
   }
- catch (  FileNotFoundException e) {
+ catch (  Exception e) {
     LOG.error("Fail to upload jar " + libName,e);
     throw new TException(e);
   }

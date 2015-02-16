@@ -4,6 +4,7 @@
   if (dir != null) {
     path=path + File.separator + dir;
   }
+  accessCheck(path);
   LOG.info("List dir " + path);
   File file=new File(path);
   String[] files=file.list();

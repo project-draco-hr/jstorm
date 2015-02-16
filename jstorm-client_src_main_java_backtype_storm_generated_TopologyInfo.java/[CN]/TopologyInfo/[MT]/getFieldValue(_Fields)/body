@@ -12,6 +12,8 @@ case STATUS:
 return get_status();
 case TASKS:
 return get_tasks();
+case USER_DEF_METRIC:
+return get_userDefMetric();
 }
 throw new IllegalStateException();
 }

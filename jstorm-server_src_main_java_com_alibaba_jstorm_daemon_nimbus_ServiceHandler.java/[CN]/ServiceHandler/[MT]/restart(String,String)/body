@@ -1,27 +1,64 @@
 {
+  LOG.info("Begin to restart " + name + ", new configuration:"+ jsonConf);
+  StormClusterState stormClusterState=data.getStormClusterState();
   String topologyId=null;
   try {
-    topologyId=NimbusUtils.findTopoFileInStormdist(data,name);
-    if (topologyId != null) {
-      String srcDir=StormConfig.masterStormdistRoot(conf,topologyId);
-      String destDir=StormConfig.masterStormTmpRoot(conf,name);
-      FileUtils.copyDirectory(new File(srcDir),new File(destDir));
-    }
- else {
-      String errorInfo="Topology=" + name + " is not exist!";
-      throw new InvalidTopologyException(errorInfo);
-    }
+    topologyId=Cluster.get_topology_id(stormClusterState,name);
   }
- catch (  Exception e) {
-    LOG.info("InvalidTopologyException: " + e.getMessage());
-    throw new InvalidTopologyException(e.getMessage());
+ catch (  Exception e2) {
+    topologyId=null;
+  }
+  if (topologyId == null) {
+    LOG.info("No topology of " + name);
+    throw new NotAliveException("No topology of " + name);
   }
   deactivate(name);
   JStormUtils.sleepMs(5000);
-  KillOptions options=new KillOptions();
-  options.set_wait_secs(1);
-  killTopologyWithOpts(name,options);
-  int delay=(JStormUtils.parseInt(conf.get(Config.SUPERVISOR_MONITOR_FREQUENCY_SECS))) * 1000 + 5000;
-  JStormUtils.sleepMs(delay);
-  submitTopologyAfterRestart(name,jsonConf);
+  LOG.info("Deactivate " + name);
+  StormTopology topology=null;
+  Map topologyConf=null;
+  String topologyCodeLocation=null;
+  try {
+    topology=StormConfig.read_nimbus_topology_code(conf,topologyId);
+    topologyConf=StormConfig.read_nimbus_topology_conf(conf,topologyId);
+    if (jsonConf != null) {
+      Map<Object,Object> newConf=(Map<Object,Object>)JStormUtils.from_json(jsonConf);
+      topologyConf.putAll(newConf);
+    }
+    String oldDistDir=StormConfig.masterStormdistRoot(conf,topologyId);
+    String parent=StormConfig.masterInbox(conf);
+    topologyCodeLocation=parent + PathUtils.SEPERATOR + topologyId;
+    FileUtils.forceMkdir(new File(topologyCodeLocation));
+    FileUtils.cleanDirectory(new File(topologyCodeLocation));
+    FileUtils.copyDirectory(new File(oldDistDir),new File(topologyCodeLocation));
+    LOG.info("Successfully read old jar/conf/topology " + name);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to read old jar/conf/topology",e);
+    if (topologyCodeLocation != null) {
+      try {
+        PathUtils.rmr(topologyCodeLocation);
+      }
+ catch (      IOException e1) {
+      }
+    }
+    throw new TException("Failed to read old jar/conf/topology ");
+  }
+  RemoveTransitionCallback killCb=new RemoveTransitionCallback(data,topologyId);
+  killCb.execute(new Object[0]);
+  LOG.info("Successfully kill the topology " + name);
+  try {
+    submitTopology(name,topologyCodeLocation,JStormUtils.to_json(topologyConf),topology);
+  }
+ catch (  AlreadyAliveException e) {
+    LOG.info("Failed to kill the topology" + name);
+    throw new TException("Failed to kill the topology" + name);
+  }
+ finally {
+    try {
+      PathUtils.rmr(topologyCodeLocation);
+    }
+ catch (    IOException e1) {
+    }
+  }
 }

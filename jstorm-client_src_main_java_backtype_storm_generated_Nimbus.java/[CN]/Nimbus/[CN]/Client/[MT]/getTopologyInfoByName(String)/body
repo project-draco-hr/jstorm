@@ -1,0 +1,4 @@
+{
+  send_getTopologyInfoByName(topologyName);
+  return recv_getTopologyInfoByName();
+}

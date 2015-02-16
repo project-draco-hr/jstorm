@@ -1,0 +1,6 @@
+{
+  checkReady();
+  getTopologyInfoByName_call method_call=new getTopologyInfoByName_call(topologyName,resultHandler,this,___protocolFactory,___transport);
+  this.___currentMethod=method_call;
+  ___manager.call(method_call);
+}

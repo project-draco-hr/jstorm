@@ -2,11 +2,11 @@
   Map ret=readDefaultConfig();
   String confFile=System.getProperty("storm.conf.file");
   Map storm;
-  if (confFile == null || confFile.equals("")) {
+  if (StringUtils.isBlank(confFile) == true) {
     storm=findAndReadConfigFile("storm.yaml",false);
   }
  else {
-    storm=findAndReadConfigFile(confFile,true);
+    storm=loadDefinedConf(confFile);
   }
   ret.putAll(storm);
   ret.putAll(readCommandLineOpts());

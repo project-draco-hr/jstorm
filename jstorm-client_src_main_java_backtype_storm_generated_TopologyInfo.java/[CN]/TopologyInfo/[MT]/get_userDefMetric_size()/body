@@ -1,0 +1,3 @@
+{
+  return (this.userDefMetric == null) ? 0 : this.userDefMetric.size();
+}

@@ -1,19 +1,34 @@
 {
-  if (checkTupleId) {
-    Long tupleId=input.getLong(0);
-    if (tupleId <= lastTupleId) {
-      LOG.error("LastTupleId is " + lastTupleId + ", but now:"+ tupleId);
+  if (TupleHelpers.isTickTuple(input)) {
+    LOG.info("Receive one Ticket Tuple " + input.getSourceComponent());
+    return;
+  }
+  long before=System.currentTimeMillis();
+  myTimer.start();
+  try {
+    myCounter.inc();
+    myMeter.mark();
+    if (checkTupleId) {
+      Long tupleId=input.getLong(0);
+      if (tupleId <= lastTupleId) {
+        LOG.error("LastTupleId is " + lastTupleId + ", but now:"+ tupleId);
+      }
+      lastTupleId=tupleId;
     }
-    lastTupleId=tupleId;
+    TradeCustomer tradeCustomer=(TradeCustomer)input.getValue(1);
+    tradeSum.addAndGet(tradeCustomer.getTrade().getValue());
+    customerSum.addAndGet(tradeCustomer.getCustomer().getValue());
+    collector.ack(input);
+    long now=System.currentTimeMillis();
+    long spend=now - tradeCustomer.getTimestamp();
+    tpsCounter.count(spend);
+    if (slowDonw) {
+      JStormUtils.sleepMs(20);
+    }
   }
-  TradeCustomer tradeCustomer=(TradeCustomer)input.getValue(1);
-  tradeSum.addAndGet(tradeCustomer.getTrade().getValue());
-  customerSum.addAndGet(tradeCustomer.getCustomer().getValue());
-  collector.ack(input);
-  long now=System.currentTimeMillis();
-  long spend=now - tradeCustomer.getTimestamp();
-  tpsCounter.count(spend);
-  if (slowDonw) {
-    JStormUtils.sleepMs(20);
+  finally {
+    myTimer.stop();
   }
+  long after=System.currentTimeMillis();
+  myJStormHistogram.update(after - before);
 }

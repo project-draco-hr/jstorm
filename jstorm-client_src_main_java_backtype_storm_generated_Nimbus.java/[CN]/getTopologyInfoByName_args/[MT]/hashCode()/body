@@ -1,0 +1,7 @@
+{
+  HashCodeBuilder builder=new HashCodeBuilder();
+  boolean present_topologyName=true && (is_set_topologyName());
+  builder.append(present_topologyName);
+  if (present_topologyName)   builder.append(topologyName);
+  return builder.toHashCode();
+}

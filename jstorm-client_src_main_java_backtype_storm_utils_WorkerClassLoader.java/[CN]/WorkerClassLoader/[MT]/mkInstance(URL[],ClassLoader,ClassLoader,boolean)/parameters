@@ -1,4 +1,0 @@
-URL[] urls
-ClassLoader DefaultClassLoader
-ClassLoader JDKClassLoader
-boolean enable

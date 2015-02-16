@@ -13,7 +13,7 @@
         PathUtils.rmr(dir);
       }
  catch (      IOException e) {
-        LOG.error("fail to delete " + dir,e);
+        LOG.error("Fail to delete " + dir);
       }
     }
   }

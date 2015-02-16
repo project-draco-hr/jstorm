@@ -1,4 +1,16 @@
 {
-  IndexedEdge other=(IndexedEdge)o;
-  return source.equals(other.source) && target.equals(other.target) && index == other.index;
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  IndexedEdge other=(IndexedEdge)obj;
+  if (index != other.index)   return false;
+  if (source == null) {
+    if (other.source != null)     return false;
+  }
+ else   if (!source.equals(other.source))   return false;
+  if (target == null) {
+    if (other.target != null)     return false;
+  }
+ else   if (!target.equals(other.target))   return false;
+  return true;
 }

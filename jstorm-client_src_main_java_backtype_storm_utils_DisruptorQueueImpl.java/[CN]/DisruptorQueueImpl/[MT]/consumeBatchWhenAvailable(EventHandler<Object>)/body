@@ -11,7 +11,7 @@
     throw new RuntimeException(e);
   }
 catch (  InterruptedException e) {
-    LOG.error(e.getCause(),e);
+    LOG.error("InterruptedException " + e.getCause());
     return;
   }
 catch (  TimeoutException e) {

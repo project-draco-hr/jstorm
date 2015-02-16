@@ -1,4 +1,5 @@
 {
+  super(workerData);
   intervalCheck=new IntervalCheck();
   intervalCheck.setInterval(60);
   this.allOutTasks=allOutTasks;

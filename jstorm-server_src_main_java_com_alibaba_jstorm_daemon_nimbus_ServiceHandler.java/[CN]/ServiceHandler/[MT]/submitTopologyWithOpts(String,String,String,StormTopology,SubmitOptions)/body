@@ -23,9 +23,10 @@ catch (  Throwable e) {
     serializedConf.put(Config.TOPOLOGY_NAME,topologyname);
     Map<Object,Object> stormConf;
     stormConf=NimbusUtils.normalizeConf(conf,serializedConf,topology);
+    LOG.info("Normalized configuration:" + stormConf);
     Map<Object,Object> totalStormConf=new HashMap<Object,Object>(conf);
     totalStormConf.putAll(stormConf);
-    StormTopology normalizedTopology=NimbusUtils.normalizeTopology(stormConf,topology,false);
+    StormTopology normalizedTopology=NimbusUtils.normalizeTopology(stormConf,topology,true);
     Common.validate_basic(normalizedTopology,totalStormConf,topologyId);
     StormClusterState stormClusterState=data.getStormClusterState();
     setupStormCode(conf,topologyId,uploadedJarLocation,stormConf,normalizedTopology);

@@ -1,0 +1,4 @@
+URL[] urls
+ClassLoader defaultClassLoader
+ClassLoader JDKClassLoader
+boolean isDebug

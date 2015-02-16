@@ -5,8 +5,8 @@
   }
   LOG.info("worker num is: " + workersNum);
   List<ResourceWorkerSlot> result=new ArrayList<ResourceWorkerSlot>();
-  this.getRightWorkers(context,needAssign,result,workersNum,getUserDefineWorkers(context,JStromServerConfigExtension.getUserDefineAssignment(context.getStormConf())));
-  if (JStromServerConfigExtension.isUseOldAssignment(context.getStormConf())) {
+  this.getRightWorkers(context,needAssign,result,workersNum,getUserDefineWorkers(context,ConfigExtension.getUserDefineAssignment(context.getStormConf())));
+  if (ConfigExtension.isUseOldAssignment(context.getStormConf())) {
     this.getRightWorkers(context,needAssign,result,workersNum,context.getOldWorkers());
   }
   int defaultWorkerNum=Math.min(workersNum - result.size(),needAssign.size());
@@ -15,8 +15,13 @@
   for (int i=0; i < defaultWorkerNum; i++) {
     result.add(new ResourceWorkerSlot());
   }
-  this.putAllWorkerToSupervisor(result,this.getIsolationSupervisors(context));
-  this.putAllWorkerToSupervisor(result,this.getCanUseSupervisors(context.getCluster()));
+  List<SupervisorInfo> isolationSupervisors=this.getIsolationSupervisors(context);
+  if (isolationSupervisors.size() != 0) {
+    this.putAllWorkerToSupervisor(result,this.getCanUseSupervisors(isolationSupervisors));
+  }
+ else {
+    this.putAllWorkerToSupervisor(result,this.getCanUseSupervisors(context.getCluster()));
+  }
   this.setAllWorkerMemAndCpu(context.getStormConf(),result);
   return result;
 }

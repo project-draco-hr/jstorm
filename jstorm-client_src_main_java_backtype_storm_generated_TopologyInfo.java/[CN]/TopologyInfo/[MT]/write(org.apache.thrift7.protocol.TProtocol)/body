@@ -18,8 +18,8 @@
     oprot.writeFieldBegin(WORKERS_FIELD_DESC);
 {
       oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.workers.size()));
-      for (      WorkerSummary _iter199 : this.workers) {
-        _iter199.write(oprot);
+      for (      WorkerSummary _iter202 : this.workers) {
+        _iter202.write(oprot);
       }
       oprot.writeListEnd();
     }
@@ -34,12 +34,25 @@
     oprot.writeFieldBegin(TASKS_FIELD_DESC);
 {
       oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.tasks.size()));
-      for (      TaskSummary _iter200 : this.tasks) {
-        _iter200.write(oprot);
+      for (      TaskSummary _iter203 : this.tasks) {
+        _iter203.write(oprot);
       }
       oprot.writeListEnd();
     }
     oprot.writeFieldEnd();
+  }
+  if (this.userDefMetric != null) {
+    if (is_set_userDefMetric()) {
+      oprot.writeFieldBegin(USER_DEF_METRIC_FIELD_DESC);
+{
+        oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.userDefMetric.size()));
+        for (        UserDefMetric _iter204 : this.userDefMetric) {
+          _iter204.write(oprot);
+        }
+        oprot.writeListEnd();
+      }
+      oprot.writeFieldEnd();
+    }
   }
   oprot.writeFieldStop();
   oprot.writeStructEnd();

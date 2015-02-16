@@ -1,4 +1,5 @@
 {
+  if (data.length > (JStormUtils.SIZE_1_K * 800))   throw new Exception("Writing 800k+ data into ZK is not allowed!");
   if (zkobj.exists(zk,path,false)) {
     zkobj.setData(zk,path,data);
   }

@@ -1,19 +1,14 @@
 {
-  if (isShutdown.compareAndSet(false,true) == false) {
+  if (data.getIsShutdown().getAndSet(true) == true) {
     LOG.info("Notify to quit nimbus");
     return;
   }
   LOG.info("Begin to shutdown nimbus");
-  for (  SmartThread t : smartThreads) {
+  for (  AsyncLoopThread t : smartThreads) {
     t.cleanup();
     JStormUtils.sleepMs(10);
     t.interrupt();
-    try {
-      t.join();
-    }
- catch (    InterruptedException e) {
-      LOG.error("join thread",e);
-    }
+    LOG.info("Successfully cleanup " + t.getThread().getName());
   }
   if (serviceHandler != null) {
     serviceHandler.shutdown();

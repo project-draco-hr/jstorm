@@ -1,7 +1,7 @@
 {
   stormClusterState.setup_heartbeats(topologyId);
   Map<Integer,TaskInfo> taskToComponetId=mkTaskComponentAssignments(conf,topologyId);
-  if (taskToComponetId == null) {
+  if (taskToComponetId == null || taskToComponetId.size() == 0) {
     throw new InvalidTopologyException("Failed to generate TaskIDs map");
   }
   for (  Entry<Integer,TaskInfo> entry : taskToComponetId.entrySet()) {

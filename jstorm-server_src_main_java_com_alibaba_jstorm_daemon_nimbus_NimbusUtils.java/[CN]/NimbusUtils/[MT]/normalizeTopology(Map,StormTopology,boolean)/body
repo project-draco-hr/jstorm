@@ -1,6 +1,12 @@
 {
   StormTopology ret=topology.deepCopy();
+  Map<String,Object> rawComponents=ThriftTopologyUtils.getComponents(topology);
   Map<String,Object> components=ThriftTopologyUtils.getComponents(ret);
+  if (rawComponents.keySet().equals(components.keySet()) == false) {
+    String errMsg="Failed to normalize topology binary, maybe due to wrong dependency";
+    LOG.info(errMsg + " raw components:" + rawComponents.keySet()+ ", normalized "+ components.keySet());
+    throw new InvalidParameterException(errMsg);
+  }
   for (  Entry<String,Object> entry : components.entrySet()) {
     Object component=entry.getValue();
     String componentName=entry.getKey();
@@ -9,21 +15,30 @@
       common=((Bolt)component).get_common();
       if (fromConf) {
         Integer paraNum=ConfigExtension.getBoltParallelism(stormConf,componentName);
-        if (paraNum != null)         common.set_parallelism_hint(paraNum);
+        if (paraNum != null) {
+          LOG.info("Set " + componentName + " as "+ paraNum);
+          common.set_parallelism_hint(paraNum);
+        }
       }
     }
     if (component instanceof SpoutSpec) {
       common=((SpoutSpec)component).get_common();
       if (fromConf) {
         Integer paraNum=ConfigExtension.getSpoutParallelism(stormConf,componentName);
-        if (paraNum != null)         common.set_parallelism_hint(paraNum);
+        if (paraNum != null) {
+          LOG.info("Set " + componentName + " as "+ paraNum);
+          common.set_parallelism_hint(paraNum);
+        }
       }
     }
     if (component instanceof StateSpoutSpec) {
       common=((StateSpoutSpec)component).get_common();
       if (fromConf) {
         Integer paraNum=ConfigExtension.getSpoutParallelism(stormConf,componentName);
-        if (paraNum != null)         common.set_parallelism_hint(paraNum);
+        if (paraNum != null) {
+          LOG.info("Set " + componentName + " as "+ paraNum);
+          common.set_parallelism_hint(paraNum);
+        }
       }
     }
     Map componentMap=new HashMap();

@@ -1,0 +1,6 @@
+{
+  super(urls,JDKClassLoader);
+  this.defaultClassLoader=defaultClassLoader;
+  this.JDKClassLoader=JDKClassLoader;
+  this.isDebug=isDebug;
+}

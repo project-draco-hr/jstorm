@@ -1,6 +1,8 @@
 {
   try {
-    state.getNimbus().killTopology(topologyName);
+    KillOptions killOps=new KillOptions();
+    killOps.set_wait_secs(0);
+    state.getNimbus().killTopologyWithOpts(topologyName,killOps);
   }
  catch (  Exception e) {
     LOG.error("fail to kill Topology " + topologyName,e);

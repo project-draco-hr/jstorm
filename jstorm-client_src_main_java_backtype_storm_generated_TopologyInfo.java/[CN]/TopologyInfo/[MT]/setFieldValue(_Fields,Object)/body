@@ -48,5 +48,13 @@ unset_tasks();
 set_tasks((List<TaskSummary>)value);
 }
 break;
+case USER_DEF_METRIC:
+if (value == null) {
+unset_userDefMetric();
+}
+ else {
+set_userDefMetric((List<UserDefMetric>)value);
+}
+break;
 }
 }

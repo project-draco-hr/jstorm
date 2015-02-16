@@ -1,5 +1,9 @@
 {
-  active.set(false);
+  if (active.getAndSet(false) == false) {
+    LOG.info("Worker has been shutdown already");
+    return;
+  }
+  threadPool.shutdown();
   metricReporter.shutdown();
   for (  ShutdownableDameon task : shutdowntasks) {
     task.shutdown();

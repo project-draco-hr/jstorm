@@ -4,6 +4,6 @@
     exec_command(cmd);
   }
  catch (  Exception e) {
-    LOG.warn("No " + dir + " from "+ jarpath+ "by cmd:"+ cmd+ "!"+ e.getMessage());
+    LOG.warn("No " + dir + " from "+ jarpath+ " by cmd:"+ cmd+ "!\n"+ e.getMessage());
   }
 }

@@ -1,0 +1,16 @@
+{
+  File file=new File(confFile);
+  if (file.exists() == false) {
+    return findAndReadConfigFile(confFile,true);
+  }
+  Yaml yaml=new Yaml();
+  Map ret;
+  try {
+    ret=(Map)yaml.load(new FileReader(file));
+  }
+ catch (  FileNotFoundException e) {
+    ret=null;
+  }
+  if (ret == null)   ret=new HashMap();
+  return new HashMap(ret);
+}

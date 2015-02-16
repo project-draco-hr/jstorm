@@ -1,8 +1,0 @@
-{
-  if (other.is_set_ite()) {
-    this.ite=new InvalidTopologyException(other.ite);
-  }
-  if (other.is_set_tae()) {
-    this.tae=new TopologyAssignException(other.tae);
-  }
-}

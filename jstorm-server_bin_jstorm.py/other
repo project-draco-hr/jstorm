@@ -7,11 +7,12 @@ if (sys.platform == 'cygwin'):
     normclasspath = cygpath
 else:
     normclasspath = identity
-CONF_DIR = os.path.expanduser('~/.jstorm')
+CLIENT_CONF_FILE = ''
 JSTORM_DIR = '/'.join(os.path.realpath(__file__).split('/')[:(-2)])
 JSTORM_CONF_DIR = os.getenv('JSTORM_CONF_DIR', (JSTORM_DIR + '/conf'))
 LOG4J_CONF = (JSTORM_CONF_DIR + '/jstorm.log4j.properties')
 CONFIG_OPTS = []
+STATUS = 0
 if (not os.path.exists((JSTORM_DIR + '/RELEASE'))):
     print '******************************************'
     print "The jstorm client can only be run from within a release. You appear to be trying to run the client from a checkout of JStorm's source code."
@@ -20,4 +21,5 @@ if (not os.path.exists((JSTORM_DIR + '/RELEASE'))):
     sys.exit(1)
 COMMANDS = {'jar': jar, 'kill': kill, 'nimbus': nimbus, 'zktool': zktool, 'drpc': drpc, 'supervisor': supervisor, 'localconfvalue': print_localconfvalue, 'remoteconfvalue': print_remoteconfvalue, 'classpath': print_classpath, 'activate': activate, 'deactivate': deactivate, 'rebalance': rebalance, 'help': print_usage, 'metricsMonitor': metrics_Monitor, 'list': list, 'restart': restart, }
 if (__name__ == '__main__'):
+    check_java()
     main()

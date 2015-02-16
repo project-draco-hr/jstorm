@@ -1,6 +1,0 @@
-{
-  if (active.get()) {
-    return frequence;
-  }
-  return -1;
-}

@@ -1,3 +1,11 @@
 {
-  return nodeId.equals(((Node)o).nodeId);
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  Node other=(Node)obj;
+  if (nodeId == null) {
+    if (other.nodeId != null)     return false;
+  }
+ else   if (!nodeId.equals(other.nodeId))   return false;
+  return true;
 }

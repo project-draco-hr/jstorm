@@ -10,14 +10,6 @@
   int cpuNum=assignment.getCpu();
   String childopts=getChildOpts(totalConf);
   childopts+=getGcDumpParam(totalConf);
-  childopts=childopts.replace("%ID%",port.toString());
-  childopts=childopts.replace("%TOPOLOGYID%",topologyId);
-  if (stormhome != null) {
-    childopts=childopts.replace("%JSTORM_HOME%",stormhome);
-  }
- else {
-    childopts=childopts.replace("%JSTORM_HOME%","./");
-  }
   Map<String,String> environment=new HashMap<String,String>();
   if (ConfigExtension.getWorkerRedirectOutput(totalConf)) {
     environment.put("REDIRECT","true");
@@ -25,7 +17,6 @@
  else {
     environment.put("REDIRECT","false");
   }
-  String logFileName=JStormUtils.genLogName(assignment.getTopologyName(),port);
   environment.put("LD_LIBRARY_PATH",(String)totalConf.get(Config.JAVA_LIBRARY_PATH));
   StringBuilder commandSB=new StringBuilder();
   try {
@@ -47,16 +38,11 @@
   commandSB.append(" " + (assignment.getJvm() == null ? "" : assignment.getJvm()));
   commandSB.append(" -Djava.library.path=");
   commandSB.append((String)totalConf.get(Config.JAVA_LIBRARY_PATH));
-  commandSB.append(" -Dlogfile.name=");
-  commandSB.append(logFileName);
   if (stormhome != null) {
-    commandSB.append(" -Dlog4j.configuration=File:" + stormhome + "/conf/jstorm.log4j.properties");
     commandSB.append(" -Djstorm.home=");
     commandSB.append(stormhome);
   }
- else {
-    commandSB.append(" -Dlog4j.configuration=File:jstorm.log4j.properties");
-  }
+  commandSB.append(getLogParameter(totalConf,stormhome,assignment.getTopologyName(),port));
   String classpath=getClassPath(stormjar,stormhome,totalConf);
   String workerClassPath=(String)totalConf.get(Config.WORKER_CLASSPATH);
   List<String> otherLibs=(List<String>)stormConf.get(GenericOptionsParser.TOPOLOGY_LIB_NAME);
@@ -84,7 +70,16 @@
   commandSB.append(workerId);
   commandSB.append(" ");
   commandSB.append(workerClassPath + ":" + stormjar);
-  LOG.info("Launching worker with command: " + commandSB);
+  String cmd=commandSB.toString();
+  cmd=cmd.replace("%ID%",port.toString());
+  cmd=cmd.replace("%TOPOLOGYID%",topologyId);
+  if (stormhome != null) {
+    cmd=cmd.replace("%JSTORM_HOME%",stormhome);
+  }
+ else {
+    cmd=cmd.replace("%JSTORM_HOME%","./");
+  }
+  LOG.info("Launching worker with command: " + cmd);
   LOG.info("Environment:" + environment.toString());
-  JStormUtils.launch_process(commandSB.toString(),environment,true);
+  JStormUtils.launch_process(cmd,environment,true);
 }

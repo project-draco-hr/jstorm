@@ -1,0 +1,8 @@
+{
+  for (  String host : hosts) {
+    if (NetWorkUtils.equals(host,target) == true) {
+      return true;
+    }
+  }
+  return false;
+}

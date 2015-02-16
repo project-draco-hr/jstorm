@@ -7,15 +7,14 @@
   Set<String> cleanupIds=get_cleanup_ids(clusterState,active_topologys);
   for (  String topologyId : cleanupIds) {
     LOG.info("Cleaning up " + topologyId);
-    clusterState.teardown_heartbeats(topologyId);
-    clusterState.teardown_task_errors(topologyId);
+    clusterState.try_remove_storm(topologyId);
     nimbusData.getTaskHeartbeatsCache().remove(topologyId);
     String master_stormdist_root=StormConfig.masterStormdistRoot(nimbusData.getConf(),topologyId);
     try {
       PathUtils.rmr(master_stormdist_root);
     }
  catch (    IOException e) {
-      LOG.error("Failed to delete " + master_stormdist_root + ",",e);
+      LOG.warn("Failed to delete " + master_stormdist_root + ",",e);
     }
   }
 }

@@ -1,0 +1,22 @@
+{
+  teardown_heartbeats(topologyId);
+  teardown_task_errors(topologyId);
+  try {
+    cluster_state.delete_node(Cluster.assignment_path(topologyId));
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to delete zk Assignment " + topologyId);
+  }
+  try {
+    cluster_state.delete_node(Cluster.storm_task_root(topologyId));
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to delete zk taskInfo " + topologyId);
+  }
+  try {
+    cluster_state.delete_node(Cluster.monitor_path(topologyId));
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to delete zk monitor " + topologyId);
+  }
+}

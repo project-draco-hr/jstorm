@@ -3,6 +3,6 @@
   if (data == null || data.length == 0) {
     return null;
   }
-  Object obj=Utils.deserialize(data);
+  Object obj=Utils.deserialize(data,null);
   return obj.toString();
 }

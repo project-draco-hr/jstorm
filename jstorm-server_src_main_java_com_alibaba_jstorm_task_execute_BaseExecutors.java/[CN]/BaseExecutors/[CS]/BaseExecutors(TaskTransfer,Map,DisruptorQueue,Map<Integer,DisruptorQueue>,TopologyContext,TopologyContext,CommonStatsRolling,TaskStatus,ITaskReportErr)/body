@@ -22,4 +22,6 @@
   deserializeTimer=Metrics.registerTimer(idStr,MetricDef.DESERIALIZE_TIME,String.valueOf(taskId),Metrics.MetricType.TASK);
   Metrics.registerQueue(idStr,MetricDef.DESERIALIZE_QUEUE,deserializeQueue,String.valueOf(taskId),Metrics.MetricType.TASK);
   Metrics.registerQueue(idStr,MetricDef.EXECUTE_QUEUE,exeQueue,String.valueOf(taskId),Metrics.MetricType.TASK);
+  RotatingMapTrigger rotatingMapTrigger=new RotatingMapTrigger(storm_conf,idStr + "_rotating",exeQueue);
+  rotatingMapTrigger.register();
 }

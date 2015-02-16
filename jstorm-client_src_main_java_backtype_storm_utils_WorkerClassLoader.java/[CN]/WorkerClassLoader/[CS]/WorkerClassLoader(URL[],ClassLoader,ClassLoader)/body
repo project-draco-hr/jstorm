@@ -1,5 +1,0 @@
-{
-  super(urls,defaultClassLoader);
-  this.defaultClassLoader=defaultClassLoader;
-  this.JDKClassLoader=JDKClassLoader;
-}

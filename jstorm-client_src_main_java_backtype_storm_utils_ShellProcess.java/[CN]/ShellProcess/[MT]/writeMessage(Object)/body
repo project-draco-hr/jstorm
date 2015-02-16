@@ -1,3 +1,0 @@
-{
-  writeString(Utils.to_json(msg));
-}

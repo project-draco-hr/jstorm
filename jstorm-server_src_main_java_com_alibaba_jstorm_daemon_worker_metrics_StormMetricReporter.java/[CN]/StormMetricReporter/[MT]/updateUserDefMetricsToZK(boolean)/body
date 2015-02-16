@@ -8,7 +8,7 @@
   userDefMetricData.updateFromGauge(userDefMetric.getGauge());
   userDefMetricData.updateFromCounter(userDefMetric.getCounter());
   userDefMetricData.updateFromMeterData(userDefMetric.getMeter());
-  if (metricPerf == false) {
+  if (metricPerf) {
     userDefMetricData.updateFromHistogramData(userDefMetric.getHistogram());
     userDefMetricData.updateFromTimerData(userDefMetric.getTimer());
   }
@@ -21,7 +21,7 @@
   doCallback(userDefMetric.getGauge());
   doCallback(userDefMetric.getCounter());
   doCallback(userDefMetric.getMeter());
-  if (metricPerf == false) {
+  if (metricPerf) {
     doCallback(userDefMetric.getHistogram());
     doCallback(userDefMetric.getTimer());
   }

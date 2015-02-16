@@ -3,7 +3,7 @@
     if (worker.getNodeId() != null)     continue;
     if (worker.getHostname() != null) {
       for (      SupervisorInfo supervisor : supervisors) {
-        if (supervisor.getHostName().equals(worker.getHostname()) && supervisor.getWorkerPorts().size() > 0) {
+        if (NetWorkUtils.equals(supervisor.getHostName(),worker.getHostname()) && supervisor.getWorkerPorts().size() > 0) {
           this.putWorkerToSupervisor(supervisor,worker);
           break;
         }

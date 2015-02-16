@@ -10,4 +10,13 @@ def main():
     if (COMMANDS.get(COMMAND) == None):
         unknown_command(COMMAND)
         sys.exit((-1))
-    COMMANDS.get(COMMAND, 'help')(*ARGS)
+    if ((len(ARGS) != 0) and (ARGS[0] == 'help')):
+        print_usage(COMMAND)
+        sys.exit(0)
+    try:
+        COMMANDS.get(COMMAND, 'help')(*ARGS)
+    except Exception as msg:
+        print msg
+        print_usage(COMMAND)
+        sys.exit((-1))
+    sys.exit(STATUS)

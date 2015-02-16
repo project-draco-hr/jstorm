@@ -1,0 +1,13 @@
+{
+  HashCodeBuilder builder=new HashCodeBuilder();
+  boolean present_type=true && (is_set_type());
+  builder.append(present_type);
+  if (present_type)   builder.append(type);
+  boolean present_name=true && (is_set_name());
+  builder.append(present_name);
+  if (present_name)   builder.append(name);
+  boolean present_value=true;
+  builder.append(present_value);
+  if (present_value)   builder.append(value);
+  return builder.toHashCode();
+}

@@ -1,5 +1,6 @@
 {
   LOG.info("Successfully start reconnect thread");
+  thread=Thread.currentThread();
   while (closed == false) {
     NettyClient client=null;
     try {

@@ -1,7 +1,23 @@
 {
   if (!StormConfig.local_mode(conf)) {
-    String[] pathCache=tmpJarLocation.split("/");
-    String jarPath=tmpJarLocation + "/stormjar-" + pathCache[pathCache.length - 1]+ ".jar";
+    boolean existLibs=copyLibJars(tmpJarLocation,stormroot);
+    String jarPath=null;
+    List<String> files=PathUtils.read_dir_contents(tmpJarLocation);
+    for (    String file : files) {
+      if (file.endsWith(".jar")) {
+        jarPath=tmpJarLocation + PathUtils.SEPERATOR + file;
+        break;
+      }
+    }
+    if (jarPath == null) {
+      if (existLibs == false) {
+        throw new IllegalArgumentException("No jar under " + tmpJarLocation);
+      }
+ else {
+        LOG.info("No submit jar");
+        return;
+      }
+    }
     File srcFile=new File(jarPath);
     if (!srcFile.exists()) {
       throw new IllegalArgumentException(jarPath + " to copy to " + stormroot+ " does not exist!");
@@ -10,12 +26,6 @@
     File destFile=new File(path);
     FileUtils.copyFile(srcFile,destFile);
     srcFile.delete();
-    String libPath=StormConfig.stormlib_path(stormroot);
-    srcFile=new File(tmpJarLocation);
-    if (!srcFile.exists()) {
-      throw new IllegalArgumentException(tmpJarLocation + " to copy to " + stormroot+ " does not exist!");
-    }
-    destFile=new File(libPath);
-    FileUtils.copyDirectory(srcFile,destFile);
+    return;
   }
 }

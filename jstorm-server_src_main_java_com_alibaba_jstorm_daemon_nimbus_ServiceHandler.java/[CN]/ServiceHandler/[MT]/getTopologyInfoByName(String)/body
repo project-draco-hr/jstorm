@@ -1,0 +1,23 @@
+{
+  StormClusterState stormClusterState=data.getStormClusterState();
+  try {
+    Map<String,StormBase> bases=Cluster.topology_bases(stormClusterState);
+    for (    Entry<String,StormBase> entry : bases.entrySet()) {
+      String topologyId=entry.getKey();
+      StormBase base=entry.getValue();
+      if (StringUtils.equals(topologyName,base.getStormName()) == false) {
+        continue;
+      }
+      return getTopologyInfo(topologyId,base);
+    }
+  }
+ catch (  TException e) {
+    LOG.info("Failed to get topologyInfo " + topologyName,e);
+    throw e;
+  }
+catch (  Exception e) {
+    LOG.info("Failed to get topologyInfo " + topologyName,e);
+    throw new TException("Failed to get topologyInfo" + topologyName);
+  }
+  throw new NotAliveException("No topology of " + topologyName);
+}

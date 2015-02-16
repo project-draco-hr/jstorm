@@ -1,5 +1,4 @@
 {
-  StringBuilder sb=new StringBuilder();
   Map<String,String> map=new HashMap<String,String>();
   map.put(COMPONENTTONUM_TAG,Utils.to_json(componentToNum));
   map.put(MEM_TAG,String.valueOf(mem));

@@ -1,0 +1,22 @@
+{
+  CuratorFramework zkobj=null;
+  String masterHost=null;
+  try {
+    String root=String.valueOf(storm_conf.get(Config.STORM_ZOOKEEPER_ROOT));
+    String zkMasterDir=root + MASTER_PATH;
+    zkobj=Utils.newCurator(storm_conf,(List<String>)storm_conf.get(Config.STORM_ZOOKEEPER_SERVERS),storm_conf.get(Config.STORM_ZOOKEEPER_PORT),zkMasterDir);
+    zkobj.start();
+    if (zkobj.checkExists().forPath("/") == null) {
+      throw new RuntimeException("No alive nimbus ");
+    }
+    masterHost=new String(zkobj.getData().forPath("/"));
+    LOG.info("masterHost:" + masterHost);
+    return masterHost;
+  }
+  finally {
+    if (zkobj != null) {
+      zkobj.close();
+      zkobj=null;
+    }
+  }
+}

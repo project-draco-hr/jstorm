@@ -9,8 +9,7 @@
     return out_tasks;
   }
  else   if (GrouperType.shuffle.equals(grouptype)) {
-    int rnd=randomrange.nextInt();
-    return JStormUtils.mk_list(out_tasks.get(rnd));
+    return shuffer.grouper(values);
   }
  else   if (GrouperType.none.equals(grouptype)) {
     int rnd=Math.abs(random.nextInt() % out_tasks.size());

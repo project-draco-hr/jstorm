@@ -5,9 +5,6 @@
   RefreshConnections refreshConn=makeRefreshConnections();
   AsyncLoopThread refreshconn=new AsyncLoopThread(refreshConn,false,Thread.MIN_PRIORITY,true);
   threads.add(refreshconn);
-  TimeTick timeTick=new TimeTick(workerData);
-  AsyncLoopThread tick=new AsyncLoopThread(timeTick);
-  threads.add(tick);
   RefreshActive refreshZkActive=new RefreshActive(workerData);
   AsyncLoopThread refreshzk=new AsyncLoopThread(refreshZkActive,false,Thread.MIN_PRIORITY,true);
   threads.add(refreshzk);

@@ -11,8 +11,8 @@
       oprot.writeFieldBegin(TASK_METRIC_LIST_FIELD_DESC);
 {
         oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.task_metric_list.size()));
-        for (        TaskMetricData _iter261 : this.task_metric_list) {
-          _iter261.write(oprot);
+        for (        TaskMetricData _iter265 : this.task_metric_list) {
+          _iter265.write(oprot);
         }
         oprot.writeListEnd();
       }
@@ -24,8 +24,8 @@
       oprot.writeFieldBegin(WORKER_METRIC_LIST_FIELD_DESC);
 {
         oprot.writeListBegin(new org.apache.thrift7.protocol.TList(org.apache.thrift7.protocol.TType.STRUCT,this.worker_metric_list.size()));
-        for (        WorkerMetricData _iter262 : this.worker_metric_list) {
-          _iter262.write(oprot);
+        for (        WorkerMetricData _iter266 : this.worker_metric_list) {
+          _iter266.write(oprot);
         }
         oprot.writeListEnd();
       }

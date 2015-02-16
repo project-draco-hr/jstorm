@@ -1,0 +1,5 @@
+{
+  for (  Integer taskId : outboundTasks) {
+    outTaskStatus.put(taskId,false);
+  }
+}

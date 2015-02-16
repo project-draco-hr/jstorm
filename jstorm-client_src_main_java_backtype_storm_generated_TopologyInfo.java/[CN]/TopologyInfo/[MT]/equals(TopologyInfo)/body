@@ -36,5 +36,11 @@
     if (!(this_present_tasks && that_present_tasks))     return false;
     if (!this.tasks.equals(that.tasks))     return false;
   }
+  boolean this_present_userDefMetric=true && this.is_set_userDefMetric();
+  boolean that_present_userDefMetric=true && that.is_set_userDefMetric();
+  if (this_present_userDefMetric || that_present_userDefMetric) {
+    if (!(this_present_userDefMetric && that_present_userDefMetric))     return false;
+    if (!this.userDefMetric.equals(that.userDefMetric))     return false;
+  }
   return true;
 }

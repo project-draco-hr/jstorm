@@ -1,0 +1,15 @@
+{
+  String srcLibPath=StormConfig.stormlib_path(tmpJarLocation);
+  String destLibPath=StormConfig.stormlib_path(stormroot);
+  LOG.info("Begin to copy from " + srcLibPath + " to "+ destLibPath);
+  File srcFile=new File(srcLibPath);
+  if (srcFile.exists() == false) {
+    LOG.info("No lib jars " + srcLibPath);
+    return false;
+  }
+  File destFile=new File(destLibPath);
+  FileUtils.copyDirectory(srcFile,destFile);
+  PathUtils.rmr(srcLibPath);
+  LOG.info("Successfully copy libs " + destLibPath);
+  return true;
+}
