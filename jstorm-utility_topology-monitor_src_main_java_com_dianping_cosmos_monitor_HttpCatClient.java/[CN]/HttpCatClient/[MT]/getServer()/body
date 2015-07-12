@@ -1,0 +1,4 @@
+{
+  int index=CURRENT_SERVER_INDEX.get() % CAT_SERVERS.size();
+  return CAT_SERVERS.get(index);
+}

@@ -1,0 +1,12 @@
+{
+  String currentTopology=StringUtils.substringBefore(stormId,"-");
+  String topologyPrefix=StringUtils.substringBefore(currentTopology,"_");
+  String topologyIndex=StringUtils.substringAfter(currentTopology,"_");
+  int newIndex=Integer.parseInt(topologyIndex) + 1;
+  String newTopologyName=topologyPrefix + "_" + newIndex;
+  LOGGER.info("new topology name = " + newTopologyName);
+  execStartCommand(newTopologyName);
+  LOGGER.info("execStartCommand finish ..");
+  execShutdownCommand(currentTopology);
+  LOGGER.info("execShutdownCommand finish ..");
+}

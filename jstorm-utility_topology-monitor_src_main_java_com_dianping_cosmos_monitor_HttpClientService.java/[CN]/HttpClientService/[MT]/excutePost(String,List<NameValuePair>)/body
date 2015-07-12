@@ -1,0 +1,8 @@
+{
+  HttpClient httpClient=getHttpClient();
+  HttpPost httpPost=new HttpPost(url);
+  httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+  HttpResponse httpResponse=httpClient.execute(httpPost);
+  String response=parseResponse(url,httpResponse);
+  return response;
+}

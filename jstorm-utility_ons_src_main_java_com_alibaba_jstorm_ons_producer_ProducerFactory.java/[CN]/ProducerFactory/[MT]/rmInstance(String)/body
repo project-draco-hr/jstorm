@@ -1,0 +1,10 @@
+{
+  Producer producer=producers.remove(producerId);
+  if (producer == null) {
+    LOG.info("Producer of " + producerId + " has already been shutdown ");
+    return;
+  }
+  producer.shutdown();
+  LOG.info("Producer of " + producerId + " has been shutdown ");
+  return;
+}

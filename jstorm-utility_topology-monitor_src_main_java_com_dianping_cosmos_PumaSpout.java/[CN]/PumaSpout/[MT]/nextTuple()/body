@@ -1,0 +1,12 @@
+{
+  RowChangedEvent event=null;
+  try {
+    event=receiveQueue.take();
+  }
+ catch (  InterruptedException e) {
+    return;
+  }
+  String msgId=getMsgId(event);
+  collector.emit(getStreamId(event),new Values(event),msgId);
+  waitingForAck.put(msgId,event);
+}

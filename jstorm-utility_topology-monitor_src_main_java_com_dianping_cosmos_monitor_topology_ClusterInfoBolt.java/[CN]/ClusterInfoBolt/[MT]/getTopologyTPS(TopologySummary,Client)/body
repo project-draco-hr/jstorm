@@ -1,0 +1,17 @@
+{
+  long topologyTps=0l;
+  String topologyId=topology.get_id();
+  if (topologyId.startsWith("ClusterMonitor")) {
+    return topologyTps;
+  }
+  TopologyInfo topologyInfo=client.getTopologyInfo(topologyId);
+  if (topologyInfo == null) {
+    return topologyTps;
+  }
+  List<ExecutorSummary> executorSummaryList=topologyInfo.get_executors();
+  for (  ExecutorSummary executor : executorSummaryList) {
+    topologyTps+=getComponentTPS(executor);
+  }
+  LOGGER.info("topology = " + topology.get_name() + ", tps = "+ topologyTps);
+  return topologyTps;
+}

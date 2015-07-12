@@ -1,0 +1,5 @@
+{
+  metricClient=new MetricClient(context);
+  waithHistogram=metricClient.registerHistogram("OnsTupleWait",null);
+  processHistogram=metricClient.registerHistogram("OnsTupleProcess",null);
+}

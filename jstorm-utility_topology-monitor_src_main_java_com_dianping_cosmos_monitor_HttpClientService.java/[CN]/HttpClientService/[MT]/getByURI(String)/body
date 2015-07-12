@@ -1,0 +1,6 @@
+{
+  String response=excuteGet(url,true);
+  if (response == null) {
+    LOGGER.error("call uri error, response is null, uri = " + url);
+  }
+}

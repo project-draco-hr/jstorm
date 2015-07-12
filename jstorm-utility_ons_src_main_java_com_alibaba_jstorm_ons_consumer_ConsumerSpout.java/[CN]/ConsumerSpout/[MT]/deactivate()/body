@@ -1,0 +1,6 @@
+{
+  if (consumer != null && active == true) {
+    active=false;
+    consumer.shutdown();
+  }
+}

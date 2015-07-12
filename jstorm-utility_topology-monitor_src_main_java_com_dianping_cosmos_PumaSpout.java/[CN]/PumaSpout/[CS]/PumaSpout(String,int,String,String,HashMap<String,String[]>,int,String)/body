@@ -1,0 +1,9 @@
+{
+  pumaHost=host;
+  pumaPort=port;
+  pumaName=name;
+  pumaTarget=target;
+  watchTables=tables;
+  pumaServerId=serverId;
+  pumaSeqFileBase=seqFileBase;
+}

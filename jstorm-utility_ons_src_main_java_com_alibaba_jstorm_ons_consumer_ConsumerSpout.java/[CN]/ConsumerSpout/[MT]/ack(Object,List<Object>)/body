@@ -1,0 +1,4 @@
+{
+  OnsTuple OnsTuple=(OnsTuple)values.get(0);
+  finishTuple(OnsTuple);
+}

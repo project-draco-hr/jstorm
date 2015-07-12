@@ -1,0 +1,6 @@
+{
+  for (  String message : stream) {
+    collector.emit(topic,new Values(message));
+    _spoutMetric.incr();
+  }
+}

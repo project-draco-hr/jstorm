@@ -1,0 +1,16 @@
+{
+  collector=_collector;
+  _spoutMetric=new CountMetric();
+  context.registerMetric(CatMetricUtil.getSpoutMetricName(topic,group),_spoutMetric,Constants.EMIT_FREQUENCY_IN_SECONDS);
+  ConsumerConfig config=new ConsumerConfig();
+  try {
+    consumer=new Consumer(topic,group,config);
+  }
+ catch (  LionException e) {
+    throw new RuntimeException(e);
+  }
+  consumer.start();
+  stream=consumer.getStream();
+  fetchThread=new MessageFetcher(stream);
+  new Thread(fetchThread).start();
+}

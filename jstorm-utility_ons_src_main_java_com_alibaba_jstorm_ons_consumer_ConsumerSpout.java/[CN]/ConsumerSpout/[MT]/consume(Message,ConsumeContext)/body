@@ -1,0 +1,27 @@
+{
+  try {
+    OnsTuple OnsTuple=new OnsTuple(message);
+    if (flowControl) {
+      sendingQueue.offer(OnsTuple);
+    }
+ else {
+      sendTuple(OnsTuple);
+    }
+    if (autoAck) {
+      return Action.CommitMessage;
+    }
+ else {
+      OnsTuple.waitFinish();
+      if (OnsTuple.isSuccess() == true) {
+        return Action.CommitMessage;
+      }
+ else {
+        return Action.ReconsumeLater;
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to emit " + id,e);
+    return Action.ReconsumeLater;
+  }
+}

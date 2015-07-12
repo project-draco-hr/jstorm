@@ -1,0 +1,12 @@
+{
+  for (  DataPoint p : dataPoints) {
+    try {
+      if (CatMetricUtil.isCatMetric(p.name)) {
+        HttpCatClient.sendMetric(getTopologyName(),CatMetricUtil.getCatMetricKey(p.name),"sum",String.valueOf(p.value));
+      }
+    }
+ catch (    Exception e) {
+      LOGGER.warn("send metirc 2 cat error.",e);
+    }
+  }
+}

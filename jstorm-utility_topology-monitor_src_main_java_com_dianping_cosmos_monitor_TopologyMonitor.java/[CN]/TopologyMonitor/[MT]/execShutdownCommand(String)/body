@@ -1,0 +1,10 @@
+{
+  Process process;
+  try {
+    process=Runtime.getRuntime().exec(new String[]{"/usr/local/storm/bin/storm","kill",topologyName,"10"});
+    process.waitFor();
+  }
+ catch (  Exception e) {
+    LOGGER.error("",e);
+  }
+}

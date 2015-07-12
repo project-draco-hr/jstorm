@@ -1,0 +1,8 @@
+{
+  if (!(event instanceof RowChangedEvent)) {
+    LOG.error("received event " + event + " which is not a RowChangedEvent");
+    return;
+  }
+  RowChangedEvent e=(RowChangedEvent)event;
+  receiveQueue.add(e);
+}

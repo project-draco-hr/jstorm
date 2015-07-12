@@ -1,0 +1,9 @@
+{
+  if (TupleHelpers.isTickTuple(tuple)) {
+    if (nimbusClient == null) {
+      initClient(configMap);
+    }
+    getClusterInfo(client);
+    collector.emit(new Values(tuple));
+  }
+}

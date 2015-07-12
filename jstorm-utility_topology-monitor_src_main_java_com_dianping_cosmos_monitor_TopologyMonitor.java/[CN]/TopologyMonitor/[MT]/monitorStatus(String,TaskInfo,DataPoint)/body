@@ -1,0 +1,18 @@
+{
+  SpoutCounter counter=spoutCounterMap.get(taskInfo.srcTaskId);
+  if (counter == null) {
+    counter=new SpoutCounter();
+    spoutCounterMap.put(taskInfo.srcTaskId,counter);
+  }
+  counter.incrRepeatCounter();
+  String value=String.valueOf(p.value);
+  long increment=Long.parseLong(value);
+  counter.incrTupleCounter(increment);
+  if (counter.getRepeatCounter() >= 12) {
+    LOGGER.info("last minute tuple = " + counter.getTupleCounter());
+    if (counter.getTupleCounter() <= 10000) {
+      LOGGER.error("spout has problem, restar topology....");
+    }
+    spoutCounterMap.clear();
+  }
+}

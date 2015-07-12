@@ -1,0 +1,6 @@
+{
+  if (StringUtils.isBlank(spoutMetricName) || !StringUtils.startsWith(spoutMetricName,CAT_METRIC_NAME_PREFIX)) {
+    return "default";
+  }
+  return StringUtils.substringAfter(spoutMetricName,CAT_METRIC_NAME_PREFIX);
+}

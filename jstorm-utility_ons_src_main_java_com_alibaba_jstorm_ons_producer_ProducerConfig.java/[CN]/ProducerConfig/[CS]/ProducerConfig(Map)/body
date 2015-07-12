@@ -1,0 +1,7 @@
+{
+  super(conf);
+  producerId=(String)conf.get(PropertyKeyConst.ProducerId);
+  if (producerId == null) {
+    throw new RuntimeException(PropertyKeyConst.ProducerId + " hasn't been set");
+  }
+}

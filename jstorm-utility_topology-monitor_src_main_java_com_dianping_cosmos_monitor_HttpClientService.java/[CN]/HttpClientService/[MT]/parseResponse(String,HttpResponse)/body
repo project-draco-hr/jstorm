@@ -1,0 +1,10 @@
+{
+  int status=httpResponse.getStatusLine().getStatusCode();
+  if (status != 200) {
+    String errorMsg="Error occurs in calling acl service: " + url + ", with status:"+ status;
+    throw new Exception(errorMsg);
+  }
+  HttpEntity entry=httpResponse.getEntity();
+  String response=EntityUtils.toString(entry,"UTF-8");
+  return response;
+}

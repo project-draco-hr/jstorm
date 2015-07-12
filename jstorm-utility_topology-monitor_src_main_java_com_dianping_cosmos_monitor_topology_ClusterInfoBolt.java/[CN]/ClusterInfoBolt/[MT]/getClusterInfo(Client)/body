@@ -1,0 +1,34 @@
+{
+  try {
+    ClusterSummary clusterSummary=client.getClusterInfo();
+    List<SupervisorSummary> supervisorSummaryList=clusterSummary.get_supervisors();
+    int totalWorkers=0;
+    int usedWorkers=0;
+    for (    SupervisorSummary summary : supervisorSummaryList) {
+      totalWorkers+=summary.get_num_workers();
+      usedWorkers+=summary.get_num_used_workers();
+    }
+    int freeWorkers=totalWorkers - usedWorkers;
+    LOGGER.info("cluster totalWorkers = " + totalWorkers + ", usedWorkers = "+ usedWorkers+ ", freeWorkers  = "+ freeWorkers);
+    HttpCatClient.sendMetric("ClusterMonitor","freeSlots","avg",String.valueOf(freeWorkers));
+    HttpCatClient.sendMetric("ClusterMonitor","totalSlots","avg",String.valueOf(totalWorkers));
+    List<TopologySummary> topologySummaryList=clusterSummary.get_topologies();
+    long clusterTPS=0l;
+    for (    TopologySummary topology : topologySummaryList) {
+      long topologyTPS=getTopologyTPS(topology,client);
+      clusterTPS+=topologyTPS;
+      if (topology.get_name().startsWith("ClusterMonitor")) {
+        continue;
+      }
+      HttpCatClient.sendMetric(topology.get_name(),topology.get_name() + "-TPS","avg",String.valueOf(topologyTPS));
+    }
+    HttpCatClient.sendMetric("ClusterMonitor","ClusterEmitTPS","avg",String.valueOf(clusterTPS));
+  }
+ catch (  TException e) {
+    initClient(configMap);
+    LOGGER.error("get client info error.",e);
+  }
+catch (  NotAliveException nae) {
+    LOGGER.warn("topology is dead.",nae);
+  }
+}

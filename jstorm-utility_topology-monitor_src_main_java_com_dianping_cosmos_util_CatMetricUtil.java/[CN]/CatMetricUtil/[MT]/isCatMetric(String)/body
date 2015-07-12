@@ -1,0 +1,6 @@
+{
+  if (StringUtils.isBlank(dataPointName)) {
+    return false;
+  }
+  return StringUtils.startsWith(dataPointName,CAT_METRIC_NAME_PREFIX);
+}

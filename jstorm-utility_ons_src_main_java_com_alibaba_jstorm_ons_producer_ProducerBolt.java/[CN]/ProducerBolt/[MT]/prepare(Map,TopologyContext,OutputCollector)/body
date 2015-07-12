@@ -1,0 +1,11 @@
+{
+  this.collector=collector;
+  this.runCounter=new RunCounter(ProducerBolt.class);
+  this.producerConfig=new ProducerConfig(stormConf);
+  try {
+    this.producer=ProducerFactory.mkInstance(producerConfig);
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

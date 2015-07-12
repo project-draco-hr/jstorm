@@ -1,0 +1,16 @@
+{
+  OnsTuple OnsTuple=(OnsTuple)values.get(0);
+  AtomicInteger failTimes=OnsTuple.getFailureTimes();
+  int failNum=failTimes.incrementAndGet();
+  if (failNum > maxFailTimes) {
+    LOG.warn("Message " + OnsTuple.getMessage().getMsgID() + " fail times "+ failNum);
+    finishTuple(OnsTuple);
+    return;
+  }
+  if (flowControl) {
+    sendingQueue.offer(OnsTuple);
+  }
+ else {
+    sendTuple(OnsTuple);
+  }
+}

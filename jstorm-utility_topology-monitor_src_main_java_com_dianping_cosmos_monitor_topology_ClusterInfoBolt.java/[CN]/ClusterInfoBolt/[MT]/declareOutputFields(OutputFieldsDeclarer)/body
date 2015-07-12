@@ -1,0 +1,3 @@
+{
+  outputfieldsdeclarer.declare(new Fields("monitor"));
+}

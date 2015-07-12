@@ -1,0 +1,4 @@
+{
+  LOG.debug("ack: " + msgId);
+  waitingForAck.remove(msgId);
+}

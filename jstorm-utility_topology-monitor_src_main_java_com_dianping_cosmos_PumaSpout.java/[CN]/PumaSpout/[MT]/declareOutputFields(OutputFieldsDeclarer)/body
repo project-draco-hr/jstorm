@@ -1,0 +1,9 @@
+{
+  for (  Entry<String,String[]> entry : watchTables.entrySet()) {
+    String db=entry.getKey();
+    for (    String table : entry.getValue()) {
+      String dbTable=db + "." + table;
+      declarer.declareStream(dbTable,new Fields("event"));
+    }
+  }
+}

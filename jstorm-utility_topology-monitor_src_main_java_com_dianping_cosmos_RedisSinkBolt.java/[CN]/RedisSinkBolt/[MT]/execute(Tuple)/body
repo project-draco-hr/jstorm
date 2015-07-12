@@ -1,0 +1,27 @@
+{
+  byte[] key=input.getBinary(0);
+  byte[] value=input.getBinary(1);
+  if (key == null || value == null) {
+    collector.ack(input);
+    return;
+  }
+  try {
+    if (updater != null) {
+      byte[] oldValue=retryGet(key);
+      byte[] newValue=updater.update(oldValue,value);
+      if (newValue == null) {
+        collector.ack(input);
+        return;
+      }
+      retrySet(key,newValue);
+      collector.ack(input);
+      return;
+    }
+    retrySet(key,value);
+    collector.ack(input);
+  }
+ catch (  JedisConnectionException e) {
+    LOG.warn("JedisConnectionException catched ",e);
+    collector.fail(input);
+  }
+}

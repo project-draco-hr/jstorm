@@ -1,0 +1,4 @@
+{
+  Map<String,Object> conf=new HashMap<String,Object>();
+  return conf;
+}

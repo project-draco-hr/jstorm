@@ -1,0 +1,7 @@
+{
+  HttpClient httpClient=getHttpClient();
+  HttpUriRequest request=getGetRequest(url,useURI);
+  HttpResponse httpResponse=httpClient.execute(request);
+  String response=parseResponse(url,httpResponse);
+  return response;
+}

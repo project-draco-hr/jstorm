@@ -1,0 +1,14 @@
+{
+  StringWriter stringWriter=new StringWriter();
+  String json="";
+  try {
+    JsonGenerator gen=new JsonFactory().createJsonGenerator(stringWriter);
+    MAPPER.writeValue(gen,pojo);
+    gen.close();
+    json=stringWriter.toString();
+  }
+ catch (  Exception e) {
+    LOGGER.error(pojo.getClass().getName() + "???json??????",e);
+  }
+  return json;
+}

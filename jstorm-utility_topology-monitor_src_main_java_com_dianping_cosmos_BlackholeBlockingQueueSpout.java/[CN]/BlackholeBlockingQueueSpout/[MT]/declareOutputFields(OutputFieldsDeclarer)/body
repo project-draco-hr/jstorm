@@ -1,0 +1,3 @@
+{
+  declarer.declareStream(topic,new Fields("event"));
+}

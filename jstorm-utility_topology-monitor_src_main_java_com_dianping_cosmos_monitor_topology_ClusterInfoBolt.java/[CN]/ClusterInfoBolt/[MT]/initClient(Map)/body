@@ -1,0 +1,4 @@
+{
+  nimbusClient=NimbusClient.getConfiguredClient(map);
+  client=nimbusClient.getClient();
+}

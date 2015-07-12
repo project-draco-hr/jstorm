@@ -1,0 +1,13 @@
+{
+  this.collector=collector;
+  GenericObjectPoolConfig pconf=new GenericObjectPoolConfig();
+  pconf.setMaxWaitMillis(2000);
+  pconf.setMaxTotal(1000);
+  pconf.setTestOnBorrow(false);
+  pconf.setTestOnReturn(false);
+  pconf.setTestWhileIdle(true);
+  pconf.setMinEvictableIdleTimeMillis(120000);
+  pconf.setTimeBetweenEvictionRunsMillis(60000);
+  pconf.setNumTestsPerEvictionRun(-1);
+  pool=new JedisPool(pconf,redisHost,redisPort,timeout);
+}

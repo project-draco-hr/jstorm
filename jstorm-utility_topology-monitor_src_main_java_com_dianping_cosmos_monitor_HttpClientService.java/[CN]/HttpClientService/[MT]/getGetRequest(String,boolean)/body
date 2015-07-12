@@ -1,0 +1,12 @@
+{
+  HttpUriRequest request;
+  if (useURI) {
+    URL requestURL=new URL(url);
+    URI uri=new URI(requestURL.getProtocol(),null,requestURL.getHost(),requestURL.getPort(),requestURL.getPath(),requestURL.getQuery(),null);
+    request=new HttpGet(uri);
+  }
+ else {
+    request=new HttpGet(url);
+  }
+  return request;
+}

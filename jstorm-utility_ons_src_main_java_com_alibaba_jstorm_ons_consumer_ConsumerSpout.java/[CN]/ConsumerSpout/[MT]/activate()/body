@@ -1,0 +1,6 @@
+{
+  if (consumer != null && active == false) {
+    active=true;
+    consumer.start();
+  }
+}

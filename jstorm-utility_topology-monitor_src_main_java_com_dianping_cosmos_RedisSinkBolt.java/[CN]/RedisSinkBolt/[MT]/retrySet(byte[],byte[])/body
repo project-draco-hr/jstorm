@@ -1,0 +1,27 @@
+{
+  int retry=0;
+  String ret;
+  while (true) {
+    Jedis jedis=null;
+    try {
+      jedis=pool.getResource();
+      ret=jedis.set(key,value);
+      return ret;
+    }
+ catch (    JedisConnectionException e) {
+      if (jedis != null) {
+        pool.returnBrokenResource(jedis);
+        jedis=null;
+      }
+      if (retry > retryLimit) {
+        throw e;
+      }
+      retry++;
+    }
+ finally {
+      if (jedis != null) {
+        pool.returnResource(jedis);
+      }
+    }
+  }
+}

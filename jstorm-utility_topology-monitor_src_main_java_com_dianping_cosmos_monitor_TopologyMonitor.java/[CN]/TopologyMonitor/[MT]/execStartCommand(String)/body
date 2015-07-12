@@ -1,0 +1,10 @@
+{
+  Process process;
+  try {
+    process=Runtime.getRuntime().exec(new String[]{"/usr/local/storm/bin/storm","jar","/home/hadoop/topology/meteor-traffic-0.0.1.jar","com.dianping.data.warehouse.traffic.mobile.MobileUVTopology",topologyName});
+    process.waitFor();
+  }
+ catch (  Exception e) {
+    LOGGER.error("",e);
+  }
+}

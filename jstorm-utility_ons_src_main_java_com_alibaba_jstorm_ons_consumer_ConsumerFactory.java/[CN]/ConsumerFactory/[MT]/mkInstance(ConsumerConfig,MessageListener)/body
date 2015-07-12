@@ -1,0 +1,19 @@
+{
+  String consumerId=consumerConfig.getConsumerId();
+  Consumer consumer=consumers.get(consumerId);
+  if (consumer != null) {
+    LOG.info("Consumer of " + consumerId + " has been created, don't recreate it ");
+    return null;
+  }
+  Properties properties=new Properties();
+  properties.put(PropertyKeyConst.AccessKey,consumerConfig.getAccessKey());
+  properties.put(PropertyKeyConst.SecretKey,consumerConfig.getSecretKey());
+  properties.put(PropertyKeyConst.ConsumerId,consumerId);
+  properties.put(PropertyKeyConst.ConsumeThreadNums,consumerConfig.getConsumerThreadNum());
+  consumer=ONSFactory.createConsumer(properties);
+  consumer.subscribe(consumerConfig.getTopic(),consumerConfig.getSubExpress(),listener);
+  consumer.start();
+  consumers.put(consumerId,consumer);
+  LOG.info("Successfully create " + consumerId + " consumer");
+  return consumer;
+}

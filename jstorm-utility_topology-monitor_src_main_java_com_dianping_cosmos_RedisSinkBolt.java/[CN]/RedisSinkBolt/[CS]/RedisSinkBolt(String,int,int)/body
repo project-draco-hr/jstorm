@@ -1,0 +1,3 @@
+{
+  this(redisHost,redisPort,50,retryLimit);
+}

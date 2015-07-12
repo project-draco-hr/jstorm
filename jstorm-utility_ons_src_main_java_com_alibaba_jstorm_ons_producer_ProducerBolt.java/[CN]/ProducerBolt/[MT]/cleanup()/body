@@ -1,0 +1,4 @@
+{
+  ProducerFactory.rmInstance(producerConfig.getProducerId());
+  producer=null;
+}

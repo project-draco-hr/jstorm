@@ -1,0 +1,4 @@
+{
+  this.topic=topic;
+  this.group=group;
+}

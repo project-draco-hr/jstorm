@@ -1,0 +1,5 @@
+{
+  this.collector=outputcollector;
+  this.configMap=map;
+  initClient(configMap);
+}

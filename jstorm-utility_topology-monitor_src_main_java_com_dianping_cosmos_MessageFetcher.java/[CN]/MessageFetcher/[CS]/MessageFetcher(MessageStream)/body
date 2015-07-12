@@ -1,0 +1,5 @@
+{
+  this.running=true;
+  this.stream=stream;
+  this.emitQueue=new LinkedBlockingQueue<String>(MAX_QUEUE_SIZE);
+}

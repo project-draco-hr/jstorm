@@ -1,0 +1,14 @@
+{
+  String message=fetchThread.pollMessage();
+  if (message != null) {
+    collector.emit(topic,new Values(message));
+    _spoutMetric.incr();
+  }
+ else {
+    Utils.sleep(100);
+    warnningStep++;
+    if (warnningStep % 100 == 0) {
+      LOG.warn("Queue is empty, cannot poll message.");
+    }
+  }
+}

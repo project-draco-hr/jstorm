@@ -1,0 +1,5 @@
+{
+  LOG.debug("fail: " + msgId + ", resend event");
+  RowChangedEvent event=waitingForAck.get(msgId);
+  collector.emit(getStreamId(event),new Values(event),getMsgId(event));
+}

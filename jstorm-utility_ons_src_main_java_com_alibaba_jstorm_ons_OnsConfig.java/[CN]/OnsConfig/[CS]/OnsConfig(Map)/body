@@ -1,0 +1,12 @@
+{
+  topic=(String)conf.get("Topic");
+  if (conf.get("SubExpress") != null) {
+    subExpress=(String)conf.get("SubExpress");
+  }
+ else {
+    subExpress="*";
+  }
+  accessKey=(String)conf.get(PropertyKeyConst.AccessKey);
+  secretKey=(String)conf.get(PropertyKeyConst.SecretKey);
+  checkValid();
+}

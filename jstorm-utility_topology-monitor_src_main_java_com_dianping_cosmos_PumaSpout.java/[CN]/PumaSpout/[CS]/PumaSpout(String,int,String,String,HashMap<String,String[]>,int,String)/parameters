@@ -1,0 +1,7 @@
+String host
+int port
+String name
+String target
+HashMap<String,String[]> tables
+int serverId
+String seqFileBase

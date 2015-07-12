@@ -1,0 +1,31 @@
+{
+  long componentTps=0l;
+  if (executor == null) {
+    return componentTps;
+  }
+  String componentId=executor.get_component_id();
+  if (Utils.isSystemId(componentId)) {
+    return componentTps;
+  }
+  if (executor.get_stats() == null) {
+    return componentTps;
+  }
+  Map<String,Map<String,Long>> emittedMap=executor.get_stats().get_emitted();
+  Map<String,Long> minutesEmitted=emittedMap.get("600");
+  if (minutesEmitted == null) {
+    return componentTps;
+  }
+  for (  Map.Entry<String,Long> emittedEntry : minutesEmitted.entrySet()) {
+    if (Utils.isSystemId(emittedEntry.getKey())) {
+      continue;
+    }
+    if (executor.get_uptime_secs() >= 600) {
+      componentTps+=emittedEntry.getValue() / 600;
+    }
+    if (executor.get_uptime_secs() >= 10 && executor.get_uptime_secs() < 600) {
+      componentTps+=emittedEntry.getValue() / executor.get_uptime_secs();
+    }
+  }
+  LOGGER.debug("component = " + componentId + ", tps = "+ componentTps);
+  return componentTps;
+}

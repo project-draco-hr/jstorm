@@ -1,0 +1,12 @@
+{
+  OnsTuple OnsTuple=null;
+  try {
+    OnsTuple=sendingQueue.take();
+  }
+ catch (  InterruptedException e) {
+  }
+  if (OnsTuple == null) {
+    return;
+  }
+  sendTuple(OnsTuple);
+}

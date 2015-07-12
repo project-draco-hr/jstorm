@@ -1,0 +1,15 @@
+{
+  try {
+    JsonNode tree1=MAPPER.readTree(firstJSON);
+    JsonNode tree2=MAPPER.readTree(secondJSON);
+    boolean areEqual=tree1.equals(tree2);
+    return areEqual;
+  }
+ catch (  JsonProcessingException e) {
+    LOGGER.error("json compare wrong:" + firstJSON + ";"+ secondJSON,e);
+  }
+catch (  IOException e) {
+    LOGGER.error("json compare wrong:" + firstJSON + ";"+ secondJSON,e);
+  }
+  return false;
+}

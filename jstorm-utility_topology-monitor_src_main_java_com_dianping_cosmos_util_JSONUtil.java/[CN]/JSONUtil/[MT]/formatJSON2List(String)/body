@@ -1,0 +1,10 @@
+{
+  List<?> list=null;
+  try {
+    list=MAPPER.readValue(json,List.class);
+  }
+ catch (  Exception e) {
+    LOGGER.error("formatJSON2List error, json = " + json,e);
+  }
+  return list;
+}

@@ -1,0 +1,26 @@
+{
+  collector=_collector;
+  receiveQueue=new LinkedBlockingQueue<RowChangedEvent>();
+  waitingForAck=new ConcurrentHashMap<String,RowChangedEvent>();
+  ConfigurationBuilder configBuilder=new ConfigurationBuilder();
+  configBuilder.ddl(false);
+  configBuilder.dml(true);
+  configBuilder.transaction(false);
+  if (pumaSeqFileBase != null) {
+    configBuilder.seqFileBase(pumaSeqFileBase);
+  }
+  configBuilder.host(pumaHost);
+  configBuilder.port(pumaPort);
+  configBuilder.serverId(pumaServerId);
+  configBuilder.name(pumaName);
+  for (  Entry<String,String[]> e : watchTables.entrySet()) {
+    String db=e.getKey();
+    String[] tabs=e.getValue();
+    configBuilder.tables(db,tabs);
+  }
+  configBuilder.target(pumaTarget);
+  PumaClient pc=new PumaClient(configBuilder.build());
+  listener=new PumaEventListener();
+  pc.register(listener);
+  pc.start();
+}

@@ -1,0 +1,8 @@
+{
+  TopologyBuilder builder=new TopologyBuilder();
+  int writerParallel=JStormUtils.parseInt(conf.get("topology.producer.parallel"),1);
+  int spoutParallel=JStormUtils.parseInt(conf.get("topology.consumer.parallel"),1);
+  builder.setSpout("OnsConsumer",new ConsumerSpout(),spoutParallel);
+  builder.setBolt("OnsProducer",new ProducerBolt(),writerParallel).localFirstGrouping("OnsConsumer");
+  return builder;
+}

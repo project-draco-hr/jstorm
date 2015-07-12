@@ -1,0 +1,4 @@
+String redisHost
+int redisPort
+int timeout
+int retryLimit

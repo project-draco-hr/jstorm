@@ -1,0 +1,22 @@
+{
+  String server=getServer();
+  try {
+    StringBuilder request=new StringBuilder();
+    request.append(server);
+    request.append("cat/r/monitor?timestamp=");
+    request.append(System.currentTimeMillis());
+    request.append("&group=Storm&domain=");
+    request.append(domain);
+    request.append("&key=");
+    request.append(key);
+    request.append("&op=");
+    request.append(op);
+    request.append("&" + op + "=");
+    request.append(value);
+    httClientSerivce.get(request.toString());
+  }
+ catch (  Exception e) {
+    CURRENT_SERVER_INDEX.getAndIncrement();
+    LOGGER.error("send to cat " + server + " error.",e);
+  }
+}

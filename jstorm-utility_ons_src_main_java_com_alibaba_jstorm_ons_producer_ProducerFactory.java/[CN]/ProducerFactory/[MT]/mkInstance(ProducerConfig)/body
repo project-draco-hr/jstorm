@@ -1,0 +1,17 @@
+{
+  String producerId=producerConfig.getProducerId();
+  Producer producer=producers.get(producerId);
+  if (producer != null) {
+    LOG.info("Producer of " + producerId + " has been created, don't recreate it ");
+    return producer;
+  }
+  Properties properties=new Properties();
+  properties.put(PropertyKeyConst.ProducerId,producerConfig.getProducerId());
+  properties.put(PropertyKeyConst.AccessKey,producerConfig.getAccessKey());
+  properties.put(PropertyKeyConst.SecretKey,producerConfig.getSecretKey());
+  producer=ONSFactory.createProducer(properties);
+  producer.start();
+  producers.put(producerId,producer);
+  LOG.info("Successfully create " + producerId + " producer");
+  return producer;
+}

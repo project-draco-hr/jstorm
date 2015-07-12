@@ -1,0 +1,3 @@
+String redisHost
+int redisPort
+int retryLimit

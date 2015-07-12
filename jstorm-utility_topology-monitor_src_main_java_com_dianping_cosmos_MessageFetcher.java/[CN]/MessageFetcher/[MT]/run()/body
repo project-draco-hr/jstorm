@@ -1,0 +1,15 @@
+{
+  while (running) {
+    for (    String message : stream) {
+      try {
+        while (!emitQueue.offer(message,TIME_OUT,TimeUnit.MILLISECONDS)) {
+          LOG.error("Queue is full, cannot offer message.");
+        }
+      }
+ catch (      InterruptedException e) {
+        LOG.error("Thread Interrupted");
+        running=false;
+      }
+    }
+  }
+}

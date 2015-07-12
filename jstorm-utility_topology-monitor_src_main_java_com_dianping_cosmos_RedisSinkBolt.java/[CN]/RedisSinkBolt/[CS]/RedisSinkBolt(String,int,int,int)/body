@@ -1,0 +1,6 @@
+{
+  this.redisHost=redisHost;
+  this.redisPort=redisPort;
+  this.timeout=timeout;
+  this.retryLimit=retryLimit;
+}

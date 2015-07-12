@@ -1,0 +1,14 @@
+{
+  StringWriter stringWriter=new StringWriter();
+  String json="";
+  try {
+    JsonGenerator gen=new JsonFactory().createJsonGenerator(stringWriter);
+    MAPPER.writeValue(gen,map);
+    gen.close();
+    json=stringWriter.toString();
+  }
+ catch (  Exception e) {
+    LOGGER.error("",e);
+  }
+  return json;
+}

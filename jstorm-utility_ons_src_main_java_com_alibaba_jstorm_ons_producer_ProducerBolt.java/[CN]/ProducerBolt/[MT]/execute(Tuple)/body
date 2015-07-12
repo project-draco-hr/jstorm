@@ -1,0 +1,21 @@
+{
+  OnsTuple msgTuple=(OnsTuple)tuple.getValue(0);
+  long before=System.currentTimeMillis();
+  SendResult sendResult=null;
+  try {
+    Message msg=new Message(producerConfig.getTopic(),producerConfig.getSubExpress(),msgTuple.getMessage().getBody());
+    if (msgTuple.getMessage().getKey() != null) {
+      msg.setKey(msgTuple.getMessage().getKey());
+    }
+    sendResult=producer.send(msg);
+    LOG.info("Success send msg of " + msgTuple.getMessage().getMsgID());
+    runCounter.count(System.currentTimeMillis() - before);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to send message, SendResult:" + sendResult + "\n",e);
+    runCounter.count(System.currentTimeMillis() - before);
+    collector.fail(tuple);
+    return;
+  }
+  collector.ack(tuple);
+}
