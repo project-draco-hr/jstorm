@@ -1,7 +1,0 @@
-{
-  this();
-  this.port=port;
-  set_port_isSet(true);
-  this.topology=topology;
-  this.tasks=tasks;
-}

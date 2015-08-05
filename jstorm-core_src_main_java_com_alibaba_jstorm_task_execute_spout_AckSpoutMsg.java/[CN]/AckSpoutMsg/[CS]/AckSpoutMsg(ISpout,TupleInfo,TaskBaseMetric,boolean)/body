@@ -1,0 +1,11 @@
+{
+  this.task_stats=_task_stats;
+  this.spout=_spout;
+  this.isDebug=_isDebug;
+  this.msgId=tupleInfo.getMessageId();
+  this.stream=tupleInfo.getStream();
+  if (tupleInfo.getTimestamp() != 0) {
+    this.timeStamp=System.currentTimeMillis() - tupleInfo.getTimestamp();
+  }
+  this.values=tupleInfo.getValues();
+}

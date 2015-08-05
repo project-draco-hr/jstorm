@@ -1,0 +1,5 @@
+{
+  this.baseMetric=null;
+  this.inputMetric=null;
+  this.outputMetric=null;
+}

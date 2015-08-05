@@ -1,0 +1,7 @@
+String topologyId
+Set<Integer> taskIds
+String topologyName
+long mem
+int cpu
+String jvm
+long timeStamp

@@ -1,0 +1,24 @@
+{
+  Map<Integer,List<TaskError>> ret=new HashMap<Integer,List<TaskError>>();
+  try {
+    List<String> errorTasks=stormClusterState.task_error_ids(topologyId);
+    if (errorTasks == null || errorTasks.size() == 0) {
+      return ret;
+    }
+    for (    String taskIdStr : errorTasks) {
+      Integer taskId=-1;
+      try {
+        taskId=Integer.valueOf(taskIdStr);
+      }
+ catch (      Exception e) {
+        continue;
+      }
+      List<TaskError> taskErrorList=stormClusterState.task_errors(topologyId,taskId);
+      ret.put(taskId,taskErrorList);
+    }
+    return ret;
+  }
+ catch (  Exception e) {
+    return ret;
+  }
+}

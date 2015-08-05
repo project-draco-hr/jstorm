@@ -1,0 +1,11 @@
+{
+  if (object == null) {
+    return cache;
+  }
+  if (cache == null) {
+    cache=new Histogram.HistorgramPair();
+  }
+  cache.addValue(object.getSum());
+  cache.addTimes(object.getTimes());
+  return cache;
+}

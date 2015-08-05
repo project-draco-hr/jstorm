@@ -1,0 +1,59 @@
+{
+  List<TableData> ret=new ArrayList<TableData>();
+  TableData table=new TableData();
+  ret.add(table);
+  List<String> headers=table.getHeaders();
+  List<Map<String,ColumnData>> lines=table.getLines();
+  table.setName("Worker " + UIDef.METRICS);
+  List<String> keys=getSortedKeys(UIUtils.getKeys(metrics.values()));
+  headers.add(UIDef.PORT);
+  headers.add(MetricDef.NETTY);
+  headers.addAll(keys);
+  TreeMap<String,MetricInfo> tmpMap=new TreeMap<String,MetricInfo>();
+  tmpMap.putAll(metrics);
+  Map<String,MetricInfo> showMap=new TreeMap<String,MetricInfo>();
+  long pos=JStormUtils.parseLong(paramMap.get(UIDef.POS),0);
+  long index=0;
+  for (  Entry<String,MetricInfo> entry : tmpMap.entrySet()) {
+    if (index < pos) {
+      index++;
+    }
+ else     if (pos <= index && index < pos + UIUtils.ONE_TABLE_PAGE_SIZE) {
+      showMap.put(entry.getKey(),entry.getValue());
+      index++;
+    }
+ else {
+      break;
+    }
+  }
+  for (  Entry<String,MetricInfo> entry : showMap.entrySet()) {
+    Map<String,ColumnData> line=new HashMap<String,ColumnData>();
+    lines.add(line);
+    String slot=entry.getKey();
+    MetricInfo metric=entry.getValue();
+    ColumnData slotColumn=new ColumnData();
+    slotColumn.addText(slot);
+    line.put(UIDef.PORT,slotColumn);
+    ColumnData nettyColumn=new ColumnData();
+    line.put(MetricDef.NETTY,nettyColumn);
+    if (StringUtils.isBlank(paramMap.get(UIDef.TOPOLOGY))) {
+      nettyColumn.addText(MetricDef.NETTY);
+    }
+ else {
+      LinkData linkData=new LinkData();
+      nettyColumn.addLinkData(linkData);
+      linkData.setUrl(UIDef.LINK_WINDOW_TABLE);
+      linkData.setText(MetricDef.NETTY);
+      linkData.addParam(UIDef.CLUSTER,paramMap.get(UIDef.CLUSTER));
+      linkData.addParam(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_NETTY);
+      linkData.addParam(UIDef.TOPOLOGY,paramMap.get(UIDef.TOPOLOGY));
+    }
+    for (    String key : keys) {
+      String value=UIUtils.getValue(metric,key,window);
+      ColumnData valueColumn=new ColumnData();
+      valueColumn.addText(value);
+      line.put(key,valueColumn);
+    }
+  }
+  return ret;
+}

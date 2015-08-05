@@ -1,0 +1,6 @@
+{
+  List<Integer> ret;
+  ret=intraGroup(values);
+  if (ret == null)   ret=interGroup(values);
+  return ret;
+}

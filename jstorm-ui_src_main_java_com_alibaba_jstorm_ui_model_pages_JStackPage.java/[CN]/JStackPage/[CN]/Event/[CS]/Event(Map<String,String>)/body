@@ -1,0 +1,16 @@
+{
+  clusterName=paramMap.get(UIDef.CLUSTER);
+  host=paramMap.get(UIDef.HOST);
+  workerport=paramMap.get(UIDef.PORT);
+  topologyId=paramMap.get(UIDef.TOPOLOGY);
+  logServerPort=paramMap.get(UIDef.LOG_SERVER_PORT);
+  if (StringUtils.isBlank(host)) {
+    throw new IllegalArgumentException("Please set host");
+  }
+ else   if (StringUtils.isBlank(workerport)) {
+    throw new IllegalArgumentException("Please set port");
+  }
+ else   if (StringUtils.isBlank(logServerPort)) {
+    throw new IllegalArgumentException("Please set dir");
+  }
+}

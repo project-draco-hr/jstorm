@@ -1,4 +1,0 @@
-StormClusterState zkClusterState
-Assignment assignment
-Map<Integer,String> taskToComponent
-String topologyId

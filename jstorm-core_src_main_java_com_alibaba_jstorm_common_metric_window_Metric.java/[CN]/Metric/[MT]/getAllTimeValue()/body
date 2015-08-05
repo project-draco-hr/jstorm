@@ -1,0 +1,3 @@
+{
+  return convertor.convert(allWindow.getSnapshot());
+}

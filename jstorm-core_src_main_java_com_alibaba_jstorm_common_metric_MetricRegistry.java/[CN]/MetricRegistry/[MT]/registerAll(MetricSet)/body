@@ -1,0 +1,3 @@
+{
+  registerAll(null,metrics);
+}

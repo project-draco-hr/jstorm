@@ -1,5 +1,0 @@
-{
-  commStatsInfo.buildBoltStatsData();
-  commStatsInfo.buildSpoutStatsData();
-  commStatsInfo.buildTopoStatsData();
-}

@@ -1,0 +1,12 @@
+{
+  if (intervalCheck.check()) {
+    rolling();
+  }
+  cleanExpiredBuckets();
+  Collection<V> values=buckets.values();
+  V ret=merger.merge(values,unflushed,this);
+  if (ret == null) {
+    return defaultValue;
+  }
+  return ret;
+}

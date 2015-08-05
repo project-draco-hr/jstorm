@@ -1,0 +1,26 @@
+{
+  if (!is_set_nimbus_master()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'nimbus_master' is unset! Struct:" + toString());
+  }
+  if (!is_set_nimbus_slaves()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'nimbus_slaves' is unset! Struct:" + toString());
+  }
+  if (!is_set_supervisor_num()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'supervisor_num' is unset! Struct:" + toString());
+  }
+  if (!is_set_total_port_num()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'total_port_num' is unset! Struct:" + toString());
+  }
+  if (!is_set_used_port_num()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'used_port_num' is unset! Struct:" + toString());
+  }
+  if (!is_set_free_port_num()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'free_port_num' is unset! Struct:" + toString());
+  }
+  if (!is_set_version()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'version' is unset! Struct:" + toString());
+  }
+  if (nimbus_master != null) {
+    nimbus_master.validate();
+  }
+}

@@ -1,0 +1,9 @@
+{
+  Map<String,String> paramMap=new HashMap<String,String>();
+  paramMap.put(UIDef.CLUSTER,clusterName);
+  paramMap.put(UIDef.HOST,host);
+  paramMap.put(UIDef.LOG_SERVER_PORT,logServerPort);
+  paramMap.put(UIDef.LOG_NAME,logName);
+  paramMap.put(UIDef.POS,pos);
+  return paramMap;
+}

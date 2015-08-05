@@ -1,0 +1,14 @@
+{
+  this.defaultTimeout=ConfigExtension.getDefaultCacheTimeout(conf);
+  registerCacheWindow(defaultTimeout);
+  List<Object> list=(List)ConfigExtension.getCacheTimeoutList(conf);
+  if (list != null) {
+    for (    Object obj : list) {
+      Integer timeoutSecond=JStormUtils.parseInt(obj);
+      if (timeoutSecond == null) {
+        continue;
+      }
+      registerCacheWindow(timeoutSecond);
+    }
+  }
+}

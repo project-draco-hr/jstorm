@@ -1,0 +1,10 @@
+{
+  boolean ret=false;
+  Set<Integer> tasks=worker.getTasks();
+  if (tasks != null) {
+    if ((leftTaskNum == 0 && tasks.size() >= avgTaskNum) || (leftTaskNum > 0 && tasks.size() >= (avgTaskNum + 1))) {
+      ret=true;
+    }
+  }
+  return ret;
+}

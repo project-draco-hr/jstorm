@@ -1,0 +1,2 @@
+List<ResourceWorkerSlot> assignedWorkers
+List<SupervisorInfo> supervisors

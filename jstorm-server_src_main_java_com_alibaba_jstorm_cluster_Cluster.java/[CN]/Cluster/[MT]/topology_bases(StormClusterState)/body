@@ -1,3 +1,0 @@
-{
-  return get_topology_id(zkCluster);
-}

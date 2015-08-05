@@ -1,0 +1,35 @@
+{
+  Map<String,Bolt> oldBolts=oldTopology.get_bolts();
+  Map<String,Bolt> bolts=newTopology.get_bolts();
+  for (  Entry<String,Bolt> entry : oldBolts.entrySet()) {
+    String boltName=entry.getKey();
+    Bolt oldBolt=entry.getValue();
+    Bolt bolt=bolts.get(boltName);
+    if (oldBolt.get_common().get_parallelism_hint() > bolt.get_common().get_parallelism_hint()) {
+      int removedTaskNum=oldBolt.get_common().get_parallelism_hint() - bolt.get_common().get_parallelism_hint();
+      TreeSet<Integer> taskIds=new TreeSet<Integer>(clusterState.task_ids_by_componentId(topologyid,boltName));
+      Iterator<Integer> descendIterator=taskIds.descendingIterator();
+      while (--removedTaskNum >= 0) {
+        int taskId=descendIterator.next();
+        removeTask(topologyid,taskId,clusterState);
+        LOG.info("Remove bolt task, taskId=" + taskId + " for "+ boltName);
+      }
+    }
+ else     if (oldBolt.get_common().get_parallelism_hint() == bolt.get_common().get_parallelism_hint()) {
+      continue;
+    }
+ else {
+      int delta=bolt.get_common().get_parallelism_hint() - oldBolt.get_common().get_parallelism_hint();
+      Map<Integer,TaskInfo> taskInfoMap=new HashMap<Integer,TaskInfo>();
+      for (int i=1; i <= delta; i++) {
+        cnt++;
+        TaskInfo taskInfo=new TaskInfo((String)entry.getKey(),"bolt");
+        taskInfoMap.put(cnt,taskInfo);
+        newTasks.add(cnt);
+        LOG.info("Setup new bolt task, taskId=" + cnt + " for "+ boltName);
+      }
+      clusterState.add_task(topologyid,taskInfoMap);
+    }
+  }
+  return cnt;
+}

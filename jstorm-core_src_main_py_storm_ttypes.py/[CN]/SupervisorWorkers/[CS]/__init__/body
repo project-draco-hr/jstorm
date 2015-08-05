@@ -1,0 +1,4 @@
+def __init__(self, supervisor=None, workers=None, workerMetric=None):
+    self.supervisor = supervisor
+    self.workers = workers
+    self.workerMetric = workerMetric

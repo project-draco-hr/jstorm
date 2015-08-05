@@ -1,0 +1,12 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  if (other.is_set_host()) {
+    this.host=other.host;
+  }
+  if (other.is_set_supervisor_id()) {
+    this.supervisor_id=other.supervisor_id;
+  }
+  this.uptime_secs=other.uptime_secs;
+  this.num_workers=other.num_workers;
+  this.num_used_workers=other.num_used_workers;
+}

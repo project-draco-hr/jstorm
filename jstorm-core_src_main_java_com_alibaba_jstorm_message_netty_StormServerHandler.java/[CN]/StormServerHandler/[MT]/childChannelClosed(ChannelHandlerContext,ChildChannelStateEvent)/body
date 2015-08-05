@@ -1,0 +1,5 @@
+{
+  super.childChannelClosed(ctx,e);
+  LOG.info("Connection closed {}",e.getChildChannel().getRemoteAddress());
+  MessageDecoder.removeTransmitHistogram(e.getChildChannel());
+}

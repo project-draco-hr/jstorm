@@ -1,0 +1,12 @@
+{
+  MetricInfo topologyMetricInfo=MetricThrift.mkMetricInfo();
+  topologyMetric.set_topologyMetric(topologyMetricInfo);
+  Map<String,MetricInfo> componentMetrics=topologyMetric.get_componentMetric();
+  if (componentMetrics == null) {
+    return;
+  }
+  for (  MetricInfo componentMetric : componentMetrics.values()) {
+    topologyMetricInfo=mergeMetricInfo(componentMetric,topologyMetricInfo,MetricDef.MERGE_SUM_TAG);
+  }
+  topologyMetric.set_topologyMetric(topologyMetricInfo);
+}

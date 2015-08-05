@@ -1,0 +1,13 @@
+{
+  boolean isMatch=true;
+  LocalAssignment localAssignment=assignedTasks.get(whb.getPort());
+  if (localAssignment == null) {
+    LOG.debug("Following worker has been removed, port=" + whb.getPort() + ", assignedTasks="+ assignedTasks);
+    isMatch=false;
+  }
+ else   if (!whb.getTopologyId().equals(localAssignment.getTopologyId())) {
+    LOG.info("topology id not equal whb=" + whb.getTopologyId() + ",localAssignment="+ localAssignment.getTopologyId());
+    isMatch=false;
+  }
+  return isMatch;
+}

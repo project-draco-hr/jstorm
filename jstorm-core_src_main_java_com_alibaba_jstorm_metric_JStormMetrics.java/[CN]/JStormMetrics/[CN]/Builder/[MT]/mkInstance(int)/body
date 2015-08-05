@@ -1,0 +1,17 @@
+{
+  if (type == COUNTER) {
+    return new Counter<Double>(Double.valueOf(0));
+  }
+ else   if (type == METER) {
+    return new Meter();
+  }
+ else   if (type == HISTOGRAM) {
+    return new Histogram();
+  }
+ else   if (type == TIMER) {
+    return new Timer();
+  }
+ else {
+    throw new IllegalArgumentException();
+  }
+}

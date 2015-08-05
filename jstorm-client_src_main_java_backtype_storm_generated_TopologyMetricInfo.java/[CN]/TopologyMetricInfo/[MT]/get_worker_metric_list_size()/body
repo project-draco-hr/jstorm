@@ -1,3 +1,0 @@
-{
-  return (this.worker_metric_list == null) ? 0 : this.worker_metric_list.size();
-}

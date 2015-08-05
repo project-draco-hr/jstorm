@@ -1,5 +1,0 @@
-{
-  if (that == null)   return false;
-  if (that instanceof TopologyMetricInfo)   return this.equals((TopologyMetricInfo)that);
-  return false;
-}

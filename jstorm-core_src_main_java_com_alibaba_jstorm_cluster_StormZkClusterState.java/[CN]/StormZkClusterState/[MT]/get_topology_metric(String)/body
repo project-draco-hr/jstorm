@@ -1,0 +1,3 @@
+{
+  return getObject(Cluster.metric_path(topologyId),false);
+}

@@ -1,0 +1,4 @@
+{
+  Double ret=(double)queue.pctFull();
+  return ret;
+}

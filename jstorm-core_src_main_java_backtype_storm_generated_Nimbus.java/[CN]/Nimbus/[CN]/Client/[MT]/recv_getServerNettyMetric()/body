@@ -1,0 +1,8 @@
+{
+  getServerNettyMetric_result result=new getServerNettyMetric_result();
+  receiveBase(result,"getServerNettyMetric");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getServerNettyMetric failed: unknown result");
+}

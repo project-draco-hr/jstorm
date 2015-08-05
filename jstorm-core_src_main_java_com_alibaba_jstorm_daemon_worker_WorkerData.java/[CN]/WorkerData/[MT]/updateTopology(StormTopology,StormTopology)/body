@@ -1,0 +1,5 @@
+{
+  oldTopology.set_bolts(newTopology.get_bolts());
+  oldTopology.set_spouts(newTopology.get_spouts());
+  oldTopology.set_state_spouts(newTopology.get_state_spouts());
+}

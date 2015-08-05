@@ -1,8 +1,0 @@
-{
-  String metricName;
-  if (prefix == null)   metricName=name;
- else   metricName=prefix + "-" + name;
-  JStormTimer ret=registerTimer(metricName);
-  updateMetric(prefix,name,metricType,ret.getInstance(),idStr);
-  return ret;
-}

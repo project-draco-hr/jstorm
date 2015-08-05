@@ -1,0 +1,32 @@
+{
+  StringBuilder sb=new StringBuilder("SupervisorWorkers(");
+  boolean first=true;
+  sb.append("supervisor:");
+  if (this.supervisor == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.supervisor);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("workers:");
+  if (this.workers == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.workers);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("workerMetric:");
+  if (this.workerMetric == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.workerMetric);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

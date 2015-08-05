@@ -1,0 +1,40 @@
+{
+  if (data.getIsShutdown().getAndSet(true) == true) {
+    LOG.info("Notify to quit nimbus");
+    return;
+  }
+  LOG.info("Begin to shutdown nimbus");
+  AsyncLoopRunnable.getShutdown().set(true);
+  data.getScheduExec().shutdownNow();
+  for (  AsyncLoopThread t : smartThreads) {
+    t.cleanup();
+    JStormUtils.sleepMs(10);
+    t.interrupt();
+    LOG.info("Successfully cleanup " + t.getThread().getName());
+  }
+  if (serviceHandler != null) {
+    serviceHandler.shutdown();
+  }
+  if (topologyAssign != null) {
+    topologyAssign.cleanup();
+    LOG.info("Successfully shutdown TopologyAssign thread");
+  }
+  if (follower != null) {
+    follower.clean();
+    LOG.info("Successfully shutdown follower thread");
+  }
+  if (data != null) {
+    data.cleanup();
+    LOG.info("Successfully shutdown NimbusData");
+  }
+  if (thriftServer != null) {
+    thriftServer.stop();
+    LOG.info("Successfully shutdown thrift server");
+  }
+  if (hs != null) {
+    hs.shutdown();
+    LOG.info("Successfully shutdown httpserver");
+  }
+  LOG.info("Successfully shutdown nimbus");
+  JStormUtils.halt_process(0,"!!!Shutdown!!!");
+}

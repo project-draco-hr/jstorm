@@ -1,0 +1,3 @@
+String topologyName
+String serverName
+org.apache.thrift.async.AsyncMethodCallback resultHandler

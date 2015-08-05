@@ -1,0 +1,4 @@
+def getTopologyId(self, topologyName):
+    '\n    Parameters:\n     - topologyName\n    '
+    self.send_getTopologyId(topologyName)
+    return self.recv_getTopologyId()

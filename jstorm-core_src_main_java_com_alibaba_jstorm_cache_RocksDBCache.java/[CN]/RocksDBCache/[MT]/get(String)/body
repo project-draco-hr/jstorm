@@ -1,0 +1,18 @@
+{
+  try {
+    byte[] data=db.get(key.getBytes());
+    if (data != null) {
+      try {
+        return Utils.javaDeserialize(data);
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to deserialize obj of " + key);
+        db.remove(key.getBytes());
+        return null;
+      }
+    }
+  }
+ catch (  Exception e) {
+  }
+  return null;
+}

@@ -1,0 +1,31 @@
+{
+  int assignType=context.getAssignType();
+  if (TopologyAssignContext.isAssignTypeValid(assignType) == false) {
+    throw new FailedAssignTopologyException("Invalide Assign Type " + assignType);
+  }
+  DefaultTopologyAssignContext defaultContext=new DefaultTopologyAssignContext(context);
+  if (assignType == TopologyAssignContext.ASSIGN_TYPE_REBALANCE) {
+    freeUsed(defaultContext);
+  }
+  LOG.info("Dead tasks:" + defaultContext.getDeadTaskIds());
+  LOG.info("Unstopped tasks:" + defaultContext.getUnstoppedTaskIds());
+  Set<Integer> needAssignTasks=getNeedAssignTasks(defaultContext);
+  Set<ResourceWorkerSlot> keepAssigns=getKeepAssign(defaultContext,needAssignTasks);
+  Set<ResourceWorkerSlot> ret=new HashSet<ResourceWorkerSlot>();
+  ret.addAll(keepAssigns);
+  ret.addAll(defaultContext.getUnstoppedWorkers());
+  int allocWorkerNum=defaultContext.getTotalWorkerNum() - defaultContext.getUnstoppedWorkerNum() - keepAssigns.size();
+  LOG.info("allocWorkerNum=" + allocWorkerNum + ", totalWorkerNum="+ defaultContext.getTotalWorkerNum());
+  if (allocWorkerNum <= 0) {
+    LOG.warn("Don't need assign workers, all workers are fine " + defaultContext.toDetailString());
+    throw new FailedAssignTopologyException("Don't need assign worker, all workers are fine ");
+  }
+  List<ResourceWorkerSlot> availableWorkers=WorkerScheduler.getInstance().getAvailableWorkers(defaultContext,needAssignTasks,allocWorkerNum);
+  TaskScheduler taskScheduler=new TaskScheduler(defaultContext,needAssignTasks,availableWorkers);
+  Set<ResourceWorkerSlot> assignment=new HashSet<ResourceWorkerSlot>(taskScheduler.assign());
+  ret.addAll(assignment);
+  LOG.info("Keep Alive slots:" + keepAssigns);
+  LOG.info("Unstopped slots:" + defaultContext.getUnstoppedWorkers());
+  LOG.info("New assign slots:" + assignment);
+  return ret;
+}

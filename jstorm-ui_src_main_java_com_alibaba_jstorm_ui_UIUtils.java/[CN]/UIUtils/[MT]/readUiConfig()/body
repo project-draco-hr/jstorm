@@ -12,6 +12,9 @@
       if (clientConf != null) {
         ret.putAll(clientConf);
       }
+      if (ONE_TABLE_PAGE_SIZE == null) {
+        ONE_TABLE_PAGE_SIZE=ConfigExtension.getUiOneTablePageSize(clientConf);
+      }
     }
  catch (    FileNotFoundException e) {
     }

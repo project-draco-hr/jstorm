@@ -1,0 +1,16 @@
+{
+switch (fieldId) {
+case 1:
+    return NAME;
+case 2:
+  return PARALLEL;
+case 3:
+return TYPE;
+case 4:
+return TASK_IDS;
+case 5:
+return ERRORS;
+default :
+return null;
+}
+}

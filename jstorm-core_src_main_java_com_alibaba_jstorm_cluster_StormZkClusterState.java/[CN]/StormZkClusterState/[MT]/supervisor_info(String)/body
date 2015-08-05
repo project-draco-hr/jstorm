@@ -1,0 +1,4 @@
+{
+  String supervisorPath=Cluster.supervisor_path(supervisorId);
+  return (SupervisorInfo)getObject(supervisorPath,false);
+}

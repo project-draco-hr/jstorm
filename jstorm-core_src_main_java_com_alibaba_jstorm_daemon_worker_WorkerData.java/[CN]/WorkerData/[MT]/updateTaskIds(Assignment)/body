@@ -1,0 +1,4 @@
+{
+  this.taskids.clear();
+  this.taskids.addAll(assignment.getCurrentWorkerTasks(supervisorId,port));
+}

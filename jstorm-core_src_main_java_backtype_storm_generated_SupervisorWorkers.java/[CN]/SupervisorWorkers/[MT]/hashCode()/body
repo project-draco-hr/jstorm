@@ -1,0 +1,13 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_supervisor=true && (is_set_supervisor());
+  list.add(present_supervisor);
+  if (present_supervisor)   list.add(supervisor);
+  boolean present_workers=true && (is_set_workers());
+  list.add(present_workers);
+  if (present_workers)   list.add(workers);
+  boolean present_workerMetric=true && (is_set_workerMetric());
+  list.add(present_workerMetric);
+  if (present_workerMetric)   list.add(workerMetric);
+  return list.hashCode();
+}

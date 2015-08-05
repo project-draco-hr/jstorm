@@ -1,0 +1,15 @@
+{
+  if (collection == null) {
+    return false;
+  }
+  File file=new File(jar);
+  String fileName=file.getName();
+  for (  String item : collection) {
+    String regex=item + "[-._0-9]*.jar";
+    Pattern p=Pattern.compile(regex);
+    if (p.matcher(fileName).matches() == true) {
+      return true;
+    }
+  }
+  return false;
+}

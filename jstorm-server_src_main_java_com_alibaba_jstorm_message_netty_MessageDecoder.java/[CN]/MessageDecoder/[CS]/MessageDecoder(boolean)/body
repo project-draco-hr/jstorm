@@ -1,6 +1,0 @@
-{
-  if (isServer) {
-    if (timer == null)     timer=Metrics.registerTimer(null,MetricDef.NETTY_SERV_DECODE_TIME,null,Metrics.MetricType.WORKER);
-  }
-  if (networkTransmitTimeMap == null)   networkTransmitTimeMap=new HashMap<String,JStormHistogram>();
-}

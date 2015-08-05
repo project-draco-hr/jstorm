@@ -1,0 +1,11 @@
+{
+switch (field) {
+case NIMBUS:
+    return get_nimbus();
+case SUPERVISORS:
+  return get_supervisors();
+case TOPOLOGIES:
+return get_topologies();
+}
+throw new IllegalStateException();
+}

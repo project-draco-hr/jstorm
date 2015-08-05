@@ -1,0 +1,10 @@
+{
+switch (fieldId) {
+case 1:
+    return HOST;
+case 2:
+  return UPTIME_SECS;
+default :
+return null;
+}
+}

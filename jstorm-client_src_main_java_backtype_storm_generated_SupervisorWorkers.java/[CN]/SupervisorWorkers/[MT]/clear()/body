@@ -1,4 +1,0 @@
-{
-  this.supervisor=null;
-  this.workers=null;
-}

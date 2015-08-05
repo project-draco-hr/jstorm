@@ -1,0 +1,22 @@
+{
+  if (other.is_set_topology()) {
+    this.topology=new TopologySummary(other.topology);
+  }
+  if (other.is_set_components()) {
+    List<ComponentSummary> __this__components=new ArrayList<ComponentSummary>(other.components.size());
+    for (    ComponentSummary other_element : other.components) {
+      __this__components.add(new ComponentSummary(other_element));
+    }
+    this.components=__this__components;
+  }
+  if (other.is_set_tasks()) {
+    List<TaskSummary> __this__tasks=new ArrayList<TaskSummary>(other.tasks.size());
+    for (    TaskSummary other_element : other.tasks) {
+      __this__tasks.add(new TaskSummary(other_element));
+    }
+    this.tasks=__this__tasks;
+  }
+  if (other.is_set_metrics()) {
+    this.metrics=new TopologyMetric(other.metrics);
+  }
+}

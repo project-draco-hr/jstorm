@@ -1,3 +1,0 @@
-{
-  logger.info(marker,"type=GAUGE, name={}, value={}",name,gauge.getValue());
-}

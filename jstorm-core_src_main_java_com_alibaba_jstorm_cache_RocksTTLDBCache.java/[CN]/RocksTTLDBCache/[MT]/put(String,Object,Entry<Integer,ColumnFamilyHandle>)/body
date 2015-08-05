@@ -1,0 +1,21 @@
+{
+  byte[] data=Utils.javaSerialize(value);
+  try {
+    ttlDB.put(entry.getValue(),key.getBytes(),data);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed put into cache, " + key,e);
+    return;
+  }
+  for (  Entry<Integer,ColumnFamilyHandle> removeEntry : windowHandlers.entrySet()) {
+    if (removeEntry.getKey().equals(entry.getKey())) {
+      continue;
+    }
+    try {
+      ttlDB.remove(removeEntry.getValue(),key.getBytes());
+    }
+ catch (    Exception e) {
+      LOG.warn("Failed to remove other " + key);
+    }
+  }
+}

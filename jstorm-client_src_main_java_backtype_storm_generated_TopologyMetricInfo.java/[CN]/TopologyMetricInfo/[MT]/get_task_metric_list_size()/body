@@ -1,3 +1,0 @@
-{
-  return (this.task_metric_list == null) ? 0 : this.task_metric_list.size();
-}

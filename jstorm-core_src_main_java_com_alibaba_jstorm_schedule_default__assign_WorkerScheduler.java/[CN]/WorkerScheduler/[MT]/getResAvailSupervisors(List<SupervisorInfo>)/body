@@ -1,0 +1,7 @@
+{
+  List<SupervisorInfo> availableSupervisors=new ArrayList<SupervisorInfo>();
+  for (  SupervisorInfo supervisor : supervisors) {
+    if (supervisor.getAvailableWorkerPorts().size() > 0)     availableSupervisors.add(supervisor);
+  }
+  return availableSupervisors;
+}

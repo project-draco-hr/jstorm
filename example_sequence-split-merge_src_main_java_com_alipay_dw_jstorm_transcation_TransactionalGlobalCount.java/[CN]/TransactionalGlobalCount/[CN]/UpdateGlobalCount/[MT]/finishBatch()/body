@@ -16,5 +16,5 @@
     newval=val;
   }
   _collector.emit(new Values(_attempt,newval.count));
-  LOG.info("---UpdateGlobalCount.finishBatch(), _attempt=" + _attempt + ", newval=("+ newval.txid+ ","+ newval.count+ ")");
+  LOG.info("@@@@@@@@@@@@@@ UpdateGlobalCount finishBatch @@@@@@@@@@@@@@@");
 }

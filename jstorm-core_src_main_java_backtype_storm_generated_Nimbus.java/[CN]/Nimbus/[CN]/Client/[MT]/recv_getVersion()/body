@@ -1,0 +1,8 @@
+{
+  getVersion_result result=new getVersion_result();
+  receiveBase(result,"getVersion");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getVersion failed: unknown result");
+}

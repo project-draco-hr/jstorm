@@ -1,6 +1,0 @@
-String id
-String name
-int uptime_secs
-List<WorkerSummary> workers
-String status
-List<TaskSummary> tasks

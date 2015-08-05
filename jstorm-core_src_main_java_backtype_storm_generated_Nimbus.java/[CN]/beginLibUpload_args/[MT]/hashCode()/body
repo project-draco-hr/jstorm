@@ -1,0 +1,7 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_libName=true && (is_set_libName());
+  list.add(present_libName);
+  if (present_libName)   list.add(libName);
+  return list.hashCode();
+}

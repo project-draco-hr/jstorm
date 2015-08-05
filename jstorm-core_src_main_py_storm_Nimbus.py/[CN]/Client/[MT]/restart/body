@@ -1,0 +1,4 @@
+def restart(self, name, jsonConf):
+    '\n    Parameters:\n     - name\n     - jsonConf\n    '
+    self.send_restart(name, jsonConf)
+    self.recv_restart()

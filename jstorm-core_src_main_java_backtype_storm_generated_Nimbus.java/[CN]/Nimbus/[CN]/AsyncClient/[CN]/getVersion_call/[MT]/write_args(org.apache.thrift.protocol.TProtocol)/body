@@ -1,0 +1,6 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getVersion",org.apache.thrift.protocol.TMessageType.CALL,0));
+  getVersion_args args=new getVersion_args();
+  args.write(prot);
+  prot.writeMessageEnd();
+}

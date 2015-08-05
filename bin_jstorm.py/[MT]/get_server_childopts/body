@@ -1,0 +1,3 @@
+def get_server_childopts(log_name):
+    ret = (' -Dlogfile.name=%s -Dlogback.configurationFile=%s' % (log_name, LOGBACK_CONF))
+    return ret

@@ -1,0 +1,16 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_topology=true && (is_set_topology());
+  list.add(present_topology);
+  if (present_topology)   list.add(topology);
+  boolean present_components=true && (is_set_components());
+  list.add(present_components);
+  if (present_components)   list.add(components);
+  boolean present_tasks=true && (is_set_tasks());
+  list.add(present_tasks);
+  if (present_tasks)   list.add(tasks);
+  boolean present_metrics=true && (is_set_metrics());
+  list.add(present_metrics);
+  if (present_metrics)   list.add(metrics);
+  return list.hashCode();
+}

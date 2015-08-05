@@ -1,0 +1,6 @@
+{
+  boolean updateHb=hbUpdateTrigger.getAndSet(false);
+  if (updateHb) {
+    update();
+  }
+}

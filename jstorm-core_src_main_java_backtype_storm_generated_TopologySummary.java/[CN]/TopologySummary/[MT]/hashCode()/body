@@ -1,0 +1,25 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_id=true && (is_set_id());
+  list.add(present_id);
+  if (present_id)   list.add(id);
+  boolean present_name=true && (is_set_name());
+  list.add(present_name);
+  if (present_name)   list.add(name);
+  boolean present_status=true && (is_set_status());
+  list.add(present_status);
+  if (present_status)   list.add(status);
+  boolean present_uptime_secs=true;
+  list.add(present_uptime_secs);
+  if (present_uptime_secs)   list.add(uptime_secs);
+  boolean present_num_tasks=true;
+  list.add(present_num_tasks);
+  if (present_num_tasks)   list.add(num_tasks);
+  boolean present_num_workers=true;
+  list.add(present_num_workers);
+  if (present_num_workers)   list.add(num_workers);
+  boolean present_error_info=true && (is_set_error_info());
+  list.add(present_error_info);
+  if (present_error_info)   list.add(error_info);
+  return list.hashCode();
+}

@@ -1,0 +1,18 @@
+{
+  System.out.println("!!!!!!!!Start test_small_message !!!!!!!!!!!");
+  String req_msg="Aloha is the most Hawaiian word.";
+  IConnection server=null;
+  IConnection client=null;
+  server=initNettyServer();
+  client=context.connect(null,"localhost",port);
+  List<TaskMessage> list=new ArrayList<TaskMessage>();
+  TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+  list.add(message);
+  client.send(message);
+  byte[] recv=(byte[])server.recv(task,0);
+  Assert.assertEquals(req_msg,new String(recv));
+  System.out.println("!!!!!!!!!!!!!!!!!!Test one time!!!!!!!!!!!!!!!!!");
+  server.close();
+  client.close();
+  System.out.println("!!!!!!!!!!!!End test_small_message!!!!!!!!!!!!!");
+}

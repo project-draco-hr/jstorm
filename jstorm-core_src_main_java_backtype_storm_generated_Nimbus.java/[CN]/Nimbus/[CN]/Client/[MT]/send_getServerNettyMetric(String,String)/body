@@ -1,0 +1,6 @@
+{
+  getServerNettyMetric_args args=new getServerNettyMetric_args();
+  args.set_topologyName(topologyName);
+  args.set_serverName(serverName);
+  sendBase("getServerNettyMetric",args);
+}

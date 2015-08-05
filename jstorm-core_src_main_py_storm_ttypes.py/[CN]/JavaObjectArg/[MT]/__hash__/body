@@ -1,0 +1,9 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.int_arg))
+    value = ((value * 31) ^ hash(self.long_arg))
+    value = ((value * 31) ^ hash(self.string_arg))
+    value = ((value * 31) ^ hash(self.bool_arg))
+    value = ((value * 31) ^ hash(self.binary_arg))
+    value = ((value * 31) ^ hash(self.double_arg))
+    return value

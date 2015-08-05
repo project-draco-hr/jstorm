@@ -1,0 +1,4 @@
+{
+  getVersion_args args=new getVersion_args();
+  sendBase("getVersion",args);
+}

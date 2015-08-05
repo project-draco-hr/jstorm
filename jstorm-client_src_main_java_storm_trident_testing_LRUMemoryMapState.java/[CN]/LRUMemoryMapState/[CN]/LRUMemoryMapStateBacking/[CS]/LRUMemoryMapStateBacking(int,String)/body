@@ -1,4 +1,0 @@
-{
-  _dbs.putIfAbsent(id,new LRUMap<List<Object>,Object>(cacheSize));
-  this.db=(Map<List<Object>,T>)_dbs.get(id);
-}

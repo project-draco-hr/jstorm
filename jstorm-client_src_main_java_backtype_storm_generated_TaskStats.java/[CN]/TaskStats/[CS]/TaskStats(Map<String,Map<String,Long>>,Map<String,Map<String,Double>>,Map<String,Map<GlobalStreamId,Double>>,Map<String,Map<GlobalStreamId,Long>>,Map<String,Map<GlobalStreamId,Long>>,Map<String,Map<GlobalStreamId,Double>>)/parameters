@@ -1,6 +1,0 @@
-Map<String,Map<String,Long>> emitted
-Map<String,Map<String,Double>> send_tps
-Map<String,Map<GlobalStreamId,Double>> recv_tps
-Map<String,Map<GlobalStreamId,Long>> acked
-Map<String,Map<GlobalStreamId,Long>> failed
-Map<String,Map<GlobalStreamId,Double>> process_ms_avg

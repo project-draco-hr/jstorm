@@ -1,0 +1,14 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case NIMBUS:
+    return is_set_nimbus();
+case SUPERVISORS:
+  return is_set_supervisors();
+case TOPOLOGIES:
+return is_set_topologies();
+}
+throw new IllegalStateException();
+}

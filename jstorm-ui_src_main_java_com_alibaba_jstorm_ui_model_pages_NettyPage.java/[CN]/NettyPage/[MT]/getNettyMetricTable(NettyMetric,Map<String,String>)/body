@@ -1,0 +1,10 @@
+{
+  String windowStr=paramMap.get(UIDef.WINDOW);
+  Integer window=StatBuckets.getTimeKey(windowStr);
+  if (nettyMetric == null || nettyMetric.get_connections() == null) {
+    throw new RuntimeException("No netty metrics");
+  }
+  TreeMap<String,MetricInfo> metrics=new TreeMap<String,MetricInfo>();
+  metrics.putAll(nettyMetric.get_connections());
+  return UIUtils.getNettyMetricsTable(metrics,window,paramMap);
+}

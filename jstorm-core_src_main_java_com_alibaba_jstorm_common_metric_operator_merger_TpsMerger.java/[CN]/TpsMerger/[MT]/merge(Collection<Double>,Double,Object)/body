@@ -1,0 +1,13 @@
+{
+  double sum=0.0d;
+  if (unflushed != null) {
+    sum+=unflushed;
+  }
+  for (  Double item : objs) {
+    if (item != null) {
+      sum+=item;
+    }
+  }
+  Double ret=(sum * 1000) / getRunMillis(others);
+  return ret;
+}

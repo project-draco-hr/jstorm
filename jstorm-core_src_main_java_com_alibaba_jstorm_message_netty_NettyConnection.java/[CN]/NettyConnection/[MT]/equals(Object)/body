@@ -1,0 +1,15 @@
+{
+  if (this == obj)   return true;
+  if (obj == null)   return false;
+  if (getClass() != obj.getClass())   return false;
+  NettyConnection other=(NettyConnection)obj;
+  if (clientPort == null) {
+    if (other.clientPort != null)     return false;
+  }
+ else   if (!clientPort.equals(other.clientPort))   return false;
+  if (serverPort == null) {
+    if (other.serverPort != null)     return false;
+  }
+ else   if (!serverPort.equals(other.serverPort))   return false;
+  return true;
+}

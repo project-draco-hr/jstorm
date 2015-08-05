@@ -1,3 +1,0 @@
-{
-  return new PartitionNode(basis.streamId,basis.name,basis.allOutputFields,Grouping.custom_serialized(Utils.serialize(new IdentityGrouping())));
-}

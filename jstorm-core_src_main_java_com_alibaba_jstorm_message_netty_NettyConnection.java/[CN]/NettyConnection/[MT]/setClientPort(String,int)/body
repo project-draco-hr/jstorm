@@ -1,0 +1,4 @@
+{
+  String ip=NetWorkUtils.host2Ip(client);
+  clientPort=ip + ":" + port;
+}

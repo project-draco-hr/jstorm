@@ -1,0 +1,20 @@
+{
+switch (field) {
+case TOPOLOGY_NAME:
+    if (value == null) {
+      unset_topologyName();
+    }
+ else {
+      set_topologyName((String)value);
+    }
+  break;
+case POS:
+if (value == null) {
+  unset_pos();
+}
+ else {
+  set_pos((Integer)value);
+}
+break;
+}
+}

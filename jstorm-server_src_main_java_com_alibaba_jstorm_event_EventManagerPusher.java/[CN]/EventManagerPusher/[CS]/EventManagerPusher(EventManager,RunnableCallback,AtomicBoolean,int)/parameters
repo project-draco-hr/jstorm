@@ -1,4 +1,0 @@
-EventManager eventManager
-RunnableCallback event
-AtomicBoolean active
-int frequence

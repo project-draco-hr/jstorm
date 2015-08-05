@@ -1,0 +1,14 @@
+{
+  Metric metric=metrics.getMetric(name);
+  if (metric == null) {
+    metric=JStormMetrics.Builder.mkInstance(type);
+    try {
+      JStormMetrics.registerTaskMetric(metric,taskId,name);
+    }
+ catch (    Exception e) {
+      LOG.warn("Duplicated metrics of {}, taskId:{}",name,taskId);
+      return;
+    }
+  }
+  metric.update(value);
+}

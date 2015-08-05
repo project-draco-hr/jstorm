@@ -1,0 +1,8 @@
+{
+  try {
+    db.remove(key.getBytes());
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to remove " + key);
+  }
+}

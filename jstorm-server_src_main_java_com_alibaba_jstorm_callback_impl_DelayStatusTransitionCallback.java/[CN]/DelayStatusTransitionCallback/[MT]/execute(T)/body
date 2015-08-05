@@ -1,6 +1,0 @@
-{
-  int delaySecs=getDelaySeconds(args);
-  LOG.info("Delaying event " + newType + " for "+ delaySecs+ " secs for "+ topologyid);
-  data.getScheduExec().schedule(new DelayEventRunnable(data,topologyid,nextAction),delaySecs,TimeUnit.SECONDS);
-  return new StormStatus(delaySecs,newType);
-}

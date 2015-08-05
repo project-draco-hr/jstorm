@@ -1,0 +1,10 @@
+{
+  StringBuilder sb=new StringBuilder();
+  sb.append(event.topologyId);
+  sb.append("'s worker on ");
+  sb.append(event.host);
+  sb.append(":");
+  sb.append(event.workerport);
+  sb.append(" disappear.");
+  return sb.toString();
+}

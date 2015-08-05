@@ -1,5 +1,0 @@
-{
-  this.prefix=prefix;
-  this.name=name;
-  this.metric=metric;
-}

@@ -1,0 +1,50 @@
+{
+  TableData table=new TableData();
+  List<String> headers=table.getHeaders();
+  List<Map<String,ColumnData>> lines=table.getLines();
+  List<String> keys=UIUtils.getSortedKeys(UIUtils.getKeys(componentMetrics.values()));
+  headers.add(UIDef.HEADER_COMPONENT_NAME);
+  headers.add(UIDef.HEADER_TASK_NUM);
+  headers.addAll(keys);
+  headers.add(UIDef.HEADER_ERROR);
+  for (  ComponentSummary componentSummary : componentSummaries) {
+    Map<String,ColumnData> line=new HashMap<String,ColumnData>();
+    lines.add(line);
+    String name=componentSummary.get_name();
+    ColumnData nameColumnData=new ColumnData();
+    LinkData linkData=new LinkData();
+    nameColumnData.addLinkData(linkData);
+    line.put(UIDef.HEADER_COMPONENT_NAME,nameColumnData);
+    linkData.setUrl(UIDef.LINK_WINDOW_TABLE);
+    linkData.setText(name);
+    linkData.addParam(UIDef.CLUSTER,paramMap.get(UIDef.CLUSTER));
+    linkData.addParam(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_COMPONENT);
+    linkData.addParam(UIDef.TOPOLOGY,topologyInfo.get_topology().get_id());
+    linkData.addParam(UIDef.COMPONENT,name);
+    ColumnData taskNumColumn=new ColumnData();
+    taskNumColumn.addText(String.valueOf(componentSummary.get_parallel()));
+    line.put(UIDef.HEADER_TASK_NUM,taskNumColumn);
+    ColumnData errColumn=new ColumnData();
+    line.put(UIDef.HEADER_ERROR,errColumn);
+    List<ErrorInfo> errs=componentSummary.get_errors();
+    if (errs == null) {
+      errColumn.addText("");
+    }
+ else {
+      for (      ErrorInfo err : errs) {
+        errColumn.addText(err.get_error() + "\r\n");
+      }
+    }
+    MetricInfo metric=componentMetrics.get(name);
+    if (metric == null) {
+      continue;
+    }
+    for (    String key : keys) {
+      String value=UIUtils.getValue(metric,key,window);
+      ColumnData columnData=new ColumnData();
+      columnData.addText(value);
+      line.put(key,columnData);
+    }
+  }
+  return table;
+}

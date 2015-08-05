@@ -1,0 +1,7 @@
+{
+  LOG.info("Begin to close rocketDb of {}",rootDir);
+  if (db != null) {
+    db.close();
+  }
+  LOG.info("Successfully closed rocketDb of {}",rootDir);
+}

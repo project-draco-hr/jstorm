@@ -1,4 +1,0 @@
-{
-  this.topologyid=topologyid;
-  this.oldStatus=status;
-}

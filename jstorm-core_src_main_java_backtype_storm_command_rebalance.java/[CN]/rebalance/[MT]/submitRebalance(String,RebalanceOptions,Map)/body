@@ -1,0 +1,19 @@
+{
+  Map stormConf=Utils.readStormConfig();
+  if (conf != null) {
+    stormConf.putAll(conf);
+  }
+  NimbusClient client=null;
+  try {
+    client=NimbusClient.getConfiguredClient(stormConf);
+    client.getClient().rebalance(topologyName,options);
+  }
+ catch (  Exception e) {
+    throw e;
+  }
+ finally {
+    if (client != null) {
+      client.close();
+    }
+  }
+}

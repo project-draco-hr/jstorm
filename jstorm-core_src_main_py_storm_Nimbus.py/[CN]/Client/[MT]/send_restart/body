@@ -1,0 +1,8 @@
+def send_restart(self, name, jsonConf):
+    self._oprot.writeMessageBegin('restart', TMessageType.CALL, self._seqid)
+    args = restart_args()
+    args.name = name
+    args.jsonConf = jsonConf
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

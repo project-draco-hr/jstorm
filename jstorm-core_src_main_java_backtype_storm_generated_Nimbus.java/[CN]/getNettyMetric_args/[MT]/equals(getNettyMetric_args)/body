@@ -1,0 +1,16 @@
+{
+  if (that == null)   return false;
+  boolean this_present_topologyName=true && this.is_set_topologyName();
+  boolean that_present_topologyName=true && that.is_set_topologyName();
+  if (this_present_topologyName || that_present_topologyName) {
+    if (!(this_present_topologyName && that_present_topologyName))     return false;
+    if (!this.topologyName.equals(that.topologyName))     return false;
+  }
+  boolean this_present_pos=true;
+  boolean that_present_pos=true;
+  if (this_present_pos || that_present_pos) {
+    if (!(this_present_pos && that_present_pos))     return false;
+    if (this.pos != that.pos)     return false;
+  }
+  return true;
+}

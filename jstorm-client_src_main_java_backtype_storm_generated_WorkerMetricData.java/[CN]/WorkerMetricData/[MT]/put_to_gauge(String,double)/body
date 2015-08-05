@@ -1,6 +1,0 @@
-{
-  if (this.gauge == null) {
-    this.gauge=new HashMap<String,Double>();
-  }
-  this.gauge.put(key,val);
-}

@@ -1,0 +1,5 @@
+{
+  if (uploadMetrics != null) {
+    uploadMetrics.validate();
+  }
+}

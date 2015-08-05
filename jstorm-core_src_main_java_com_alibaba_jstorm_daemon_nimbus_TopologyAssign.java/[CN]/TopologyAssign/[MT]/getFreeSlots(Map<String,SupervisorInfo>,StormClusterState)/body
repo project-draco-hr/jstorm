@@ -1,0 +1,15 @@
+{
+  Map<String,Assignment> assignments=Cluster.get_all_assignment(stormClusterState,null);
+  for (  Entry<String,Assignment> entry : assignments.entrySet()) {
+    String topologyId=entry.getKey();
+    Assignment assignment=entry.getValue();
+    Set<ResourceWorkerSlot> workers=assignment.getWorkers();
+    for (    ResourceWorkerSlot worker : workers) {
+      SupervisorInfo supervisorInfo=supervisorInfos.get(worker.getNodeId());
+      if (supervisorInfo == null) {
+        continue;
+      }
+      supervisorInfo.getAvailableWorkerPorts().remove(worker.getPort());
+    }
+  }
+}

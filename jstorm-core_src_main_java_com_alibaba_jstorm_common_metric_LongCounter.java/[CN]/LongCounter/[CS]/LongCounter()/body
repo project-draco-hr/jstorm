@@ -1,0 +1,7 @@
+{
+  super.defaultValue=new AtomicLong(0);
+  super.updater=new LongAddUpdater();
+  super.merger=new LongSumMerger();
+  super.convertor=new AtomicLongToLong();
+  init();
+}

@@ -1,0 +1,4 @@
+{
+  String failNumName=MetricRegistry.name(MetricDef.FAILED_NUM,component,stream);
+  update(failNumName,Double.valueOf(1),JStormMetrics.Builder.COUNTER);
+}

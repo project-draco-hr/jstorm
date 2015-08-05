@@ -1,0 +1,12 @@
+{
+  int ret=0;
+  Set<Integer> tasks=worker.getTasks();
+  if (tasks == null) {
+    tasks=new HashSet<Integer>();
+    worker.setTasks(tasks);
+  }
+  tasks.add(task);
+  ret=taskContext.getWorkerToTaskNum().get(worker);
+  taskContext.getWorkerToTaskNum().put(worker,++ret);
+  return ret;
+}

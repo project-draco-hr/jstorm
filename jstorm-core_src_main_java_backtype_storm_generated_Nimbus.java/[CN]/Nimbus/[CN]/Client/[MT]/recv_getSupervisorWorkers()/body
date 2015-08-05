@@ -1,0 +1,11 @@
+{
+  getSupervisorWorkers_result result=new getSupervisorWorkers_result();
+  receiveBase(result,"getSupervisorWorkers");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  if (result.e != null) {
+    throw result.e;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getSupervisorWorkers failed: unknown result");
+}

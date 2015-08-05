@@ -1,0 +1,17 @@
+{
+  if (isClosed()) {
+    LOG.warn("Client is being closed, and does not take requests any more");
+    return;
+  }
+  long start=System.nanoTime();
+  try {
+    pushBatch(messages);
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+ finally {
+    long end=System.nanoTime();
+    sendTimer.update((end - start) / 1000000.0d);
+  }
+}

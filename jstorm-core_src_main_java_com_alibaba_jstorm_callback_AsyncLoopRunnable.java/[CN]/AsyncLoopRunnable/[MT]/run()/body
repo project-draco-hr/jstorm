@@ -1,0 +1,36 @@
+{
+  if (fn == null) {
+    LOG.error("fn==null");
+    throw new RuntimeException("AsyncLoopRunnable no core function ");
+  }
+  fn.preRun();
+  try {
+    while (shutdown.get() == false) {
+      Exception e=null;
+      fn.run();
+      if (shutdown.get() == true) {
+        shutdown();
+        return;
+      }
+      e=fn.error();
+      if (e != null) {
+        throw e;
+      }
+      Object rtn=fn.getResult();
+      if (this.needQuit(rtn)) {
+        shutdown();
+        return;
+      }
+    }
+  }
+ catch (  Throwable e) {
+    if (shutdown.get() == true) {
+      shutdown();
+      return;
+    }
+ else {
+      LOG.error("Async loop died!!!" + e.getMessage(),e);
+      killfn.execute(e);
+    }
+  }
+}

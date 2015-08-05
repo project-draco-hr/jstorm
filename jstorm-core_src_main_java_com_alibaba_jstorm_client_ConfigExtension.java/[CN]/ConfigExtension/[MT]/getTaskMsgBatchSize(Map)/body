@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(TASK_MSG_BATCH_SIZE),1);
+}

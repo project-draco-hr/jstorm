@@ -1,0 +1,3 @@
+{
+  return (this.components == null) ? null : this.components.iterator();
+}

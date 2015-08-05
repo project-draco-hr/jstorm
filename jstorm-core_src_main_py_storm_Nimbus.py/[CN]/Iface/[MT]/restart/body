@@ -1,0 +1,3 @@
+def restart(self, name, jsonConf):
+    '\n    Parameters:\n     - name\n     - jsonConf\n    '
+    pass

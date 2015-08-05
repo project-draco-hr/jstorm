@@ -1,0 +1,46 @@
+{
+  Map<String,StateHeartbeat> workeridHbstate=new HashMap<String,StateHeartbeat>();
+  int now=TimeUtils.current_time_secs();
+  Map<String,WorkerHeartbeat> idToHeartbeat=readWorkerHeartbeats(conf);
+  for (  Map.Entry<String,WorkerHeartbeat> entry : idToHeartbeat.entrySet()) {
+    String workerid=entry.getKey().toString();
+    WorkerHeartbeat whb=entry.getValue();
+    State state=null;
+    if (whb == null) {
+      state=State.notStarted;
+      Pair<Integer,Integer> timeToPort=this.workerIdToStartTimeAndPort.get(workerid);
+      if (timeToPort != null) {
+        LocalAssignment localAssignment=assignedTasks.get(timeToPort.getSecond());
+        if (localAssignment == null) {
+          LOG.info("Following worker don't exit assignment, so remove this port=" + timeToPort.getSecond());
+          state=State.disallowed;
+          Integer port=this.workerIdToStartTimeAndPort.get(workerid).getSecond();
+          this.workerIdToStartTimeAndPort.remove(workerid);
+          this.portToWorkerId.remove(port);
+        }
+      }
+    }
+ else     if (matchesAssignment(whb,assignedTasks) == false) {
+      state=State.disallowed;
+    }
+ else     if ((now - whb.getTimeSecs()) > JStormUtils.parseInt(conf.get(Config.SUPERVISOR_WORKER_TIMEOUT_SECS))) {
+      state=State.timedOut;
+    }
+ else {
+      if (isWorkerDead(workerid)) {
+        state=State.timedOut;
+      }
+ else {
+        state=State.valid;
+      }
+    }
+    if (state != State.valid) {
+      if (killingWorkers.containsKey(workerid) == false)       LOG.info("Worker:" + workerid + " state:"+ state+ " WorkerHeartbeat:"+ whb+ " assignedTasks:"+ assignedTasks+ " at supervisor time-secs "+ now);
+    }
+ else {
+      LOG.debug("Worker:" + workerid + " state:"+ state+ " WorkerHeartbeat: "+ whb+ " at supervisor time-secs "+ now);
+    }
+    workeridHbstate.put(workerid,new StateHeartbeat(state,whb));
+  }
+  return workeridHbstate;
+}

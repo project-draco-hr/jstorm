@@ -1,0 +1,9 @@
+{
+  generateTables();
+  if (tables == null || tables.size() == 0 || tables.get(0).getLines().size() == 1) {
+    clusterType=SINGLE_CLUSTER;
+  }
+ else {
+    clusterType=MULTI_CLUSTER;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("updateConf",org.apache.thrift.protocol.TMessageType.CALL,0));
+  updateConf_args args=new updateConf_args();
+  args.set_name(name);
+  args.set_conf(conf);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

@@ -1,0 +1,10 @@
+{
+  Channel channel=super.isChannelReady();
+  if (channel == null) {
+    return null;
+  }
+  if (blockSend == true && pendings.get() >= MAX_SEND_PENDING) {
+    return null;
+  }
+  return channel;
+}

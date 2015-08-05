@@ -1,0 +1,20 @@
+{
+  if (processErrorStream != null) {
+    try {
+      StringBuilder sb=new StringBuilder();
+      while (processErrorStream.available() > 0) {
+        int bufferSize=processErrorStream.available();
+        byte[] errorReadingBuffer=new byte[bufferSize];
+        processErrorStream.read(errorReadingBuffer,0,bufferSize);
+        sb.append(new String(errorReadingBuffer));
+      }
+      return sb.toString();
+    }
+ catch (    IOException e) {
+      return "(Unable to capture error stream)";
+    }
+  }
+ else {
+    return "";
+  }
+}

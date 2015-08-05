@@ -1,0 +1,7 @@
+{
+  Set<Integer> outboundTasks=worker_output_tasks(workerData);
+  workerData.initOutboundTaskStatus(outboundTasks);
+  workerData.setOutboundTasks(outboundTasks);
+  RefreshConnections refresh_connections=new RefreshConnections(workerData);
+  return refresh_connections;
+}

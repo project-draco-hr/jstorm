@@ -1,0 +1,4 @@
+{
+  this.parallel=parallel;
+  set_parallel_isSet(true);
+}

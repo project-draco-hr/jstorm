@@ -1,0 +1,29 @@
+{
+  this.stormConf=storm_conf;
+  this.factory=factory;
+  this.scheduler=scheduler;
+  this.reconnector=reconnector;
+  retries=new AtomicInteger(0);
+  channelRef=new AtomicReference<Channel>(null);
+  being_closed=new AtomicBoolean(false);
+  pendings=new AtomicLong(0);
+  nettyConnection=new NettyConnection();
+  nettyConnection.setClientPort(NetWorkUtils.ip(),ConfigExtension.getLocalWorkerPort(storm_conf));
+  nettyConnection.setServerPort(host,port);
+  buffer_size=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_BUFFER_SIZE));
+  max_retries=Math.min(30,Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MAX_RETRIES)));
+  base_sleep_ms=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MIN_SLEEP_MS));
+  max_sleep_ms=Utils.getInt(storm_conf.get(Config.STORM_MESSAGING_NETTY_MAX_SLEEP_MS));
+  timeoutMs=ConfigExtension.getNettyPendingBufferTimeout(storm_conf);
+  MAX_SEND_PENDING=(int)ConfigExtension.getNettyMaxSendPending(storm_conf);
+  this.messageBatchSize=Utils.getInt(storm_conf.get(Config.STORM_NETTY_MESSAGE_BATCH_SIZE),262144);
+  messageBatchRef=new AtomicReference<MessageBatch>();
+  remote_addr=new InetSocketAddress(host,port);
+  name=remote_addr.toString();
+  connectMyself=isConnectMyself(stormConf,host,port);
+  address=JStormServerUtils.getName(host,port);
+  if (connectMyself == false) {
+    registerMetrics();
+  }
+  closingChannel=new HashSet<Channel>();
+}

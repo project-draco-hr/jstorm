@@ -1,0 +1,4 @@
+{
+  MetricTest test=new MetricTest();
+  test.alltest();
+}

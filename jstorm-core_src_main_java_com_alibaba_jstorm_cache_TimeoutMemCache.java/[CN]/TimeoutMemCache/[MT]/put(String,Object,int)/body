@@ -1,0 +1,11 @@
+{
+  Entry<Integer,TimeCacheMap<String,Object>> ceilingEntry=cacheWindows.ceilingEntry(timeoutSecond);
+  if (ceilingEntry == null) {
+    put(key,value);
+    return;
+  }
+ else {
+    remove(key);
+    ceilingEntry.getValue().put(key,value);
+  }
+}

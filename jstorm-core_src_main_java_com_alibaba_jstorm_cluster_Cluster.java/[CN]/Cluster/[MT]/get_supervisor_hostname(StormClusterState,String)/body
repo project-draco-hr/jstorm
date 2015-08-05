@@ -1,0 +1,9 @@
+{
+  SupervisorInfo supervisorInfo=stormClusterState.supervisor_info(supervisorId);
+  if (supervisorInfo == null) {
+    return null;
+  }
+ else {
+    return supervisorInfo.getHostName();
+  }
+}

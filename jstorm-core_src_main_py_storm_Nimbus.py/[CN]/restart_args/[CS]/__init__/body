@@ -1,0 +1,3 @@
+def __init__(self, name=None, jsonConf=None):
+    self.name = name
+    self.jsonConf = jsonConf

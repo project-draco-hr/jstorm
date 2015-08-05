@@ -1,0 +1,11 @@
+{
+  TableData table=new TableData();
+  List<String> headers=table.getHeaders();
+  List<Map<String,ColumnData>> lines=table.getLines();
+  Map<String,MetricWindow> baseMetric=metricInfo.get_baseMetric();
+  List<String> keys=getSortedKeys(baseMetric.keySet());
+  headers.addAll(keys);
+  Map<String,ColumnData> line=getMetricLine(metricInfo,headers,window);
+  lines.add(line);
+  return table;
+}

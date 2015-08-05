@@ -1,5 +1,0 @@
-{
-  if (that == null)   return false;
-  if (that instanceof WorkerMetricData)   return this.equals((WorkerMetricData)that);
-  return false;
-}

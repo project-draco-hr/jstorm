@@ -1,0 +1,4 @@
+{
+  added.incrementAndGet();
+  queue.add(event_fn);
+}

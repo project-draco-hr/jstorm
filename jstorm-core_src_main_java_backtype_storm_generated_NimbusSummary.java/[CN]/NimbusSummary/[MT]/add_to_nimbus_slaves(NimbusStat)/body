@@ -1,0 +1,6 @@
+{
+  if (this.nimbus_slaves == null) {
+    this.nimbus_slaves=new ArrayList<NimbusStat>();
+  }
+  this.nimbus_slaves.add(elem);
+}

@@ -1,0 +1,3 @@
+{
+  return new getNettyMetric_resultTupleScheme();
+}

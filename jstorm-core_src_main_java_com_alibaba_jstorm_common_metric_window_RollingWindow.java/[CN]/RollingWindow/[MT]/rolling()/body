@@ -1,0 +1,10 @@
+{
+synchronized (this) {
+    if (unflushed != null) {
+      buckets.put(currBucketTime,unflushed);
+      unflushed=null;
+    }
+    currBucketTime=getCurrBucketTime();
+    return;
+  }
+}

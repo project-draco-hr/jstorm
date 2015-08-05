@@ -1,0 +1,39 @@
+{
+  for (  Entry<String,Set<String>> entry : topologyWorkers.entrySet()) {
+    String topologyId=entry.getKey();
+    Set<String> workers=entry.getValue();
+    Set<String> connections=new TreeSet<String>();
+    TopologyMetric topologyMetric=new TopologyMetric();
+    boolean isExistWorker=false;
+    for (    String workerId : workers) {
+      WorkerUploadMetrics workerMetric=(WorkerUploadMetrics)dbCache.get(getWorkerKey(topologyId,workerId));
+      if (workerMetric == null) {
+        LOG.warn("Failed to get WorkerUploadMetrics of " + getWorkerKey(topologyId,workerId));
+        continue;
+      }
+      isExistWorker=true;
+      mergeTopology(topologyMetric,workerMetric);
+      mergeNetty(workerMetric,topologyId,connections);
+    }
+    if (isExistWorker == false) {
+      LOG.info("No worker metrics of {}",topologyId);
+      continue;
+    }
+    mergeTasks(topologyMetric,topologyId);
+    mergeComponent(topologyMetric);
+    dbCache.put(getTopologyKey(topologyId),topologyMetric);
+    mergeNetty(topologyId,connections);
+    LOG.info("Successfully render topologyId of " + topologyId);
+    uploadToAlimonitor(topologyMetric,topologyId);
+    cleanDeadSupervisorWorker(topologyMetric);
+    try {
+      LOG.info(topologyId + " finish metric");
+      stormClusterState.set_topology_metric(topologyId,topologyMetric);
+      LOG.info("Successfully uploaded toplogy metrics: " + topologyId);
+    }
+ catch (    Exception e) {
+      LOG.info("Failed to upload toplogy metrics: " + topologyId,e);
+      continue;
+    }
+  }
+}

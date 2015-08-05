@@ -1,0 +1,9 @@
+{
+  Number value=gauge.getValue();
+  Map<Integer,Number> ret=new TreeMap<Integer,Number>();
+  for (  Integer timeKey : windowSeconds) {
+    ret.put(timeKey,value);
+  }
+  ret.put(StatBuckets.ALL_TIME_WINDOW,value);
+  return ret;
+}

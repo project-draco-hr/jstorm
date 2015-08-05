@@ -1,0 +1,9 @@
+{
+  TreeMap<String,MetricInfo> ret=(TreeMap<String,MetricInfo>)dbCache.get(getNettyTopologyKey(topologyId));
+  if (ret == null) {
+    return emptyNettyMetric;
+  }
+ else {
+    return ret;
+  }
+}

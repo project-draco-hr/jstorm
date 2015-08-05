@@ -1,0 +1,20 @@
+{
+  int nowSec=TimeUtils.current_time_secs();
+  int startRemove=nowSec - (interval - 1) - windowSecond;
+  List<Integer> removeList=new ArrayList<Integer>();
+  for (  Integer keyTime : buckets.keySet()) {
+    if (keyTime < startRemove) {
+      removeList.add(keyTime);
+    }
+ else     if (keyTime >= startRemove) {
+      break;
+    }
+  }
+  for (  Integer removeKey : removeList) {
+    buckets.remove(removeKey);
+  }
+  if (buckets.isEmpty() == false) {
+    Integer first=buckets.firstKey();
+    startTime=first.longValue() * 1000;
+  }
+}

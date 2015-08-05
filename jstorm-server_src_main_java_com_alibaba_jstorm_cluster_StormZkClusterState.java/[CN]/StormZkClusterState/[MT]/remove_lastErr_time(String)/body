@@ -1,4 +1,0 @@
-{
-  String path=Cluster.lasterror_path(topologyId);
-  cluster_state.delete_node(path);
-}

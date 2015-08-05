@@ -1,0 +1,34 @@
+{
+  System.out.println("!!!!!!!!Start test_multiple_client !!!!!!!!!!!");
+  final String req_msg=setupLargMsg();
+  final int clientNum=3;
+  final AtomicLong received=new AtomicLong(clientNum);
+  for (int i=0; i < clientNum; i++) {
+    new Thread(new Runnable(){
+      @Override public void run(){
+        IConnection client=context.connect(null,"localhost",port);
+        List<TaskMessage> list=new ArrayList<TaskMessage>();
+        TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+        list.add(message);
+        client.send(message);
+        System.out.println("!!Client has sent data");
+        while (received.get() != 0) {
+          JStormUtils.sleepMs(1000);
+        }
+        client.close();
+      }
+    }
+).start();
+  }
+  IConnection server=null;
+  JStormUtils.sleepMs(1000);
+  System.out.println("!!server begin start!!!!!");
+  server=initNettyServer();
+  for (int i=0; i < clientNum; i++) {
+    byte[] recv=(byte[])server.recv(task,0);
+    Assert.assertEquals(req_msg,new String(recv));
+    received.decrementAndGet();
+  }
+  server.close();
+  System.out.println("!!!!!!!!!!!!End test_multiple_client!!!!!!!!!!!!!");
+}

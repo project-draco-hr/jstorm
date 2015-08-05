@@ -1,0 +1,6 @@
+{
+  this();
+  this.supervisor=supervisor;
+  this.workers=workers;
+  this.workerMetric=workerMetric;
+}

@@ -1,0 +1,7 @@
+{
+  StormClusterState clusterState=data.getStormClusterState();
+  TreeSet<Integer> taskIds=new TreeSet<Integer>(clusterState.task_ids(topologyid));
+  int cnt=taskIds.descendingIterator().next();
+  cnt=setBoltInfo(oldTopology,newTopology,cnt,clusterState);
+  cnt=setSpoutInfo(oldTopology,newTopology,cnt,clusterState);
+}

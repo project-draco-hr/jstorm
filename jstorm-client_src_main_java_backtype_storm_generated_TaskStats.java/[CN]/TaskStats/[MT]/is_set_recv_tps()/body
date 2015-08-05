@@ -1,3 +1,0 @@
-{
-  return this.recv_tps != null;
-}

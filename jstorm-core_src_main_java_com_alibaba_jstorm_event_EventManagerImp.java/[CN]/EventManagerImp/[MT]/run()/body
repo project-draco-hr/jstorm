@@ -1,0 +1,14 @@
+{
+  try {
+    RunnableCallback r=queue.take();
+    if (r == null) {
+      return;
+    }
+    r.run();
+    e=r.error();
+    proccessinc();
+  }
+ catch (  InterruptedException e) {
+    LOG.info("InterruptedException when processing event ");
+  }
+}

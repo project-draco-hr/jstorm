@@ -1,0 +1,30 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.supervisor=new SupervisorSummary();
+  struct.supervisor.read(iprot);
+  struct.set_supervisor_isSet(true);
+{
+    org.apache.thrift.protocol.TList _list207=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.workers=new ArrayList<WorkerSummary>(_list207.size);
+    WorkerSummary _elem208;
+    for (int _i209=0; _i209 < _list207.size; ++_i209) {
+      _elem208=new WorkerSummary();
+      _elem208.read(iprot);
+      struct.workers.add(_elem208);
+    }
+  }
+  struct.set_workers_isSet(true);
+{
+    org.apache.thrift.protocol.TMap _map210=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.workerMetric=new HashMap<String,MetricInfo>(2 * _map210.size);
+    String _key211;
+    MetricInfo _val212;
+    for (int _i213=0; _i213 < _map210.size; ++_i213) {
+      _key211=iprot.readString();
+      _val212=new MetricInfo();
+      _val212.read(iprot);
+      struct.workerMetric.put(_key211,_val212);
+    }
+  }
+  struct.set_workerMetric_isSet(true);
+}

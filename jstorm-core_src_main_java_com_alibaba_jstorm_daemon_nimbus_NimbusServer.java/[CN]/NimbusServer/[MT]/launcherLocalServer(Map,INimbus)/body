@@ -1,0 +1,9 @@
+{
+  LOG.info("Begin to start nimbus on local model");
+  StormConfig.validate_local_mode(conf);
+  inimbus.prepare(conf,StormConfig.masterInimbus(conf));
+  data=createNimbusData(conf,inimbus);
+  initUploadMetricThread(data);
+  init(conf);
+  return serviceHandler;
+}

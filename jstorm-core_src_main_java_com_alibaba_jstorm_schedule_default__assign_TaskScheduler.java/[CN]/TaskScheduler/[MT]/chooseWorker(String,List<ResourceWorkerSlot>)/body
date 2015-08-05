@@ -1,0 +1,7 @@
+{
+  List<ResourceWorkerSlot> result=componentSelector.select(workers,name);
+  result=totalTaskNumSelector.select(result,name);
+  if (name.equals(TaskScheduler.ACKER_NAME))   return result.iterator().next();
+  result=inputComponentSelector.select(result,name);
+  return result.iterator().next();
+}

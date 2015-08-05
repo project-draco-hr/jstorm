@@ -1,0 +1,10 @@
+def validate(self):
+    if (self.name is None):
+        raise TProtocol.TProtocolException(message='Required field name is unset!')
+    if (self.parallel is None):
+        raise TProtocol.TProtocolException(message='Required field parallel is unset!')
+    if (self.type is None):
+        raise TProtocol.TProtocolException(message='Required field type is unset!')
+    if (self.task_ids is None):
+        raise TProtocol.TProtocolException(message='Required field task_ids is unset!')
+    return

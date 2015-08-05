@@ -1,0 +1,34 @@
+{
+  if (that == null)   return false;
+  boolean this_present_name=true && this.is_set_name();
+  boolean that_present_name=true && that.is_set_name();
+  if (this_present_name || that_present_name) {
+    if (!(this_present_name && that_present_name))     return false;
+    if (!this.name.equals(that.name))     return false;
+  }
+  boolean this_present_parallel=true;
+  boolean that_present_parallel=true;
+  if (this_present_parallel || that_present_parallel) {
+    if (!(this_present_parallel && that_present_parallel))     return false;
+    if (this.parallel != that.parallel)     return false;
+  }
+  boolean this_present_type=true && this.is_set_type();
+  boolean that_present_type=true && that.is_set_type();
+  if (this_present_type || that_present_type) {
+    if (!(this_present_type && that_present_type))     return false;
+    if (!this.type.equals(that.type))     return false;
+  }
+  boolean this_present_task_ids=true && this.is_set_task_ids();
+  boolean that_present_task_ids=true && that.is_set_task_ids();
+  if (this_present_task_ids || that_present_task_ids) {
+    if (!(this_present_task_ids && that_present_task_ids))     return false;
+    if (!this.task_ids.equals(that.task_ids))     return false;
+  }
+  boolean this_present_errors=true && this.is_set_errors();
+  boolean that_present_errors=true && that.is_set_errors();
+  if (this_present_errors || that_present_errors) {
+    if (!(this_present_errors && that_present_errors))     return false;
+    if (!this.errors.equals(that.errors))     return false;
+  }
+  return true;
+}

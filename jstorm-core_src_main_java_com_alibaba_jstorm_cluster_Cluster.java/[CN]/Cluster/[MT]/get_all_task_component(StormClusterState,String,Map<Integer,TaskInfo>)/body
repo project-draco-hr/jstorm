@@ -1,0 +1,9 @@
+{
+  if (taskInfoMap == null) {
+    taskInfoMap=get_all_taskInfo(zkCluster,topologyId);
+  }
+  if (taskInfoMap == null) {
+    return null;
+  }
+  return Common.getTaskToComponent(taskInfoMap);
+}

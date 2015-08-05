@@ -1,0 +1,50 @@
+{
+  Map<String,Long> removingMap=removing.buildMap();
+  Map<String,Assignment> assignMap=null;
+  try {
+    assignMap=Cluster.get_all_assignment(stormClusterState,null);
+  }
+ catch (  Exception e1) {
+    LOG.info("Failed to get Assignments");
+  }
+  for (  String topologyId : topologyWorkers.keySet()) {
+    if (assignMap.containsKey(topologyId) == false) {
+      removingMap.put(topologyId,System.currentTimeMillis());
+    }
+  }
+  for (  String topologyId : removingMap.keySet()) {
+    dbCache.remove(getTopologyKey(topologyId));
+    Set<String> workers=topologyWorkers.get(topologyId);
+    if (workers != null) {
+      for (      String workerSlot : workers) {
+        dbCache.remove(getWorkerKey(topologyId,workerSlot));
+      }
+      topologyWorkers.remove(topologyId);
+    }
+  }
+  for (  Entry<String,Set<String>> entry : topologyWorkers.entrySet()) {
+    String topologyId=entry.getKey();
+    Set<String> metricWorkers=entry.getValue();
+    Set<String> workerSlots=new HashSet<String>();
+    Assignment assignment=assignMap.get(topologyId);
+    if (assignment == null) {
+      LOG.error("Assignment disappear of " + topologyId);
+      continue;
+    }
+    for (    ResourceWorkerSlot worker : assignment.getWorkers()) {
+      String slot=getWorkerSlotName(worker.getNodeId(),worker.getPort());
+      workerSlots.add(slot);
+    }
+    Set<String> removes=new HashSet<String>();
+    for (    String slot : metricWorkers) {
+      if (workerSlots.contains(slot) == false) {
+        LOG.info("Remove worker metrics of {}:{}",topologyId,slot);
+        removes.add(slot);
+      }
+    }
+    for (    String slot : removes) {
+      metricWorkers.remove(slot);
+      dbCache.remove(getWorkerKey(topologyId,slot));
+    }
+  }
+}

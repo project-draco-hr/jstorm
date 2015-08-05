@@ -1,0 +1,5 @@
+{
+  if (task_obj instanceof IConfig) {
+    ((IConfig)task_obj).updateConf(conf);
+  }
+}

@@ -1,0 +1,28 @@
+{
+  if (StormConfig.local_mode(conf)) {
+    try {
+      byte[] temp=Utils.serialize(upload);
+      LocalCluster.getInstance().getLocalClusterMap().getNimbus().workerUploadMetric(upload);
+    }
+ catch (    TException e) {
+      LOG.error("Failed to upload worker metrics",e);
+    }
+  }
+ else {
+    try {
+      if (client == null) {
+        client=NimbusClient.getConfiguredClient(conf);
+      }
+      client.getClient().workerUploadMetric(upload);
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to upload worker metrics",e);
+      if (client != null) {
+        client.close();
+        client=null;
+      }
+    }
+ finally {
+    }
+  }
+}

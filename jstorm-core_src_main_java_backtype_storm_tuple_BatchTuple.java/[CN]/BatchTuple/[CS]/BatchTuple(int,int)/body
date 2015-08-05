@@ -1,0 +1,4 @@
+{
+  this.targetTaskId=targetTaskId;
+  this.batchSize=batchSize;
+}

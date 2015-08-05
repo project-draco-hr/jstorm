@@ -1,0 +1,36 @@
+{
+  StringBuilder sb=new StringBuilder("MetricInfo(");
+  boolean first=true;
+  sb.append("baseMetric:");
+  if (this.baseMetric == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.baseMetric);
+  }
+  first=false;
+  if (is_set_inputMetric()) {
+    if (!first)     sb.append(", ");
+    sb.append("inputMetric:");
+    if (this.inputMetric == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.inputMetric);
+    }
+    first=false;
+  }
+  if (is_set_outputMetric()) {
+    if (!first)     sb.append(", ");
+    sb.append("outputMetric:");
+    if (this.outputMetric == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.outputMetric);
+    }
+    first=false;
+  }
+  sb.append(")");
+  return sb.toString();
+}

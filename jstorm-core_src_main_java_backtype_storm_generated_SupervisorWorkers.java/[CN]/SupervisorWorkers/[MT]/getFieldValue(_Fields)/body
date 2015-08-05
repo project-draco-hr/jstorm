@@ -1,0 +1,11 @@
+{
+switch (field) {
+case SUPERVISOR:
+    return get_supervisor();
+case WORKERS:
+  return get_workers();
+case WORKER_METRIC:
+return get_workerMetric();
+}
+throw new IllegalStateException();
+}

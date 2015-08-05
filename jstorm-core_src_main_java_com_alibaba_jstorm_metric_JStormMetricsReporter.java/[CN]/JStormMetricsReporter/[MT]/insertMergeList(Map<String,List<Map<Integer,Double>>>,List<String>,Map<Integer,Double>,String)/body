@@ -1,0 +1,13 @@
+{
+  for (  String tag : mergeList) {
+    if (name.startsWith(tag) == false) {
+      continue;
+    }
+    List<Map<Integer,Double>> list=mergeMap.get(tag);
+    if (list == null) {
+      list=new ArrayList<Map<Integer,Double>>();
+      mergeMap.put(tag,list);
+    }
+    list.add(snapshot);
+  }
+}

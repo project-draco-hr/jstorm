@@ -1,0 +1,8 @@
+{
+  MetricRegistry metrics=taskMetrics.get(taskId);
+  if (metrics == null) {
+    throw new IllegalArgumentException("Invalid taskId " + taskId);
+  }
+  String registerName=MetricRegistry.name(name,args);
+  return metrics.register(registerName,metric);
+}

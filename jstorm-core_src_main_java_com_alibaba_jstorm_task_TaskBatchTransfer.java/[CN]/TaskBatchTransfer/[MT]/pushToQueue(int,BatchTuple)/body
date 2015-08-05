@@ -1,0 +1,10 @@
+{
+  DisruptorQueue exeQueue=innerTaskTransfer.get(targetTaskid);
+  if (exeQueue != null) {
+    exeQueue.publish(batch);
+  }
+ else {
+    serializeQueue.publish(batch);
+  }
+  resetBatchTuple(targetTaskid);
+}

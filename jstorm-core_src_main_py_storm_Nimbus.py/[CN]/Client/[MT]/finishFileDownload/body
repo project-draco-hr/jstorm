@@ -1,0 +1,4 @@
+def finishFileDownload(self, id):
+    '\n    Parameters:\n     - id\n    '
+    self.send_finishFileDownload(id)
+    self.recv_finishFileDownload()

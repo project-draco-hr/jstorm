@@ -1,0 +1,3 @@
+{
+  setObject(Cluster.assignment_path(topologyId),info);
+}

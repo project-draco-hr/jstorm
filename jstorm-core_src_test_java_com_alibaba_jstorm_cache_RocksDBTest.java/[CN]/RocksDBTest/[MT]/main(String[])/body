@@ -1,0 +1,7 @@
+{
+  if (OSInfo.isLinux() || OSInfo.isMac()) {
+    RocksDB.loadLibrary();
+    RocksDBTest instance=new RocksDBTest();
+    instance.performanceTest();
+  }
+}

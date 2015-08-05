@@ -1,0 +1,6 @@
+{
+  updateConf_args args=new updateConf_args();
+  args.set_name(name);
+  args.set_conf(conf);
+  sendBase("updateConf",args);
+}

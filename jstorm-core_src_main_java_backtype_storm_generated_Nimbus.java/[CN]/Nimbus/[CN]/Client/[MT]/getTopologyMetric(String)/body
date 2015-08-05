@@ -1,0 +1,4 @@
+{
+  send_getTopologyMetric(topologyName);
+  return recv_getTopologyMetric();
+}

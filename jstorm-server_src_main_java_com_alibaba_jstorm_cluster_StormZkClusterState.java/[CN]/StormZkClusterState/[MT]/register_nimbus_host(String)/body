@@ -1,3 +1,0 @@
-{
-  cluster_state.set_ephemeral_node(ZkConstant.NIMBUS_SLAVE_SUBTREE + Cluster.ZK_SEPERATOR + host,null);
-}

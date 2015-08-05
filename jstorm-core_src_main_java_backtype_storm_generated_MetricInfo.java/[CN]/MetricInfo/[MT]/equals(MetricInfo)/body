@@ -1,0 +1,22 @@
+{
+  if (that == null)   return false;
+  boolean this_present_baseMetric=true && this.is_set_baseMetric();
+  boolean that_present_baseMetric=true && that.is_set_baseMetric();
+  if (this_present_baseMetric || that_present_baseMetric) {
+    if (!(this_present_baseMetric && that_present_baseMetric))     return false;
+    if (!this.baseMetric.equals(that.baseMetric))     return false;
+  }
+  boolean this_present_inputMetric=true && this.is_set_inputMetric();
+  boolean that_present_inputMetric=true && that.is_set_inputMetric();
+  if (this_present_inputMetric || that_present_inputMetric) {
+    if (!(this_present_inputMetric && that_present_inputMetric))     return false;
+    if (!this.inputMetric.equals(that.inputMetric))     return false;
+  }
+  boolean this_present_outputMetric=true && this.is_set_outputMetric();
+  boolean that_present_outputMetric=true && that.is_set_outputMetric();
+  if (this_present_outputMetric || that_present_outputMetric) {
+    if (!(this_present_outputMetric && that_present_outputMetric))     return false;
+    if (!this.outputMetric.equals(that.outputMetric))     return false;
+  }
+  return true;
+}

@@ -1,0 +1,9 @@
+{
+switch (field) {
+case TASK_ID:
+    return Integer.valueOf(get_taskId());
+case COMPONENT:
+  return get_component();
+}
+throw new IllegalStateException();
+}

@@ -1,0 +1,13 @@
+{
+  windowsTitle="JStorm Time Windows";
+  for (  Integer timeWindow : StatBuckets.TIME_WINDOWS) {
+    LinkData link=new LinkData();
+    windowLinks.add(link);
+    link.setUrl(UIDef.LINK_WINDOW_TABLE);
+    link.setText(StatBuckets.getShowTimeStr(timeWindow));
+    Map<String,String> tempParameterMap=new HashMap<String,String>();
+    tempParameterMap.putAll(parameterMap);
+    tempParameterMap.put(UIDef.WINDOW,StatBuckets.getShowTimeStr(timeWindow));
+    link.setParamMap(tempParameterMap);
+  }
+}

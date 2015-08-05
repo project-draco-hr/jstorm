@@ -1,0 +1,23 @@
+{
+  Set<String> downloadTopologys=new HashSet<String>();
+  for (  Entry<String,String> entry : topologyCodes.entrySet()) {
+    String topologyId=entry.getKey();
+    String masterCodeDir=entry.getValue();
+    if (!downloadedTopologyIds.contains(topologyId) || updateTopologys.contains(topologyId)) {
+      LOG.info("Downloading code for storm id " + topologyId + " from "+ masterCodeDir);
+      try {
+        downloadStormCode(conf,topologyId,masterCodeDir);
+        StormConfig.write_supervisor_topology_timestamp(conf,topologyId,assignments.get(topologyId).getTimeStamp());
+      }
+ catch (      IOException e) {
+        LOG.error(e + " downloadStormCode failed " + "topologyId:"+ topologyId+ "masterCodeDir:"+ masterCodeDir);
+      }
+catch (      TException e) {
+        LOG.error(e + " downloadStormCode failed " + "topologyId:"+ topologyId+ "masterCodeDir:"+ masterCodeDir);
+      }
+      LOG.info("Finished downloading code for storm id " + topologyId + " from "+ masterCodeDir);
+      downloadTopologys.add(topologyId);
+    }
+  }
+  updateTaskCleanupTimeout(downloadTopologys);
+}

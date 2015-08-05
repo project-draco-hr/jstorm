@@ -1,0 +1,4 @@
+{
+  String name=MetricRegistry.name(MetricDef.RECV_TPS,component,stream);
+  update(name,Double.valueOf(1),JStormMetrics.Builder.METER);
+}

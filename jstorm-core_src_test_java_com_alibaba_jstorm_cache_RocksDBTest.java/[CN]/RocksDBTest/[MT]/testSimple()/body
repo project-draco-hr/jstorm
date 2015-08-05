@@ -1,0 +1,105 @@
+{
+  List<Map<String,Object>> dataList=new ArrayList<Map<String,Object>>();
+  for (int i=0; i < 4; i++) {
+    dataList.add(new HashMap<String,Object>());
+  }
+  for (int i=0; i < 10; i++) {
+    String key="key" + i;
+    for (int j=0; j < 4; j++) {
+      Map<String,Object> data=dataList.get(j);
+      String value="value--" + i + "--"+ j;
+      data.put(key,value);
+    }
+  }
+  Map<String,Object> data=dataList.get(0);
+  for (  Entry<String,Object> entry : data.entrySet()) {
+    cache.put(entry.getKey(),entry.getValue());
+  }
+  for (  Entry<String,Object> entry : data.entrySet()) {
+    String rawValue=(String)entry.getValue();
+    String fetchValue=(String)cache.get(entry.getKey());
+    Assert.assertEquals(rawValue,fetchValue);
+  }
+  for (  Entry<String,Object> entry : data.entrySet()) {
+    cache.remove(entry.getKey());
+  }
+  for (  Entry<String,Object> entry : data.entrySet()) {
+    String fetchValue=(String)cache.get(entry.getKey());
+    Assert.assertEquals(fetchValue,null);
+  }
+  Map<String,Object> data1=dataList.get(1);
+  cache.putBatch(data1);
+  Map<String,Object> getBatch=new HashMap<String,Object>();
+  for (  Entry<String,Object> entry : data1.entrySet()) {
+    getBatch.put(entry.getKey(),null);
+  }
+  Map<String,Object> emptyBatch=new HashMap<String,Object>();
+  emptyBatch.putAll(getBatch);
+  cache.getBatch(getBatch);
+  for (  String key : getBatch.keySet()) {
+    String rawValue=(String)data1.get(key);
+    String fetchValue=(String)getBatch.get(key);
+    Assert.assertEquals(rawValue,fetchValue);
+  }
+  cache.removeBatch(data1.keySet());
+  getBatch.clear();
+  getBatch.putAll(emptyBatch);
+  cache.getBatch(getBatch);
+  for (  String key : getBatch.keySet()) {
+    String rawValue=null;
+    String fetchValue=(String)getBatch.get(key);
+    Assert.assertEquals(rawValue,fetchValue);
+  }
+  Map<String,Object> data2=dataList.get(2);
+  for (  Entry<String,Object> entry : data2.entrySet()) {
+    cache.put(entry.getKey(),entry.getValue(),60);
+  }
+  for (  Entry<String,Object> entry : data2.entrySet()) {
+    String rawValue=(String)entry.getValue();
+    String fetchValue=(String)cache.get(entry.getKey());
+    Assert.assertEquals(rawValue,fetchValue);
+  }
+  for (  Entry<String,Object> entry : data2.entrySet()) {
+    cache.remove(entry.getKey());
+  }
+  for (  Entry<String,Object> entry : data2.entrySet()) {
+    String fetchValue=(String)cache.get(entry.getKey());
+    Assert.assertEquals(fetchValue,null);
+  }
+  Map<String,Object> data3=dataList.get(3);
+  cache.putBatch(data3,60);
+  for (  Entry<String,Object> entry : data3.entrySet()) {
+    getBatch.put(entry.getKey(),null);
+  }
+  cache.getBatch(getBatch);
+  for (  String key : getBatch.keySet()) {
+    String rawValue=(String)data3.get(key);
+    String fetchValue=(String)getBatch.get(key);
+    Assert.assertEquals(rawValue,fetchValue);
+  }
+  cache.removeBatch(data3.keySet());
+  getBatch.clear();
+  getBatch.putAll(emptyBatch);
+  cache.getBatch(getBatch);
+  for (  String key : getBatch.keySet()) {
+    String rawValue=null;
+    String fetchValue=(String)getBatch.get(key);
+    Assert.assertEquals(rawValue,fetchValue);
+  }
+  for (  Entry<String,Object> entry : data.entrySet()) {
+    cache.put(entry.getKey(),entry.getValue());
+  }
+  cache.putBatch(data3,60);
+  for (  Entry<String,Object> entry : data3.entrySet()) {
+    String rawValue=(String)entry.getValue();
+    String fetchValue=(String)cache.get(entry.getKey());
+    Assert.assertEquals(rawValue,fetchValue);
+  }
+  cache.removeBatch(data3.keySet());
+  for (  Entry<String,Object> entry : data3.entrySet()) {
+    String rawValue=null;
+    String fetchValue=(String)cache.get(entry.getKey());
+    Assert.assertEquals(rawValue,fetchValue);
+  }
+  cache.removeBatch(data3.keySet());
+}

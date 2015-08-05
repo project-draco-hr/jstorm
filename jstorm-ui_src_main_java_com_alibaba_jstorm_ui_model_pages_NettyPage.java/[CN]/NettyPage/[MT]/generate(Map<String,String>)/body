@@ -1,0 +1,38 @@
+{
+  List<TableData> tables=new ArrayList<TableData>();
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(paramMap);
+    String topologyId=paramMap.get(UIDef.TOPOLOGY);
+    if (topologyId == null) {
+      throw new IllegalArgumentException("Not set topologyId");
+    }
+    NettyMetric nettyMetric=null;
+    try {
+      String topologyName=Common.getTopologyNameById(topologyId);
+      String server=paramMap.get(UIDef.HOST);
+      if (server == null) {
+        int pos=JStormUtils.parseInt(paramMap.get(UIDef.POS),0);
+        nettyMetric=client.getClient().getNettyMetric(topologyName,pos);
+      }
+ else {
+        nettyMetric=client.getClient().getServerNettyMetric(topologyName,server);
+      }
+    }
+ catch (    org.apache.thrift.TException e) {
+      throw new IllegalArgumentException("Failed to get topologyInfo of " + topologyId + ", maybe it is dead");
+    }
+    TableData nettyMetricTable=getNettyMetricTable(nettyMetric,paramMap);
+    tables.add(nettyMetricTable);
+    Output ret=new Output();
+    ret.tables=tables;
+    ret.rawData="";
+    ret.pages=getPageIndex(nettyMetric,paramMap);
+    return ret;
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(paramMap);
+    LOG.error(e.getMessage(),e);
+    return UIUtils.getErrorInfo(e);
+  }
+}

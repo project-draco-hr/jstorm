@@ -1,0 +1,10 @@
+{
+  getTopologyId_result result=new getTopologyId_result();
+  try {
+    result.success=iface.getTopologyId(args.topologyName);
+  }
+ catch (  NotAliveException e) {
+    result.e=e;
+  }
+  return result;
+}

@@ -1,0 +1,11 @@
+{
+  String topologyId=workerMetrics.get_topology_id();
+  Map<Integer,MetricInfo> taskMetrics=topologyMetric.get_taskMetric();
+  if (taskMetrics == null) {
+    taskMetrics=new HashMap<Integer,MetricInfo>();
+    topologyMetric.set_taskMetric(taskMetrics);
+  }
+  taskMetrics.putAll(workerMetrics.get_taskMetric());
+  String hostname=getWorkerHostname(workerMetrics);
+  topologyMetric.put_to_workerMetric(getWorkerSlotName(hostname,workerMetrics.get_port()),workerMetrics.get_workerMetric());
+}

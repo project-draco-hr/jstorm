@@ -1,0 +1,10 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case METRIC_WINDOW:
+    return is_set_metricWindow();
+}
+throw new IllegalStateException();
+}

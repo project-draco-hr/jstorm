@@ -1,3 +1,0 @@
-{
-  NimbusUtils.transition(data,topologyid,false,StatusType.monitor);
-}

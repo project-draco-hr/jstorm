@@ -1,0 +1,3 @@
+{
+  return CACHE_NAMESPACE_METRIC + "@" + topologyId+ "@"+ workerSlot;
+}

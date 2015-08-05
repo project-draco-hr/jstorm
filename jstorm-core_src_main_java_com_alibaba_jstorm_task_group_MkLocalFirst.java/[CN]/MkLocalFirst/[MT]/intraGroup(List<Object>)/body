@@ -1,0 +1,8 @@
+{
+  if (localOutTasks.size() == 0)   return null;
+  int index=getActiveTask(randomrange,localOutTasks);
+  if (index == -1) {
+    return null;
+  }
+  return JStormUtils.mk_list(localOutTasks.get(index));
+}

@@ -1,5 +1,0 @@
-{
-  curr.setFirst(curr.getFirst() + val);
-  curr.setSecond(curr.getSecond() + 1);
-  return curr;
-}

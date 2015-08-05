@@ -1,9 +1,0 @@
-{
-  LOG.info("Begin to close connection to {} and flush all data, batchQueue {}, disruptor {}",name,batchQueue.size(),disruptorQueue.population());
-  sendAllData();
-  disruptorQueue.haltWithInterrupt();
-  Metrics.unregister(address,MetricDef.NETTY_CLI_SYNC_BATCH_QUEUE,null,Metrics.MetricType.WORKER);
-  Metrics.unregister(address,MetricDef.NETTY_CLI_SYNC_DISR_QUEUE,null,Metrics.MetricType.WORKER);
-  super.close();
-  shutdownPool();
-}

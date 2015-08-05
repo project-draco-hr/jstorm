@@ -1,0 +1,12 @@
+{
+  if (OSInfo.isLinux() == false) {
+    return false;
+  }
+  String path="/proc/" + pid;
+  File file=new File(path);
+  if (file.exists() == false) {
+    LOG.info("Process " + pid + " is dead");
+    return true;
+  }
+  return false;
+}

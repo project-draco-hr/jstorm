@@ -1,0 +1,11 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+{
+    oprot.writeI32(struct.connections.size());
+    for (    Map.Entry<String,MetricInfo> _iter279 : struct.connections.entrySet()) {
+      oprot.writeString(_iter279.getKey());
+      _iter279.getValue().write(oprot);
+    }
+  }
+  oprot.writeI32(struct.connectionNum);
+}

@@ -1,0 +1,5 @@
+{
+  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_SYNC_BATCH_QUEUE,nettyConnection.toString());
+  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE,nettyConnection.toString());
+  JStormHealthCheck.unregisterWorkerHealthCheck(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE + ":" + nettyConnection.toString());
+}

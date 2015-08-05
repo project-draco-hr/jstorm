@@ -1,0 +1,18 @@
+{
+  cache.cleanup();
+  LOG.info("Successfully shutdown Cache");
+  try {
+    stormClusterState.disconnect();
+    LOG.info("Successfully shutdown ZK Cluster Instance");
+  }
+ catch (  Exception e) {
+  }
+  try {
+    scheduExec.shutdown();
+    LOG.info("Successfully shutdown threadpool");
+  }
+ catch (  Exception e) {
+  }
+  uploaders.cleanup();
+  downloaders.cleanup();
+}

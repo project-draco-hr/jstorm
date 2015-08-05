@@ -1,0 +1,8 @@
+Map conf
+String supervisorId
+Map<String,String> removed
+ConcurrentHashMap<String,String> workerThreadPids
+CgroupManager cgroupManager
+boolean block
+Map<String,Integer> killingWorkers
+Map<String,Integer> taskCleanupTimeoutMap

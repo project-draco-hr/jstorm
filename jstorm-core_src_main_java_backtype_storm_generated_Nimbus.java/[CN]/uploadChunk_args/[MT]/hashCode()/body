@@ -1,0 +1,10 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_location=true && (is_set_location());
+  list.add(present_location);
+  if (present_location)   list.add(location);
+  boolean present_chunk=true && (is_set_chunk());
+  list.add(present_chunk);
+  if (present_chunk)   list.add(chunk);
+  return list.hashCode();
+}

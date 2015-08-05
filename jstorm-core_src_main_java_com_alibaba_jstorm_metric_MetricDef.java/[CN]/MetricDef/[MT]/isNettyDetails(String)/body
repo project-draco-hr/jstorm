@@ -1,0 +1,12 @@
+{
+  Set<String> specialNettySet=new HashSet<String>();
+  specialNettySet.add(MetricDef.NETTY_CLI_SEND_SPEED);
+  specialNettySet.add(MetricDef.NETTY_SRV_RECV_SPEED);
+  if (specialNettySet.contains(metricName)) {
+    return false;
+  }
+  if (metricName.startsWith(MetricDef.NETTY)) {
+    return true;
+  }
+  return false;
+}

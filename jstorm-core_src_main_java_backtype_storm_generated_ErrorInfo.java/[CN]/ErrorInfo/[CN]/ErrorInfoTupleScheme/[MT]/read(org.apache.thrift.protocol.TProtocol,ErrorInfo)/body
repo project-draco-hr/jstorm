@@ -1,0 +1,7 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.error=iprot.readString();
+  struct.set_error_isSet(true);
+  struct.error_time_secs=iprot.readI32();
+  struct.set_error_time_secs_isSet(true);
+}

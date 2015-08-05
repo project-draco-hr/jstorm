@@ -1,0 +1,14 @@
+{
+  this.topology_context=_topology_context;
+  this.out_fields=_out_fields;
+  this.thrift_grouping=_thrift_grouping;
+  this.streamId=streamId;
+  this.out_tasks=new ArrayList<Integer>();
+  this.out_tasks.addAll(_outTasks);
+  Collections.sort(this.out_tasks);
+  this.local_tasks=_topology_context.getThisWorkerTasks();
+  this.fields=Thrift.groupingType(thrift_grouping);
+  this.grouptype=this.parseGroupType(workerData);
+  String id=_topology_context.getThisTaskId() + ":" + streamId;
+  LOG.info(id + " grouptype is " + grouptype+ ", out_tasks is "+ out_tasks+ ", local_tasks"+ local_tasks);
+}

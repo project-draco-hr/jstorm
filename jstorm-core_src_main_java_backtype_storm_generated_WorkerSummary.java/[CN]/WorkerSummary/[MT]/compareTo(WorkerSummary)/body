@@ -1,0 +1,47 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  lastComparison=Boolean.valueOf(is_set_port()).compareTo(other.is_set_port());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_port()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.port,other.port);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_uptime()).compareTo(other.is_set_uptime());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_uptime()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.uptime,other.uptime);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_topology()).compareTo(other.is_set_topology());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_topology()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.topology,other.topology);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_tasks()).compareTo(other.is_set_tasks());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_tasks()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.tasks,other.tasks);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

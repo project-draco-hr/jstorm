@@ -1,0 +1,10 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_topologyName=true && (is_set_topologyName());
+  list.add(present_topologyName);
+  if (present_topologyName)   list.add(topologyName);
+  boolean present_serverName=true && (is_set_serverName());
+  list.add(present_serverName);
+  if (present_serverName)   list.add(serverName);
+  return list.hashCode();
+}

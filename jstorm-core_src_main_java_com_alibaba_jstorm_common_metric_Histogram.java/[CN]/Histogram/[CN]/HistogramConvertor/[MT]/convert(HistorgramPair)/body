@@ -1,0 +1,11 @@
+{
+  if (from == null) {
+    return 0.0d;
+  }
+  if (from.getTimes() == 0) {
+    return 0.0d;
+  }
+ else {
+    return from.getSum() / from.getTimes();
+  }
+}

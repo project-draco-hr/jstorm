@@ -1,0 +1,15 @@
+{
+  List<ResourceWorkerSlot> ret=new ArrayList<ResourceWorkerSlot>();
+  if (workers == null)   return ret;
+  Map<String,List<Integer>> componentToTask=(HashMap<String,List<Integer>>)((HashMap<String,List<Integer>>)context.getComponentTasks()).clone();
+  if (context.getAssignType() != context.ASSIGN_TYPE_NEW) {
+    checkUserDefineWorkers(context,workers,context.getTaskToComponent());
+  }
+  for (  WorkerAssignment worker : workers) {
+    ResourceWorkerSlot workerSlot=new ResourceWorkerSlot(worker,componentToTask);
+    if (workerSlot.getTasks().size() != 0) {
+      ret.add(workerSlot);
+    }
+  }
+  return ret;
+}

@@ -1,5 +1,0 @@
-{
-  if (lastUpdateTime == 0) {
-    lastUpdateTime=System.currentTimeMillis();
-  }
-}

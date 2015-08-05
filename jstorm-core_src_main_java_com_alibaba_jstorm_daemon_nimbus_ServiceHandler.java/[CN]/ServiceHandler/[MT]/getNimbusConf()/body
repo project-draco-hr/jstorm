@@ -1,0 +1,11 @@
+{
+  try {
+    String ret=JStormUtils.to_json(data.getConf());
+    return ret;
+  }
+ catch (  Exception e) {
+    String err="Failed to generate Nimbus configuration";
+    LOG.error(err,e);
+    throw new TException(err);
+  }
+}

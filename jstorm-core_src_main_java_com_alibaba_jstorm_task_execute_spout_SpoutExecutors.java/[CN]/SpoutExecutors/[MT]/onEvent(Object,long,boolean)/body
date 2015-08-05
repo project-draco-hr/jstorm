@@ -1,0 +1,46 @@
+{
+  long start=System.nanoTime();
+  try {
+    if (event == null) {
+      return;
+    }
+    Runnable runnable=null;
+    if (event instanceof Tuple) {
+      runnable=processTupleEvent((Tuple)event);
+    }
+ else     if (event instanceof BatchTuple) {
+      for (      Tuple tuple : ((BatchTuple)event).getTuples()) {
+        runnable=processTupleEvent(tuple);
+        if (runnable != null) {
+          runnable.run();
+          runnable=null;
+        }
+      }
+    }
+ else     if (event instanceof TimerTrigger.TimerEvent) {
+      processTimerEvent((TimerTrigger.TimerEvent)event);
+      return;
+    }
+ else     if (event instanceof IAckMsg) {
+      runnable=(Runnable)event;
+    }
+ else     if (event instanceof Runnable) {
+      runnable=(Runnable)event;
+    }
+ else {
+      LOG.warn("Receive one unknow event-" + event.toString() + " "+ idStr);
+      return;
+    }
+    if (runnable != null)     runnable.run();
+  }
+ catch (  Throwable e) {
+    if (taskStatus.isShutdown() == false) {
+      LOG.info("Unknow excpetion ",e);
+      report_error.report(e);
+    }
+  }
+ finally {
+    long end=System.nanoTime();
+    ackerTimer.update((end - start) / 1000000.0d);
+  }
+}

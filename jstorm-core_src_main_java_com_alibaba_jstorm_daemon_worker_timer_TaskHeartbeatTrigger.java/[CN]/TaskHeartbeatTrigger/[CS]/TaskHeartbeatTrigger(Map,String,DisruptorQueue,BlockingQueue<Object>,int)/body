@@ -1,0 +1,9 @@
+{
+  this.name=name;
+  this.queue=queue;
+  this.controlQueue=controlQueue;
+  this.opCode=TimerConstants.TASK_HEARTBEAT;
+  this.taskId=taskId;
+  frequence=JStormUtils.parseInt(conf.get(Config.TASK_HEARTBEAT_FREQUENCY_SECS),10);
+  firstTime=frequence;
+}

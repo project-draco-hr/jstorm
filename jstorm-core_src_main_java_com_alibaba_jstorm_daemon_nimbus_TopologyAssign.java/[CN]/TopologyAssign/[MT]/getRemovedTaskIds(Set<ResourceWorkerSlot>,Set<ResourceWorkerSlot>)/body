@@ -1,0 +1,11 @@
+{
+  Set<Integer> rtn=new HashSet<Integer>();
+  Set<Integer> oldTasks=getTaskSetFromWorkerSet(oldWorkers);
+  Set<Integer> newTasks=getTaskSetFromWorkerSet(workers);
+  for (  Integer taskId : oldTasks) {
+    if (!(newTasks.contains(taskId))) {
+      rtn.add(taskId);
+    }
+  }
+  return rtn;
+}

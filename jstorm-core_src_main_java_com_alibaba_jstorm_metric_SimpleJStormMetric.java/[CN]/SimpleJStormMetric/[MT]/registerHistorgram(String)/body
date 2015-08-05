@@ -1,0 +1,3 @@
+{
+  return JStormMetrics.registerWorkerHistogram(name);
+}

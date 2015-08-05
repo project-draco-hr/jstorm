@@ -1,0 +1,11 @@
+{
+  getTopologyInfoByName_result result=new getTopologyInfoByName_result();
+  receiveBase(result,"getTopologyInfoByName");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  if (result.e != null) {
+    throw result.e;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getTopologyInfoByName failed: unknown result");
+}

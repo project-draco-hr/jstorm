@@ -1,8 +1,0 @@
-{
-  byte[] data=ZeroMq.recv(socket,flags);
-  if (data == null || data.length <= 4) {
-    return null;
-  }
-  int port=KryoTupleDeserializer.deserializeTaskId(data);
-  return new TaskMessage(port,data);
-}

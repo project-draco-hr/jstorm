@@ -1,0 +1,6 @@
+{
+  this();
+  this.nimbus=nimbus;
+  this.supervisors=supervisors;
+  this.topologies=topologies;
+}

@@ -1,7 +1,0 @@
-String hostname
-int port
-Map<String,Double> gauge
-Map<String,Double> counter
-Map<String,Double> meter
-Map<String,Double> timer
-Map<String,Double> histogram

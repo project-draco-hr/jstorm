@@ -1,0 +1,21 @@
+{
+  StormClusterState clusterState=nimbusData.getStormClusterState();
+  List<String> active_topologys=clusterState.active_storms();
+  if (active_topologys == null) {
+    return;
+  }
+  Set<String> cleanupIds=get_cleanup_ids(clusterState,active_topologys);
+  for (  String topologyId : cleanupIds) {
+    LOG.info("Cleaning up " + topologyId);
+    clusterState.try_remove_storm(topologyId);
+    nimbusData.getTaskHeartbeatsCache().remove(topologyId);
+    NimbusUtils.removeTopologyTaskTimeout(nimbusData,topologyId);
+    String master_stormdist_root=StormConfig.masterStormdistRoot(nimbusData.getConf(),topologyId);
+    try {
+      PathUtils.rmr(master_stormdist_root);
+    }
+ catch (    IOException e) {
+      LOG.warn("Failed to delete " + master_stormdist_root + ",",e);
+    }
+  }
+}

@@ -1,0 +1,6 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.nimbus))
+    value = ((value * 31) ^ hash(self.supervisors))
+    value = ((value * 31) ^ hash(self.topologies))
+    return value

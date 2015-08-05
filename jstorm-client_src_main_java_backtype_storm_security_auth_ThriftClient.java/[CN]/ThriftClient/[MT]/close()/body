@@ -1,3 +1,0 @@
-{
-  if (_transport != null)   _transport.close();
-}

@@ -1,0 +1,3 @@
+String topology_id
+int port
+ConcurrentHashMap<Integer,DisruptorQueue> deserializedueue

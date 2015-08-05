@@ -1,0 +1,5 @@
+TopologyInfo topologyInfo
+List<ComponentSummary> componentSummaries
+Map<String,MetricInfo> componentMetrics
+Map<String,String> paramMap
+Integer window

@@ -1,4 +1,0 @@
-{
-  if (active.get())   return 0;
- else   return -1;
-}

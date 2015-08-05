@@ -1,0 +1,6 @@
+{
+  if (zkCache != null) {
+    zkCache.remove(path);
+  }
+  zkobj.deletereRcursive(zk,path);
+}

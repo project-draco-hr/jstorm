@@ -1,0 +1,8 @@
+{
+  nimbusConf=conf;
+  Boolean isEnable=ConfigExtension.isEnableTopologyNettyMetrics(conf);
+  if (isEnable != null) {
+    defaultEnable=isEnable;
+  }
+  LOG.info("Default netty metrics setting is " + defaultEnable);
+}

@@ -1,0 +1,7 @@
+Task task
+int taskId
+Map stormConf
+TopologyContext topologyContext
+Map<Integer,DisruptorQueue> innerTaskTransfer
+TaskStatus taskStatus
+String taskName

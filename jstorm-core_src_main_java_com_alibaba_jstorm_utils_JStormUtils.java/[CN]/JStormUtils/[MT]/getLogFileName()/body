@@ -1,0 +1,20 @@
+{
+  try {
+    Logger rootLogger=LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
+    if (rootLogger instanceof ch.qos.logback.classic.Logger) {
+      ch.qos.logback.classic.Logger logbackLogger=(ch.qos.logback.classic.Logger)rootLogger;
+      for (Iterator<ch.qos.logback.core.Appender<ch.qos.logback.classic.spi.ILoggingEvent>> index=logbackLogger.iteratorForAppenders(); index.hasNext(); ) {
+        ch.qos.logback.core.Appender<ch.qos.logback.classic.spi.ILoggingEvent> appender=index.next();
+        if (appender instanceof ch.qos.logback.core.FileAppender) {
+          ch.qos.logback.core.FileAppender fileAppender=(ch.qos.logback.core.FileAppender)appender;
+          return fileAppender.getFile();
+        }
+      }
+    }
+  }
+ catch (  Throwable e) {
+    LOG.info("Failed to get root logger file name",e.getMessage());
+    return null;
+  }
+  return null;
+}

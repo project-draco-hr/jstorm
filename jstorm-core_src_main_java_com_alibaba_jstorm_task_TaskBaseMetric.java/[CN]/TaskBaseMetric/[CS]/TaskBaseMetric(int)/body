@@ -1,0 +1,4 @@
+{
+  metrics=JStormMetrics.registerTask(taskId);
+  this.taskId=taskId;
+}

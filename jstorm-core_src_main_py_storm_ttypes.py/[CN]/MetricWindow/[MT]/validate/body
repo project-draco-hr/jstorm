@@ -1,0 +1,4 @@
+def validate(self):
+    if (self.metricWindow is None):
+        raise TProtocol.TProtocolException(message='Required field metricWindow is unset!')
+    return

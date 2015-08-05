@@ -1,0 +1,46 @@
+{
+  StormClusterState clusterState=data.getStormClusterState();
+  try {
+    List<String> active_topologys=clusterState.assignments(null);
+    if (active_topologys == null) {
+      LOG.info("Failed to get active topologies");
+      return;
+    }
+    for (    String topologyid : active_topologys) {
+      if (clusterState.storm_base(topologyid,null) == null) {
+        continue;
+      }
+      LOG.debug("Check tasks " + topologyid);
+      Set<Integer> taskIds=clusterState.task_ids(topologyid);
+      if (taskIds == null) {
+        LOG.info("Failed to get task ids of " + topologyid);
+        continue;
+      }
+      boolean needReassign=false;
+      for (      Integer task : taskIds) {
+        boolean isTaskDead=NimbusUtils.isTaskDead(data,topologyid,task);
+        if (isTaskDead == true) {
+          LOG.info("Found " + topologyid + ",taskid:"+ task+ " is dead");
+          ResourceWorkerSlot resource=null;
+          Assignment assignment=clusterState.assignment_info(topologyid,null);
+          if (assignment != null)           resource=assignment.getWorkerByTaskId(task);
+          if (resource != null) {
+            Date now=new Date();
+            String nowStr=TimeFormat.getSecond(now);
+            String errorInfo="Task-" + task + " is dead on "+ resource.getHostname()+ ":"+ resource.getPort()+ ", "+ nowStr;
+            LOG.info(errorInfo);
+            clusterState.report_task_error(topologyid,task,errorInfo);
+          }
+          needReassign=true;
+          break;
+        }
+      }
+      if (needReassign == true) {
+        NimbusUtils.transition(data,topologyid,false,StatusType.monitor);
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.error(e.getMessage(),e);
+  }
+}

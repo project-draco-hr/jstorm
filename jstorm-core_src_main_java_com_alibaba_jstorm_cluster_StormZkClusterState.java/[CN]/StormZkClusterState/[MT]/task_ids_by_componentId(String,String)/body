@@ -1,0 +1,17 @@
+{
+  String stormTaskPath=Cluster.storm_task_root(topologyId);
+  Object data=getObject(stormTaskPath,false);
+  if (data == null) {
+    return null;
+  }
+  Map<Integer,TaskInfo> taskInfoMap=(Map<Integer,TaskInfo>)data;
+  Set<Integer> rtn=new HashSet<Integer>();
+  Set<Integer> taskIds=taskInfoMap.keySet();
+  for (  Integer taskId : taskIds) {
+    TaskInfo taskInfo=taskInfoMap.get(taskId);
+    if (taskInfo != null) {
+      if (taskInfo.getComponentId().equalsIgnoreCase(componentId))       rtn.add(taskId);
+    }
+  }
+  return rtn;
+}

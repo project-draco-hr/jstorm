@@ -1,7 +1,0 @@
-{
-  if (!this.isRunning()) {
-    return;
-  }
-  added.incrementAndGet();
-  queue.add(event_fn);
-}

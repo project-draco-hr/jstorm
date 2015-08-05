@@ -1,0 +1,70 @@
+{
+  String currPid=JStormUtils.process_pid();
+  List<Integer> ret=new ArrayList<Integer>();
+  StringBuilder sb=new StringBuilder();
+  sb.append("ps -Af ");
+  try {
+    LOG.info("Begin to execute " + sb.toString());
+    Process process=JStormUtils.launch_process(sb.toString(),new HashMap<String,String>(),false);
+    InputStream stdin=process.getInputStream();
+    BufferedReader reader=new BufferedReader(new InputStreamReader(stdin));
+    JStormUtils.sleepMs(1000);
+    String str;
+    while ((str=reader.readLine()) != null) {
+      if (StringUtils.isBlank(str)) {
+        continue;
+      }
+      if (str.contains(Worker.class.getName()) == false) {
+        continue;
+      }
+ else       if (str.contains(port) == false) {
+        continue;
+      }
+      LOG.info("Find :" + str);
+      String[] fields=StringUtils.split(str);
+      boolean find=false;
+      int i=0;
+      for (; i < fields.length; i++) {
+        String field=fields[i];
+        LOG.debug("Filed, " + i + ":"+ field);
+        if (field.contains(Worker.class.getName()) == true) {
+          if (i + 3 >= fields.length) {
+            LOG.info("Failed to find port ");
+          }
+ else           if (fields[i + 3].equals(String.valueOf(port))) {
+            find=true;
+          }
+          break;
+        }
+      }
+      if (find == false) {
+        LOG.info("No old port worker");
+        continue;
+      }
+      if (fields.length >= 2) {
+        try {
+          if (currPid.equals(fields[1])) {
+            LOG.info("Skip kill myself");
+            continue;
+          }
+          Integer pid=Integer.valueOf(fields[1]);
+          LOG.info("Find one process :" + pid.toString());
+          ret.add(pid);
+        }
+ catch (        Exception e) {
+          LOG.error(e.getMessage(),e);
+          continue;
+        }
+      }
+    }
+    return ret;
+  }
+ catch (  IOException e) {
+    LOG.info("Failed to execute " + sb.toString());
+    return ret;
+  }
+catch (  Exception e) {
+    LOG.info(e.getMessage(),e);
+    return ret;
+  }
+}

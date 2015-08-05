@@ -1,0 +1,22 @@
+{
+  Integer window=null;
+  if (showKey == null) {
+    window=(MINUTE_WINDOW);
+  }
+ else   if (showKey.equals(MINUTE_WINDOW_STR)) {
+    window=(MINUTE_WINDOW);
+  }
+ else   if (showKey.equals(HOUR_WINDOW_STR)) {
+    window=(HOUR_WINDOW);
+  }
+ else   if (showKey.equals(DAY_WINDOW_STR)) {
+    window=(DAY_WINDOW);
+  }
+ else   if (showKey.equals(ALL_WINDOW_STR)) {
+    window=ALL_TIME_WINDOW;
+  }
+ else {
+    window=MINUTE_WINDOW;
+  }
+  return window;
+}

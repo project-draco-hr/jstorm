@@ -1,0 +1,26 @@
+{
+  if (servers == null || servers.size() == 0) {
+    return new ArrayList<String>();
+  }
+  Set<String> ret=new HashSet<String>();
+  for (  String server : servers) {
+    if (StringUtils.isBlank(server)) {
+      continue;
+    }
+    InetAddress ia;
+    try {
+      ia=InetAddress.getByName(server);
+    }
+ catch (    UnknownHostException e) {
+      LOG.info("Fail to get address of ",server);
+      continue;
+    }
+    if (ia.isLoopbackAddress() || ia.isAnyLocalAddress()) {
+      ret.add(NetWorkUtils.ip());
+    }
+ else {
+      ret.add(ia.getHostAddress());
+    }
+  }
+  return JStormUtils.mk_list(ret);
+}

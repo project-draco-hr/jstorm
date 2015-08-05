@@ -1,0 +1,4 @@
+long totalSize
+long pageSize
+String url
+Map<String,String> paramMap

@@ -1,0 +1,14 @@
+{
+  try {
+    Double value=Double.valueOf(text);
+    if (Math.abs(value - Math.round(value)) < 0.001) {
+      texts.add(text);
+    }
+ else {
+      texts.add(JStormUtils.formatSimpleDouble(value));
+    }
+  }
+ catch (  Exception e) {
+    texts.add(text);
+  }
+}

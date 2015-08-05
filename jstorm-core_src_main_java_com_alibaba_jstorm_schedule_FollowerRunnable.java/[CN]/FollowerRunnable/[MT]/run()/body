@@ -1,0 +1,38 @@
+{
+  LOG.info("Follower Thread starts!");
+  while (state) {
+    StormClusterState zkClusterState=data.getStormClusterState();
+    try {
+      Thread.sleep(sleepTime);
+      if (!zkClusterState.leader_existed()) {
+        this.tryToBeLeader(data.getConf());
+        continue;
+      }
+      String master=zkClusterState.get_leader_host();
+      boolean isZkLeader=isLeader(master);
+      if (data.isLeader() == true) {
+        if (isZkLeader == false) {
+          LOG.info("New ZK master is " + master);
+          JStormUtils.halt_process(1,"Lose ZK master node, halt process");
+          return;
+        }
+      }
+      if (isZkLeader == true) {
+        zkClusterState.unregister_nimbus_host(hostPort);
+        data.setLeader(true);
+        continue;
+      }
+      check();
+      zkClusterState.update_nimbus_slave(hostPort,data.uptime());
+    }
+ catch (    InterruptedException e) {
+      continue;
+    }
+catch (    Exception e) {
+      if (state) {
+        LOG.error("Unknow exception ",e);
+      }
+    }
+  }
+  LOG.info("Follower Thread has closed!");
+}

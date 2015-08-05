@@ -1,0 +1,3 @@
+{
+  return OS.indexOf("os/2") >= 0;
+}

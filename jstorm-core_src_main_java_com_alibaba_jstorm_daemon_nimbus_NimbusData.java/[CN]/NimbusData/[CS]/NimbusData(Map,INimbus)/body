@@ -1,0 +1,17 @@
+{
+  this.conf=conf;
+  createFileHandler();
+  this.submittedCount=new AtomicInteger(0);
+  this.stormClusterState=Cluster.mk_storm_cluster_state(conf);
+  createCache();
+  this.taskHeartbeatsCache=new ConcurrentHashMap<String,Map<Integer,TkHbCacheTime>>();
+  this.scheduExec=Executors.newScheduledThreadPool(SCHEDULE_THREAD_NUM);
+  this.statusTransition=new StatusTransition(this);
+  this.startTime=TimeUtils.current_time_secs();
+  this.inimubs=inimbus;
+  localMode=StormConfig.local_mode(conf);
+  this.topologyNettyMgr=new TopologyNettyMgr(conf);
+  this.metricRunnable=new TopologyMetricsRunnable(this);
+  pendingSubmitTopologys=new TimeCacheMap<String,Object>(JStormUtils.MIN_30);
+  topologyTaskTimeout=new ConcurrentHashMap<String,Integer>();
+}

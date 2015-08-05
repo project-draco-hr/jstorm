@@ -1,0 +1,3 @@
+com.codahale.metrics.Gauge<Double> rawGauge
+String name
+String args

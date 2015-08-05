@@ -1,6 +1,0 @@
-{
-  String userMetricName=getMetricName(taskid,name);
-  Counter ret=Metrics.registerCounter(userMetricName);
-  Metrics.registerUserDefine(userMetricName,ret,callback);
-  return ret;
-}

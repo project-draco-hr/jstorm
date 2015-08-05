@@ -1,5 +1,0 @@
-{
-  for (  Entry<String,Double> entry : gaugeMapKV.entrySet()) {
-    kVMap.put(entry.getKey(),entry.getValue());
-  }
-}

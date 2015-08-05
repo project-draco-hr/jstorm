@@ -1,0 +1,5 @@
+{
+  MessageDecoder.removeTransmitHistogram(channel);
+  channel.close().awaitUninterruptibly();
+  allChannels.remove(channel);
+}

@@ -1,0 +1,16 @@
+{
+  StormTopology topology=null;
+  try {
+    StormTopology stormtopology=StormConfig.read_nimbus_topology_code(conf,id);
+    if (stormtopology == null) {
+      throw new NotAliveException("No topology of " + id);
+    }
+    Map<Object,Object> topologyConf=(Map<Object,Object>)StormConfig.read_nimbus_topology_conf(conf,id);
+    topology=Common.system_topology(topologyConf,stormtopology);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to get topology " + id + ",",e);
+    throw new TException("Failed to get system_topology");
+  }
+  return topology;
+}

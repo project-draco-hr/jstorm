@@ -1,5 +1,0 @@
-{
-  conf=storm_conf;
-  masterHost=getMaster(storm_conf,timeout);
-  connect(storm_conf,timeout);
-}

@@ -1,0 +1,39 @@
+{
+  LOG.debug("Synchronizing supervisor, interval seconds:" + TimeUtils.time_delta(lastTime));
+  lastTime=TimeUtils.current_time_secs();
+  try {
+    RunnableCallback syncCallback=new EventManagerZkPusher(this,syncSupEventManager);
+    Map<String,Assignment> assignments=Cluster.get_all_assignment(stormClusterState,syncCallback);
+    LOG.debug("Get all assignments " + assignments);
+    List<String> downloadedTopologyIds=StormConfig.get_supervisor_toplogy_list(conf);
+    LOG.debug("Downloaded storm ids: " + downloadedTopologyIds);
+    Map<Integer,LocalAssignment> zkAssignment=getLocalAssign(stormClusterState,supervisorId,assignments);
+    Map<Integer,LocalAssignment> localAssignment;
+    Set<String> updateTopologys;
+    try {
+      LOG.debug("Writing local assignment " + zkAssignment);
+      localAssignment=(Map<Integer,LocalAssignment>)localState.get(Common.LS_LOCAL_ASSIGNMENTS);
+      if (localAssignment == null) {
+        localAssignment=new HashMap<Integer,LocalAssignment>();
+      }
+      localState.put(Common.LS_LOCAL_ASSIGNMENTS,zkAssignment);
+      updateTopologys=getUpdateTopologys(localAssignment,zkAssignment);
+      Set<String> reDownloadTopologys=getNeedReDownloadTopologys(localAssignment);
+      if (reDownloadTopologys != null) {
+        updateTopologys.addAll(reDownloadTopologys);
+      }
+    }
+ catch (    IOException e) {
+      LOG.error("put LS_LOCAL_ASSIGNMENTS " + zkAssignment + " of localState failed");
+      throw e;
+    }
+    Map<String,String> topologyCodes=getTopologyCodeLocations(assignments,supervisorId);
+    downloadTopology(topologyCodes,downloadedTopologyIds,updateTopologys,assignments);
+    removeUselessTopology(topologyCodes,downloadedTopologyIds);
+    syncProcesses.run(zkAssignment);
+    heartbeat.updateHbTrigger(true);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to Sync Supervisor",e);
+  }
+}

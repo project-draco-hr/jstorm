@@ -1,0 +1,13 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_wait_secs=true && (is_set_wait_secs());
+  list.add(present_wait_secs);
+  if (present_wait_secs)   list.add(wait_secs);
+  boolean present_reassign=true && (is_set_reassign());
+  list.add(present_reassign);
+  if (present_reassign)   list.add(reassign);
+  boolean present_conf=true && (is_set_conf());
+  list.add(present_conf);
+  if (present_conf)   list.add(conf);
+  return list.hashCode();
+}

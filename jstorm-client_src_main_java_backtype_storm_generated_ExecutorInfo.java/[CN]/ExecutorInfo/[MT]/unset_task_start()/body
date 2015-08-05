@@ -1,3 +1,0 @@
-{
-  __isset_bit_vector.clear(__TASK_START_ISSET_ID);
-}

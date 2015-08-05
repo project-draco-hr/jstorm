@@ -1,8 +1,8 @@
 {
   if (arg.endsWith("yaml")) {
-    LoadYaml(arg);
+    conf=LoadConf.LoadYaml(arg);
   }
  else {
-    LoadProperty(arg);
+    conf=LoadConf.LoadProperty(arg);
   }
 }

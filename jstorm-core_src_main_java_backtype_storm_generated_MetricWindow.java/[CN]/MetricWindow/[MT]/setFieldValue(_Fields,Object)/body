@@ -1,0 +1,12 @@
+{
+switch (field) {
+case METRIC_WINDOW:
+    if (value == null) {
+      unset_metricWindow();
+    }
+ else {
+      set_metricWindow((Map<Integer,Double>)value);
+    }
+  break;
+}
+}

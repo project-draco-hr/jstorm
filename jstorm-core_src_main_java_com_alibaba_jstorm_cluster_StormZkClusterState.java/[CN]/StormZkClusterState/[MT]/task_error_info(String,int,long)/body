@@ -1,0 +1,6 @@
+{
+  String path=Cluster.taskerror_path(topologyId,taskId);
+  cluster_state.mkdirs(path);
+  path=path + "/" + timeStamp;
+  return getString(path,false);
+}

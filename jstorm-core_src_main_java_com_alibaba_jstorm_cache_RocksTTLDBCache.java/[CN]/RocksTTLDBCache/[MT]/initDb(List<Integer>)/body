@@ -1,0 +1,26 @@
+{
+  LOG.info("Begin to init rocksDB of {}",rootDir);
+  DBOptions dbOptions=null;
+  List<ColumnFamilyDescriptor> columnFamilyNames=new ArrayList<ColumnFamilyDescriptor>();
+  columnFamilyNames.add(new ColumnFamilyDescriptor(RocksDB.DEFAULT_COLUMN_FAMILY));
+  for (  Integer timeout : list) {
+    columnFamilyNames.add(new ColumnFamilyDescriptor(String.valueOf(timeout).getBytes()));
+  }
+  List<Integer> ttlValues=new ArrayList<Integer>();
+  ttlValues.add(0);
+  ttlValues.addAll(list);
+  try {
+    dbOptions=new DBOptions().setCreateMissingColumnFamilies(true).setCreateIfMissing(true);
+    List<ColumnFamilyHandle> columnFamilyHandleList=new ArrayList<ColumnFamilyHandle>();
+    ttlDB=TtlDB.open(dbOptions,rootDir,columnFamilyNames,columnFamilyHandleList,ttlValues,false);
+    for (int i=0; i < ttlValues.size(); i++) {
+      windowHandlers.put(ttlValues.get(i),columnFamilyHandleList.get(i));
+    }
+    LOG.info("Successfully init rocksDB of {}",rootDir);
+  }
+  finally {
+    if (dbOptions != null) {
+      dbOptions.dispose();
+    }
+  }
+}

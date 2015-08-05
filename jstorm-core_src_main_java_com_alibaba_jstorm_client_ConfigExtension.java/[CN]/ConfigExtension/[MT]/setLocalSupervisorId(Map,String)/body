@@ -1,0 +1,3 @@
+{
+  conf.put(LOCAL_SUPERVISOR_ID,supervisorId);
+}

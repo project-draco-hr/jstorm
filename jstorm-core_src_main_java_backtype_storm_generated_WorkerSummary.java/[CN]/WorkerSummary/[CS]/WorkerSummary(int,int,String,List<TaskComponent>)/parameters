@@ -1,0 +1,4 @@
+int port
+int uptime
+String topology
+List<TaskComponent> tasks

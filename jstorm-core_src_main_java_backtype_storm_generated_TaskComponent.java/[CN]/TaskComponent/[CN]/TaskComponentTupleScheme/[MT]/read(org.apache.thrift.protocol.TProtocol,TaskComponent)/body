@@ -1,0 +1,7 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.taskId=iprot.readI32();
+  struct.set_taskId_isSet(true);
+  struct.component=iprot.readString();
+  struct.set_component_isSet(true);
+}

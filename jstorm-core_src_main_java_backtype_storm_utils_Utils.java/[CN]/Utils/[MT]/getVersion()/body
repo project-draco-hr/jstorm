@@ -1,0 +1,24 @@
+{
+  String ret="";
+  InputStream input=null;
+  try {
+    input=Utils.class.getClassLoader().getResourceAsStream("version");
+    BufferedReader in=new BufferedReader(new InputStreamReader(input));
+    String s=in.readLine();
+    ret=s.trim();
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to get version",e);
+  }
+ finally {
+    if (input != null) {
+      try {
+        input.close();
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to close the reader of RELEASE",e);
+      }
+    }
+  }
+  return ret;
+}

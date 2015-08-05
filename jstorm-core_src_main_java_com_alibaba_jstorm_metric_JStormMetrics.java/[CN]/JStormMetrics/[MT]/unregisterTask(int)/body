@@ -1,0 +1,3 @@
+{
+  taskMetrics.remove(taskId);
+}

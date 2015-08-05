@@ -1,0 +1,18 @@
+{
+  try {
+    String topologyName=Common.topologyIdToName(topologyId);
+    Boolean isEnable=setting.get(topologyName);
+    if (isEnable != null) {
+      return isEnable;
+    }
+    Map topologyConf=StormConfig.read_nimbus_topology_conf(nimbusConf,topologyId);
+    isEnable=getTopology(topologyConf);
+    setting.put(topologyName,isEnable);
+    LOG.info("{} netty metrics setting is {}",topologyName,isEnable);
+    return isEnable;
+  }
+ catch (  Exception e) {
+    LOG.info("Failed to get {} netty metrics setting ",topologyId);
+    return defaultEnable;
+  }
+}

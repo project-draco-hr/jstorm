@@ -1,0 +1,27 @@
+{
+  List<TableData> tables=null;
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(paramMap);
+    ClusterSummary clusterSummary=client.getClient().getClusterInfo();
+    String jsonConf=client.getClient().getNimbusConf();
+    Map<String,Object> nimbusConf=(Map<String,Object>)Utils.from_json(jsonConf);
+    NimbusSummary nimbusSummary=clusterSummary.get_nimbus();
+    tables=getNimbus(nimbusSummary,nimbusConf,paramMap);
+    TableData topologyTable=UIUtils.getTopologyTable(clusterSummary.get_topologies(),paramMap);
+    tables.add(topologyTable);
+    tables.add(getSupervisorTable(clusterSummary.get_supervisors(),paramMap));
+    Output ret=new Output();
+    ret.tables=tables;
+    ret.rawData="";
+    if (clusterSummary.get_supervisors().size() > UIUtils.ONE_TABLE_PAGE_SIZE) {
+      ret.pages=PageIndex.generatePageIndex(clusterSummary.get_supervisors().size(),UIUtils.ONE_TABLE_PAGE_SIZE,UIDef.LINK_TABLE_PAGE,paramMap);
+    }
+    return ret;
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(paramMap);
+    LOG.error(e.getMessage(),e);
+    return UIUtils.getErrorInfo(e);
+  }
+}

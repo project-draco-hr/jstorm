@@ -1,5 +1,0 @@
-{
-  this.stream=stream;
-  this.emitted=JStormUtils.formatValue(emitted);
-  this.sendTps=JStormUtils.formatValue(sendTps);
-}

@@ -1,0 +1,9 @@
+{
+  this.topologyId=topologyId;
+  this.taskIds=new HashSet<Integer>(taskIds);
+  this.topologyName=topologyName;
+  this.mem=mem;
+  this.cpu=cpu;
+  this.jvm=jvm;
+  this.timeStamp=timeStamp;
+}

@@ -1,0 +1,14 @@
+{
+  if (name.startsWith("backtype.storm") == true) {
+    return true;
+  }
+ else   if (name.startsWith("com.alibaba.jstorm")) {
+    return true;
+  }
+ else   if (isLogByDefault(name)) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

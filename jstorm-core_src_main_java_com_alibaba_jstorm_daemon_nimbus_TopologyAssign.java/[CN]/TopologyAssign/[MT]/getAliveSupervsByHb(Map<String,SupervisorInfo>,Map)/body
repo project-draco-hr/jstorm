@@ -1,0 +1,16 @@
+{
+  int currentTime=TimeUtils.current_time_secs();
+  int hbTimeout=JStormUtils.parseInt(conf.get(Config.NIMBUS_SUPERVISOR_TIMEOUT_SECS),(JStormUtils.MIN_1 * 3));
+  Set<String> supervisorTobeRemoved=new HashSet<String>();
+  for (  Entry<String,SupervisorInfo> entry : supervisorInfos.entrySet()) {
+    SupervisorInfo supInfo=entry.getValue();
+    int lastReportTime=supInfo.getTimeSecs();
+    if ((currentTime - lastReportTime) > hbTimeout) {
+      LOG.warn("Supervisor-" + supInfo.getHostName() + " is dead. lastReportTime="+ lastReportTime);
+      supervisorTobeRemoved.add(entry.getKey());
+    }
+  }
+  for (  String name : supervisorTobeRemoved) {
+    supervisorInfos.remove(name);
+  }
+}

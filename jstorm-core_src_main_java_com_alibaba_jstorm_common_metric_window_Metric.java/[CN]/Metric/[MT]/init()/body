@@ -1,0 +1,17 @@
+{
+  if (defaultValue == null || updater == null || merger == null || convertor == null) {
+    throw new IllegalArgumentException("Invalid argements");
+  }
+  rollingWindows=new ArrayList<RollingWindow<V>>();
+  if (windowSeconds != null) {
+    rollingWindows.clear();
+    for (    int windowSize : windowSeconds) {
+      RollingWindow<V> rollingWindow=new RollingWindow<V>(defaultValue,windowSize / bucketSize,windowSize,updater,merger);
+      rollingWindows.add(rollingWindow);
+    }
+  }
+  allWindow=new AllWindow<V>(defaultValue,updater,merger);
+  this.interval=getInterval();
+  this.intervalCheck=new IntervalCheck();
+  this.intervalCheck.setInterval(interval);
+}

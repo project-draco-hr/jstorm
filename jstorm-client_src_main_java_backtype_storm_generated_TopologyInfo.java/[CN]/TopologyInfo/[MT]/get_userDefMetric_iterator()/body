@@ -1,3 +1,0 @@
-{
-  return (this.userDefMetric == null) ? null : this.userDefMetric.iterator();
-}

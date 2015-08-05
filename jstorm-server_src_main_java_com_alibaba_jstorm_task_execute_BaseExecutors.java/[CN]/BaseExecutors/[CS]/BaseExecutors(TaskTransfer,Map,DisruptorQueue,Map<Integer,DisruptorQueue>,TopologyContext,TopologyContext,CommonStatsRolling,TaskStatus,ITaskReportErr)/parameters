@@ -1,9 +1,0 @@
-TaskTransfer _transfer_fn
-Map _storm_conf
-DisruptorQueue deserializeQueue
-Map<Integer,DisruptorQueue> innerTaskTransfer
-TopologyContext topology_context
-TopologyContext _user_context
-CommonStatsRolling _task_stats
-TaskStatus taskStatus
-ITaskReportErr _report_error

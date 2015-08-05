@@ -1,7 +1,0 @@
-{
-  this.clusterName=clusterName;
-  this.topologyid=topologyId;
-  this.componentid=componentId;
-  this.window=window;
-  init();
-}

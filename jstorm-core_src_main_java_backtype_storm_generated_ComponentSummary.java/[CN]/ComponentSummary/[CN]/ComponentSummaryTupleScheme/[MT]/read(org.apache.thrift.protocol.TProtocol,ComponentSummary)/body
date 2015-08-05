@@ -1,0 +1,33 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.name=iprot.readString();
+  struct.set_name_isSet(true);
+  struct.parallel=iprot.readI32();
+  struct.set_parallel_isSet(true);
+  struct.type=iprot.readString();
+  struct.set_type_isSet(true);
+{
+    org.apache.thrift.protocol.TList _list224=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32,iprot.readI32());
+    struct.task_ids=new ArrayList<Integer>(_list224.size);
+    int _elem225;
+    for (int _i226=0; _i226 < _list224.size; ++_i226) {
+      _elem225=iprot.readI32();
+      struct.task_ids.add(_elem225);
+    }
+  }
+  struct.set_task_ids_isSet(true);
+  BitSet incoming=iprot.readBitSet(1);
+  if (incoming.get(0)) {
+{
+      org.apache.thrift.protocol.TList _list227=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+      struct.errors=new ArrayList<ErrorInfo>(_list227.size);
+      ErrorInfo _elem228;
+      for (int _i229=0; _i229 < _list227.size; ++_i229) {
+        _elem228=new ErrorInfo();
+        _elem228.read(iprot);
+        struct.errors.add(_elem228);
+      }
+    }
+    struct.set_errors_isSet(true);
+  }
+}

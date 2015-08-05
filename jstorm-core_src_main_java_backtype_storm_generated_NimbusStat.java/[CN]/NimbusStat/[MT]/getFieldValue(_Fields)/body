@@ -1,0 +1,9 @@
+{
+switch (field) {
+case HOST:
+    return get_host();
+case UPTIME_SECS:
+  return get_uptime_secs();
+}
+throw new IllegalStateException();
+}

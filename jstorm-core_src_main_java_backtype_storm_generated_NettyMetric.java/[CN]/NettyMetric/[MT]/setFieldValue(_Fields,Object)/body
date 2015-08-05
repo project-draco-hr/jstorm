@@ -1,0 +1,20 @@
+{
+switch (field) {
+case CONNECTIONS:
+    if (value == null) {
+      unset_connections();
+    }
+ else {
+      set_connections((Map<String,MetricInfo>)value);
+    }
+  break;
+case CONNECTION_NUM:
+if (value == null) {
+  unset_connectionNum();
+}
+ else {
+  set_connectionNum((Integer)value);
+}
+break;
+}
+}

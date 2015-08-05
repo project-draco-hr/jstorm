@@ -1,0 +1,48 @@
+{
+  StringBuilder sb=new StringBuilder("NimbusSummary(");
+  boolean first=true;
+  sb.append("nimbus_master:");
+  if (this.nimbus_master == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.nimbus_master);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("nimbus_slaves:");
+  if (this.nimbus_slaves == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.nimbus_slaves);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("supervisor_num:");
+  sb.append(this.supervisor_num);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("total_port_num:");
+  sb.append(this.total_port_num);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("used_port_num:");
+  sb.append(this.used_port_num);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("free_port_num:");
+  sb.append(this.free_port_num);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("version:");
+  if (this.version == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.version);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

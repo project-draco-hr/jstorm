@@ -1,0 +1,4 @@
+{
+  this.host=null;
+  this.uptime_secs=null;
+}

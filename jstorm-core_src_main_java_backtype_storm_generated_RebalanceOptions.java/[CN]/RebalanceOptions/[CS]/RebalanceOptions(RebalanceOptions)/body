@@ -1,0 +1,8 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  this.wait_secs=other.wait_secs;
+  this.reassign=other.reassign;
+  if (other.is_set_conf()) {
+    this.conf=other.conf;
+  }
+}

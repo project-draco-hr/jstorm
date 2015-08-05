@@ -1,0 +1,12 @@
+{
+synchronized (LocalCluster.class) {
+    if (instance != null) {
+      throw new RuntimeException("LocalCluster should be single");
+    }
+    setLogger();
+    System.setProperty("java.net.preferIPv4Stack","true");
+    this.state=LocalUtils.prepareLocalCluster();
+    if (this.state == null)     throw new RuntimeException("prepareLocalCluster error");
+    instance=this;
+  }
+}

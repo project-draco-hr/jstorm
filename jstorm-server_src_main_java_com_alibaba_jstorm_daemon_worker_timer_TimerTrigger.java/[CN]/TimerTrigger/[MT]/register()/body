@@ -1,4 +1,0 @@
-{
-  threadPool.scheduleAtFixedRate(this,firstTime,frequence,TimeUnit.SECONDS);
-  LOG.info("Successfully register timer " + this);
-}

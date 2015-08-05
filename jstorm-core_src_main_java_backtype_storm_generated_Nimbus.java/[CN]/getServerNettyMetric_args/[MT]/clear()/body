@@ -1,0 +1,4 @@
+{
+  this.topologyName=null;
+  this.serverName=null;
+}

@@ -1,0 +1,3 @@
+{
+  return (this.nimbus_slaves == null) ? 0 : this.nimbus_slaves.size();
+}

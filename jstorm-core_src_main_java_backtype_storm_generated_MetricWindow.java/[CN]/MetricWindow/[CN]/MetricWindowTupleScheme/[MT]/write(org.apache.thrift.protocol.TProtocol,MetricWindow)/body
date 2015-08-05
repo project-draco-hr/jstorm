@@ -1,0 +1,10 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+{
+    oprot.writeI32(struct.metricWindow.size());
+    for (    Map.Entry<Integer,Double> _iter111 : struct.metricWindow.entrySet()) {
+      oprot.writeI32(_iter111.getKey());
+      oprot.writeDouble(_iter111.getValue());
+    }
+  }
+}

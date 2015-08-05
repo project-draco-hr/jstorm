@@ -1,0 +1,10 @@
+{
+  long startTime=createTime;
+  if (args != null) {
+    if (args[0] != null && args[0] instanceof StartTime) {
+      StartTime rollingWindow=(StartTime)args[0];
+      startTime=rollingWindow.getStartTime();
+    }
+  }
+  return (System.currentTimeMillis() - startTime);
+}

@@ -1,3 +1,0 @@
-{
-  recvQueue.publish(message);
-}

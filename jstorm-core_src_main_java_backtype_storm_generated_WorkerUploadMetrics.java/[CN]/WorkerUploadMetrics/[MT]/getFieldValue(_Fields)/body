@@ -1,0 +1,17 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    return get_topology_id();
+case SUPERVISOR_ID:
+  return get_supervisor_id();
+case PORT:
+return Integer.valueOf(get_port());
+case WORKER_METRIC:
+return get_workerMetric();
+case NETTY_METRIC:
+return get_nettyMetric();
+case TASK_METRIC:
+return get_taskMetric();
+}
+throw new IllegalStateException();
+}

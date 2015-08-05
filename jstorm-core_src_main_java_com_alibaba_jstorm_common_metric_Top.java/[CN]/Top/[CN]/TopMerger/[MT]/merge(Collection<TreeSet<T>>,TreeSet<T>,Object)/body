@@ -1,0 +1,24 @@
+{
+  TreeSet<T> temp=new TreeSet<T>(comparator);
+  if (unflushed != null) {
+    temp.addAll(unflushed);
+  }
+  for (  TreeSet<T> set : objs) {
+    temp.addAll(set);
+  }
+  if (temp.size() <= n) {
+    return temp;
+  }
+  TreeSet<T> ret=new TreeSet<T>(comparator);
+  int i=0;
+  for (  T item : temp) {
+    if (i < n) {
+      ret.add(item);
+      i++;
+    }
+ else {
+      break;
+    }
+  }
+  return ret;
+}

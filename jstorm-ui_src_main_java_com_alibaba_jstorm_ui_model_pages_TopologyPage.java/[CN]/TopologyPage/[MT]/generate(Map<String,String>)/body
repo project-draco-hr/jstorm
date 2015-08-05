@@ -1,0 +1,44 @@
+{
+  LOG.info("Begin TopologyPage " + new Date());
+  List<TableData> tables=new ArrayList<TableData>();
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(paramMap);
+    String topologyId=paramMap.get(UIDef.TOPOLOGY);
+    if (topologyId == null) {
+      throw new IllegalArgumentException("Not set topologyId");
+    }
+    TopologyInfo topologyInfo=null;
+    try {
+      topologyInfo=client.getClient().getTopologyInfo(topologyId);
+    }
+ catch (    org.apache.thrift.TException e) {
+      throw new IllegalArgumentException("Failed to get topologyInfo of " + topologyId + ", maybe it is dead");
+    }
+    List<TopologySummary> topologyList=new ArrayList<TopologySummary>();
+    topologyList.add(topologyInfo.get_topology());
+    TableData topologyTable=UIUtils.getTopologyTable(topologyList,paramMap);
+    tables.add(topologyTable);
+    TableData topologyMetricTable=getTopologyState(topologyInfo,paramMap);
+    tables.add(topologyMetricTable);
+    List<TableData> componentTables=getComponentTables(topologyInfo,paramMap);
+    tables.addAll(componentTables);
+    List<TableData> workerMetricTables=getWorkerMetricTable(topologyInfo,paramMap);
+    if (workerMetricTables != null) {
+      tables.addAll(workerMetricTables);
+    }
+    Output ret=new Output();
+    ret.tables=tables;
+    ret.rawData="";
+    if (topologyInfo.get_metrics().get_workerMetric().size() > UIUtils.ONE_TABLE_PAGE_SIZE) {
+      ret.pages=PageIndex.generatePageIndex(topologyInfo.get_metrics().get_workerMetric().size(),UIUtils.ONE_TABLE_PAGE_SIZE,UIDef.LINK_WINDOW_TABLE,paramMap);
+    }
+    LOG.info("Finish TopologyPage " + new Date());
+    return ret;
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(paramMap);
+    LOG.error(e.getMessage(),e);
+    return UIUtils.getErrorInfo(e);
+  }
+}

@@ -1,0 +1,55 @@
+def read(self, iprot):
+    if ((iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and isinstance(iprot.trans, TTransport.CReadableTransport) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+        return
+    iprot.readStructBegin()
+    while True:
+        (fname, ftype, fid) = iprot.readFieldBegin()
+        if (ftype == TType.STOP):
+            break
+        if (fid == 1):
+            if (ftype == TType.STRUCT):
+                self.topologyMetric = MetricInfo()
+                self.topologyMetric.read(iprot)
+            else:
+                iprot.skip(ftype)
+        elif (fid == 2):
+            if (ftype == TType.MAP):
+                self.componentMetric = {}
+                (_ktype149, _vtype150, _size148) = iprot.readMapBegin()
+                for _i152 in xrange(_size148):
+                    _key153 = iprot.readString().decode('utf-8')
+                    _val154 = MetricInfo()
+                    _val154.read(iprot)
+                    self.componentMetric[_key153] = _val154
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 3):
+            if (ftype == TType.MAP):
+                self.workerMetric = {}
+                (_ktype156, _vtype157, _size155) = iprot.readMapBegin()
+                for _i159 in xrange(_size155):
+                    _key160 = iprot.readString().decode('utf-8')
+                    _val161 = MetricInfo()
+                    _val161.read(iprot)
+                    self.workerMetric[_key160] = _val161
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 4):
+            if (ftype == TType.MAP):
+                self.taskMetric = {}
+                (_ktype163, _vtype164, _size162) = iprot.readMapBegin()
+                for _i166 in xrange(_size162):
+                    _key167 = iprot.readI32()
+                    _val168 = MetricInfo()
+                    _val168.read(iprot)
+                    self.taskMetric[_key167] = _val168
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        else:
+            iprot.skip(ftype)
+        iprot.readFieldEnd()
+    iprot.readStructEnd()

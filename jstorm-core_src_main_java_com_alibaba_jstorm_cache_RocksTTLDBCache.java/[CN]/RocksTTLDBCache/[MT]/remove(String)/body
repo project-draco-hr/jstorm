@@ -1,0 +1,10 @@
+{
+  for (  Entry<Integer,ColumnFamilyHandle> entry : windowHandlers.entrySet()) {
+    try {
+      ttlDB.remove(entry.getValue(),key.getBytes());
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to remove " + key);
+    }
+  }
+}

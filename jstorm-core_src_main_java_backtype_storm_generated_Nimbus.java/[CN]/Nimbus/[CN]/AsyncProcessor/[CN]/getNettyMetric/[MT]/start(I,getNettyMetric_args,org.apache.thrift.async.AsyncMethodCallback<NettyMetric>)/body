@@ -1,0 +1,3 @@
+{
+  iface.getNettyMetric(args.topologyName,args.pos,resultHandler);
+}

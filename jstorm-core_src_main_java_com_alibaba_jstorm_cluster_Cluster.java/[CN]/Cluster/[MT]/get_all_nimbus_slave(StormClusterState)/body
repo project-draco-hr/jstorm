@@ -1,0 +1,12 @@
+{
+  List<String> hosts=stormClusterState.get_nimbus_slaves();
+  if (hosts == null || hosts.size() == 0) {
+    return null;
+  }
+  Map<String,String> ret=new HashMap<String,String>();
+  for (  String host : hosts) {
+    String time=stormClusterState.get_nimbus_slave_time(host);
+    ret.put(host,time);
+  }
+  return ret;
+}

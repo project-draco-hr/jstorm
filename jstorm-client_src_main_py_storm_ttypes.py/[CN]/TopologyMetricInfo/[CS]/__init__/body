@@ -1,4 +1,0 @@
-def __init__(self, topology_id=None, task_metric_list=None, worker_metric_list=None):
-    self.topology_id = topology_id
-    self.task_metric_list = task_metric_list
-    self.worker_metric_list = worker_metric_list

@@ -1,0 +1,34 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.supervisor != null) {
+    oprot.writeFieldBegin(SUPERVISOR_FIELD_DESC);
+    struct.supervisor.write(oprot);
+    oprot.writeFieldEnd();
+  }
+  if (struct.workers != null) {
+    oprot.writeFieldBegin(WORKERS_FIELD_DESC);
+{
+      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.workers.size()));
+      for (      WorkerSummary _iter203 : struct.workers) {
+        _iter203.write(oprot);
+      }
+      oprot.writeListEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (struct.workerMetric != null) {
+    oprot.writeFieldBegin(WORKER_METRIC_FIELD_DESC);
+{
+      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,struct.workerMetric.size()));
+      for (      Map.Entry<String,MetricInfo> _iter204 : struct.workerMetric.entrySet()) {
+        oprot.writeString(_iter204.getKey());
+        _iter204.getValue().write(oprot);
+      }
+      oprot.writeMapEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

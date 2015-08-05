@@ -1,0 +1,67 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  lastComparison=Boolean.valueOf(is_set_task_id()).compareTo(other.is_set_task_id());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_task_id()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.task_id,other.task_id);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_uptime()).compareTo(other.is_set_uptime());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_uptime()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.uptime,other.uptime);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_status()).compareTo(other.is_set_status());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_status()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.status,other.status);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_host()).compareTo(other.is_set_host());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_host()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.host,other.host);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_port()).compareTo(other.is_set_port());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_port()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.port,other.port);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_errors()).compareTo(other.is_set_errors());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_errors()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.errors,other.errors);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

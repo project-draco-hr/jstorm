@@ -1,0 +1,4 @@
+def updateConf(self, name, conf):
+    '\n    Parameters:\n     - name\n     - conf\n    '
+    self.send_updateConf(name, conf)
+    self.recv_updateConf()

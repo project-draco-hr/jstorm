@@ -1,0 +1,5 @@
+{
+  Gauge<Double> ret=new Gauge<Double>(rawGauge);
+  registerTaskMetric(ret,taskId,name,args);
+  return ret;
+}

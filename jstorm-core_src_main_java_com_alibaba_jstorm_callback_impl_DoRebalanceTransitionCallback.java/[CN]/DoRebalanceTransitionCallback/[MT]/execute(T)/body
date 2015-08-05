@@ -1,0 +1,62 @@
+{
+  boolean isSetTaskInfo=false;
+  try {
+    Boolean reassign=(Boolean)args[1];
+    Map<Object,Object> conf=(Map<Object,Object>)args[2];
+    if (conf != null) {
+      boolean isConfUpdate=false;
+      Map stormConf=data.getConf();
+      Map topoConf=StormConfig.read_nimbus_topology_conf(stormConf,topologyid);
+      StormTopology rawOldTopology=StormConfig.read_nimbus_topology_code(stormConf,topologyid);
+      StormTopology rawNewTopology=NimbusUtils.normalizeTopology(conf,rawOldTopology,true);
+      StormTopology sysOldTopology=rawOldTopology.deepCopy();
+      StormTopology sysNewTopology=rawNewTopology.deepCopy();
+      if (conf.get(Config.TOPOLOGY_ACKER_EXECUTORS) != null) {
+        Common.add_acker(topoConf,sysOldTopology);
+        Common.add_acker(conf,sysNewTopology);
+        int ackerNum=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
+        int oldAckerNum=JStormUtils.parseInt(topoConf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
+        LOG.info("Update acker from oldAckerNum=" + oldAckerNum + " to ackerNum="+ ackerNum);
+        topoConf.put(Config.TOPOLOGY_ACKER_EXECUTORS,ackerNum);
+        isConfUpdate=true;
+      }
+      setTaskInfo(sysOldTopology,sysNewTopology);
+      isSetTaskInfo=true;
+      StormConfig.write_nimbus_topology_code(stormConf,topologyid,Utils.serialize(rawNewTopology));
+      Set<Object> keys=conf.keySet();
+      Integer workerNum=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_WORKERS));
+      if (workerNum != null) {
+        Integer oldWorkerNum=JStormUtils.parseInt(topoConf.get(Config.TOPOLOGY_WORKERS));
+        topoConf.put(Config.TOPOLOGY_WORKERS,workerNum);
+        isConfUpdate=true;
+        LOG.info("Update worker num from " + oldWorkerNum + " to "+ workerNum);
+      }
+      if (keys.contains(Config.ISOLATION_SCHEDULER_MACHINES)) {
+        topoConf.put(Config.ISOLATION_SCHEDULER_MACHINES,conf.get(Config.ISOLATION_SCHEDULER_MACHINES));
+      }
+      if (isConfUpdate) {
+        StormConfig.write_nimbus_topology_conf(stormConf,topologyid,topoConf);
+      }
+    }
+    TopologyAssignEvent event=new TopologyAssignEvent();
+    event.setTopologyId(topologyid);
+    event.setScratch(true);
+    event.setOldStatus(oldStatus);
+    event.setReassign(reassign);
+    TopologyAssign.push(event);
+  }
+ catch (  Exception e) {
+    LOG.error("do-rebalance error!",e);
+    if (isSetTaskInfo) {
+      try {
+        StormClusterState clusterState=data.getStormClusterState();
+        clusterState.remove_task(topologyid,newTasks);
+      }
+ catch (      Exception e1) {
+        LOG.error("Failed to rollback the changes on ZK for task-" + newTasks,e);
+      }
+    }
+  }
+  DelayStatusTransitionCallback delayCallback=new DelayStatusTransitionCallback(data,topologyid,oldStatus,StatusType.rebalancing,StatusType.done_rebalance);
+  return delayCallback.execute();
+}

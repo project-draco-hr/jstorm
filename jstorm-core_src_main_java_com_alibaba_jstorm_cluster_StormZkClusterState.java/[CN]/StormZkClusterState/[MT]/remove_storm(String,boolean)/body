@@ -1,0 +1,16 @@
+{
+  deleteObject(Cluster.assignment_path(topologyId));
+  if (needSleep) {
+    JStormUtils.sleepMs(10000);
+  }
+  try {
+    deleteObject(Cluster.storm_task_root(topologyId));
+    teardown_heartbeats(topologyId);
+    teardown_task_errors(topologyId);
+    deleteObject(Cluster.metric_path(topologyId));
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to delete task root and monitor root for" + topologyId);
+  }
+  remove_storm_base(topologyId);
+}

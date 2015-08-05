@@ -1,3 +1,0 @@
-{
-  return staticTypeMap.get(type);
-}

@@ -1,0 +1,9 @@
+{
+  Double ret=(double)queue.pctFull();
+  if (ret > 0.9) {
+    return HealthCheck.Result.unhealthy(name + QUEUE_IS_FULL);
+  }
+ else {
+    return healthy;
+  }
+}

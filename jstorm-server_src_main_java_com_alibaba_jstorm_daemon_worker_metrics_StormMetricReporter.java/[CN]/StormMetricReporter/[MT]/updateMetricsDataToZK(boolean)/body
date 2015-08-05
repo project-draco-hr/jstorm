@@ -1,7 +1,0 @@
-{
-  Map<String,List<MetricInfo>> taskMetricMap=Metrics.getTaskMetricMap();
-  List<MetricInfo> workerMetricList=Metrics.getWorkerMetricList();
-  updateTaskMetricsToZK(taskMetricMap,metricPerf);
-  updateWorkerMetricsToZK(workerMetricList,metricPerf);
-  updateUserDefMetricsToZK(metricPerf);
-}

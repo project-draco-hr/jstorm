@@ -1,9 +1,0 @@
-{
-  if (isLocalWorker == true) {
-    return innerGroup(values);
-  }
-  if (intervalCheck.check()) {
-    refreshLocalNodeTasks();
-  }
-  return innerGroup(values);
-}

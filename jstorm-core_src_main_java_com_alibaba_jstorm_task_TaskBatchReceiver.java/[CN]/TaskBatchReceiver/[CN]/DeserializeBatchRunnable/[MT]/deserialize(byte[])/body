@@ -1,0 +1,32 @@
+{
+  long start=System.nanoTime();
+  try {
+    if (ser_msg == null) {
+      return null;
+    }
+    if (ser_msg.length == 0) {
+      return null;
+    }
+ else     if (ser_msg.length == 1) {
+      byte newStatus=ser_msg[0];
+      LOG.info("Change task status as " + newStatus);
+      taskStatus.setStatus(newStatus);
+      return null;
+    }
+    BatchTuple tuple=deserializer.deserializeBatch(ser_msg);
+    if (isDebugRecv) {
+      LOG.info(idStr + " receive " + tuple.toString());
+    }
+    return tuple;
+  }
+ catch (  Throwable e) {
+    if (taskStatus.isShutdown() == false) {
+      LOG.error(idStr + " recv thread error " + JStormUtils.toPrintableString(ser_msg)+ "\n",e);
+    }
+  }
+ finally {
+    long end=System.nanoTime();
+    deserializeTimer.update((end - start) / 1000000.0d);
+  }
+  return null;
+}

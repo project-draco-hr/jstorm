@@ -1,6 +1,0 @@
-{
-  sendTps+=commStatsData.getSendTps();
-  recvTps+=commStatsData.getRecvTps();
-  failed+=commStatsData.getFailed();
-  latency+=commStatsData.getLatency();
-}

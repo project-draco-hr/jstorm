@@ -1,0 +1,5 @@
+{
+  super.channelClosed(ctx,e);
+  LOG.info("Connection channelClosed {}",e.getChannel().getRemoteAddress());
+  MessageDecoder.removeTransmitHistogram(e.getChannel());
+}

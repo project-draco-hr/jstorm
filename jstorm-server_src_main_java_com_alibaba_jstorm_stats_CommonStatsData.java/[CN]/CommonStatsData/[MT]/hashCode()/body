@@ -1,9 +1,0 @@
-{
-  int ret=0;
-  for (  Entry<StaticsType,Map<Integer,Object>> entry : staticsMap.entrySet()) {
-    StaticsType type=entry.getKey();
-    Map<Integer,Object> value=entry.getValue();
-    ret+=value.hashCode();
-  }
-  return ret;
-}

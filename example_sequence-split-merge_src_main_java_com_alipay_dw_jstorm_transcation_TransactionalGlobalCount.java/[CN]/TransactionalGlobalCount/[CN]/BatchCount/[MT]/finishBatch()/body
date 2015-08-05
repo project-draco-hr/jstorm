@@ -1,4 +1,4 @@
 {
   _collector.emit(new Values(_id,_count));
-  LOG.info("---BatchCount.finishBatch(), _id=" + _id + ", _count="+ _count);
+  LOG.info("@@@@@@@@@@@@@@ BatchCount finishBatch @@@@@@@@@@@@@@@");
 }

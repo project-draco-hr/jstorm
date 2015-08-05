@@ -1,4 +1,0 @@
-{
-  this.supervisorToWorker=supervisorToWorker;
-  this.relationship=relationship;
-}

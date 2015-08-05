@@ -1,0 +1,20 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.port=iprot.readI32();
+  struct.set_port_isSet(true);
+  struct.uptime=iprot.readI32();
+  struct.set_uptime_isSet(true);
+  struct.topology=iprot.readString();
+  struct.set_topology_isSet(true);
+{
+    org.apache.thrift.protocol.TList _list103=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.tasks=new ArrayList<TaskComponent>(_list103.size);
+    TaskComponent _elem104;
+    for (int _i105=0; _i105 < _list103.size; ++_i105) {
+      _elem104=new TaskComponent();
+      _elem104.read(iprot);
+      struct.tasks.add(_elem104);
+    }
+  }
+  struct.set_tasks_isSet(true);
+}

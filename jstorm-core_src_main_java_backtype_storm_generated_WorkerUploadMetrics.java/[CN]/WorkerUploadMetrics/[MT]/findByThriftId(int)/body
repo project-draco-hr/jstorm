@@ -1,0 +1,18 @@
+{
+switch (fieldId) {
+case 1:
+    return TOPOLOGY_ID;
+case 2:
+  return SUPERVISOR_ID;
+case 3:
+return PORT;
+case 4:
+return WORKER_METRIC;
+case 5:
+return NETTY_METRIC;
+case 6:
+return TASK_METRIC;
+default :
+return null;
+}
+}

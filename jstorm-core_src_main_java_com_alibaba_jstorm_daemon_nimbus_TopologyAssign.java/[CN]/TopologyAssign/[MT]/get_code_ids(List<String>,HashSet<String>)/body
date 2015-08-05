@@ -1,0 +1,22 @@
+{
+  Map conf=nimbusData.getConf();
+  String master_stormdist_root=StormConfig.masterStormdistRoot(conf);
+  List<String> all_code_ids=PathUtils.read_dir_contents(master_stormdist_root);
+  code_ids.addAll(all_code_ids);
+  long now=System.currentTimeMillis();
+  for (  String dir : code_ids) {
+    File file=new File(master_stormdist_root + File.separator + dir);
+    try {
+      if (file.exists() == false) {
+        continue;
+      }
+      long modify=file.lastModified();
+      if (now - modify < cleanupTimeoutSec * 1000) {
+        latest_code_ids.add(dir);
+      }
+    }
+ catch (    Exception exception) {
+      LOG.error("Failed to get modify time of " + dir,exception);
+    }
+  }
+}

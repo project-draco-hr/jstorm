@@ -1,0 +1,11 @@
+{
+  CgroupCommon workerGroup=new CgroupCommon(workerId,h,this.rootCgroup);
+  this.center.create(workerGroup);
+  CgroupCore cpu=workerGroup.getCores().get(SubSystemType.cpu);
+  CpuCore cpuCore=(CpuCore)cpu;
+  cpuCore.setCpuShares(cpuNum * ONE_CPU_SLOT);
+  setCpuUsageUpperLimit(cpuCore,ConfigExtension.getWorkerCpuCoreUpperLimit(conf));
+  StringBuilder sb=new StringBuilder();
+  sb.append("cgexec -g cpu:").append(workerGroup.getName()).append(" ");
+  return sb.toString();
+}

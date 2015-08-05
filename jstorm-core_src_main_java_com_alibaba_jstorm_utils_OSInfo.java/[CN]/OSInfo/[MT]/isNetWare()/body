@@ -1,0 +1,3 @@
+{
+  return OS.indexOf("netware") >= 0;
+}

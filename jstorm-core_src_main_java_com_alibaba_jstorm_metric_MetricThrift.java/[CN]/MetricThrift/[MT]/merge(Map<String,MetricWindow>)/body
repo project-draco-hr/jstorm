@@ -1,0 +1,21 @@
+{
+  Map<Integer,Double> merge=new HashMap<Integer,Double>();
+  for (  Entry<String,MetricWindow> entry : details.entrySet()) {
+    MetricWindow metricWindow=entry.getValue();
+    Map<Integer,Double> metric=metricWindow.get_metricWindow();
+    for (    Entry<Integer,Double> metricEntry : metric.entrySet()) {
+      Integer key=metricEntry.getKey();
+      try {
+        Double value=((Number)JStormUtils.add(metricEntry.getValue(),merge.get(key))).doubleValue();
+        merge.put(key,value);
+      }
+ catch (      Exception e) {
+        LOG.error("Invalid type of " + entry.getKey() + ":"+ key,e);
+        continue;
+      }
+    }
+  }
+  MetricWindow ret=new MetricWindow();
+  ret.set_metricWindow(merge);
+  return ret;
+}

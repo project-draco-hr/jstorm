@@ -1,3 +1,0 @@
-{
-  return staticsMap.get(type);
-}

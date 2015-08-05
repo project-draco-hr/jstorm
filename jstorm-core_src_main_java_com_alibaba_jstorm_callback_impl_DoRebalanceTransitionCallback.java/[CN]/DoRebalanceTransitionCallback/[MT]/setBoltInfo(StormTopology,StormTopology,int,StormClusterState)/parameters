@@ -1,0 +1,4 @@
+StormTopology oldTopology
+StormTopology newTopology
+int cnt
+StormClusterState clusterState

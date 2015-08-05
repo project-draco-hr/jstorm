@@ -1,0 +1,7 @@
+{
+  HashMap<String,ResourceWorkerSlot> rtn=new HashMap<String,ResourceWorkerSlot>();
+  for (  ResourceWorkerSlot worker : workers) {
+    rtn.put(worker.getHostPort(),worker);
+  }
+  return rtn;
+}

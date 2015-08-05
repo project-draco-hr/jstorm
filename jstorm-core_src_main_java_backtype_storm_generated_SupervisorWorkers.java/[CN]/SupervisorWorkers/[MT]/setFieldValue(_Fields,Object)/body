@@ -1,0 +1,28 @@
+{
+switch (field) {
+case SUPERVISOR:
+    if (value == null) {
+      unset_supervisor();
+    }
+ else {
+      set_supervisor((SupervisorSummary)value);
+    }
+  break;
+case WORKERS:
+if (value == null) {
+  unset_workers();
+}
+ else {
+  set_workers((List<WorkerSummary>)value);
+}
+break;
+case WORKER_METRIC:
+if (value == null) {
+unset_workerMetric();
+}
+ else {
+set_workerMetric((Map<String,MetricInfo>)value);
+}
+break;
+}
+}

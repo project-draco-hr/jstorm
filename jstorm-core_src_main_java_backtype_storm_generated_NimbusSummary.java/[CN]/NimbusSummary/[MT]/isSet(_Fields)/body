@@ -1,0 +1,22 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case NIMBUS_MASTER:
+    return is_set_nimbus_master();
+case NIMBUS_SLAVES:
+  return is_set_nimbus_slaves();
+case SUPERVISOR_NUM:
+return is_set_supervisor_num();
+case TOTAL_PORT_NUM:
+return is_set_total_port_num();
+case USED_PORT_NUM:
+return is_set_used_port_num();
+case FREE_PORT_NUM:
+return is_set_free_port_num();
+case VERSION:
+return is_set_version();
+}
+throw new IllegalStateException();
+}

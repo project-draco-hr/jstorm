@@ -1,0 +1,30 @@
+{
+  if (StringUtils.isBlank(host) == false) {
+    this.host=host;
+    if (port == null) {
+      port=type.getPort(conf);
+    }
+    this.port=port;
+    this.hostPort=host + ":" + port;
+  }
+ else {
+    try {
+      hostPort=ThriftClient.getMasterByZk(conf);
+    }
+ catch (    Exception e) {
+      throw new RuntimeException("Failed to get master from ZK.",e);
+    }
+    String[] host_port=hostPort.split(":");
+    if (host_port.length != 2) {
+      throw new InvalidParameterException("Host format error: " + hostPort);
+    }
+    this.host=host_port[0];
+    this.port=Integer.parseInt(host_port[1]);
+  }
+  if (this.host == null) {
+    throw new IllegalArgumentException("host is not set");
+  }
+  if (this.port == null || this.port <= 0) {
+    throw new IllegalArgumentException("invalid port: " + port);
+  }
+}

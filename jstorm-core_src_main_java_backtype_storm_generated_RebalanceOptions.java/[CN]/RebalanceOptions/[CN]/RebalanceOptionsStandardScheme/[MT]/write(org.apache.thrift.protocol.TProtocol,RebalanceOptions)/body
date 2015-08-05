@@ -1,0 +1,23 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.is_set_wait_secs()) {
+    oprot.writeFieldBegin(WAIT_SECS_FIELD_DESC);
+    oprot.writeI32(struct.wait_secs);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_reassign()) {
+    oprot.writeFieldBegin(REASSIGN_FIELD_DESC);
+    oprot.writeBool(struct.reassign);
+    oprot.writeFieldEnd();
+  }
+  if (struct.conf != null) {
+    if (struct.is_set_conf()) {
+      oprot.writeFieldBegin(CONF_FIELD_DESC);
+      oprot.writeString(struct.conf);
+      oprot.writeFieldEnd();
+    }
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

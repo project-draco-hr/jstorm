@@ -1,0 +1,9 @@
+{
+  if (cache == null) {
+    cache=new AtomicLong(0);
+  }
+  if (object != null) {
+    cache.addAndGet(object.longValue());
+  }
+  return cache;
+}

@@ -1,0 +1,107 @@
+{
+  long start=System.nanoTime();
+  StormClusterState stormClusterState=data.getStormClusterState();
+  try {
+    StormBase base=stormClusterState.storm_base(topologyId,null);
+    if (base == null) {
+      throw new NotAliveException("No topology of " + topologyId);
+    }
+    Assignment assignment=stormClusterState.assignment_info(topologyId,null);
+    if (assignment == null) {
+      throw new NotAliveException("No topology of " + topologyId);
+    }
+    Map<String,TaskHeartbeat> taskHBMap=Cluster.get_all_task_heartbeat(stormClusterState,topologyId);
+    Map<Integer,TaskInfo> taskInfoMap=Cluster.get_all_taskInfo(stormClusterState,topologyId);
+    Map<Integer,String> taskToComponent=Cluster.get_all_task_component(stormClusterState,topologyId,taskInfoMap);
+    Map<Integer,String> taskToType=Cluster.get_all_task_type(stormClusterState,topologyId,taskInfoMap);
+    String errorString=null;
+    if (Cluster.is_topology_exist_error(stormClusterState,topologyId)) {
+      errorString="Y";
+    }
+ else {
+      errorString="";
+    }
+    TopologySummary topologySummary=new TopologySummary();
+    topologySummary.set_id(topologyId);
+    topologySummary.set_name(base.getStormName());
+    topologySummary.set_uptime_secs(TimeUtils.time_delta(base.getLanchTimeSecs()));
+    ;
+    topologySummary.set_status(base.getStatusString());
+    topologySummary.set_num_tasks(NimbusUtils.getTopologyTaskNum(assignment));
+    topologySummary.set_num_workers(assignment.getWorkers().size());
+    topologySummary.set_error_info(errorString);
+    Map<String,ComponentSummary> componentSummaryMap=new HashMap<String,ComponentSummary>();
+    HashMap<String,List<Integer>> componentToTasks=JStormUtils.reverse_map(taskToComponent);
+    for (    Entry<String,List<Integer>> entry : componentToTasks.entrySet()) {
+      String name=entry.getKey();
+      List<Integer> taskIds=entry.getValue();
+      if (taskIds == null || taskIds.size() == 0) {
+        LOG.warn("No task of component " + name);
+        continue;
+      }
+      ComponentSummary componentSummary=new ComponentSummary();
+      componentSummaryMap.put(name,componentSummary);
+      componentSummary.set_name(name);
+      componentSummary.set_type(taskToType.get(taskIds.get(0)));
+      componentSummary.set_parallel(taskIds.size());
+      componentSummary.set_task_ids(taskIds);
+    }
+    Map<Integer,TaskSummary> taskSummaryMap=new TreeMap<Integer,TaskSummary>();
+    Map<Integer,List<TaskError>> taskErrors=Cluster.get_all_task_errors(stormClusterState,topologyId);
+    for (    Integer taskId : taskInfoMap.keySet()) {
+      TaskSummary taskSummary=new TaskSummary();
+      taskSummaryMap.put(taskId,taskSummary);
+      taskSummary.set_task_id(taskId);
+      TaskHeartbeat hb=taskHBMap.get(String.valueOf(taskId));
+      if (hb == null) {
+        taskSummary.set_status("Starting");
+        taskSummary.set_uptime(0);
+      }
+ else {
+        taskSummary.set_status("ACTIVE");
+        taskSummary.set_uptime(hb.getUptimeSecs());
+      }
+      if (StringUtils.isBlank(errorString)) {
+        continue;
+      }
+      List<TaskError> taskErrorList=taskErrors.get(taskId);
+      if (taskErrorList != null && taskErrorList.size() != 0) {
+        for (        TaskError taskError : taskErrorList) {
+          ErrorInfo errorInfo=new ErrorInfo(taskError.getError(),taskError.getTimSecs());
+          taskSummary.add_to_errors(errorInfo);
+          String component=taskToComponent.get(taskId);
+          componentSummaryMap.get(component).add_to_errors(errorInfo);
+        }
+      }
+    }
+    for (    ResourceWorkerSlot workerSlot : assignment.getWorkers()) {
+      String hostname=workerSlot.getHostname();
+      int port=workerSlot.getPort();
+      for (      Integer taskId : workerSlot.getTasks()) {
+        TaskSummary taskSummary=taskSummaryMap.get(taskId);
+        taskSummary.set_host(hostname);
+        taskSummary.set_port(port);
+      }
+    }
+    TopologyInfo topologyInfo=new TopologyInfo();
+    topologyInfo.set_topology(topologySummary);
+    topologyInfo.set_components(JStormUtils.mk_list(componentSummaryMap.values()));
+    topologyInfo.set_tasks(JStormUtils.mk_list(taskSummaryMap.values()));
+    topologyInfo.set_metrics(data.getMetricRunnable().getTopologyMetric(topologyId));
+    return topologyInfo;
+  }
+ catch (  TException e) {
+    LOG.info("Failed to get topologyInfo " + topologyId,e);
+    throw e;
+  }
+catch (  Exception e) {
+    LOG.info("Failed to get topologyInfo " + topologyId,e);
+    throw new TException("Failed to get topologyInfo" + topologyId);
+  }
+ finally {
+    long end=System.nanoTime();
+    double spend=(end - start) / 1000000.0d;
+    SimpleJStormMetric.updateHistorgram("getTopologyInfo",spend);
+    LOG.info("Finish getTopologyInfo {}, spend {} ms",topologyId,spend);
+  }
+}

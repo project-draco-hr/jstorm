@@ -1,0 +1,3 @@
+{
+  iface.metricMonitor(args.name,args.options,resultHandler);
+}

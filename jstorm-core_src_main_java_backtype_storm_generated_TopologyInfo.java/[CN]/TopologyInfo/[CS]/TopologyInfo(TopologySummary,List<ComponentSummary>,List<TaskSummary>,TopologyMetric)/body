@@ -1,0 +1,7 @@
+{
+  this();
+  this.topology=topology;
+  this.components=components;
+  this.tasks=tasks;
+  this.metrics=metrics;
+}

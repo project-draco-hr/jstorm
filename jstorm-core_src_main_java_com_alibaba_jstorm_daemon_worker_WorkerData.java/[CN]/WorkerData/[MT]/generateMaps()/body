@@ -1,0 +1,7 @@
+{
+  updateTaskComponentMap();
+  this.defaultResources=new HashMap<String,Object>();
+  this.userResources=new HashMap<String,Object>();
+  this.executorData=new HashMap<String,Object>();
+  this.registeredMetrics=new HashMap();
+}

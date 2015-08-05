@@ -1,0 +1,5 @@
+{
+  finishFileDownload_result result=new finishFileDownload_result();
+  receiveBase(result,"finishFileDownload");
+  return;
+}

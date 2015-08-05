@@ -1,0 +1,14 @@
+{
+  this();
+  this.nimbus_master=nimbus_master;
+  this.nimbus_slaves=nimbus_slaves;
+  this.supervisor_num=supervisor_num;
+  set_supervisor_num_isSet(true);
+  this.total_port_num=total_port_num;
+  set_total_port_num_isSet(true);
+  this.used_port_num=used_port_num;
+  set_used_port_num_isSet(true);
+  this.free_port_num=free_port_num;
+  set_free_port_num_isSet(true);
+  this.version=version;
+}

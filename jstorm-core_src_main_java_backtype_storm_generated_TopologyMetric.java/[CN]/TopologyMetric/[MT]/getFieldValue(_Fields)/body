@@ -1,0 +1,13 @@
+{
+switch (field) {
+case TOPOLOGY_METRIC:
+    return get_topologyMetric();
+case COMPONENT_METRIC:
+  return get_componentMetric();
+case WORKER_METRIC:
+return get_workerMetric();
+case TASK_METRIC:
+return get_taskMetric();
+}
+throw new IllegalStateException();
+}

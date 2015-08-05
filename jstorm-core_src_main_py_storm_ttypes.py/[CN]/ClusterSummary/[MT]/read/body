@@ -1,0 +1,41 @@
+def read(self, iprot):
+    if ((iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and isinstance(iprot.trans, TTransport.CReadableTransport) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+        return
+    iprot.readStructBegin()
+    while True:
+        (fname, ftype, fid) = iprot.readFieldBegin()
+        if (ftype == TType.STOP):
+            break
+        if (fid == 1):
+            if (ftype == TType.STRUCT):
+                self.nimbus = NimbusSummary()
+                self.nimbus.read(iprot)
+            else:
+                iprot.skip(ftype)
+        elif (fid == 2):
+            if (ftype == TType.LIST):
+                self.supervisors = []
+                (_etype76, _size73) = iprot.readListBegin()
+                for _i77 in xrange(_size73):
+                    _elem78 = SupervisorSummary()
+                    _elem78.read(iprot)
+                    self.supervisors.append(_elem78)
+                iprot.readListEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 3):
+            if (ftype == TType.LIST):
+                self.topologies = []
+                (_etype82, _size79) = iprot.readListBegin()
+                for _i83 in xrange(_size79):
+                    _elem84 = TopologySummary()
+                    _elem84.read(iprot)
+                    self.topologies.append(_elem84)
+                iprot.readListEnd()
+            else:
+                iprot.skip(ftype)
+        else:
+            iprot.skip(ftype)
+        iprot.readFieldEnd()
+    iprot.readStructEnd()

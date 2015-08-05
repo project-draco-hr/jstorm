@@ -1,0 +1,26 @@
+{
+  try {
+    checkTopologyActive(data,topologyName,true);
+    Integer wait_amt=null;
+    String jsonConf=null;
+    Boolean reassign=false;
+    if (options != null) {
+      if (options.is_set_wait_secs())       wait_amt=options.get_wait_secs();
+      if (options.is_set_reassign())       reassign=options.is_reassign();
+      if (options.is_set_conf())       jsonConf=options.get_conf();
+    }
+    LOG.info("Begin to rebalance " + topologyName + "wait_time:"+ wait_amt+ ", reassign: "+ reassign+ ", new worker/bolt configuration:"+ jsonConf);
+    Map<Object,Object> conf=(Map<Object,Object>)JStormUtils.from_json(jsonConf);
+    NimbusUtils.transitionName(data,topologyName,true,StatusType.rebalance,wait_amt,reassign,conf);
+  }
+ catch (  NotAliveException e) {
+    String errMsg="Rebalance Error, no this topology " + topologyName;
+    LOG.error(errMsg,e);
+    throw new NotAliveException(errMsg);
+  }
+catch (  Exception e) {
+    String errMsg="Failed to rebalance topology " + topologyName;
+    LOG.error(errMsg,e);
+    throw new TException(errMsg);
+  }
+}

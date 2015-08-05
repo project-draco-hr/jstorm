@@ -1,0 +1,20 @@
+{
+switch (fieldId) {
+case 1:
+    return NIMBUS_MASTER;
+case 2:
+  return NIMBUS_SLAVES;
+case 3:
+return SUPERVISOR_NUM;
+case 4:
+return TOTAL_PORT_NUM;
+case 5:
+return USED_PORT_NUM;
+case 6:
+return FREE_PORT_NUM;
+case 7:
+return VERSION;
+default :
+return null;
+}
+}

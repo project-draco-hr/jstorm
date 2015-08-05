@@ -1,0 +1,10 @@
+def process_getVersion(self, seqid, iprot, oprot):
+    args = getVersion_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getVersion_result()
+    result.success = self._handler.getVersion()
+    oprot.writeMessageBegin('getVersion', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

@@ -1,0 +1,5 @@
+{
+  String topologyRoot=StormConfig.masterStormdistRoot(conf,topologyId);
+  String confPath=StormConfig.stormconf_path(topologyRoot);
+  FileUtils.writeByteArrayToFile(new File(confPath),Utils.serialize(topoConf));
+}

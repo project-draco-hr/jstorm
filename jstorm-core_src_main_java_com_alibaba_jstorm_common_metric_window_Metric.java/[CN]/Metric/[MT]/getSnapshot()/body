@@ -1,0 +1,13 @@
+{
+  flush();
+  Map<Integer,T> ret=new TreeMap<Integer,T>();
+  for (  RollingWindow<V> rollingWindow : rollingWindows) {
+    V value=rollingWindow.getSnapshot();
+    ret.put(rollingWindow.getWindowSecond(),convertor.convert(value));
+  }
+  ret.put(StatBuckets.ALL_TIME_WINDOW,convertor.convert(allWindow.getSnapshot()));
+  if (callback != null) {
+    callback.execute(this);
+  }
+  return ret;
+}

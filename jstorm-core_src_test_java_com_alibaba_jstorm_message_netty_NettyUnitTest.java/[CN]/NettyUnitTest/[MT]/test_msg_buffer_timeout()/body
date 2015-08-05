@@ -1,0 +1,44 @@
+{
+  System.out.println("!!!!!!!!Start test_msg_buffer_timeout !!!!!!!!!!!");
+  final String req_msg=setupLargMsg();
+  ConfigExtension.setNettyPendingBufferTimeout(storm_conf,10 * 1000l);
+  final IContext context=TransportFactory.makeContext(storm_conf);
+  new Thread(new Runnable(){
+    @Override public void run(){
+      lock.lock();
+      IConnection client=context.connect(null,"localhost",port);
+      List<TaskMessage> list=new ArrayList<TaskMessage>();
+      TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+      list.add(message);
+      client.send(message);
+      System.out.println("!!Client has sent data");
+      JStormUtils.sleepMs(1000);
+      try {
+        clientClose.await();
+      }
+ catch (      InterruptedException e) {
+        e.printStackTrace();
+      }
+      client.close();
+      contextClose.signal();
+      lock.unlock();
+    }
+  }
+).start();
+  IConnection server=null;
+  JStormUtils.sleepMs(11000);
+  System.out.println("!!server begin start!!!!!");
+  server=initNettyServer();
+  JStormUtils.sleepMs(5000);
+  System.out.println("Begin to receive message");
+  byte[] recv=(byte[])server.recv(task,1);
+  Assert.assertEquals(null,recv);
+  System.out.println("Pending message was timouout:" + (recv == null));
+  lock.lock();
+  clientClose.signal();
+  server.close();
+  contextClose.await();
+  context.term();
+  lock.unlock();
+  System.out.println("!!!!!!!!!!!!End test_msg_buffer_timeout!!!!!!!!!!!!!");
+}

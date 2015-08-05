@@ -1,0 +1,23 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  BitSet optionals=new BitSet();
+  if (struct.is_set_wait_secs()) {
+    optionals.set(0);
+  }
+  if (struct.is_set_reassign()) {
+    optionals.set(1);
+  }
+  if (struct.is_set_conf()) {
+    optionals.set(2);
+  }
+  oprot.writeBitSet(optionals,3);
+  if (struct.is_set_wait_secs()) {
+    oprot.writeI32(struct.wait_secs);
+  }
+  if (struct.is_set_reassign()) {
+    oprot.writeBool(struct.reassign);
+  }
+  if (struct.is_set_conf()) {
+    oprot.writeString(struct.conf);
+  }
+}

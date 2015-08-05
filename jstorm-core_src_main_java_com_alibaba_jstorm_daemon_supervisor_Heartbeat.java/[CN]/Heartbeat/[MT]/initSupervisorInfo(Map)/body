@@ -1,0 +1,22 @@
+{
+  List<Integer> portList=JStormUtils.getSupervisorPortList(conf);
+  if (!StormConfig.local_mode(conf)) {
+    try {
+      boolean isLocaliP=false;
+      isLocaliP=myHostName.equals("127.0.0.1");
+      if (isLocaliP) {
+        throw new Exception("the hostname which  supervisor get is localhost");
+      }
+    }
+ catch (    Exception e1) {
+      LOG.error("get supervisor host error!",e1);
+      throw new RuntimeException(e1);
+    }
+    Set<Integer> ports=JStormUtils.listToSet(portList);
+    supervisorInfo=new SupervisorInfo(myHostName,supervisorId,ports);
+  }
+ else {
+    Set<Integer> ports=JStormUtils.listToSet(portList.subList(0,1));
+    supervisorInfo=new SupervisorInfo(myHostName,supervisorId,ports);
+  }
+}

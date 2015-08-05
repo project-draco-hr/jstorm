@@ -1,6 +1,0 @@
-{
-  if (this.send_tps == null) {
-    this.send_tps=new HashMap<String,Map<String,Double>>();
-  }
-  this.send_tps.put(key,val);
-}

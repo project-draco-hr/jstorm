@@ -1,0 +1,24 @@
+{
+  long start=System.nanoTime();
+  try {
+    String topologyId=getTopologyId(topologyName);
+    SortedMap<String,MetricInfo> allConnections=data.getMetricRunnable().getNettyMetric(topologyId);
+    int mapSize=allConnections.size();
+    NettyMetric ret=new NettyMetric();
+    String serverIp=NetWorkUtils.host2Ip(serverName);
+    Map<String,MetricInfo> selectConnections=new TreeMap<String,MetricInfo>();
+    for (    Entry<String,MetricInfo> entry : allConnections.entrySet()) {
+      if (entry.getKey().contains(serverIp)) {
+        selectConnections.put(entry.getKey(),entry.getValue());
+      }
+    }
+    ret.set_connectionNum(selectConnections.size());
+    ret.set_connections(selectConnections);
+    return ret;
+  }
+  finally {
+    double spend=(System.nanoTime() - start) / 1000000.0d;
+    SimpleJStormMetric.updateHistorgram("getNettyMetric",spend);
+    LOG.info("getServerNettyMetric, {} : {}ms",topologyName,spend);
+  }
+}

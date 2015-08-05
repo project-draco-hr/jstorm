@@ -1,6 +1,0 @@
-ResourceWorkerSlot resource
-int taskId
-String component
-String componentType
-String host
-int uptime

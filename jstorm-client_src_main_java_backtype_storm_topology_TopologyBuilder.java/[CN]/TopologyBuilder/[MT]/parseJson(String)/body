@@ -1,4 +1,0 @@
-{
-  if (json == null)   return new HashMap();
- else   return (Map)Utils.from_json(json);
-}

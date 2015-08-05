@@ -1,6 +1,0 @@
-{
-  this.taskid=taskid;
-  this.host=host;
-  this.port=port;
-  this.uptime=uptime;
-}

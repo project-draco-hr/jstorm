@@ -1,0 +1,16 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TOPOLOGY:
+    return is_set_topology();
+case COMPONENTS:
+  return is_set_components();
+case TASKS:
+return is_set_tasks();
+case METRICS:
+return is_set_metrics();
+}
+throw new IllegalStateException();
+}

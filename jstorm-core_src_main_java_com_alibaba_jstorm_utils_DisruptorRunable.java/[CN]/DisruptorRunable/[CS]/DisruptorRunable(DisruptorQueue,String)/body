@@ -1,0 +1,8 @@
+{
+  this.queue=queue;
+  this.timer=JStormMetrics.registerWorkerTimer(idStr + MetricDef.TIME_TYPE);
+  this.idStr=idStr;
+  QueueGauge queueGauge=new QueueGauge(idStr + MetricDef.QUEUE_TYPE,queue);
+  JStormMetrics.registerWorkerGauge(queueGauge,idStr + MetricDef.QUEUE_TYPE);
+  JStormHealthCheck.registerWorkerHealthCheck(idStr,queueGauge);
+}

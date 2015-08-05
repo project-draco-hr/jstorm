@@ -1,0 +1,9 @@
+{
+  if (cache == null) {
+    cache=new AtomicDouble(0.0);
+  }
+  if (object != null) {
+    cache.addAndGet(object.doubleValue());
+  }
+  return cache;
+}

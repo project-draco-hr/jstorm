@@ -1,3 +1,0 @@
-{
-  return monitor_path(topology_id) + ZK_SEPERATOR + TASK_DIR;
-}

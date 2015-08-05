@@ -1,0 +1,40 @@
+{
+  List<String> task_ids=clusterState.task_storms();
+  List<String> heartbeat_ids=clusterState.heartbeat_storms();
+  List<String> error_ids=clusterState.task_error_storms();
+  List<String> assignment_ids=clusterState.assignments(null);
+  List<String> metric_ids=clusterState.get_metrics();
+  List<String> code_ids=new ArrayList<String>();
+  HashSet<String> latest_code_ids=new HashSet<String>();
+  get_code_ids(code_ids,latest_code_ids);
+  Set<String> to_cleanup_ids=new HashSet<String>();
+  Set<String> pendingTopologys=nimbusData.getPendingSubmitTopoloygs().keySet();
+  if (task_ids != null) {
+    to_cleanup_ids.addAll(task_ids);
+  }
+  if (heartbeat_ids != null) {
+    to_cleanup_ids.addAll(heartbeat_ids);
+  }
+  if (error_ids != null) {
+    to_cleanup_ids.addAll(error_ids);
+  }
+  if (assignment_ids != null) {
+    to_cleanup_ids.addAll(assignment_ids);
+  }
+  if (code_ids != null) {
+    to_cleanup_ids.addAll(code_ids);
+  }
+  if (metric_ids != null) {
+    to_cleanup_ids.addAll(metric_ids);
+  }
+  if (active_topologys != null) {
+    to_cleanup_ids.removeAll(active_topologys);
+    latest_code_ids.removeAll(active_topologys);
+  }
+  if (pendingTopologys != null) {
+    to_cleanup_ids.removeAll(pendingTopologys);
+  }
+  to_cleanup_ids.removeAll(latest_code_ids);
+  LOG.info("Skip remove topology of " + latest_code_ids);
+  return to_cleanup_ids;
+}

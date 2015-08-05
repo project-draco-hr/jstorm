@@ -1,0 +1,17 @@
+{
+  if (!is_set_topologyMetric()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'topologyMetric' is unset! Struct:" + toString());
+  }
+  if (!is_set_componentMetric()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'componentMetric' is unset! Struct:" + toString());
+  }
+  if (!is_set_workerMetric()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'workerMetric' is unset! Struct:" + toString());
+  }
+  if (!is_set_taskMetric()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'taskMetric' is unset! Struct:" + toString());
+  }
+  if (topologyMetric != null) {
+    topologyMetric.validate();
+  }
+}

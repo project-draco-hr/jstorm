@@ -1,0 +1,16 @@
+{
+  try {
+    if (conf.containsKey(Config.STORM_DO_AS_USER)) {
+      if (asUser != null && !asUser.isEmpty()) {
+        LOG.warn("You have specified a doAsUser as param {} and a doAsParam as config, config will take precedence.",asUser,conf.get(Config.STORM_DO_AS_USER));
+      }
+      asUser=(String)conf.get(Config.STORM_DO_AS_USER);
+    }
+    NimbusClient client=new NimbusClient(conf,null,null,timeout,asUser);
+    checkVersion(client);
+    return client;
+  }
+ catch (  Exception ex) {
+    throw new RuntimeException(ex);
+  }
+}

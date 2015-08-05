@@ -1,0 +1,10 @@
+{
+  if (that == null)   return false;
+  boolean this_present_uploadMetrics=true && this.is_set_uploadMetrics();
+  boolean that_present_uploadMetrics=true && that.is_set_uploadMetrics();
+  if (this_present_uploadMetrics || that_present_uploadMetrics) {
+    if (!(this_present_uploadMetrics && that_present_uploadMetrics))     return false;
+    if (!this.uploadMetrics.equals(that.uploadMetrics))     return false;
+  }
+  return true;
+}

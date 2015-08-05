@@ -1,0 +1,18 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case NAME:
+    return is_set_name();
+case PARALLEL:
+  return is_set_parallel();
+case TYPE:
+return is_set_type();
+case TASK_IDS:
+return is_set_task_ids();
+case ERRORS:
+return is_set_errors();
+}
+throw new IllegalStateException();
+}

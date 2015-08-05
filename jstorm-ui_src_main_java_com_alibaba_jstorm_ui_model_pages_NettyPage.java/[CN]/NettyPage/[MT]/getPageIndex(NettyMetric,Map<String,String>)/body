@@ -1,0 +1,12 @@
+{
+  if (nettyMetric.get_connectionNum() == nettyMetric.get_connections().size()) {
+    return new ArrayList<PageIndex>();
+  }
+  PageIndex.Event event=new PageIndex.Event();
+  event.totalSize=nettyMetric.get_connectionNum();
+  event.pos=JStormUtils.parseLong(paramMap.get(UIDef.POS),0);
+  event.pageSize=MetricDef.NETTY_METRICS_PACKAGE_SIZE;
+  event.url=UIDef.LINK_WINDOW_TABLE;
+  event.paramMap=paramMap;
+  return PageIndex.generatePageIndex(event);
+}

@@ -1,7 +1,0 @@
-{
-  this.host=NetWorkUtils.ip2Host(s.get_host());
-  this.ip=NetWorkUtils.host2Ip(s.get_host());
-  this.uptime=StatBuckets.prettyUptimeStr(s.get_uptime_secs());
-  this.totalPort=String.valueOf(s.get_num_workers());
-  this.usedPort=String.valueOf(s.get_num_used_workers());
-}

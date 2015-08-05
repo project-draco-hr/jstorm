@@ -1,0 +1,2 @@
+org.apache.thrift.protocol.TProtocol iprot
+getTopologyId_result struct

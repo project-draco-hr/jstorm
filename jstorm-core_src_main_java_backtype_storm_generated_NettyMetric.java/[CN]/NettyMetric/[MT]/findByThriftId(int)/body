@@ -1,0 +1,10 @@
+{
+switch (fieldId) {
+case 1:
+    return CONNECTIONS;
+case 2:
+  return CONNECTION_NUM;
+default :
+return null;
+}
+}

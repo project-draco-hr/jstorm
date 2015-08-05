@@ -1,0 +1,3 @@
+SupervisorSummary supervisorSummary
+Map<String,String> paramMap
+Map<String,Object> nimbusConf

@@ -1,0 +1,13 @@
+{
+  Set<String> reDownloadTopologys=syncProcesses.getTopologyIdNeedDownload().getAndSet(null);
+  if (reDownloadTopologys == null || reDownloadTopologys.size() == 0)   return null;
+  Set<String> needRemoveTopologys=new HashSet<String>();
+  Map<Integer,String> portToStartWorkerId=syncProcesses.getPortToWorkerId();
+  for (  Entry<Integer,LocalAssignment> entry : localAssignment.entrySet()) {
+    if (portToStartWorkerId.containsKey(entry.getKey()))     needRemoveTopologys.add(entry.getValue().getTopologyId());
+  }
+  LOG.debug("worker is starting on these topology, so delay download topology binary: " + needRemoveTopologys);
+  reDownloadTopologys.removeAll(needRemoveTopologys);
+  if (reDownloadTopologys.size() > 0)   LOG.info("Following topologys is going to re-download the jars, " + reDownloadTopologys);
+  return reDownloadTopologys;
+}

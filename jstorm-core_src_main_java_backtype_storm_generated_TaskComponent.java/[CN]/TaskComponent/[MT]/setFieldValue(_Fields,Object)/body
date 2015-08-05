@@ -1,0 +1,20 @@
+{
+switch (field) {
+case TASK_ID:
+    if (value == null) {
+      unset_taskId();
+    }
+ else {
+      set_taskId((Integer)value);
+    }
+  break;
+case COMPONENT:
+if (value == null) {
+  unset_component();
+}
+ else {
+  set_component((String)value);
+}
+break;
+}
+}

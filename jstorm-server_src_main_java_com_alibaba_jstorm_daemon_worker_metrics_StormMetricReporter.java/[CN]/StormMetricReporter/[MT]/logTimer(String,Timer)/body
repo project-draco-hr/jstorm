@@ -1,4 +1,0 @@
-{
-  final Snapshot snapshot=timer.getSnapshot();
-  logger.info(marker,"type=TIMER, name={}, count={}, min={}, max={}, mean={}, stddev={}, median={}, " + "p75={}, p95={}, p98={}, p99={}, p999={}, mean_rate={}, m1={}, m5={}, " + "m15={}, rate_unit={}, duration_unit={}",name,timer.getCount(),convertDuration(snapshot.getMin()),convertDuration(snapshot.getMax()),convertDuration(snapshot.getMean()),convertDuration(snapshot.getStdDev()),convertDuration(snapshot.getMedian()),convertDuration(snapshot.get75thPercentile()),convertDuration(snapshot.get95thPercentile()),convertDuration(snapshot.get98thPercentile()),convertDuration(snapshot.get99thPercentile()),convertDuration(snapshot.get999thPercentile()),convertRate(timer.getMeanRate()),convertRate(timer.getOneMinuteRate()),convertRate(timer.getFiveMinuteRate()),convertRate(timer.getFifteenMinuteRate()),getRateUnit(),getDurationUnit());
-}

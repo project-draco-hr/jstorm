@@ -1,0 +1,33 @@
+{
+  Set<String> topologys=new HashSet<String>();
+  for (  Map.Entry<Integer,LocalAssignment> entry : localAssignments.entrySet()) {
+    topologys.add(entry.getValue().getTopologyId());
+  }
+  for (  StateHeartbeat stateHb : localWorkerStats.values()) {
+    State state=stateHb.getState();
+    if (!state.equals(State.notStarted)) {
+      String topologyId=stateHb.getHeartbeat().getTopologyId();
+      topologys.remove(topologyId);
+    }
+  }
+  long currTime=System.currentTimeMillis();
+  Set<String> needRemoveTopologys=new HashSet<String>();
+  for (  String topologyId : topologys) {
+    try {
+      long lastModifytime=StormConfig.get_supervisor_topology_Bianrymodify_time(conf,topologyId);
+      if ((currTime - lastModifytime) / 1000 < (JStormUtils.MIN_1 * 2)) {
+        LOG.debug("less 2 minite ,so removed " + topologyId);
+        needRemoveTopologys.add(topologyId);
+      }
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to get the time of file last modification for topology" + topologyId,e);
+      needRemoveTopologys.add(topologyId);
+    }
+  }
+  topologys.removeAll(needRemoveTopologys);
+  if (topologys.size() > 0) {
+    LOG.debug("Following topologys is going to re-download the jars, " + topologys);
+  }
+  needDownloadTopologys.set(topologys);
+}

@@ -1,0 +1,4 @@
+def __init__(self, baseMetric=None, inputMetric=None, outputMetric=None):
+    self.baseMetric = baseMetric
+    self.inputMetric = inputMetric
+    self.outputMetric = outputMetric

@@ -1,0 +1,17 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  struct.supervisor.write(oprot);
+{
+    oprot.writeI32(struct.workers.size());
+    for (    WorkerSummary _iter205 : struct.workers) {
+      _iter205.write(oprot);
+    }
+  }
+{
+    oprot.writeI32(struct.workerMetric.size());
+    for (    Map.Entry<String,MetricInfo> _iter206 : struct.workerMetric.entrySet()) {
+      oprot.writeString(_iter206.getKey());
+      _iter206.getValue().write(oprot);
+    }
+  }
+}

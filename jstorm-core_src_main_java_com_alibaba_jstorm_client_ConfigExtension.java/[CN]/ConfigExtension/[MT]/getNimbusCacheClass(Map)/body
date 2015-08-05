@@ -1,0 +1,3 @@
+{
+  return (String)conf.get(NIMBUS_CACHE_CLASS);
+}

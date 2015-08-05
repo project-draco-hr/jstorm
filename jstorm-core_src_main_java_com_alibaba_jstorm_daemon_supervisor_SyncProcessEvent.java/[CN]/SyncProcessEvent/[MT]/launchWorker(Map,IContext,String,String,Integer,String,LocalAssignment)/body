@@ -1,0 +1,88 @@
+{
+  String stormroot=StormConfig.supervisor_stormdist_root(conf,topologyId);
+  String stormjar=StormConfig.stormjar_path(stormroot);
+  Map stormConf=StormConfig.read_supervisor_topology_conf(conf,topologyId);
+  Map totalConf=new HashMap();
+  totalConf.putAll(conf);
+  totalConf.putAll(stormConf);
+  String stormhome=System.getProperty("jstorm.home");
+  long memSize=assignment.getMem();
+  int cpuNum=assignment.getCpu();
+  long memGsize=memSize / JStormUtils.SIZE_1_G;
+  int gcThreadsNum=memGsize > 4 ? (int)(memGsize * 1.5) : 4;
+  String childopts=getChildOpts(totalConf);
+  childopts+=getGcDumpParam(totalConf);
+  Map<String,String> environment=new HashMap<String,String>();
+  if (ConfigExtension.getWorkerRedirectOutput(totalConf)) {
+    environment.put("REDIRECT","true");
+  }
+ else {
+    environment.put("REDIRECT","false");
+  }
+  environment.put("LD_LIBRARY_PATH",(String)totalConf.get(Config.JAVA_LIBRARY_PATH));
+  StringBuilder commandSB=new StringBuilder();
+  try {
+    if (this.cgroupManager != null) {
+      commandSB.append(cgroupManager.startNewWorker(totalConf,cpuNum,workerId));
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("fail to prepare cgroup to workerId: " + workerId,e);
+    return;
+  }
+  commandSB.append("java -server ");
+  commandSB.append(" -Xms" + memSize);
+  commandSB.append(" -Xmx" + memSize + " ");
+  commandSB.append(" -Xmn" + memSize / 3 + " ");
+  commandSB.append(" -XX:PermSize=" + memSize / 16);
+  commandSB.append(" -XX:MaxPermSize=" + memSize / 8);
+  commandSB.append(" -XX:ParallelGCThreads=" + gcThreadsNum);
+  commandSB.append(" " + childopts);
+  commandSB.append(" " + (assignment.getJvm() == null ? "" : assignment.getJvm()));
+  commandSB.append(" -Djava.library.path=");
+  commandSB.append((String)totalConf.get(Config.JAVA_LIBRARY_PATH));
+  if (stormhome != null) {
+    commandSB.append(" -Djstorm.home=");
+    commandSB.append(stormhome);
+  }
+  commandSB.append(getLogParameter(totalConf,stormhome,assignment.getTopologyName(),port));
+  String classpath=getClassPath(stormjar,stormhome,totalConf);
+  String workerClassPath=(String)totalConf.get(Config.TOPOLOGY_CLASSPATH);
+  List<String> otherLibs=(List<String>)stormConf.get(GenericOptionsParser.TOPOLOGY_LIB_NAME);
+  StringBuilder sb=new StringBuilder();
+  if (otherLibs != null) {
+    for (    String libName : otherLibs) {
+      sb.append(StormConfig.stormlib_path(stormroot,libName)).append(":");
+    }
+  }
+  workerClassPath=workerClassPath + ":" + sb.toString();
+  Map<String,String> policyReplaceMap=new HashMap<String,String>();
+  String realClassPath=classpath + ":" + workerClassPath;
+  policyReplaceMap.put(SandBoxMaker.CLASS_PATH_KEY,realClassPath);
+  commandSB.append(sandBoxMaker.sandboxPolicy(workerId,policyReplaceMap));
+  commandSB.append(" -cp ");
+  commandSB.append(classpath);
+  if (!ConfigExtension.isEnableTopologyClassLoader(totalConf))   commandSB.append(":").append(workerClassPath);
+  commandSB.append(" com.alibaba.jstorm.daemon.worker.Worker ");
+  commandSB.append(topologyId);
+  commandSB.append(" ");
+  commandSB.append(supervisorId);
+  commandSB.append(" ");
+  commandSB.append(port);
+  commandSB.append(" ");
+  commandSB.append(workerId);
+  commandSB.append(" ");
+  commandSB.append(workerClassPath + ":" + stormjar);
+  String cmd=commandSB.toString();
+  cmd=cmd.replace("%ID%",port.toString());
+  cmd=cmd.replace("%TOPOLOGYID%",topologyId);
+  if (stormhome != null) {
+    cmd=cmd.replace("%JSTORM_HOME%",stormhome);
+  }
+ else {
+    cmd=cmd.replace("%JSTORM_HOME%","./");
+  }
+  LOG.info("Launching worker with command: " + cmd);
+  LOG.info("Environment:" + environment.toString());
+  JStormUtils.launch_process(cmd,environment,true);
+}

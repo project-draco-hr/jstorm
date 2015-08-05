@@ -1,0 +1,8 @@
+self
+nimbus_master
+nimbus_slaves
+supervisor_num
+total_port_num
+used_port_num
+free_port_num
+version

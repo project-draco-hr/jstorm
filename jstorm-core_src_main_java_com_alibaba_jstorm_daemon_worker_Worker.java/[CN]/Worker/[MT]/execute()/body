@@ -1,0 +1,26 @@
+{
+  List<AsyncLoopThread> threads=new ArrayList<AsyncLoopThread>();
+  startDispatchThread();
+  RefreshConnections refreshConn=makeRefreshConnections();
+  AsyncLoopThread refreshconn=new AsyncLoopThread(refreshConn,false,Thread.MIN_PRIORITY,true);
+  threads.add(refreshconn);
+  RefreshActive refreshZkActive=new RefreshActive(workerData);
+  AsyncLoopThread refreshzk=new AsyncLoopThread(refreshZkActive,false,Thread.MIN_PRIORITY,true);
+  threads.add(refreshzk);
+  AsyncLoopThread syncContainerHbThread=SyncContainerHb.mkWorkerInstance(workerData.getStormConf());
+  if (syncContainerHbThread != null) {
+    threads.add(syncContainerHbThread);
+  }
+  JStormMetricsReporter metricReporter=new JStormMetricsReporter(workerData);
+  AsyncLoopThread metricThread=new AsyncLoopThread(metricReporter);
+  threads.add(metricThread);
+  TaskHeartbeatRunable taskHB=new TaskHeartbeatRunable(workerData);
+  AsyncLoopThread taskHBThread=new AsyncLoopThread(taskHB);
+  threads.add(taskHBThread);
+  RunnableCallback heartbeat_fn=new WorkerHeartbeatRunable(workerData);
+  AsyncLoopThread hb=new AsyncLoopThread(heartbeat_fn,false,null,Thread.NORM_PRIORITY,true);
+  threads.add(hb);
+  List<TaskShutdownDameon> shutdowntasks=createTasks();
+  workerData.setShutdownTasks(shutdowntasks);
+  return new WorkerShutdown(workerData,threads);
+}

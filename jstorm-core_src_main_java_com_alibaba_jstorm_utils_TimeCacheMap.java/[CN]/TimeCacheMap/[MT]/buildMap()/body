@@ -1,0 +1,9 @@
+{
+  Map<K,V> ret=new HashMap<K,V>();
+synchronized (_lock) {
+    for (    HashMap<K,V> bucket : _buckets) {
+      ret.putAll(bucket);
+    }
+    return ret;
+  }
+}

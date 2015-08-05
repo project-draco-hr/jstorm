@@ -1,0 +1,4 @@
+{
+  String topologyId=getTopologyId(topologyName);
+  return getTopologyInfo(topologyId);
+}

@@ -1,0 +1,15 @@
+{
+switch (field) {
+case NAME:
+    return get_name();
+case PARALLEL:
+  return Integer.valueOf(get_parallel());
+case TYPE:
+return get_type();
+case TASK_IDS:
+return get_task_ids();
+case ERRORS:
+return get_errors();
+}
+throw new IllegalStateException();
+}

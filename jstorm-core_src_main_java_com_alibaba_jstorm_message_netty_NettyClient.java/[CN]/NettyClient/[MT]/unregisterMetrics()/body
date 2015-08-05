@@ -1,0 +1,9 @@
+{
+  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_SEND_TIME,nettyConnection.toString());
+  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_BATCH_SIZE,nettyConnection.toString());
+  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_SEND_PENDING,nettyConnection.toString());
+  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_CACHE_SIZE,nettyConnection.toString());
+  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_SEND_SPEED,nettyConnection.toString());
+  JStormHealthCheck.unregisterWorkerHealthCheck(MetricDef.NETTY_CLI_CACHE_SIZE + ":" + nettyConnection.toString());
+  JStormHealthCheck.unregisterWorkerHealthCheck(MetricDef.NETTY_CLI_CONNECTION + ":" + nettyConnection.toString());
+}

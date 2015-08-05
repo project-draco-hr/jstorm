@@ -1,0 +1,47 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  lastComparison=Boolean.valueOf(is_set_topology()).compareTo(other.is_set_topology());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_topology()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.topology,other.topology);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_components()).compareTo(other.is_set_components());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_components()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.components,other.components);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_tasks()).compareTo(other.is_set_tasks());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_tasks()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.tasks,other.tasks);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_metrics()).compareTo(other.is_set_metrics());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_metrics()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.metrics,other.metrics);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

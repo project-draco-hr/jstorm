@@ -1,8 +1,0 @@
-{
-synchronized (this) {
-    for (int i=0; i < windows.length; i++) {
-      windows[i]=windows[i].cleanup_rolling_window();
-    }
-    return this;
-  }
-}

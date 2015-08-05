@@ -1,0 +1,13 @@
+{
+  AtomicLong ret=new AtomicLong(0);
+  if (unflushed != null) {
+    ret.addAndGet(unflushed.get());
+  }
+  for (  AtomicLong item : objs) {
+    if (item == null) {
+      continue;
+    }
+    ret.addAndGet(item.get());
+  }
+  return ret;
+}

@@ -1,0 +1,4 @@
+String client
+int clientPort
+String server
+int serverPort

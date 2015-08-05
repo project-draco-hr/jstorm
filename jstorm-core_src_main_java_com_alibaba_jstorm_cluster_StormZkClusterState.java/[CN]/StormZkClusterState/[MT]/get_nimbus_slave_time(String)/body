@@ -1,0 +1,4 @@
+{
+  String path=Cluster.NIMBUS_SLAVE_SUBTREE + Cluster.ZK_SEPERATOR + host;
+  return (String)getObject(path,false);
+}

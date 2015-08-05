@@ -1,6 +1,0 @@
-{
-  Tuple tuple=deserialize((byte[])event);
-  if (tuple != null) {
-    exeQueue.publish(tuple);
-  }
-}

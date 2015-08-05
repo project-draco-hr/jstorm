@@ -1,0 +1,6 @@
+{
+  String stormRoot=supervisor_stormdist_root(conf,topologyId);
+  String timeStampPath=stormts_path(stormRoot);
+  byte[] data=FileUtils.readFileToByteArray(new File(timeStampPath));
+  return JStormUtils.bytesToLong(data);
+}

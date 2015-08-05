@@ -1,0 +1,7 @@
+{
+  if (temp.contains(key)) {
+    ret.add(key);
+    temp.remove(key);
+  }
+  return;
+}

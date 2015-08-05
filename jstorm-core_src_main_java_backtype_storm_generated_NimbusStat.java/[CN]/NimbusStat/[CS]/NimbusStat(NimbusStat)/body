@@ -1,0 +1,8 @@
+{
+  if (other.is_set_host()) {
+    this.host=other.host;
+  }
+  if (other.is_set_uptime_secs()) {
+    this.uptime_secs=other.uptime_secs;
+  }
+}

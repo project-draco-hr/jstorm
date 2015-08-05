@@ -1,0 +1,16 @@
+{
+  double sum=0.0d;
+  long times=0l;
+  if (unflushed != null) {
+    sum=sum + unflushed.getSum();
+    times=times + unflushed.getTimes();
+  }
+  for (  Histogram.HistorgramPair item : objs) {
+    if (item == null) {
+      continue;
+    }
+    sum=sum + item.getSum();
+    times=times + item.getTimes();
+  }
+  return new Histogram.HistorgramPair(sum,times);
+}

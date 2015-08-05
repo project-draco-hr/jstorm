@@ -1,9 +1,0 @@
-{
-  List<ComponentSummary> ret=new ArrayList<ComponentSummary>();
-  ComponentSummary cs=new ComponentSummary();
-  cs.setComponentId(componentid);
-  cs.setTopologyname(summ.get_name());
-  cs.setParallelism(String.valueOf(ts.size()));
-  ret.add(cs);
-  return ret;
-}

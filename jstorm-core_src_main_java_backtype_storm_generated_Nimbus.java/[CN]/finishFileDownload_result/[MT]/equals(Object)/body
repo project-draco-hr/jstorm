@@ -1,0 +1,5 @@
+{
+  if (that == null)   return false;
+  if (that instanceof finishFileDownload_result)   return this.equals((finishFileDownload_result)that);
+  return false;
+}

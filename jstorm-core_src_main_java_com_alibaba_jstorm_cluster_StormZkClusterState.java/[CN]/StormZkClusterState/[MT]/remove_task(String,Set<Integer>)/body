@@ -1,0 +1,11 @@
+{
+  String tasksPath=Cluster.storm_task_root(topologyId);
+  Object data=getObject(tasksPath,false);
+  if (data != null) {
+    Map<Integer,TaskInfo> taskInfoMap=((Map<Integer,TaskInfo>)data);
+    for (    Integer taskId : taskIds) {
+      taskInfoMap.remove(taskId);
+    }
+    setObject(tasksPath,taskInfoMap);
+  }
+}

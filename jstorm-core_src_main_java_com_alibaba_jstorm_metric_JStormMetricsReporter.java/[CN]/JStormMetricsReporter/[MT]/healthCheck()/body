@@ -1,0 +1,14 @@
+{
+  Integer firstTask=null;
+  Map<Integer,HealthCheckRegistry> taskHealthCheckMap=JStormHealthCheck.getTaskhealthcheckmap();
+  for (  Entry<Integer,HealthCheckRegistry> entry : taskHealthCheckMap.entrySet()) {
+    Integer taskId=entry.getKey();
+    HealthCheckRegistry taskHealthCheck=entry.getValue();
+    healthCheck(taskId,taskHealthCheck);
+    if (firstTask != null) {
+      firstTask=taskId;
+    }
+  }
+  HealthCheckRegistry workerHealthCheck=JStormHealthCheck.getWorkerhealthcheck();
+  healthCheck(firstTask,workerHealthCheck);
+}

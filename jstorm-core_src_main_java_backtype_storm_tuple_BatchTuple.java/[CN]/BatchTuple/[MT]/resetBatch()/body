@@ -1,0 +1,3 @@
+{
+  batch=new ArrayList<Tuple>();
+}

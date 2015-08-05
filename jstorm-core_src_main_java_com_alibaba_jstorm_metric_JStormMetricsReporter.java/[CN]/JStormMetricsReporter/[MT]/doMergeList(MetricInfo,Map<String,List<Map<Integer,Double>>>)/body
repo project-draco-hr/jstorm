@@ -1,0 +1,8 @@
+{
+  for (  Entry<String,List<Map<Integer,Double>>> entry : mergeMap.entrySet()) {
+    String name=entry.getKey();
+    List<Map<Integer,Double>> list=entry.getValue();
+    Map<Integer,Double> merged=JStormUtils.mergeMapList(list);
+    MetricThrift.insert(workerMetricInfo,name,merged);
+  }
+}

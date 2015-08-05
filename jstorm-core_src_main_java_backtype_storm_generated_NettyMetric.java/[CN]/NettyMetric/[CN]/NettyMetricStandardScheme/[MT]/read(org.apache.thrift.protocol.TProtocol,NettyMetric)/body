@@ -1,0 +1,47 @@
+{
+  org.apache.thrift.protocol.TField schemeField;
+  iprot.readStructBegin();
+  while (true) {
+    schemeField=iprot.readFieldBegin();
+    if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+      break;
+    }
+switch (schemeField.id) {
+case 1:
+      if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+{
+          org.apache.thrift.protocol.TMap _map274=iprot.readMapBegin();
+          struct.connections=new HashMap<String,MetricInfo>(2 * _map274.size);
+          String _key275;
+          MetricInfo _val276;
+          for (int _i277=0; _i277 < _map274.size; ++_i277) {
+            _key275=iprot.readString();
+            _val276=new MetricInfo();
+            _val276.read(iprot);
+            struct.connections.put(_key275,_val276);
+          }
+          iprot.readMapEnd();
+        }
+        struct.set_connections_isSet(true);
+      }
+ else {
+        org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+      }
+    break;
+case 2:
+  if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+    struct.connectionNum=iprot.readI32();
+    struct.set_connectionNum_isSet(true);
+  }
+ else {
+    org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+  }
+break;
+default :
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+iprot.readFieldEnd();
+}
+iprot.readStructEnd();
+struct.validate();
+}

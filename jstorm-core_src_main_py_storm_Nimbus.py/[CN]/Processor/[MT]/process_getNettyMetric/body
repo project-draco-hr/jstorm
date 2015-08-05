@@ -1,0 +1,10 @@
+def process_getNettyMetric(self, seqid, iprot, oprot):
+    args = getNettyMetric_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getNettyMetric_result()
+    result.success = self._handler.getNettyMetric(args.topologyName, args.pos)
+    oprot.writeMessageBegin('getNettyMetric', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

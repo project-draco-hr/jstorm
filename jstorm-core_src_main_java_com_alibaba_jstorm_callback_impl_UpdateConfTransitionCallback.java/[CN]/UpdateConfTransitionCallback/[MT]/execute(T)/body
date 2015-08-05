@@ -1,0 +1,18 @@
+{
+  StormClusterState clusterState=data.getStormClusterState();
+  try {
+    Map userConf=(Map)args[0];
+    Map topoConf=StormConfig.read_nimbus_topology_conf(data.getConf(),topologyId);
+    topoConf.putAll(userConf);
+    StormConfig.write_nimbus_topology_conf(data.getConf(),topologyId,topoConf);
+    Assignment assignment=clusterState.assignment_info(topologyId,null);
+    assignment.setAssignmentType(AssignmentType.Config);
+    assignment.updateTimeStamp();
+    clusterState.set_assignment(topologyId,assignment);
+    LOG.info("Successfully update new config to ZK for " + topologyId);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to update user configuartion.",e);
+  }
+  return currentStatus;
+}

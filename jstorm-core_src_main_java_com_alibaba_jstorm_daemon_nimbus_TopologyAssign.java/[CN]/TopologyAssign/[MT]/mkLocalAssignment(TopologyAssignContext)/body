@@ -1,0 +1,17 @@
+{
+  Set<ResourceWorkerSlot> result=new HashSet<ResourceWorkerSlot>();
+  Map<String,SupervisorInfo> cluster=context.getCluster();
+  if (cluster.size() != 1)   throw new RuntimeException();
+  SupervisorInfo localSupervisor=null;
+  String supervisorId=null;
+  for (  Entry<String,SupervisorInfo> entry : cluster.entrySet()) {
+    supervisorId=entry.getKey();
+    localSupervisor=entry.getValue();
+  }
+  int port=localSupervisor.getAvailableWorkerPorts().iterator().next();
+  ResourceWorkerSlot worker=new ResourceWorkerSlot(supervisorId,port);
+  worker.setTasks(new HashSet<Integer>(context.getAllTaskIds()));
+  worker.setHostname(localSupervisor.getHostName());
+  result.add(worker);
+  return result;
+}

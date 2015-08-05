@@ -1,0 +1,15 @@
+{
+  Map<Integer,TkHbCacheTime> taskHBs=data.getTaskHeartbeatsCache(topologyId,true);
+  Map<Integer,Integer> taskStartTimes=assignment.getTaskStartTimeSecs();
+  for (  Entry<Integer,Integer> entry : taskStartTimes.entrySet()) {
+    Integer taskId=entry.getKey();
+    Integer taskStartTime=entry.getValue();
+    TkHbCacheTime taskHB=taskHBs.get(taskId);
+    if (taskHB == null) {
+      taskHB=new TkHbCacheTime();
+      taskHBs.put(taskId,taskHB);
+    }
+    taskHB.setTaskAssignedTime(taskStartTime);
+  }
+  return;
+}

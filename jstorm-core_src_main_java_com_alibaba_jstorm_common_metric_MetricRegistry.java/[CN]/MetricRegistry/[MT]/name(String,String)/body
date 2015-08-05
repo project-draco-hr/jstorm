@@ -1,0 +1,10 @@
+{
+  final StringBuilder builder=new StringBuilder();
+  append(builder,name);
+  if (names != null) {
+    for (    String s : names) {
+      append(builder,s);
+    }
+  }
+  return builder.toString();
+}

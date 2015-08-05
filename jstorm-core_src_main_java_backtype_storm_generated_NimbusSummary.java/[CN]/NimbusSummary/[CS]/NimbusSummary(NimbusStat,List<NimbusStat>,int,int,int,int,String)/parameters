@@ -1,0 +1,7 @@
+NimbusStat nimbus_master
+List<NimbusStat> nimbus_slaves
+int supervisor_num
+int total_port_num
+int used_port_num
+int free_port_num
+String version

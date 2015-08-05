@@ -1,0 +1,5 @@
+{
+  Meter ret=(Meter)Builder.mkInstance(Builder.METER);
+  registerWorkerMetric(ret,name,args);
+  return ret;
+}

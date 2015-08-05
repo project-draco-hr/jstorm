@@ -1,0 +1,6 @@
+{
+  Map<String,String> parameterMap=new HashMap<String,String>();
+  parameterMap.put(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_CONF);
+  parameterMap.put(UIDef.CONF_TYPE,UIDef.CONF_TYPE_NIMBUS);
+  return parameterMap;
+}

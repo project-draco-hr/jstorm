@@ -1,0 +1,6 @@
+Map conf
+ThriftConnectionType type
+String host
+Integer port
+Integer timeout
+String asUser

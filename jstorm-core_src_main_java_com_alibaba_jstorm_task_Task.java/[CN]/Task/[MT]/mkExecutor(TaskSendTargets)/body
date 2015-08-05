@@ -1,0 +1,5 @@
+{
+  ITaskReportErr reportError=new TaskReportError(zkCluster,topologyid,taskid);
+  TaskReportErrorAndDie reportErrorDie=new TaskReportErrorAndDie(reportError,workHalt);
+  return mk_executors(sendTargets,reportErrorDie);
+}

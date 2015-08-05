@@ -1,0 +1,5 @@
+{
+  ByteBuffer buffer=ByteBuffer.allocate(Long.SIZE);
+  buffer.putLong(x);
+  return buffer.array();
+}

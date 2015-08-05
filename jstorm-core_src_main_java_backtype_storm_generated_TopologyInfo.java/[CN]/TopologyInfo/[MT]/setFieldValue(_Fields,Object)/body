@@ -1,0 +1,36 @@
+{
+switch (field) {
+case TOPOLOGY:
+    if (value == null) {
+      unset_topology();
+    }
+ else {
+      set_topology((TopologySummary)value);
+    }
+  break;
+case COMPONENTS:
+if (value == null) {
+  unset_components();
+}
+ else {
+  set_components((List<ComponentSummary>)value);
+}
+break;
+case TASKS:
+if (value == null) {
+unset_tasks();
+}
+ else {
+set_tasks((List<TaskSummary>)value);
+}
+break;
+case METRICS:
+if (value == null) {
+unset_metrics();
+}
+ else {
+set_metrics((TopologyMetric)value);
+}
+break;
+}
+}

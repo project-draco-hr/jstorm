@@ -1,0 +1,2 @@
+org.apache.thrift.protocol.TProtocol iprot
+beginLibUpload_args struct

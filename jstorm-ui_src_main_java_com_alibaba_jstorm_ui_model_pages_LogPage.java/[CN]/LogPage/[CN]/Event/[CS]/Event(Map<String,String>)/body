@@ -1,0 +1,29 @@
+{
+  clusterName=paramMap.get(UIDef.CLUSTER);
+  host=paramMap.get(UIDef.HOST);
+  logServerPort=paramMap.get(UIDef.LOG_SERVER_PORT);
+  logName=paramMap.get(UIDef.LOG_NAME);
+  topologyId=paramMap.get(UIDef.TOPOLOGY);
+  workerPort=paramMap.get(UIDef.PORT);
+  pos=paramMap.get(UIDef.POS);
+  if (host == null) {
+    throw new IllegalArgumentException("Please set host");
+  }
+ else   if (logServerPort == null) {
+    throw new IllegalArgumentException("Please set log server's port");
+  }
+  if (StringUtils.isBlank(logName) == false) {
+    return;
+  }
+  if (topologyId == null || workerPort == null) {
+    throw new IllegalArgumentException("Please set log fileName or topologyId-workerPort");
+  }
+  String topologyName;
+  try {
+    topologyName=Common.topologyIdToName(topologyId);
+  }
+ catch (  Exception e) {
+    throw new IllegalArgumentException("Please set log fileName or topologyId-workerPort");
+  }
+  logName=topologyName + "-worker-" + workerPort+ ".log";
+}

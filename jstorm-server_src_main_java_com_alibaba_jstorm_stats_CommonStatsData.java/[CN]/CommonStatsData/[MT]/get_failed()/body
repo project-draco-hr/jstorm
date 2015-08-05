@@ -1,5 +1,0 @@
-{
-  Map<Integer,Object> statics=staticsMap.get(StaticsType.failed);
-  GlobalStreamId streamIdSample=new GlobalStreamId("","");
-  return convertKey(statics,streamIdSample,Long.valueOf(0));
-}

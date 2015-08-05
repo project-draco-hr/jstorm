@@ -1,0 +1,10 @@
+{
+  ColumnFamilyHandle cfHandler=null;
+  Entry<Integer,ColumnFamilyHandle> ceilingEntry=windowHandlers.ceilingEntry(timeoutSecond);
+  if (ceilingEntry != null) {
+    return ceilingEntry;
+  }
+ else {
+    return windowHandlers.firstEntry();
+  }
+}

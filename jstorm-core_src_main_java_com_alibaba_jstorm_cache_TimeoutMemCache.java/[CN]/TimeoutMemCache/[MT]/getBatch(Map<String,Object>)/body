@@ -1,0 +1,7 @@
+{
+  for (  String key : map.keySet()) {
+    Object obj=get(key);
+    map.put(key,obj);
+  }
+  return;
+}

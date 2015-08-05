@@ -1,0 +1,9 @@
+{
+  this.topology_id=null;
+  this.supervisor_id=null;
+  set_port_isSet(false);
+  this.port=0;
+  this.workerMetric=null;
+  this.nettyMetric=null;
+  this.taskMetric=null;
+}

@@ -2,6 +2,6 @@
   TopologyBuilder builder=SetBuilder();
   LocalCluster cluster=new LocalCluster();
   cluster.submitTopology(topologyName,conf,builder.createTopology());
-  Thread.sleep(600000);
+  Thread.sleep(60000);
   cluster.shutdown();
 }

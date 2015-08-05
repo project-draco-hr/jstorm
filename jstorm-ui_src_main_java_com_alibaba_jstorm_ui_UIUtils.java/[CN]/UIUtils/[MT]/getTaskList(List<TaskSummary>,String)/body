@@ -1,9 +1,0 @@
-{
-  List<TaskSummary> ret=new ArrayList<TaskSummary>();
-  for (  TaskSummary task : taskSummaries) {
-    if (componentId.equals(task.get_component_id())) {
-      ret.add(task);
-    }
-  }
-  return ret;
-}

@@ -1,0 +1,18 @@
+{
+  this.task=task;
+  this.taskId=taskId;
+  this.idStr=taskName;
+  this.topologyContext=topologyContext;
+  this.innerTaskTransfer=innerTaskTransfer;
+  this.taskStatus=taskStatus;
+  this.isDebugRecv=ConfigExtension.isTopologyDebugRecvTuple(stormConf);
+  int queueSize=JStormUtils.parseInt(stormConf.get(Config.TOPOLOGY_EXECUTOR_RECEIVE_BUFFER_SIZE),256);
+  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(stormConf);
+  this.deserializeQueue=DisruptorQueue.mkInstance("TaskDeserialize",ProducerType.MULTI,queueSize,waitStrategy);
+  setDeserializeThread();
+  this.deserializer=new KryoTupleDeserializer(stormConf,topologyContext);
+  deserializeTimer=JStormMetrics.registerTaskHistogram(taskId,MetricDef.DESERIALIZE_TIME);
+  QueueGauge deserializeQueueGauge=new QueueGauge(idStr + MetricDef.DESERIALIZE_QUEUE,deserializeQueue);
+  JStormMetrics.registerTaskGauge(deserializeQueueGauge,taskId,MetricDef.DESERIALIZE_QUEUE);
+  JStormHealthCheck.registerTaskHealthCheck(taskId,MetricDef.DESERIALIZE_QUEUE,deserializeQueueGauge);
+}

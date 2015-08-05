@@ -1,8 +1,0 @@
-{
-  try {
-    return new NimbusClient(conf);
-  }
- catch (  Exception ex) {
-    throw new RuntimeException(ex);
-  }
-}

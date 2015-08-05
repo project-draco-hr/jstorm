@@ -1,0 +1,3 @@
+{
+  super(task,taskId,stormConf,topologyContext,innerTaskTransfer,taskStatus,taskName);
+}

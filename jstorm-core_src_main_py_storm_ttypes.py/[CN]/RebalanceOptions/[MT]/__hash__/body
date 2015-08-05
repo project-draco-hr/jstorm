@@ -1,0 +1,6 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.wait_secs))
+    value = ((value * 31) ^ hash(self.reassign))
+    value = ((value * 31) ^ hash(self.conf))
+    return value

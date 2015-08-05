@@ -1,0 +1,13 @@
+{
+  ComponentCommon common=new ComponentCommon();
+  common.set_inputs(new HashMap<GlobalStreamId,Grouping>());
+  if (parallelism != null) {
+    common.set_parallelism_hint(parallelism.intValue());
+  }
+ else {
+    common.set_parallelism_hint(1);
+  }
+  Map conf=component.getComponentConfiguration();
+  if (conf != null)   common.set_json_conf(JSONValue.toJSONString(conf));
+  _commons.put(id,common);
+}

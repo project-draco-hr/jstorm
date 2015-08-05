@@ -1,4 +1,0 @@
-{
-  super(workerData.getSendingQueue(),timer,DrainerRunable.class.getSimpleName(),workerData.getActive());
-  Metrics.registerQueue(null,MetricDef.DRAINER_QUEUE,queue,null,Metrics.MetricType.WORKER);
-}

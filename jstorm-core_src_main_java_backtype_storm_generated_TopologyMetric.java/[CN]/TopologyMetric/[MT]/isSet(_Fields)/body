@@ -1,0 +1,16 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TOPOLOGY_METRIC:
+    return is_set_topologyMetric();
+case COMPONENT_METRIC:
+  return is_set_componentMetric();
+case WORKER_METRIC:
+return is_set_workerMetric();
+case TASK_METRIC:
+return is_set_taskMetric();
+}
+throw new IllegalStateException();
+}

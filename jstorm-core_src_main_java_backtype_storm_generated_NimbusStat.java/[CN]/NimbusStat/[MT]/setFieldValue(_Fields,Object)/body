@@ -1,0 +1,20 @@
+{
+switch (field) {
+case HOST:
+    if (value == null) {
+      unset_host();
+    }
+ else {
+      set_host((String)value);
+    }
+  break;
+case UPTIME_SECS:
+if (value == null) {
+  unset_uptime_secs();
+}
+ else {
+  set_uptime_secs((String)value);
+}
+break;
+}
+}

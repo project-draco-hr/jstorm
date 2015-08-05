@@ -1,0 +1,5 @@
+{
+  this.isServer=isServer;
+  this.localPort=ConfigExtension.getLocalWorkerPort(conf);
+  this.localIp=NetWorkUtils.ip();
+}

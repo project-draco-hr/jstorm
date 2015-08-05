@@ -1,0 +1,10 @@
+{
+  if (unflushed == null) {
+    return;
+  }
+  for (  RollingWindow<V> rollingWindow : rollingWindows) {
+    rollingWindow.updateBatch(unflushed);
+  }
+  allWindow.updateBatch(unflushed);
+  unflushed=null;
+}

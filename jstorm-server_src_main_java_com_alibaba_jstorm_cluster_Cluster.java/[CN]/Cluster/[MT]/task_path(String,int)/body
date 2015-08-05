@@ -1,3 +1,0 @@
-{
-  return storm_task_root(topology_id) + ZK_SEPERATOR + task_id;
-}

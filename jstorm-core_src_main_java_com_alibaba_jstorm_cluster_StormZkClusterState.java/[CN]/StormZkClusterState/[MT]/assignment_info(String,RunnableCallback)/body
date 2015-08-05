@@ -1,0 +1,7 @@
+{
+  if (callback != null) {
+    assignment_info_callback.put(topologyId,callback);
+  }
+  String assgnmentPath=Cluster.assignment_path(topologyId);
+  return (Assignment)getObject(assgnmentPath,callback != null);
+}

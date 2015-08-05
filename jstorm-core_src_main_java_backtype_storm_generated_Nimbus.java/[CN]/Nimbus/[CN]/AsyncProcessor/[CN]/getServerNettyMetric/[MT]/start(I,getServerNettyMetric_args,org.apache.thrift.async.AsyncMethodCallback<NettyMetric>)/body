@@ -1,0 +1,3 @@
+{
+  iface.getServerNettyMetric(args.topologyName,args.serverName,resultHandler);
+}

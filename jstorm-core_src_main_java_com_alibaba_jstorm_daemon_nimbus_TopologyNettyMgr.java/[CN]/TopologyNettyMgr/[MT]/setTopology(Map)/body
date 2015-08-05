@@ -1,0 +1,11 @@
+{
+  String topologyName=(String)conf.get(Config.TOPOLOGY_NAME);
+  if (topologyName == null) {
+    LOG.info("No topologyName setting");
+    return;
+  }
+  boolean isEnable=getTopology(conf);
+  setting.put(topologyName,isEnable);
+  LOG.info("{} netty metrics setting is {}",topologyName,isEnable);
+  return;
+}

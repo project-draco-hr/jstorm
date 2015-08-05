@@ -1,0 +1,16 @@
+{
+  long pos=index * event.pageSize;
+  PageIndex page=new PageIndex();
+  LinkData linkData=new LinkData();
+  page.linkData=linkData;
+  linkData.setUrl(event.url);
+  linkData.setText(text);
+  Map<String,String> paramMap=new HashMap<String,String>();
+  paramMap.putAll(event.paramMap);
+  paramMap.put(UIDef.POS,String.valueOf(pos));
+  linkData.setParamMap(paramMap);
+  if (isActive == true) {
+    page.status="active";
+  }
+  ret.add(page);
+}

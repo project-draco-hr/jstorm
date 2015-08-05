@@ -1,0 +1,3 @@
+MetricInfo metricInfo
+List<String> headers
+Integer window

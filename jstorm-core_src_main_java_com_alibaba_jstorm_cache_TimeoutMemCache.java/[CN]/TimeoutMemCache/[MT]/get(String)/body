@@ -1,0 +1,9 @@
+{
+  for (  TimeCacheMap<String,Object> cacheWindow : cacheWindows.values()) {
+    Object ret=cacheWindow.get(key);
+    if (ret != null) {
+      return ret;
+    }
+  }
+  return null;
+}

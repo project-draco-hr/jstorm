@@ -1,0 +1,11 @@
+{
+  JStormMetrics.registerWorkerGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return Double.valueOf(batchQueue.size());
+    }
+  }
+,MetricDef.NETTY_CLI_SYNC_BATCH_QUEUE,nettyConnection.toString());
+  QueueGauge cacheQueueGauge=new QueueGauge(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE + nettyConnection.toString(),disruptorQueue);
+  JStormMetrics.registerWorkerGauge(cacheQueueGauge,MetricDef.NETTY_CLI_SYNC_DISR_QUEUE,nettyConnection.toString());
+  JStormHealthCheck.registerWorkerHealthCheck(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE + ":" + nettyConnection.toString(),cacheQueueGauge);
+}

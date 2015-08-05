@@ -1,0 +1,18 @@
+{
+  StormTopology rawTmp=null;
+  StormTopology sysTmp=null;
+  try {
+    rawTmp=StormConfig.read_supervisor_topology_code(conf,topologyId);
+    sysTmp=Common.system_topology(stormConf,rawTopology);
+  }
+ catch (  IOException e) {
+    LOG.error("Failed to read supervisor topology code for " + topologyId,e);
+    return;
+  }
+catch (  InvalidTopologyException e) {
+    LOG.error("Failed to update sysTopology for " + topologyId,e);
+    return;
+  }
+  updateTopology(rawTopology,rawTmp);
+  updateTopology(sysTopology,sysTmp);
+}

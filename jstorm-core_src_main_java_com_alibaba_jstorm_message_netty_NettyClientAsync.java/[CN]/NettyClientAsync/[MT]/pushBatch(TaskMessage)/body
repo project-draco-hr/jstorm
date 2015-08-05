@@ -1,0 +1,29 @@
+{
+  if (TaskMessage.isEmpty(message)) {
+    return;
+  }
+  MessageBatch messageBatch=messageBatchRef.getAndSet(null);
+  if (null == messageBatch) {
+    messageBatch=new MessageBatch(messageBatchSize);
+  }
+  messageBatch.add(message);
+  Channel channel=isChannelReady();
+  if (channel == null) {
+    handleFailedChannel(messageBatch);
+    return;
+  }
+  if (messageBatch.isFull()) {
+    flushRequest(channel,messageBatch);
+    return;
+  }
+  if (directlySend) {
+    flushRequest(channel,messageBatch);
+  }
+ else {
+    if (messageBatchRef.compareAndSet(null,messageBatch)) {
+      flush_later.set(true);
+    }
+ else     LOG.error("MessageBatch will be lost. This should not happen.");
+  }
+  return;
+}

@@ -1,0 +1,13 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_spouts=true && (is_set_spouts());
+  list.add(present_spouts);
+  if (present_spouts)   list.add(spouts);
+  boolean present_bolts=true && (is_set_bolts());
+  list.add(present_bolts);
+  if (present_bolts)   list.add(bolts);
+  boolean present_state_spouts=true && (is_set_state_spouts());
+  list.add(present_state_spouts);
+  if (present_state_spouts)   list.add(state_spouts);
+  return list.hashCode();
+}

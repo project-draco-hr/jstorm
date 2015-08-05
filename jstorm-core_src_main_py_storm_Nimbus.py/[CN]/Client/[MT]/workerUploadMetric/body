@@ -1,0 +1,4 @@
+def workerUploadMetric(self, uploadMetrics):
+    '\n    Parameters:\n     - uploadMetrics\n    '
+    self.send_workerUploadMetric(uploadMetrics)
+    self.recv_workerUploadMetric()

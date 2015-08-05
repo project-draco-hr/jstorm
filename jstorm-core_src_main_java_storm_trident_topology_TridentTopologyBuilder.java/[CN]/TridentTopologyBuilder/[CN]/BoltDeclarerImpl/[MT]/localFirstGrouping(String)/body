@@ -1,0 +1,15 @@
+{
+  addDeclaration(new InputDeclaration(){
+    @Override public void declare(    InputDeclarer declarer){
+      declarer.localFirstGrouping(componentId);
+    }
+    @Override public String getComponent(){
+      return componentId;
+    }
+    @Override public String getStream(){
+      return null;
+    }
+  }
+);
+  return this;
+}

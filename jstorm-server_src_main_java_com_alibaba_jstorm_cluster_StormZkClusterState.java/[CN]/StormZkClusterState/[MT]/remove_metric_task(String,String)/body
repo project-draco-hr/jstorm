@@ -1,4 +1,0 @@
-{
-  String monitorTaskPath=Cluster.monitor_task_path(topologyId,taskId);
-  cluster_state.delete_node(monitorTaskPath);
-}

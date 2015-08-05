@@ -1,6 +1,0 @@
-{
-  sendTps=0.0;
-  recvTps=0.0;
-  failed=0l;
-  latency=0.0;
-}

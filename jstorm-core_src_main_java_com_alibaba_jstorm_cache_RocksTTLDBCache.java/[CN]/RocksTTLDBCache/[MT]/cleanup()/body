@@ -1,0 +1,10 @@
+{
+  LOG.info("Begin to close rocketDb of {}",rootDir);
+  for (  ColumnFamilyHandle columnFamilyHandle : windowHandlers.values()) {
+    columnFamilyHandle.dispose();
+  }
+  if (ttlDB != null) {
+    ttlDB.close();
+  }
+  LOG.info("Successfully closed rocketDb of {}",rootDir);
+}

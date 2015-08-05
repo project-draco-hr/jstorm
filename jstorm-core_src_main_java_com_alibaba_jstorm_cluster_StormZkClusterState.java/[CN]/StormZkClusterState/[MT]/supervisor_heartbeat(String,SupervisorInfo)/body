@@ -1,0 +1,4 @@
+{
+  String supervisorPath=Cluster.supervisor_path(supervisorId);
+  setTempObject(supervisorPath,info);
+}

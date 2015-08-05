@@ -1,0 +1,10 @@
+{
+  try {
+    return Utils.getVersion();
+  }
+ catch (  Exception e) {
+    String errMsg="!!! Binary has been changed, please restart Nimbus !!! ";
+    LOG.error(errMsg,e);
+    throw new TException(errMsg,e);
+  }
+}

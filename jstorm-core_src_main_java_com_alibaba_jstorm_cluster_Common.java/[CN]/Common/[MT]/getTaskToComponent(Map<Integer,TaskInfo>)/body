@@ -1,0 +1,7 @@
+{
+  Map<Integer,String> ret=new TreeMap<Integer,String>();
+  for (  Entry<Integer,TaskInfo> entry : taskInfoMap.entrySet()) {
+    ret.put(entry.getKey(),entry.getValue().getComponentId());
+  }
+  return ret;
+}

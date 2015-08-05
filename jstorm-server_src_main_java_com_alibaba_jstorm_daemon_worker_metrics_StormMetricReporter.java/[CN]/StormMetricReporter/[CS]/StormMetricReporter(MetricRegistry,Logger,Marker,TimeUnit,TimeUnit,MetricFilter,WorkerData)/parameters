@@ -1,7 +1,0 @@
-MetricRegistry registry
-Logger logger
-Marker marker
-TimeUnit rateUnit
-TimeUnit durationUnit
-MetricFilter filter
-WorkerData workerData

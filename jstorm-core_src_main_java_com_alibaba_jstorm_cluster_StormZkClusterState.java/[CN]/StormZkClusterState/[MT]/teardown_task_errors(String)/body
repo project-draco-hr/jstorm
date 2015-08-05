@@ -1,0 +1,9 @@
+{
+  try {
+    String taskerrPath=Cluster.taskerror_storm_root(topologyId);
+    deleteObject(taskerrPath);
+  }
+ catch (  Exception e) {
+    LOG.error("Could not teardown errors for " + topologyId,e);
+  }
+}

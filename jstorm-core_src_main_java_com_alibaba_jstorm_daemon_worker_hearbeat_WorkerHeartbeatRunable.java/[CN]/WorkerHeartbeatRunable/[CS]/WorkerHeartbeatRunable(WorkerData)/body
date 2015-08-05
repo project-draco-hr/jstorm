@@ -1,0 +1,12 @@
+{
+  this.workerData=workerData;
+  this.conf=workerData.getStormConf();
+  this.worker_id=workerData.getWorkerId();
+  this.port=workerData.getPort();
+  this.topologyId=workerData.getTopologyId();
+  this.task_ids=new CopyOnWriteArraySet<Integer>(workerData.getTaskids());
+  this.shutdown=workerData.getShutdown();
+  String key=Config.WORKER_HEARTBEAT_FREQUENCY_SECS;
+  frequence=JStormUtils.parseInt(conf.get(key),10);
+  this.workerStates=new HashMap<String,LocalState>();
+}

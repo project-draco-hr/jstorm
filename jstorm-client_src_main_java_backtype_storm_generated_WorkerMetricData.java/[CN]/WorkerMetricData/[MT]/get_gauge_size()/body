@@ -1,3 +1,0 @@
-{
-  return (this.gauge == null) ? 0 : this.gauge.size();
-}

@@ -1,0 +1,11 @@
+{
+  MetricWindow metricWindow=metric.get_baseMetric().get(key);
+  if (metricWindow == null) {
+    return String.valueOf("000.000");
+  }
+  Double value=metricWindow.get_metricWindow().get(window);
+  if (value == null) {
+    return String.valueOf("000.000");
+  }
+  return JStormUtils.formatSimpleDouble(value);
+}

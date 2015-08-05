@@ -1,0 +1,13 @@
+{
+  if (event == null) {
+    return;
+  }
+  long start=System.nanoTime();
+  try {
+    handleEvent(event,endOfBatch);
+  }
+  finally {
+    long end=System.nanoTime();
+    timer.update((end - start) / 1000000.0d);
+  }
+}

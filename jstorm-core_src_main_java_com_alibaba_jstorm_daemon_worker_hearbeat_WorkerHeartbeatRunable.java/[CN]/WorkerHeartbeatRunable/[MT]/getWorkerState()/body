@@ -1,0 +1,8 @@
+{
+  LocalState state=workerStates.get(worker_id);
+  if (state == null) {
+    state=StormConfig.worker_state(conf,worker_id);
+    workerStates.put(worker_id,state);
+  }
+  return state;
+}

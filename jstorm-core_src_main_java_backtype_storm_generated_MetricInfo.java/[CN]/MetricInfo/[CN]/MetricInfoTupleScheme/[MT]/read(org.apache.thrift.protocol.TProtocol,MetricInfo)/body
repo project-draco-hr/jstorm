@@ -1,0 +1,67 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+{
+    org.apache.thrift.protocol.TMap _map146=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.baseMetric=new HashMap<String,MetricWindow>(2 * _map146.size);
+    String _key147;
+    MetricWindow _val148;
+    for (int _i149=0; _i149 < _map146.size; ++_i149) {
+      _key147=iprot.readString();
+      _val148=new MetricWindow();
+      _val148.read(iprot);
+      struct.baseMetric.put(_key147,_val148);
+    }
+  }
+  struct.set_baseMetric_isSet(true);
+  BitSet incoming=iprot.readBitSet(2);
+  if (incoming.get(0)) {
+{
+      org.apache.thrift.protocol.TMap _map150=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,iprot.readI32());
+      struct.inputMetric=new HashMap<String,Map<String,MetricWindow>>(2 * _map150.size);
+      String _key151;
+      Map<String,MetricWindow> _val152;
+      for (int _i153=0; _i153 < _map150.size; ++_i153) {
+        _key151=iprot.readString();
+{
+          org.apache.thrift.protocol.TMap _map154=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+          _val152=new HashMap<String,MetricWindow>(2 * _map154.size);
+          String _key155;
+          MetricWindow _val156;
+          for (int _i157=0; _i157 < _map154.size; ++_i157) {
+            _key155=iprot.readString();
+            _val156=new MetricWindow();
+            _val156.read(iprot);
+            _val152.put(_key155,_val156);
+          }
+        }
+        struct.inputMetric.put(_key151,_val152);
+      }
+    }
+    struct.set_inputMetric_isSet(true);
+  }
+  if (incoming.get(1)) {
+{
+      org.apache.thrift.protocol.TMap _map158=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,iprot.readI32());
+      struct.outputMetric=new HashMap<String,Map<String,MetricWindow>>(2 * _map158.size);
+      String _key159;
+      Map<String,MetricWindow> _val160;
+      for (int _i161=0; _i161 < _map158.size; ++_i161) {
+        _key159=iprot.readString();
+{
+          org.apache.thrift.protocol.TMap _map162=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+          _val160=new HashMap<String,MetricWindow>(2 * _map162.size);
+          String _key163;
+          MetricWindow _val164;
+          for (int _i165=0; _i165 < _map162.size; ++_i165) {
+            _key163=iprot.readString();
+            _val164=new MetricWindow();
+            _val164.read(iprot);
+            _val160.put(_key163,_val164);
+          }
+        }
+        struct.outputMetric.put(_key159,_val160);
+      }
+    }
+    struct.set_outputMetric_isSet(true);
+  }
+}

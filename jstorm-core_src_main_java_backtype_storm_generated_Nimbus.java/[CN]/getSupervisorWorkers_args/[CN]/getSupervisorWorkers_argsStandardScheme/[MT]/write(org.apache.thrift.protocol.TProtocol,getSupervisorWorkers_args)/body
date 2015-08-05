@@ -1,0 +1,11 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.host != null) {
+    oprot.writeFieldBegin(HOST_FIELD_DESC);
+    oprot.writeString(struct.host);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

@@ -1,6 +1,0 @@
-{
-  if (this.meter == null) {
-    this.meter=new HashMap<String,Double>();
-  }
-  this.meter.put(key,val);
-}

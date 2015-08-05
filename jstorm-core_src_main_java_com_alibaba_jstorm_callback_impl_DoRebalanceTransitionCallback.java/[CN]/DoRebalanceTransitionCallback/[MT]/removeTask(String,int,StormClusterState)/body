@@ -1,0 +1,8 @@
+{
+  Set<Integer> taskIds=new HashSet<Integer>(taskId);
+  clusterState.remove_task(topologyid,taskIds);
+  Map<Integer,TkHbCacheTime> TkHbs=data.getTaskHeartbeatsCache(topologyid,false);
+  if (TkHbs != null) {
+    TkHbs.remove(taskId);
+  }
+}

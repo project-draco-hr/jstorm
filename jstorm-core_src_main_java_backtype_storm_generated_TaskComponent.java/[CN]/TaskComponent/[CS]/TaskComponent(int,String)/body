@@ -1,0 +1,6 @@
+{
+  this();
+  this.taskId=taskId;
+  set_taskId_isSet(true);
+  this.component=component;
+}

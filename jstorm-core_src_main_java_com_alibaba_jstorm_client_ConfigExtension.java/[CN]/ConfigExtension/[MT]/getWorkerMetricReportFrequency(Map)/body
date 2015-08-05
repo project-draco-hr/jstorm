@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(WORKER_MERTRIC_REPORT_FREQUENCY),60);
+}

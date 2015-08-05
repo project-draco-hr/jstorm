@@ -1,0 +1,8 @@
+{
+  int ret=0;
+  ret=ret | (bytes[offset++] & 0x000000FF);
+  ret=ret | ((bytes[offset++] << 8) & 0x0000FF00);
+  ret=ret | ((bytes[offset++] << 16) & 0x00FF0000);
+  ret=ret | ((bytes[offset] << 24) & 0xFF000000);
+  return ret;
+}

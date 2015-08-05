@@ -1,0 +1,3 @@
+{
+  setObject(Cluster.assignment_bak_path(topologyName),info);
+}

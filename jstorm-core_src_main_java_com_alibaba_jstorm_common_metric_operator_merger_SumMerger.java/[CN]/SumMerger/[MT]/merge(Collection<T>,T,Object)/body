@@ -1,0 +1,7 @@
+{
+  T ret=unflushed;
+  for (  T obj : objs) {
+    ret=(T)JStormUtils.add(ret,obj);
+  }
+  return ret;
+}

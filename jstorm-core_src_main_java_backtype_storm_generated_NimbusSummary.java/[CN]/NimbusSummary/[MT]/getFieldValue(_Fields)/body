@@ -1,0 +1,19 @@
+{
+switch (field) {
+case NIMBUS_MASTER:
+    return get_nimbus_master();
+case NIMBUS_SLAVES:
+  return get_nimbus_slaves();
+case SUPERVISOR_NUM:
+return Integer.valueOf(get_supervisor_num());
+case TOTAL_PORT_NUM:
+return Integer.valueOf(get_total_port_num());
+case USED_PORT_NUM:
+return Integer.valueOf(get_used_port_num());
+case FREE_PORT_NUM:
+return Integer.valueOf(get_free_port_num());
+case VERSION:
+return get_version();
+}
+throw new IllegalStateException();
+}

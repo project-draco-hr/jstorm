@@ -1,0 +1,22 @@
+{
+  String clusterName=parameterMap.get(UIDef.CLUSTER);
+  if (StringUtils.isBlank(clusterName) == true) {
+    clusterName=DEFAULT;
+  }
+  NimbusClient client=clientManager.get(clusterName);
+  if (client != null) {
+    try {
+      client.getClient().getVersion();
+    }
+ catch (    Exception e) {
+      LOG.info("Nimbus has been restarted, it begin to reconnect");
+      client=null;
+    }
+  }
+  if (client != null) {
+    return client;
+  }
+  client=getNimbusClient(clusterName);
+  clientManager.put(clusterName,client);
+  return client;
+}

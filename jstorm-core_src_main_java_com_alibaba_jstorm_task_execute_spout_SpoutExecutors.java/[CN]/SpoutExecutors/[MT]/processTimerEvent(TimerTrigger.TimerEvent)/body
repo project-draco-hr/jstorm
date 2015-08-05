@@ -1,0 +1,25 @@
+{
+switch (event.getOpCode()) {
+case TimerConstants.ROTATING_MAP:
+{
+      Map<Long,TupleInfo> timeoutMap=pending.rotate();
+      for (      java.util.Map.Entry<Long,TupleInfo> entry : timeoutMap.entrySet()) {
+        TupleInfo tupleInfo=entry.getValue();
+        FailSpoutMsg fail=new FailSpoutMsg(entry.getKey(),spout,(TupleInfo)tupleInfo,task_stats,isDebug);
+        fail.run();
+      }
+      break;
+    }
+case TimerConstants.TASK_HEARTBEAT:
+{
+    Integer taskId=(Integer)event.getMsg();
+    TaskHeartbeatRunable.updateTaskHbStats(taskId,task);
+    break;
+  }
+default :
+{
+  LOG.warn("Receive unsupported timer event, opcode=" + event.getOpCode());
+  break;
+}
+}
+}

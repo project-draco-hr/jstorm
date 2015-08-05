@@ -1,0 +1,9 @@
+{
+  Map conf=UIUtils.readUiConfig();
+  if (DEFAULT.equals(clusterName)) {
+  }
+ else   if (StringUtils.isBlank(clusterName) == false) {
+    UIUtils.getClusterInfoByName(conf,clusterName);
+  }
+  return NimbusClient.getConfiguredClient(conf);
+}

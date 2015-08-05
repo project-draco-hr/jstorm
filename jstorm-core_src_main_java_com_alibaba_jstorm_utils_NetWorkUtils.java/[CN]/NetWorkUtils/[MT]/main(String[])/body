@@ -1,0 +1,5 @@
+{
+  List<String> servers=new ArrayList<String>();
+  servers.add("localhost");
+  System.out.println(host2Ip(servers));
+}

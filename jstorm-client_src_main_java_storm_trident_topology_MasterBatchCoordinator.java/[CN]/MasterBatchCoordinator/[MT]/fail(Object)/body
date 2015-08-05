@@ -1,3 +1,0 @@
-{
-  sync(Operation.FAIL,(TransactionAttempt)msgId);
-}

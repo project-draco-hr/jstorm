@@ -1,0 +1,35 @@
+{
+  Map<String,SpoutSpec> oldSpouts=oldTopology.get_spouts();
+  Map<String,SpoutSpec> spouts=newTopology.get_spouts();
+  for (  Entry<String,SpoutSpec> entry : oldSpouts.entrySet()) {
+    String spoutName=entry.getKey();
+    SpoutSpec oldSpout=entry.getValue();
+    SpoutSpec spout=spouts.get(spoutName);
+    if (oldSpout.get_common().get_parallelism_hint() > spout.get_common().get_parallelism_hint()) {
+      int removedTaskNum=oldSpout.get_common().get_parallelism_hint() - spout.get_common().get_parallelism_hint();
+      TreeSet<Integer> taskIds=new TreeSet<Integer>(clusterState.task_ids_by_componentId(topologyid,spoutName));
+      Iterator<Integer> descendIterator=taskIds.descendingIterator();
+      while (--removedTaskNum >= 0) {
+        int taskId=descendIterator.next();
+        removeTask(topologyid,taskId,clusterState);
+        LOG.info("Remove spout task, taskId=" + taskId + " for "+ spoutName);
+      }
+    }
+ else     if (oldSpout.get_common().get_parallelism_hint() == spout.get_common().get_parallelism_hint()) {
+      continue;
+    }
+ else {
+      int delta=spout.get_common().get_parallelism_hint() - oldSpout.get_common().get_parallelism_hint();
+      Map<Integer,TaskInfo> taskInfoMap=new HashMap<Integer,TaskInfo>();
+      for (int i=1; i <= delta; i++) {
+        cnt++;
+        TaskInfo taskInfo=new TaskInfo((String)entry.getKey(),"spout");
+        taskInfoMap.put(cnt,taskInfo);
+        newTasks.add(cnt);
+        LOG.info("Setup new spout task, taskId=" + cnt + " for "+ spoutName);
+      }
+      clusterState.add_task(topologyid,taskInfoMap);
+    }
+  }
+  return cnt;
+}

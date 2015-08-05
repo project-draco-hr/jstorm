@@ -1,0 +1,2 @@
+def __init__(self, metricWindow=None):
+    self.metricWindow = metricWindow

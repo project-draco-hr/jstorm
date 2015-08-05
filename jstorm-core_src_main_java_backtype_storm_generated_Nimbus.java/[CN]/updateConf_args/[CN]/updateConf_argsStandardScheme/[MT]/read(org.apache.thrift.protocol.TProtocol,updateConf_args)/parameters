@@ -1,0 +1,2 @@
+org.apache.thrift.protocol.TProtocol iprot
+updateConf_args struct

@@ -1,6 +1,0 @@
-{
-  wsumm=new ArrayList<WorkerSumm>();
-  for (  WorkerSummary workerSummary : workerSummaries) {
-    wsumm.add(new WorkerSumm(workerSummary));
-  }
-}

@@ -1,0 +1,4 @@
+{
+  this.gauge=gauge;
+  init();
+}

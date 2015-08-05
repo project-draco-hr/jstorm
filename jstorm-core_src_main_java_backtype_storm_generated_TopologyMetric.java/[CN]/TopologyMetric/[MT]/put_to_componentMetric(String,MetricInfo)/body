@@ -1,0 +1,6 @@
+{
+  if (this.componentMetric == null) {
+    this.componentMetric=new HashMap<String,MetricInfo>();
+  }
+  this.componentMetric.put(key,val);
+}

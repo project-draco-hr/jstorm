@@ -1,0 +1,12 @@
+{
+  this.conf=conf;
+  this.supervisorId=supervisorId;
+  this.shutdown=new AtomicBoolean(false);
+  this.threads=threads;
+  this.processesEventManager=processesEventManager;
+  this.eventManager=eventManager;
+  this.httpserver=httpserver;
+  this.stormClusterState=stormClusterState;
+  this.workerThreadPidsAtom=workerThreadPidsAtom;
+  Runtime.getRuntime().addShutdownHook(new Thread(this));
+}

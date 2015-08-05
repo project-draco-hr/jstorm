@@ -1,0 +1,15 @@
+{
+  AsyncLoopThread ackerThread=null;
+  if (baseExecutor instanceof SpoutExecutors) {
+    ackerThread=((SpoutExecutors)baseExecutor).getAckerRunnableThread();
+    if (ackerThread != null) {
+      allThreads.add(ackerThread);
+    }
+  }
+  AsyncLoopThread recvThread=taskReceiver.getDeserializeThread();
+  allThreads.add(recvThread);
+  AsyncLoopThread serializeThread=taskTransfer.getSerializeThread();
+  allThreads.add(serializeThread);
+  TaskShutdownDameon shutdown=new TaskShutdownDameon(taskStatus,topologyid,taskid,allThreads,zkCluster,taskObj);
+  return shutdown;
+}

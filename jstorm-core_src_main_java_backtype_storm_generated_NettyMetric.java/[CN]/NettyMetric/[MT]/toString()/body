@@ -1,0 +1,18 @@
+{
+  StringBuilder sb=new StringBuilder("NettyMetric(");
+  boolean first=true;
+  sb.append("connections:");
+  if (this.connections == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.connections);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("connectionNum:");
+  sb.append(this.connectionNum);
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

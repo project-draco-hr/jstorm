@@ -1,0 +1,10 @@
+{
+  MessageBatch messageBatch=messageBatchRef.get();
+  if (messageBatch == null) {
+    return 0.0;
+  }
+ else {
+    Double ret=(double)messageBatch.getEncoded_length();
+    return ret;
+  }
+}

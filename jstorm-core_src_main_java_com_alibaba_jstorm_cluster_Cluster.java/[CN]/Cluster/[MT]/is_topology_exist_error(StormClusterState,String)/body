@@ -1,0 +1,15 @@
+{
+  Map<Integer,String> lastErrMap=stormClusterState.topo_lastErr_time(topologyId);
+  if (lastErrMap == null || lastErrMap.size() == 0) {
+    return false;
+  }
+  int now=TimeUtils.current_time_secs();
+  for (  Entry<Integer,String> entry : lastErrMap.entrySet()) {
+    Integer timeout=entry.getKey();
+    Integer timestamp=Integer.valueOf(entry.getValue());
+    if (now - timestamp <= timeout) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -1,0 +1,16 @@
+{
+  if (that == null)   return false;
+  boolean this_present_taskId=true;
+  boolean that_present_taskId=true;
+  if (this_present_taskId || that_present_taskId) {
+    if (!(this_present_taskId && that_present_taskId))     return false;
+    if (this.taskId != that.taskId)     return false;
+  }
+  boolean this_present_component=true && this.is_set_component();
+  boolean that_present_component=true && that.is_set_component();
+  if (this_present_component || that_present_component) {
+    if (!(this_present_component && that_present_component))     return false;
+    if (!this.component.equals(that.component))     return false;
+  }
+  return true;
+}

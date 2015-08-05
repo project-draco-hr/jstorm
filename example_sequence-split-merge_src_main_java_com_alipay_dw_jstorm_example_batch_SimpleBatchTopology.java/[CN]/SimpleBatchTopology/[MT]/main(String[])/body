@@ -3,7 +3,7 @@
     System.err.println("Please input parameters topology.yaml");
     System.exit(-1);
   }
-  LoadYaml(args[0]);
+  conf=LoadConf.LoadYaml(args[0]);
   boolean isLocal=StormConfig.local_mode(conf);
   if (isLocal) {
     SetLocalTopology();

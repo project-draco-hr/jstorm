@@ -1,0 +1,21 @@
+{
+  if (batch == null || batch.currBatchSize() == 0)   return null;
+  byte[][] bytes=new byte[batch.currBatchSize()][];
+  int i=0, len=0;
+  for (  Tuple tuple : batch.getTuples()) {
+    bytes[i]=serialize(tuple);
+    len+=bytes[i].length;
+    len+=4;
+    i++;
+  }
+  byte[] ret=new byte[len];
+  int index=0;
+  for (i=0; i < bytes.length; i++) {
+    Utils.writeIntToByteArray(ret,index,bytes[i].length);
+    index+=4;
+    for (int j=0; j < bytes[i].length; j++) {
+      ret[index++]=bytes[i][j];
+    }
+  }
+  return ret;
+}

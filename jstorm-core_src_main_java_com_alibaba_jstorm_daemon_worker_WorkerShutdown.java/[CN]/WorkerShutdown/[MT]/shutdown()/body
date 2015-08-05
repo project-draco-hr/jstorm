@@ -1,0 +1,34 @@
+{
+  if (shutdown.getAndSet(true) == true) {
+    LOG.info("Worker has been shutdown already");
+    return;
+  }
+  if (recvConnection != null) {
+    recvConnection.close();
+  }
+  AsyncLoopRunnable.getShutdown().set(true);
+  threadPool.shutdown();
+  for (  ShutdownableDameon task : shutdowntasks) {
+    task.shutdown();
+  }
+  for (  AsyncLoopThread t : threads) {
+    LOG.info("Begin to shutdown " + t.getThread().getName());
+    t.cleanup();
+    JStormUtils.sleepMs(100);
+    t.interrupt();
+    LOG.info("Successfully " + t.getThread().getName());
+  }
+  for (  WorkerSlot k : nodeportSocket.keySet()) {
+    IConnection value=nodeportSocket.get(k);
+    value.close();
+  }
+  context.term();
+  try {
+    zkCluster.disconnect();
+    cluster_state.close();
+  }
+ catch (  Exception e) {
+    LOG.info("Shutdown error,",e);
+  }
+  JStormUtils.halt_process(0,"!!!Shutdown!!!");
+}

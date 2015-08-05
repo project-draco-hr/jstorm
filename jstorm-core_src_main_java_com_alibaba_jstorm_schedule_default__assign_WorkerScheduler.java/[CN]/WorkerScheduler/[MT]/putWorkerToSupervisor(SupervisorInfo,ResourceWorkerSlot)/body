@@ -1,0 +1,9 @@
+{
+  int port=worker.getPort();
+  if (!supervisor.getAvailableWorkerPorts().contains(worker.getPort())) {
+    port=supervisor.getAvailableWorkerPorts().iterator().next();
+  }
+  worker.setPort(port);
+  supervisor.getAvailableWorkerPorts().remove(port);
+  worker.setNodeId(supervisor.getSupervisorId());
+}

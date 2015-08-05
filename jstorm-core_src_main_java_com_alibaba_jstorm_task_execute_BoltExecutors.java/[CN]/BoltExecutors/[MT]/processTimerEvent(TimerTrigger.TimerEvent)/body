@@ -1,0 +1,39 @@
+{
+switch (event.getOpCode()) {
+case TimerConstants.ROTATING_MAP:
+{
+      Map<Tuple,Long> timeoutMap=tuple_start_times.rotate();
+      if (ackerNum > 0) {
+        for (        Entry<Tuple,Long> entry : timeoutMap.entrySet()) {
+          Tuple input=entry.getKey();
+          task_stats.bolt_failed_tuple(input.getSourceComponent(),input.getSourceStreamId());
+        }
+      }
+      break;
+    }
+case TimerConstants.TICK_TUPLE:
+{
+    try {
+      Tuple tuple=(Tuple)event.getMsg();
+      bolt.execute(tuple);
+    }
+ catch (    Throwable e) {
+      error=e;
+      LOG.error("bolt execute error ",e);
+      report_error.report(e);
+    }
+    break;
+  }
+case TimerConstants.TASK_HEARTBEAT:
+{
+  Integer taskId=(Integer)event.getMsg();
+  TaskHeartbeatRunable.updateTaskHbStats(taskId,task);
+  break;
+}
+default :
+{
+LOG.warn("Receive unsupported timer event, opcode=" + event.getOpCode());
+break;
+}
+}
+}

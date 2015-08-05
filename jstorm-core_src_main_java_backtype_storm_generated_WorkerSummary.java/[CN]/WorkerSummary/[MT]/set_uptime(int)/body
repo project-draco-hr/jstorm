@@ -1,0 +1,4 @@
+{
+  this.uptime=uptime;
+  set_uptime_isSet(true);
+}

@@ -1,0 +1,4 @@
+def validate(self):
+    if (self.baseMetric is None):
+        raise TProtocol.TProtocolException(message='Required field baseMetric is unset!')
+    return

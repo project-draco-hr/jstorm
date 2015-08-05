@@ -1,0 +1,11 @@
+Task task
+IBolt _bolt
+TaskTransfer _transfer_fn
+Map<Integer,DisruptorQueue> innerTaskTransfer
+Map storm_conf
+TaskSendTargets _send_fn
+TaskStatus taskStatus
+TopologyContext sysTopologyCxt
+TopologyContext userTopologyCxt
+TaskBaseMetric _task_stats
+ITaskReportErr _report_error

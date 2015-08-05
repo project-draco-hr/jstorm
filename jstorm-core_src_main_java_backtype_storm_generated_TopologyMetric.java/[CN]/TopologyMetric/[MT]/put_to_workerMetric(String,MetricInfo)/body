@@ -1,0 +1,6 @@
+{
+  if (this.workerMetric == null) {
+    this.workerMetric=new HashMap<String,MetricInfo>();
+  }
+  this.workerMetric.put(key,val);
+}

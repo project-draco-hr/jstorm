@@ -1,0 +1,7 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.host=iprot.readString();
+  struct.set_host_isSet(true);
+  struct.uptime_secs=iprot.readString();
+  struct.set_uptime_secs_isSet(true);
+}

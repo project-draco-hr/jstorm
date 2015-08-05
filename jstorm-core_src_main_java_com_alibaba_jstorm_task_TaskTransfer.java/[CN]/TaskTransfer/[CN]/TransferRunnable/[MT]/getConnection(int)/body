@@ -1,0 +1,16 @@
+{
+  IConnection conn=null;
+  WorkerSlot nodePort=taskNodeport.get(taskId);
+  if (nodePort == null) {
+    String errormsg="can`t not found IConnection to " + taskId;
+    LOG.warn("Intra transfer warn",new Exception(errormsg));
+  }
+ else {
+    conn=nodeportSocket.get(nodePort);
+    if (conn == null) {
+      String errormsg="can`t not found nodePort " + nodePort;
+      LOG.warn("Intra transfer warn",new Exception(errormsg));
+    }
+  }
+  return conn;
+}

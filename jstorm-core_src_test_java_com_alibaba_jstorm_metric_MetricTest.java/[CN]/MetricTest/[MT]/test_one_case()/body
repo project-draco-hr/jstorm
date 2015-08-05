@@ -1,0 +1,13 @@
+{
+  int[] timeWindow={0,windows[0]};
+  int m=1, i=1, j=0, l=1;
+  Input input=new Input();
+  input.metric=getJStormMetric(m);
+  input.metric.setWindowSeconds(windows);
+  input.firstRunSeconds=timeWindow[i];
+  input.interruptSeconds=timeWindow[j];
+  input.endRunSeconds=timeWindow[l];
+  Output result=testTimes(input);
+  System.out.println(input.metric.getClass().getSimpleName() + ":" + result.output);
+  unregisterJStormMetric(m);
+}

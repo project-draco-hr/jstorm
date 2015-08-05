@@ -1,0 +1,41 @@
+{
+  StringBuilder sb=new StringBuilder("TopologyMetric(");
+  boolean first=true;
+  sb.append("topologyMetric:");
+  if (this.topologyMetric == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.topologyMetric);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("componentMetric:");
+  if (this.componentMetric == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.componentMetric);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("workerMetric:");
+  if (this.workerMetric == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.workerMetric);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("taskMetric:");
+  if (this.taskMetric == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.taskMetric);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

@@ -1,9 +1,0 @@
-{
-switch (field) {
-case SUPERVISOR:
-    return get_supervisor();
-case WORKERS:
-  return get_workers();
-}
-throw new IllegalStateException();
-}

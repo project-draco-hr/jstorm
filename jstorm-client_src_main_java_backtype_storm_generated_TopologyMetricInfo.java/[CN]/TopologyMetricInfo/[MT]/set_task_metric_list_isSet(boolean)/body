@@ -1,5 +1,0 @@
-{
-  if (!value) {
-    this.task_metric_list=null;
-  }
-}

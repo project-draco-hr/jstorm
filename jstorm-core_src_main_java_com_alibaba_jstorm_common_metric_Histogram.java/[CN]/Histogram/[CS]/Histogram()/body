@@ -1,0 +1,7 @@
+{
+  defaultValue=new HistorgramPair();
+  updater=new AvgUpdater();
+  merger=new AvgMerger();
+  convertor=new HistogramConvertor();
+  init();
+}

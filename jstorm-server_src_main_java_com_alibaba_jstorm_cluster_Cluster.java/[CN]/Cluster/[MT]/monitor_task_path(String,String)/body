@@ -1,3 +1,0 @@
-{
-  return monitor_taskdir_path(topology_id) + ZK_SEPERATOR + task_id;
-}

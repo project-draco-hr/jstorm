@@ -1,0 +1,12 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  BitSet incoming=iprot.readBitSet(2);
+  if (incoming.get(0)) {
+    struct.name=iprot.readString();
+    struct.set_name_isSet(true);
+  }
+  if (incoming.get(1)) {
+    struct.conf=iprot.readString();
+    struct.set_conf_isSet(true);
+  }
+}

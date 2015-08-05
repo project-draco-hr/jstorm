@@ -1,2 +1,0 @@
-Map<String,Map<String,TaskHeartbeat>> HbMap
-Map<String,CommStatsData> statsDataMap

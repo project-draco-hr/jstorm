@@ -1,0 +1,8 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getServerNettyMetric",org.apache.thrift.protocol.TMessageType.CALL,0));
+  getServerNettyMetric_args args=new getServerNettyMetric_args();
+  args.set_topologyName(topologyName);
+  args.set_serverName(serverName);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

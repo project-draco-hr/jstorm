@@ -1,0 +1,17 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  struct.topology.write(oprot);
+{
+    oprot.writeI32(struct.components.size());
+    for (    ComponentSummary _iter246 : struct.components) {
+      _iter246.write(oprot);
+    }
+  }
+{
+    oprot.writeI32(struct.tasks.size());
+    for (    TaskSummary _iter247 : struct.tasks) {
+      _iter247.write(oprot);
+    }
+  }
+  struct.metrics.write(oprot);
+}

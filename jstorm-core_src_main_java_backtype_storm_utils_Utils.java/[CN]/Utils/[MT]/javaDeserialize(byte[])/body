@@ -1,0 +1,3 @@
+{
+  return javaDeserializeWithCL(serialized,WorkerClassLoader.getInstance());
+}

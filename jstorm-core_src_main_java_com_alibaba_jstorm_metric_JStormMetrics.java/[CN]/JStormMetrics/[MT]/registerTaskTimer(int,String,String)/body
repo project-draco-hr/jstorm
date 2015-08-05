@@ -1,0 +1,5 @@
+{
+  Timer ret=(Timer)Builder.mkInstance(Builder.TIMER);
+  registerTaskMetric(ret,taskId,name,args);
+  return ret;
+}

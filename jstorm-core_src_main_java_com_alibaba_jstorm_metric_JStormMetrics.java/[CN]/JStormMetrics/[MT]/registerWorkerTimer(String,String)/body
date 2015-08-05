@@ -1,0 +1,5 @@
+{
+  Timer ret=(Timer)Builder.mkInstance(Builder.TIMER);
+  registerWorkerMetric(ret,name,args);
+  return ret;
+}

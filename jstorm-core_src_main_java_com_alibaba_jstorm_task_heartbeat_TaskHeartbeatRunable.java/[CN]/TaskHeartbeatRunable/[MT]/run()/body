@@ -1,0 +1,8 @@
+{
+  try {
+    handle();
+  }
+ catch (  InterruptedException e) {
+    LOG.info(e.getMessage());
+  }
+}

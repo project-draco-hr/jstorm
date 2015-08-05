@@ -1,0 +1,7 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_uploadMetrics=true && (is_set_uploadMetrics());
+  list.add(present_uploadMetrics);
+  if (present_uploadMetrics)   list.add(uploadMetrics);
+  return list.hashCode();
+}

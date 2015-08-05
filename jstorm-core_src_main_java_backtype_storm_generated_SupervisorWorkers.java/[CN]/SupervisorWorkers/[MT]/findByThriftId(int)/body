@@ -1,0 +1,12 @@
+{
+switch (fieldId) {
+case 1:
+    return SUPERVISOR;
+case 2:
+  return WORKERS;
+case 3:
+return WORKER_METRIC;
+default :
+return null;
+}
+}

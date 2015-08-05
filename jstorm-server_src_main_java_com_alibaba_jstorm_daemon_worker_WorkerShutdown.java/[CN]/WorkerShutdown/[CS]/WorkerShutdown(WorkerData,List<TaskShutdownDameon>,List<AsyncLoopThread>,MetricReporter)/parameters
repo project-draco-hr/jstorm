@@ -1,4 +1,0 @@
-WorkerData workerData
-List<TaskShutdownDameon> _shutdowntasks
-List<AsyncLoopThread> _threads
-MetricReporter metricReporter

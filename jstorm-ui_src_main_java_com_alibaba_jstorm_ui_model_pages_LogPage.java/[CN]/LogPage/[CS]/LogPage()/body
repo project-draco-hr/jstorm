@@ -1,0 +1,5 @@
+{
+  FacesContext ctx=FacesContext.getCurrentInstance();
+  paramMap=ctx.getExternalContext().getRequestParameterMap();
+  init();
+}

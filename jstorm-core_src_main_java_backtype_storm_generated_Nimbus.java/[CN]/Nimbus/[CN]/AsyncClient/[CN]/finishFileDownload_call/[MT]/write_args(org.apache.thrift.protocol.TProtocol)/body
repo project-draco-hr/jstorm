@@ -1,0 +1,7 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("finishFileDownload",org.apache.thrift.protocol.TMessageType.CALL,0));
+  finishFileDownload_args args=new finishFileDownload_args();
+  args.set_id(id);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

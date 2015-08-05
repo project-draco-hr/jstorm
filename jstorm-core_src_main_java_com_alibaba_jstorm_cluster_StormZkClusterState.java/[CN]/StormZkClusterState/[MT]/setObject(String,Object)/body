@@ -1,0 +1,11 @@
+{
+  if (obj instanceof byte[]) {
+    cluster_state.set_data(path,(byte[])obj);
+  }
+ else   if (obj instanceof String) {
+    cluster_state.set_data(path,((String)obj).getBytes());
+  }
+ else {
+    cluster_state.set_data(path,Utils.serialize(obj));
+  }
+}

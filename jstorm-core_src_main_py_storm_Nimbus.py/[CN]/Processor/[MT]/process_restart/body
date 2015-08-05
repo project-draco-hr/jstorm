@@ -1,0 +1,17 @@
+def process_restart(self, seqid, iprot, oprot):
+    args = restart_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = restart_result()
+    try:
+        self._handler.restart(args.name, args.jsonConf)
+    except NotAliveException as e:
+        result.e = e
+    except InvalidTopologyException as ite:
+        result.ite = ite
+    except TopologyAssignException as tae:
+        result.tae = tae
+    oprot.writeMessageBegin('restart', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

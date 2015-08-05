@@ -1,0 +1,25 @@
+{
+  this.nimbusCache=nimbusData.getNimbusCache();
+  this.dbCache=nimbusCache.getDbCache();
+  this.topologyWorkers=new ConcurrentHashMap<String,Set<String>>();
+  this.removing=new TimeCacheMap<String,Long>(600);
+  this.queue=new LinkedBlockingDeque<TopologyMetricsRunnable.Event>();
+  this.stormClusterState=nimbusData.getStormClusterState();
+  this.isShutdown=nimbusData.getIsShutdown();
+  this.topologyNettyMgr=nimbusData.getTopologyNettyMgr();
+  if (ConfigExtension.isAlimonitorMetricsPost(nimbusData.getConf())) {
+    metricSendClient=new AlimonitorClient(AlimonitorClient.DEFAUT_ADDR,AlimonitorClient.DEFAULT_PORT,true);
+  }
+ else {
+    metricSendClient=new MetricSendClient();
+  }
+  localMode=StormConfig.local_mode(nimbusData.getConf());
+  updateHistogram=SimpleJStormMetric.registerHistorgram("TopologyMetricsRunnable_Update");
+  uploadHistogram=SimpleJStormMetric.registerHistorgram("TopologyMetricsRunnable_Upload");
+  SimpleJStormMetric.registerWorkerGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return (double)queue.size();
+    }
+  }
+,"TopologyMetricsRunnable_Queue");
+}

@@ -1,0 +1,15 @@
+{
+  Map topologyConf=null;
+  try {
+    topologyConf=StormConfig.read_nimbus_topology_conf(data.getConf(),topologyId);
+  }
+ catch (  IOException e) {
+    LOG.warn("Failed to read configuration of " + topologyId + ", "+ e.getMessage());
+  }
+  Integer timeout=JStormUtils.parseInt(topologyConf.get(Config.NIMBUS_TASK_TIMEOUT_SECS));
+  if (timeout == null) {
+    timeout=JStormUtils.parseInt(data.getConf().get(Config.NIMBUS_TASK_TIMEOUT_SECS));
+  }
+  LOG.info("Setting taskTimeout:" + timeout + " for "+ topologyId);
+  data.getTopologyTaskTimeout().put(topologyId,timeout);
+}

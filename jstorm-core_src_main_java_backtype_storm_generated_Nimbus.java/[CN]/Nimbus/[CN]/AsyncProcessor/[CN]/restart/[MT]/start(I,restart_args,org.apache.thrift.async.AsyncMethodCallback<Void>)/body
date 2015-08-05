@@ -1,0 +1,3 @@
+{
+  iface.restart(args.name,args.jsonConf,resultHandler);
+}

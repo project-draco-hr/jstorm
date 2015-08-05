@@ -1,0 +1,10 @@
+{
+  Map<Integer,String> tmp=Common.getTaskToComponent(Cluster.get_all_taskInfo(zkCluster,topologyId));
+  this.tasksToComponent.putAll(tmp);
+  LOG.info("Updated tasksToComponentMap:" + tasksToComponent);
+  this.componentToSortedTasks.putAll(JStormUtils.reverse_map(tmp));
+  for (  java.util.Map.Entry<String,List<Integer>> entry : componentToSortedTasks.entrySet()) {
+    List<Integer> tasks=entry.getValue();
+    Collections.sort(tasks);
+  }
+}

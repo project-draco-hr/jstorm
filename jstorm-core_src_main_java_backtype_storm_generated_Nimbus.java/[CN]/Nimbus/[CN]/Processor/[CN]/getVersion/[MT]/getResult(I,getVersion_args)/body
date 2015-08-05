@@ -1,0 +1,5 @@
+{
+  getVersion_result result=new getVersion_result();
+  result.success=iface.getVersion();
+  return result;
+}

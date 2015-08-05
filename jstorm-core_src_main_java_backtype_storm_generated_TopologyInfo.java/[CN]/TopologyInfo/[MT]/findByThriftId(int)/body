@@ -1,0 +1,14 @@
+{
+switch (fieldId) {
+case 1:
+    return TOPOLOGY;
+case 2:
+  return COMPONENTS;
+case 3:
+return TASKS;
+case 4:
+return METRICS;
+default :
+return null;
+}
+}

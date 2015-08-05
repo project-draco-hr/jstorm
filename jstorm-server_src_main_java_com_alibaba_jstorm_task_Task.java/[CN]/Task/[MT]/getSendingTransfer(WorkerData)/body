@@ -1,5 +1,0 @@
-{
-  KryoTupleSerializer serializer=new KryoTupleSerializer(workerData.getStormConf(),topologyContext);
-  String taskName=JStormServerUtils.getName(componentid,taskid);
-  return new TaskTransfer(taskName,serializer,taskStatus,workerData);
-}

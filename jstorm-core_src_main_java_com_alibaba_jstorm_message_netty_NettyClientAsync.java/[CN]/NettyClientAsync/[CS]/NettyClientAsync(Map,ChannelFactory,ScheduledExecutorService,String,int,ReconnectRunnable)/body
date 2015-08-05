@@ -1,0 +1,19 @@
+{
+  super(storm_conf,factory,scheduler,host,port,reconnector);
+  BATCH_THREASHOLD_WARN=ConfigExtension.getNettyBufferThresholdSize(storm_conf);
+  blockSend=isBlockSend(storm_conf);
+  directlySend=isDirectSend(storm_conf);
+  flush_later=new AtomicBoolean(false);
+  flushCheckInterval=Utils.getInt(storm_conf.get(Config.STORM_NETTY_FLUSH_CHECK_INTERVAL_MS),10);
+  Runnable flusher=new Runnable(){
+    @Override public void run(){
+      flush();
+    }
+  }
+;
+  long initialDelay=Math.min(1000,max_sleep_ms * max_retries);
+  scheduler.scheduleAtFixedRate(flusher,initialDelay,flushCheckInterval,TimeUnit.MILLISECONDS);
+  clientChannelFactory=factory;
+  start();
+  LOG.info(this.toString());
+}

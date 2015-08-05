@@ -1,0 +1,23 @@
+{
+  this.task=task;
+  this.taskName=taskName;
+  this.serializer=serializer;
+  this.taskStatus=taskStatus;
+  this.storm_conf=workerData.getStormConf();
+  this.transferQueue=workerData.getTransferQueue();
+  this.innerTaskTransfer=workerData.getInnerTaskTransfer();
+  this.nodeportSocket=workerData.getNodeportSocket();
+  this.taskNodeport=workerData.getTaskNodeport();
+  int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_SEND_BUFFER_SIZE));
+  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(storm_conf);
+  this.serializeQueue=DisruptorQueue.mkInstance(taskName,ProducerType.MULTI,queue_size,waitStrategy);
+  this.serializeQueue.consumerStarted();
+  String taskId=taskName.substring(taskName.indexOf(":") + 1);
+  String metricName=MetricRegistry.name(MetricDef.SERIALIZE_QUEUE,taskName);
+  QueueGauge serializeQueueGauge=new QueueGauge(metricName,serializeQueue);
+  JStormMetrics.registerTaskGauge(serializeQueueGauge,Integer.valueOf(taskId),MetricDef.SERIALIZE_QUEUE);
+  JStormHealthCheck.registerTaskHealthCheck(Integer.valueOf(taskId),MetricDef.SERIALIZE_QUEUE,serializeQueueGauge);
+  timer=JStormMetrics.registerTaskTimer(Integer.valueOf(taskId),MetricDef.SERIALIZE_TIME);
+  serializeThread=setupSerializeThread();
+  LOG.info("Successfully start TaskTransfer thread");
+}

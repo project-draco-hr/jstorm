@@ -1,0 +1,4 @@
+{
+  String assgnmentBakPath=Cluster.assignment_bak_path(topologyName);
+  return (AssignmentBak)getObject(assgnmentBakPath,false);
+}

@@ -1,0 +1,9 @@
+{
+  h=center.busy(SubSystemType.cpu);
+  if (h == null) {
+    Set<SubSystemType> types=new HashSet<SubSystemType>();
+    types.add(SubSystemType.cpu);
+    h=new Hierarchy(JSTORM_HIERARCHY_NAME,types,JSTORM_CPU_HIERARCHY_DIR);
+  }
+  rootCgroup=new CgroupCommon(rootDir,h,h.getRootCgroups());
+}

@@ -1,0 +1,11 @@
+{
+  String authenticationID=ac.getAuthenticationID();
+  LOG.info("Successfully authenticated client: authenticationID=" + authenticationID + " authorizationID= "+ ac.getAuthorizationID());
+  if (ac.getAuthorizationID() == null) {
+    ac.setAuthorizedID(authenticationID);
+  }
+  if (!ac.getAuthenticationID().equals(ac.getAuthorizationID())) {
+    ReqContext.context().setRealPrincipal(new SaslTransportPlugin.User(ac.getAuthenticationID()));
+  }
+  ac.setAuthorized(true);
+}

@@ -1,0 +1,6 @@
+{
+  if (batch == null) {
+    batch=new ArrayList<Tuple>();
+  }
+  batch.add(tuple);
+}

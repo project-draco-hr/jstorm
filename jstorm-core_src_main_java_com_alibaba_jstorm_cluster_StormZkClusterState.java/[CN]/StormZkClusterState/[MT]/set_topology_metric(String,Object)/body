@@ -1,0 +1,4 @@
+{
+  String path=Cluster.metric_path(topologyId);
+  setObject(path,metric);
+}

@@ -1,0 +1,5 @@
+{
+  drpcService=drpc;
+  REQUEST_TIMEOUT_SECS=JStormUtils.parseInt(drpcService.getConf().get(Config.DRPC_REQUEST_TIMEOUT_SECS),60);
+  LOG.info("Drpc timeout seconds is " + REQUEST_TIMEOUT_SECS);
+}

@@ -1,3 +1,0 @@
-def get_server_childopts(log_name):
-    ret = (' -Dlogfile.name=%s -Dlog4j.configuration=File:%s' % (log_name, LOG4J_CONF))
-    return ret

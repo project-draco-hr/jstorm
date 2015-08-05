@@ -1,0 +1,8 @@
+{
+  KryoTupleSerializer serializer=new KryoTupleSerializer(workerData.getStormConf(),topologyContext);
+  String taskName=JStormServerUtils.getName(componentid,taskid);
+  TaskTransfer taskTransfer;
+  if (isTaskBatchTuple)   taskTransfer=new TaskBatchTransfer(this,taskName,serializer,taskStatus,workerData);
+ else   taskTransfer=new TaskTransfer(this,taskName,serializer,taskStatus,workerData);
+  return taskTransfer;
+}

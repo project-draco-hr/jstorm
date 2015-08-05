@@ -1,5 +1,0 @@
-{
-  this.workerData=workerData;
-  reporter1Minute=StormMetricReporter.forRegistry(Metrics.getMetrics()).outputTo(LoggerFactory.getLogger(MetricReporter.class)).convertRatesTo(TimeUnit.SECONDS).convertDurationsTo(TimeUnit.MILLISECONDS).setWorkerData(workerData).build();
-  reporter10Minute=Slf4jReporter.forRegistry(Metrics.getJstack()).outputTo(LoggerFactory.getLogger(MetricReporter.class)).convertRatesTo(TimeUnit.SECONDS).convertDurationsTo(TimeUnit.MILLISECONDS).build();
-}

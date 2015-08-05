@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseLong(conf.get(UI_ONE_TABLE_PAGE_SIZE),200);
+}

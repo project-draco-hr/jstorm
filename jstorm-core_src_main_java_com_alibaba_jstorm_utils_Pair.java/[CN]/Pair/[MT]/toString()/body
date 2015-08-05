@@ -1,0 +1,7 @@
+{
+  StringBuilder sb=new StringBuilder();
+  sb.append("first:" + first);
+  sb.append(":");
+  sb.append("sencond:" + second);
+  return sb.toString();
+}

@@ -1,0 +1,4 @@
+{
+  byte[] data=cluster_state.get_data(path,callback);
+  return new String(data);
+}

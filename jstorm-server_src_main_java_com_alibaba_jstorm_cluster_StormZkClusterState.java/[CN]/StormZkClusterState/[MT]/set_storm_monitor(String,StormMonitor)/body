@@ -1,7 +1,0 @@
-{
-  String monitorStatusPath=Cluster.monitor_status_path(topologyId);
-  cluster_state.set_data(monitorStatusPath,Utils.serialize(metricsMonitor));
-  cluster_state.mkdirs(Cluster.monitor_taskdir_path(topologyId));
-  cluster_state.mkdirs(Cluster.monitor_workerdir_path(topologyId));
-  cluster_state.mkdirs(Cluster.monitor_userdir_path(topologyId));
-}

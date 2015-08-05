@@ -1,3 +1,0 @@
-{
-  return zmq_bind(true,port);
-}

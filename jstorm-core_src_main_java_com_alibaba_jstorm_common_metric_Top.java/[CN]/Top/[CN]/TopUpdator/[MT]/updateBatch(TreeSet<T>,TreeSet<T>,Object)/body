@@ -1,0 +1,10 @@
+{
+  if (cache == null) {
+    cache=new TreeSet<T>(comparator);
+  }
+  cache.addAll(object);
+  while (cache.size() > n) {
+    cache.remove(cache.last());
+  }
+  return cache;
+}

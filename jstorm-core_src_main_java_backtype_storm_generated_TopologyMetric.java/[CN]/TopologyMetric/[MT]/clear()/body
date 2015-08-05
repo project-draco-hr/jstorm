@@ -1,0 +1,6 @@
+{
+  this.topologyMetric=null;
+  this.componentMetric=null;
+  this.workerMetric=null;
+  this.taskMetric=null;
+}

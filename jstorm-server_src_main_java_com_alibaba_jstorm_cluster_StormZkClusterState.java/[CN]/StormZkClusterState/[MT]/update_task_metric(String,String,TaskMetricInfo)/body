@@ -1,4 +1,0 @@
-{
-  String taskMetricPath=Cluster.monitor_task_path(topologyId,taskId);
-  cluster_state.set_data(taskMetricPath,Utils.serialize(metricInfo));
-}

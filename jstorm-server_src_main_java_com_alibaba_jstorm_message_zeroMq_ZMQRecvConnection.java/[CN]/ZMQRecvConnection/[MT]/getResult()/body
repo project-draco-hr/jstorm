@@ -1,4 +1,0 @@
-{
-  LOG.info("Begin to shutdown ZMQ Recv thread");
-  return -1;
-}

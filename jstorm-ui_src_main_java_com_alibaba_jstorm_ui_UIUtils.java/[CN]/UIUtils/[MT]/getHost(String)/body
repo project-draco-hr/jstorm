@@ -1,0 +1,9 @@
+{
+  if (ipPort.contains(":")) {
+    String firstPart=ipPort.substring(0,ipPort.indexOf(":"));
+    return NetWorkUtils.ip2Host(firstPart);
+  }
+ else {
+    return NetWorkUtils.ip2Host(ipPort);
+  }
+}

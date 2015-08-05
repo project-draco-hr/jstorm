@@ -1,0 +1,8 @@
+{
+synchronized (SimpleJStormMetric.class) {
+    if (instance == null) {
+      instance=new SimpleJStormMetric();
+    }
+    return instance;
+  }
+}

@@ -1,0 +1,8 @@
+{
+  HealthCheckRegistry healthCheckRegister=taskHealthCheckMap.get(taskId);
+  if (healthCheckRegister == null) {
+    healthCheckRegister=new HealthCheckRegistry();
+    taskHealthCheckMap.put(taskId,healthCheckRegister);
+  }
+  healthCheckRegister.register(name,healthCheck);
+}

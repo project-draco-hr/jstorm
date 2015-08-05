@@ -1,0 +1,10 @@
+def process_finishFileDownload(self, seqid, iprot, oprot):
+    args = finishFileDownload_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = finishFileDownload_result()
+    self._handler.finishFileDownload(args.id)
+    oprot.writeMessageBegin('finishFileDownload', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

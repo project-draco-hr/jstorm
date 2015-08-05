@@ -1,0 +1,4 @@
+{
+  byte[] data=cluster_state.get_data_sync(path,callback);
+  return Utils.maybe_deserialize(data);
+}

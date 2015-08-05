@@ -1,0 +1,3 @@
+{
+  return (this.task_ids == null) ? null : this.task_ids.iterator();
+}

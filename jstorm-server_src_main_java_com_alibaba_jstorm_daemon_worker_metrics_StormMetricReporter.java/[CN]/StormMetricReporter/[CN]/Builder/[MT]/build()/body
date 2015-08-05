@@ -1,3 +1,0 @@
-{
-  return new StormMetricReporter(registry,logger,marker,rateUnit,durationUnit,filter,workerData);
-}

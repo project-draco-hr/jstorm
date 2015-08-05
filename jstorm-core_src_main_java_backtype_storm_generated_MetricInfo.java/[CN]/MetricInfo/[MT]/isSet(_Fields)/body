@@ -1,0 +1,14 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case BASE_METRIC:
+    return is_set_baseMetric();
+case INPUT_METRIC:
+  return is_set_inputMetric();
+case OUTPUT_METRIC:
+return is_set_outputMetric();
+}
+throw new IllegalStateException();
+}

@@ -1,9 +1,0 @@
-{
-  this.hostName=hostName;
-  this.port=port;
-  this.gaugeData=new HashMap<String,Double>();
-  this.counterData=new HashMap<String,Double>();
-  this.meterData=new HashMap<String,Double>();
-  this.timerData=new HashMap<String,Double>();
-  this.histogramData=new HashMap<String,Double>();
-}

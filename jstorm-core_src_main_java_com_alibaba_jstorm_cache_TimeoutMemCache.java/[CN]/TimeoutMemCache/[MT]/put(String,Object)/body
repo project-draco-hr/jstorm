@@ -1,0 +1,5 @@
+{
+  remove(key);
+  TimeCacheMap<String,Object> bestWindow=cacheWindows.get(defaultTimeout);
+  bestWindow.put(key,value);
+}

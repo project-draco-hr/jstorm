@@ -1,0 +1,22 @@
+{
+  Set<String> filterJars=new HashSet<String>();
+  boolean enableClassloader=ConfigExtension.isEnableTopologyClassLoader(totalConf);
+  if (enableClassloader == false) {
+    boolean enableLog4j=false;
+    String userDefLog4jConf=ConfigExtension.getUserDefinedLog4jConf(totalConf);
+    if (StringUtils.isBlank(userDefLog4jConf) == false) {
+      enableLog4j=true;
+    }
+    if (enableLog4j == true) {
+      filterJars.add("log4j-over-slf4j");
+      filterJars.add("logback-core");
+      filterJars.add("logback-classic");
+    }
+ else {
+      filterJars.add("slf4j-log4j");
+      filterJars.add("log4j");
+    }
+  }
+  LOG.info("Remove jars " + filterJars);
+  return filterJars;
+}

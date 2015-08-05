@@ -1,0 +1,4 @@
+{
+  JStormMetrics.unregisterWorkerMetric(idStr + MetricDef.QUEUE_TYPE);
+  JStormHealthCheck.unregisterWorkerHealthCheck(idStr);
+}

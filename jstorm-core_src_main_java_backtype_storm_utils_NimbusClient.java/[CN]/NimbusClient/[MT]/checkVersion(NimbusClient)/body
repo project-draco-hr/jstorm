@@ -1,0 +1,13 @@
+{
+  String serverVersion;
+  try {
+    serverVersion=client.getClient().getVersion();
+  }
+ catch (  TException e) {
+    LOG.warn("Failed to get nimbus version ");
+    return;
+  }
+  if (!clientVersion.equals(serverVersion)) {
+    LOG.warn("Your client version:  " + clientVersion + " but nimbus version: "+ serverVersion);
+  }
+}

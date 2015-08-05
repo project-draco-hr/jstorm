@@ -1,0 +1,30 @@
+{
+  this.pageSize=ConfigExtension.getLogPageSize(conf);
+  logDir=JStormUtils.getLogDir();
+  String logDirPath=PathUtils.getCanonicalPath(logDir);
+  if (logDirPath == null) {
+    accessDirs.add(logDir);
+  }
+ else {
+    accessDirs.add(logDirPath);
+  }
+  stormHome=System.getProperty("jstorm.home");
+  if (stormHome != null) {
+    String stormHomePath=PathUtils.getCanonicalPath(stormHome);
+    if (stormHomePath == null) {
+      accessDirs.add(stormHome);
+    }
+ else {
+      accessDirs.add(stormHomePath);
+    }
+  }
+  String confDir=System.getProperty(Constants.JSTORM_CONF_DIR);
+  if (StringUtils.isBlank(confDir) == false) {
+    String confDirPath=PathUtils.getCanonicalPath(confDir);
+    if (confDirPath != null) {
+      accessDirs.add(confDirPath);
+    }
+  }
+  this.conf=conf;
+  LOG.info("logview logDir=" + logDir);
+}

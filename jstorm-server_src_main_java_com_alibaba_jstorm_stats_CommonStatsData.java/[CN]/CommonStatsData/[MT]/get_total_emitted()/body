@@ -1,8 +1,0 @@
-{
-  Long ret=new Long(0);
-  Map<String,Long> allTimeEmitted=get_emitted().get(StatBuckets.ALL_WINDOW_STR);
-  for (  Entry<String,Long> entry : allTimeEmitted.entrySet()) {
-    ret+=entry.getValue();
-  }
-  return ret;
-}

@@ -1,0 +1,12 @@
+{
+  Object event=controlQueue.poll();
+  if (event != null) {
+    if (event instanceof TimerTrigger.TimerEvent) {
+      processTimerEvent((TimerTrigger.TimerEvent)event);
+      LOG.debug("Received one event from control queue");
+    }
+ else {
+      LOG.warn("Received unknown control event, " + event.getClass().getName());
+    }
+  }
+}

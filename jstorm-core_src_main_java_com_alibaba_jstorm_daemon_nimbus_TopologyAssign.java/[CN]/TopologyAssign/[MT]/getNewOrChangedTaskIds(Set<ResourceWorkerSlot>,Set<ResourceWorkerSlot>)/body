@@ -1,0 +1,17 @@
+{
+  Set<Integer> rtn=new HashSet<Integer>();
+  HashMap<String,ResourceWorkerSlot> workerPortMap=HostPortToWorkerMap(oldWorkers);
+  for (  ResourceWorkerSlot worker : workers) {
+    ResourceWorkerSlot oldWorker=workerPortMap.get(worker.getHostPort());
+    if (oldWorker != null) {
+      Set<Integer> oldTasks=oldWorker.getTasks();
+      for (      Integer task : worker.getTasks()) {
+        if (!(oldTasks.contains(task)))         rtn.add(task);
+      }
+    }
+ else {
+      rtn.addAll(worker.getTasks());
+    }
+  }
+  return rtn;
+}

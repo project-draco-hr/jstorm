@@ -1,3 +1,0 @@
-{
-  cluster_state.set_data(ZkConstant.NIMBUS_SLAVE_SUBTREE + Cluster.ZK_SEPERATOR + host,String.valueOf(time).getBytes("UTF-8"));
-}

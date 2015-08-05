@@ -1,2 +1,0 @@
-def __hash__(self):
-    return (((((((0 + hash(self.id)) + hash(self.name)) + hash(self.status)) + hash(self.uptime_secs)) + hash(self.num_tasks)) + hash(self.num_workers)) + hash(self.error_info))

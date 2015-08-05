@@ -1,0 +1,28 @@
+{
+  if (that == null)   return false;
+  boolean this_present_topologyMetric=true && this.is_set_topologyMetric();
+  boolean that_present_topologyMetric=true && that.is_set_topologyMetric();
+  if (this_present_topologyMetric || that_present_topologyMetric) {
+    if (!(this_present_topologyMetric && that_present_topologyMetric))     return false;
+    if (!this.topologyMetric.equals(that.topologyMetric))     return false;
+  }
+  boolean this_present_componentMetric=true && this.is_set_componentMetric();
+  boolean that_present_componentMetric=true && that.is_set_componentMetric();
+  if (this_present_componentMetric || that_present_componentMetric) {
+    if (!(this_present_componentMetric && that_present_componentMetric))     return false;
+    if (!this.componentMetric.equals(that.componentMetric))     return false;
+  }
+  boolean this_present_workerMetric=true && this.is_set_workerMetric();
+  boolean that_present_workerMetric=true && that.is_set_workerMetric();
+  if (this_present_workerMetric || that_present_workerMetric) {
+    if (!(this_present_workerMetric && that_present_workerMetric))     return false;
+    if (!this.workerMetric.equals(that.workerMetric))     return false;
+  }
+  boolean this_present_taskMetric=true && this.is_set_taskMetric();
+  boolean that_present_taskMetric=true && that.is_set_taskMetric();
+  if (this_present_taskMetric || that_present_taskMetric) {
+    if (!(this_present_taskMetric && that_present_taskMetric))     return false;
+    if (!this.taskMetric.equals(that.taskMetric))     return false;
+  }
+  return true;
+}

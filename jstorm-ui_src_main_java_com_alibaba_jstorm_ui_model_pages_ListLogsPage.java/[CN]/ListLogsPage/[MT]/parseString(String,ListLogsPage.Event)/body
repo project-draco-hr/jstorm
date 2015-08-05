@@ -1,0 +1,71 @@
+{
+  Map<String,Map<String,String>> map=(Map<String,Map<String,String>>)JStormUtils.from_json(input);
+  List<TableData> ret=new ArrayList<TableData>();
+  TableData dirTable=new TableData();
+  TableData fileTable=new TableData();
+  ret.add(dirTable);
+  ret.add(fileTable);
+  dirTable.setName("Dirs");
+  fileTable.setName("Files");
+  Set<String> keys=new HashSet<String>();
+  for (  Map<String,String> jobj : map.values()) {
+    keys.addAll(jobj.keySet());
+  }
+  List<String> dirHeaders=dirTable.getHeaders();
+  dirHeaders.addAll(keys);
+  List<String> fileHeaders=fileTable.getHeaders();
+  fileHeaders.addAll(keys);
+  for (  Map<String,String> jobj : map.values()) {
+    boolean isDir=false;
+    Map<String,ColumnData> line=new HashMap<String,ColumnData>();
+    String fileName=null;
+    ColumnData linkColumn=null;
+    for (    Entry<String,String> entry : jobj.entrySet()) {
+      String key=entry.getKey();
+      String value=entry.getValue();
+      if (FileAttribute.FILE_NAME_FIELD.equals(key)) {
+        fileName=value;
+      }
+ else       if (FileAttribute.IS_DIR_FIELD.equals(key)) {
+        isDir=Boolean.valueOf(value);
+        ColumnData columnData=new ColumnData();
+        columnData.addText(value);
+        line.put(key,columnData);
+      }
+ else {
+        ColumnData columnData=new ColumnData();
+        columnData.addText(value);
+        line.put(key,columnData);
+      }
+    }
+    if (isDir == true) {
+      ColumnData column=new ColumnData();
+      line.put(FileAttribute.FILE_NAME_FIELD,column);
+      LinkData linkData=new LinkData();
+      column.addLinkData(linkData);
+      linkData.setUrl(UIDef.LINK_TABLE_PAGE);
+      linkData.setText(fileName);
+      linkData.addParam(UIDef.CLUSTER,event.clusterName);
+      linkData.addParam(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_LISTLOG);
+      linkData.addParam(UIDef.HOST,event.host);
+      linkData.addParam(UIDef.PORT,event.port);
+      linkData.addParam(UIDef.DIR,event.dir + File.separator + fileName);
+      dirTable.getLines().add(line);
+    }
+ else {
+      ColumnData column=new ColumnData();
+      line.put(FileAttribute.FILE_NAME_FIELD,column);
+      LinkData linkData=new LinkData();
+      column.addLinkData(linkData);
+      linkData.setUrl(UIDef.LINK_LOG);
+      linkData.setText(fileName);
+      linkData.addParam(UIDef.CLUSTER,event.clusterName);
+      linkData.addParam(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_LOG);
+      linkData.addParam(UIDef.HOST,event.host);
+      linkData.addParam(UIDef.LOG_SERVER_PORT,event.port);
+      linkData.addParam(UIDef.LOG_NAME,event.dir + File.separator + fileName);
+      fileTable.getLines().add(line);
+    }
+  }
+  return ret;
+}

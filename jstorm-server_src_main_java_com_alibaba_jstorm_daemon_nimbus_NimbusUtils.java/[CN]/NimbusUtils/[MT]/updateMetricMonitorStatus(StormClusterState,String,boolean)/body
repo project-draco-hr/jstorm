@@ -1,4 +1,0 @@
-{
-  StormMonitor stormMonitor=new StormMonitor(isEnable);
-  clusterState.set_storm_monitor(topologyId,stormMonitor);
-}

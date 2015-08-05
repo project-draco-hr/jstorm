@@ -1,0 +1,14 @@
+{
+  Boolean isEnable=ConfigExtension.isEnableTopologyNettyMetrics(conf);
+  if (isEnable != null) {
+    return isEnable;
+  }
+  int workerNum=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_WORKERS),1);
+  if (workerNum <= WORKER_DISABLE_THREADHOLD) {
+    isEnable=Boolean.TRUE;
+  }
+ else {
+    isEnable=Boolean.FALSE;
+  }
+  return isEnable;
+}

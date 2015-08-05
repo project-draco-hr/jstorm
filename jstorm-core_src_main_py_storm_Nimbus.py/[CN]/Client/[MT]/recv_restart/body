@@ -1,0 +1,18 @@
+def recv_restart(self):
+    iprot = self._iprot
+    (fname, mtype, rseqid) = iprot.readMessageBegin()
+    if (mtype == TMessageType.EXCEPTION):
+        x = TApplicationException()
+        x.read(iprot)
+        iprot.readMessageEnd()
+        raise x
+    result = restart_result()
+    result.read(iprot)
+    iprot.readMessageEnd()
+    if (result.e is not None):
+        raise result.e
+    if (result.ite is not None):
+        raise result.ite
+    if (result.tae is not None):
+        raise result.tae
+    return

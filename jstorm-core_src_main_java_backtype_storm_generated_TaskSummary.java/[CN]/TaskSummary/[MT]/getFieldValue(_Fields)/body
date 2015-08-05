@@ -1,0 +1,17 @@
+{
+switch (field) {
+case TASK_ID:
+    return Integer.valueOf(get_task_id());
+case UPTIME:
+  return Integer.valueOf(get_uptime());
+case STATUS:
+return get_status();
+case HOST:
+return get_host();
+case PORT:
+return Integer.valueOf(get_port());
+case ERRORS:
+return get_errors();
+}
+throw new IllegalStateException();
+}

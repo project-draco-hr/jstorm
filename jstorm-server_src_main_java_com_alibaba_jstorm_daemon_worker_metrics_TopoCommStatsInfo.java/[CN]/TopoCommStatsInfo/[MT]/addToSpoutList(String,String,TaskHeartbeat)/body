@@ -1,8 +1,0 @@
-{
-  Map<String,TaskHeartbeat> taskMap=spoutHbMap.get(componentId);
-  if (taskMap == null) {
-    taskMap=new HashMap<String,TaskHeartbeat>();
-    spoutHbMap.put(componentId,taskMap);
-  }
-  taskMap.put(taskId,taskHb);
-}

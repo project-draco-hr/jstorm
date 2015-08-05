@@ -1,0 +1,27 @@
+{
+  String confDir=(String)conf.get(ROCKSDB_ROOT_DIR);
+  if (StringUtils.isBlank(confDir) == true) {
+    throw new RuntimeException("Doesn't set rootDir of rocksDB");
+  }
+  boolean clean=ConfigExtension.getNimbusCacheReset(conf);
+  LOG.info("RocksDB reset is " + clean);
+  if (clean == true) {
+    try {
+      PathUtils.rmr(confDir);
+    }
+ catch (    IOException e) {
+      throw new RuntimeException("Failed to cleanup rooDir of rocksDB " + confDir);
+    }
+  }
+  File file=new File(confDir);
+  if (file.exists() == false) {
+    try {
+      PathUtils.local_mkdirs(confDir);
+      file=new File(confDir);
+    }
+ catch (    IOException e) {
+      throw new RuntimeException("Failed to mkdir rooDir of rocksDB " + confDir);
+    }
+  }
+  rootDir=file.getAbsolutePath();
+}

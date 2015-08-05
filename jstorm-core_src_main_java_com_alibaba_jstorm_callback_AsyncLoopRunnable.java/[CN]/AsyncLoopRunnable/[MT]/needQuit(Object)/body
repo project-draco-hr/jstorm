@@ -1,0 +1,21 @@
+{
+  if (rtn != null) {
+    long sleepTime=Long.parseLong(String.valueOf(rtn));
+    if (sleepTime < 0) {
+      return true;
+    }
+ else     if (sleepTime > 0) {
+      long now=System.currentTimeMillis();
+      long cost=now - lastTime;
+      long sleepMs=sleepTime * 1000 - cost;
+      if (sleepMs > 0) {
+        JStormUtils.sleepMs(sleepMs);
+        lastTime=System.currentTimeMillis();
+      }
+ else {
+        lastTime=now;
+      }
+    }
+  }
+  return false;
+}

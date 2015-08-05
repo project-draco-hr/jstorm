@@ -1,0 +1,10 @@
+{
+  LOG.info("Begin to close connection to {} and flush all data, batchQueue {}, disruptor {}",name,batchQueue.size(),disruptorQueue.population());
+  sendAllData();
+  disruptorQueue.haltWithInterrupt();
+  if (connectMyself == false) {
+    unregisterSyncMetrics();
+  }
+  super.close();
+  shutdownPool();
+}

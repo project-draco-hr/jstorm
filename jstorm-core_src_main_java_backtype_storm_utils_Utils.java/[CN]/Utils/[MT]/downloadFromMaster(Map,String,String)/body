@@ -1,0 +1,21 @@
+{
+  WritableByteChannel out=null;
+  NimbusClient client=null;
+  try {
+    client=NimbusClient.getConfiguredClient(conf,10 * 1000);
+    String id=client.getClient().beginFileDownload(file);
+    out=Channels.newChannel(new FileOutputStream(localFile));
+    while (true) {
+      ByteBuffer chunk=client.getClient().downloadChunk(id);
+      int written=out.write(chunk);
+      if (written == 0) {
+        client.getClient().finishFileDownload(id);
+        break;
+      }
+    }
+  }
+  finally {
+    if (out != null)     out.close();
+    if (client != null)     client.close();
+  }
+}

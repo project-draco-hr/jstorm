@@ -1,0 +1,14 @@
+{
+  int pos=metricFullName.indexOf(MetricRegistry.NAME_SEPERATOR);
+  if (pos < 0 || pos >= metricFullName.length() - 1) {
+    return;
+  }
+  String realHeader=metricFullName.substring(0,pos);
+  String nettyConnection=metricFullName.substring(pos + 1);
+  MetricInfo metricInfo=nettyMetricInfo.get(nettyConnection);
+  if (metricInfo == null) {
+    metricInfo=MetricThrift.mkMetricInfo();
+    nettyMetricInfo.put(nettyConnection,metricInfo);
+  }
+  MetricThrift.insert(metricInfo,realHeader,snapshot);
+}

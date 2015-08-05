@@ -1,0 +1,38 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  oprot.writeFieldBegin(TASK_ID_FIELD_DESC);
+  oprot.writeI32(struct.task_id);
+  oprot.writeFieldEnd();
+  oprot.writeFieldBegin(UPTIME_FIELD_DESC);
+  oprot.writeI32(struct.uptime);
+  oprot.writeFieldEnd();
+  if (struct.status != null) {
+    oprot.writeFieldBegin(STATUS_FIELD_DESC);
+    oprot.writeString(struct.status);
+    oprot.writeFieldEnd();
+  }
+  if (struct.host != null) {
+    oprot.writeFieldBegin(HOST_FIELD_DESC);
+    oprot.writeString(struct.host);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldBegin(PORT_FIELD_DESC);
+  oprot.writeI32(struct.port);
+  oprot.writeFieldEnd();
+  if (struct.errors != null) {
+    if (struct.is_set_errors()) {
+      oprot.writeFieldBegin(ERRORS_FIELD_DESC);
+{
+        oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.errors.size()));
+        for (        ErrorInfo _iter233 : struct.errors) {
+          _iter233.write(oprot);
+        }
+        oprot.writeListEnd();
+      }
+      oprot.writeFieldEnd();
+    }
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

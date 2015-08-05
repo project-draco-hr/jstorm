@@ -1,0 +1,6 @@
+{
+  IContext context=workerData.getContext();
+  String topologyId=workerData.getTopologyId();
+  IConnection recvConnection=context.bind(topologyId,workerData.getPort(),workerData.getDeserializeQueues());
+  workerData.setRecvConnection(recvConnection);
+}

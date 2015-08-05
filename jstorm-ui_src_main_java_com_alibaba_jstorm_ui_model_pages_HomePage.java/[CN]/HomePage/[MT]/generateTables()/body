@@ -1,0 +1,56 @@
+{
+  long start=System.nanoTime();
+  try {
+    LOG.info("ClusterPage init...");
+    Map conf=UIUtils.readUiConfig();
+    List<Map> uiClusters=ConfigExtension.getUiClusters(conf);
+    if (uiClusters == null) {
+      return;
+    }
+    TableData table=new TableData();
+    tables.add(table);
+    List<String> headers=table.getHeaders();
+    List<Map<String,ColumnData>> lines=table.getLines();
+    table.setName("Cluster List");
+    headers.add(StringUtils.capitalize(UIDef.CLUSTER));
+    headers.add(HEADER_ZK_ROOT);
+    headers.add(HEADER_ZK_SERVERS);
+    headers.add(HEADER_ZK_PORT);
+    for (    Map cluster : uiClusters) {
+      Map<String,ColumnData> line=new HashMap<String,ColumnData>();
+      lines.add(line);
+      String clusterName=ConfigExtension.getUiClusterName(cluster);
+      ColumnData clusterColumn=new ColumnData();
+      LinkData linkData=new LinkData();
+      linkData.setUrl(UIDef.LINK_TABLE_PAGE);
+      linkData.setText(clusterName);
+      linkData.addParam(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_CLUSTER);
+      linkData.addParam(UIDef.CLUSTER,clusterName);
+      clusterColumn.addLinkData(linkData);
+      line.put(StringUtils.capitalize(UIDef.CLUSTER),clusterColumn);
+      String zkRoot=ConfigExtension.getUiClusterZkRoot(cluster);
+      ColumnData zkRootColumn=new ColumnData();
+      zkRootColumn.addText(zkRoot);
+      line.put(HEADER_ZK_ROOT,zkRootColumn);
+      List<String> servers=ConfigExtension.getUiClusterZkServers(cluster);
+      ColumnData zkServerColumn=new ColumnData();
+      for (      String server : servers) {
+        zkServerColumn.addText(server);
+      }
+      line.put(HEADER_ZK_SERVERS,zkServerColumn);
+      String port=String.valueOf(ConfigExtension.getUiClusterZkPort(cluster));
+      ColumnData zkPortColumn=new ColumnData();
+      zkPortColumn.addText(port);
+      line.put(HEADER_ZK_PORT,zkPortColumn);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to get cluster information:",e);
+    throw new RuntimeException(e);
+  }
+ finally {
+    long end=System.nanoTime();
+    UIMetrics.updateHistorgram(this.getClass().getSimpleName(),(end - start) / 1000000.0d);
+    LOG.info("Finish ClusterPage");
+  }
+}

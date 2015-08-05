@@ -1,0 +1,46 @@
+{
+  if (that == null)   return false;
+  boolean this_present_nimbus_master=true && this.is_set_nimbus_master();
+  boolean that_present_nimbus_master=true && that.is_set_nimbus_master();
+  if (this_present_nimbus_master || that_present_nimbus_master) {
+    if (!(this_present_nimbus_master && that_present_nimbus_master))     return false;
+    if (!this.nimbus_master.equals(that.nimbus_master))     return false;
+  }
+  boolean this_present_nimbus_slaves=true && this.is_set_nimbus_slaves();
+  boolean that_present_nimbus_slaves=true && that.is_set_nimbus_slaves();
+  if (this_present_nimbus_slaves || that_present_nimbus_slaves) {
+    if (!(this_present_nimbus_slaves && that_present_nimbus_slaves))     return false;
+    if (!this.nimbus_slaves.equals(that.nimbus_slaves))     return false;
+  }
+  boolean this_present_supervisor_num=true;
+  boolean that_present_supervisor_num=true;
+  if (this_present_supervisor_num || that_present_supervisor_num) {
+    if (!(this_present_supervisor_num && that_present_supervisor_num))     return false;
+    if (this.supervisor_num != that.supervisor_num)     return false;
+  }
+  boolean this_present_total_port_num=true;
+  boolean that_present_total_port_num=true;
+  if (this_present_total_port_num || that_present_total_port_num) {
+    if (!(this_present_total_port_num && that_present_total_port_num))     return false;
+    if (this.total_port_num != that.total_port_num)     return false;
+  }
+  boolean this_present_used_port_num=true;
+  boolean that_present_used_port_num=true;
+  if (this_present_used_port_num || that_present_used_port_num) {
+    if (!(this_present_used_port_num && that_present_used_port_num))     return false;
+    if (this.used_port_num != that.used_port_num)     return false;
+  }
+  boolean this_present_free_port_num=true;
+  boolean that_present_free_port_num=true;
+  if (this_present_free_port_num || that_present_free_port_num) {
+    if (!(this_present_free_port_num && that_present_free_port_num))     return false;
+    if (this.free_port_num != that.free_port_num)     return false;
+  }
+  boolean this_present_version=true && this.is_set_version();
+  boolean that_present_version=true && that.is_set_version();
+  if (this_present_version || that_present_version) {
+    if (!(this_present_version && that_present_version))     return false;
+    if (!this.version.equals(that.version))     return false;
+  }
+  return true;
+}

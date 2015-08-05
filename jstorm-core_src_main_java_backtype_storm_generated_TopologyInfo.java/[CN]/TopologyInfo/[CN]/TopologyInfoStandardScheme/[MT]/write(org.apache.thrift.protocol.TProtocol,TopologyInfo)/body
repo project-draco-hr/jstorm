@@ -1,0 +1,38 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.topology != null) {
+    oprot.writeFieldBegin(TOPOLOGY_FIELD_DESC);
+    struct.topology.write(oprot);
+    oprot.writeFieldEnd();
+  }
+  if (struct.components != null) {
+    oprot.writeFieldBegin(COMPONENTS_FIELD_DESC);
+{
+      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.components.size()));
+      for (      ComponentSummary _iter244 : struct.components) {
+        _iter244.write(oprot);
+      }
+      oprot.writeListEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (struct.tasks != null) {
+    oprot.writeFieldBegin(TASKS_FIELD_DESC);
+{
+      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.tasks.size()));
+      for (      TaskSummary _iter245 : struct.tasks) {
+        _iter245.write(oprot);
+      }
+      oprot.writeListEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (struct.metrics != null) {
+    oprot.writeFieldBegin(METRICS_FIELD_DESC);
+    struct.metrics.write(oprot);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

@@ -1,0 +1,3 @@
+I iface
+getServerNettyMetric_args args
+org.apache.thrift.async.AsyncMethodCallback<NettyMetric> resultHandler

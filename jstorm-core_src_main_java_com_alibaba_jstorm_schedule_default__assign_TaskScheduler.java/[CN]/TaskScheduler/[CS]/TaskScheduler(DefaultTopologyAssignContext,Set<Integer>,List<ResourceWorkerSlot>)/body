@@ -1,0 +1,14 @@
+{
+  this.tasks=tasks;
+  LOG.info("Tasks " + tasks + " is going to be assigned in workers "+ workers);
+  this.context=context;
+  this.taskContext=new TaskAssignContext(this.buildSupervisorToWorker(workers),Common.buildSpoutOutoputAndBoltInputMap(context));
+  this.componentSelector=new ComponentNumSelector(taskContext);
+  this.inputComponentSelector=new InputComponentNumSelector(taskContext);
+  this.totalTaskNumSelector=new TotalTaskNumSelector(taskContext);
+  if (tasks.size() == 0)   return;
+  setTaskNum(tasks.size(),workerNum);
+  if (context.getAssignType() == TopologyAssignContext.ASSIGN_TYPE_REBALANCE && context.isReassign() == false) {
+    keepAssignment(context.getOldAssignment().getWorkers());
+  }
+}

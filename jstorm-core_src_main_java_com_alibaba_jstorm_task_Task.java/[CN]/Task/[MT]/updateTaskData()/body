@@ -1,0 +1,6 @@
+{
+  List<Integer> localTasks=JStormUtils.mk_list(workerData.getTaskids());
+  topologyContext.setThisWorkerTasks(localTasks);
+  userContext.setThisWorkerTasks(localTasks);
+  updateSendTargets();
+}

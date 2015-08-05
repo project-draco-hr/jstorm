@@ -1,0 +1,15 @@
+{
+  super(task,_transfer_fn,_storm_conf,innerTaskTransfer,topology_context,_user_context,_task_stats,taskStatus,_report_error);
+  this.spout=_spout;
+  this.max_spout_pending=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
+  this.nextTupleTimer=JStormMetrics.registerTaskHistogram(taskId,MetricDef.EXECUTE_TIME);
+  this.ackerTimer=JStormMetrics.registerTaskHistogram(taskId,MetricDef.ACKER_TIME);
+  this.emptyCpuCounter=new TimerRatio();
+  JStormMetrics.registerTaskGauge(emptyCpuCounter,taskId,MetricDef.EMPTY_CPU_RATIO);
+  isSpoutFullSleep=ConfigExtension.isSpoutPendFullSleep(storm_conf);
+  if (ConfigExtension.isTaskBatchTuple(storm_conf)) {
+    TaskBatchFlushTrigger batchFlushTrigger=new TaskBatchFlushTrigger(5,idStr + Constants.SYSTEM_COMPONENT_ID,(TaskBatchTransfer)_transfer_fn);
+    batchFlushTrigger.register(TimeUnit.MILLISECONDS);
+  }
+  LOG.info("isSpoutFullSleep:" + isSpoutFullSleep);
+}

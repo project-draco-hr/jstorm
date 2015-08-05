@@ -1,0 +1,7 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  if (other.is_set_error()) {
+    this.error=other.error;
+  }
+  this.error_time_secs=other.error_time_secs;
+}

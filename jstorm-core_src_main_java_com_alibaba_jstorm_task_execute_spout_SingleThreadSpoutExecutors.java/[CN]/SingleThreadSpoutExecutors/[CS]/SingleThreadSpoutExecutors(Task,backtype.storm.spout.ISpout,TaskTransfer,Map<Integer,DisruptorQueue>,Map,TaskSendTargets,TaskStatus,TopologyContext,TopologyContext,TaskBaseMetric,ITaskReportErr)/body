@@ -1,0 +1,5 @@
+{
+  super(task,_spout,_transfer_fn,innerTaskTransfer,_storm_conf,sendTargets,taskStatus,topology_context,_user_context,_task_stats,_report_error);
+  pending=new RotatingMap<Long,TupleInfo>(Acker.TIMEOUT_BUCKET_NUM,null,true);
+  super.prepare(sendTargets,_transfer_fn,topology_context);
+}

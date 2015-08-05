@@ -1,7 +1,0 @@
-{
-  WorkerClassLoader.switchThreadContext();
-  while (taskStatus.isShutdown() == false) {
-    serializeQueue.consumeBatchWhenAvailable(this);
-  }
-  WorkerClassLoader.restoreThreadContext();
-}

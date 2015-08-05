@@ -1,0 +1,28 @@
+{
+switch (field) {
+case WAIT_SECS:
+    if (value == null) {
+      unset_wait_secs();
+    }
+ else {
+      set_wait_secs((Integer)value);
+    }
+  break;
+case REASSIGN:
+if (value == null) {
+  unset_reassign();
+}
+ else {
+  set_reassign((Boolean)value);
+}
+break;
+case CONF:
+if (value == null) {
+unset_conf();
+}
+ else {
+set_conf((String)value);
+}
+break;
+}
+}

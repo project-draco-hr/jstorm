@@ -1,4 +1,0 @@
-{
-  int cutoff=TimeUtils.current_time_secs() - rolling_window_size();
-  return cleanup_rolling_window(cutoff);
-}

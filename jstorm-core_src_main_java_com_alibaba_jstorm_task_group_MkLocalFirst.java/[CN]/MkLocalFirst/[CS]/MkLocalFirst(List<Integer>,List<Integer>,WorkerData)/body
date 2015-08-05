@@ -1,0 +1,25 @@
+{
+  super(workerData);
+  intervalCheck=new IntervalCheck();
+  intervalCheck.setInterval(10);
+  this.allOutTasks.addAll(allOutTasks);
+  this.workerData=workerData;
+  List<Integer> localWorkerOutTasks=new ArrayList<Integer>();
+  for (  Integer outTask : allOutTasks) {
+    if (workerTasks.contains(outTask)) {
+      localWorkerOutTasks.add(outTask);
+    }
+  }
+  remoteOutTasks.addAll(allOutTasks);
+  if (localWorkerOutTasks.size() != 0) {
+    isLocalWorkerAvail=true;
+    localOutTasks.addAll(localWorkerOutTasks);
+    remoteOutTasks.removeAll(localWorkerOutTasks);
+  }
+ else {
+    isLocalWorkerAvail=false;
+  }
+  randomrange=new RandomRange(localOutTasks.size());
+  remoteRandomRange=new RandomRange(remoteOutTasks.size());
+  LOG.info("Local out tasks:" + localOutTasks + ", Remote out tasks:"+ remoteOutTasks);
+}

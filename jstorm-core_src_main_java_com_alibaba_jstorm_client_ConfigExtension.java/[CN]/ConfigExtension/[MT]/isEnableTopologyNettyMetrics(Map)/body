@@ -1,0 +1,3 @@
+{
+  return (Boolean)conf.get(TOPOLOGY_ENABLE_NETTY_METRICS);
+}

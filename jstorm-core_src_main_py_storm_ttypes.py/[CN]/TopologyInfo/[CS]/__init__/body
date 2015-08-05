@@ -1,0 +1,5 @@
+def __init__(self, topology=None, components=None, tasks=None, metrics=None):
+    self.topology = topology
+    self.components = components
+    self.tasks = tasks
+    self.metrics = metrics

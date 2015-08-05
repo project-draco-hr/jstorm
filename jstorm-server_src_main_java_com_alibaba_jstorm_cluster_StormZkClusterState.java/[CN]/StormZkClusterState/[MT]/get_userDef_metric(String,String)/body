@@ -1,6 +1,0 @@
-{
-  String workerMetricPath=Cluster.monitor_user_path(topologyId,workerId);
-  byte[] userMetricsData=cluster_state.get_data(workerMetricPath,false);
-  Object userMetrics=Cluster.maybe_deserialize(userMetricsData);
-  return (UserDefMetricData)userMetrics;
-}

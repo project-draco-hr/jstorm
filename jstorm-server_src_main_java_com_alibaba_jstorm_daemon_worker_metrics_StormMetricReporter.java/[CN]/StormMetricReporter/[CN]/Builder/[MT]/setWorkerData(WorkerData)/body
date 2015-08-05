@@ -1,4 +1,0 @@
-{
-  this.workerData=Data;
-  return this;
-}

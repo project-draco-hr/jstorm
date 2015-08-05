@@ -1,0 +1,7 @@
+{
+  Set<Integer> rtn=new HashSet<Integer>();
+  for (  ResourceWorkerSlot worker : workers) {
+    rtn.addAll(worker.getTasks());
+  }
+  return rtn;
+}

@@ -1,0 +1,5 @@
+{
+  this.topologyName=null;
+  set_pos_isSet(false);
+  this.pos=0;
+}

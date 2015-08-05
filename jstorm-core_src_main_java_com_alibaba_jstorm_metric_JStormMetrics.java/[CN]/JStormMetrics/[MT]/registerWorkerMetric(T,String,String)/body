@@ -1,0 +1,4 @@
+{
+  String registerName=MetricRegistry.name(name,args);
+  return workerMetrics.register(registerName,metric);
+}

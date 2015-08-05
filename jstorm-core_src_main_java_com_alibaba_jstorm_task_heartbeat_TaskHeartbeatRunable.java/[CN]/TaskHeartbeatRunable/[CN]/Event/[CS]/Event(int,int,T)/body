@@ -1,0 +1,5 @@
+{
+  this.type=type;
+  this.taskId=taskId;
+  this.value=value;
+}

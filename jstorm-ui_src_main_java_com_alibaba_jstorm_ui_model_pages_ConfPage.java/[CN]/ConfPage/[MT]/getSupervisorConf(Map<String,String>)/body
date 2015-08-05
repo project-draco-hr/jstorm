@@ -1,0 +1,20 @@
+{
+  String host=paramMap.get(UIDef.HOST);
+  String port=paramMap.get(UIDef.PORT);
+  if (host == null || port == null) {
+    throw new IllegalArgumentException("Invalid parameter, please set supervisor host and port");
+  }
+  final String PROXY_URL="http://%s:%s/logview?%s=%s";
+  String baseUrl=String.format(PROXY_URL,NetWorkUtils.host2Ip(host),port,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW_CONF);
+  String url=baseUrl;
+  HttpClient client=HttpClientBuilder.create().build();
+  HttpPost post=new HttpPost(url);
+  HttpResponse response=client.execute(post);
+  if (response.getStatusLine().getStatusCode() == 200) {
+    String data=EntityUtils.toString(response.getEntity(),"utf-8");
+    return data;
+  }
+ else {
+    return (EntityUtils.toString(response.getEntity()));
+  }
+}

@@ -1,0 +1,25 @@
+{
+  String baseUrl=String.format(PROXY_URL,NetWorkUtils.host2Ip(event.host),event.logServerPort,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD,HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW,event.logName);
+  String url=baseUrl;
+  if (event.pos != null) {
+    url+=("&" + HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_POS + "="+ event.pos);
+  }
+  HttpClient client=HttpClientBuilder.create().build();
+  HttpPost post=new HttpPost(url);
+  HttpResponse response=client.execute(post);
+  if (response.getStatusLine().getStatusCode() == 200) {
+    String data=EntityUtils.toString(response.getEntity(),ConfigExtension.getLogViewEncoding(conf));
+    String sizeStr=data.substring(0,16);
+    PageIndex.Event pageIndexEvent=new PageIndex.Event();
+    pageIndexEvent.totalSize=Long.valueOf(sizeStr);
+    pageIndexEvent.pos=JStormUtils.parseLong(event.pos,pageIndexEvent.totalSize > 0 ? pageIndexEvent.totalSize - 1 : 0);
+    pageIndexEvent.pageSize=ConfigExtension.getLogPageSize(conf);
+    pageIndexEvent.url=UIDef.LINK_LOG;
+    pageIndexEvent.paramMap=event.toMap();
+    pages=PageIndex.generatePageIndex(pageIndexEvent);
+    setLog(data);
+  }
+ else {
+    setLog(EntityUtils.toString(response.getEntity()));
+  }
+}

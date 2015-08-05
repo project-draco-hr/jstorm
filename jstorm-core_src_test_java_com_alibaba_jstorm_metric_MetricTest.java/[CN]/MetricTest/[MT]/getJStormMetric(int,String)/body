@@ -1,0 +1,16 @@
+{
+  Metric metric=null;
+  if (type == 0) {
+    metric=JStormMetrics.registerWorkerCounter("Counter",name);
+  }
+ else   if (type == 1) {
+    metric=JStormMetrics.registerWorkerMeter("Meter",name);
+  }
+ else   if (type == 2) {
+    metric=JStormMetrics.registerWorkerHistogram("Historgram",name);
+  }
+ else {
+    return null;
+  }
+  return metric;
+}

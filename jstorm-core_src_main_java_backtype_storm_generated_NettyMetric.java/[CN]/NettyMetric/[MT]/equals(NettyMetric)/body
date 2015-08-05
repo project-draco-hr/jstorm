@@ -1,0 +1,16 @@
+{
+  if (that == null)   return false;
+  boolean this_present_connections=true && this.is_set_connections();
+  boolean that_present_connections=true && that.is_set_connections();
+  if (this_present_connections || that_present_connections) {
+    if (!(this_present_connections && that_present_connections))     return false;
+    if (!this.connections.equals(that.connections))     return false;
+  }
+  boolean this_present_connectionNum=true;
+  boolean that_present_connectionNum=true;
+  if (this_present_connectionNum || that_present_connectionNum) {
+    if (!(this_present_connectionNum && that_present_connectionNum))     return false;
+    if (this.connectionNum != that.connectionNum)     return false;
+  }
+  return true;
+}

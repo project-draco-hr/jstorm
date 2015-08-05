@@ -1,0 +1,8 @@
+{
+  String taskPath=Cluster.storm_task_root(topologyId);
+  Object data=getObject(taskPath,false);
+  if (data == null) {
+    return null;
+  }
+  return (Map<Integer,TaskInfo>)data;
+}

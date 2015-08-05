@@ -1,8 +1,0 @@
-self
-hostname
-port
-gauge
-counter
-meter
-timer
-histogram

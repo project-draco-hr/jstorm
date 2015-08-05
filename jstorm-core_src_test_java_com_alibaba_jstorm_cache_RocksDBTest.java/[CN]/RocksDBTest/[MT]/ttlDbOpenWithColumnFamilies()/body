@@ -1,0 +1,37 @@
+{
+  DBOptions dbOptions=null;
+  TtlDB ttlDB=null;
+  List<ColumnFamilyDescriptor> cfNames=new ArrayList<ColumnFamilyDescriptor>();
+  List<ColumnFamilyHandle> columnFamilyHandleList=new ArrayList<ColumnFamilyHandle>();
+  cfNames.add(new ColumnFamilyDescriptor(RocksDB.DEFAULT_COLUMN_FAMILY));
+  cfNames.add(new ColumnFamilyDescriptor("new_cf".getBytes()));
+  List<Integer> ttlValues=new ArrayList<Integer>();
+  ttlValues.add(0);
+  ttlValues.add(1);
+  try {
+    System.out.println("Begin to open db");
+    dbOptions=new DBOptions().setCreateMissingColumnFamilies(true).setCreateIfMissing(true);
+    ttlDB=TtlDB.open(dbOptions,rootDir,cfNames,columnFamilyHandleList,ttlValues,false);
+    System.out.println("Successfully open db " + rootDir);
+    ttlDB.put("key".getBytes(),"value".getBytes());
+    assertThat(ttlDB.get("key".getBytes())).isEqualTo("value".getBytes());
+    ttlDB.put(columnFamilyHandleList.get(1),"key".getBytes(),"value".getBytes());
+    assertThat(ttlDB.get(columnFamilyHandleList.get(1),"key".getBytes())).isEqualTo("value".getBytes());
+    TimeUnit.SECONDS.sleep(2);
+    ttlDB.compactRange();
+    ttlDB.compactRange(columnFamilyHandleList.get(1));
+    assertThat(ttlDB.get("key".getBytes())).isNotNull();
+    assertThat(ttlDB.get(columnFamilyHandleList.get(1),"key".getBytes())).isNull();
+  }
+  finally {
+    for (    ColumnFamilyHandle columnFamilyHandle : columnFamilyHandleList) {
+      columnFamilyHandle.dispose();
+    }
+    if (ttlDB != null) {
+      ttlDB.close();
+    }
+    if (dbOptions != null) {
+      dbOptions.dispose();
+    }
+  }
+}

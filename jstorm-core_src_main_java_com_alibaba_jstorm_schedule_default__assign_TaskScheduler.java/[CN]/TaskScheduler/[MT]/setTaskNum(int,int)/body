@@ -1,0 +1,10 @@
+{
+  if (taskNum >= 0 && workerNum > 0) {
+    this.avgTaskNum=taskNum / workerNum;
+    this.leftTaskNum=taskNum % workerNum;
+    LOG.debug("avgTaskNum=" + avgTaskNum + ", leftTaskNum="+ leftTaskNum);
+  }
+ else {
+    LOG.debug("Illegal parameters, taskNum=" + taskNum + ", workerNum="+ workerNum);
+  }
+}

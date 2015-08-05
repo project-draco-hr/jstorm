@@ -1,0 +1,3 @@
+{
+  return getMetrics(Meter.class,filter);
+}

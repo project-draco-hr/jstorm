@@ -1,0 +1,90 @@
+{
+  org.apache.thrift.protocol.TField schemeField;
+  iprot.readStructBegin();
+  while (true) {
+    schemeField=iprot.readFieldBegin();
+    if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+      break;
+    }
+switch (schemeField.id) {
+case 1:
+      if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+        struct.topologyMetric=new MetricInfo();
+        struct.topologyMetric.read(iprot);
+        struct.set_topologyMetric_isSet(true);
+      }
+ else {
+        org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+      }
+    break;
+case 2:
+  if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+{
+      org.apache.thrift.protocol.TMap _map166=iprot.readMapBegin();
+      struct.componentMetric=new HashMap<String,MetricInfo>(2 * _map166.size);
+      String _key167;
+      MetricInfo _val168;
+      for (int _i169=0; _i169 < _map166.size; ++_i169) {
+        _key167=iprot.readString();
+        _val168=new MetricInfo();
+        _val168.read(iprot);
+        struct.componentMetric.put(_key167,_val168);
+      }
+      iprot.readMapEnd();
+    }
+    struct.set_componentMetric_isSet(true);
+  }
+ else {
+    org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+  }
+break;
+case 3:
+if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+{
+  org.apache.thrift.protocol.TMap _map170=iprot.readMapBegin();
+  struct.workerMetric=new HashMap<String,MetricInfo>(2 * _map170.size);
+  String _key171;
+  MetricInfo _val172;
+  for (int _i173=0; _i173 < _map170.size; ++_i173) {
+    _key171=iprot.readString();
+    _val172=new MetricInfo();
+    _val172.read(iprot);
+    struct.workerMetric.put(_key171,_val172);
+  }
+  iprot.readMapEnd();
+}
+struct.set_workerMetric_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 4:
+if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
+{
+org.apache.thrift.protocol.TMap _map174=iprot.readMapBegin();
+struct.taskMetric=new HashMap<Integer,MetricInfo>(2 * _map174.size);
+int _key175;
+MetricInfo _val176;
+for (int _i177=0; _i177 < _map174.size; ++_i177) {
+_key175=iprot.readI32();
+_val176=new MetricInfo();
+_val176.read(iprot);
+struct.taskMetric.put(_key175,_val176);
+}
+iprot.readMapEnd();
+}
+struct.set_taskMetric_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+default :
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+iprot.readFieldEnd();
+}
+iprot.readStructEnd();
+struct.validate();
+}

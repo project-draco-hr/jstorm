@@ -1,6 +1,0 @@
-{
-  scheduExec=Executors.newScheduledThreadPool(6);
-  inimubs=null;
-  conf=new HashMap<Object,Object>();
-  localMode=false;
-}

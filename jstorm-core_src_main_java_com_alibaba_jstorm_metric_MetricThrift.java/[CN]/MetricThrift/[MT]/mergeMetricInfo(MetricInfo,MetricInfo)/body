@@ -1,0 +1,10 @@
+{
+  if (to == null) {
+    to=mkMetricInfo();
+  }
+  if (from == null) {
+    return to;
+  }
+  to.get_baseMetric().putAll(from.get_baseMetric());
+  return to;
+}

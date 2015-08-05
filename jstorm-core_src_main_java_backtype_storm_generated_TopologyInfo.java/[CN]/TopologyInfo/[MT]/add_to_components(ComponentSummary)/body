@@ -1,0 +1,6 @@
+{
+  if (this.components == null) {
+    this.components=new ArrayList<ComponentSummary>();
+  }
+  this.components.add(elem);
+}

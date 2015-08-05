@@ -1,0 +1,7 @@
+self
+topology_id
+supervisor_id
+port
+workerMetric
+nettyMetric
+taskMetric

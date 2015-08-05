@@ -1,0 +1,51 @@
+{
+  int allUsedPorts=0;
+  for (  SupervisorInfo supervisor : supervisors) {
+    int supervisorUsedPorts=supervisor.getWorkerPorts().size() - supervisor.getAvailableWorkerPorts().size();
+    allUsedPorts=allUsedPorts + supervisorUsedPorts;
+  }
+  int theoryAveragePorts=(allUsedPorts + assignedWorkers.size()) / supervisors.size() + 1;
+  List<SupervisorInfo> overLoadSupervisors=new ArrayList<SupervisorInfo>();
+  int key=0;
+  Iterator<ResourceWorkerSlot> iterator=assignedWorkers.iterator();
+  while (iterator.hasNext()) {
+    if (supervisors.size() == 0)     break;
+    if (key >= supervisors.size())     key=0;
+    SupervisorInfo supervisor=supervisors.get(key);
+    int supervisorUsedPorts=supervisor.getWorkerPorts().size() - supervisor.getAvailableWorkerPorts().size();
+    if (supervisorUsedPorts < theoryAveragePorts) {
+      ResourceWorkerSlot worker=iterator.next();
+      if (worker.getNodeId() != null)       continue;
+      worker.setHostname(supervisor.getHostName());
+      worker.setNodeId(supervisor.getSupervisorId());
+      worker.setPort(supervisor.getAvailableWorkerPorts().iterator().next());
+      supervisor.getAvailableWorkerPorts().remove(worker.getPort());
+      if (supervisor.getAvailableWorkerPorts().size() == 0)       supervisors.remove(supervisor);
+      key++;
+    }
+ else {
+      overLoadSupervisors.add(supervisor);
+      supervisors.remove(supervisor);
+    }
+  }
+  Collections.sort(overLoadSupervisors,new Comparator<SupervisorInfo>(){
+    @Override public int compare(    SupervisorInfo o1,    SupervisorInfo o2){
+      return -NumberUtils.compare(o1.getAvailableWorkerPorts().size(),o2.getAvailableWorkerPorts().size());
+    }
+  }
+);
+  key=0;
+  while (iterator.hasNext()) {
+    if (overLoadSupervisors.size() == 0)     break;
+    if (key >= overLoadSupervisors.size())     key=0;
+    ResourceWorkerSlot worker=iterator.next();
+    if (worker.getNodeId() != null)     continue;
+    SupervisorInfo supervisor=overLoadSupervisors.get(key);
+    worker.setHostname(supervisor.getHostName());
+    worker.setNodeId(supervisor.getSupervisorId());
+    worker.setPort(supervisor.getAvailableWorkerPorts().iterator().next());
+    supervisor.getAvailableWorkerPorts().remove(worker.getPort());
+    if (supervisor.getAvailableWorkerPorts().size() == 0)     overLoadSupervisors.remove(supervisor);
+    key++;
+  }
+}

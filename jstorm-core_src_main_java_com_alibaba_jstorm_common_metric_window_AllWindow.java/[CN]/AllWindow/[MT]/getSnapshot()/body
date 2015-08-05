@@ -1,0 +1,9 @@
+{
+  V ret=merger.merge(new ArrayList<V>(),unflushed,this);
+  if (ret == null) {
+    return defaultValue;
+  }
+ else {
+    return ret;
+  }
+}

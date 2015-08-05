@@ -1,0 +1,41 @@
+{
+  LOG.info("Starting Supervisor with conf " + conf);
+  String path=StormConfig.supervisorTmpDir(conf);
+  FileUtils.cleanDirectory(new File(path));
+  StormClusterState stormClusterState=Cluster.mk_storm_cluster_state(conf);
+  LocalState localState=StormConfig.supervisorState(conf);
+  String supervisorId=(String)localState.get(Common.LS_ID);
+  if (supervisorId == null) {
+    supervisorId=UUID.randomUUID().toString();
+    localState.put(Common.LS_ID,supervisorId);
+  }
+  Vector<AsyncLoopThread> threads=new Vector<AsyncLoopThread>();
+  Heartbeat hb=new Heartbeat(conf,stormClusterState,supervisorId);
+  hb.update();
+  AsyncLoopThread heartbeat=new AsyncLoopThread(hb,false,null,Thread.MIN_PRIORITY,true);
+  threads.add(heartbeat);
+  AsyncLoopThread syncContainerHbThread=SyncContainerHb.mkSupervisorInstance(conf);
+  if (syncContainerHbThread != null) {
+    threads.add(syncContainerHbThread);
+  }
+  EventManagerImp processEventManager=new EventManagerImp();
+  AsyncLoopThread processEventThread=new AsyncLoopThread(processEventManager);
+  threads.add(processEventThread);
+  ConcurrentHashMap<String,String> workerThreadPids=new ConcurrentHashMap<String,String>();
+  SyncProcessEvent syncProcessEvent=new SyncProcessEvent(supervisorId,conf,localState,workerThreadPids,sharedContext);
+  EventManagerImp syncSupEventManager=new EventManagerImp();
+  AsyncLoopThread syncSupEventThread=new AsyncLoopThread(syncSupEventManager);
+  threads.add(syncSupEventThread);
+  SyncSupervisorEvent syncSupervisorEvent=new SyncSupervisorEvent(supervisorId,conf,processEventManager,syncSupEventManager,stormClusterState,localState,syncProcessEvent,hb);
+  int syncFrequence=JStormUtils.parseInt(conf.get(Config.SUPERVISOR_MONITOR_FREQUENCY_SECS));
+  EventManagerPusher syncSupervisorPusher=new EventManagerPusher(syncSupEventManager,syncSupervisorEvent,syncFrequence);
+  AsyncLoopThread syncSupervisorThread=new AsyncLoopThread(syncSupervisorPusher);
+  threads.add(syncSupervisorThread);
+  Httpserver httpserver=null;
+  if (StormConfig.local_mode(conf) == false) {
+    int port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
+    httpserver=new Httpserver(port,conf);
+    httpserver.start();
+  }
+  return new SupervisorManger(conf,supervisorId,threads,syncSupEventManager,processEventManager,httpserver,stormClusterState,workerThreadPids);
+}

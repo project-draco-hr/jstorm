@@ -1,0 +1,4 @@
+def __init__(self, nimbus=None, supervisors=None, topologies=None):
+    self.nimbus = nimbus
+    self.supervisors = supervisors
+    self.topologies = topologies

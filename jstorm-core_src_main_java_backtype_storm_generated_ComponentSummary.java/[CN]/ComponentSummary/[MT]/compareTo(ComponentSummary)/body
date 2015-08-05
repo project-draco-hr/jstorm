@@ -1,0 +1,57 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  lastComparison=Boolean.valueOf(is_set_name()).compareTo(other.is_set_name());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_name()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.name,other.name);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_parallel()).compareTo(other.is_set_parallel());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_parallel()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.parallel,other.parallel);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_type()).compareTo(other.is_set_type());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_type()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.type,other.type);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_task_ids()).compareTo(other.is_set_task_ids());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_task_ids()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.task_ids,other.task_ids);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_errors()).compareTo(other.is_set_errors());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_errors()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.errors,other.errors);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

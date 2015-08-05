@@ -1,0 +1,8 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.host))
+    value = ((value * 31) ^ hash(self.supervisor_id))
+    value = ((value * 31) ^ hash(self.uptime_secs))
+    value = ((value * 31) ^ hash(self.num_workers))
+    value = ((value * 31) ^ hash(self.num_used_workers))
+    return value

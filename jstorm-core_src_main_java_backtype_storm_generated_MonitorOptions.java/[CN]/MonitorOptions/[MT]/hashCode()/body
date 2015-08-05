@@ -1,0 +1,7 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_isEnable=true && (is_set_isEnable());
+  list.add(present_isEnable);
+  if (present_isEnable)   list.add(isEnable);
+  return list.hashCode();
+}

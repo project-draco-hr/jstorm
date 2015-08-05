@@ -1,4 +1,3 @@
 {
   _sum+=tuple.getInteger(1);
-  LOG.info("---UpdateGlobalCount.execute(), _sum=" + _sum);
 }

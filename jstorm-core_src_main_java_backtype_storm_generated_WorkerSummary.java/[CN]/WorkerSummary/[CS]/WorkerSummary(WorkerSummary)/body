@@ -1,0 +1,15 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  this.port=other.port;
+  this.uptime=other.uptime;
+  if (other.is_set_topology()) {
+    this.topology=other.topology;
+  }
+  if (other.is_set_tasks()) {
+    List<TaskComponent> __this__tasks=new ArrayList<TaskComponent>(other.tasks.size());
+    for (    TaskComponent other_element : other.tasks) {
+      __this__tasks.add(new TaskComponent(other_element));
+    }
+    this.tasks=__this__tasks;
+  }
+}

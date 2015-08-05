@@ -1,0 +1,100 @@
+{
+  this.conf=conf;
+  this.context=context;
+  this.topologyId=topology_id;
+  this.supervisorId=supervisor_id;
+  this.port=port;
+  this.workerId=worker_id;
+  this.shutdown=new AtomicBoolean(false);
+  this.monitorEnable=new AtomicBoolean(true);
+  this.topologyStatus=StatusType.active;
+  if (StormConfig.cluster_mode(conf).equals("distributed")) {
+    String pidDir=StormConfig.worker_pids_root(conf,worker_id);
+    JStormServerUtils.createPid(pidDir);
+  }
+  this.zkClusterstate=ZkTool.mk_distributed_cluster_state(conf);
+  this.zkCluster=Cluster.mk_storm_cluster_state(zkClusterstate);
+  Map rawConf=StormConfig.read_supervisor_topology_conf(conf,topology_id);
+  this.stormConf=new HashMap<Object,Object>();
+  this.stormConf.putAll(conf);
+  this.stormConf.putAll(rawConf);
+  ConfigExtension.setLocalSupervisorId(stormConf,supervisorId);
+  ConfigExtension.setLocalWorkerId(stormConf,workerId);
+  ConfigExtension.setLocalWorkerPort(stormConf,port);
+  ControlMessage.setPort(port);
+  Metric.setEnable(ConfigExtension.isEnablePerformanceMetrics(stormConf));
+  LOG.info("Worker Configuration " + stormConf);
+  try {
+    boolean enableClassloader=ConfigExtension.isEnableTopologyClassLoader(stormConf);
+    boolean enableDebugClassloader=ConfigExtension.isEnableClassloaderDebug(stormConf);
+    if (jar_path == null && enableClassloader == true && !conf.get(Config.STORM_CLUSTER_MODE).equals("local")) {
+      LOG.error("enable classloader, but not app jar");
+      throw new InvalidParameterException();
+    }
+    URL[] urlArray=new URL[0];
+    if (jar_path != null) {
+      String[] paths=jar_path.split(":");
+      Set<URL> urls=new HashSet<URL>();
+      for (      String path : paths) {
+        if (StringUtils.isBlank(path))         continue;
+        URL url=new URL("File:" + path);
+        urls.add(url);
+      }
+      urlArray=urls.toArray(new URL[0]);
+    }
+    WorkerClassLoader.mkInstance(urlArray,ClassLoader.getSystemClassLoader(),ClassLoader.getSystemClassLoader().getParent(),enableClassloader,enableDebugClassloader);
+  }
+ catch (  Exception e) {
+    LOG.error("init jarClassLoader error!",e);
+    throw new InvalidParameterException();
+  }
+  if (this.context == null) {
+    this.context=TransportFactory.makeContext(stormConf);
+  }
+  boolean disruptorUseSleep=ConfigExtension.isDisruptorUseSleep(stormConf);
+  DisruptorQueue.setUseSleep(disruptorUseSleep);
+  boolean isLimited=ConfigExtension.getTopologyBufferSizeLimited(stormConf);
+  DisruptorQueue.setLimited(isLimited);
+  LOG.info("Disruptor use sleep:" + disruptorUseSleep + ", limited size:"+ isLimited);
+  int buffer_size=Utils.getInt(conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
+  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(conf);
+  this.transferQueue=DisruptorQueue.mkInstance("TotalTransfer",ProducerType.MULTI,buffer_size,waitStrategy);
+  this.transferQueue.consumerStarted();
+  this.sendingQueue=DisruptorQueue.mkInstance("TotalSending",ProducerType.MULTI,buffer_size,waitStrategy);
+  this.sendingQueue.consumerStarted();
+  this.nodeportSocket=new ConcurrentHashMap<WorkerSlot,IConnection>();
+  this.taskNodeport=new ConcurrentHashMap<Integer,WorkerSlot>();
+  this.workerToResource=new ConcurrentSkipListSet<ResourceWorkerSlot>();
+  this.innerTaskTransfer=new ConcurrentHashMap<Integer,DisruptorQueue>();
+  this.deserializeQueues=new ConcurrentHashMap<Integer,DisruptorQueue>();
+  this.tasksToComponent=new ConcurrentHashMap<Integer,String>();
+  this.componentToSortedTasks=new ConcurrentHashMap<String,List<Integer>>();
+  Assignment assignment=zkCluster.assignment_info(topologyId,null);
+  if (assignment == null) {
+    String errMsg="Failed to get Assignment of " + topologyId;
+    LOG.error(errMsg);
+    throw new RuntimeException(errMsg);
+  }
+  workerToResource.addAll(assignment.getWorkers());
+  this.taskids=assignment.getCurrentWorkerTasks(supervisorId,port);
+  if (taskids.size() == 0) {
+    throw new RuntimeException("No tasks running current workers");
+  }
+  LOG.info("Current worker taskList:" + taskids);
+  rawTopology=StormConfig.read_supervisor_topology_code(conf,topology_id);
+  sysTopology=Common.system_topology(stormConf,rawTopology);
+  generateMaps();
+  contextMaker=new ContextMaker(this);
+  outTaskStatus=new ConcurrentHashMap<Integer,Boolean>();
+  threadPool=Executors.newScheduledThreadPool(THREAD_POOL_NUM);
+  TimerTrigger.setScheduledExecutorService(threadPool);
+  try {
+    Long tmp=StormConfig.read_supervisor_topology_timestamp(conf,topology_id);
+    assignmentTS=(tmp == null ? System.currentTimeMillis() : tmp);
+  }
+ catch (  FileNotFoundException e) {
+    assignmentTS=System.currentTimeMillis();
+  }
+  outboundTasks=new HashSet<Integer>();
+  LOG.info("Successfully create WorkerData");
+}

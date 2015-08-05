@@ -1,0 +1,16 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_port=true;
+  list.add(present_port);
+  if (present_port)   list.add(port);
+  boolean present_uptime=true;
+  list.add(present_uptime);
+  if (present_uptime)   list.add(uptime);
+  boolean present_topology=true && (is_set_topology());
+  list.add(present_topology);
+  if (present_topology)   list.add(topology);
+  boolean present_tasks=true && (is_set_tasks());
+  list.add(present_tasks);
+  if (present_tasks)   list.add(tasks);
+  return list.hashCode();
+}

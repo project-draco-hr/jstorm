@@ -1,0 +1,5 @@
+{
+  final long elapsed=System.currentTimeMillis() - startTime;
+  timer.update(elapsed,TimeUnit.MILLISECONDS);
+  return elapsed;
+}

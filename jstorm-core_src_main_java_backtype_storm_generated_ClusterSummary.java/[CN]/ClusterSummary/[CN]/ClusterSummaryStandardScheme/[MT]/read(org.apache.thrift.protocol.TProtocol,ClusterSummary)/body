@@ -1,0 +1,65 @@
+{
+  org.apache.thrift.protocol.TField schemeField;
+  iprot.readStructBegin();
+  while (true) {
+    schemeField=iprot.readFieldBegin();
+    if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+      break;
+    }
+switch (schemeField.id) {
+case 1:
+      if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+        struct.nimbus=new NimbusSummary();
+        struct.nimbus.read(iprot);
+        struct.set_nimbus_isSet(true);
+      }
+ else {
+        org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+      }
+    break;
+case 2:
+  if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+{
+      org.apache.thrift.protocol.TList _list82=iprot.readListBegin();
+      struct.supervisors=new ArrayList<SupervisorSummary>(_list82.size);
+      SupervisorSummary _elem83;
+      for (int _i84=0; _i84 < _list82.size; ++_i84) {
+        _elem83=new SupervisorSummary();
+        _elem83.read(iprot);
+        struct.supervisors.add(_elem83);
+      }
+      iprot.readListEnd();
+    }
+    struct.set_supervisors_isSet(true);
+  }
+ else {
+    org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+  }
+break;
+case 3:
+if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+{
+  org.apache.thrift.protocol.TList _list85=iprot.readListBegin();
+  struct.topologies=new ArrayList<TopologySummary>(_list85.size);
+  TopologySummary _elem86;
+  for (int _i87=0; _i87 < _list85.size; ++_i87) {
+    _elem86=new TopologySummary();
+    _elem86.read(iprot);
+    struct.topologies.add(_elem86);
+  }
+  iprot.readListEnd();
+}
+struct.set_topologies_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+default :
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+iprot.readFieldEnd();
+}
+iprot.readStructEnd();
+struct.validate();
+}

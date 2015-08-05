@@ -1,0 +1,3 @@
+I iface
+getSupervisorWorkers_args args
+org.apache.thrift.async.AsyncMethodCallback<SupervisorWorkers> resultHandler

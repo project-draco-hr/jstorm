@@ -1,0 +1,4 @@
+{
+  String stormPath=Cluster.storm_path(topologyId);
+  setObject(stormPath,stormBase);
+}

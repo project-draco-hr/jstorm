@@ -1,0 +1,13 @@
+{
+  Map<String,TaskHeartbeat> ret=new HashMap<String,TaskHeartbeat>();
+  List<String> taskList=zkCluster.heartbeat_tasks(topologyId);
+  for (  String taskId : taskList) {
+    TaskHeartbeat hb=zkCluster.task_heartbeat(topologyId,Integer.valueOf(taskId));
+    if (hb == null) {
+      LOG.error("Failed to get hearbeat of " + topologyId + ":"+ taskId);
+      continue;
+    }
+    ret.put(taskId,hb);
+  }
+  return ret;
+}

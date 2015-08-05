@@ -1,0 +1,10 @@
+{
+  Map<String,ColumnData> line=new HashMap<String,ColumnData>();
+  for (  String key : headers) {
+    String value=getValue(metricInfo,key,window);
+    ColumnData columnData=new ColumnData();
+    columnData.addText(value);
+    line.put(key,columnData);
+  }
+  return line;
+}

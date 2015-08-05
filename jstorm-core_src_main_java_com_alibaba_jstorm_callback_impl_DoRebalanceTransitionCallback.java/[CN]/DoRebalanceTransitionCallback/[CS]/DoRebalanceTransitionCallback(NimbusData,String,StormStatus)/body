@@ -1,0 +1,6 @@
+{
+  this.data=data;
+  this.topologyid=topologyid;
+  this.oldStatus=status;
+  this.newTasks=new HashSet<Integer>();
+}

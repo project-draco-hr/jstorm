@@ -1,0 +1,15 @@
+{
+  LOG.info("Begin to init rocksDB of {}",rootDir);
+  Options dbOptions=null;
+  try {
+    dbOptions=new Options().setCreateMissingColumnFamilies(true).setCreateIfMissing(true);
+    List<ColumnFamilyHandle> columnFamilyHandleList=new ArrayList<ColumnFamilyHandle>();
+    db=RocksDB.open(dbOptions,rootDir);
+    LOG.info("Successfully init rocksDB of {}",rootDir);
+  }
+  finally {
+    if (dbOptions != null) {
+      dbOptions.dispose();
+    }
+  }
+}

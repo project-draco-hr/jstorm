@@ -1,0 +1,5 @@
+{
+  String component=topologyContext.getThisComponentId();
+  Map<String,Map<String,MkGrouper>> streamComponentGrouper=Common.outbound_components(topologyContext,workerData);
+  return new TaskSendTargets(stormConf,component,streamComponentGrouper,topologyContext,taskStats);
+}

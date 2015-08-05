@@ -1,0 +1,18 @@
+{
+  if (StringUtils.isBlank(name)) {
+    throw new RuntimeException("TopologyName is empty");
+  }
+  try {
+    String topologyId=client.getClient().getTopologyId(name);
+    if (StringUtils.isBlank(topologyId) == false) {
+      return true;
+    }
+    return false;
+  }
+ catch (  NotAliveException e) {
+    return false;
+  }
+catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

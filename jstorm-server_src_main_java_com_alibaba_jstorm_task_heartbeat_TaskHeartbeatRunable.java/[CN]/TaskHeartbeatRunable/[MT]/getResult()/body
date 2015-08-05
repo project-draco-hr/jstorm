@@ -1,9 +1,0 @@
-{
-  if (active.get() == true) {
-    return frequence;
-  }
- else {
-    LOG.info("Successfully shutdown Task's headbeat thread");
-    return -1;
-  }
-}

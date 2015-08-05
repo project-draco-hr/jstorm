@@ -1,0 +1,7 @@
+{
+switch (field) {
+case TOPOLOGY_NAME:
+    return get_topologyName();
+}
+throw new IllegalStateException();
+}

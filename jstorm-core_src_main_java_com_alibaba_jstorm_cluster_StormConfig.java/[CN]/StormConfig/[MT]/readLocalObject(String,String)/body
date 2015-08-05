@@ -1,0 +1,19 @@
+{
+  String errMsg="Failed to get topology configuration of " + topologyId + " file:"+ readFile;
+  byte[] bconf=FileUtils.readFileToByteArray(new File(readFile));
+  if (bconf == null) {
+    errMsg+=", due to failed to read";
+    LOG.error(errMsg);
+    throw new IOException(errMsg);
+  }
+  Object ret=null;
+  try {
+    ret=Utils.javaDeserialize(bconf);
+  }
+ catch (  Exception e) {
+    errMsg+=", due to failed to serialized the data";
+    LOG.error(errMsg);
+    throw new IOException(errMsg);
+  }
+  return ret;
+}

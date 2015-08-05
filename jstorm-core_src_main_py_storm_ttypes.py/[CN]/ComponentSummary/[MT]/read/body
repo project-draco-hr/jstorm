@@ -1,0 +1,49 @@
+def read(self, iprot):
+    if ((iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and isinstance(iprot.trans, TTransport.CReadableTransport) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+        return
+    iprot.readStructBegin()
+    while True:
+        (fname, ftype, fid) = iprot.readFieldBegin()
+        if (ftype == TType.STOP):
+            break
+        if (fid == 1):
+            if (ftype == TType.STRING):
+                self.name = iprot.readString().decode('utf-8')
+            else:
+                iprot.skip(ftype)
+        elif (fid == 2):
+            if (ftype == TType.I32):
+                self.parallel = iprot.readI32()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 3):
+            if (ftype == TType.STRING):
+                self.type = iprot.readString().decode('utf-8')
+            else:
+                iprot.skip(ftype)
+        elif (fid == 4):
+            if (ftype == TType.LIST):
+                self.task_ids = []
+                (_etype194, _size191) = iprot.readListBegin()
+                for _i195 in xrange(_size191):
+                    _elem196 = iprot.readI32()
+                    self.task_ids.append(_elem196)
+                iprot.readListEnd()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 5):
+            if (ftype == TType.LIST):
+                self.errors = []
+                (_etype200, _size197) = iprot.readListBegin()
+                for _i201 in xrange(_size197):
+                    _elem202 = ErrorInfo()
+                    _elem202.read(iprot)
+                    self.errors.append(_elem202)
+                iprot.readListEnd()
+            else:
+                iprot.skip(ftype)
+        else:
+            iprot.skip(ftype)
+        iprot.readFieldEnd()
+    iprot.readStructEnd()

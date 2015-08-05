@@ -1,8 +1,0 @@
-{
-  String metricName;
-  if (prefix == null)   metricName=name;
- else   metricName=prefix + "-" + name;
-  Gauge<Float> ret=registerQueue(metricName,queue);
-  updateMetric(prefix,name,metricType,ret,idStr);
-  return ret;
-}

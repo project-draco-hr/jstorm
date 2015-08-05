@@ -1,4 +1,0 @@
-{
-  String userMetricPath=Cluster.monitor_user_path(topologyId,workerId);
-  cluster_state.set_data(userMetricPath,Utils.serialize(metricInfo));
-}

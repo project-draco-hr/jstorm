@@ -1,0 +1,12 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TASK_ID:
+    return is_set_taskId();
+case COMPONENT:
+  return is_set_component();
+}
+throw new IllegalStateException();
+}

@@ -1,0 +1,8 @@
+{
+  masterCodeDir=null;
+  this.nodeHost=new HashMap<String,String>();
+  this.taskStartTimeSecs=new HashMap<Integer,Integer>();
+  this.workers=new HashSet<ResourceWorkerSlot>();
+  this.timeStamp=System.currentTimeMillis();
+  this.type=AssignmentType.Assign;
+}

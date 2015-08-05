@@ -1,3 +1,0 @@
-{
-  return zmq_connect(true,host,port);
-}

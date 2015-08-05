@@ -1,0 +1,4 @@
+{
+  this.paramMap=paramMap;
+  init();
+}

@@ -1,0 +1,7 @@
+{
+switch (field) {
+case METRIC_WINDOW:
+    return get_metricWindow();
+}
+throw new IllegalStateException();
+}

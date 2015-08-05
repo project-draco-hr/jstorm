@@ -1,8 +1,0 @@
-self
-task_id
-component_id
-gauge
-counter
-meter
-timer
-histogram

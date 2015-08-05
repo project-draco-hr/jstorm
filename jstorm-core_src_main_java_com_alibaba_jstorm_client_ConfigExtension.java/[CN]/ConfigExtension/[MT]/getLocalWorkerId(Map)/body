@@ -1,0 +1,3 @@
+{
+  return (String)conf.get(LOCLA_WORKER_ID);
+}

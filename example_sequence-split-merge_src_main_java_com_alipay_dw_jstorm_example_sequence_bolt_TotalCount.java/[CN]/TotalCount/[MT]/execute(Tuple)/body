@@ -4,10 +4,7 @@
     return;
   }
   long before=System.currentTimeMillis();
-  myTimer.start();
   try {
-    myCounter.inc();
-    myMeter.mark();
     if (checkTupleId) {
       Long tupleId=input.getLong(0);
       if (tupleId <= lastTupleId) {
@@ -27,8 +24,5 @@
     }
   }
   finally {
-    myTimer.stop();
   }
-  long after=System.currentTimeMillis();
-  myJStormHistogram.update(after - before);
 }

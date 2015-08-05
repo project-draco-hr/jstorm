@@ -1,0 +1,13 @@
+def process_getTopologyInfoByName(self, seqid, iprot, oprot):
+    args = getTopologyInfoByName_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getTopologyInfoByName_result()
+    try:
+        result.success = self._handler.getTopologyInfoByName(args.topologyName)
+    except NotAliveException as e:
+        result.e = e
+    oprot.writeMessageBegin('getTopologyInfoByName', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

@@ -1,0 +1,11 @@
+{
+  for (int m=0; m < 2; m++) {
+    Input input=new Input();
+    input.metric=getMetric(m);
+    input.firstRunSeconds=20;
+    input.interruptSeconds=0;
+    input.endRunSeconds=0;
+    Output result=testTimes(input);
+    System.out.println(input.metric.getClass().getSimpleName() + ":" + result.output);
+  }
+}

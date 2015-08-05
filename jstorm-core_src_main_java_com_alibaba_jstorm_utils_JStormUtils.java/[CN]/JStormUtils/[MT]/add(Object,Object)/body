@@ -1,0 +1,32 @@
+{
+  if (oldValue == null) {
+    return newValue;
+  }
+ else   if (newValue == null) {
+    return oldValue;
+  }
+  if (oldValue instanceof Long) {
+    return (Long)oldValue + (Long)newValue;
+  }
+ else   if (oldValue instanceof Double) {
+    return (Double)oldValue + (Double)newValue;
+  }
+ else   if (oldValue instanceof Integer) {
+    return (Integer)oldValue + (Integer)newValue;
+  }
+ else   if (oldValue instanceof Float) {
+    return (Float)oldValue + (Float)newValue;
+  }
+ else   if (oldValue instanceof Short) {
+    return (Short)oldValue + (Short)newValue;
+  }
+ else   if (oldValue instanceof BigInteger) {
+    return ((BigInteger)oldValue).add((BigInteger)newValue);
+  }
+ else   if (oldValue instanceof Number) {
+    return ((Number)oldValue).doubleValue() + ((Number)newValue).doubleValue();
+  }
+ else {
+    return null;
+  }
+}

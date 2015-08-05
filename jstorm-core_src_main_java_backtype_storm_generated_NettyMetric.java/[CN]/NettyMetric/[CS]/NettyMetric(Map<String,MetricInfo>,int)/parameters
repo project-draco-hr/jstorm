@@ -1,0 +1,2 @@
+Map<String,MetricInfo> connections
+int connectionNum

@@ -1,3 +1,0 @@
-Map<String,List<TaskSummary>> taskMap
-TaskSummary t
-String componentId

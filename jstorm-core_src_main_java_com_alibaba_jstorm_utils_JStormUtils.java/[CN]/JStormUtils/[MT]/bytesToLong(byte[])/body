@@ -1,0 +1,6 @@
+{
+  ByteBuffer buffer=ByteBuffer.allocate(Long.SIZE);
+  buffer.put(bytes);
+  buffer.flip();
+  return buffer.getLong();
+}

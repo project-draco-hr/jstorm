@@ -1,9 +1,0 @@
-{
-  for (  Entry<String,Map<MetricType,Double>> entry : histogramMapKV.entrySet()) {
-    String name=entry.getKey();
-    Map<MetricType,Double> typeMap=entry.getValue();
-    for (    Entry<MetricType,Double> typeEntry : typeMap.entrySet()) {
-      kVMap.put(name + "_" + typeEntry.getKey().toString(),typeEntry.getValue());
-    }
-  }
-}

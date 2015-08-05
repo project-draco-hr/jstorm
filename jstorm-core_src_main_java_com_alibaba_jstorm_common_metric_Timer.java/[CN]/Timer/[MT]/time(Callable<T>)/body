@@ -1,0 +1,9 @@
+{
+  final long startTime=System.currentTimeMillis();
+  try {
+    return event.call();
+  }
+  finally {
+    update(System.currentTimeMillis() - startTime);
+  }
+}

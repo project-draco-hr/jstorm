@@ -1,0 +1,23 @@
+{
+  if (other.is_set_supervisor()) {
+    this.supervisor=new SupervisorSummary(other.supervisor);
+  }
+  if (other.is_set_workers()) {
+    List<WorkerSummary> __this__workers=new ArrayList<WorkerSummary>(other.workers.size());
+    for (    WorkerSummary other_element : other.workers) {
+      __this__workers.add(new WorkerSummary(other_element));
+    }
+    this.workers=__this__workers;
+  }
+  if (other.is_set_workerMetric()) {
+    Map<String,MetricInfo> __this__workerMetric=new HashMap<String,MetricInfo>(other.workerMetric.size());
+    for (    Map.Entry<String,MetricInfo> other_element : other.workerMetric.entrySet()) {
+      String other_element_key=other_element.getKey();
+      MetricInfo other_element_value=other_element.getValue();
+      String __this__workerMetric_copy_key=other_element_key;
+      MetricInfo __this__workerMetric_copy_value=new MetricInfo(other_element_value);
+      __this__workerMetric.put(__this__workerMetric_copy_key,__this__workerMetric_copy_value);
+    }
+    this.workerMetric=__this__workerMetric;
+  }
+}

@@ -1,0 +1,71 @@
+{
+  Map<String,List<String>> workerId2Pids=new HashMap<String,List<String>>();
+  boolean localMode=false;
+  int maxWaitTime=0;
+  if (killingWorkers == null)   killingWorkers=new HashMap<String,Integer>();
+  for (  Entry<String,String> entry : removed.entrySet()) {
+    String workerId=entry.getKey();
+    String topologyId=entry.getValue();
+    List<String> pids=null;
+    try {
+      pids=getPid(conf,workerId);
+    }
+ catch (    IOException e1) {
+      LOG.error("Failed to get pid for " + workerId + " of "+ topologyId);
+    }
+    workerId2Pids.put(workerId,pids);
+    if (killingWorkers.get(workerId) == null) {
+      killingWorkers.put(workerId,TimeUtils.current_time_secs());
+      LOG.info("Begin to shut down " + topologyId + ":"+ workerId);
+      try {
+        String threadPid=workerThreadPids.get(workerId);
+        if (threadPid != null) {
+          ProcessSimulator.killProcess(threadPid);
+          localMode=true;
+          continue;
+        }
+        for (        String pid : pids) {
+          JStormUtils.process_killed(Integer.parseInt(pid));
+        }
+        if (taskCleanupTimeoutMap != null && taskCleanupTimeoutMap.get(topologyId) != null) {
+          maxWaitTime=Math.max(maxWaitTime,taskCleanupTimeoutMap.get(topologyId));
+        }
+ else {
+          maxWaitTime=Math.max(maxWaitTime,ConfigExtension.getTaskCleanupTimeoutSec(conf));
+        }
+      }
+ catch (      Exception e) {
+        LOG.info("Failed to shutdown ",e);
+      }
+    }
+  }
+  if (block) {
+    JStormUtils.sleepMs(maxWaitTime);
+  }
+  for (  Entry<String,String> entry : removed.entrySet()) {
+    String workerId=entry.getKey();
+    String topologyId=entry.getValue();
+    List<String> pids=workerId2Pids.get(workerId);
+    int cleanupTimeout;
+    if (taskCleanupTimeoutMap != null && taskCleanupTimeoutMap.get(topologyId) != null) {
+      cleanupTimeout=taskCleanupTimeoutMap.get(topologyId);
+    }
+ else {
+      cleanupTimeout=ConfigExtension.getTaskCleanupTimeoutSec(conf);
+    }
+    int initCleaupTime=killingWorkers.get(workerId);
+    if (TimeUtils.current_time_secs() - initCleaupTime > cleanupTimeout) {
+      if (localMode == false) {
+        for (        String pid : pids) {
+          JStormUtils.ensure_process_killed(Integer.parseInt(pid));
+          if (cgroupManager != null) {
+            cgroupManager.shutDownWorker(workerId,true);
+          }
+        }
+      }
+      tryCleanupWorkerDir(conf,workerId);
+      LOG.info("Successfully shut down " + workerId);
+      killingWorkers.remove(workerId);
+    }
+  }
+}

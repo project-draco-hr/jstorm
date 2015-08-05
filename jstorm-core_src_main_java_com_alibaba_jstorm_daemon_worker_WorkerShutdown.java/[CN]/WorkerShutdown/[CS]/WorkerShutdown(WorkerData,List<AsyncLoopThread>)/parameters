@@ -1,0 +1,2 @@
+WorkerData workerData
+List<AsyncLoopThread> _threads

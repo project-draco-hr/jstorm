@@ -1,0 +1,3 @@
+{
+  SystemOperation.mount("test","/cgroup/cpu","cgroup","cpu");
+}

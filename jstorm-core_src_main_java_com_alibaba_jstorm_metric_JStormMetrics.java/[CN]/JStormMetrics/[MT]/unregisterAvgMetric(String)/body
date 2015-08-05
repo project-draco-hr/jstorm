@@ -1,0 +1,3 @@
+{
+  MetricDef.MERGE_AVG_TAG.remove(name);
+}

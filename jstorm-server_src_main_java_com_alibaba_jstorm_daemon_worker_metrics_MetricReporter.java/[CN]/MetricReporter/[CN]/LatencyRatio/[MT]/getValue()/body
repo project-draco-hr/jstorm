@@ -1,4 +1,0 @@
-{
-  Snapshot snapshot=timer.getSnapshot();
-  return snapshot.getMedian() / 1000000;
-}

@@ -1,0 +1,19 @@
+{
+  String host=paramMap.get(UIDef.HOST);
+  String port=paramMap.get(UIDef.PORT);
+  String dir=paramMap.get(UIDef.DIR);
+  String clusterName=paramMap.get(UIDef.CLUSTER);
+  if (StringUtils.isBlank(host)) {
+    throw new IllegalArgumentException("Please set host");
+  }
+ else   if (StringUtils.isBlank(port)) {
+    throw new IllegalArgumentException("Please set port");
+  }
+ else   if (StringUtils.isBlank(dir)) {
+    throw new IllegalArgumentException("Please set dir");
+  }
+  this.host=host;
+  this.port=port;
+  this.dir=dir;
+  this.clusterName=clusterName;
+}

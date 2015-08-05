@@ -1,0 +1,12 @@
+{
+  this.shutdowntasks=workerData.getShutdownTasks();
+  this.threads=_threads;
+  this.shutdown=workerData.getShutdown();
+  this.nodeportSocket=workerData.getNodeportSocket();
+  this.context=workerData.getContext();
+  this.zkCluster=workerData.getZkCluster();
+  this.cluster_state=workerData.getZkClusterstate();
+  this.threadPool=workerData.getThreadPool();
+  this.recvConnection=workerData.getRecvConnection();
+  Runtime.getRuntime().addShutdownHook(new Thread(this));
+}

@@ -1,0 +1,8 @@
+{
+  this.timeout=timeout;
+  this.conf=conf;
+  this.type=type;
+  this.asUser=asUser;
+  getMaster(conf,host,port);
+  reconnect();
+}

@@ -1,0 +1,10 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_host=true && (is_set_host());
+  list.add(present_host);
+  if (present_host)   list.add(host);
+  boolean present_uptime_secs=true && (is_set_uptime_secs());
+  list.add(present_uptime_secs);
+  if (present_uptime_secs)   list.add(uptime_secs);
+  return list.hashCode();
+}

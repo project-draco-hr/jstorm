@@ -1,0 +1,8 @@
+{
+  this();
+  this.name=name;
+  this.parallel=parallel;
+  set_parallel_isSet(true);
+  this.type=type;
+  this.task_ids=task_ids;
+}

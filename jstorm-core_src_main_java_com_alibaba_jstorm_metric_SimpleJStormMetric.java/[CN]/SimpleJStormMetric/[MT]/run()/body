@@ -1,0 +1,8 @@
+{
+  Map<String,Metric> map=metrics.getMetrics();
+  for (  Entry<String,Metric> entry : map.entrySet()) {
+    String key=entry.getKey();
+    Metric metric=entry.getValue();
+    LOG.info(key + ":" + metric.getSnapshot());
+  }
+}

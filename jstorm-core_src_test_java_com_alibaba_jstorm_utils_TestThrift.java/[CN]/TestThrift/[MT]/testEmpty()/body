@@ -1,0 +1,4 @@
+{
+  MetricInfo metricInfo=new MetricInfo();
+  System.out.println("base:" + metricInfo.get_baseMetric());
+}

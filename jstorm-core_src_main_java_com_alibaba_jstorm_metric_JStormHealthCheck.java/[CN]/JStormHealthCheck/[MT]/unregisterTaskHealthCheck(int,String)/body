@@ -1,0 +1,6 @@
+{
+  HealthCheckRegistry healthCheckRegister=taskHealthCheckMap.get(taskId);
+  if (healthCheckRegister != null) {
+    healthCheckRegister.unregister(name);
+  }
+}

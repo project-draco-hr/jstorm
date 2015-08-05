@@ -1,0 +1,4 @@
+{
+  this.connectionNum=connectionNum;
+  set_connectionNum_isSet(true);
+}

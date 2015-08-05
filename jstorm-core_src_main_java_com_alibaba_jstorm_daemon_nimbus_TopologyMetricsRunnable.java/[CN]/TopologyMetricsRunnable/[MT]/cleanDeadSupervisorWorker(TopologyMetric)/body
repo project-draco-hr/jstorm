@@ -1,0 +1,15 @@
+{
+  List<String> removeList=new ArrayList<String>();
+  Map<String,MetricInfo> workerMetric=metric.get_workerMetric();
+  if (workerMetric == null) {
+    return;
+  }
+  for (  String hostPort : workerMetric.keySet()) {
+    if (hostPort.startsWith(DEAD_SUPERVISOR_HEAD)) {
+      removeList.add(hostPort);
+    }
+  }
+  for (  String removed : removeList) {
+    workerMetric.remove(removed);
+  }
+}

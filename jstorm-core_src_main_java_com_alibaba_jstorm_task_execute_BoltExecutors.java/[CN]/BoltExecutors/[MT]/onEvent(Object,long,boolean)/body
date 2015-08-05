@@ -1,0 +1,26 @@
+{
+  if (event == null) {
+    return;
+  }
+  long start=System.nanoTime();
+  try {
+    if (event instanceof Tuple) {
+      processTupleEvent((Tuple)event);
+    }
+ else     if (event instanceof BatchTuple) {
+      for (      Tuple tuple : ((BatchTuple)event).getTuples()) {
+        processTupleEvent((Tuple)tuple);
+      }
+    }
+ else     if (event instanceof TimerTrigger.TimerEvent) {
+      processTimerEvent((TimerTrigger.TimerEvent)event);
+    }
+ else {
+      LOG.warn("Bolt executor received unknown message");
+    }
+  }
+  finally {
+    long end=System.nanoTime();
+    boltExeTimer.update((end - start) / 1000000.0d);
+  }
+}

@@ -1,0 +1,6 @@
+def __init__(self, name=None, parallel=None, type=None, task_ids=None, errors=None):
+    self.name = name
+    self.parallel = parallel
+    self.type = type
+    self.task_ids = task_ids
+    self.errors = errors

@@ -1,0 +1,6 @@
+{
+  if (this.metricWindow == null) {
+    this.metricWindow=new HashMap<Integer,Double>();
+  }
+  this.metricWindow.put(key,val);
+}

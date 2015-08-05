@@ -1,0 +1,20 @@
+{
+  if (time == null) {
+    return MINUTE_WINDOW_STR;
+  }
+ else   if (time.equals(MINUTE_WINDOW)) {
+    return MINUTE_WINDOW_STR;
+  }
+ else   if (time.equals(HOUR_WINDOW)) {
+    return HOUR_WINDOW_STR;
+  }
+ else   if (time.equals(DAY_WINDOW)) {
+    return DAY_WINDOW_STR;
+  }
+ else   if (time.equals(ALL_TIME_WINDOW)) {
+    return ALL_WINDOW_STR;
+  }
+ else {
+    return MINUTE_WINDOW_STR;
+  }
+}

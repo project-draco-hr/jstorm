@@ -1,0 +1,4 @@
+{
+  String path=Cluster.taskerror_path(topologyId,taskId);
+  cluster_state.delete_node(path);
+}

@@ -1,0 +1,67 @@
+{
+  final LinkedBlockingDeque<String> getQueue=new LinkedBlockingDeque<String>();
+  final LinkedBlockingDeque<String> rmQueue=new LinkedBlockingDeque<String>();
+  final int TIMES=10000000;
+  Thread putThread=new Thread(new Runnable(){
+    RunCounter runCounter=new RunCounter("Put");
+    @Override public void run(){
+      for (int i=0; i < TIMES; i++) {
+        String key="Key" + i;
+        cache.put(key,key);
+        runCounter.count(1l);
+        getQueue.offer(key);
+      }
+      getQueue.offer(null);
+      System.out.println("Shutdown ");
+    }
+  }
+);
+  Thread getThread=new Thread(new Runnable(){
+    RunCounter runCounter=new RunCounter("Get");
+    @Override public void run(){
+      while (true) {
+        String key=null;
+        try {
+          key=getQueue.take();
+        }
+ catch (        InterruptedException e) {
+          e.printStackTrace();
+        }
+        if (key == null) {
+          break;
+        }
+        cache.get(key);
+        runCounter.count(1l);
+        rmQueue.offer(key);
+      }
+      System.out.println("Shutdown get");
+    }
+  }
+);
+  Thread rmThread=new Thread(new Runnable(){
+    RunCounter runCounter=new RunCounter("Rm");
+    @Override public void run(){
+      while (true) {
+        String key=null;
+        try {
+          key=rmQueue.take();
+        }
+ catch (        InterruptedException e) {
+          e.printStackTrace();
+        }
+        if (key == null) {
+          break;
+        }
+        cache.remove(key);
+        runCounter.count(1l);
+      }
+      System.out.println("Shutdown rm");
+    }
+  }
+);
+  System.out.println("Start performance test");
+  putThread.start();
+  getThread.start();
+  rmThread.start();
+  JStormUtils.sleepMs(1000000);
+}

@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(WORKER_CPU_CORE_UPPER_LIMIT),1);
+}

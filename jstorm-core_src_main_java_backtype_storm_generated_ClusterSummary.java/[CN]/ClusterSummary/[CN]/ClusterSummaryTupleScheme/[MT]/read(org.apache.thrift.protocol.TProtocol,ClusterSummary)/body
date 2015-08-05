@@ -1,0 +1,28 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.nimbus=new NimbusSummary();
+  struct.nimbus.read(iprot);
+  struct.set_nimbus_isSet(true);
+{
+    org.apache.thrift.protocol.TList _list92=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.supervisors=new ArrayList<SupervisorSummary>(_list92.size);
+    SupervisorSummary _elem93;
+    for (int _i94=0; _i94 < _list92.size; ++_i94) {
+      _elem93=new SupervisorSummary();
+      _elem93.read(iprot);
+      struct.supervisors.add(_elem93);
+    }
+  }
+  struct.set_supervisors_isSet(true);
+{
+    org.apache.thrift.protocol.TList _list95=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.topologies=new ArrayList<TopologySummary>(_list95.size);
+    TopologySummary _elem96;
+    for (int _i97=0; _i97 < _list95.size; ++_i97) {
+      _elem96=new TopologySummary();
+      _elem96.read(iprot);
+      struct.topologies.add(_elem96);
+    }
+  }
+  struct.set_topologies_isSet(true);
+}

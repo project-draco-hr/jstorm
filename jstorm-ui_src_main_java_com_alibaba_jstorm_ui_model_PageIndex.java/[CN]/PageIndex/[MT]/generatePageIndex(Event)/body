@@ -1,0 +1,36 @@
+{
+  List<PageIndex> ret=new ArrayList<PageIndex>();
+  long pageNum=(event.totalSize + event.pageSize - 1) / event.pageSize;
+  long currentPageIndex=event.pos / event.pageSize;
+  if (pageNum <= 10) {
+    for (long i=pageNum - 1; i >= 0; i--) {
+      insertPage(i,String.valueOf(i),i == currentPageIndex,event,ret);
+    }
+    return ret;
+  }
+  if (pageNum - currentPageIndex < 5) {
+    for (long i=pageNum - 1; i >= currentPageIndex; i--) {
+      insertPage(i,String.valueOf(i),i == currentPageIndex,event,ret);
+    }
+  }
+ else {
+    insertPage(pageNum - 1,"End",pageNum - 1 == currentPageIndex,event,ret);
+    insertPage(currentPageIndex + 4,"...",false,event,ret);
+    for (long i=currentPageIndex + 3; i >= currentPageIndex; i--) {
+      insertPage(i,String.valueOf(i),i == currentPageIndex,event,ret);
+    }
+  }
+  if (currentPageIndex < 5) {
+    for (long i=currentPageIndex - 1; i > 0; i--) {
+      insertPage(i,String.valueOf(i),i == currentPageIndex,event,ret);
+    }
+  }
+ else {
+    for (long i=currentPageIndex - 1; i >= currentPageIndex - 3; i--) {
+      insertPage(i,String.valueOf(i),i == currentPageIndex,event,ret);
+    }
+    insertPage(currentPageIndex - 4,"...",false,event,ret);
+    insertPage(0,"Begin",0 == currentPageIndex,event,ret);
+  }
+  return ret;
+}

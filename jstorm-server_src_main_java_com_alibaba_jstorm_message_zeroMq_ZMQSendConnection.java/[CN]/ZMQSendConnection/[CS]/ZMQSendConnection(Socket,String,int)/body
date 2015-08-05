@@ -1,6 +1,0 @@
-{
-  socket=_socket;
-  prefix=JStormServerUtils.getName(host,port);
-  timer=Metrics.registerTimer(prefix,MetricDef.ZMQ_SEND_TIME,null,Metrics.MetricType.WORKER);
-  histogram=Metrics.registerHistograms(prefix,MetricDef.ZMQ_SEND_MSG_SIZE,null,Metrics.MetricType.WORKER);
-}

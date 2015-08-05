@@ -1,0 +1,5 @@
+{
+  while (shutdown.get() == false) {
+    serializeQueue.consumeBatchWhenAvailable(this);
+  }
+}

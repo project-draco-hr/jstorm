@@ -1,0 +1,5 @@
+{
+synchronized (this) {
+    unflushed=updater.update(obj,unflushed);
+  }
+}

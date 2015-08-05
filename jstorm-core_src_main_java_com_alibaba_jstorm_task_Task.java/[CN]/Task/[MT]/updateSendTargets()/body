@@ -1,0 +1,9 @@
+{
+  if (taskSendTargets != null) {
+    Map<String,Map<String,MkGrouper>> streamComponentGrouper=Common.outbound_components(topologyContext,workerData);
+    taskSendTargets.updateStreamCompGrouper(streamComponentGrouper);
+  }
+ else {
+    LOG.error("taskSendTargets is null when trying to update it.");
+  }
+}

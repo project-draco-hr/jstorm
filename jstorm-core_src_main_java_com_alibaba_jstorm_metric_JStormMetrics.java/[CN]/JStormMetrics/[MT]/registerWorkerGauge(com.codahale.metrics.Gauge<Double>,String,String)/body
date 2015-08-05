@@ -1,0 +1,5 @@
+{
+  Gauge<Double> ret=new Gauge<Double>(rawGauge);
+  registerWorkerMetric(ret,name,args);
+  return ret;
+}

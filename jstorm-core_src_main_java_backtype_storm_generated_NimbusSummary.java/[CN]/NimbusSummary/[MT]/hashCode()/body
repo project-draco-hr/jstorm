@@ -1,0 +1,25 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_nimbus_master=true && (is_set_nimbus_master());
+  list.add(present_nimbus_master);
+  if (present_nimbus_master)   list.add(nimbus_master);
+  boolean present_nimbus_slaves=true && (is_set_nimbus_slaves());
+  list.add(present_nimbus_slaves);
+  if (present_nimbus_slaves)   list.add(nimbus_slaves);
+  boolean present_supervisor_num=true;
+  list.add(present_supervisor_num);
+  if (present_supervisor_num)   list.add(supervisor_num);
+  boolean present_total_port_num=true;
+  list.add(present_total_port_num);
+  if (present_total_port_num)   list.add(total_port_num);
+  boolean present_used_port_num=true;
+  list.add(present_used_port_num);
+  if (present_used_port_num)   list.add(used_port_num);
+  boolean present_free_port_num=true;
+  list.add(present_free_port_num);
+  if (present_free_port_num)   list.add(free_port_num);
+  boolean present_version=true && (is_set_version());
+  list.add(present_version);
+  if (present_version)   list.add(version);
+  return list.hashCode();
+}

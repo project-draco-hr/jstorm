@@ -1,0 +1,5 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.initial_status=backtype.storm.generated.TopologyInitialStatus.findByValue(iprot.readI32());
+  struct.set_initial_status_isSet(true);
+}

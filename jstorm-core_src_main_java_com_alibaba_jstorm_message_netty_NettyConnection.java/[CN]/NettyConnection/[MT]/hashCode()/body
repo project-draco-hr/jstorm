@@ -1,0 +1,7 @@
+{
+  final int prime=31;
+  int result=1;
+  result=prime * result + ((clientPort == null) ? 0 : clientPort.hashCode());
+  result=prime * result + ((serverPort == null) ? 0 : serverPort.hashCode());
+  return result;
+}

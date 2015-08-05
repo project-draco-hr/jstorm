@@ -1,0 +1,13 @@
+{
+  this.startTime=System.currentTimeMillis();
+  this.interval=interval;
+  this.intervalCheck=new IntervalCheck();
+  this.intervalCheck.setInterval(interval);
+  this.currBucketTime=getCurrBucketTime();
+  this.bucketNum=windowSecond / interval;
+  this.windowSecond=(bucketNum) * interval;
+  this.buckets=new TreeMap<Integer,V>();
+  this.updater=updater;
+  this.merger=merger;
+  this.defaultValue=defaultValue;
+}

@@ -1,0 +1,13 @@
+{
+  BatchTuple ret=new BatchTuple();
+  int offset=0;
+  while (offset < ser.length) {
+    int tupleSize=Utils.readIntFromByteArray(ser,offset);
+    offset+=4;
+    ByteBuffer buff=ByteBuffer.allocate(tupleSize);
+    buff.put(ser,offset,tupleSize);
+    ret.addToBatch(deserialize(buff.array()));
+    offset+=tupleSize;
+  }
+  return ret;
+}

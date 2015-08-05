@@ -1,4 +1,0 @@
-{
-  reporter1Minute.start(1,TimeUnit.MINUTES);
-  reporter10Minute.start(10,TimeUnit.MINUTES);
-}

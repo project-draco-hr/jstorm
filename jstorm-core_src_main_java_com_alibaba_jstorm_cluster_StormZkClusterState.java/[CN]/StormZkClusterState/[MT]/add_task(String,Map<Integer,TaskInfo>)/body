@@ -1,0 +1,8 @@
+{
+  String stormTaskPath=Cluster.storm_task_root(topologyId);
+  Object data=getObject(stormTaskPath,false);
+  if (data != null) {
+    ((Map<Integer,TaskInfo>)data).putAll(taskInfoMap);
+    setObject(stormTaskPath,data);
+  }
+}

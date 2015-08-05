@@ -1,0 +1,5 @@
+{
+  Meter ret=(Meter)Builder.mkInstance(Builder.METER);
+  registerTaskMetric(ret,taskId,name,args);
+  return ret;
+}

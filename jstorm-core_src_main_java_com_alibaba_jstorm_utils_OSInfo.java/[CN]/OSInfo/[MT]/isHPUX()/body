@@ -1,0 +1,3 @@
+{
+  return OS.indexOf("hp-ux") >= 0;
+}

@@ -1,0 +1,7 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  this.taskId=other.taskId;
+  if (other.is_set_component()) {
+    this.component=other.component;
+  }
+}

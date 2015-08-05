@@ -1,0 +1,18 @@
+{
+switch (fieldId) {
+case 1:
+    return TASK_ID;
+case 2:
+  return UPTIME;
+case 3:
+return STATUS;
+case 4:
+return HOST;
+case 5:
+return PORT;
+case 6:
+return ERRORS;
+default :
+return null;
+}
+}

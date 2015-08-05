@@ -1,0 +1,4 @@
+{
+  System.out.println("Error: Invalid parameters!");
+  System.out.println("USAGE: jstorm rebalance [-r] TopologyName [DelayTime] [NewConfig]");
+}

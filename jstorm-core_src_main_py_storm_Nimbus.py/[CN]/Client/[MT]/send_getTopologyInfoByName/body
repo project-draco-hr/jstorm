@@ -1,0 +1,7 @@
+def send_getTopologyInfoByName(self, topologyName):
+    self._oprot.writeMessageBegin('getTopologyInfoByName', TMessageType.CALL, self._seqid)
+    args = getTopologyInfoByName_args()
+    args.topologyName = topologyName
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

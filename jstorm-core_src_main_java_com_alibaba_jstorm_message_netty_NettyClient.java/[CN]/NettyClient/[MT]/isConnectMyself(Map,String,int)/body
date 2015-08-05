@@ -1,0 +1,9 @@
+{
+  String localIp=NetWorkUtils.ip();
+  String remoteIp=NetWorkUtils.host2Ip(host);
+  int localPort=ConfigExtension.getLocalWorkerPort(conf);
+  if (localPort == port && localIp.equals(remoteIp)) {
+    return true;
+  }
+  return false;
+}

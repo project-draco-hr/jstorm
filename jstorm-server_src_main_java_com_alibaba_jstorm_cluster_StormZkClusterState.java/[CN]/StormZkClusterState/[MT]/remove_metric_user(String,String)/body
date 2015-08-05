@@ -1,4 +1,0 @@
-{
-  String monitorUserPath=Cluster.monitor_user_path(topologyId,workerId);
-  cluster_state.delete_node(monitorUserPath);
-}

@@ -1,0 +1,2 @@
+AtomicReference<MessageBatch> messageBatchRef
+String name

@@ -1,0 +1,4 @@
+{
+  this.sum=sum;
+  this.times=times;
+}

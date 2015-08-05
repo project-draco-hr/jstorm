@@ -1,0 +1,22 @@
+{
+  try {
+    MetricInfo workerMetricInfo=computWorkerMetrics();
+    Map<Integer,MetricInfo> taskMetricMap=computeTaskMetrics();
+    WorkerUploadMetrics upload=new WorkerUploadMetrics();
+    upload.set_topology_id(topologyId);
+    upload.set_supervisor_id(supervisorId);
+    upload.set_port(port);
+    upload.set_workerMetric(workerMetricInfo);
+    upload.set_nettyMetric(new NettyMetric(JStormMetrics.getExposeNettyMetrics(),JStormMetrics.getExposeNettyMetrics().size()));
+    upload.set_taskMetric(taskMetricMap);
+    uploadMetric(upload);
+    healthCheck();
+    LOG.info("Successfully upload worker's metrics");
+    LOG.info(Utils.toPrettyJsonString(workerMetricInfo));
+    LOG.info(Utils.toPrettyJsonString(JStormMetrics.getExposeNettyMetrics()));
+    LOG.info(Utils.toPrettyJsonString(taskMetricMap));
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to upload worker metrics",e);
+  }
+}

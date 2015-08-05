@@ -1,0 +1,5 @@
+{
+  super.channelDisconnected(ctx,e);
+  LOG.info("Connection channelDisconnected {}",e.getChannel().getRemoteAddress());
+  MessageDecoder.removeTransmitHistogram(e.getChannel());
+}

@@ -1,0 +1,12 @@
+{
+  Map<String,Integer> components=taskContext.getWorkerToComponentNum().get(worker);
+  if (components == null) {
+    components=new HashMap<String,Integer>();
+    taskContext.getWorkerToComponentNum().put(worker,components);
+  }
+  Integer componentNum=components.get(name);
+  if (componentNum == null) {
+    componentNum=0;
+  }
+  components.put(name,++componentNum);
+}

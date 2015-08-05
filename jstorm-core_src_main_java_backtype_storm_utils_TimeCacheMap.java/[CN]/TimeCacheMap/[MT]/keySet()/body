@@ -1,0 +1,9 @@
+{
+  Set<K> ret=new HashSet<K>();
+synchronized (_lock) {
+    for (    HashMap<K,V> bucket : _buckets) {
+      ret.addAll(bucket.keySet());
+    }
+  }
+  return ret;
+}

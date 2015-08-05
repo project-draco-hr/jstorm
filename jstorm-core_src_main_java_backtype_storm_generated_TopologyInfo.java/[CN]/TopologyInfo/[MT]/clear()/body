@@ -1,0 +1,6 @@
+{
+  this.topology=null;
+  this.components=null;
+  this.tasks=null;
+  this.metrics=null;
+}

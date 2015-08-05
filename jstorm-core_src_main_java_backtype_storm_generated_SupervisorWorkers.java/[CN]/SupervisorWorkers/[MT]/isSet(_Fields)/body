@@ -1,0 +1,14 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case SUPERVISOR:
+    return is_set_supervisor();
+case WORKERS:
+  return is_set_workers();
+case WORKER_METRIC:
+return is_set_workerMetric();
+}
+throw new IllegalStateException();
+}

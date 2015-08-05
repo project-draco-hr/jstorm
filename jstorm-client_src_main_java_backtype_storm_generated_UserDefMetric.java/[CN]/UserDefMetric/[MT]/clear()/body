@@ -1,6 +1,0 @@
-{
-  this.type=null;
-  this.name=null;
-  set_value_isSet(false);
-  this.value=0.0;
-}

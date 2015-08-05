@@ -1,0 +1,31 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.topology=new TopologySummary();
+  struct.topology.read(iprot);
+  struct.set_topology_isSet(true);
+{
+    org.apache.thrift.protocol.TList _list248=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.components=new ArrayList<ComponentSummary>(_list248.size);
+    ComponentSummary _elem249;
+    for (int _i250=0; _i250 < _list248.size; ++_i250) {
+      _elem249=new ComponentSummary();
+      _elem249.read(iprot);
+      struct.components.add(_elem249);
+    }
+  }
+  struct.set_components_isSet(true);
+{
+    org.apache.thrift.protocol.TList _list251=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.tasks=new ArrayList<TaskSummary>(_list251.size);
+    TaskSummary _elem252;
+    for (int _i253=0; _i253 < _list251.size; ++_i253) {
+      _elem252=new TaskSummary();
+      _elem252.read(iprot);
+      struct.tasks.add(_elem252);
+    }
+  }
+  struct.set_tasks_isSet(true);
+  struct.metrics=new TopologyMetric();
+  struct.metrics.read(iprot);
+  struct.set_metrics_isSet(true);
+}

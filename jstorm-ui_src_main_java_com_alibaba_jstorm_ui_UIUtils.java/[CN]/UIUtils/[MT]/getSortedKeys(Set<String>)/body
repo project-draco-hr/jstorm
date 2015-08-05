@@ -1,0 +1,15 @@
+{
+  List<String> ret=new ArrayList<String>();
+  Set<String> temp=new TreeSet<String>();
+  temp.addAll(keys);
+  checkKey(ret,temp,MetricDef.CPU_USED_RATIO);
+  checkKey(ret,temp,MetricDef.MEMORY_USED);
+  checkKey(ret,temp,MetricDef.SEND_TPS);
+  checkKey(ret,temp,MetricDef.RECV_TPS);
+  checkKey(ret,temp,MetricDef.EMMITTED_NUM);
+  checkKey(ret,temp,MetricDef.ACKED_NUM);
+  checkKey(ret,temp,MetricDef.FAILED_NUM);
+  checkKey(ret,temp,MetricDef.PROCESS_LATENCY);
+  ret.addAll(temp);
+  return ret;
+}

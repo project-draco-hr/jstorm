@@ -1,6 +1,0 @@
-{
-  String userMetricName=getMetricName(taskid,name);
-  JStormHistogram ret=Metrics.registerHistograms(userMetricName);
-  Metrics.registerUserDefine(userMetricName,ret,callback);
-  return ret;
-}

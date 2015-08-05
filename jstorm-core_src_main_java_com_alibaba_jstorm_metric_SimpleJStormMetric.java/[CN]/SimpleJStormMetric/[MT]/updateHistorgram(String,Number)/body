@@ -1,0 +1,14 @@
+{
+  LOG.debug(name + ":" + obj.doubleValue());
+  Histogram histogram=(Histogram)metrics.getMetric(name);
+  if (histogram == null) {
+    try {
+      histogram=registerHistorgram(name);
+    }
+ catch (    Exception e) {
+      LOG.info("{} has been register",name);
+      return;
+    }
+  }
+  histogram.update(obj);
+}

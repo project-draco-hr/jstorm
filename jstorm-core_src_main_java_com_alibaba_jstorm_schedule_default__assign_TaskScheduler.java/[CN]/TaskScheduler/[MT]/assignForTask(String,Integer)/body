@@ -1,0 +1,4 @@
+{
+  ResourceWorkerSlot worker=chooseWorker(name,new ArrayList<ResourceWorkerSlot>(taskContext.getWorkerToTaskNum().keySet()));
+  pushTaskToWorker(task,name,worker);
+}

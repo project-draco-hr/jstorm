@@ -1,3 +1,0 @@
-{
-  logger.info(marker,"type=COUNTER, name={}, count={}",name,counter.getCount());
-}

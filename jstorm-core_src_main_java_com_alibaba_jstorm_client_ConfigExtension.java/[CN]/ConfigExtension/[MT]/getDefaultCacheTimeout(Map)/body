@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(DEFAULT_CACHE_TIMEOUT),60);
+}

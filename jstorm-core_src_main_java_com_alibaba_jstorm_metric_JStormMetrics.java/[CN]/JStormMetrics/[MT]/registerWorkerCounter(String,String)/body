@@ -1,0 +1,5 @@
+{
+  Counter<Double> ret=(Counter<Double>)Builder.mkInstance(Builder.COUNTER);
+  registerWorkerMetric(ret,name,args);
+  return ret;
+}

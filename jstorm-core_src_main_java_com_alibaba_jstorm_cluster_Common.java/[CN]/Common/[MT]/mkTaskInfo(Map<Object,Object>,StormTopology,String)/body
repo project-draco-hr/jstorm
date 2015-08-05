@@ -1,0 +1,8 @@
+{
+  Map<Integer,TaskInfo> rtn=new TreeMap<Integer,TaskInfo>();
+  Integer count=0;
+  count=mkTaskMaker(stormConf,sysTopology.get_bolts(),rtn,count);
+  count=mkTaskMaker(stormConf,sysTopology.get_spouts(),rtn,count);
+  count=mkTaskMaker(stormConf,sysTopology.get_state_spouts(),rtn,count);
+  return rtn;
+}

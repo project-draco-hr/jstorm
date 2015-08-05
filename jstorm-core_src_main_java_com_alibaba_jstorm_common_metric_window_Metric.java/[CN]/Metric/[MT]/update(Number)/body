@@ -1,0 +1,11 @@
+{
+  if (enable == false) {
+    return;
+  }
+  if (intervalCheck.check()) {
+    flush();
+  }
+synchronized (this) {
+    unflushed=updater.update(obj,unflushed);
+  }
+}

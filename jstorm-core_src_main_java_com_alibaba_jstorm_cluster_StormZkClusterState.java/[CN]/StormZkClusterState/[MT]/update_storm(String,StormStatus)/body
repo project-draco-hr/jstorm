@@ -1,0 +1,7 @@
+{
+  StormBase base=this.storm_base(topologyId,null);
+  if (base != null) {
+    base.setStatus(newElems);
+    setObject(Cluster.storm_path(topologyId),base);
+  }
+}

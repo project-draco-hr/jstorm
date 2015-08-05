@@ -1,6 +1,0 @@
-{
-  if (this.task_metric_list == null) {
-    this.task_metric_list=new ArrayList<TaskMetricData>();
-  }
-  this.task_metric_list.add(elem);
-}

@@ -1,7 +1,0 @@
-{
-  prot.writeMessageBegin(new org.apache.thrift7.protocol.TMessage("getTopologyInfoByName",org.apache.thrift7.protocol.TMessageType.CALL,0));
-  getTopologyInfoByName_args args=new getTopologyInfoByName_args();
-  args.set_topologyName(topologyName);
-  args.write(prot);
-  prot.writeMessageEnd();
-}

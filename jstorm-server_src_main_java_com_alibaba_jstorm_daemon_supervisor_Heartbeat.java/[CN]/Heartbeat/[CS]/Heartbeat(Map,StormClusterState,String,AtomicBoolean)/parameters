@@ -1,4 +1,0 @@
-Map conf
-StormClusterState stormClusterState
-String supervisorId
-AtomicBoolean active

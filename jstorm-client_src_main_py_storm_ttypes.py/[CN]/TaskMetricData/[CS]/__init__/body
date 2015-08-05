@@ -1,8 +1,0 @@
-def __init__(self, task_id=None, component_id=None, gauge=None, counter=None, meter=None, timer=None, histogram=None):
-    self.task_id = task_id
-    self.component_id = component_id
-    self.gauge = gauge
-    self.counter = counter
-    self.meter = meter
-    self.timer = timer
-    self.histogram = histogram

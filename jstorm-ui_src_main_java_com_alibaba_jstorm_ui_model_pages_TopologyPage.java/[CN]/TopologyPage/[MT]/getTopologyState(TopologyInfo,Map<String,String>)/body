@@ -1,0 +1,8 @@
+{
+  TopologyMetric topologyMetrics=topologyInfo.get_metrics();
+  String windowStr=paramMap.get(UIDef.WINDOW);
+  Integer window=StatBuckets.getTimeKey(windowStr);
+  TableData table=UIUtils.getMetricTable(topologyMetrics.get_topologyMetric(),window);
+  table.setName(UIDef.HEADER_TOPOLOGY_METRICS + "(" + StatBuckets.getShowTimeStr(window)+ ")");
+  return table;
+}

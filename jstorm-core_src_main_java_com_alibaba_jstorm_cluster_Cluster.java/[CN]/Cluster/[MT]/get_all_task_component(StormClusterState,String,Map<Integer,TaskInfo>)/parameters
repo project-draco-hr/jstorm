@@ -1,0 +1,3 @@
+StormClusterState zkCluster
+String topologyId
+Map<Integer,TaskInfo> taskInfoMap

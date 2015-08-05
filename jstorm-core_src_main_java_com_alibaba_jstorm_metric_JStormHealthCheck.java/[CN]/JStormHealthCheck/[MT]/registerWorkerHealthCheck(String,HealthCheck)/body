@@ -1,0 +1,3 @@
+{
+  workerHealthCheck.register(name,healthCheck);
+}

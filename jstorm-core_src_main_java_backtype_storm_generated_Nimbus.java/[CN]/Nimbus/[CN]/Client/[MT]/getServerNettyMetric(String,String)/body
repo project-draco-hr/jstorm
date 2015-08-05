@@ -1,0 +1,4 @@
+{
+  send_getServerNettyMetric(topologyName,serverName);
+  return recv_getServerNettyMetric();
+}

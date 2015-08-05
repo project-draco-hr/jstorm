@@ -1,0 +1,6 @@
+{
+  if (callback != null) {
+    storm_base_callback.put(topologyId,callback);
+  }
+  return (StormBase)getObject(Cluster.storm_path(topologyId),callback != null);
+}

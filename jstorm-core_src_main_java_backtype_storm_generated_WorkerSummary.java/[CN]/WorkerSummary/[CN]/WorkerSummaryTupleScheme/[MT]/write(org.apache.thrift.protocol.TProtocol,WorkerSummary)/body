@@ -1,0 +1,12 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  oprot.writeI32(struct.port);
+  oprot.writeI32(struct.uptime);
+  oprot.writeString(struct.topology);
+{
+    oprot.writeI32(struct.tasks.size());
+    for (    TaskComponent _iter102 : struct.tasks) {
+      _iter102.write(oprot);
+    }
+  }
+}

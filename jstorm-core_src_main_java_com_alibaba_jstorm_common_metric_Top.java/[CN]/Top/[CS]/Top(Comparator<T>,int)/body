@@ -1,0 +1,9 @@
+{
+  this.comparator=comparator;
+  this.n=n;
+  this.defaultValue=new TreeSet<T>(comparator);
+  this.updater=new Top.TopUpdator<T>(comparator,n);
+  this.merger=new Top.TopMerger<T>(comparator,n);
+  this.convertor=new Top.SetToList<T>();
+  init();
+}

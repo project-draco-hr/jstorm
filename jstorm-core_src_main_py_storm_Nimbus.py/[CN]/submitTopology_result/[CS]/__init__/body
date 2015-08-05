@@ -1,0 +1,4 @@
+def __init__(self, e=None, ite=None, tae=None):
+    self.e = e
+    self.ite = ite
+    self.tae = tae

@@ -1,0 +1,27 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  if (other.is_set_topology_id()) {
+    this.topology_id=other.topology_id;
+  }
+  if (other.is_set_supervisor_id()) {
+    this.supervisor_id=other.supervisor_id;
+  }
+  this.port=other.port;
+  if (other.is_set_workerMetric()) {
+    this.workerMetric=new MetricInfo(other.workerMetric);
+  }
+  if (other.is_set_nettyMetric()) {
+    this.nettyMetric=new NettyMetric(other.nettyMetric);
+  }
+  if (other.is_set_taskMetric()) {
+    Map<Integer,MetricInfo> __this__taskMetric=new HashMap<Integer,MetricInfo>(other.taskMetric.size());
+    for (    Map.Entry<Integer,MetricInfo> other_element : other.taskMetric.entrySet()) {
+      Integer other_element_key=other_element.getKey();
+      MetricInfo other_element_value=other_element.getValue();
+      Integer __this__taskMetric_copy_key=other_element_key;
+      MetricInfo __this__taskMetric_copy_value=new MetricInfo(other_element_value);
+      __this__taskMetric.put(__this__taskMetric_copy_key,__this__taskMetric_copy_value);
+    }
+    this.taskMetric=__this__taskMetric;
+  }
+}

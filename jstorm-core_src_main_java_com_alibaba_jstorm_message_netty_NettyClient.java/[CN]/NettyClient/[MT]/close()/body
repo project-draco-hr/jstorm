@@ -1,0 +1,36 @@
+{
+  LOG.info("Close netty connection to {}",name());
+  if (being_closed.compareAndSet(false,true) == false) {
+    LOG.info("Netty client has been closed.");
+    return;
+  }
+  if (connectMyself == false) {
+    unregisterMetrics();
+  }
+  Channel channel=channelRef.get();
+  if (channel == null) {
+    LOG.info("Channel {} has been closed before",name());
+    return;
+  }
+  if (channel.isWritable()) {
+    MessageBatch toBeFlushed=messageBatchRef.getAndSet(null);
+    flushRequest(channel,toBeFlushed);
+  }
+  final long timeoutMilliSeconds=10 * 1000;
+  final long start=System.currentTimeMillis();
+  LOG.info("Waiting for pending batchs to be sent with " + name() + "..., timeout: {}ms, pendings: {}",timeoutMilliSeconds,pendings.get());
+  while (pendings.get() != 0) {
+    try {
+      long delta=System.currentTimeMillis() - start;
+      if (delta > timeoutMilliSeconds) {
+        LOG.error("Timeout when sending pending batchs with {}..., there are still {} pending batchs not sent",name(),pendings.get());
+        break;
+      }
+      Thread.sleep(1000);
+    }
+ catch (    InterruptedException e) {
+      break;
+    }
+  }
+  close_n_release();
+}

@@ -1,5 +1,0 @@
-{
-  if (skipcommon == false) {
-    cleanup_common_stats();
-  }
-}

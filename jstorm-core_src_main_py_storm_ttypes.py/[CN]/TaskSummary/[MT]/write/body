@@ -1,0 +1,34 @@
+def write(self, oprot):
+    if ((oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+        return
+    oprot.writeStructBegin('TaskSummary')
+    if (self.task_id is not None):
+        oprot.writeFieldBegin('task_id', TType.I32, 1)
+        oprot.writeI32(self.task_id)
+        oprot.writeFieldEnd()
+    if (self.uptime is not None):
+        oprot.writeFieldBegin('uptime', TType.I32, 2)
+        oprot.writeI32(self.uptime)
+        oprot.writeFieldEnd()
+    if (self.status is not None):
+        oprot.writeFieldBegin('status', TType.STRING, 3)
+        oprot.writeString(self.status.encode('utf-8'))
+        oprot.writeFieldEnd()
+    if (self.host is not None):
+        oprot.writeFieldBegin('host', TType.STRING, 4)
+        oprot.writeString(self.host.encode('utf-8'))
+        oprot.writeFieldEnd()
+    if (self.port is not None):
+        oprot.writeFieldBegin('port', TType.I32, 5)
+        oprot.writeI32(self.port)
+        oprot.writeFieldEnd()
+    if (self.errors is not None):
+        oprot.writeFieldBegin('errors', TType.LIST, 6)
+        oprot.writeListBegin(TType.STRUCT, len(self.errors))
+        for iter211 in self.errors:
+            iter211.write(oprot)
+        oprot.writeListEnd()
+        oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()

@@ -1,0 +1,19 @@
+{
+  long start=System.currentTimeMillis();
+  WorkerUploadMetrics workerMetrics=event.workerMetrics;
+  String topologyId=workerMetrics.get_topology_id();
+  if (removing.containsKey(topologyId) == true) {
+    LOG.info("Topology " + topologyId + " has been removed, skip update");
+    return;
+  }
+  Set<String> workers=topologyWorkers.get(topologyId);
+  if (workers == null) {
+    workers=new HashSet<String>();
+    topologyWorkers.put(topologyId,workers);
+  }
+  String workerSlot=getWorkerSlotName(workerMetrics.get_supervisor_id(),workerMetrics.get_port());
+  workers.add(workerSlot);
+  dbCache.put(getWorkerKey(topologyId,workerSlot),workerMetrics);
+  long end=System.currentTimeMillis();
+  updateHistogram.update((end - start));
+}

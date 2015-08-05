@@ -1,0 +1,10 @@
+{
+  byte[] data=Utils.javaSerialize(value);
+  try {
+    db.put(key.getBytes(),data);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed put into cache, " + key,e);
+    return;
+  }
+}

@@ -1,0 +1,4 @@
+{
+  if (availableWorkerPorts == null)   availableWorkerPorts=new HashSet<Integer>();
+  return availableWorkerPorts;
+}

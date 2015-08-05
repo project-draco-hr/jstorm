@@ -1,0 +1,3 @@
+def getVersion(self):
+    self.send_getVersion()
+    return self.recv_getVersion()

@@ -1,0 +1,8 @@
+{
+  Map<String,MetricInfo> metrics=supervisorWorkers.get_workerMetric();
+  if (metrics == null) {
+    LOG.error("No metrics of " + supervisorWorkers.get_supervisor().get_host());
+    return null;
+  }
+  return UIUtils.getWorkerMetricsTable(metrics,StatBuckets.ALL_TIME_WINDOW,paramMap);
+}

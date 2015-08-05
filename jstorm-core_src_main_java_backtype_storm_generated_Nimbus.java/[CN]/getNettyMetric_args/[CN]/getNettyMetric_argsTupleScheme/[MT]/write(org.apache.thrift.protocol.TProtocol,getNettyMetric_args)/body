@@ -1,0 +1,17 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  BitSet optionals=new BitSet();
+  if (struct.is_set_topologyName()) {
+    optionals.set(0);
+  }
+  if (struct.is_set_pos()) {
+    optionals.set(1);
+  }
+  oprot.writeBitSet(optionals,2);
+  if (struct.is_set_topologyName()) {
+    oprot.writeString(struct.topologyName);
+  }
+  if (struct.is_set_pos()) {
+    oprot.writeI32(struct.pos);
+  }
+}

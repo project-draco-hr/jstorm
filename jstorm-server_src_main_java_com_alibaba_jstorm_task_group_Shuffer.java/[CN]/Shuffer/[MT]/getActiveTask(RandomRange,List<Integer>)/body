@@ -1,9 +1,0 @@
-{
-  int index=randomrange.nextInt();
-  int size=outTasks.size();
-  for (int i=0; i < size; i++) {
-    if (workerData.isOutboundTaskActive(Integer.valueOf(outTasks.get(index))))     break;
- else     index=randomrange.nextInt();
-  }
-  return (index < size ? index : -1);
-}

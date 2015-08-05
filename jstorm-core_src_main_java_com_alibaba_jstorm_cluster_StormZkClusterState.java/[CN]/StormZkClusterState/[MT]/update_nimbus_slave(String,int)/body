@@ -1,0 +1,3 @@
+{
+  setTempObject(Cluster.NIMBUS_SLAVE_SUBTREE + Cluster.ZK_SEPERATOR + host,String.valueOf(time));
+}

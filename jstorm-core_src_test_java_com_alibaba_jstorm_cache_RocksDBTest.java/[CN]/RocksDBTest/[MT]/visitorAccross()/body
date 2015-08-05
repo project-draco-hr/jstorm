@@ -1,0 +1,76 @@
+{
+  DBOptions dbOptions=null;
+  TtlDB ttlDB=null;
+  List<ColumnFamilyDescriptor> cfNames=new ArrayList<ColumnFamilyDescriptor>();
+  List<ColumnFamilyHandle> columnFamilyHandleList=new ArrayList<ColumnFamilyHandle>();
+  cfNames.add(new ColumnFamilyDescriptor(RocksDB.DEFAULT_COLUMN_FAMILY));
+  cfNames.add(new ColumnFamilyDescriptor("new_cf".getBytes()));
+  List<Integer> ttlValues=new ArrayList<Integer>();
+  ttlValues.add(1);
+  ttlValues.add(0);
+  try {
+    System.out.println("Begin to open db");
+    dbOptions=new DBOptions().setCreateMissingColumnFamilies(true).setCreateIfMissing(true);
+    ttlDB=TtlDB.open(dbOptions,rootDir,cfNames,columnFamilyHandleList,ttlValues,false);
+    System.out.println("Successfully open db " + rootDir);
+    List<String> keys=new ArrayList<String>();
+    keys.add("key");
+    ttlDB.put("key".getBytes(),"key".getBytes());
+    for (int i=0; i < 2; i++) {
+      String key="key" + i;
+      keys.add(key);
+      ttlDB.put(columnFamilyHandleList.get(i),key.getBytes(),key.getBytes());
+    }
+    try {
+      byte[] value=ttlDB.get("others".getBytes());
+      if (value != null) {
+        System.out.println("Raw get :" + new String(value));
+      }
+ else {
+        System.out.println("No value of other");
+      }
+    }
+ catch (    Exception e) {
+      System.out.println("Occur exception other");
+    }
+    for (    String key : keys) {
+      try {
+        byte[] value=ttlDB.get(key.getBytes());
+        if (value != null) {
+          System.out.println("Raw get :" + new String(value));
+        }
+ else {
+          System.out.println("No value of " + key);
+        }
+      }
+ catch (      Exception e) {
+        System.out.println("Occur exception " + key + ", Raw");
+      }
+      for (int i=0; i < 2; i++) {
+        try {
+          byte[] value=ttlDB.get(columnFamilyHandleList.get(i),key.getBytes());
+          if (value != null) {
+            System.out.println("handler index" + i + " get :"+ new String(value));
+          }
+ else {
+            System.out.println("No value of index" + i + " get :"+ key);
+          }
+        }
+ catch (        Exception e) {
+          System.out.println("Occur exception " + key + ", handler index:"+ i);
+        }
+      }
+    }
+  }
+  finally {
+    for (    ColumnFamilyHandle columnFamilyHandle : columnFamilyHandleList) {
+      columnFamilyHandle.dispose();
+    }
+    if (ttlDB != null) {
+      ttlDB.close();
+    }
+    if (dbOptions != null) {
+      dbOptions.dispose();
+    }
+  }
+}

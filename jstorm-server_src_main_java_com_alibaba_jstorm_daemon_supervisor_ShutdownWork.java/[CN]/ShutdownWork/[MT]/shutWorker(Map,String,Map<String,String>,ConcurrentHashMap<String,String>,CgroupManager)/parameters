@@ -1,5 +1,0 @@
-Map conf
-String supervisorId
-Map<String,String> removed
-ConcurrentHashMap<String,String> workerThreadPids
-CgroupManager cgroupManager

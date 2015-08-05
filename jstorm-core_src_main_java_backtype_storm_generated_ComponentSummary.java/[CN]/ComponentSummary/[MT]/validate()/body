@@ -1,0 +1,14 @@
+{
+  if (!is_set_name()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'name' is unset! Struct:" + toString());
+  }
+  if (!is_set_parallel()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'parallel' is unset! Struct:" + toString());
+  }
+  if (!is_set_type()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'type' is unset! Struct:" + toString());
+  }
+  if (!is_set_task_ids()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'task_ids' is unset! Struct:" + toString());
+  }
+}

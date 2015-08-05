@@ -1,0 +1,42 @@
+{
+  int workersNum=getWorkersNum(context,num);
+  if (workersNum == 0) {
+    throw new FailedAssignTopologyException("there's no enough worker");
+  }
+  List<ResourceWorkerSlot> assignedWorkers=new ArrayList<ResourceWorkerSlot>();
+  getRightWorkers(context,needAssign,assignedWorkers,workersNum,getUserDefineWorkers(context,ConfigExtension.getUserDefineAssignment(context.getStormConf())));
+  if (ConfigExtension.isUseOldAssignment(context.getStormConf())) {
+    getRightWorkers(context,needAssign,assignedWorkers,workersNum,context.getOldWorkers());
+  }
+ else   if (context.getAssignType() == TopologyAssignContext.ASSIGN_TYPE_REBALANCE && context.isReassign() == false) {
+    int cnt=0;
+    for (    ResourceWorkerSlot worker : context.getOldWorkers()) {
+      if (cnt < workersNum) {
+        ResourceWorkerSlot resFreeWorker=new ResourceWorkerSlot();
+        resFreeWorker.setPort(worker.getPort());
+        resFreeWorker.setHostname(worker.getHostname());
+        resFreeWorker.setNodeId(worker.getNodeId());
+        assignedWorkers.add(resFreeWorker);
+        cnt++;
+      }
+ else {
+        break;
+      }
+    }
+  }
+  int defaultWorkerNum=Math.min(workersNum - assignedWorkers.size(),needAssign.size());
+  LOG.info("Get workers from user define and old assignments: " + assignedWorkers);
+  for (int i=0; i < defaultWorkerNum; i++) {
+    assignedWorkers.add(new ResourceWorkerSlot());
+  }
+  List<SupervisorInfo> isolationSupervisors=this.getIsolationSupervisors(context);
+  if (isolationSupervisors.size() != 0) {
+    putAllWorkerToSupervisor(assignedWorkers,getResAvailSupervisors(isolationSupervisors));
+  }
+ else {
+    putAllWorkerToSupervisor(assignedWorkers,getResAvailSupervisors(context.getCluster()));
+  }
+  this.setAllWorkerMemAndCpu(context.getStormConf(),assignedWorkers);
+  LOG.info("Assigned workers=" + assignedWorkers);
+  return assignedWorkers;
+}

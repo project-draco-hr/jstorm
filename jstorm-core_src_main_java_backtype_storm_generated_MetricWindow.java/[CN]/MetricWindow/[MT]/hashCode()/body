@@ -1,0 +1,7 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_metricWindow=true && (is_set_metricWindow());
+  list.add(present_metricWindow);
+  if (present_metricWindow)   list.add(metricWindow);
+  return list.hashCode();
+}

@@ -1,0 +1,10 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_taskId=true;
+  list.add(present_taskId);
+  if (present_taskId)   list.add(taskId);
+  boolean present_component=true && (is_set_component());
+  list.add(present_component);
+  if (present_component)   list.add(component);
+  return list.hashCode();
+}

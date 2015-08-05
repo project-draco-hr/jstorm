@@ -1,0 +1,23 @@
+{
+  StringBuilder sb=new StringBuilder("getServerNettyMetric_args(");
+  boolean first=true;
+  sb.append("topologyName:");
+  if (this.topologyName == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.topologyName);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("serverName:");
+  if (this.serverName == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.serverName);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

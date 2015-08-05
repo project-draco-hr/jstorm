@@ -1,0 +1,8 @@
+{
+  Map stormConf=workerData.getStormConf();
+  int queue_size=Utils.getInt(stormConf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE),1024);
+  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(stormConf);
+  DisruptorQueue recvQueue=DisruptorQueue.mkInstance("Dispatch",ProducerType.MULTI,queue_size,waitStrategy);
+  recvQueue.consumerStarted();
+  return recvQueue;
+}

@@ -1,0 +1,15 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  struct.nimbus_master.write(oprot);
+{
+    oprot.writeI32(struct.nimbus_slaves.size());
+    for (    NimbusStat _iter78 : struct.nimbus_slaves) {
+      _iter78.write(oprot);
+    }
+  }
+  oprot.writeI32(struct.supervisor_num);
+  oprot.writeI32(struct.total_port_num);
+  oprot.writeI32(struct.used_port_num);
+  oprot.writeI32(struct.free_port_num);
+  oprot.writeString(struct.version);
+}

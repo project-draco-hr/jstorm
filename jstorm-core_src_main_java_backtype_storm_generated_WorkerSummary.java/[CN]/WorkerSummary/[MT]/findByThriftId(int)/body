@@ -1,0 +1,14 @@
+{
+switch (fieldId) {
+case 1:
+    return PORT;
+case 2:
+  return UPTIME;
+case 3:
+return TOPOLOGY;
+case 4:
+return TASKS;
+default :
+return null;
+}
+}

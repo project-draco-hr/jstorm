@@ -1,0 +1,8 @@
+{
+  this.workers=workers;
+  this.nodeHost=nodeHost;
+  this.taskStartTimeSecs=taskStartTimeSecs;
+  this.masterCodeDir=masterCodeDir;
+  this.timeStamp=System.currentTimeMillis();
+  this.type=AssignmentType.Assign;
+}

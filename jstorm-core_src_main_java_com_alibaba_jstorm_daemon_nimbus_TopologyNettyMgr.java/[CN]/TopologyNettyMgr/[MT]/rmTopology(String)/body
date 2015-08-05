@@ -1,0 +1,10 @@
+{
+  String topologyName;
+  try {
+    topologyName=Common.topologyIdToName(topologyId);
+    setting.remove(topologyName);
+    LOG.info("Remove {} netty metrics setting ",topologyName);
+  }
+ catch (  InvalidTopologyException e) {
+  }
+}

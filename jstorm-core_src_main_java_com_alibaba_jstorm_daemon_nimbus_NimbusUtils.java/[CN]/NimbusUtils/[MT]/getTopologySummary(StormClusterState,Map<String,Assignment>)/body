@@ -1,0 +1,33 @@
+{
+  List<TopologySummary> topologySummaries=new ArrayList<TopologySummary>();
+  Map<String,StormBase> bases=Cluster.get_all_StormBase(stormClusterState);
+  for (  Entry<String,StormBase> entry : bases.entrySet()) {
+    String topologyId=entry.getKey();
+    StormBase base=entry.getValue();
+    Assignment assignment=stormClusterState.assignment_info(topologyId,null);
+    if (assignment == null) {
+      LOG.error("Failed to get assignment of " + topologyId);
+      continue;
+    }
+    assignments.put(topologyId,assignment);
+    int num_workers=assignment.getWorkers().size();
+    int num_tasks=getTopologyTaskNum(assignment);
+    String errorString=null;
+    if (Cluster.is_topology_exist_error(stormClusterState,topologyId)) {
+      errorString="Y";
+    }
+ else {
+      errorString="";
+    }
+    TopologySummary topology=new TopologySummary();
+    topology.set_id(topologyId);
+    topology.set_name(base.getStormName());
+    topology.set_status(base.getStatusString());
+    topology.set_uptime_secs(TimeUtils.time_delta(base.getLanchTimeSecs()));
+    topology.set_num_workers(num_workers);
+    topology.set_num_tasks(num_tasks);
+    topology.set_error_info(errorString);
+    topologySummaries.add(topology);
+  }
+  return topologySummaries;
+}

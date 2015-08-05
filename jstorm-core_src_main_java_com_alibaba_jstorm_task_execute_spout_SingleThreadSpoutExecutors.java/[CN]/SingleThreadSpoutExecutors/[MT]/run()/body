@@ -1,0 +1,5 @@
+{
+  executeEvent();
+  super.nextTuple();
+  processControlEvent();
+}

@@ -1,0 +1,3 @@
+SupervisorSummary supervisor
+List<WorkerSummary> workers
+Map<String,MetricInfo> workerMetric

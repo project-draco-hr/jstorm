@@ -1,5 +1,0 @@
-{
-  if (isEnable == true) {
-    instance.update(value);
-  }
-}

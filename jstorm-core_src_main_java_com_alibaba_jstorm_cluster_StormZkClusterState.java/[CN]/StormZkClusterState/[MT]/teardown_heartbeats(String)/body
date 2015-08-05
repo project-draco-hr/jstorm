@@ -1,0 +1,9 @@
+{
+  try {
+    String taskbeatPath=Cluster.taskbeat_storm_root(topologyId);
+    deleteObject(taskbeatPath);
+  }
+ catch (  Exception e) {
+    LOG.warn("Could not teardown heartbeats for " + topologyId,e);
+  }
+}

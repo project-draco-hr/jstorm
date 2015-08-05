@@ -1,0 +1,19 @@
+{
+  if (shutdown.getAndSet(true) == true) {
+    LOG.info("Notify to quit drpc");
+    return;
+  }
+  LOG.info("Begin to shutdown drpc");
+  AsyncLoopRunnable.getShutdown().set(true);
+  clearThread.interrupt();
+  try {
+    clearThread.join();
+  }
+ catch (  InterruptedException e) {
+  }
+  LOG.info("Successfully cleanup clear thread");
+  invokeServer.stop();
+  LOG.info("Successfully stop invokeServer");
+  handlerServer.stop();
+  LOG.info("Successfully stop handlerServer");
+}

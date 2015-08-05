@@ -1,5 +1,0 @@
-{
-  if (that == null)   return false;
-  if (that instanceof UserDefMetric)   return this.equals((UserDefMetric)that);
-  return false;
-}

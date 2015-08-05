@@ -1,0 +1,2 @@
+Map<String,StateHeartbeat> localWorkerStats
+Map<Integer,LocalAssignment> localAssignments

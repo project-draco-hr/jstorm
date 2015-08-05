@@ -1,9 +1,0 @@
-Map conf
-String supervisorId
-AtomicBoolean active
-Vector<AsyncLoopThread> threads
-EventManager processesEventManager
-EventManager eventManager
-Httpserver httpserver
-StormClusterState stormClusterState
-ConcurrentHashMap<String,String> workerThreadPidsAtom

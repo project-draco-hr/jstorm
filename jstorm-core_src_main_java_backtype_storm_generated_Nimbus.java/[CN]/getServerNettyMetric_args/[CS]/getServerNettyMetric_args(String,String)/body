@@ -1,0 +1,5 @@
+{
+  this();
+  this.topologyName=topologyName;
+  this.serverName=serverName;
+}

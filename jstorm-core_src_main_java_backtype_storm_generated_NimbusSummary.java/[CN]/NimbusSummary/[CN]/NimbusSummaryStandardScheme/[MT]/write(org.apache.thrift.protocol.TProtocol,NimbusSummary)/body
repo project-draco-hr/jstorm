@@ -1,0 +1,39 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.nimbus_master != null) {
+    oprot.writeFieldBegin(NIMBUS_MASTER_FIELD_DESC);
+    struct.nimbus_master.write(oprot);
+    oprot.writeFieldEnd();
+  }
+  if (struct.nimbus_slaves != null) {
+    oprot.writeFieldBegin(NIMBUS_SLAVES_FIELD_DESC);
+{
+      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.nimbus_slaves.size()));
+      for (      NimbusStat _iter77 : struct.nimbus_slaves) {
+        _iter77.write(oprot);
+      }
+      oprot.writeListEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldBegin(SUPERVISOR_NUM_FIELD_DESC);
+  oprot.writeI32(struct.supervisor_num);
+  oprot.writeFieldEnd();
+  oprot.writeFieldBegin(TOTAL_PORT_NUM_FIELD_DESC);
+  oprot.writeI32(struct.total_port_num);
+  oprot.writeFieldEnd();
+  oprot.writeFieldBegin(USED_PORT_NUM_FIELD_DESC);
+  oprot.writeI32(struct.used_port_num);
+  oprot.writeFieldEnd();
+  oprot.writeFieldBegin(FREE_PORT_NUM_FIELD_DESC);
+  oprot.writeI32(struct.free_port_num);
+  oprot.writeFieldEnd();
+  if (struct.version != null) {
+    oprot.writeFieldBegin(VERSION_FIELD_DESC);
+    oprot.writeString(struct.version);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

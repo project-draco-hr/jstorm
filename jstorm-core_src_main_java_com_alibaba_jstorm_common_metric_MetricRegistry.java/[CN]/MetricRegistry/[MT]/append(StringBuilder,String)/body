@@ -1,0 +1,8 @@
+{
+  if (part != null && !part.isEmpty()) {
+    if (builder.length() > 0) {
+      builder.append(NAME_SEPERATOR);
+    }
+    builder.append(part);
+  }
+}

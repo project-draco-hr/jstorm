@@ -1,0 +1,21 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  if (other.is_set_name()) {
+    this.name=other.name;
+  }
+  this.parallel=other.parallel;
+  if (other.is_set_type()) {
+    this.type=other.type;
+  }
+  if (other.is_set_task_ids()) {
+    List<Integer> __this__task_ids=new ArrayList<Integer>(other.task_ids);
+    this.task_ids=__this__task_ids;
+  }
+  if (other.is_set_errors()) {
+    List<ErrorInfo> __this__errors=new ArrayList<ErrorInfo>(other.errors.size());
+    for (    ErrorInfo other_element : other.errors) {
+      __this__errors.add(new ErrorInfo(other_element));
+    }
+    this.errors=__this__errors;
+  }
+}

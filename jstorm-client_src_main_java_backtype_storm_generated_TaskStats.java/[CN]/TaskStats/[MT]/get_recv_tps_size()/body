@@ -1,3 +1,0 @@
-{
-  return (this.recv_tps == null) ? 0 : this.recv_tps.size();
-}

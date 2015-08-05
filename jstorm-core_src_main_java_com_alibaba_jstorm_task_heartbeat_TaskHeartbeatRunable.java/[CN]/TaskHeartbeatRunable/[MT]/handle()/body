@@ -1,0 +1,31 @@
+{
+  Event event=eventQueue.take();
+  while (event != null) {
+switch (event.getType()) {
+case Event.TASK_HEARTBEAT_TYPE:
+{
+        updateTaskHbStats(event);
+        break;
+      }
+case Event.REGISTER_TYPE:
+{
+      Event<TaskStats> regEvent=event;
+      taskStatsMap.put(event.getTaskId(),regEvent.getEventValue());
+      taskAssignTsMap.put(event.getTaskId(),System.currentTimeMillis());
+      break;
+    }
+case Event.UNREGISTER_TYPE:
+{
+    taskStatsMap.remove(event.getTaskId());
+    taskAssignTsMap.remove(event.getTaskId());
+    break;
+  }
+default :
+{
+  LOG.warn("Unknown event type received:" + event.getType());
+  break;
+}
+}
+event=eventQueue.take();
+}
+}

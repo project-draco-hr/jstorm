@@ -1,0 +1,3 @@
+{
+  return zkCluster.task_all_info(topologyId);
+}

@@ -1,8 +1,0 @@
-def __init__(self, hostname=None, port=None, gauge=None, counter=None, meter=None, timer=None, histogram=None):
-    self.hostname = hostname
-    self.port = port
-    self.gauge = gauge
-    self.counter = counter
-    self.meter = meter
-    self.timer = timer
-    self.histogram = histogram

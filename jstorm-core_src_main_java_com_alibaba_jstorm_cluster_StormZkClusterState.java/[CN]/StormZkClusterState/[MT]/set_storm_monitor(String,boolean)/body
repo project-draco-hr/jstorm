@@ -1,0 +1,7 @@
+{
+  StormBase base=this.storm_base(topologyId,null);
+  if (base != null) {
+    base.setEnableMonitor(isEnable);
+    setObject(Cluster.storm_path(topologyId),base);
+  }
+}

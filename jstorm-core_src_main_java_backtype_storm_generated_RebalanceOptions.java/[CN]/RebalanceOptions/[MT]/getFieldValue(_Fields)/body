@@ -1,0 +1,11 @@
+{
+switch (field) {
+case WAIT_SECS:
+    return Integer.valueOf(get_wait_secs());
+case REASSIGN:
+  return Boolean.valueOf(is_reassign());
+case CONF:
+return get_conf();
+}
+throw new IllegalStateException();
+}

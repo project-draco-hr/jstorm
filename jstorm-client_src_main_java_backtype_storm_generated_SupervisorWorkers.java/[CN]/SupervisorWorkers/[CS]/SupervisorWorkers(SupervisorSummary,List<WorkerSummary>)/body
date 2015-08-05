@@ -1,5 +1,0 @@
-{
-  this();
-  this.supervisor=supervisor;
-  this.workers=workers;
-}

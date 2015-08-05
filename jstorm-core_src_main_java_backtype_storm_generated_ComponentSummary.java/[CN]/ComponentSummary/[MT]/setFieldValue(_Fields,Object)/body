@@ -1,0 +1,44 @@
+{
+switch (field) {
+case NAME:
+    if (value == null) {
+      unset_name();
+    }
+ else {
+      set_name((String)value);
+    }
+  break;
+case PARALLEL:
+if (value == null) {
+  unset_parallel();
+}
+ else {
+  set_parallel((Integer)value);
+}
+break;
+case TYPE:
+if (value == null) {
+unset_type();
+}
+ else {
+set_type((String)value);
+}
+break;
+case TASK_IDS:
+if (value == null) {
+unset_task_ids();
+}
+ else {
+set_task_ids((List<Integer>)value);
+}
+break;
+case ERRORS:
+if (value == null) {
+unset_errors();
+}
+ else {
+set_errors((List<ErrorInfo>)value);
+}
+break;
+}
+}

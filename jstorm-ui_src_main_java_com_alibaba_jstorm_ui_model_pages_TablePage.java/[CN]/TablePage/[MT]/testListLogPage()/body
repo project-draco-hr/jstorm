@@ -1,0 +1,8 @@
+{
+  Map<String,String> parameterMap=new HashMap<String,String>();
+  parameterMap.put(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_LISTLOG);
+  parameterMap.put(UIDef.HOST,"free-56-156.shucang.alipay.net");
+  parameterMap.put(UIDef.PORT,"7621");
+  parameterMap.put(UIDef.DIR,".");
+  return parameterMap;
+}

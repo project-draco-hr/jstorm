@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseLong(conf.get(NETTY_MAX_SEND_PENDING),4);
+}

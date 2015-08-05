@@ -1,0 +1,28 @@
+{
+  try {
+    Class c=Class.forName(klass);
+    Constructor[] constructors=c.getConstructors();
+    boolean found=false;
+    Constructor con=null;
+    for (    Constructor cons : constructors) {
+      if (cons.getParameterTypes().length == params.length) {
+        con=cons;
+        break;
+      }
+    }
+    if (con == null) {
+      throw new RuntimeException("Cound not found the corresponding constructor, params=" + params.toString());
+    }
+ else {
+      if (con.getParameterTypes().length == 0) {
+        return c.newInstance();
+      }
+ else {
+        return con.newInstance(params);
+      }
+    }
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

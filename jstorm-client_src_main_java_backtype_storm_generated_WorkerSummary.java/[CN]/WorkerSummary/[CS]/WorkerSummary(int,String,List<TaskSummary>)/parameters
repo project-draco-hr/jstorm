@@ -1,3 +1,0 @@
-int port
-String topology
-List<TaskSummary> tasks

@@ -1,0 +1,28 @@
+{
+switch (field) {
+case NIMBUS:
+    if (value == null) {
+      unset_nimbus();
+    }
+ else {
+      set_nimbus((NimbusSummary)value);
+    }
+  break;
+case SUPERVISORS:
+if (value == null) {
+  unset_supervisors();
+}
+ else {
+  set_supervisors((List<SupervisorSummary>)value);
+}
+break;
+case TOPOLOGIES:
+if (value == null) {
+unset_topologies();
+}
+ else {
+set_topologies((List<TopologySummary>)value);
+}
+break;
+}
+}

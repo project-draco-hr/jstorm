@@ -1,7 +1,0 @@
-{
-  String component=topologyContext.getThisComponentId();
-  Map<String,Map<String,MkGrouper>> streamComponentGrouper=Common.outbound_components(topologyContext,workerData);
-  Map<Integer,String> task2Component=topologyContext.getTaskToComponent();
-  Map<String,List<Integer>> component2Tasks=JStormUtils.reverse_map(task2Component);
-  return new TaskSendTargets(stormConf,component,streamComponentGrouper,topologyContext,component2Tasks,taskStats);
-}

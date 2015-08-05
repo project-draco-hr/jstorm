@@ -1,0 +1,19 @@
+{
+  Histogram netTransTime=networkTransmitTimeMap.get(channel);
+  if (netTransTime == null) {
+    InetSocketAddress sockAddr=(InetSocketAddress)(channel.getRemoteAddress());
+    String nettyConnection=NettyConnection.mkString(sockAddr.getAddress().getHostAddress(),clientPort,localIp,localPort);
+    try {
+      netTransTime=JStormMetrics.registerWorkerHistogram(MetricDef.NETTY_SRV_MSG_TRANS_TIME,nettyConnection);
+    }
+ catch (    Exception e) {
+      LOG.error("{}.{} has been register",MetricDef.NETTY_SRV_MSG_TRANS_TIME,nettyConnection);
+      removeTransmitHistogram(nettyConnection);
+      return null;
+    }
+    networkTransmitTimeMap.put(channel,netTransTime);
+    transmitNameMap.put(channel,nettyConnection);
+    LOG.info("Register Transmit Histogram of {}, channel {}",nettyConnection,channel);
+  }
+  return netTransTime;
+}

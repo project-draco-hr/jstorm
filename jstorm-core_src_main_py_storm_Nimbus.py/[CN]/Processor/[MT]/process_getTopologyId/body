@@ -1,0 +1,13 @@
+def process_getTopologyId(self, seqid, iprot, oprot):
+    args = getTopologyId_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getTopologyId_result()
+    try:
+        result.success = self._handler.getTopologyId(args.topologyName)
+    except NotAliveException as e:
+        result.e = e
+    oprot.writeMessageBegin('getTopologyId', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

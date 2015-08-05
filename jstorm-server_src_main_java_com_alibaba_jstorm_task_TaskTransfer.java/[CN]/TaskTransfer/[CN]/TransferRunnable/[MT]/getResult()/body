@@ -1,8 +1,0 @@
-{
-  if (taskStatus.isShutdown() == false) {
-    return 0;
-  }
- else {
-    return -1;
-  }
-}

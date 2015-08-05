@@ -1,0 +1,12 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case CONNECTIONS:
+    return is_set_connections();
+case CONNECTION_NUM:
+  return is_set_connectionNum();
+}
+throw new IllegalStateException();
+}

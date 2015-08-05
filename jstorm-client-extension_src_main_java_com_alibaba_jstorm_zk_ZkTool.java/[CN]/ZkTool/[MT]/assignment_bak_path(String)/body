@@ -1,3 +1,0 @@
-{
-  return ZkConstant.ASSIGNMENTS_BAK_SUBTREE + ZkConstant.ZK_SEPERATOR + id;
-}

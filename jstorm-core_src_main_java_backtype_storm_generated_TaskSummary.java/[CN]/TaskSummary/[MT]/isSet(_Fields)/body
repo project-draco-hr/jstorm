@@ -1,0 +1,20 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TASK_ID:
+    return is_set_task_id();
+case UPTIME:
+  return is_set_uptime();
+case STATUS:
+return is_set_status();
+case HOST:
+return is_set_host();
+case PORT:
+return is_set_port();
+case ERRORS:
+return is_set_errors();
+}
+throw new IllegalStateException();
+}

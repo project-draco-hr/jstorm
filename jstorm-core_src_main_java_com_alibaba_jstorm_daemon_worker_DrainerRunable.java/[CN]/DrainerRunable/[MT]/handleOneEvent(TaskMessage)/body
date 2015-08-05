@@ -1,0 +1,31 @@
+{
+  int taskId=felem.task();
+  byte[] tuple=felem.message();
+  WorkerSlot nodePort=taskNodeport.get(taskId);
+  if (nodePort == null) {
+    String errormsg="can`t not found IConnection to " + taskId;
+    LOG.warn("DrainerRunable warn",new Exception(errormsg));
+    return;
+  }
+  IConnection conn=nodeportSocket.get(nodePort);
+  if (conn == null) {
+    String errormsg="can`t not found nodePort " + nodePort;
+    LOG.warn("DrainerRunable warn",new Exception(errormsg));
+    return;
+  }
+  if (conn.isClosed() == true) {
+    LOG.debug("Skip one tuple of " + taskId + ", due to close connection of "+ nodePort);
+    return;
+  }
+  if (isDirectSend) {
+    conn.send(felem);
+    return;
+  }
+  List<TaskMessage> list=dispatchMap.get(conn);
+  if (list == null) {
+    list=new ArrayList<TaskMessage>();
+    dispatchMap.put(conn,list);
+  }
+  list.add(felem);
+  return;
+}

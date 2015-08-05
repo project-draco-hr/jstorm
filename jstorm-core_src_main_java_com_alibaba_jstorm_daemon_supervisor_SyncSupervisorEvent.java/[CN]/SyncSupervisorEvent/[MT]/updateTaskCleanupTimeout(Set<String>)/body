@@ -1,0 +1,35 @@
+{
+  Map topologyConf=null;
+  Map<String,Integer> taskCleanupTimeouts=new HashMap<String,Integer>();
+  for (  String topologyId : topologys) {
+    try {
+      topologyConf=StormConfig.read_supervisor_topology_conf(conf,topologyId);
+    }
+ catch (    IOException e) {
+      LOG.info("Failed to read conf for " + topologyId);
+    }
+    Integer cleanupTimeout=null;
+    if (topologyConf != null) {
+      cleanupTimeout=JStormUtils.parseInt(topologyConf.get(ConfigExtension.TASK_CLEANUP_TIMEOUT_SEC));
+    }
+    if (cleanupTimeout == null) {
+      cleanupTimeout=ConfigExtension.getTaskCleanupTimeoutSec(conf);
+    }
+    taskCleanupTimeouts.put(topologyId,cleanupTimeout);
+  }
+  Map<String,Integer> localTaskCleanupTimeouts=null;
+  try {
+    localTaskCleanupTimeouts=(Map<String,Integer>)localState.get(Common.LS_TASK_CLEANUP_TIMEOUT);
+  }
+ catch (  IOException e) {
+    LOG.error("Failed to read local task cleanup timeout map",e);
+  }
+  if (localTaskCleanupTimeouts == null)   localTaskCleanupTimeouts=taskCleanupTimeouts;
+ else   localTaskCleanupTimeouts.putAll(taskCleanupTimeouts);
+  try {
+    localState.put(Common.LS_TASK_CLEANUP_TIMEOUT,localTaskCleanupTimeouts);
+  }
+ catch (  IOException e) {
+    LOG.error("Failed to write local task cleanup timeout map",e);
+  }
+}

@@ -2,7 +2,16 @@
   LinearDRPCTopologyBuilder builder=construct();
   Config conf=new Config();
   conf.setNumWorkers(6);
-  if (args.length == 0) {
+  if (args.length != 0) {
+    try {
+      Map yamlConf=LoadConf.LoadYaml(args[0]);
+      if (yamlConf != null) {
+        conf.putAll(yamlConf);
+      }
+    }
+ catch (    Exception e) {
+      System.out.println("Input " + args[0] + " isn't one yaml ");
+    }
     StormSubmitter.submitTopology(TOPOLOGY_NAME,conf,builder.createRemoteTopology());
   }
  else {

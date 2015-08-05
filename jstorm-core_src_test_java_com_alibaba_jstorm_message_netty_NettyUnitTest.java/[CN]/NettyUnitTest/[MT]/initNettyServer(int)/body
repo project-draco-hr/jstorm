@@ -1,0 +1,8 @@
+{
+  ConcurrentHashMap<Integer,DisruptorQueue> deserializeQueues=new ConcurrentHashMap<Integer,DisruptorQueue>();
+  IConnection server=context.bind(null,port,deserializeQueues);
+  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(storm_conf);
+  DisruptorQueue recvQueue=DisruptorQueue.mkInstance("NettyUnitTest",ProducerType.SINGLE,1024,waitStrategy);
+  server.registerQueue(task,recvQueue);
+  return server;
+}

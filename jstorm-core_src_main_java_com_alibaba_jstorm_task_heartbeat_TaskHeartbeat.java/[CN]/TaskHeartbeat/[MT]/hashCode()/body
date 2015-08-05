@@ -1,0 +1,7 @@
+{
+  final int prime=31;
+  int result=1;
+  result=prime * result + ((timeSecs == null) ? 0 : timeSecs.hashCode());
+  result=prime * result + ((uptimeSecs == null) ? 0 : uptimeSecs.hashCode());
+  return result;
+}

@@ -1,0 +1,7 @@
+{
+  List<TaskShutdownDameon> ret=new ArrayList<TaskShutdownDameon>();
+  for (  TaskShutdownDameon shutdown : shutdownTasks) {
+    if (taskIds.contains(shutdown.getTaskId()))     ret.add(shutdown);
+  }
+  return ret;
+}

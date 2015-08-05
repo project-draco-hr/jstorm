@@ -1,0 +1,14 @@
+{
+  if (toMetric == null) {
+    toMetric=new MetricWindow(new HashMap<Integer,Double>());
+  }
+  if (fromMetric == null) {
+    return toMetric;
+  }
+  List<Map<Integer,Double>> list=new ArrayList<Map<Integer,Double>>();
+  list.add(fromMetric.get_metricWindow());
+  list.add(toMetric.get_metricWindow());
+  Map<Integer,Double> merged=JStormUtils.mergeMapList(list);
+  toMetric.set_metricWindow(merged);
+  return toMetric;
+}

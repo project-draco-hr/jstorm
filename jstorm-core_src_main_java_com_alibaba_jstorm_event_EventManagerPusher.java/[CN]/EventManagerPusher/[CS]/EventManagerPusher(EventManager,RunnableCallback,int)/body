@@ -1,0 +1,5 @@
+{
+  this.eventManager=eventManager;
+  this.event=event;
+  this.frequence=frequence;
+}

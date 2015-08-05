@@ -1,6 +1,0 @@
-{
-  LOG.info("send_tps: " + sendTps);
-  LOG.info("recv_tps: " + recvTps);
-  LOG.info("failed: " + failed);
-  LOG.info("latency: " + latency);
-}

@@ -1,0 +1,8 @@
+{
+  if (intervalCheck.check()) {
+    rolling();
+  }
+synchronized (this) {
+    unflushed=updater.update(obj,unflushed);
+  }
+}

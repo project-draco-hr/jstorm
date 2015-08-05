@@ -1,0 +1,14 @@
+{
+  StormClusterState stormClusterState=data.getStormClusterState();
+  try {
+    String topologyId=Cluster.get_topology_id(stormClusterState,topologyName);
+    if (topologyId != null) {
+      return topologyId;
+    }
+  }
+ catch (  Exception e) {
+    LOG.info("Failed to get getTopologyId " + topologyName,e);
+    throw new TException("Failed to get getTopologyId " + topologyName);
+  }
+  throw new NotAliveException("No topology of " + topologyName);
+}

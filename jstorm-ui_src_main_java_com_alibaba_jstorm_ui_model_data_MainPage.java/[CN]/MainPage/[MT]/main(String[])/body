@@ -1,9 +1,0 @@
-{
-  try {
-    MainPage m=new MainPage();
-    System.out.println(m.getCsumm());
-  }
- catch (  Exception e) {
-    e.printStackTrace();
-  }
-}

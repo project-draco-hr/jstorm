@@ -1,0 +1,18 @@
+{
+  if (event == null) {
+    return;
+  }
+  long start=System.currentTimeMillis();
+  try {
+    BatchTuple tuple=(BatchTuple)event;
+    int taskid=tuple.getTargetTaskId();
+    byte[] tupleMessage=serializer.serializeBatch(tuple);
+    TaskMessage taskMessage=new TaskMessage(taskid,tupleMessage);
+    IConnection conn=getConnection(taskid);
+    if (conn != null)     conn.send(taskMessage);
+  }
+  finally {
+    long end=System.currentTimeMillis();
+    timer.update(end - start);
+  }
+}

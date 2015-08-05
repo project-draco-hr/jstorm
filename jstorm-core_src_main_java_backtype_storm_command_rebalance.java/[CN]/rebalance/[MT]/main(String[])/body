@@ -1,0 +1,56 @@
+{
+  if (args == null || args.length == 0) {
+    printErrorInfo();
+    return;
+  }
+  int argsIndex=0;
+  String topologyName=null;
+  try {
+    RebalanceOptions options=new RebalanceOptions();
+    options.set_reassign(false);
+    options.set_conf(null);
+    if (args[argsIndex].equalsIgnoreCase(REASSIGN_FLAG)) {
+      options.set_reassign(true);
+      argsIndex++;
+      if (args.length <= argsIndex) {
+        printErrorInfo();
+        return;
+      }
+ else {
+        topologyName=args[argsIndex];
+      }
+    }
+ else {
+      topologyName=args[argsIndex];
+    }
+    argsIndex++;
+    if (args.length > argsIndex) {
+      for (int i=argsIndex; i < args.length; i++) {
+        String arg=args[i];
+        if (arg.endsWith("yaml") || arg.endsWith("prop")) {
+          Map userConf=Utils.loadConf(arg);
+          String jsonConf=Utils.to_json(userConf);
+          options.set_conf(jsonConf);
+        }
+ else {
+          try {
+            int delaySeconds=Integer.parseInt(args[1]);
+            options.set_wait_secs(delaySeconds);
+          }
+ catch (          NumberFormatException e) {
+            System.out.println("Unsupported argument found, arg=" + arg + ". Full args are "+ args);
+            printErrorInfo();
+            return;
+          }
+        }
+      }
+    }
+    submitRebalance(topologyName,options);
+    System.out.println("Successfully submit command rebalance " + topologyName + ", delaySecs="+ options.get_wait_secs()+ ", reassignFlag="+ options.is_reassign()+ ", newConfiguration="+ options.get_conf());
+  }
+ catch (  Exception e) {
+    System.out.println(e.getMessage());
+    e.printStackTrace();
+    throw new RuntimeException(e);
+  }
+}

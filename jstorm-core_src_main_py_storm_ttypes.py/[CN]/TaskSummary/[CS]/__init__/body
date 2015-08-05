@@ -1,0 +1,7 @@
+def __init__(self, task_id=None, uptime=None, status=None, host=None, port=None, errors=None):
+    self.task_id = task_id
+    self.uptime = uptime
+    self.status = status
+    self.host = host
+    self.port = port
+    self.errors = errors

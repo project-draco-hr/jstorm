@@ -1,0 +1,10 @@
+{
+  messageBatchRef.set(messageBatch);
+  flush_later.set(true);
+  long cachedSize=messageBatch.getEncoded_length();
+  if (cachedSize > BATCH_THREASHOLD_WARN) {
+    long sleepMs=getDelaySec(cachedSize);
+    waitChannelReady(cachedSize,sleepMs);
+  }
+  return;
+}

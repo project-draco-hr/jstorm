@@ -1,0 +1,45 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.topologyMetric=new MetricInfo();
+  struct.topologyMetric.read(iprot);
+  struct.set_topologyMetric_isSet(true);
+{
+    org.apache.thrift.protocol.TMap _map184=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.componentMetric=new HashMap<String,MetricInfo>(2 * _map184.size);
+    String _key185;
+    MetricInfo _val186;
+    for (int _i187=0; _i187 < _map184.size; ++_i187) {
+      _key185=iprot.readString();
+      _val186=new MetricInfo();
+      _val186.read(iprot);
+      struct.componentMetric.put(_key185,_val186);
+    }
+  }
+  struct.set_componentMetric_isSet(true);
+{
+    org.apache.thrift.protocol.TMap _map188=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.workerMetric=new HashMap<String,MetricInfo>(2 * _map188.size);
+    String _key189;
+    MetricInfo _val190;
+    for (int _i191=0; _i191 < _map188.size; ++_i191) {
+      _key189=iprot.readString();
+      _val190=new MetricInfo();
+      _val190.read(iprot);
+      struct.workerMetric.put(_key189,_val190);
+    }
+  }
+  struct.set_workerMetric_isSet(true);
+{
+    org.apache.thrift.protocol.TMap _map192=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.taskMetric=new HashMap<Integer,MetricInfo>(2 * _map192.size);
+    int _key193;
+    MetricInfo _val194;
+    for (int _i195=0; _i195 < _map192.size; ++_i195) {
+      _key193=iprot.readI32();
+      _val194=new MetricInfo();
+      _val194.read(iprot);
+      struct.taskMetric.put(_key193,_val194);
+    }
+  }
+  struct.set_taskMetric_isSet(true);
+}

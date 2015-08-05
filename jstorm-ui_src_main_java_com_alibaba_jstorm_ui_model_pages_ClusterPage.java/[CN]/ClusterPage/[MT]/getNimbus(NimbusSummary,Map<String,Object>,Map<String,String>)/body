@@ -1,0 +1,10 @@
+{
+  List<TableData> ret=new ArrayList<TableData>();
+  TableData nimbusMaster=getNimbusMaster(nimbusSummary,nimbusConf,paramMap);
+  ret.add(nimbusMaster);
+  TableData slavesTable=getNimbusSlaves(nimbusSummary,nimbusConf,paramMap);
+  if (slavesTable != null) {
+    ret.add(slavesTable);
+  }
+  return ret;
+}

@@ -1,0 +1,21 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  oprot.writeI32(struct.task_id);
+  oprot.writeI32(struct.uptime);
+  oprot.writeString(struct.status);
+  oprot.writeString(struct.host);
+  oprot.writeI32(struct.port);
+  BitSet optionals=new BitSet();
+  if (struct.is_set_errors()) {
+    optionals.set(0);
+  }
+  oprot.writeBitSet(optionals,1);
+  if (struct.is_set_errors()) {
+{
+      oprot.writeI32(struct.errors.size());
+      for (      ErrorInfo _iter234 : struct.errors) {
+        _iter234.write(oprot);
+      }
+    }
+  }
+}

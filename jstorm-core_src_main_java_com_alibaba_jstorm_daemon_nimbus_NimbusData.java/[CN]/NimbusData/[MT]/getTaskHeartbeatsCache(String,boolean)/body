@@ -1,0 +1,9 @@
+{
+  Map<Integer,TkHbCacheTime> ret=null;
+  ret=taskHeartbeatsCache.get(topologyId);
+  if (ret == null && createIfNotExist) {
+    ret=new ConcurrentHashMap<Integer,TkHbCacheTime>();
+    taskHeartbeatsCache.put(topologyId,ret);
+  }
+  return ret;
+}

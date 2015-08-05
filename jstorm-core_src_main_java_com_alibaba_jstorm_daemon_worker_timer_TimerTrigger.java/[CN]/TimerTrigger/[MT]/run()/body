@@ -1,0 +1,20 @@
+{
+  try {
+    updateObject();
+    if (object == null) {
+      LOG.info("Timer " + name + " 's object is null ");
+      return;
+    }
+    TimerEvent event=new TimerEvent(opCode,object);
+    queue.publish(event,block);
+  }
+ catch (  InsufficientCapacityException e) {
+    LOG.warn("Failed to public timer event to " + name);
+    return;
+  }
+catch (  Exception e) {
+    LOG.warn("Failed to public timer event to " + name,e);
+    return;
+  }
+  LOG.debug(" Trigger timer event to " + name);
+}

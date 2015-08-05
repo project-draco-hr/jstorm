@@ -1,0 +1,6 @@
+{
+  if (this.taskMetric == null) {
+    this.taskMetric=new HashMap<Integer,MetricInfo>();
+  }
+  this.taskMetric.put(key,val);
+}

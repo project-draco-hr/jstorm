@@ -1,0 +1,16 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.topologyName != null) {
+    oprot.writeFieldBegin(TOPOLOGY_NAME_FIELD_DESC);
+    oprot.writeString(struct.topologyName);
+    oprot.writeFieldEnd();
+  }
+  if (struct.serverName != null) {
+    oprot.writeFieldBegin(SERVER_NAME_FIELD_DESC);
+    oprot.writeString(struct.serverName);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

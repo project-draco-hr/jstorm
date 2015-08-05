@@ -1,0 +1,31 @@
+{
+  final String LOGBACK_CONF_TAG="logback.configurationFile";
+  final String LOGBACK_CONF_TAG_CMD=" -D" + LOGBACK_CONF_TAG + "=";
+  final String DEFAULT_LOG_CONF="jstorm.logback.xml";
+  String logFileName=JStormUtils.genLogName(topologyName,port);
+  StringBuilder commandSB=new StringBuilder();
+  commandSB.append(" -Dlogfile.name=");
+  commandSB.append(logFileName);
+  String userDefLogbackConf=ConfigExtension.getUserDefinedLogbackConf(conf);
+  String logConf=System.getProperty(LOGBACK_CONF_TAG);
+  if (StringUtils.isBlank(userDefLogbackConf) == false) {
+    LOG.info("Use user fined back conf " + userDefLogbackConf);
+    commandSB.append(LOGBACK_CONF_TAG_CMD).append(userDefLogbackConf);
+  }
+ else   if (StringUtils.isBlank(logConf) == false) {
+    commandSB.append(LOGBACK_CONF_TAG_CMD).append(logConf);
+  }
+ else   if (StringUtils.isBlank(stormHome) == false) {
+    commandSB.append(LOGBACK_CONF_TAG_CMD).append(stormHome).append(File.separator).append("conf").append(File.separator).append(DEFAULT_LOG_CONF);
+  }
+ else {
+    commandSB.append(LOGBACK_CONF_TAG_CMD + DEFAULT_LOG_CONF);
+  }
+  final String LOG4J_CONF_TAG="log4j.configuration";
+  String userDefLog4jConf=ConfigExtension.getUserDefinedLog4jConf(conf);
+  if (StringUtils.isBlank(userDefLog4jConf) == false) {
+    LOG.info("Use user fined log4j conf " + userDefLog4jConf);
+    commandSB.append(" -D" + LOG4J_CONF_TAG + "=").append(userDefLog4jConf);
+  }
+  return commandSB.toString();
+}

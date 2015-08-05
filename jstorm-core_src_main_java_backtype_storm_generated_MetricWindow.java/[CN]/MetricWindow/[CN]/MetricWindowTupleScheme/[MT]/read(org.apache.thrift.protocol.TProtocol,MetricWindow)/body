@@ -1,0 +1,15 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+{
+    org.apache.thrift.protocol.TMap _map112=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.DOUBLE,iprot.readI32());
+    struct.metricWindow=new HashMap<Integer,Double>(2 * _map112.size);
+    int _key113;
+    double _val114;
+    for (int _i115=0; _i115 < _map112.size; ++_i115) {
+      _key113=iprot.readI32();
+      _val114=iprot.readDouble();
+      struct.metricWindow.put(_key113,_val114);
+    }
+  }
+  struct.set_metricWindow_isSet(true);
+}

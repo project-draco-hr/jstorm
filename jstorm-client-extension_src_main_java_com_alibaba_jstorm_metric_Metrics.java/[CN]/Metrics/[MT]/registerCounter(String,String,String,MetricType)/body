@@ -1,8 +1,0 @@
-{
-  String metricName;
-  if (prefix == null)   metricName=name;
- else   metricName=prefix + "-" + name;
-  Counter ret=registerCounter(metricName);
-  updateMetric(prefix,name,metricType,ret,idStr);
-  return ret;
-}

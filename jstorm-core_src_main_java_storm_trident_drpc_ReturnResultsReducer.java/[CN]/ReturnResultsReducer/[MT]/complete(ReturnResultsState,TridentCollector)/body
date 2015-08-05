@@ -1,0 +1,40 @@
+{
+  if (state.returnInfo != null) {
+    String result=JSONValue.toJSONString(state.results);
+    Map retMap=(Map)JSONValue.parse(state.returnInfo);
+    final String host=(String)retMap.get("host");
+    final int port=Utils.getInt(retMap.get("port"));
+    String id=(String)retMap.get("id");
+    DistributedRPCInvocations.Iface client;
+    if (local) {
+      client=(DistributedRPCInvocations.Iface)ServiceRegistry.getService(host);
+    }
+ else {
+      List server=new ArrayList(){
+{
+          add(host);
+          add(port);
+        }
+      }
+;
+      if (!_clients.containsKey(server)) {
+        try {
+          _clients.put(server,new DRPCInvocationsClient(conf,host,port));
+        }
+ catch (        TTransportException ex) {
+          throw new RuntimeException(ex);
+        }
+      }
+      client=_clients.get(server);
+    }
+    try {
+      client.result(id,result);
+    }
+ catch (    AuthorizationException aze) {
+      collector.reportError(aze);
+    }
+catch (    TException e) {
+      collector.reportError(e);
+    }
+  }
+}

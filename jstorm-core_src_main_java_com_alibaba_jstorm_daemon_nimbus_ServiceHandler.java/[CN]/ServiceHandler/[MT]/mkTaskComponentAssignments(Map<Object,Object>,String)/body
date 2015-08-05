@@ -1,0 +1,6 @@
+{
+  Map<Object,Object> stormConf=StormConfig.read_nimbus_topology_conf(conf,topologyid);
+  StormTopology stopology=StormConfig.read_nimbus_topology_code(conf,topologyid);
+  StormTopology topology=Common.system_topology(stormConf,stopology);
+  return Common.mkTaskInfo(stormConf,topology,topologyid);
+}

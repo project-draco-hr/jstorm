@@ -1,0 +1,5 @@
+Map conf
+String name
+DisruptorQueue queue
+BlockingQueue<Object> controlQueue
+int taskId

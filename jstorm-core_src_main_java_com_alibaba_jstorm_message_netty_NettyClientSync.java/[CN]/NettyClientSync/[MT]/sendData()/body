@@ -1,0 +1,21 @@
+{
+  long start=System.nanoTime();
+  try {
+    MessageBatch batch=batchQueue.poll();
+    if (batch == null) {
+      disruptorQueue.consumeBatchWhenAvailable(this);
+      batch=batchQueue.poll();
+    }
+    Channel channel=channelRef.get();
+    flushBatch(batch,channel);
+  }
+ catch (  Throwable e) {
+    LOG.error("Occur e",e);
+    String err=name + " nettyclient occur unknow exception";
+    JStormUtils.halt_process(-1,err);
+  }
+ finally {
+    long end=System.nanoTime();
+    sendTimer.update((end - start) / 1000000.0d);
+  }
+}

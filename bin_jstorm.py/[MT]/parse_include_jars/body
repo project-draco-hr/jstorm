@@ -1,0 +1,5 @@
+def parse_include_jars(jars):
+    global INCLUDE_JARS
+    INCLUDE_JARS = jars.split(',')
+    print ' Include jars:'
+    print INCLUDE_JARS

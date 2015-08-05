@@ -1,0 +1,5 @@
+def get_client_childopts():
+    ret = ((((' -Dstorm.root.logger=INFO,stdout -Dlogback.configurationFile=' + JSTORM_DIR) + '/conf/client_logback.xml -Dlog4j.configuration=File:') + JSTORM_DIR) + '/conf/client_log4j.properties')
+    if (CLIENT_CONF_FILE != ''):
+        ret += (' -Dstorm.conf.file=' + CLIENT_CONF_FILE)
+    return ret

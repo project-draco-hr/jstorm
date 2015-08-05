@@ -1,0 +1,5 @@
+Task task
+String taskName
+KryoTupleSerializer serializer
+TaskStatus taskStatus
+WorkerData workerData

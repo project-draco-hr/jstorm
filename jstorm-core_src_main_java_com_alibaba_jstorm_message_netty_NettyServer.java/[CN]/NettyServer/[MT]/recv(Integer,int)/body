@@ -1,0 +1,15 @@
+{
+  try {
+    DisruptorQueue recvQueue=deserializeQueues.get(taskId);
+    if ((flags & 0x01) == 0x01) {
+      return recvQueue.poll();
+    }
+ else {
+      return recvQueue.take();
+    }
+  }
+ catch (  Exception e) {
+    LOG.warn("Occur unexception ",e);
+    return null;
+  }
+}

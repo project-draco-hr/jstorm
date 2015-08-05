@@ -1,5 +1,0 @@
-{
-  if (!value) {
-    this.send_tps=null;
-  }
-}

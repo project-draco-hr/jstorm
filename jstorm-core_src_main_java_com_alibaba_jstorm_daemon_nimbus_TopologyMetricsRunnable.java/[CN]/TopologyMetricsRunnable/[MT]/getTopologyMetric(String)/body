@@ -1,0 +1,16 @@
+{
+  long start=System.nanoTime();
+  try {
+    TopologyMetric ret=(TopologyMetric)dbCache.get(getTopologyKey(topologyId));
+    if (ret == null) {
+      return emptyTopologyMetric;
+    }
+ else {
+      return ret;
+    }
+  }
+  finally {
+    long end=System.nanoTime();
+    SimpleJStormMetric.updateHistorgram("getTopologyMetric",(end - start) / 1000000.0d);
+  }
+}

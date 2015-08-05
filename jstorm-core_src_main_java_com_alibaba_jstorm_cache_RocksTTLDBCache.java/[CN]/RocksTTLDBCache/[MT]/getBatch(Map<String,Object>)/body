@@ -1,0 +1,40 @@
+{
+  List<byte[]> lookupKeys=new ArrayList<byte[]>();
+  for (  String key : map.keySet()) {
+    lookupKeys.add(key.getBytes());
+  }
+  for (  Entry<Integer,ColumnFamilyHandle> entry : windowHandlers.entrySet()) {
+    List<ColumnFamilyHandle> cfHandlers=new ArrayList<ColumnFamilyHandle>();
+    for (    String key : map.keySet()) {
+      cfHandlers.add(entry.getValue());
+    }
+    try {
+      Map<byte[],byte[]> results=ttlDB.multiGet(cfHandlers,lookupKeys);
+      if (results == null || results.size() == 0) {
+        continue;
+      }
+      for (      Entry<byte[],byte[]> resultEntry : results.entrySet()) {
+        byte[] keyByte=resultEntry.getKey();
+        byte[] valueByte=resultEntry.getValue();
+        if (keyByte == null || valueByte == null) {
+          continue;
+        }
+        Object value=null;
+        try {
+          value=Utils.javaDeserialize(valueByte);
+        }
+ catch (        Exception e) {
+          LOG.error("Failed to deserialize obj of " + new String(keyByte));
+          ttlDB.remove(entry.getValue(),keyByte);
+          continue;
+        }
+        map.put(new String(keyByte),value);
+      }
+      return;
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to query " + map.keySet() + ", in window: "+ entry.getKey());
+    }
+  }
+  return;
+}

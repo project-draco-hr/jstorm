@@ -1,4 +1,0 @@
-def __init__(self, port=None, topology=None, tasks=None):
-    self.port = port
-    self.topology = topology
-    self.tasks = tasks

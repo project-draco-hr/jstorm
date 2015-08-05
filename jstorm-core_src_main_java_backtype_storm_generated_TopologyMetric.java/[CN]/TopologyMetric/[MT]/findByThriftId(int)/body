@@ -1,0 +1,14 @@
+{
+switch (fieldId) {
+case 1:
+    return TOPOLOGY_METRIC;
+case 2:
+  return COMPONENT_METRIC;
+case 3:
+return WORKER_METRIC;
+case 4:
+return TASK_METRIC;
+default :
+return null;
+}
+}

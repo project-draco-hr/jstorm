@@ -1,0 +1,28 @@
+{
+  LOG.debug("Push task-" + task + " to worker-"+ worker.getPort());
+  int taskNum=updateAssignedTasksOfWorker(task,worker);
+  if (leftTaskNum <= 0) {
+    if (taskNum == avgTaskNum) {
+      taskContext.getWorkerToTaskNum().remove(worker);
+      assignments.add(worker);
+    }
+  }
+ else {
+    if (taskNum == (avgTaskNum + 1)) {
+      taskContext.getWorkerToTaskNum().remove(worker);
+      leftTaskNum--;
+      assignments.add(worker);
+    }
+    if (leftTaskNum <= 0) {
+      List<ResourceWorkerSlot> needDelete=new ArrayList<ResourceWorkerSlot>();
+      for (      Entry<ResourceWorkerSlot,Integer> entry : taskContext.getWorkerToTaskNum().entrySet()) {
+        if (entry.getValue() == avgTaskNum)         needDelete.add(entry.getKey());
+      }
+      for (      ResourceWorkerSlot workerToDelete : needDelete) {
+        taskContext.getWorkerToTaskNum().remove(workerToDelete);
+        assignments.add(workerToDelete);
+      }
+    }
+  }
+  updateComponentsNumOfWorker(name,worker);
+}

@@ -1,0 +1,40 @@
+{
+synchronized (this) {
+    if (isClosed == true) {
+      return;
+    }
+    isClosed=true;
+  }
+  LOG.info("Begin to shut down task " + topology_id + ":"+ task_id);
+  taskStatus.setStatus(TaskStatus.SHUTDOWN);
+  try {
+    Thread.sleep(100);
+  }
+ catch (  InterruptedException e) {
+  }
+  for (  AsyncLoopThread thr : all_threads) {
+    LOG.info("Begin to shutdown " + thr.getThread().getName());
+    thr.cleanup();
+    JStormUtils.sleepMs(10);
+    thr.interrupt();
+    LOG.info("Successfully shutdown " + thr.getThread().getName());
+  }
+  closeComponent(task_obj);
+  try {
+    JStormMetrics.unregisterTask(task_id);
+    TaskHeartbeatRunable.unregisterTaskStats(task_id);
+    zkCluster.remove_task_heartbeat(topology_id,task_id);
+  }
+ catch (  Exception e) {
+    LOG.info("Failed to cleanup");
+  }
+ finally {
+    try {
+      zkCluster.disconnect();
+    }
+ catch (    Exception e) {
+      LOG.info("Failed to disconnect",e);
+    }
+  }
+  LOG.info("Successfully shutdown task " + topology_id + ":"+ task_id);
+}

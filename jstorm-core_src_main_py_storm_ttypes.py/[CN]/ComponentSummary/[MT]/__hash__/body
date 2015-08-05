@@ -1,0 +1,8 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.name))
+    value = ((value * 31) ^ hash(self.parallel))
+    value = ((value * 31) ^ hash(self.type))
+    value = ((value * 31) ^ hash(self.task_ids))
+    value = ((value * 31) ^ hash(self.errors))
+    return value

@@ -1,0 +1,41 @@
+{
+  int firstRunSeconds=input.firstRunSeconds;
+  int interruptSeconds=input.interruptSeconds;
+  int endRunSeconds=input.endRunSeconds;
+  System.out.println("Start test " + new Date() + ", first:"+ firstRunSeconds+ ", interrupt:"+ interruptSeconds+ ", endRun:"+ endRunSeconds);
+  final long intervalTimes=1000000l;
+  long firstCounter=0l;
+  long start=System.currentTimeMillis();
+  long now=System.currentTimeMillis();
+  long firstStop=start + firstRunSeconds * 1000;
+  Metric metric=input.metric;
+  while (now < firstStop) {
+    for (long l=0; l < intervalTimes; l++) {
+      metric.update(1.0d);
+    }
+    firstCounter+=intervalTimes;
+    now=System.currentTimeMillis();
+  }
+  try {
+    Thread.sleep(interruptSeconds * 1000);
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+  now=System.currentTimeMillis();
+  long endStop=now + endRunSeconds * 1000;
+  long secondCounter=0l;
+  while (now < endStop) {
+    for (long l=0; l < intervalTimes; l++) {
+      metric.update(1.0d);
+    }
+    secondCounter+=intervalTimes;
+    now=System.currentTimeMillis();
+  }
+  long end=System.currentTimeMillis();
+  long totalCounter=firstCounter + secondCounter;
+  Output output=new Output();
+  System.out.println("update " + totalCounter + " cost "+ (end - start) / 1000 + ", firstCounter:" + firstCounter + ", endCounter:" + secondCounter);
+  System.out.println("End test " + new Date());
+  return;
+}

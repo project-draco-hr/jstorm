@@ -1,0 +1,6 @@
+{
+  this.updater=updater;
+  this.merger=merger;
+  this.defaultValue=defaultValue;
+  this.startTime=System.currentTimeMillis();
+}

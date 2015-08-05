@@ -1,3 +1,0 @@
-{
-  return (this.histogram == null) ? 0 : this.histogram.size();
-}

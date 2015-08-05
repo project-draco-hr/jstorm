@@ -1,0 +1,22 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_task_id=true;
+  list.add(present_task_id);
+  if (present_task_id)   list.add(task_id);
+  boolean present_uptime=true;
+  list.add(present_uptime);
+  if (present_uptime)   list.add(uptime);
+  boolean present_status=true && (is_set_status());
+  list.add(present_status);
+  if (present_status)   list.add(status);
+  boolean present_host=true && (is_set_host());
+  list.add(present_host);
+  if (present_host)   list.add(host);
+  boolean present_port=true;
+  list.add(present_port);
+  if (present_port)   list.add(port);
+  boolean present_errors=true && (is_set_errors());
+  list.add(present_errors);
+  if (present_errors)   list.add(errors);
+  return list.hashCode();
+}

@@ -1,0 +1,7 @@
+{
+  defaultValue=0.0d;
+  updater=new AddUpdater<Double>();
+  merger=new TpsMerger();
+  convertor=new DefaultConvertor<Double>();
+  init();
+}

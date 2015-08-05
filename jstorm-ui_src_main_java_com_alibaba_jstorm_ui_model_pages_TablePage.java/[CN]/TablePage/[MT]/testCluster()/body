@@ -1,0 +1,5 @@
+{
+  Map<String,String> parameterMap=new HashMap<String,String>();
+  parameterMap.put(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_CLUSTER);
+  return parameterMap;
+}

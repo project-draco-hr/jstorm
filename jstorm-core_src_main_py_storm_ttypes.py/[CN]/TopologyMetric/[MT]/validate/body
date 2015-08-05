@@ -1,0 +1,10 @@
+def validate(self):
+    if (self.topologyMetric is None):
+        raise TProtocol.TProtocolException(message='Required field topologyMetric is unset!')
+    if (self.componentMetric is None):
+        raise TProtocol.TProtocolException(message='Required field componentMetric is unset!')
+    if (self.workerMetric is None):
+        raise TProtocol.TProtocolException(message='Required field workerMetric is unset!')
+    if (self.taskMetric is None):
+        raise TProtocol.TProtocolException(message='Required field taskMetric is unset!')
+    return

@@ -1,0 +1,6 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.supervisor))
+    value = ((value * 31) ^ hash(self.workers))
+    value = ((value * 31) ^ hash(self.workerMetric))
+    return value

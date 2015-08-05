@@ -1,0 +1,7 @@
+{
+  updater=new AddUpdater<T>();
+  merger=new SumMerger<T>();
+  convertor=new DefaultConvertor<T>();
+  defaultValue=zero;
+  init();
+}

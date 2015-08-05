@@ -1,0 +1,3 @@
+Map<String,StateHeartbeat> localWorkerStats
+Map<Integer,LocalAssignment> localAssignments
+Map<String,Integer> taskCleanupTimeoutMap

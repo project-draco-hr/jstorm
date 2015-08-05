@@ -1,0 +1,36 @@
+{
+switch (field) {
+case TOPOLOGY_METRIC:
+    if (value == null) {
+      unset_topologyMetric();
+    }
+ else {
+      set_topologyMetric((MetricInfo)value);
+    }
+  break;
+case COMPONENT_METRIC:
+if (value == null) {
+  unset_componentMetric();
+}
+ else {
+  set_componentMetric((Map<String,MetricInfo>)value);
+}
+break;
+case WORKER_METRIC:
+if (value == null) {
+unset_workerMetric();
+}
+ else {
+set_workerMetric((Map<String,MetricInfo>)value);
+}
+break;
+case TASK_METRIC:
+if (value == null) {
+unset_taskMetric();
+}
+ else {
+set_taskMetric((Map<Integer,MetricInfo>)value);
+}
+break;
+}
+}

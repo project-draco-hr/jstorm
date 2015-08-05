@@ -1,0 +1,9 @@
+{
+synchronized (UIMetrics.class) {
+    if (instance == null) {
+      instance=new UIMetrics();
+      LOG.info("Make instance");
+    }
+    return instance;
+  }
+}

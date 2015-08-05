@@ -1,0 +1,10 @@
+{
+  int targetTaskid=tuple.getTargetTaskId();
+synchronized (lock) {
+    BatchTuple batch=getBatchTuple(targetTaskid);
+    batch.addToBatch(tuple);
+    if (batch.isBatchFull()) {
+      pushToQueue(targetTaskid,batch);
+    }
+  }
+}

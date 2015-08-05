@@ -1,0 +1,67 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  lastComparison=Boolean.valueOf(is_set_topology_id()).compareTo(other.is_set_topology_id());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_topology_id()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.topology_id,other.topology_id);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_supervisor_id()).compareTo(other.is_set_supervisor_id());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_supervisor_id()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.supervisor_id,other.supervisor_id);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_port()).compareTo(other.is_set_port());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_port()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.port,other.port);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_workerMetric()).compareTo(other.is_set_workerMetric());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_workerMetric()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.workerMetric,other.workerMetric);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_nettyMetric()).compareTo(other.is_set_nettyMetric());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_nettyMetric()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.nettyMetric,other.nettyMetric);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_taskMetric()).compareTo(other.is_set_taskMetric());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_taskMetric()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.taskMetric,other.taskMetric);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

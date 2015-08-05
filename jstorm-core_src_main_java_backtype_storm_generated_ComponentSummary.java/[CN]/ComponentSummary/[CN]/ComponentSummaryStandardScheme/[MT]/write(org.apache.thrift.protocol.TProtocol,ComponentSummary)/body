@@ -1,0 +1,43 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.name != null) {
+    oprot.writeFieldBegin(NAME_FIELD_DESC);
+    oprot.writeString(struct.name);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldBegin(PARALLEL_FIELD_DESC);
+  oprot.writeI32(struct.parallel);
+  oprot.writeFieldEnd();
+  if (struct.type != null) {
+    oprot.writeFieldBegin(TYPE_FIELD_DESC);
+    oprot.writeString(struct.type);
+    oprot.writeFieldEnd();
+  }
+  if (struct.task_ids != null) {
+    oprot.writeFieldBegin(TASK_IDS_FIELD_DESC);
+{
+      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32,struct.task_ids.size()));
+      for (      int _iter220 : struct.task_ids) {
+        oprot.writeI32(_iter220);
+      }
+      oprot.writeListEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  if (struct.errors != null) {
+    if (struct.is_set_errors()) {
+      oprot.writeFieldBegin(ERRORS_FIELD_DESC);
+{
+        oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.errors.size()));
+        for (        ErrorInfo _iter221 : struct.errors) {
+          _iter221.write(oprot);
+        }
+        oprot.writeListEnd();
+      }
+      oprot.writeFieldEnd();
+    }
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

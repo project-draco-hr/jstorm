@@ -1,0 +1,21 @@
+{
+  ColumnData columnData=new ColumnData();
+  LinkData linkData=new LinkData();
+  columnData.addLinkData(linkData);
+  linkData.setUrl(UIDef.LINK_WINDOW_TABLE);
+  linkData.setText(connectionName);
+  Map<String,String> linkDataParam=new HashMap<String,String>();
+  linkData.setParamMap(linkDataParam);
+  linkDataParam.putAll(paramMap);
+  linkDataParam.remove(UIDef.POS);
+  try {
+    int pos=connectionName.indexOf(":");
+    if (pos > 0) {
+      String source=connectionName.substring(0,pos);
+      linkDataParam.put(UIDef.HOST,source);
+    }
+  }
+ catch (  Exception e) {
+  }
+  return columnData;
+}

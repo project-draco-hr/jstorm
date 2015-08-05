@@ -1,0 +1,5 @@
+{
+  if (other.is_set_uploadMetrics()) {
+    this.uploadMetrics=new WorkerUploadMetrics(other.uploadMetrics);
+  }
+}

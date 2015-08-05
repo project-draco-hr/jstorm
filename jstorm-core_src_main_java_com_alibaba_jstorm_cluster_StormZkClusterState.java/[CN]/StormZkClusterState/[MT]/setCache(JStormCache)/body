@@ -1,0 +1,5 @@
+{
+  if (cluster_state instanceof DistributedClusterState) {
+    ((DistributedClusterState)cluster_state).setZkCache(simpleCache);
+  }
+}

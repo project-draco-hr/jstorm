@@ -1,0 +1,10 @@
+{
+  List<String> active_ids=data.getStormClusterState().active_storms();
+  if (active_ids != null) {
+    for (    String topologyid : active_ids) {
+      NimbusUtils.transition(data,topologyid,false,StatusType.startup);
+      NimbusUtils.updateTopologyTaskTimeout(data,topologyid);
+    }
+  }
+  LOG.info("Successfully init topology status");
+}

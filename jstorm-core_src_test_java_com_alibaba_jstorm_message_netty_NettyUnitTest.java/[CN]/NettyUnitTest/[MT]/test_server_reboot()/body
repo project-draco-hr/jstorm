@@ -1,0 +1,52 @@
+{
+  System.out.println("!!!!!!!!!!Start server reboot test!!!!!!!!");
+  final String req_msg=setupLargMsg();
+  final IContext context=TransportFactory.makeContext(storm_conf);
+  IConnection server=null;
+  new Thread(new Runnable(){
+    @Override public void run(){
+      final IConnection client=context.connect(null,"localhost",port);
+      lock.lock();
+      List<TaskMessage> list=new ArrayList<TaskMessage>();
+      TaskMessage message=new TaskMessage(task,req_msg.getBytes());
+      list.add(message);
+      client.send(message);
+      System.out.println("Send first");
+      JStormUtils.sleepMs(10000);
+      System.out.println("Begin to Send second");
+      client.send(message);
+      System.out.println("Send second");
+      JStormUtils.sleepMs(15000);
+      client.send(message);
+      System.out.println("Send third time");
+      try {
+        clientClose.await();
+      }
+ catch (      InterruptedException e) {
+        e.printStackTrace();
+      }
+      client.close();
+      contextClose.signal();
+      lock.unlock();
+    }
+  }
+).start();
+  server=initNettyServer();
+  byte[] recv=(byte[])server.recv(task,0);
+  System.out.println("Receive first");
+  Assert.assertEquals(req_msg,new String(recv));
+  server.close();
+  System.out.println("!!shutdow server and sleep 30s, please wait!!");
+  Thread.sleep(30000);
+  IConnection server2=server=initNettyServer();
+  System.out.println("!!!!!!!!!!!!!!!!!!!! restart server !!!!!!!!!!!");
+  byte[] recv2=(byte[])server2.recv(task,0);
+  Assert.assertEquals(req_msg,new String(recv2));
+  lock.lock();
+  clientClose.signal();
+  server2.close();
+  contextClose.await();
+  context.term();
+  lock.unlock();
+  System.out.println("!!!!!!!!!!End server reboot test!!!!!!!!");
+}

@@ -1,0 +1,20 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TOPOLOGY_ID:
+    return is_set_topology_id();
+case SUPERVISOR_ID:
+  return is_set_supervisor_id();
+case PORT:
+return is_set_port();
+case WORKER_METRIC:
+return is_set_workerMetric();
+case NETTY_METRIC:
+return is_set_nettyMetric();
+case TASK_METRIC:
+return is_set_taskMetric();
+}
+throw new IllegalStateException();
+}

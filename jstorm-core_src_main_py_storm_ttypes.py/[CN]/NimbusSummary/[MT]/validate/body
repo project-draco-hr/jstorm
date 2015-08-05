@@ -1,0 +1,16 @@
+def validate(self):
+    if (self.nimbus_master is None):
+        raise TProtocol.TProtocolException(message='Required field nimbus_master is unset!')
+    if (self.nimbus_slaves is None):
+        raise TProtocol.TProtocolException(message='Required field nimbus_slaves is unset!')
+    if (self.supervisor_num is None):
+        raise TProtocol.TProtocolException(message='Required field supervisor_num is unset!')
+    if (self.total_port_num is None):
+        raise TProtocol.TProtocolException(message='Required field total_port_num is unset!')
+    if (self.used_port_num is None):
+        raise TProtocol.TProtocolException(message='Required field used_port_num is unset!')
+    if (self.free_port_num is None):
+        raise TProtocol.TProtocolException(message='Required field free_port_num is unset!')
+    if (self.version is None):
+        raise TProtocol.TProtocolException(message='Required field version is unset!')
+    return

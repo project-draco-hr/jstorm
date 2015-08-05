@@ -1,0 +1,14 @@
+{
+  StringBuilder sb=new StringBuilder("MetricWindow(");
+  boolean first=true;
+  sb.append("metricWindow:");
+  if (this.metricWindow == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.metricWindow);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

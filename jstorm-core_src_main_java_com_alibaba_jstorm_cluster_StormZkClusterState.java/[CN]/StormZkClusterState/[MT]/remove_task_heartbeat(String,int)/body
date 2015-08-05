@@ -1,0 +1,4 @@
+{
+  String taskbeatPath=Cluster.taskbeat_path(topologyId,taskId);
+  deleteObject(taskbeatPath);
+}

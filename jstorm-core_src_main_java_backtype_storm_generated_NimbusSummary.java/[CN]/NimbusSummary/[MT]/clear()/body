@@ -1,0 +1,13 @@
+{
+  this.nimbus_master=null;
+  this.nimbus_slaves=null;
+  set_supervisor_num_isSet(false);
+  this.supervisor_num=0;
+  set_total_port_num_isSet(false);
+  this.total_port_num=0;
+  set_used_port_num_isSet(false);
+  this.used_port_num=0;
+  set_free_port_num_isSet(false);
+  this.free_port_num=0;
+  this.version=null;
+}

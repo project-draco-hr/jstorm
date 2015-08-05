@@ -1,0 +1,19 @@
+{
+  if (other.is_set_nimbus()) {
+    this.nimbus=new NimbusSummary(other.nimbus);
+  }
+  if (other.is_set_supervisors()) {
+    List<SupervisorSummary> __this__supervisors=new ArrayList<SupervisorSummary>(other.supervisors.size());
+    for (    SupervisorSummary other_element : other.supervisors) {
+      __this__supervisors.add(new SupervisorSummary(other_element));
+    }
+    this.supervisors=__this__supervisors;
+  }
+  if (other.is_set_topologies()) {
+    List<TopologySummary> __this__topologies=new ArrayList<TopologySummary>(other.topologies.size());
+    for (    TopologySummary other_element : other.topologies) {
+      __this__topologies.add(new TopologySummary(other_element));
+    }
+    this.topologies=__this__topologies;
+  }
+}

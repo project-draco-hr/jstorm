@@ -1,0 +1,13 @@
+{
+  while (taskStatus.isShutdown() == false) {
+    try {
+      exeQueue.consumeBatchWhenAvailable(this);
+      processControlEvent();
+    }
+ catch (    Throwable e) {
+      if (taskStatus.isShutdown() == false) {
+        LOG.error(idStr + " bolt exeutor  error",e);
+      }
+    }
+  }
+}

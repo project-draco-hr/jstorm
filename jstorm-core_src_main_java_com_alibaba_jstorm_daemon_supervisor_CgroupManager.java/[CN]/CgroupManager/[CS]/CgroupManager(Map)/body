@@ -1,0 +1,13 @@
+{
+  LOG.info("running on cgroup mode");
+  rootDir=ConfigExtension.getCgroupRootDir(conf);
+  if (rootDir == null)   throw new RuntimeException("Check configuration file. The supervisor.cgroup.rootdir is missing.");
+  File file=new File(JSTORM_CPU_HIERARCHY_DIR + "/" + rootDir);
+  if (!file.exists()) {
+    LOG.error(JSTORM_CPU_HIERARCHY_DIR + "/" + rootDir+ " is not existing.");
+    throw new RuntimeException("Check if cgconfig service starts or /etc/cgconfig.conf is consistent with configuration file.");
+  }
+  center=CgroupCenter.getInstance();
+  if (center == null)   throw new RuntimeException("Cgroup error, please check /proc/cgroups");
+  this.prepareSubSystem();
+}

@@ -1,0 +1,6 @@
+{
+  if (other.is_set_metricWindow()) {
+    Map<Integer,Double> __this__metricWindow=new HashMap<Integer,Double>(other.metricWindow);
+    this.metricWindow=__this__metricWindow;
+  }
+}

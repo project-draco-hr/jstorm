@@ -1,0 +1,13 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_nimbus=true && (is_set_nimbus());
+  list.add(present_nimbus);
+  if (present_nimbus)   list.add(nimbus);
+  boolean present_supervisors=true && (is_set_supervisors());
+  list.add(present_supervisors);
+  if (present_supervisors)   list.add(supervisors);
+  boolean present_topologies=true && (is_set_topologies());
+  list.add(present_topologies);
+  if (present_topologies)   list.add(topologies);
+  return list.hashCode();
+}

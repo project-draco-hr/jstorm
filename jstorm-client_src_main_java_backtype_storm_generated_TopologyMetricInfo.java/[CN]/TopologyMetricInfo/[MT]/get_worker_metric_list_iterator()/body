@@ -1,3 +1,0 @@
-{
-  return (this.worker_metric_list == null) ? null : this.worker_metric_list.iterator();
-}

@@ -1,4 +1,0 @@
-{
-  Map<Integer,Object> statics=staticsMap.get(StaticsType.send_tps);
-  return convertKey(statics,String.valueOf(""),Double.valueOf(0));
-}

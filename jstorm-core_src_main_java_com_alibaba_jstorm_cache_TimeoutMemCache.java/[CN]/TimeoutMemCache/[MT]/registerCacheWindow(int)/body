@@ -1,0 +1,12 @@
+{
+synchronized (this) {
+    if (cacheWindows.get(timeoutSecond) == null) {
+      TimeCacheMap<String,Object> cacheWindow=new TimeCacheMap<String,Object>(timeoutSecond);
+      cacheWindows.put(timeoutSecond,cacheWindow);
+      LOG.info("Successfully register CacheWindow: " + timeoutSecond);
+    }
+ else {
+      LOG.info("CacheWindow: " + timeoutSecond + " has been registered");
+    }
+  }
+}

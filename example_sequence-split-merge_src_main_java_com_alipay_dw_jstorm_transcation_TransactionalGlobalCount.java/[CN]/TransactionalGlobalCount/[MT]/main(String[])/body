@@ -1,12 +1,28 @@
 {
   MemoryTransactionalSpout spout=new MemoryTransactionalSpout(DATA,new Fields("word"),PARTITION_TAKE_PER_BATCH);
-  TransactionalTopologyBuilder builder=new TransactionalTopologyBuilder("global-count","spout",spout,2);
-  builder.setBolt("partial-count",new BatchCount(),3).noneGrouping("spout");
-  builder.setBolt("sum",new UpdateGlobalCount(),1).globalGrouping("partial-count");
+  TransactionalTopologyBuilder builder=new TransactionalTopologyBuilder("global-count","spout",spout,3);
+  builder.setBolt("partial-count",new BatchCount(),5).noneGrouping("spout");
+  builder.setBolt("sum",new UpdateGlobalCount()).globalGrouping("partial-count");
   Config config=new Config();
   config.setDebug(true);
   config.setMaxSpoutPending(3);
-  config.put(Config.TOPOLOGY_WORKERS,9);
-  Config.setNumAckers(config,0);
-  StormSubmitter.submitTopology("global-count-topology",config,builder.buildTopology());
+  if (args.length == 0) {
+    LocalCluster cluster=new LocalCluster();
+    cluster.submitTopology("global-count-topology",config,builder.buildTopology());
+    Thread.sleep(100000);
+    cluster.shutdown();
+  }
+ else {
+    config.setNumWorkers(3);
+    try {
+      Map yamlConf=LoadConf.LoadYaml(args[0]);
+      if (yamlConf != null) {
+        config.putAll(yamlConf);
+      }
+    }
+ catch (    Exception e) {
+      System.out.println("Input " + args[0] + " isn't one yaml ");
+    }
+    StormSubmitter.submitTopology("global",config,builder.buildTopology());
+  }
 }

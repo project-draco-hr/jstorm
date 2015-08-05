@@ -1,0 +1,12 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.fields))
+    value = ((value * 31) ^ hash(self.shuffle))
+    value = ((value * 31) ^ hash(self.all))
+    value = ((value * 31) ^ hash(self.none))
+    value = ((value * 31) ^ hash(self.direct))
+    value = ((value * 31) ^ hash(self.custom_object))
+    value = ((value * 31) ^ hash(self.custom_serialized))
+    value = ((value * 31) ^ hash(self.local_or_shuffle))
+    value = ((value * 31) ^ hash(self.localFirst))
+    return value

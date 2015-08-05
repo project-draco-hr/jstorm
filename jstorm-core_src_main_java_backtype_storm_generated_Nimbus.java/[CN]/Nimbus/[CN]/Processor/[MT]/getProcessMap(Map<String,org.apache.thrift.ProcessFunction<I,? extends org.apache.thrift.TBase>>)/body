@@ -1,0 +1,34 @@
+{
+  processMap.put("submitTopology",new submitTopology());
+  processMap.put("submitTopologyWithOpts",new submitTopologyWithOpts());
+  processMap.put("killTopology",new killTopology());
+  processMap.put("killTopologyWithOpts",new killTopologyWithOpts());
+  processMap.put("activate",new activate());
+  processMap.put("deactivate",new deactivate());
+  processMap.put("rebalance",new rebalance());
+  processMap.put("metricMonitor",new metricMonitor());
+  processMap.put("restart",new restart());
+  processMap.put("beginLibUpload",new beginLibUpload());
+  processMap.put("beginFileUpload",new beginFileUpload());
+  processMap.put("uploadChunk",new uploadChunk());
+  processMap.put("finishFileUpload",new finishFileUpload());
+  processMap.put("beginFileDownload",new beginFileDownload());
+  processMap.put("downloadChunk",new downloadChunk());
+  processMap.put("finishFileDownload",new finishFileDownload());
+  processMap.put("getNimbusConf",new getNimbusConf());
+  processMap.put("getTopologyConf",new getTopologyConf());
+  processMap.put("getTopologyId",new getTopologyId());
+  processMap.put("getClusterInfo",new getClusterInfo());
+  processMap.put("getSupervisorWorkers",new getSupervisorWorkers());
+  processMap.put("getTopologyInfo",new getTopologyInfo());
+  processMap.put("getTopologyInfoByName",new getTopologyInfoByName());
+  processMap.put("getTopology",new getTopology());
+  processMap.put("getUserTopology",new getUserTopology());
+  processMap.put("workerUploadMetric",new workerUploadMetric());
+  processMap.put("getTopologyMetric",new getTopologyMetric());
+  processMap.put("getNettyMetric",new getNettyMetric());
+  processMap.put("getServerNettyMetric",new getServerNettyMetric());
+  processMap.put("getVersion",new getVersion());
+  processMap.put("updateConf",new updateConf());
+  return processMap;
+}

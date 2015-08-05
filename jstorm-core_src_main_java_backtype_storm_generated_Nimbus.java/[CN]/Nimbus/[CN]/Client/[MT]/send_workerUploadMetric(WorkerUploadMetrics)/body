@@ -1,0 +1,5 @@
+{
+  workerUploadMetric_args args=new workerUploadMetric_args();
+  args.set_uploadMetrics(uploadMetrics);
+  sendBase("workerUploadMetric",args);
+}

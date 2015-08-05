@@ -1,0 +1,7 @@
+{
+  if (_transport != null) {
+    _transport.close();
+    _transport=null;
+    _protocol=null;
+  }
+}

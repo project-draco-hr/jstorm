@@ -1,0 +1,5 @@
+def parse_exclude_jars(jars):
+    global EXCLUDE_JARS
+    EXCLUDE_JARS = jars.split(',')
+    print ' Excludes jars:'
+    print EXCLUDE_JARS

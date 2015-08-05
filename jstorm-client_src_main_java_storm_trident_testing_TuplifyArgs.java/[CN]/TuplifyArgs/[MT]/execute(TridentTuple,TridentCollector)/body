@@ -1,7 +1,0 @@
-{
-  String args=input.getString(0);
-  List<List<Object>> tuples=(List)Utils.from_json(args);
-  for (  List<Object> tuple : tuples) {
-    collector.emit(tuple);
-  }
-}

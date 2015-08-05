@@ -5,6 +5,7 @@
   }
   if (isFinished == true) {
     LOG.info("Finish sending ");
+    JStormUtils.sleepMs(10000);
     return;
   }
   if (tupleId > SPOUT_MAX_SEND_NUM) {

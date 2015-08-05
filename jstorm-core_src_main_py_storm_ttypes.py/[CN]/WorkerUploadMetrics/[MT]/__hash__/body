@@ -1,0 +1,9 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.topology_id))
+    value = ((value * 31) ^ hash(self.supervisor_id))
+    value = ((value * 31) ^ hash(self.port))
+    value = ((value * 31) ^ hash(self.workerMetric))
+    value = ((value * 31) ^ hash(self.nettyMetric))
+    value = ((value * 31) ^ hash(self.taskMetric))
+    return value

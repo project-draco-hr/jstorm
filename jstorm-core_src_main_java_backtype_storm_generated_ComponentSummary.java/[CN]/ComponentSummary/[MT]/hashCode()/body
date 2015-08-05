@@ -1,0 +1,19 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_name=true && (is_set_name());
+  list.add(present_name);
+  if (present_name)   list.add(name);
+  boolean present_parallel=true;
+  list.add(present_parallel);
+  if (present_parallel)   list.add(parallel);
+  boolean present_type=true && (is_set_type());
+  list.add(present_type);
+  if (present_type)   list.add(type);
+  boolean present_task_ids=true && (is_set_task_ids());
+  list.add(present_task_ids);
+  if (present_task_ids)   list.add(task_ids);
+  boolean present_errors=true && (is_set_errors());
+  list.add(present_errors);
+  if (present_errors)   list.add(errors);
+  return list.hashCode();
+}

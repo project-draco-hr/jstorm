@@ -1,0 +1,8 @@
+{
+  byte[] ret=null;
+  ret=zkobj.getData(zk,path,watch);
+  if (zkCache != null && ret != null) {
+    zkCache.put(path,ret);
+  }
+  return ret;
+}

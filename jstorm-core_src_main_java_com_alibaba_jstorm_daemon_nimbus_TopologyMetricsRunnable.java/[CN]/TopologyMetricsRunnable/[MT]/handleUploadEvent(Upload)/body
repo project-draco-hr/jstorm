@@ -1,0 +1,12 @@
+{
+  if (isUploading.getAndSet(true) == true) {
+    LOG.info("Nimbus is alread uploading");
+    return;
+  }
+  long start=System.currentTimeMillis();
+  cleanTopology();
+  render();
+  isUploading.set(false);
+  long end=System.currentTimeMillis();
+  uploadHistogram.update(end - start);
+}

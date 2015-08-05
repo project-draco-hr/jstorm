@@ -1,8 +1,0 @@
-{
-  emitted=JStormUtils.formatValue(staticsType.get(StaticsType.emitted));
-  sendTps=JStormUtils.formatValue(staticsType.get(StaticsType.send_tps));
-  recvTps=JStormUtils.formatValue(staticsType.get(StaticsType.recv_tps));
-  acked=JStormUtils.formatValue(staticsType.get(StaticsType.acked));
-  failed=JStormUtils.formatValue(staticsType.get(StaticsType.failed));
-  process=JStormUtils.formatValue(staticsType.get(StaticsType.process_latencies));
-}

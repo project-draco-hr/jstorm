@@ -1,0 +1,5 @@
+{
+  super(task,taskName,serializer,taskStatus,workerData);
+  batchMap=new HashMap<Integer,BatchTuple>();
+  batchSize=ConfigExtension.getTaskMsgBatchSize(workerData.getStormConf());
+}

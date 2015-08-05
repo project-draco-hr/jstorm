@@ -1,0 +1,8 @@
+{
+  Histogram netTransTime=networkTransmitTimeMap.remove(channel);
+  if (netTransTime != null) {
+    String nettyConnection=transmitNameMap.remove(channel);
+    JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_SRV_MSG_TRANS_TIME,nettyConnection);
+    LOG.info("Remove Transmit Histogram of {}, channel {}",nettyConnection,channel);
+  }
+}

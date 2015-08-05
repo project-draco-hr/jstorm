@@ -1,0 +1,5 @@
+{
+  if (!is_set_baseMetric()) {
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'baseMetric' is unset! Struct:" + toString());
+  }
+}

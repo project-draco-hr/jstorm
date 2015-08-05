@@ -1,0 +1,20 @@
+{
+  for (  Entry<Integer,ColumnFamilyHandle> entry : windowHandlers.entrySet()) {
+    try {
+      byte[] data=ttlDB.get(entry.getValue(),key.getBytes());
+      if (data != null) {
+        try {
+          return Utils.javaDeserialize(data);
+        }
+ catch (        Exception e) {
+          LOG.error("Failed to deserialize obj of " + key);
+          ttlDB.remove(entry.getValue(),key.getBytes());
+          return null;
+        }
+      }
+    }
+ catch (    Exception e) {
+    }
+  }
+  return null;
+}

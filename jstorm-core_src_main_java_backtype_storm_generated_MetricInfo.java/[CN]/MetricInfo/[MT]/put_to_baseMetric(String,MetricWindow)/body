@@ -1,0 +1,6 @@
+{
+  if (this.baseMetric == null) {
+    this.baseMetric=new HashMap<String,MetricWindow>();
+  }
+  this.baseMetric.put(key,val);
+}

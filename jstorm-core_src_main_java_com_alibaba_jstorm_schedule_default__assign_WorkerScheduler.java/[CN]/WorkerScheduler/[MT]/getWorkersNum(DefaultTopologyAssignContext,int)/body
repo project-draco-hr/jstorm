@@ -1,0 +1,15 @@
+{
+  Map<String,SupervisorInfo> supervisors=context.getCluster();
+  List<SupervisorInfo> isolationSupervisors=this.getIsolationSupervisors(context);
+  int slotNum=0;
+  if (isolationSupervisors.size() != 0) {
+    for (    SupervisorInfo superivsor : isolationSupervisors) {
+      slotNum=slotNum + superivsor.getAvailableWorkerPorts().size();
+    }
+    return Math.min(slotNum,workersNum);
+  }
+  for (  Entry<String,SupervisorInfo> entry : supervisors.entrySet()) {
+    slotNum=slotNum + entry.getValue().getAvailableWorkerPorts().size();
+  }
+  return Math.min(slotNum,workersNum);
+}

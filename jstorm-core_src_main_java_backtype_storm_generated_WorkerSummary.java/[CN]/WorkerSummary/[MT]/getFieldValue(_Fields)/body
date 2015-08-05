@@ -1,0 +1,13 @@
+{
+switch (field) {
+case PORT:
+    return Integer.valueOf(get_port());
+case UPTIME:
+  return Integer.valueOf(get_uptime());
+case TOPOLOGY:
+return get_topology();
+case TASKS:
+return get_tasks();
+}
+throw new IllegalStateException();
+}
