@@ -1,0 +1,3 @@
+Set<Integer> keepPorts
+Map<Integer,LocalAssignment> localAssignments
+Set<String> downloadFailedTopologyIds

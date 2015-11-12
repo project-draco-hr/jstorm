@@ -1,0 +1,4 @@
+String clusterName
+String topologyId
+TopologyMetric tpMetric
+Map<String,Object> metricContext

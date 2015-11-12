@@ -1,0 +1,6 @@
+Event e
+long index
+int pageSize
+String text
+boolean isDisable
+boolean isActive

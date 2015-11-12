@@ -1,0 +1,30 @@
+{
+  long start=System.currentTimeMillis();
+  host=NetWorkUtils.host2Ip(host);
+  int window=UIUtils.parseWindow(win);
+  UIUtils.addWindowAttribute(model,window);
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    SupervisorWorkers supervisorWorkers=client.getClient().getSupervisorWorkers(host);
+    model.addAttribute("supervisor",JStormUtils.thriftToMap(supervisorWorkers.get_supervisor()));
+    List<WorkerSummary> workerSummaries=supervisorWorkers.get_workers();
+    model.addAttribute("workerSummary",JStormUtils.thriftToMap(workerSummaries));
+    Map<String,MetricInfo> workerMetricInfo=supervisorWorkers.get_workerMetric();
+    List<UIWorkerMetric> workerMetrics=getWorkerMetrics(workerMetricInfo,workerSummaries,host,window);
+    model.addAttribute("workerMetrics",workerMetrics);
+    model.addAttribute("workerHead",UIMetricUtils.sortHead(workerMetrics,UIWorkerMetric.HEAD));
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    LOG.error(e.getMessage(),e);
+    UIUtils.addErrorAttribute(model,e);
+  }
+  model.addAttribute("clusterName",clusterName);
+  model.addAttribute("host",host);
+  model.addAttribute("page","supervisor");
+  model.addAttribute("supervisorPort",UIUtils.getSupervisorPort(clusterName));
+  UIUtils.addTitleAttribute(model,"Supervisor Summary");
+  LOG.info("supervisor page show cost:{}ms",System.currentTimeMillis() - start);
+  return "supervisor";
+}

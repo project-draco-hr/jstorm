@@ -7,8 +7,7 @@
     Map<String,SupervisorInfo> supervisorInfos=Cluster.get_all_SupervisorInfo(stormClusterState,null);
     List<SupervisorSummary> supervisorSummaries=NimbusUtils.mkSupervisorSummaries(supervisorInfos,assignments);
     NimbusSummary nimbusSummary=NimbusUtils.getNimbusSummary(stormClusterState,supervisorSummaries,data);
-    ClusterSummary ret=new ClusterSummary(nimbusSummary,supervisorSummaries,topologySummaries);
-    return ret;
+    return new ClusterSummary(nimbusSummary,supervisorSummaries,topologySummaries);
   }
  catch (  TException e) {
     LOG.info("Failed to get ClusterSummary ",e);
@@ -19,8 +18,7 @@ catch (  Exception e) {
     throw new TException(e);
   }
  finally {
-    double spend=(System.nanoTime() - start) / 1000000.0d;
-    SimpleJStormMetric.updateHistorgram("getClusterInfo",spend);
-    LOG.info("getClusterInfo spend {}ms",spend);
+    long end=System.nanoTime();
+    SimpleJStormMetric.updateNimbusHistogram("getClusterInfo",(end - start) / TimeUtils.NS_PER_US);
   }
 }

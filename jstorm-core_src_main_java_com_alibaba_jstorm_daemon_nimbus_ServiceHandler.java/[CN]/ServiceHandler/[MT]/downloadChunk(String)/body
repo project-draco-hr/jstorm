@@ -9,7 +9,7 @@
       BufferFileInputStream is=(BufferFileInputStream)obj;
       byte[] ret=is.read();
       if (ret != null) {
-        downloaders.put(id,(BufferFileInputStream)is);
+        downloaders.put(id,is);
         return ByteBuffer.wrap(ret);
       }
     }

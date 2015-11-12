@@ -1,3 +1,0 @@
-def getTopologyMetric(self, topologyName):
-    '\n    Parameters:\n     - topologyName\n    '
-    pass

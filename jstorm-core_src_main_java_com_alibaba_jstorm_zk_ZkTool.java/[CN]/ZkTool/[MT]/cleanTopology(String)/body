@@ -1,0 +1,92 @@
+{
+  DistributedClusterState zkClusterState=null;
+  try {
+    zkClusterState=new DistributedClusterState(conf);
+    String rootDir=String.valueOf(conf.get(Config.STORM_ZOOKEEPER_ROOT));
+    String assignmentPath="/assignments/" + topologyId;
+    String stormBase="/topology/" + topologyId;
+    String taskbeats="/taskbeats/" + topologyId;
+    String tasks="/tasks/" + topologyId;
+    String taskerrors="/taskerrors/" + topologyId;
+    String monitor="/monitor/" + topologyId;
+    if (zkClusterState.node_existed(assignmentPath,false)) {
+      try {
+        zkClusterState.delete_node(assignmentPath);
+      }
+ catch (      Exception e) {
+        LOG.error("Could not remove assignments for " + topologyId,e);
+      }
+    }
+ else {
+      LOG.info(" node of " + rootDir + assignmentPath+ " isn't existed ");
+    }
+    if (zkClusterState.node_existed(stormBase,false)) {
+      try {
+        zkClusterState.delete_node(stormBase);
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to remove storm base for " + topologyId,e);
+      }
+    }
+ else {
+      LOG.info(" node of " + rootDir + stormBase+ " isn't existed ");
+    }
+    if (zkClusterState.node_existed(taskbeats,false)) {
+      try {
+        zkClusterState.delete_node(taskbeats);
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to remove taskbeats for " + topologyId,e);
+      }
+    }
+ else {
+      LOG.info(" node of " + rootDir + taskbeats+ " isn't existed ");
+    }
+    if (zkClusterState.node_existed(tasks,false)) {
+      try {
+        zkClusterState.delete_node(tasks);
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to remove tasks for " + topologyId,e);
+      }
+    }
+ else {
+      LOG.info(" node of " + rootDir + tasks+ " isn't existed ");
+    }
+    if (zkClusterState.node_existed(taskerrors,false)) {
+      try {
+        zkClusterState.delete_node(taskerrors);
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to remove taskerrors for " + topologyId,e);
+      }
+    }
+ else {
+      LOG.info(" node of " + rootDir + taskerrors+ " isn't existed ");
+    }
+    if (zkClusterState.node_existed(monitor,false)) {
+      try {
+        zkClusterState.delete_node(monitor);
+      }
+ catch (      Exception e) {
+        LOG.error("Failed to remove monitor for " + topologyId,e);
+      }
+    }
+ else {
+      LOG.info(" node of " + rootDir + monitor+ " isn't existed ");
+    }
+  }
+ catch (  Exception e) {
+    if (zkClusterState == null) {
+      LOG.error("Failed to connect ZK ",e);
+    }
+ else {
+      LOG.error("Failed to clean  topolodyId: " + topologyId + "\n",e);
+    }
+  }
+ finally {
+    if (zkClusterState != null) {
+      zkClusterState.close();
+    }
+  }
+}

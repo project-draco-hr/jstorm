@@ -1,0 +1,5 @@
+{
+  eventSampler=new EventSampler(BATCH_EVENT_SAMPLER_INTERVAL_S);
+  setBatchSize(maxBatchSize);
+  LOG.info("Start check batch size, task of  " + taskName);
+}

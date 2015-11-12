@@ -1,3 +1,0 @@
-{
-  return (this.componentMetric == null) ? 0 : this.componentMetric.size();
-}

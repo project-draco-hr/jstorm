@@ -1,0 +1,5 @@
+long metricId
+MetricType metricType
+int win
+long start
+long end

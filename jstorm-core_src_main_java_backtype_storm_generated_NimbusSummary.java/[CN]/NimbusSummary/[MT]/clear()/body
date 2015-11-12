@@ -1,13 +1,13 @@
 {
-  this.nimbus_master=null;
-  this.nimbus_slaves=null;
-  set_supervisor_num_isSet(false);
-  this.supervisor_num=0;
-  set_total_port_num_isSet(false);
-  this.total_port_num=0;
-  set_used_port_num_isSet(false);
-  this.used_port_num=0;
-  set_free_port_num_isSet(false);
-  this.free_port_num=0;
+  this.nimbusMaster=null;
+  this.nimbusSlaves=null;
+  set_supervisorNum_isSet(false);
+  this.supervisorNum=0;
+  set_totalPortNum_isSet(false);
+  this.totalPortNum=0;
+  set_usedPortNum_isSet(false);
+  this.usedPortNum=0;
+  set_freePortNum_isSet(false);
+  this.freePortNum=0;
   this.version=null;
 }

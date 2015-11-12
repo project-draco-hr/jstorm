@@ -1,8 +1,9 @@
 {
-  int workersNum=getWorkersNum(context,num);
-  if (workersNum == 0) {
-    throw new FailedAssignTopologyException("there's no enough worker");
+  int workersNum=getAvailableWorkersNum(context);
+  if (workersNum < allocWorkerNum) {
+    throw new FailedAssignTopologyException("there's no enough worker. allocWorkerNum=" + allocWorkerNum + ", availableWorkerNum="+ workersNum);
   }
+  workersNum=allocWorkerNum;
   List<ResourceWorkerSlot> assignedWorkers=new ArrayList<ResourceWorkerSlot>();
   getRightWorkers(context,needAssign,assignedWorkers,workersNum,getUserDefineWorkers(context,ConfigExtension.getUserDefineAssignment(context.getStormConf())));
   if (ConfigExtension.isUseOldAssignment(context.getStormConf())) {
@@ -24,9 +25,19 @@
       }
     }
   }
-  int defaultWorkerNum=Math.min(workersNum - assignedWorkers.size(),needAssign.size());
+  int workersForSingleTM=0;
+  if (context.getAssignSingleWorkerForTM()) {
+    for (    Integer taskId : needAssign) {
+      String componentName=context.getTaskToComponent().get(taskId);
+      if (componentName.equals(Common.TOPOLOGY_MASTER_COMPONENT_ID)) {
+        workersForSingleTM++;
+      }
+    }
+  }
   LOG.info("Get workers from user define and old assignments: " + assignedWorkers);
-  for (int i=0; i < defaultWorkerNum; i++) {
+  int restWokerNum=workersNum - assignedWorkers.size();
+  if (restWokerNum < 0)   throw new FailedAssignTopologyException("Too much workers are needed for user define or old assignments. workersNum=" + workersNum + ", assignedWokersNum="+ assignedWorkers.size());
+  for (int i=0; i < restWokerNum; i++) {
     assignedWorkers.add(new ResourceWorkerSlot());
   }
   List<SupervisorInfo> isolationSupervisors=this.getIsolationSupervisors(context);

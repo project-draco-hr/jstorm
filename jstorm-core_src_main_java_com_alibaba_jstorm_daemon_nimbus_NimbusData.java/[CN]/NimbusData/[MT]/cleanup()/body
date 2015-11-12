@@ -1,5 +1,5 @@
 {
-  cache.cleanup();
+  nimbusCache.cleanup();
   LOG.info("Successfully shutdown Cache");
   try {
     stormClusterState.disconnect();

@@ -1,0 +1,12 @@
+{
+  List values=JStormUtils.mk_list(uptime.uptime());
+  if (spoutOutputCollector != null) {
+    spoutOutputCollector.emit(Common.TOPOLOGY_MASTER_HB_STREAM_ID,values);
+  }
+ else   if (boltOutputCollector != null) {
+    boltOutputCollector.emit(Common.TOPOLOGY_MASTER_HB_STREAM_ID,values);
+  }
+ else {
+    LOG.warn("Failed to send hearbeat msg. OutputCollector has not been initialized!");
+  }
+}

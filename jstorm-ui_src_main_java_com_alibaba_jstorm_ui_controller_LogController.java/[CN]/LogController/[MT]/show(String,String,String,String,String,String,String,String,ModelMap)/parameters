@@ -1,0 +1,9 @@
+String clusterName
+String host
+String logServerPort
+String dir
+String workerPort
+String logName
+String topologyId
+String pos
+ModelMap model

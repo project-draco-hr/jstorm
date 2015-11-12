@@ -9,8 +9,8 @@
 switch (schemeField.id) {
 case 1:
       if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-        struct.task_id=iprot.readI32();
-        struct.set_task_id_isSet(true);
+        struct.taskId=iprot.readI32();
+        struct.set_taskId_isSet(true);
       }
  else {
         org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
@@ -55,13 +55,13 @@ break;
 case 6:
 if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
 {
-org.apache.thrift.protocol.TList _list230=iprot.readListBegin();
-struct.errors=new ArrayList<ErrorInfo>(_list230.size);
-ErrorInfo _elem231;
-for (int _i232=0; _i232 < _list230.size; ++_i232) {
-_elem231=new ErrorInfo();
-_elem231.read(iprot);
-struct.errors.add(_elem231);
+org.apache.thrift.protocol.TList _list178=iprot.readListBegin();
+struct.errors=new ArrayList<ErrorInfo>(_list178.size);
+ErrorInfo _elem179;
+for (int _i180=0; _i180 < _list178.size; ++_i180) {
+_elem179=new ErrorInfo();
+_elem179.read(iprot);
+struct.errors.add(_elem179);
 }
 iprot.readListEnd();
 }

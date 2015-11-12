@@ -1,0 +1,6 @@
+{
+  if (zkRoot == null)   return false;
+  if (zkServers == null || zkServers.size() == 0)   return false;
+  if (zkPort == null)   return false;
+  return true;
+}

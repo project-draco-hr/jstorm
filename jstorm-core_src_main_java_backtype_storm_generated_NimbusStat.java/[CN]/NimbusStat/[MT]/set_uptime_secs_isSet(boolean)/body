@@ -1,5 +1,0 @@
-{
-  if (!value) {
-    this.uptime_secs=null;
-  }
-}

@@ -18,9 +18,7 @@
     }
   }
   if (users.size() + assignedWorkers.size() > workersNum) {
-    return;
-  }
-  if (users.size() + assignedWorkers.size() == workersNum && assigned.size() != needAssign.size()) {
+    LOG.warn("There are no enough workers for user define scheduler / keeping old assignment, userdefineWorkers={}, assignedWorkers={}, workerNum={}",users,assignedWorkers,workersNum);
     return;
   }
   assignedWorkers.addAll(users);

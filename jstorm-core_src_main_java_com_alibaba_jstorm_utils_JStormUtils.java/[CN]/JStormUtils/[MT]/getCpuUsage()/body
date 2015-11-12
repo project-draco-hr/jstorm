@@ -6,7 +6,8 @@
   String output=null;
   try {
     String pid=JStormUtils.process_pid();
-    output=SystemOperation.exec("top -b -n 1 | grep " + pid);
+    String command=String.format("top -b -n 1 -p %s | grep -w %s",pid,pid);
+    output=SystemOperation.exec(command);
     String subStr=output.substring(output.indexOf("S") + 1);
     for (int i=0; i < subStr.length(); i++) {
       char ch=subStr.charAt(i);

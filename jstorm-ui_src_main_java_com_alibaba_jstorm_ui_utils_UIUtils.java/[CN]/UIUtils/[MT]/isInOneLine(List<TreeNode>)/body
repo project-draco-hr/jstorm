@@ -1,0 +1,11 @@
+{
+  if (children.size() <= 1) {
+    return false;
+  }
+  for (  TreeNode node : children) {
+    if (node.getBreadth() != 1) {
+      return false;
+    }
+  }
+  return true;
+}

@@ -1,3 +1,0 @@
-Map<String,MetricInfo> nettyMetricInfo
-Map<Integer,Double> snapshot
-String metricFullName

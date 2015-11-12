@@ -9,4 +9,6 @@ def recv_result(self):
     result = result_result()
     result.read(iprot)
     iprot.readMessageEnd()
+    if (result.aze is not None):
+        raise result.aze
     return

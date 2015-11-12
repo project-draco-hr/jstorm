@@ -1,0 +1,7 @@
+{
+  this();
+  this.topologyId=topologyId;
+  this.host=host;
+  this.page=page;
+  set_page_isSet(true);
+}

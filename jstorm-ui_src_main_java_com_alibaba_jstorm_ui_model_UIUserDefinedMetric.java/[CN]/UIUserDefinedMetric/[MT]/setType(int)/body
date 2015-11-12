@@ -1,0 +1,15 @@
+{
+  MetricType metricType=MetricType.parse(type);
+switch (metricType) {
+case COUNTER:
+    this.type="Counter";
+case GAUGE:
+  this.type="Gauge";
+case METER:
+this.type="Meter";
+case HISTOGRAM:
+this.type="Histogram";
+case TIMER:
+this.type="Timer";
+}
+}

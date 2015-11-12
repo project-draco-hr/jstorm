@@ -1,0 +1,4 @@
+int initDelay
+int frequence
+String name
+BackpressureTrigger trigger

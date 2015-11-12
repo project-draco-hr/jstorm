@@ -1,0 +1,11 @@
+{
+  String displayName;
+  if (StringUtils.isBlank(prefix)) {
+    displayName=UIDef.APP_NAME;
+  }
+ else {
+    displayName=prefix + " - " + UIDef.APP_NAME;
+  }
+  model.addAttribute("title",displayName);
+  model.addAttribute("PAGE_MAX",UIDef.PAGE_MAX);
+}

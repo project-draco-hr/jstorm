@@ -1,0 +1,19 @@
+{
+  int hour=time.getHours();
+  int min=time.getMinutes();
+  StringBuilder sb=new StringBuilder();
+  if (hour < 10) {
+    sb.append(0).append(hour);
+  }
+ else {
+    sb.append(hour);
+  }
+  sb.append(":");
+  if (min < 10) {
+    sb.append(0).append(min);
+  }
+ else {
+    sb.append(min);
+  }
+  return sb.toString();
+}

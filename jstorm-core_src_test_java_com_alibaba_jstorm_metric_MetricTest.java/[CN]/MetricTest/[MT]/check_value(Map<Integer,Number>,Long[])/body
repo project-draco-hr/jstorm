@@ -1,9 +1,0 @@
-{
-  int i=0;
-  for (  Integer key : map.keySet()) {
-    StringBuilder sb=new StringBuilder();
-    sb.append("Time window ").append(key).append(" should be ");
-    sb.append(result[i]).append(", but it is ").append(map.get(key));
-    Assert.assertTrue(sb.toString(),map.get(key).equals(result[i]));
-  }
-}

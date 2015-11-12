@@ -1,3 +1,0 @@
-TaskSendTargets sendTargets
-TaskTransfer transferFn
-TopologyContext topologyContext

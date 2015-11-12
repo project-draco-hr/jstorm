@@ -1,0 +1,4 @@
+{
+  String userMetricName=getMetricName(name,group,MetricType.HISTOGRAM);
+  return (AsmHistogram)JStormMetrics.registerTaskMetric(userMetricName,new AsmHistogram());
+}

@@ -1,0 +1,3 @@
+String clusterName
+String topologyName
+int size

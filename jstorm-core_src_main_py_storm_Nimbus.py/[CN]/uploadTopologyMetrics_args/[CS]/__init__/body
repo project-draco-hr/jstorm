@@ -1,0 +1,3 @@
+def __init__(self, topologyId=None, topologyMetrics=None):
+    self.topologyId = topologyId
+    self.topologyMetrics = topologyMetrics

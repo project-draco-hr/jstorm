@@ -1,26 +1,44 @@
 {
-  try {
-    TopologyMetricsRunnable.Event event=queue.take();
-    if (event instanceof Remove) {
-      handleRemoveEvent((Remove)event);
+  while (!isShutdown.get()) {
+    if (localMode) {
       return;
     }
- else     if (event instanceof Update) {
-      handleUpdateEvent((Update)event);
-      return;
-    }
- else     if (event instanceof Upload) {
-      handleUploadEvent((Upload)event);
-      return;
-    }
+    try {
+      if (this.metricUploader != null) {
+        Event event=queue.poll();
+        if (event == null) {
+          continue;
+        }
+        if (event instanceof Remove) {
+          handleRemoveEvent((Remove)event);
+        }
+ else         if (event instanceof Update) {
+          handleUpdateEvent((Update)event);
+        }
+ else         if (event instanceof Refresh) {
+          handleRefreshEvent((Refresh)event);
+        }
+ else         if (event instanceof KillTopologyEvent) {
+          handleKillTopologyEvent((KillTopologyEvent)event);
+        }
+ else         if (event instanceof StartTopologyEvent) {
+          handleStartTopologyEvent((StartTopologyEvent)event);
+        }
+ else         if (event instanceof TaskDeadEvent) {
+          handleTaskDeadEvent((TaskDeadEvent)event);
+        }
+ else         if (event instanceof TaskStartEvent) {
+          handleTaskStartEvent((TaskStartEvent)event);
+        }
  else {
-      LOG.error("Unknow event type");
-      return;
+          LOG.error("Unknown event type:{}",event.getClass());
+        }
+      }
     }
-  }
- catch (  Exception e) {
-    if (isShutdown.get() == false) {
-      LOG.error(e.getMessage(),e);
+ catch (    Exception e) {
+      if (!isShutdown.get()) {
+        LOG.error(e.getMessage(),e);
+      }
     }
   }
 }

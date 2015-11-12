@@ -1,0 +1,8 @@
+{
+  if (metricNameCounters.containsKey(metricName)) {
+    metricNameCounters.put(metricName,metricNameCounters.get(metricName) + 1);
+  }
+ else {
+    metricNameCounters.put(metricName,1);
+  }
+}

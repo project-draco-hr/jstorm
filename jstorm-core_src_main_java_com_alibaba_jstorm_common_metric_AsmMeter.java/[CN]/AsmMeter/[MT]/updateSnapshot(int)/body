@@ -1,0 +1,5 @@
+{
+  AsmMeterSnapshot meterSnapshot=new AsmMeterSnapshot();
+  meterSnapshot.setM1(meter.getOneMinuteRate()).setM5(meter.getFiveMinuteRate()).setM15(meter.getFifteenMinuteRate()).setMean(meter.getMeanRate()).setTs(System.currentTimeMillis()).setMetricId(metricId);
+  snapshots.put(window,meterSnapshot);
+}

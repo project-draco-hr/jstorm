@@ -1,0 +1,6 @@
+{
+  long newTs=TimeUtils.alignTimeToWin(snapshot.get_ts(),win);
+  data.setWin(win);
+  data.setMetricId(snapshot.get_metricId());
+  data.setTs(new Date(newTs));
+}

@@ -1,6 +1,6 @@
 {
   __isset_bitfield=other.__isset_bitfield;
-  this.task_id=other.task_id;
+  this.taskId=other.taskId;
   this.uptime=other.uptime;
   if (other.is_set_status()) {
     this.status=other.status;

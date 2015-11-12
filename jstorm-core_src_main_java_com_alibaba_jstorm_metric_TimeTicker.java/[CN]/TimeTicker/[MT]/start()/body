@@ -1,0 +1,8 @@
+{
+  if (unit == TimeUnit.MILLISECONDS) {
+    this.start=System.currentTimeMillis();
+  }
+ else   if (unit == TimeUnit.NANOSECONDS) {
+    this.start=System.nanoTime();
+  }
+}

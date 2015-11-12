@@ -1,0 +1,17 @@
+{
+  for (  Map.Entry<String,Map<Integer,MetricSnapshot>> entry : newCounters.entrySet()) {
+    String metricName=entry.getKey();
+    Map<Integer,MetricSnapshot> snapshots=entry.getValue();
+    Map<Integer,MetricSnapshot> oldSnapshots=oldCounters.get(metricName);
+    if (oldSnapshots != null && oldSnapshots.size() > 0) {
+      for (      Map.Entry<Integer,MetricSnapshot> snapshotEntry : snapshots.entrySet()) {
+        Integer win=snapshotEntry.getKey();
+        MetricSnapshot snapshot=snapshotEntry.getValue();
+        MetricSnapshot oldSnapshot=oldSnapshots.get(win);
+        if (oldSnapshot != null) {
+          snapshot.set_longValue(snapshot.get_longValue() + oldSnapshot.get_longValue());
+        }
+      }
+    }
+  }
+}

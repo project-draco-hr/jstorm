@@ -1,0 +1,22 @@
+{
+  if (obj instanceof MetricSnapshot) {
+    MetricSnapshot snapshot=(MetricSnapshot)obj;
+    MetricType type=MetricType.parse(snapshot.get_metricType());
+    if (type == MetricType.COUNTER) {
+      return counterStr(snapshot);
+    }
+ else     if (type == MetricType.GAUGE) {
+      return gaugeStr(snapshot);
+    }
+ else     if (type == MetricType.METER) {
+      return meterStr(snapshot);
+    }
+ else     if (type == MetricType.HISTOGRAM) {
+      return histogramStr(snapshot);
+    }
+ else     if (type == MetricType.TIMER) {
+      return timerStr(snapshot);
+    }
+  }
+  return obj.toString();
+}

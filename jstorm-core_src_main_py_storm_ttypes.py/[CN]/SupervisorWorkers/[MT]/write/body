@@ -10,16 +10,16 @@ def write(self, oprot):
     if (self.workers is not None):
         oprot.writeFieldBegin('workers', TType.LIST, 2)
         oprot.writeListBegin(TType.STRUCT, len(self.workers))
-        for iter188 in self.workers:
-            iter188.write(oprot)
+        for iter141 in self.workers:
+            iter141.write(oprot)
         oprot.writeListEnd()
         oprot.writeFieldEnd()
     if (self.workerMetric is not None):
         oprot.writeFieldBegin('workerMetric', TType.MAP, 3)
         oprot.writeMapBegin(TType.STRING, TType.STRUCT, len(self.workerMetric))
-        for (kiter189, viter190) in self.workerMetric.items():
-            oprot.writeString(kiter189.encode('utf-8'))
-            viter190.write(oprot)
+        for (kiter142, viter143) in self.workerMetric.items():
+            oprot.writeString(kiter142.encode('utf-8'))
+            viter143.write(oprot)
         oprot.writeMapEnd()
         oprot.writeFieldEnd()
     oprot.writeFieldStop()

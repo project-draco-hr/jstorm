@@ -1,0 +1,15 @@
+{
+  this.supervisorId=supervisorId;
+  this.conf=conf;
+  this.localState=localState;
+  this.workerThreadPids=workerThreadPids;
+  this.sharedContext=sharedContext;
+  this.sandBoxMaker=new SandBoxMaker(conf);
+  this.workerIdToStartTimeAndPort=new HashMap<String,Pair<Integer,Integer>>();
+  this.needDownloadTopologys=new AtomicReference<Set>();
+  if (ConfigExtension.isEnableCgroup(conf)) {
+    cgroupManager=new CgroupManager(conf);
+  }
+  killingWorkers=new HashMap<String,Integer>();
+  this.workerReportError=workerReportError;
+}

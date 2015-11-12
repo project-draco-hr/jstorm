@@ -1,9 +1,0 @@
-{
-  Map<String,String> parameterMap=testTopologyPage();
-  try {
-    WindowTablePage table=new WindowTablePage(parameterMap);
-    System.out.println(table.getTables());
-  }
- catch (  Exception e) {
-  }
-}

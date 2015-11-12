@@ -1,6 +1,0 @@
-{
-  Map<String,String> parameterMap=new HashMap<String,String>();
-  parameterMap.put(UIDef.PAGE_TYPE,UIDef.PAGE_TYPE_TOPOLOGY);
-  parameterMap.put(UIDef.TOPOLOGY,"SequenceTest-1-1431086898");
-  return parameterMap;
-}

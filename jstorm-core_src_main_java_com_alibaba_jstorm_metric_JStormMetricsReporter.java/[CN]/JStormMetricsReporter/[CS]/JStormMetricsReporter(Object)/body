@@ -1,0 +1,29 @@
+{
+  LOG.info("starting jstorm metrics reporter");
+  if (role instanceof WorkerData) {
+    WorkerData workerData=(WorkerData)role;
+    this.conf=workerData.getStormConf();
+    this.topologyId=(String)conf.get(Config.TOPOLOGY_ID);
+    this.port=workerData.getPort();
+    this.isInWorker=true;
+  }
+ else   if (role instanceof NimbusData) {
+    NimbusData nimbusData=(NimbusData)role;
+    this.conf=nimbusData.getConf();
+    this.topologyId=JStormMetrics.NIMBUS_METRIC_KEY;
+  }
+  this.host=JStormMetrics.getHost();
+  this.enableMetrics=JStormMetrics.isEnabled();
+  if (!enableMetrics) {
+    LOG.warn("***** topology metrics is disabled! *****");
+  }
+ else {
+    LOG.info("topology metrics is enabled.");
+  }
+  this.checkMetaThreadCycle=30;
+  this.flushMetricThreadCycle=1;
+  LOG.info("check meta thread freq:{}, flush metrics thread freq:{}",checkMetaThreadCycle,flushMetricThreadCycle);
+  this.localMode=StormConfig.local_mode(conf);
+  this.clusterName=ConfigExtension.getClusterName(conf);
+  LOG.info("done.");
+}

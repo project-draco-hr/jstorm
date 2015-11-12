@@ -1,0 +1,4 @@
+{
+  metricUploader.sendEvent(this.clusterName,event);
+  removeTopology(event.topologyId);
+}

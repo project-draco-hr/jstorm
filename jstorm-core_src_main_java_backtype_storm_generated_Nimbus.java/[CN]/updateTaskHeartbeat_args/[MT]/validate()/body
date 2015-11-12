@@ -1,0 +1,5 @@
+{
+  if (taskHbs != null) {
+    taskHbs.validate();
+  }
+}

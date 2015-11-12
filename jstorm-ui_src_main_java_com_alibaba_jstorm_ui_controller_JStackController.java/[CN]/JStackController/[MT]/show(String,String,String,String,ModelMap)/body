@@ -1,0 +1,7 @@
+{
+  int i_logServerPort=JStormUtils.parseInt(logServerPort);
+  int i_workerPort=JStormUtils.parseInt(workerPort);
+  requestJStack(host,i_logServerPort,i_workerPort,model);
+  model.addAttribute("clusterName",clusterName);
+  return "jstack";
+}

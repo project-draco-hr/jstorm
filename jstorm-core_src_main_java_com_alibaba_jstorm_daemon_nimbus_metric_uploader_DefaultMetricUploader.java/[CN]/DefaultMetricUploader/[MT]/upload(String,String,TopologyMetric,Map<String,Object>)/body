@@ -1,0 +1,8 @@
+{
+  if (tpMetric == null) {
+    logger.info("No metric of {}",topologyId);
+    return true;
+  }
+  logger.info("send metrics info, topology:{}, metric:{}, metricContext:{}",topologyId,Utils.toPrettyJsonString(tpMetric),metricContext);
+  return true;
+}

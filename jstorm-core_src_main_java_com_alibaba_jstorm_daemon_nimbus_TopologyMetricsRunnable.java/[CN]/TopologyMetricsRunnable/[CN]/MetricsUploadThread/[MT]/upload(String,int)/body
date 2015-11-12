@@ -1,0 +1,15 @@
+{
+  final TopologyMetricDataInfo summary=getMetricDataInfoFromCache(idx);
+  if (summary == null) {
+    LOG.warn("metric summary is null from cache idx:{}",idx);
+    markUploaded(idx);
+    return true;
+  }
+  final String topologyId=summary.topologyId;
+  if (!isTopologyAlive(topologyId)) {
+    LOG.warn("topology {} is not alive, skip sending metrics.",topologyId);
+    markUploaded(idx);
+    return true;
+  }
+  return metricUploader.upload(clusterName,topologyId,idx,summary.toMap());
+}

@@ -6,15 +6,15 @@
   struct.set_name_isSet(true);
   struct.status=iprot.readString();
   struct.set_status_isSet(true);
-  struct.uptime_secs=iprot.readI32();
-  struct.set_uptime_secs_isSet(true);
-  struct.num_tasks=iprot.readI32();
-  struct.set_num_tasks_isSet(true);
-  struct.num_workers=iprot.readI32();
-  struct.set_num_workers_isSet(true);
+  struct.uptimeSecs=iprot.readI32();
+  struct.set_uptimeSecs_isSet(true);
+  struct.numTasks=iprot.readI32();
+  struct.set_numTasks_isSet(true);
+  struct.numWorkers=iprot.readI32();
+  struct.set_numWorkers_isSet(true);
   BitSet incoming=iprot.readBitSet(1);
   if (incoming.get(0)) {
-    struct.error_info=iprot.readString();
-    struct.set_error_info_isSet(true);
+    struct.errorInfo=iprot.readString();
+    struct.set_errorInfo_isSet(true);
   }
 }

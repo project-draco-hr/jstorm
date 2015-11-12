@@ -1,5 +1,5 @@
 {
   boolean ret=false;
-  if (batch != null && batch.size() >= batchSize)   ret=true;
+  if (batch.size() >= batchSize)   ret=true;
   return ret;
 }

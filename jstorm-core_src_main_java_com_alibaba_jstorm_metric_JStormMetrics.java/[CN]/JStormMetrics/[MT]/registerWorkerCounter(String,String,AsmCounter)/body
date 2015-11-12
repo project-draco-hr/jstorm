@@ -1,0 +1,3 @@
+{
+  return (AsmCounter)registerWorkerMetric(MetricUtils.workerMetricName(topologyId,host,0,name,MetricType.COUNTER),counter);
+}

@@ -1,0 +1,17 @@
+{
+  List<MetricInfo> taskMetricList=getMetrics(topologyId,MetaType.TASK.getT());
+  if (taskMetricList != null && taskMetricList.size() > 0) {
+    MetricInfo metricInfo=taskMetricList.get(0);
+    Map<String,Map<Integer,MetricSnapshot>> metrics=metricInfo.get_metrics();
+    for (Iterator<String> itr=metrics.keySet().iterator(); itr.hasNext(); ) {
+      String metricName=itr.next();
+      String[] parts=metricName.split(MetricUtils.DELIM);
+      if (parts.length < 7 || !parts[2].equals(component)) {
+        itr.remove();
+      }
+    }
+    LOG.info("taskMetric, total size:{}",metricInfo.get_metrics_size());
+    return metricInfo;
+  }
+  return MetricUtils.mkMetricInfo();
+}

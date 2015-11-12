@@ -1,12 +1,8 @@
 {
 switch (fieldId) {
 case 1:
-    return BASE_METRIC;
-case 2:
-  return INPUT_METRIC;
-case 3:
-return OUTPUT_METRIC;
+    return METRICS;
 default :
-return null;
+  return null;
 }
 }

@@ -1,0 +1,4 @@
+String cluster
+String id
+String win
+ModelMap model

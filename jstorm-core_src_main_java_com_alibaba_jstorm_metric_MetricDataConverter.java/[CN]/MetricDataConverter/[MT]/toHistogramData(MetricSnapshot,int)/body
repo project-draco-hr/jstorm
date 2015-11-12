@@ -1,0 +1,14 @@
+{
+  HistogramData data=new HistogramData();
+  convertBase(snapshot,data,win);
+  data.setMin(snapshot.get_min());
+  data.setMax(snapshot.get_max());
+  data.setP50(snapshot.get_p50());
+  data.setP75(snapshot.get_p75());
+  data.setP95(snapshot.get_p95());
+  data.setP98(snapshot.get_p98());
+  data.setP99(snapshot.get_p99());
+  data.setP999(snapshot.get_p999());
+  data.setMean(snapshot.get_mean());
+  return data;
+}

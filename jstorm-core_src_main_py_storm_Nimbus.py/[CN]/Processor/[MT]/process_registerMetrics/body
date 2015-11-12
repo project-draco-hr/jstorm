@@ -1,0 +1,10 @@
+def process_registerMetrics(self, seqid, iprot, oprot):
+    args = registerMetrics_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = registerMetrics_result()
+    result.success = self._handler.registerMetrics(args.topologyId, args.metrics)
+    oprot.writeMessageBegin('registerMetrics', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

@@ -1,0 +1,28 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    if (value == null) {
+      unset_topologyId();
+    }
+ else {
+      set_topologyId((String)value);
+    }
+  break;
+case TOPOLOGY_MASTER_ID:
+if (value == null) {
+  unset_topologyMasterId();
+}
+ else {
+  set_topologyMasterId((Integer)value);
+}
+break;
+case TASK_HBS:
+if (value == null) {
+unset_taskHbs();
+}
+ else {
+set_taskHbs((Map<Integer,TaskHeartbeat>)value);
+}
+break;
+}
+}

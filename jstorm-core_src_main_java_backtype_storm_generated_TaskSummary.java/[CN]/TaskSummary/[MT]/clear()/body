@@ -1,6 +1,6 @@
 {
-  set_task_id_isSet(false);
-  this.task_id=0;
+  set_taskId_isSet(false);
+  this.taskId=0;
   set_uptime_isSet(false);
   this.uptime=0;
   this.status=null;

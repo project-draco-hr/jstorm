@@ -10,7 +10,7 @@ case PARALLEL:
 case TYPE:
 return is_set_type();
 case TASK_IDS:
-return is_set_task_ids();
+return is_set_taskIds();
 case ERRORS:
 return is_set_errors();
 }

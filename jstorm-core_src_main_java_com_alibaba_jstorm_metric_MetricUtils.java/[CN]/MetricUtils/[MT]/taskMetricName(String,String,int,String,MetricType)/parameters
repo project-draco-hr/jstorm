@@ -1,0 +1,5 @@
+String topologyId
+String componentId
+int taskId
+String name
+MetricType type

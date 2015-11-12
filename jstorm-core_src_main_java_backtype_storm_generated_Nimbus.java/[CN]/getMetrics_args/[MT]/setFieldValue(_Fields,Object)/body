@@ -1,0 +1,20 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    if (value == null) {
+      unset_topologyId();
+    }
+ else {
+      set_topologyId((String)value);
+    }
+  break;
+case TYPE:
+if (value == null) {
+  unset_type();
+}
+ else {
+  set_type((Integer)value);
+}
+break;
+}
+}

@@ -1,0 +1,7 @@
+String topologyId
+String host
+int page
+AsyncMethodCallback resultHandler
+org.apache.thrift.async.TAsyncClient client
+org.apache.thrift.protocol.TProtocolFactory protocolFactory
+org.apache.thrift.transport.TNonblockingTransport transport

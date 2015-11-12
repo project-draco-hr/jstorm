@@ -1,0 +1,16 @@
+{
+  byte[] ret=new byte[8 * 12];
+  Bytes.putLong(ret,0,min);
+  Bytes.putLong(ret,8,max);
+  Bytes.putDouble(ret,16,p50);
+  Bytes.putDouble(ret,24,p75);
+  Bytes.putDouble(ret,32,p95);
+  Bytes.putDouble(ret,40,p98);
+  Bytes.putDouble(ret,48,p99);
+  Bytes.putDouble(ret,56,p999);
+  Bytes.putDouble(ret,64,mean);
+  Bytes.putDouble(ret,72,m1);
+  Bytes.putDouble(ret,80,m5);
+  Bytes.putDouble(ret,88,m15);
+  return ret;
+}

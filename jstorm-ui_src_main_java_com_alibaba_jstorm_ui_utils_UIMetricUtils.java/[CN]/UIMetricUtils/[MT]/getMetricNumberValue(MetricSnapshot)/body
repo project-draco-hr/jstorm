@@ -1,0 +1,17 @@
+{
+  MetricType type=MetricType.parse(snapshot.get_metricType());
+switch (type) {
+case COUNTER:
+    return snapshot.get_longValue();
+case GAUGE:
+  return snapshot.get_doubleValue();
+case METER:
+return snapshot.get_m1();
+case HISTOGRAM:
+return snapshot.get_mean();
+case TIMER:
+return snapshot.get_mean();
+default :
+return 0;
+}
+}

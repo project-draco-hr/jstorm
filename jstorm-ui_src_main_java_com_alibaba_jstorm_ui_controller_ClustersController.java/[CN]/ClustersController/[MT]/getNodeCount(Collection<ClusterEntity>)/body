@@ -1,0 +1,7 @@
+{
+  int count=0;
+  for (  ClusterEntity c : clusterEntities) {
+    count+=c.getSupervisor_num();
+  }
+  return count;
+}

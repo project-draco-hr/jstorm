@@ -1,0 +1,37 @@
+{
+  String metricUploadClass=ConfigExtension.getMetricUploaderClass(nimbusData.getConf());
+  if (StringUtils.isBlank(metricUploadClass)) {
+    metricUploadClass=DefaultMetricUploader.class.getName();
+  }
+  LOG.info("metric uploader class:{}",metricUploadClass);
+  Object instance=Utils.newInstance(metricUploadClass);
+  if (!(instance instanceof MetricUploader)) {
+    throw new RuntimeException(metricUploadClass + " isn't MetricUploader class ");
+  }
+  this.metricUploader=(MetricUploader)instance;
+  try {
+    metricUploader.init(nimbusData);
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  LOG.info("Successfully init {}",metricUploadClass);
+  String metricQueryClientClass=ConfigExtension.getMetricQueryClientClass(nimbusData.getConf());
+  if (!StringUtils.isBlank(metricQueryClientClass)) {
+    LOG.info("metric query client class:{}",metricQueryClientClass);
+    this.metricQueryClient=(MetricQueryClient)Utils.newInstance(metricQueryClientClass);
+  }
+ else {
+    LOG.warn("use default metric query client class.");
+    this.metricQueryClient=new DefaultMetricQueryClient();
+  }
+  try {
+    metricQueryClient.init(nimbusData.getConf());
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  this.uploadThread.start();
+  this.flushMetricMetaThread.start();
+  LOG.info("init topology metric runnable done.");
+}

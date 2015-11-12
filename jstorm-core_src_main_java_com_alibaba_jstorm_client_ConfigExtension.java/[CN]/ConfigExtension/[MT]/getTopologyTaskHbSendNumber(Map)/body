@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(TOPOLOGY_TASK_HEARTBEAT_SEND_NUMBER),2000);
+}

@@ -1,0 +1,15 @@
+{
+  String workerSlot=(String)input.getValueByField(FIELD_METRIC_WORKER);
+  WorkerUploadMetrics metrics=(WorkerUploadMetrics)input.getValueByField(FIELD_METRIC_METRICS);
+  topologyMetricContext.addToMemCache(workerSlot,metrics.get_allMetrics());
+  metricLogger.info("received metrics from:{}, size:{}",workerSlot,metrics.get_allMetrics().get_metrics_size());
+  if (topologyMetricContext.readyToUpload()) {
+    metricLogger.info("all {} worker slots have updated metrics, start merging & uploading...",topologyMetricContext.getWorkerNum());
+    uploadMetricsExecutor.submit(new Runnable(){
+      @Override public void run(){
+        mergeAndUpload();
+      }
+    }
+);
+  }
+}

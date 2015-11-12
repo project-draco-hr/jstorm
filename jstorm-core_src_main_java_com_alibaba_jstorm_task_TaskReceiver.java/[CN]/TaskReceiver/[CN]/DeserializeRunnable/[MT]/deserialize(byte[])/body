@@ -19,14 +19,17 @@
     }
     return tuple;
   }
- catch (  Throwable e) {
+ catch (  KryoException e) {
+    throw new RuntimeException(e);
+  }
+catch (  Throwable e) {
     if (taskStatus.isShutdown() == false) {
       LOG.error(idStr + " recv thread error " + JStormUtils.toPrintableString(ser_msg)+ "\n",e);
     }
   }
  finally {
     long end=System.nanoTime();
-    deserializeTimer.update((end - start) / 1000000.0d);
+    deserializeTimer.update((end - start) / TimeUtils.NS_PER_US);
   }
   return null;
 }

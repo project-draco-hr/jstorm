@@ -1,0 +1,12 @@
+{
+  List<Integer> rolling=new ArrayList<>();
+  for (  Integer win : windows) {
+    long rollingTime=rollingTimeMap.get(win);
+    if (time - rollingTime >= win - 5) {
+      rolling.add(win);
+      rollingDirtyMap.put(win,true);
+      rollingTimeMap.put(win,(long)TimeUtils.current_time_secs());
+    }
+  }
+  return rolling;
+}

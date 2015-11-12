@@ -1,0 +1,4 @@
+{
+  String value=UIMetricUtils.getMetricValue(snapshot);
+  setValue(metricName,value);
+}

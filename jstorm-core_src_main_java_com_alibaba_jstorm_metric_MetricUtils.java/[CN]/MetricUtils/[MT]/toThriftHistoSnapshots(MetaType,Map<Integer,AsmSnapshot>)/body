@@ -1,0 +1,10 @@
+{
+  Map<Integer,MetricSnapshot> ret=Maps.newHashMapWithExpectedSize(snapshots.size());
+  for (  Map.Entry<Integer,AsmSnapshot> entry : snapshots.entrySet()) {
+    MetricSnapshot histogramSnapshot=convert(metaType,(AsmHistogramSnapshot)entry.getValue());
+    if (histogramSnapshot != null) {
+      ret.put(entry.getKey(),histogramSnapshot);
+    }
+  }
+  return ret;
+}

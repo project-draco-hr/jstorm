@@ -1,0 +1,6 @@
+def validate(self):
+    if (self.topologyId is None):
+        raise TProtocol.TProtocolException(message='Required field topologyId is unset!')
+    if (self.topologyMasterId is None):
+        raise TProtocol.TProtocolException(message='Required field topologyMasterId is unset!')
+    return

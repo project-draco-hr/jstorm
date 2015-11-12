@@ -8,38 +8,27 @@
   }
   if (struct.componentMetric != null) {
     oprot.writeFieldBegin(COMPONENT_METRIC_FIELD_DESC);
-{
-      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,struct.componentMetric.size()));
-      for (      Map.Entry<String,MetricInfo> _iter178 : struct.componentMetric.entrySet()) {
-        oprot.writeString(_iter178.getKey());
-        _iter178.getValue().write(oprot);
-      }
-      oprot.writeMapEnd();
-    }
+    struct.componentMetric.write(oprot);
     oprot.writeFieldEnd();
   }
   if (struct.workerMetric != null) {
     oprot.writeFieldBegin(WORKER_METRIC_FIELD_DESC);
-{
-      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,struct.workerMetric.size()));
-      for (      Map.Entry<String,MetricInfo> _iter179 : struct.workerMetric.entrySet()) {
-        oprot.writeString(_iter179.getKey());
-        _iter179.getValue().write(oprot);
-      }
-      oprot.writeMapEnd();
-    }
+    struct.workerMetric.write(oprot);
     oprot.writeFieldEnd();
   }
   if (struct.taskMetric != null) {
     oprot.writeFieldBegin(TASK_METRIC_FIELD_DESC);
-{
-      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,struct.taskMetric.size()));
-      for (      Map.Entry<Integer,MetricInfo> _iter180 : struct.taskMetric.entrySet()) {
-        oprot.writeI32(_iter180.getKey());
-        _iter180.getValue().write(oprot);
-      }
-      oprot.writeMapEnd();
-    }
+    struct.taskMetric.write(oprot);
+    oprot.writeFieldEnd();
+  }
+  if (struct.streamMetric != null) {
+    oprot.writeFieldBegin(STREAM_METRIC_FIELD_DESC);
+    struct.streamMetric.write(oprot);
+    oprot.writeFieldEnd();
+  }
+  if (struct.nettyMetric != null) {
+    oprot.writeFieldBegin(NETTY_METRIC_FIELD_DESC);
+    struct.nettyMetric.write(oprot);
     oprot.writeFieldEnd();
   }
   oprot.writeFieldStop();

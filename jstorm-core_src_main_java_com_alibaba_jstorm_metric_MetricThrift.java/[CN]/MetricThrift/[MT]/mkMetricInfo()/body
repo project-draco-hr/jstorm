@@ -1,4 +1,0 @@
-{
-  MetricInfo metricInfo=new MetricInfo(new HashMap<String,MetricWindow>());
-  return metricInfo;
-}

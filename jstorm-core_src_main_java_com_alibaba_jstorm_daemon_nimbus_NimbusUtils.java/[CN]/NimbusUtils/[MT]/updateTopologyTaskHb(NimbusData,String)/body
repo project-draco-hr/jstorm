@@ -1,0 +1,13 @@
+{
+  StormClusterState clusterState=data.getStormClusterState();
+  TopologyTaskHbInfo topologyTaskHb=null;
+  try {
+    topologyTaskHb=clusterState.topology_heartbeat(topologyId);
+  }
+ catch (  Exception e) {
+    LOG.error("updateTopologyTaskHb: Failed to get topology task heartbeat info",e);
+  }
+  if (topologyTaskHb != null) {
+    data.getTasksHeartbeat().put(topologyId,topologyTaskHb);
+  }
+}

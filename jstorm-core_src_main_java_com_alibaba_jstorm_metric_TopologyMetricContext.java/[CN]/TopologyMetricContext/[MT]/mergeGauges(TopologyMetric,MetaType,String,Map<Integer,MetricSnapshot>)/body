@@ -1,0 +1,28 @@
+{
+  MetricInfo metricInfo=getMetricInfoByType(tpMetric,metaType);
+  Map<Integer,MetricSnapshot> existing=metricInfo.get_metrics().get(meta);
+  if (existing == null) {
+    metricInfo.put_to_metrics(meta,data);
+  }
+ else {
+    for (    Map.Entry<Integer,MetricSnapshot> dataEntry : data.entrySet()) {
+      Integer win=dataEntry.getKey();
+      MetricSnapshot snapshot=dataEntry.getValue();
+      MetricSnapshot old=existing.get(win);
+      if (old == null) {
+        existing.put(win,snapshot);
+      }
+ else {
+        if (snapshot.get_ts() >= old.get_ts()) {
+          old.set_ts(snapshot.get_ts());
+          if (metaType != MetaType.TOPOLOGY) {
+            old.set_doubleValue(snapshot.get_doubleValue());
+          }
+ else {
+            old.set_doubleValue(old.get_doubleValue() + snapshot.get_doubleValue());
+          }
+        }
+      }
+    }
+  }
+}

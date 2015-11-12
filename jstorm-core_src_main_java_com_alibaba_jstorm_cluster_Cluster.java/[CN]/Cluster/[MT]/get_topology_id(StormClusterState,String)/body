@@ -6,9 +6,10 @@
       if (topology_id.indexOf(storm_name) < 0) {
         continue;
       }
-      String zkTopologyName=Common.topologyIdToName(topology_id);
-      if (storm_name.endsWith(zkTopologyName)) {
-        return topology_id;
+      StormBase base=zkCluster.storm_base(topology_id,null);
+      if (base != null && storm_name.equals(Common.getTopologyNameById(topology_id))) {
+        rtn=topology_id;
+        break;
       }
     }
   }

@@ -24,12 +24,12 @@
   int nowSecs=TimeUtils.current_time_secs();
   for (  Integer changedTaskId : changedTaskIds) {
     startTimes.put(changedTaskId,nowSecs);
-    zkClusterState.remove_task_heartbeat(topologyId,changedTaskId);
+    NimbusUtils.removeTopologyTaskHb(nimbusData,topologyId,changedTaskId);
   }
   Set<Integer> removedTaskIds=getRemovedTaskIds(oldWorkers,workers);
   for (  Integer removedTaskId : removedTaskIds) {
     startTimes.remove(removedTaskId);
-    zkClusterState.remove_task_heartbeat(topologyId,removedTaskId);
+    NimbusUtils.removeTopologyTaskHb(nimbusData,topologyId,removedTaskId);
   }
   LOG.info("Task assignment has been changed: " + changedTaskIds + ", removed tasks "+ removedTaskIds);
   return startTimes;

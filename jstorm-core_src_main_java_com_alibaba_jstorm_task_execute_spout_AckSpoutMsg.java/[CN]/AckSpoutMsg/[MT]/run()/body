@@ -9,5 +9,13 @@
  else {
     spout.ack(msgId);
   }
-  task_stats.spout_acked_tuple(stream,timeStamp);
+  long latency=0, lifeCycle=0;
+  if (tupleInfo.getTimestamp() != 0) {
+    long endTime=System.nanoTime();
+    latency=(endTime - tupleInfo.getTimestamp()) / TimeUtils.NS_PER_US;
+    if (tuple != null && tuple instanceof TupleExt) {
+      lifeCycle=(System.currentTimeMillis() - ((TupleExt)tuple).getCreationTimeStamp()) * TimeUtils.NS_PER_US;
+    }
+  }
+  task_stats.spout_acked_tuple(stream,latency,lifeCycle);
 }

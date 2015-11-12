@@ -1,0 +1,31 @@
+{
+  this.topologyId=topologyId;
+  this.taskId=taskId;
+  this.conf=conf;
+  this.client=NimbusClient.getConfiguredClient(conf);
+  this.zkCluster=zkCluster;
+  try {
+    TopologyTaskHbInfo taskHbInfo=zkCluster.topology_heartbeat(topologyId);
+    if (taskHbInfo != null) {
+      LOG.info("Found task heartbeat info left in zk for " + topologyId + ": "+ taskHbInfo.toString());
+      this.taskHbs=taskHbInfo;
+      this.taskHbMap=taskHbInfo.get_taskHbs();
+      if (this.taskHbMap == null) {
+        this.taskHbMap=new ConcurrentHashMap<Integer,TaskHeartbeat>();
+        taskHbs.set_taskHbs(this.taskHbMap);
+      }
+      this.taskHbs.set_topologyId(topologyId);
+      this.taskHbs.set_topologyMasterId(this.taskId);
+    }
+ else {
+      LOG.info("There is not any previous task heartbeat info left in zk for " + topologyId);
+      this.taskHbMap=new ConcurrentHashMap<Integer,TaskHeartbeat>();
+      this.taskHbs=new TopologyTaskHbInfo(this.topologyId,this.taskId);
+      this.taskHbs.set_taskHbs(taskHbMap);
+    }
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to get topology heartbeat from zk",e);
+  }
+  this.MAX_NUM_TASK_HB_SEND=ConfigExtension.getTopologyTaskHbSendNumber(conf);
+}

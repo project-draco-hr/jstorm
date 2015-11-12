@@ -1,0 +1,4 @@
+StringBuilder sb
+double width
+double value
+String status

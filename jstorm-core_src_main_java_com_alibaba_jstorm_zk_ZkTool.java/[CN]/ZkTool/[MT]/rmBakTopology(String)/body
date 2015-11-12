@@ -7,7 +7,7 @@
     for (    String tid : bakTopologys) {
       if (tid.equals(topologyName)) {
         LOG.info("Find backup " + topologyName);
-        String topologyPath=Cluster.assignment_bak_path(topologyName);
+        String topologyPath=assignment_bak_path(topologyName);
         zkClusterState.delete_node(topologyPath);
         LOG.info("Successfully delete topology " + topologyName + " backup Assignment");
         return;

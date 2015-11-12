@@ -1,4 +1,0 @@
-{
-  this.pos=pos;
-  set_pos_isSet(true);
-}

@@ -1,8 +1,8 @@
-def __init__(self, id=None, name=None, status=None, uptime_secs=None, num_tasks=None, num_workers=None, error_info=None):
+def __init__(self, id=None, name=None, status=None, uptimeSecs=None, numTasks=None, numWorkers=None, errorInfo=None):
     self.id = id
     self.name = name
     self.status = status
-    self.uptime_secs = uptime_secs
-    self.num_tasks = num_tasks
-    self.num_workers = num_workers
-    self.error_info = error_info
+    self.uptimeSecs = uptimeSecs
+    self.numTasks = numTasks
+    self.numWorkers = numWorkers
+    self.errorInfo = errorInfo

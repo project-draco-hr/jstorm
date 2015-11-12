@@ -12,7 +12,6 @@
     hs.start();
     initContainerHBThread(conf);
     while (!data.isLeader())     Utils.sleep(5000);
-    initUploadMetricThread(data);
     init(conf);
   }
  catch (  Throwable e) {

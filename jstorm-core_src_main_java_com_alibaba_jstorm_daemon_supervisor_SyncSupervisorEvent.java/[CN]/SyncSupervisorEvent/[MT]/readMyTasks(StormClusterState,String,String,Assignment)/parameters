@@ -1,4 +1,4 @@
 StormClusterState stormClusterState
 String topologyId
 String supervisorId
-Assignment assignmenInfo
+Assignment assignmentInfo

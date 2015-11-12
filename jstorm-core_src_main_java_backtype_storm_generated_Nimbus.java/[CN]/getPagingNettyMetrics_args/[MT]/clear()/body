@@ -1,0 +1,6 @@
+{
+  this.topologyId=null;
+  this.host=null;
+  set_page_isSet(false);
+  this.page=0;
+}

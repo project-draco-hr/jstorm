@@ -1,8 +1,0 @@
-{
-  if (other.is_set_topologyName()) {
-    this.topologyName=other.topologyName;
-  }
-  if (other.is_set_serverName()) {
-    this.serverName=other.serverName;
-  }
-}

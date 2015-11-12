@@ -1,0 +1,12 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TIME:
+    return is_set_time();
+case UPTIME:
+  return is_set_uptime();
+}
+throw new IllegalStateException();
+}

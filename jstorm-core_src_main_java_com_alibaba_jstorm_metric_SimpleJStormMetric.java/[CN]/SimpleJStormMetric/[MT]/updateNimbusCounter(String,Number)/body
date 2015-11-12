@@ -1,0 +1,3 @@
+{
+  updateCounter(NIMBUS_METRIC_KEY,name,obj);
+}

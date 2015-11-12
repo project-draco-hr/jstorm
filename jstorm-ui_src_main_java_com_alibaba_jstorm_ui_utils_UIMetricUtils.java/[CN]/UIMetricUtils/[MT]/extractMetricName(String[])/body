@@ -1,0 +1,4 @@
+{
+  if (strs.length < 6)   return null;
+  return strs[strs.length - 1];
+}

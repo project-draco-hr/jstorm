@@ -1,0 +1,25 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  this.metricId=other.metricId;
+  this.ts=other.ts;
+  this.metricType=other.metricType;
+  this.longValue=other.longValue;
+  this.doubleValue=other.doubleValue;
+  this.m1=other.m1;
+  this.m5=other.m5;
+  this.m15=other.m15;
+  this.mean=other.mean;
+  this.min=other.min;
+  this.max=other.max;
+  this.p50=other.p50;
+  this.p75=other.p75;
+  this.p95=other.p95;
+  this.p98=other.p98;
+  this.p99=other.p99;
+  this.p999=other.p999;
+  this.stddev=other.stddev;
+  if (other.is_set_points()) {
+    List<Long> __this__points=new ArrayList<Long>(other.points);
+    this.points=__this__points;
+  }
+}

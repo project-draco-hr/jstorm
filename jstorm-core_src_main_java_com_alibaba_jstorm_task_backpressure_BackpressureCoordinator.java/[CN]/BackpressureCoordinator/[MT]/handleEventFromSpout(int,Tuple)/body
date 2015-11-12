@@ -1,0 +1,33 @@
+{
+  TopoMasterCtrlEvent ctrlEvent=(TopoMasterCtrlEvent)input.getValueByField("ctrlEvent");
+  EventType type=ctrlEvent.getEventType();
+  boolean update=false;
+  if (type.equals(EventType.stopBackpressure)) {
+    String spoutComponentId=taskIdToComponentId.get(sourceTask);
+    SourceBackpressureInfo info=SourceTobackpressureInfo.remove(spoutComponentId);
+    if (info != null) {
+      info.getTasks().remove(sourceTask);
+      if (info.getTasks().size() == 0) {
+        for (        Entry<String,TargetBackpressureInfo> entry : info.getTargetTasks().entrySet()) {
+          String componentId=entry.getKey();
+          Set<String> sourceSpouts=getInputSpoutsForBolt(topology,componentId,null);
+          if (checkSpoutsUnderBackpressure(sourceSpouts) == false) {
+            Set<Integer> tasks=new TreeSet<Integer>();
+            tasks.addAll(context.getComponentTasks(componentId));
+            sendBackpressureMessage(tasks,new Values(ctrlEvent),type);
+          }
+        }
+      }
+      update=true;
+    }
+ else {
+      LOG.error("Received event from non-recorded spout-" + sourceTask);
+    }
+  }
+ else {
+    LOG.warn("Received unexpected event, " + type.toString());
+  }
+  if (update) {
+    reportBackpressureStatus();
+  }
+}

@@ -9,12 +9,12 @@ def read(self, iprot):
             break
         if (fid == 1):
             if (ftype == TType.STRING):
-                self.topology_id = iprot.readString().decode('utf-8')
+                self.topologyId = iprot.readString().decode('utf-8')
             else:
                 iprot.skip(ftype)
         elif (fid == 2):
             if (ftype == TType.STRING):
-                self.supervisor_id = iprot.readString().decode('utf-8')
+                self.supervisorId = iprot.readString().decode('utf-8')
             else:
                 iprot.skip(ftype)
         elif (fid == 3):
@@ -24,26 +24,8 @@ def read(self, iprot):
                 iprot.skip(ftype)
         elif (fid == 4):
             if (ftype == TType.STRUCT):
-                self.workerMetric = MetricInfo()
-                self.workerMetric.read(iprot)
-            else:
-                iprot.skip(ftype)
-        elif (fid == 5):
-            if (ftype == TType.STRUCT):
-                self.nettyMetric = NettyMetric()
-                self.nettyMetric.read(iprot)
-            else:
-                iprot.skip(ftype)
-        elif (fid == 6):
-            if (ftype == TType.MAP):
-                self.taskMetric = {}
-                (_ktype254, _vtype255, _size253) = iprot.readMapBegin()
-                for _i257 in xrange(_size253):
-                    _key258 = iprot.readI32()
-                    _val259 = MetricInfo()
-                    _val259.read(iprot)
-                    self.taskMetric[_key258] = _val259
-                iprot.readMapEnd()
+                self.allMetrics = MetricInfo()
+                self.allMetrics.read(iprot)
             else:
                 iprot.skip(ftype)
         else:

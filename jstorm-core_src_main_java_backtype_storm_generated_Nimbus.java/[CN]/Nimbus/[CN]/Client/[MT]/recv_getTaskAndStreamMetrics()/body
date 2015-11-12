@@ -1,0 +1,8 @@
+{
+  getTaskAndStreamMetrics_result result=new getTaskAndStreamMetrics_result();
+  receiveBase(result,"getTaskAndStreamMetrics");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getTaskAndStreamMetrics failed: unknown result");
+}

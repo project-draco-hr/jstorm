@@ -1,0 +1,8 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("uploadTopologyMetrics",org.apache.thrift.protocol.TMessageType.CALL,0));
+  uploadTopologyMetrics_args args=new uploadTopologyMetrics_args();
+  args.set_topologyId(topologyId);
+  args.set_topologyMetrics(topologyMetrics);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

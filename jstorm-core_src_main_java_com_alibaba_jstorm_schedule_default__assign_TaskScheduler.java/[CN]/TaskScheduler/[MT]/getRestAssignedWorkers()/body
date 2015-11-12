@@ -1,0 +1,9 @@
+{
+  Set<ResourceWorkerSlot> ret=new HashSet<ResourceWorkerSlot>();
+  for (  ResourceWorkerSlot worker : taskContext.getWorkerToTaskNum().keySet()) {
+    if (worker.getTasks() != null && worker.getTasks().size() > 0) {
+      ret.add(worker);
+    }
+  }
+  return ret;
+}

@@ -1,0 +1,4 @@
+{
+  MetaType metaType=MetaType.parse(type);
+  return data.getMetricCache().getMetricData(topologyId,metaType);
+}

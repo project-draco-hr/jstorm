@@ -1,3 +1,0 @@
-{
-  return getTimers(MetricFilter.ALL);
-}

@@ -10,10 +10,10 @@ case HOST:
   break;
 case UPTIME_SECS:
 if (value == null) {
-  unset_uptime_secs();
+  unset_uptimeSecs();
 }
  else {
-  set_uptime_secs((String)value);
+  set_uptimeSecs((String)value);
 }
 break;
 }

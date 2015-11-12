@@ -1,15 +1,15 @@
 {
   if (!is_set_topology()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'topology' is unset! Struct:" + toString());
+    throw new TProtocolException("Required field 'topology' is unset! Struct:" + toString());
   }
   if (!is_set_components()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'components' is unset! Struct:" + toString());
+    throw new TProtocolException("Required field 'components' is unset! Struct:" + toString());
   }
   if (!is_set_tasks()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'tasks' is unset! Struct:" + toString());
+    throw new TProtocolException("Required field 'tasks' is unset! Struct:" + toString());
   }
   if (!is_set_metrics()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'metrics' is unset! Struct:" + toString());
+    throw new TProtocolException("Required field 'metrics' is unset! Struct:" + toString());
   }
   if (topology != null) {
     topology.validate();

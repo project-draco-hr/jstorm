@@ -1,7 +1,7 @@
 {
   String fileLoc=null;
   try {
-    String path=null;
+    String path;
     String key=UUID.randomUUID().toString();
     path=StormConfig.masterInbox(conf) + "/" + key;
     FileUtils.forceMkdir(new File(path));

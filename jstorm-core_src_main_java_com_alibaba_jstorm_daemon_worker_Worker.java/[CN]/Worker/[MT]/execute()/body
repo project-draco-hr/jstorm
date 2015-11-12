@@ -12,11 +12,8 @@
     threads.add(syncContainerHbThread);
   }
   JStormMetricsReporter metricReporter=new JStormMetricsReporter(workerData);
-  AsyncLoopThread metricThread=new AsyncLoopThread(metricReporter);
-  threads.add(metricThread);
-  TaskHeartbeatRunable taskHB=new TaskHeartbeatRunable(workerData);
-  AsyncLoopThread taskHBThread=new AsyncLoopThread(taskHB);
-  threads.add(taskHBThread);
+  metricReporter.init();
+  workerData.setMetricsReporter(metricReporter);
   RunnableCallback heartbeat_fn=new WorkerHeartbeatRunable(workerData);
   AsyncLoopThread hb=new AsyncLoopThread(heartbeat_fn,false,null,Thread.NORM_PRIORITY,true);
   threads.add(hb);

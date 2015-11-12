@@ -6,6 +6,9 @@
       localOutTasks.add(outTask);
     }
   }
+  this.workerData=workerData;
+  intervalCheck=new IntervalCheck();
+  intervalCheck.setInterval(60);
   if (localOutTasks.size() != 0) {
     this.outTasks=localOutTasks;
     isLocal=true;
@@ -13,6 +16,7 @@
  else {
     this.outTasks=new ArrayList<Integer>();
     this.outTasks.addAll(allOutTasks);
+    refreshLocalNodeTasks();
     isLocal=false;
   }
   randomrange=new RandomRange(outTasks.size());

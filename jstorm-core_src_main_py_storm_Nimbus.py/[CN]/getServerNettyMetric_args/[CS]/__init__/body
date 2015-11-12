@@ -1,3 +1,0 @@
-def __init__(self, topologyName=None, serverName=None):
-    self.topologyName = topologyName
-    self.serverName = serverName

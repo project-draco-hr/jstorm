@@ -1,3 +1,0 @@
-I iface
-getTopologyInfo_args args
-org.apache.thrift.async.AsyncMethodCallback<TopologyInfo> resultHandler

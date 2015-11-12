@@ -1,0 +1,15 @@
+{
+  String[] parts=old.split(DELIM);
+  if (parts.length >= 7) {
+    parts[0]=MetaType.COMPONENT.getV() + parts[0].charAt(1);
+    parts[parts.length - 3]=EMPTY;
+    parts[parts.length - 4]="0";
+    String metricName=parts[parts.length - 1];
+    int dotIndex=metricName.indexOf(".");
+    if (dotIndex != -1) {
+      metricName=metricName.substring(dotIndex + 1);
+      parts[parts.length - 1]=metricName;
+    }
+  }
+  return concat(parts);
+}

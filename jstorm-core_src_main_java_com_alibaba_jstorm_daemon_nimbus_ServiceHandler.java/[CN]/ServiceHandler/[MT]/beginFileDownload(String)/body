@@ -1,6 +1,6 @@
 {
-  BufferFileInputStream is=null;
-  String id=null;
+  BufferFileInputStream is;
+  String id;
   try {
     int bufferSize=JStormUtils.parseInt(conf.get(Config.NIMBUS_THRIFT_MAX_BUFFER_SIZE),1024 * 1024) / 2;
     is=new BufferFileInputStream(file,bufferSize);

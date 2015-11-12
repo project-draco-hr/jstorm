@@ -1,3 +1,0 @@
-WorkerUploadMetrics workerMetric
-String topologyId
-Set<String> connections

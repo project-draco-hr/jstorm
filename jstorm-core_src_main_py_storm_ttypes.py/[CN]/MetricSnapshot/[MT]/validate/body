@@ -1,0 +1,8 @@
+def validate(self):
+    if (self.metricId is None):
+        raise TProtocol.TProtocolException(message='Required field metricId is unset!')
+    if (self.ts is None):
+        raise TProtocol.TProtocolException(message='Required field ts is unset!')
+    if (self.metricType is None):
+        raise TProtocol.TProtocolException(message='Required field metricType is unset!')
+    return

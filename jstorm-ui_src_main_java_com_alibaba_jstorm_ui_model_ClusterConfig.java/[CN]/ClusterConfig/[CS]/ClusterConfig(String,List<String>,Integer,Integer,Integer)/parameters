@@ -1,0 +1,5 @@
+String zkRoot
+List<String> zkServers
+Integer zkPort
+Integer nimbusPort
+Integer supervisorPort

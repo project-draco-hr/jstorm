@@ -1,0 +1,14 @@
+{
+  long[] values=unFlushed.getSnapshot().getValues();
+  for (  Histogram histogram : histogramMap.values()) {
+    for (    long val : values) {
+      histogram.update(val);
+    }
+  }
+  for (  long val : values) {
+    for (    AsmMetric metric : this.assocMetrics) {
+      metric.updateDirectly(val);
+    }
+  }
+  this.unFlushed=newHistogram();
+}

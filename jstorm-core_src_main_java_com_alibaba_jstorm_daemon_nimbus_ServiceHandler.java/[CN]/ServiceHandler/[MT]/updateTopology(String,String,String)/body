@@ -1,0 +1,51 @@
+{
+  try {
+    checkTopologyActive(data,name,true);
+    String topologyId=null;
+    StormClusterState stormClusterState=data.getStormClusterState();
+    topologyId=Cluster.get_topology_id(stormClusterState,name);
+    if (topologyId == null) {
+      throw new NotAliveException(name);
+    }
+    if (uploadedLocation != null) {
+      String stormroot=StormConfig.masterStormdistRoot(conf,topologyId);
+      int lastIndexOf=uploadedLocation.lastIndexOf("/");
+      String tmpDir=uploadedLocation.substring(0,lastIndexOf);
+      String stormJarPath=StormConfig.stormjar_path(tmpDir);
+      File file=new File(uploadedLocation);
+      if (file.exists()) {
+        file.renameTo(new File(stormJarPath));
+      }
+ else {
+        throw new FileNotFoundException("Source \'" + uploadedLocation + "\' does not exist");
+      }
+      File srcDir=new File(tmpDir);
+      File destDir=new File(stormroot);
+      try {
+        FileUtils.moveDirectory(srcDir,destDir);
+      }
+ catch (      FileExistsException e) {
+        FileUtils.copyDirectory(srcDir,destDir);
+        FileUtils.deleteQuietly(srcDir);
+      }
+      StormConfig.write_nimbus_topology_timestamp(data.getConf(),topologyId,System.currentTimeMillis());
+      LOG.info("update jar of " + name + " successfully");
+    }
+    Map topoConf=StormConfig.read_nimbus_topology_conf(data.getConf(),topologyId);
+    Map<Object,Object> config=(Map<Object,Object>)JStormUtils.from_json(updateConf);
+    topoConf.putAll(config);
+    StormConfig.write_nimbus_topology_conf(data.getConf(),topologyId,topoConf);
+    LOG.info("update topology " + name + " successfully");
+    NimbusUtils.transitionName(data,name,true,StatusType.update_topology,config);
+  }
+ catch (  NotAliveException e) {
+    String errMsg="Error, no this topology " + name;
+    LOG.error(errMsg,e);
+    throw new NotAliveException(errMsg);
+  }
+catch (  Exception e) {
+    String errMsg="Failed to update topology " + name;
+    LOG.error(errMsg,e);
+    throw new TException(errMsg);
+  }
+}

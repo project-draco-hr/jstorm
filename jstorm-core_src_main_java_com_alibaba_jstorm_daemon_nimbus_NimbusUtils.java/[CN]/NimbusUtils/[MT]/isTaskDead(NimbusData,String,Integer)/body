@@ -1,32 +1,30 @@
 {
   String idStr=" topology:" + topologyId + ",taskid:"+ taskId;
-  Integer zkReportTime=null;
-  StormClusterState stormClusterState=data.getStormClusterState();
-  TaskHeartbeat zkTaskHeartbeat=null;
-  try {
-    zkTaskHeartbeat=stormClusterState.task_heartbeat(topologyId,taskId);
-    if (zkTaskHeartbeat != null) {
-      zkReportTime=zkTaskHeartbeat.getTimeSecs();
+  TopologyTaskHbInfo topoTasksHbInfo=data.getTasksHeartbeat().get(topologyId);
+  Map<Integer,TaskHeartbeat> taskHbMap=null;
+  Integer taskReportTime=null;
+  if (topoTasksHbInfo != null) {
+    taskHbMap=topoTasksHbInfo.get_taskHbs();
+    if (taskHbMap != null) {
+      TaskHeartbeat tHb=taskHbMap.get(taskId);
+      taskReportTime=((tHb != null) ? tHb.get_time() : null);
     }
-  }
- catch (  Exception e) {
-    LOG.error("Failed to get ZK task hearbeat " + idStr,e);
   }
   Map<Integer,TkHbCacheTime> taskHBs=data.getTaskHeartbeatsCache(topologyId,true);
   TkHbCacheTime taskHB=taskHBs.get(taskId);
   if (taskHB == null) {
     LOG.info("No task heartbeat cache " + idStr);
-    if (zkTaskHeartbeat == null) {
-      LOG.info("No ZK task hearbeat " + idStr);
+    if (topoTasksHbInfo == null || taskHbMap == null) {
+      LOG.info("No task hearbeat was reported for " + idStr);
       return true;
     }
     taskHB=new TkHbCacheTime();
-    taskHB.update(zkTaskHeartbeat);
+    taskHB.update(taskHbMap.get(taskId));
     taskHBs.put(taskId,taskHB);
     return false;
   }
-  if (zkReportTime == null) {
-    LOG.debug("No ZK task heartbeat " + idStr);
+  if (taskReportTime == null || taskReportTime < taskHB.getTaskAssignedTime()) {
+    LOG.debug("No task heartbeat was reported for " + idStr);
     int nowSecs=TimeUtils.current_time_secs();
     int assignSecs=taskHB.getTaskAssignedTime();
     int waitInitTimeout=JStormUtils.parseInt(data.getConf().get(Config.NIMBUS_TASK_LAUNCH_SECS));
@@ -43,18 +41,19 @@
   int nowSecs=TimeUtils.current_time_secs();
   if (nimbusTime == 0) {
     taskHB.setNimbusTime(nowSecs);
-    taskHB.setTaskReportedTime(zkReportTime);
+    taskHB.setTaskReportedTime(taskReportTime);
     LOG.info("Update taskheartbeat to nimbus cache " + idStr);
     return false;
   }
-  if (reportTime != zkReportTime.intValue()) {
+  if (reportTime != taskReportTime.intValue()) {
     taskHB.setNimbusTime(nowSecs);
-    taskHB.setTaskReportedTime(zkReportTime);
-    LOG.debug(idStr + ",nimbusTime " + nowSecs+ ",zkReport:"+ zkReportTime+ ",report:"+ reportTime);
+    taskHB.setTaskReportedTime(taskReportTime);
+    LOG.debug(idStr + ",nimbusTime " + nowSecs+ ",zkReport:"+ taskReportTime+ ",report:"+ reportTime);
     return false;
   }
   Integer taskHBTimeout=data.getTopologyTaskTimeout().get(topologyId);
   if (taskHBTimeout == null)   taskHBTimeout=JStormUtils.parseInt(data.getConf().get(Config.NIMBUS_TASK_TIMEOUT_SECS));
+  if (taskId == topoTasksHbInfo.get_topologyMasterId())   taskHBTimeout=(taskHBTimeout / 2);
   if (nowSecs - nimbusTime > taskHBTimeout) {
     long ts=((long)nimbusTime) * 1000;
     Date lastTaskHBDate=new Date(ts);
@@ -66,7 +65,7 @@
     sb.append(",current ");
     sb.append(nowSecs);
     sb.append(":").append(new Date(((long)nowSecs) * 1000));
-    LOG.info(sb.toString());
+    LOG.debug(sb.toString());
     return true;
   }
   return false;

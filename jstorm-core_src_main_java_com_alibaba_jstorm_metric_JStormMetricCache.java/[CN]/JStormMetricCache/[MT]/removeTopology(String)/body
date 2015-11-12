@@ -1,0 +1,4 @@
+{
+  removeTopologyMeta(topologyId);
+  removeTopologyData(topologyId);
+}

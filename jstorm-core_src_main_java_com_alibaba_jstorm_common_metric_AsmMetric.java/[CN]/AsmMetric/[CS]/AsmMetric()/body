@@ -1,0 +1,6 @@
+{
+  for (  Integer win : windowSeconds) {
+    rollingTimeMap.put(win,lastFlushTime);
+    rollingDirtyMap.put(win,false);
+  }
+}

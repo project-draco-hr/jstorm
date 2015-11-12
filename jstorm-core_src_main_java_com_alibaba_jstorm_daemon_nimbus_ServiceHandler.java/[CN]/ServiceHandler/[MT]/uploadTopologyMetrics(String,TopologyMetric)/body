@@ -1,0 +1,8 @@
+{
+  LOG.info("Received topology metrics:{}",topologyId);
+  Update event=new Update();
+  event.timestamp=System.currentTimeMillis();
+  event.topologyMetrics=uploadMetrics;
+  event.topologyId=topologyId;
+  data.getMetricRunnable().pushEvent(event);
+}

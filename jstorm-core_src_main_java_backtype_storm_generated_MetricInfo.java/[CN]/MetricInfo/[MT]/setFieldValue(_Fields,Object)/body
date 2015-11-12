@@ -1,28 +1,12 @@
 {
 switch (field) {
-case BASE_METRIC:
+case METRICS:
     if (value == null) {
-      unset_baseMetric();
+      unset_metrics();
     }
  else {
-      set_baseMetric((Map<String,MetricWindow>)value);
+      set_metrics((Map<String,Map<Integer,MetricSnapshot>>)value);
     }
   break;
-case INPUT_METRIC:
-if (value == null) {
-  unset_inputMetric();
-}
- else {
-  set_inputMetric((Map<String,Map<String,MetricWindow>>)value);
-}
-break;
-case OUTPUT_METRIC:
-if (value == null) {
-unset_outputMetric();
-}
- else {
-set_outputMetric((Map<String,Map<String,MetricWindow>>)value);
-}
-break;
 }
 }

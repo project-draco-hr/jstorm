@@ -1,0 +1,8 @@
+{
+  if (outputCollector instanceof OutputCollector) {
+    this.boltOutput=(OutputCollector)outputCollector;
+  }
+ else   if (outputCollector instanceof SpoutOutputCollector) {
+    this.spoutOutput=(SpoutOutputCollector)outputCollector;
+  }
+}

@@ -1,0 +1,4 @@
+MetricInfo info
+int window
+List<ComponentSummary> componentSummaries
+List<UIUserDefinedMetric> userDefinedMetrics

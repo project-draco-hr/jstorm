@@ -1,0 +1,24 @@
+{
+  Set<String> set=new HashSet<>();
+  for (  Map.Entry<String,Map<String,String>> entry : subMetricMap.entrySet()) {
+    String metricName=entry.getKey();
+    if (getValue(metricName) == null) {
+      String value=merge(metricName,entry.getValue());
+      setValue(metricName,value);
+    }
+    set.addAll(entry.getValue().keySet());
+    for (    Map.Entry<String,String> en : entry.getValue().entrySet()) {
+      String compName=en.getKey();
+      String v=en.getValue();
+      String value;
+      if (v.contains(".")) {
+        value=UIMetricUtils.format(JStormUtils.parseDouble(v));
+      }
+ else {
+        value=UIMetricUtils.format(JStormUtils.parseLong(v));
+      }
+      subMetrics.put(metricName + "@" + compName,value);
+    }
+  }
+  parentComponent=set;
+}

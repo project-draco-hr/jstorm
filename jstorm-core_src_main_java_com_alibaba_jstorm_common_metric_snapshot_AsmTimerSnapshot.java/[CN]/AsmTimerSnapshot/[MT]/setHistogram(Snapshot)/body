@@ -1,0 +1,4 @@
+{
+  this.histogram=snapshot;
+  return this;
+}

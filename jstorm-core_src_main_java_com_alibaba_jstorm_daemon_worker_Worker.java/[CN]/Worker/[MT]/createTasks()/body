@@ -1,9 +1,20 @@
 {
   List<TaskShutdownDameon> shutdowntasks=new ArrayList<TaskShutdownDameon>();
   Set<Integer> taskids=workerData.getTaskids();
+  Set<Thread> threads=new HashSet<Thread>();
+  List<Task> taskArrayList=new ArrayList<Task>();
   for (  int taskid : taskids) {
-    TaskShutdownDameon t=Task.mk_task(workerData,taskid);
-    shutdowntasks.add(t);
+    Task task=new Task(workerData,taskid);
+    Thread thread=new Thread(task);
+    threads.add(thread);
+    taskArrayList.add(task);
+    thread.start();
+  }
+  for (  Thread thread : threads) {
+    thread.join();
+  }
+  for (  Task t : taskArrayList) {
+    shutdowntasks.add(t.getTaskShutdownDameon());
   }
   return shutdowntasks;
 }

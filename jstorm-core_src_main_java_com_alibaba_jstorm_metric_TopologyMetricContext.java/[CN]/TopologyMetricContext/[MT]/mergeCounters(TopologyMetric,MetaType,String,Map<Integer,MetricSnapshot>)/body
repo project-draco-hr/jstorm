@@ -1,0 +1,21 @@
+{
+  MetricInfo metricInfo=getMetricInfoByType(tpMetric,metaType);
+  Map<Integer,MetricSnapshot> existing=metricInfo.get_metrics().get(meta);
+  if (existing == null) {
+    metricInfo.put_to_metrics(meta,data);
+  }
+ else {
+    for (    Map.Entry<Integer,MetricSnapshot> dataEntry : data.entrySet()) {
+      Integer win=dataEntry.getKey();
+      MetricSnapshot snapshot=dataEntry.getValue();
+      MetricSnapshot old=existing.get(win);
+      if (old == null) {
+        existing.put(win,snapshot);
+      }
+ else {
+        old.set_ts(snapshot.get_ts());
+        old.set_longValue(old.get_longValue() + snapshot.get_longValue());
+      }
+    }
+  }
+}

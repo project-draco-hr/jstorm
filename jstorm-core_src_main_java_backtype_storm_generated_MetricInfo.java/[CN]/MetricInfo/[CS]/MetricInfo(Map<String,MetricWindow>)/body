@@ -1,4 +1,0 @@
-{
-  this();
-  this.baseMetric=baseMetric;
-}

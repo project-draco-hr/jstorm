@@ -1,4 +1,7 @@
 {
+  if (isFinishInit == false) {
+    initWrapper();
+  }
   while (taskStatus.isShutdown() == false) {
     try {
       exeQueue.consumeBatchWhenAvailable(this);

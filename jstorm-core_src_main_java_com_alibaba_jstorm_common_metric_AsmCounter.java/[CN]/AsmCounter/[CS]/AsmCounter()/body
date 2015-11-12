@@ -1,0 +1,6 @@
+{
+  super();
+  for (  int win : windowSeconds) {
+    counterMap.put(win,new Counter());
+  }
+}

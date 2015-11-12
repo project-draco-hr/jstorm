@@ -1,0 +1,3 @@
+I iface
+beginLibUpload_args args
+AsyncMethodCallback<Void> resultHandler

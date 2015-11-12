@@ -1,0 +1,6 @@
+{
+  this.topologyId=null;
+  set_topologyMasterId_isSet(false);
+  this.topologyMasterId=0;
+  this.taskHbs=null;
+}

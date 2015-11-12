@@ -1,5 +1,0 @@
-{
-  Histogram ret=(Histogram)Builder.mkInstance(Builder.HISTOGRAM);
-  registerWorkerMetric(ret,name,args);
-  return ret;
-}

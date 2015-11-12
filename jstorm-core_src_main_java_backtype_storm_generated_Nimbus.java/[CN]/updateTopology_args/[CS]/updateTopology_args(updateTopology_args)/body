@@ -1,0 +1,11 @@
+{
+  if (other.is_set_name()) {
+    this.name=other.name;
+  }
+  if (other.is_set_uploadedLocation()) {
+    this.uploadedLocation=other.uploadedLocation;
+  }
+  if (other.is_set_updateConf()) {
+    this.updateConf=other.updateConf;
+  }
+}

@@ -12,5 +12,11 @@
   boolean present_taskMetric=true && (is_set_taskMetric());
   list.add(present_taskMetric);
   if (present_taskMetric)   list.add(taskMetric);
+  boolean present_streamMetric=true && (is_set_streamMetric());
+  list.add(present_streamMetric);
+  if (present_streamMetric)   list.add(streamMetric);
+  boolean present_nettyMetric=true && (is_set_nettyMetric());
+  list.add(present_nettyMetric);
+  if (present_nettyMetric)   list.add(nettyMetric);
   return list.hashCode();
 }

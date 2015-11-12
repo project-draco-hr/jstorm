@@ -1,0 +1,4 @@
+def __init__(self, topologyId=None, host=None, page=None):
+    self.topologyId = topologyId
+    self.host = host
+    self.page = page

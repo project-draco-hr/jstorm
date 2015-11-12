@@ -1,0 +1,8 @@
+{
+  this.metricCache.putSampleRate(event.topologyId,event.sampleRate);
+  metricUploader.sendEvent(this.clusterName,event);
+  if (!topologyMetricContexts.containsKey(event.topologyId)) {
+    TopologyMetricContext metricContext=new TopologyMetricContext();
+    this.topologyMetricContexts.put(event.topologyId,metricContext);
+  }
+}

@@ -1,0 +1,4 @@
+{
+  _kryoInput.setBuffer(ser,offset,count);
+  return deserialize(_kryoInput);
+}

@@ -1,0 +1,90 @@
+{
+  String componentId=taskIdToComponentId.get(sourceTask);
+  Set<String> inputSpouts=getInputSpoutsForBolt(topology,componentId,null);
+  TopoMasterCtrlEvent ctrlEvent=(TopoMasterCtrlEvent)input.getValueByField("ctrlEvent");
+  EventType type=ctrlEvent.getEventType();
+  Set<Integer> notifyList=new TreeSet<Integer>();
+  Values values=null;
+  TargetBackpressureInfo info=null;
+  boolean update=false;
+  if (type.equals(EventType.startBackpressure)) {
+    int flowCtrlTime=(Integer)ctrlEvent.getEventValue().get(0);
+    for (    String spout : inputSpouts) {
+      info=getBackpressureInfoBySourceSpout(spout,componentId,true);
+      SourceBackpressureInfo sourceInfo=SourceTobackpressureInfo.get(spout);
+      update=info.getTasks().add(sourceTask);
+      boolean add=false;
+      if (System.currentTimeMillis() - sourceInfo.getLastestTimeStamp() > period) {
+        add=true;
+      }
+ else {
+        EventType lastestBpEvent=sourceInfo.getLastestBackpressureEvent();
+        if (lastestBpEvent != null && lastestBpEvent.equals(EventType.startBackpressure) == false) {
+          add=true;
+        }
+        int maxFlowCtrlTime=sourceInfo.getMaxFlowCtrlTime();
+        if ((flowCtrlTime - maxFlowCtrlTime > adjustedTime || maxFlowCtrlTime == -1) && flowCtrlTime >= 0) {
+          add=true;
+        }
+      }
+      info.setFlowCtrlTime(flowCtrlTime);
+      info.setBackpressureStatus(type);
+      if (add) {
+        info.setTimeStamp(System.currentTimeMillis());
+        double taskBpRatio=Double.valueOf(info.getTasks().size()) / Double.valueOf(context.getComponentTasks(componentId).size());
+        if (taskBpRatio >= triggerBpRatio) {
+          Set<Integer> spoutTasks=new TreeSet<Integer>(context.getComponentTasks(spout));
+          if (spoutTasks != null) {
+            SourceTobackpressureInfo.get(spout).getTasks().addAll(spoutTasks);
+            notifyList.addAll(spoutTasks);
+          }
+        }
+ else {
+          update=false;
+        }
+      }
+ else {
+        update=false;
+      }
+    }
+    List<Object> value=new ArrayList<Object>();
+    value.add(info.getFlowCtrlTime());
+    TopoMasterCtrlEvent startBp=new TopoMasterCtrlEvent(EventType.startBackpressure,value);
+    values=new Values(startBp);
+  }
+ else   if (type.equals(EventType.stopBackpressure)) {
+    for (    String spout : inputSpouts) {
+      info=getBackpressureInfoBySourceSpout(spout,componentId,false);
+      SourceBackpressureInfo sourceInfo=SourceTobackpressureInfo.get(spout);
+      if (info != null) {
+        Set<Integer> tasks=info.getTasks();
+        if (tasks != null) {
+          if (tasks.remove(sourceTask)) {
+            update=true;
+          }
+        }
+      }
+      if (sourceInfo != null && checkIntervalExpired(sourceInfo.getLastestTimeStamp())) {
+        info.setTimeStamp(System.currentTimeMillis());
+        Set<Integer> spoutTasks=new TreeSet<Integer>(context.getComponentTasks(spout));
+        if (spoutTasks != null) {
+          notifyList.addAll(spoutTasks);
+        }
+        info.setBackpressureStatus(type);
+      }
+    }
+    if (checkSpoutsUnderBackpressure(inputSpouts) == false) {
+      notifyList.add(sourceTask);
+    }
+    TopoMasterCtrlEvent stoptBp=new TopoMasterCtrlEvent(EventType.stopBackpressure,null);
+    values=new Values(stoptBp);
+  }
+ else {
+    LOG.warn("Received unknown event " + type.toString());
+  }
+  sendBackpressureMessage(notifyList,values,type);
+  if (update) {
+    LOG.info("inputspouts=" + inputSpouts + " for "+ componentId+ "-"+ sourceTask+ ", eventType="+ type.toString());
+    reportBackpressureStatus();
+  }
+}

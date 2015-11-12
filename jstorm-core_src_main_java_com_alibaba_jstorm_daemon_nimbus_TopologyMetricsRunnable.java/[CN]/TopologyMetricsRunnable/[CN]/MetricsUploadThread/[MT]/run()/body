@@ -1,0 +1,17 @@
+{
+  while (!isShutdown.get()) {
+    try {
+      if (metricUploader != null && nimbusData.isLeader()) {
+        final int idx=getFirstPendingUploadIndex();
+        if (idx >= 0) {
+          markUploading(idx);
+          upload(clusterName,idx);
+        }
+      }
+      JStormUtils.sleepMs(5);
+    }
+ catch (    Exception ex) {
+      LOG.error("Error",ex);
+    }
+  }
+}

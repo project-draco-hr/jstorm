@@ -1,10 +1,10 @@
 {
   String mode=(String)conf.get(Config.STORM_CLUSTER_MODE);
   if (mode != null) {
-    if (mode.equals("local")) {
+    if ("local".equals(mode)) {
       return true;
     }
-    if (mode.equals("distributed")) {
+    if ("distributed".equals(mode)) {
       return false;
     }
   }

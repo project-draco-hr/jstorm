@@ -1,13 +1,7 @@
 {
   List<Object> list=new ArrayList<Object>();
-  boolean present_baseMetric=true && (is_set_baseMetric());
-  list.add(present_baseMetric);
-  if (present_baseMetric)   list.add(baseMetric);
-  boolean present_inputMetric=true && (is_set_inputMetric());
-  list.add(present_inputMetric);
-  if (present_inputMetric)   list.add(inputMetric);
-  boolean present_outputMetric=true && (is_set_outputMetric());
-  list.add(present_outputMetric);
-  if (present_outputMetric)   list.add(outputMetric);
+  boolean present_metrics=true && (is_set_metrics());
+  list.add(present_metrics);
+  if (present_metrics)   list.add(metrics);
   return list.hashCode();
 }

@@ -1,6 +1,10 @@
 {
   TopologyAssignContext ret=new TopologyAssignContext();
   String topologyId=event.getTopologyId();
+  ret.setTopologyId(topologyId);
+  int topoMasterId=nimbusData.getTasksHeartbeat().get(topologyId).get_topologyMasterId();
+  ret.setTopologyMasterTaskId(topoMasterId);
+  LOG.info("prepareTopologyAssign, topoMasterId={}",topoMasterId);
   Map<Object,Object> nimbusConf=nimbusData.getConf();
   Map<Object,Object> topologyConf=StormConfig.read_nimbus_topology_conf(nimbusConf,topologyId);
   StormTopology rawTopology=StormConfig.read_nimbus_topology_code(nimbusConf,topologyId);
@@ -35,9 +39,19 @@
   Assignment existingAssignment=stormClusterState.assignment_info(topologyId,null);
   if (existingAssignment != null) {
     aliveTasks=getAliveTasks(topologyId,allTaskIds);
+    if (aliveTasks.contains(topoMasterId) == false) {
+      ResourceWorkerSlot worker=existingAssignment.getWorkerByTaskId(topoMasterId);
+      deadTasks.addAll(worker.getTasks());
+      Set<Integer> tempSet=new HashSet<Integer>(allTaskIds);
+      tempSet.removeAll(deadTasks);
+      aliveTasks.addAll(tempSet);
+      aliveTasks.removeAll(deadTasks);
+    }
+ else {
+      deadTasks.addAll(allTaskIds);
+      deadTasks.removeAll(aliveTasks);
+    }
     unstoppedTasks=getUnstoppedSlots(aliveTasks,supInfos,existingAssignment);
-    deadTasks.addAll(allTaskIds);
-    deadTasks.removeAll(aliveTasks);
   }
   ret.setDeadTaskIds(deadTasks);
   ret.setUnstoppedTaskIds(unstoppedTasks);

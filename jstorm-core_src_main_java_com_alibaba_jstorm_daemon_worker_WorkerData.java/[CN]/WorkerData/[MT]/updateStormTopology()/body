@@ -1,6 +1,6 @@
 {
-  StormTopology rawTmp=null;
-  StormTopology sysTmp=null;
+  StormTopology rawTmp;
+  StormTopology sysTmp;
   try {
     rawTmp=StormConfig.read_supervisor_topology_code(conf,topologyId);
     sysTmp=Common.system_topology(stormConf,rawTopology);

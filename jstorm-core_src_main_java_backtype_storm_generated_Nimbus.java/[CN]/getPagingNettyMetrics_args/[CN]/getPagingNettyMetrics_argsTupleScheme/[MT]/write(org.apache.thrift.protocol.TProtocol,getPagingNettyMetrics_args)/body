@@ -1,0 +1,23 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  BitSet optionals=new BitSet();
+  if (struct.is_set_topologyId()) {
+    optionals.set(0);
+  }
+  if (struct.is_set_host()) {
+    optionals.set(1);
+  }
+  if (struct.is_set_page()) {
+    optionals.set(2);
+  }
+  oprot.writeBitSet(optionals,3);
+  if (struct.is_set_topologyId()) {
+    oprot.writeString(struct.topologyId);
+  }
+  if (struct.is_set_host()) {
+    oprot.writeString(struct.host);
+  }
+  if (struct.is_set_page()) {
+    oprot.writeI32(struct.page);
+  }
+}

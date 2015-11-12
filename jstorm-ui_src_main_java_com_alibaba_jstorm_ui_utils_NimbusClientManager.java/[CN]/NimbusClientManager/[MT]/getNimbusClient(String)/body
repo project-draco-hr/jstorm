@@ -1,0 +1,20 @@
+{
+  Map conf=UIUtils.readUiConfig();
+  NimbusClient client=clientManager.get(clusterName);
+  if (client != null) {
+    try {
+      client.getClient().getVersion();
+      LOG.info("get Nimbus Client from clientManager");
+    }
+ catch (    Exception e) {
+      LOG.info("Nimbus has been restarted, it begin to reconnect");
+      client=null;
+    }
+  }
+  if (client == null) {
+    conf=UIUtils.resetZKConfig(conf,clusterName);
+    client=NimbusClient.getConfiguredClient(conf);
+    clientManager.put(clusterName,client);
+  }
+  return client;
+}

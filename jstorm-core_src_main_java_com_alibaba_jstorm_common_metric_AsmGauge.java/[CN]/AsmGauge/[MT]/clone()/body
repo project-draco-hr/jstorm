@@ -1,0 +1,5 @@
+{
+  AsmMetric metric=new AsmGauge(this.gauge);
+  metric.setMetricName(this.getMetricName());
+  return metric;
+}

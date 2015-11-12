@@ -1,16 +1,36 @@
 {
   long start=System.nanoTime();
   try {
-    TopologyMetric ret=(TopologyMetric)dbCache.get(getTopologyKey(topologyId));
-    if (ret == null) {
-      return emptyTopologyMetric;
+    TopologyMetric ret=new TopologyMetric();
+    List<MetricInfo> topologyMetrics=metricCache.getMetricData(topologyId,MetaType.TOPOLOGY);
+    List<MetricInfo> componentMetrics=metricCache.getMetricData(topologyId,MetaType.COMPONENT);
+    List<MetricInfo> workerMetrics=metricCache.getMetricData(topologyId,MetaType.WORKER);
+    MetricInfo dummy=MetricUtils.mkMetricInfo();
+    if (topologyMetrics.size() > 0) {
+      ret.set_topologyMetric(topologyMetrics.get(topologyMetrics.size() - 1));
     }
  else {
-      return ret;
+      ret.set_topologyMetric(dummy);
     }
+    if (componentMetrics.size() > 0) {
+      ret.set_componentMetric(componentMetrics.get(0));
+    }
+ else {
+      ret.set_componentMetric(dummy);
+    }
+    if (workerMetrics.size() > 0) {
+      ret.set_workerMetric(workerMetrics.get(0));
+    }
+ else {
+      ret.set_workerMetric(dummy);
+    }
+    ret.set_taskMetric(dummy);
+    ret.set_streamMetric(dummy);
+    ret.set_nettyMetric(dummy);
+    return ret;
   }
   finally {
     long end=System.nanoTime();
-    SimpleJStormMetric.updateHistorgram("getTopologyMetric",(end - start) / 1000000.0d);
+    SimpleJStormMetric.updateNimbusHistogram("getTopologyMetric",(end - start) / TimeUtils.NS_PER_US);
   }
 }

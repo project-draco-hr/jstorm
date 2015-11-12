@@ -1,0 +1,26 @@
+{
+  super(task);
+  this.spout=(ISpout)task.getTaskObj();
+  this.max_spout_pending=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MAX_SPOUT_PENDING));
+  this.topologyId=sysTopologyCtx.getTopologyId();
+  this.componentId=sysTopologyCtx.getThisComponentId();
+  this.taskId=task.getTaskId();
+  this.nextTupleTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.EXECUTE_TIME,MetricType.HISTOGRAM),new AsmHistogram());
+  this.ackerTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.ACKER_TIME,MetricType.HISTOGRAM),new AsmHistogram());
+  this.emptyCpuGauge=new TimerRatio();
+  JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.EMPTY_CPU_RATIO,MetricType.GAUGE),new AsmGauge(emptyCpuGauge));
+  isSpoutFullSleep=ConfigExtension.isSpoutPendFullSleep(storm_conf);
+  LOG.info("isSpoutFullSleep:" + isSpoutFullSleep);
+  mkPending();
+  JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.PENDING_MAP,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return (double)pending.size();
+    }
+  }
+));
+  SpoutCollector collector=new SpoutCollector(task,pending,exeQueue);
+  this.outputCollector=new SpoutOutputCollector(collector);
+  taskTransfer.getBackpressureController().setOutputCollector(outputCollector);
+  taskHbTrigger.setSpoutOutputCollector(outputCollector);
+  LOG.info("Successfully create SpoutExecutors " + idStr);
+}

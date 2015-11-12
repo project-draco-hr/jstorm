@@ -1,0 +1,4 @@
+{
+  this.metricType=metricType;
+  set_metricType_isSet(true);
+}

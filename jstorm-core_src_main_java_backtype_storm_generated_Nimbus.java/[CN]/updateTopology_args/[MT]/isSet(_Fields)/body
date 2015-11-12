@@ -1,0 +1,14 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case NAME:
+    return is_set_name();
+case UPLOADED_LOCATION:
+  return is_set_uploadedLocation();
+case UPDATE_CONF:
+return is_set_updateConf();
+}
+throw new IllegalStateException();
+}

@@ -1,0 +1,8 @@
+{
+  for (  ComponentSummary cs : components) {
+    if (cs.get_name().equals(compName)) {
+      return cs;
+    }
+  }
+  return null;
+}

@@ -1,0 +1,24 @@
+{
+  if (!OSInfo.isLinux() && !OSInfo.isMac()) {
+    return 0.0;
+  }
+  try {
+    String output=SystemOperation.exec("df -h /");
+    if (output != null) {
+      String[] lines=output.split("[\\r\\n]+");
+      if (lines.length >= 2) {
+        String[] parts=lines[1].split("\\s+");
+        if (parts.length >= 5) {
+          String pct=parts[4];
+          if (pct.endsWith("%")) {
+            return Integer.valueOf(pct.substring(0,pct.length() - 1)) / 100.0;
+          }
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.warn("failed to get disk usage:",e);
+  }
+  return 0.0;
+}

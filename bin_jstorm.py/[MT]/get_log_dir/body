@@ -1,0 +1,11 @@
+def get_log_dir():
+    cppaths = [JSTORM_CONF_DIR]
+    jstorm_log_dir = confvalue('jstorm.log.dir', cppaths)
+    if (not (jstorm_log_dir == 'null')):
+        if (not os.path.exists(jstorm_log_dir)):
+            os.mkdir(jstorm_log_dir)
+    else:
+        jstorm_log_dir = (JSTORM_DIR + '/logs')
+        if (not os.path.exists(jstorm_log_dir)):
+            os.mkdir(jstorm_log_dir)
+    return jstorm_log_dir

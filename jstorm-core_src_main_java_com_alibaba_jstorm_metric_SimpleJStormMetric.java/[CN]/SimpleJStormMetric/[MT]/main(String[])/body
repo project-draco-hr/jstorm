@@ -1,5 +1,0 @@
-{
-  updateHistorgram("test",11100.0);
-  SimpleJStormMetric instance=new SimpleJStormMetric();
-  instance.run();
-}

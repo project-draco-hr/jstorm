@@ -1,0 +1,38 @@
+{
+  TopologyMetricContext context=getClusterTopologyMetricContext();
+  TopologyMetric tpMetric=context.mergeMetrics();
+  if (tpMetric == null) {
+    tpMetric=MetricUtils.mkTopologyMetric();
+    tpMetric.set_topologyMetric(MetricUtils.mkMetricInfo());
+  }
+  MetricInfo clusterMetrics=tpMetric.get_topologyMetric();
+  Map<String,Long> metricNames=context.getMemMeta();
+  for (  Map.Entry<String,Map<Integer,MetricSnapshot>> entry : clusterMetrics.get_metrics().entrySet()) {
+    String metricName=entry.getKey();
+    MetricType metricType=MetricUtils.metricType(metricName);
+    Long metricId=metricNames.get(metricName);
+    for (    Map.Entry<Integer,MetricSnapshot> metric : entry.getValue().entrySet()) {
+      MetricSnapshot snapshot=metric.getValue();
+      snapshot.set_metricId(metricId);
+      if (metricType == MetricType.HISTOGRAM || metricType == MetricType.TIMER) {
+        snapshot.set_points(new ArrayList<Long>(0));
+      }
+    }
+  }
+  long ts=System.currentTimeMillis();
+  for (  Map.Entry<String,Long> entry : metricNames.entrySet()) {
+    String name=entry.getKey();
+    if (!clusterMetrics.get_metrics().containsKey(name)) {
+      Map<Integer,MetricSnapshot> metric=new HashMap<>();
+      MetricType type=MetricUtils.metricType(name);
+      metric.put(AsmWindow.M1_WINDOW,new MetricSnapshot(entry.getValue(),ts,type.getT()));
+      clusterMetrics.put_to_metrics(name,metric);
+    }
+  }
+  Update event=new Update();
+  event.timestamp=System.currentTimeMillis();
+  event.topologyMetrics=tpMetric;
+  event.topologyId=JStormMetrics.CLUSTER_METRIC_KEY;
+  pushEvent(event);
+  LOG.info("send update event for cluster metrics, size : {}",clusterMetrics.get_metrics_size());
+}

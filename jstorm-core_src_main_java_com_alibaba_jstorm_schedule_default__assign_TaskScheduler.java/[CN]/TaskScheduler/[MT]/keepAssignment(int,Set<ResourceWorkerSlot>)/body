@@ -1,0 +1,63 @@
+{
+  Set<Integer> keepTasks=new HashSet<Integer>();
+  ResourceWorkerSlot tmWorker=null;
+  for (  ResourceWorkerSlot worker : keepAssignments) {
+    if (worker.getTasks().contains(context.getTopologyMasterTaskId()))     tmWorker=worker;
+    for (    Integer taskId : worker.getTasks()) {
+      if (tasks.contains(taskId)) {
+        ResourceWorkerSlot contextWorker=taskContext.getWorker(worker);
+        if (contextWorker != null) {
+          if (tmWorker != null && tmWorker.getTasks().contains(taskId) && context.getAssignSingleWorkerForTM()) {
+            if (context.getTopologyMasterTaskId() == taskId) {
+              updateAssignedTasksOfWorker(taskId,contextWorker);
+              taskContext.getWorkerToTaskNum().remove(contextWorker);
+              contextWorker.getTasks().clear();
+              contextWorker.getTasks().add(taskId);
+              assignments.add(contextWorker);
+              tasks.remove(taskId);
+              taskNum--;
+              workerNum--;
+              LOG.info("assignForTopologyMaster: " + contextWorker);
+            }
+          }
+ else {
+            String componentName=context.getTaskToComponent().get(taskId);
+            updateAssignedTasksOfWorker(taskId,contextWorker);
+            updateComponentsNumOfWorker(componentName,contextWorker);
+            keepTasks.add(taskId);
+          }
+        }
+      }
+    }
+  }
+  if (tmWorker != null) {
+    setTaskNum(taskNum,workerNum);
+    keepAssignments.remove(tmWorker);
+  }
+  int doneAssignedTaskNum=0;
+  while (true) {
+    boolean found=false;
+    Set<ResourceWorkerSlot> doneAssignedWorkers=new HashSet<ResourceWorkerSlot>();
+    for (    ResourceWorkerSlot worker : keepAssignments) {
+      ResourceWorkerSlot contextWorker=taskContext.getWorker(worker);
+      if (contextWorker != null && isTaskFullForWorker(contextWorker)) {
+        found=true;
+        workerNum--;
+        taskContext.getWorkerToTaskNum().remove(contextWorker);
+        assignments.add(contextWorker);
+        doneAssignedWorkers.add(worker);
+        doneAssignedTaskNum+=contextWorker.getTasks().size();
+      }
+    }
+    if (found) {
+      taskNum-=doneAssignedTaskNum;
+      setTaskNum(taskNum,workerNum);
+      keepAssignments.removeAll(doneAssignedWorkers);
+    }
+ else {
+      break;
+    }
+  }
+  tasks.removeAll(keepTasks);
+  LOG.info("keep following assignment, " + assignments);
+}

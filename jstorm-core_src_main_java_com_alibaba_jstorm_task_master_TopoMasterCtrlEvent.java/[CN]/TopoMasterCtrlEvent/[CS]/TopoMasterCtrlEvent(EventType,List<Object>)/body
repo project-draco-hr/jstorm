@@ -1,0 +1,4 @@
+{
+  this.eventType=type;
+  this.eventValue=value;
+}

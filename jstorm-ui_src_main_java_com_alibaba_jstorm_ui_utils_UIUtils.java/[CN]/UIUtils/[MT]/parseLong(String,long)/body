@@ -1,0 +1,9 @@
+{
+  try {
+    Long value=Long.parseLong(s);
+    return value;
+  }
+ catch (  NumberFormatException e) {
+  }
+  return defaultValue;
+}

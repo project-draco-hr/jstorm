@@ -3,33 +3,21 @@ def write(self, oprot):
         oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
         return
     oprot.writeStructBegin('WorkerUploadMetrics')
-    if (self.topology_id is not None):
-        oprot.writeFieldBegin('topology_id', TType.STRING, 1)
-        oprot.writeString(self.topology_id.encode('utf-8'))
+    if (self.topologyId is not None):
+        oprot.writeFieldBegin('topologyId', TType.STRING, 1)
+        oprot.writeString(self.topologyId.encode('utf-8'))
         oprot.writeFieldEnd()
-    if (self.supervisor_id is not None):
-        oprot.writeFieldBegin('supervisor_id', TType.STRING, 2)
-        oprot.writeString(self.supervisor_id.encode('utf-8'))
+    if (self.supervisorId is not None):
+        oprot.writeFieldBegin('supervisorId', TType.STRING, 2)
+        oprot.writeString(self.supervisorId.encode('utf-8'))
         oprot.writeFieldEnd()
     if (self.port is not None):
         oprot.writeFieldBegin('port', TType.I32, 3)
         oprot.writeI32(self.port)
         oprot.writeFieldEnd()
-    if (self.workerMetric is not None):
-        oprot.writeFieldBegin('workerMetric', TType.STRUCT, 4)
-        self.workerMetric.write(oprot)
-        oprot.writeFieldEnd()
-    if (self.nettyMetric is not None):
-        oprot.writeFieldBegin('nettyMetric', TType.STRUCT, 5)
-        self.nettyMetric.write(oprot)
-        oprot.writeFieldEnd()
-    if (self.taskMetric is not None):
-        oprot.writeFieldBegin('taskMetric', TType.MAP, 6)
-        oprot.writeMapBegin(TType.I32, TType.STRUCT, len(self.taskMetric))
-        for (kiter260, viter261) in self.taskMetric.items():
-            oprot.writeI32(kiter260)
-            viter261.write(oprot)
-        oprot.writeMapEnd()
+    if (self.allMetrics is not None):
+        oprot.writeFieldBegin('allMetrics', TType.STRUCT, 4)
+        self.allMetrics.write(oprot)
         oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()

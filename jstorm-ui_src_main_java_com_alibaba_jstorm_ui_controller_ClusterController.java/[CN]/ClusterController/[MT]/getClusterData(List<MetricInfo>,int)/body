@@ -1,0 +1,19 @@
+{
+  if (infos == null || infos.size() == 0) {
+    return null;
+  }
+  MetricInfo info=infos.get(infos.size() - 1);
+  UISummaryMetric clusterMetric=new UISummaryMetric();
+  for (  Map.Entry<String,Map<Integer,MetricSnapshot>> metric : info.get_metrics().entrySet()) {
+    String name=metric.getKey();
+    String[] split_name=name.split("@");
+    String metricName=UIMetricUtils.extractMetricName(split_name);
+    if (!metric.getValue().containsKey(window)) {
+      LOG.info("cluster snapshot {} missing window:{}",metric.getKey(),window);
+      continue;
+    }
+    MetricSnapshot snapshot=metric.getValue().get(window);
+    clusterMetric.setMetricValue(snapshot,metricName);
+  }
+  return clusterMetric;
+}

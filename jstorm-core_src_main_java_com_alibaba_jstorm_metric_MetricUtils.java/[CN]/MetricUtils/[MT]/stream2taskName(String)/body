@@ -1,0 +1,8 @@
+{
+  String[] parts=old.split(DELIM);
+  if (parts.length >= 7) {
+    parts[0]=MetaType.TASK.getV() + parts[0].charAt(1);
+    parts[parts.length - 3]=EMPTY;
+  }
+  return concat(parts);
+}

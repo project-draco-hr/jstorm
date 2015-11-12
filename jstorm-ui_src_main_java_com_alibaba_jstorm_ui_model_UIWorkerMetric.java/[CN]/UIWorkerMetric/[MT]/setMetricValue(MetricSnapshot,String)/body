@@ -1,0 +1,10 @@
+{
+  if (metricName.equals(MetricDef.MEMORY_USED)) {
+    String value=(long)snapshot.get_doubleValue() + "";
+    setValue(metricName,value);
+  }
+ else {
+    String value=UIMetricUtils.getMetricValue(snapshot);
+    setValue(metricName,value);
+  }
+}

@@ -1,0 +1,4 @@
+String topologyId
+String componentId
+String name
+MetricType type

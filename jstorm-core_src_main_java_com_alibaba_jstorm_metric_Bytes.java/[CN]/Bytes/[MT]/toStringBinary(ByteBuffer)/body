@@ -1,0 +1,4 @@
+{
+  if (buf == null)   return "null";
+  return toStringBinary(buf.array(),buf.arrayOffset(),buf.limit());
+}

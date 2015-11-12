@@ -2,50 +2,50 @@
 switch (field) {
 case NIMBUS_MASTER:
     if (value == null) {
-      unset_nimbus_master();
+      unset_nimbusMaster();
     }
  else {
-      set_nimbus_master((NimbusStat)value);
+      set_nimbusMaster((NimbusStat)value);
     }
   break;
 case NIMBUS_SLAVES:
 if (value == null) {
-  unset_nimbus_slaves();
+  unset_nimbusSlaves();
 }
  else {
-  set_nimbus_slaves((List<NimbusStat>)value);
+  set_nimbusSlaves((List<NimbusStat>)value);
 }
 break;
 case SUPERVISOR_NUM:
 if (value == null) {
-unset_supervisor_num();
+unset_supervisorNum();
 }
  else {
-set_supervisor_num((Integer)value);
+set_supervisorNum((Integer)value);
 }
 break;
 case TOTAL_PORT_NUM:
 if (value == null) {
-unset_total_port_num();
+unset_totalPortNum();
 }
  else {
-set_total_port_num((Integer)value);
+set_totalPortNum((Integer)value);
 }
 break;
 case USED_PORT_NUM:
 if (value == null) {
-unset_used_port_num();
+unset_usedPortNum();
 }
  else {
-set_used_port_num((Integer)value);
+set_usedPortNum((Integer)value);
 }
 break;
 case FREE_PORT_NUM:
 if (value == null) {
-unset_free_port_num();
+unset_freePortNum();
 }
  else {
-set_free_port_num((Integer)value);
+set_freePortNum((Integer)value);
 }
 break;
 case VERSION:

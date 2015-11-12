@@ -1,5 +1,0 @@
-{
-  UIMetrics test=mkInstance();
-  test.run();
-  JStormUtils.sleepMs(100 * 1000);
-}

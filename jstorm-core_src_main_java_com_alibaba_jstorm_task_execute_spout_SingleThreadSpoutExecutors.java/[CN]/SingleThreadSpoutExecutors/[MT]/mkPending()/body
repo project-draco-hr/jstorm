@@ -1,0 +1,3 @@
+{
+  pending=new RotatingMap<Long,TupleInfo>(Acker.TIMEOUT_BUCKET_NUM,null,true);
+}

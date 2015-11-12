@@ -1,0 +1,43 @@
+{
+  Map<Long,MetricInfo> retMap=new TreeMap<Long,MetricInfo>();
+  String key=null;
+  if (metaType == MetaType.COMPONENT) {
+    key=METRIC_DATA_30M_COMPONENT + topologyId;
+  }
+ else   if (metaType == MetaType.TASK) {
+    key=METRIC_DATA_30M_TASK + topologyId;
+  }
+ else   if (metaType == MetaType.STREAM) {
+    key=METRIC_DATA_30M_STREAM + topologyId;
+  }
+ else   if (metaType == MetaType.WORKER) {
+    key=METRIC_DATA_30M_WORKER + topologyId;
+  }
+ else   if (metaType == MetaType.NETTY) {
+    key=METRIC_DATA_30M_NETTY + topologyId;
+  }
+ else   if (metaType == MetaType.TOPOLOGY) {
+    String keyPrefix=METRIC_DATA_30M_TOPOLOGY + topologyId + "-";
+    for (int i=1; i <= 30; i++) {
+      Object obj=cache.get(keyPrefix + i);
+      if (obj != null) {
+        Object[] objects=(Object[])obj;
+        retMap.put((Long)objects[0],(MetricInfo)objects[1]);
+      }
+    }
+  }
+  if (key != null) {
+    Object obj=cache.get(key);
+    if (obj != null) {
+      Object[] objects=(Object[])obj;
+      retMap.put((Long)objects[0],(MetricInfo)objects[1]);
+    }
+  }
+  List<MetricInfo> ret=Lists.newArrayList(retMap.values());
+  int cnt=0;
+  for (  MetricInfo metricInfo : ret) {
+    cnt+=metricInfo.get_metrics_size();
+  }
+  LOG.info("getMetricData, topology:{}, meta type:{}, metric info size:{}, total metric size:{}",topologyId,metaType,ret.size(),cnt);
+  return ret;
+}

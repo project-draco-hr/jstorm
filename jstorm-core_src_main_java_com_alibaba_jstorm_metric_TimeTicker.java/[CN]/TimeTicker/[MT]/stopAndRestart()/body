@@ -1,0 +1,5 @@
+{
+  long elapsed=stop();
+  start();
+  return elapsed;
+}

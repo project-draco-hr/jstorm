@@ -1,3 +1,3 @@
-def __init__(self, host=None, uptime_secs=None):
+def __init__(self, host=None, uptimeSecs=None):
     self.host = host
-    self.uptime_secs = uptime_secs
+    self.uptimeSecs = uptimeSecs

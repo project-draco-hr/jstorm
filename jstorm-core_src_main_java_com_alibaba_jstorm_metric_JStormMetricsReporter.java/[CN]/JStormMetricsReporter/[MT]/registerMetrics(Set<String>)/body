@@ -1,0 +1,19 @@
+{
+  if (test || !enableMetrics) {
+    return new HashMap<>();
+  }
+  try {
+    if (client == null) {
+      client=NimbusClient.getConfiguredClient(conf);
+    }
+    return client.getClient().registerMetrics(topologyId,names);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to gen metric ids",e);
+    if (client != null) {
+      client.close();
+      client=NimbusClient.getConfiguredClient(conf);
+    }
+  }
+  return null;
+}

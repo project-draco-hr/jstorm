@@ -1,0 +1,7 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.time=iprot.readI32();
+  struct.set_time_isSet(true);
+  struct.uptime=iprot.readI32();
+  struct.set_uptime_isSet(true);
+}

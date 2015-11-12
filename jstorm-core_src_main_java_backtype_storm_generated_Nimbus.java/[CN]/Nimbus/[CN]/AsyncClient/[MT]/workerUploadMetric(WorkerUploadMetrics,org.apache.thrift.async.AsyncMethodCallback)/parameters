@@ -1,2 +1,0 @@
-WorkerUploadMetrics uploadMetrics
-org.apache.thrift.async.AsyncMethodCallback resultHandler

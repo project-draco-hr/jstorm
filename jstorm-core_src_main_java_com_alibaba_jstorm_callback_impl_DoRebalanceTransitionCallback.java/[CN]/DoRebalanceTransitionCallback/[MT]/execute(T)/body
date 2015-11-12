@@ -43,7 +43,9 @@
     event.setScratch(true);
     event.setOldStatus(oldStatus);
     event.setReassign(reassign);
+    if (conf != null)     event.setScaleTopology(true);
     TopologyAssign.push(event);
+    event.waitFinish();
   }
  catch (  Exception e) {
     LOG.error("do-rebalance error!",e);

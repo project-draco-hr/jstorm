@@ -1,0 +1,3 @@
+I iface
+fetchRequest_args args
+AsyncMethodCallback<DRPCRequest> resultHandler

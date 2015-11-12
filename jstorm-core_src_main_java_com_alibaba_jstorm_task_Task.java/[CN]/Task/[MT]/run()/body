@@ -1,0 +1,8 @@
+{
+  try {
+    taskShutdownDameon=this.execute();
+  }
+ catch (  Throwable e) {
+    LOG.error("init task take error",e);
+  }
+}

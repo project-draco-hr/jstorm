@@ -1,0 +1,6 @@
+{
+  uploadTopologyMetrics_args args=new uploadTopologyMetrics_args();
+  args.set_topologyId(topologyId);
+  args.set_topologyMetrics(topologyMetrics);
+  sendBase("uploadTopologyMetrics",args);
+}

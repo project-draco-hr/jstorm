@@ -1,0 +1,6 @@
+{
+  CounterData data=new CounterData();
+  convertBase(snapshot,data,win);
+  data.setV(snapshot.get_longValue());
+  return data;
+}

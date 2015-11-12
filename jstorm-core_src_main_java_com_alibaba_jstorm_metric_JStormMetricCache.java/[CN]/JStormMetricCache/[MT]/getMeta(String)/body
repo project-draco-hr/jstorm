@@ -1,0 +1,3 @@
+{
+  return (Map<String,Long>)cache.get(METRIC_META_PREFIX + topologyId);
+}

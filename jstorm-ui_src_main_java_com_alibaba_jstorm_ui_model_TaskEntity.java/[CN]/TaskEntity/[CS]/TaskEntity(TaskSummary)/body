@@ -1,0 +1,3 @@
+{
+  this(ts.get_taskId(),ts.get_uptime(),ts.get_status(),ts.get_host(),ts.get_port(),ts.get_errors());
+}

@@ -1,0 +1,7 @@
+def send_getTopologyMetrics(self, topologyId):
+    self._oprot.writeMessageBegin('getTopologyMetrics', TMessageType.CALL, self._seqid)
+    args = getTopologyMetrics_args()
+    args.topologyId = topologyId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

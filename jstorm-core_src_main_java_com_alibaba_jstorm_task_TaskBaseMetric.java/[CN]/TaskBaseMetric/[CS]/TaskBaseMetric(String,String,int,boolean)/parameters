@@ -1,0 +1,4 @@
+String topologyId
+String componentId
+int taskId
+boolean enableMetrics

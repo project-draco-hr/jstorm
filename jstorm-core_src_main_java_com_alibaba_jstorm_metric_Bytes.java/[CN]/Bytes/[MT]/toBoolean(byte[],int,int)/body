@@ -1,0 +1,6 @@
+{
+  if (length != SIZEOF_BOOLEAN || offset + length > bytes.length) {
+    throw explainWrongLengthOrOffset(bytes,offset,length,SIZEOF_BOOLEAN);
+  }
+  return bytes[offset] != (byte)0;
+}

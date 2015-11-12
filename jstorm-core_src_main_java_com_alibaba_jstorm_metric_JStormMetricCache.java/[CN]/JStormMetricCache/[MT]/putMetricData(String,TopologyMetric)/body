@@ -1,0 +1,33 @@
+{
+  Map<String,Object> batchData=new HashMap<String,Object>();
+  long ts=System.currentTimeMillis();
+  int tp=0, comp=0, task=0, stream=0, worker=0, netty=0;
+  if (tpMetric.get_componentMetric().get_metrics_size() > 0) {
+    batchData.put(METRIC_DATA_30M_COMPONENT + topologyId,new Object[]{ts,tpMetric.get_componentMetric()});
+    comp+=tpMetric.get_componentMetric().get_metrics_size();
+  }
+  if (tpMetric.get_taskMetric().get_metrics_size() > 0) {
+    tryCombineMetricInfo(METRIC_DATA_30M_TASK + topologyId,tpMetric.get_taskMetric(),MetaType.TASK,ts);
+    task+=tpMetric.get_taskMetric().get_metrics_size();
+  }
+  if (tpMetric.get_streamMetric().get_metrics_size() > 0) {
+    tryCombineMetricInfo(METRIC_DATA_30M_STREAM + topologyId,tpMetric.get_streamMetric(),MetaType.STREAM,ts);
+    stream+=tpMetric.get_streamMetric().get_metrics_size();
+  }
+  if (tpMetric.get_workerMetric().get_metrics_size() > 0) {
+    tryCombineMetricInfo(METRIC_DATA_30M_WORKER + topologyId,tpMetric.get_workerMetric(),MetaType.WORKER,ts);
+    worker+=tpMetric.get_workerMetric().get_metrics_size();
+  }
+  if (tpMetric.get_nettyMetric().get_metrics_size() > 0) {
+    tryCombineMetricInfo(METRIC_DATA_30M_NETTY + topologyId,tpMetric.get_nettyMetric(),MetaType.NETTY,ts);
+    netty+=tpMetric.get_nettyMetric().get_metrics_size();
+  }
+  if (tpMetric.get_topologyMetric().get_metrics_size() > 0) {
+    String keyPrefix=METRIC_DATA_30M_TOPOLOGY + topologyId + "-";
+    int page=getRingAvailableIndex(keyPrefix);
+    batchData.put(keyPrefix + page,new Object[]{ts,tpMetric.get_topologyMetric()});
+    tp+=tpMetric.get_topologyMetric().get_metrics_size();
+  }
+  LOG.info("caching metric data for topology:{},tp:{},comp:{},task:{},stream:{},worker:{},netty:{},cost:{}",topologyId,tp,comp,task,stream,worker,netty,System.currentTimeMillis() - ts);
+  return putBatch(batchData);
+}

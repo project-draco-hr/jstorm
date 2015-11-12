@@ -1,0 +1,3 @@
+{
+  return (this.taskIds == null) ? 0 : this.taskIds.size();
+}

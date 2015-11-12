@@ -1,19 +1,19 @@
 {
   __isset_bitfield=other.__isset_bitfield;
-  if (other.is_set_nimbus_master()) {
-    this.nimbus_master=new NimbusStat(other.nimbus_master);
+  if (other.is_set_nimbusMaster()) {
+    this.nimbusMaster=new NimbusStat(other.nimbusMaster);
   }
-  if (other.is_set_nimbus_slaves()) {
-    List<NimbusStat> __this__nimbus_slaves=new ArrayList<NimbusStat>(other.nimbus_slaves.size());
-    for (    NimbusStat other_element : other.nimbus_slaves) {
-      __this__nimbus_slaves.add(new NimbusStat(other_element));
+  if (other.is_set_nimbusSlaves()) {
+    List<NimbusStat> __this__nimbusSlaves=new ArrayList<NimbusStat>(other.nimbusSlaves.size());
+    for (    NimbusStat other_element : other.nimbusSlaves) {
+      __this__nimbusSlaves.add(new NimbusStat(other_element));
     }
-    this.nimbus_slaves=__this__nimbus_slaves;
+    this.nimbusSlaves=__this__nimbusSlaves;
   }
-  this.supervisor_num=other.supervisor_num;
-  this.total_port_num=other.total_port_num;
-  this.used_port_num=other.used_port_num;
-  this.free_port_num=other.free_port_num;
+  this.supervisorNum=other.supervisorNum;
+  this.totalPortNum=other.totalPortNum;
+  this.usedPortNum=other.usedPortNum;
+  this.freePortNum=other.freePortNum;
   if (other.is_set_version()) {
     this.version=other.version;
   }

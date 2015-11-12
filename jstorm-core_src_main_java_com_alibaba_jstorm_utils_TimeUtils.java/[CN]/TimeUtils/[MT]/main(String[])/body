@@ -1,0 +1,10 @@
+{
+  System.out.println(new Date(alignTimeToWin(System.currentTimeMillis(),AsmWindow.M1_WINDOW)));
+  System.out.println(new Date(alignTimeToWin(System.currentTimeMillis(),AsmWindow.M10_WINDOW)));
+  System.out.println(new Date(alignTimeToWin(System.currentTimeMillis(),AsmWindow.H2_WINDOW)));
+  System.out.println(new Date(alignTimeToWin(System.currentTimeMillis(),AsmWindow.D1_WINDOW)));
+  Calendar cal=Calendar.getInstance();
+  cal.set(2015,6,23,0,0,0);
+  System.out.println(new Date(alignTimeToWin(cal.getTimeInMillis(),AsmWindow.D1_WINDOW)));
+  System.out.println(format(TimeUtils.current_time_secs()));
+}

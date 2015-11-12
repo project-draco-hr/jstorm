@@ -1,0 +1,27 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  lastComparison=Boolean.valueOf(is_set_topologyId()).compareTo(other.is_set_topologyId());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_topologyId()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.topologyId,other.topologyId);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_topologyMetrics()).compareTo(other.is_set_topologyMetrics());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_topologyMetrics()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.topologyMetrics,other.topologyMetrics);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

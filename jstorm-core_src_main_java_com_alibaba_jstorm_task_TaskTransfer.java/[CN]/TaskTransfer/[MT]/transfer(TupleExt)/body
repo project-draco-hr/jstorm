@@ -1,10 +1,13 @@
 {
-  int taskid=tuple.getTargetTaskId();
-  DisruptorQueue exeQueue=innerTaskTransfer.get(taskid);
+  int taskId=tuple.getTargetTaskId();
+  DisruptorQueue exeQueue=innerTaskTransfer.get(taskId);
   if (exeQueue != null) {
     exeQueue.publish(tuple);
   }
  else {
-    serializeQueue.publish(tuple);
+    push(taskId,tuple);
+  }
+  if (backpressureController.isBackpressureMode()) {
+    backpressureController.flowControl();
   }
 }

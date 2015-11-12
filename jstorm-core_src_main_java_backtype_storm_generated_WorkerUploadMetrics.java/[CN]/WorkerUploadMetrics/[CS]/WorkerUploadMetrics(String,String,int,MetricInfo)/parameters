@@ -1,0 +1,4 @@
+String topologyId
+String supervisorId
+int port
+MetricInfo allMetrics

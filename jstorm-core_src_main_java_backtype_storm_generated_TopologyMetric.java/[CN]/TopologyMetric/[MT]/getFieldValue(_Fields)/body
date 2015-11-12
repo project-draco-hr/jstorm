@@ -8,6 +8,10 @@ case WORKER_METRIC:
 return get_workerMetric();
 case TASK_METRIC:
 return get_taskMetric();
+case STREAM_METRIC:
+return get_streamMetric();
+case NETTY_METRIC:
+return get_nettyMetric();
 }
 throw new IllegalStateException();
 }

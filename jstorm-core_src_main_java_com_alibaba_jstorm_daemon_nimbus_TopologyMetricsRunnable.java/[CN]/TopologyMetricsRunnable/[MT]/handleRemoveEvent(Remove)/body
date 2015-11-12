@@ -1,14 +1,7 @@
 {
   String topologyId=event.topologyId;
-  TopologyMetric topologyMetric=(TopologyMetric)dbCache.get(getTopologyKey(topologyId));
-  if (topologyMetric == null) {
-    LOG.warn("No TopologyMetric of  " + topologyId);
-    return;
+  if (topologyId != null) {
+    removeTopology(topologyId);
   }
-  removing.put(topologyId,System.currentTimeMillis());
-  dbCache.remove(getTopologyKey(topologyId));
-  dbCache.remove(getNettyTopologyKey(topologyId));
-  topologyNettyMgr.rmTopology(topologyId);
-  LOG.info("Successfully remove TopologyMetric of " + topologyId);
-  return;
+  LOG.info("remove topology:{}.",topologyId);
 }

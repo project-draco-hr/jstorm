@@ -1,0 +1,4 @@
+{
+  this.p98=p98;
+  set_p98_isSet(true);
+}

@@ -1,0 +1,3 @@
+{
+  return new getMetrics_result(this);
+}

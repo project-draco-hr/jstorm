@@ -1,0 +1,5 @@
+ISpout _spout
+Tuple tuple
+TupleInfo tupleInfo
+TaskBaseMetric _task_stats
+boolean _isDebug

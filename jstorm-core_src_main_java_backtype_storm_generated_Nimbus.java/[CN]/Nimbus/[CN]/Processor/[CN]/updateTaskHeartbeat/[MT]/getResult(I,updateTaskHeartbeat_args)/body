@@ -1,0 +1,5 @@
+{
+  updateTaskHeartbeat_result result=new updateTaskHeartbeat_result();
+  iface.updateTaskHeartbeat(args.taskHbs);
+  return result;
+}

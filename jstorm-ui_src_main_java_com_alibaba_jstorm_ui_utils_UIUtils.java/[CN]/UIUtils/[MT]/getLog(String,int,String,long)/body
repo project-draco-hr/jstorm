@@ -1,0 +1,7 @@
+{
+  String url=String.format("http://%s:%s/logview?cmd=showLog&log=%s",host,port,file);
+  if (position >= 0) {
+    url+="&pos=" + position;
+  }
+  return getHttpResponse(url);
+}

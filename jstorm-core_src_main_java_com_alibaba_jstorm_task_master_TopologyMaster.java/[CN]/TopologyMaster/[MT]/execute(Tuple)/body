@@ -1,0 +1,20 @@
+{
+  if (input != null) {
+    try {
+      queue.put(input);
+    }
+ catch (    InterruptedException e) {
+      LOG.error("Failed to put event to taskHb updater's queue",e);
+    }
+    if (threadAliveCheck.check()) {
+      if (updateThread == null || updateThread.isAlive() == false) {
+        updateThread=new Thread(new TopologyMasterRunnable());
+        updateThread.start();
+      }
+    }
+    collector.ack(input);
+  }
+ else {
+    LOG.error("Received null tuple!");
+  }
+}

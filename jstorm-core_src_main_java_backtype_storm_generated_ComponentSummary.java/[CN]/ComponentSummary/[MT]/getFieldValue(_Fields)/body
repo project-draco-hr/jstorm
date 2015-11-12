@@ -7,7 +7,7 @@ case PARALLEL:
 case TYPE:
 return get_type();
 case TASK_IDS:
-return get_task_ids();
+return get_taskIds();
 case ERRORS:
 return get_errors();
 }

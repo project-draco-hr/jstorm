@@ -1,0 +1,3 @@
+{
+  iface.uploadTopologyMetrics(args.topologyId,args.topologyMetrics,resultHandler);
+}

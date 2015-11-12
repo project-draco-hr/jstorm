@@ -1,0 +1,6 @@
+{
+  GaugeData data=new GaugeData();
+  convertBase(snapshot,data,win);
+  data.setV(snapshot.get_doubleValue());
+  return data;
+}

@@ -18,11 +18,34 @@
   this.stormConf=new HashMap<Object,Object>();
   this.stormConf.putAll(conf);
   this.stormConf.putAll(rawConf);
+  JStormMetrics.setTopologyId(topology_id);
+  JStormMetrics.setPort(port);
+  JStormMetrics.setDebug(ConfigExtension.isEnableMetricDebug(stormConf));
+  JStormMetrics.setEnabled(ConfigExtension.isEnableMetrics(stormConf));
+  JStormMetrics.addDebugMetrics(ConfigExtension.getDebugMetricNames(stormConf));
+  AsmMetric.setSampleRate(ConfigExtension.getMetricSampleRate(stormConf));
   ConfigExtension.setLocalSupervisorId(stormConf,supervisorId);
   ConfigExtension.setLocalWorkerId(stormConf,workerId);
   ConfigExtension.setLocalWorkerPort(stormConf,port);
   ControlMessage.setPort(port);
-  Metric.setEnable(ConfigExtension.isEnablePerformanceMetrics(stormConf));
+  JStormMetrics.registerWorkerTopologyMetric(JStormMetrics.workerMetricName(MetricDef.CPU_USED_RATIO,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return JStormUtils.getCpuUsage();
+    }
+  }
+));
+  JStormMetrics.registerWorkerTopologyMetric(JStormMetrics.workerMetricName(MetricDef.MEMORY_USED,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return JStormUtils.getMemUsage();
+    }
+  }
+));
+  JStormMetrics.registerWorkerMetric(JStormMetrics.workerMetricName(MetricDef.DISK_USAGE,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return JStormUtils.getDiskUsage();
+    }
+  }
+));
   LOG.info("Worker Configuration " + stormConf);
   try {
     boolean enableClassloader=ConfigExtension.isEnableTopologyClassLoader(stormConf);
@@ -56,8 +79,8 @@
   boolean isLimited=ConfigExtension.getTopologyBufferSizeLimited(stormConf);
   DisruptorQueue.setLimited(isLimited);
   LOG.info("Disruptor use sleep:" + disruptorUseSleep + ", limited size:"+ isLimited);
-  int buffer_size=Utils.getInt(conf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
-  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(conf);
+  int buffer_size=Utils.getInt(stormConf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
+  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(stormConf);
   this.transferQueue=DisruptorQueue.mkInstance("TotalTransfer",ProducerType.MULTI,buffer_size,waitStrategy);
   this.transferQueue.consumerStarted();
   this.sendingQueue=DisruptorQueue.mkInstance("TotalSending",ProducerType.MULTI,buffer_size,waitStrategy);
@@ -88,6 +111,9 @@
   outTaskStatus=new ConcurrentHashMap<Integer,Boolean>();
   threadPool=Executors.newScheduledThreadPool(THREAD_POOL_NUM);
   TimerTrigger.setScheduledExecutorService(threadPool);
+  if (!StormConfig.local_mode(stormConf)) {
+    healthReporterThread=new AsyncLoopThread(new JStormHealthReporter(this));
+  }
   try {
     Long tmp=StormConfig.read_supervisor_topology_timestamp(conf,topology_id);
     assignmentTS=(tmp == null ? System.currentTimeMillis() : tmp);

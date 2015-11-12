@@ -1,3 +1,0 @@
-Map<String,MetricInfo> metrics
-Integer window
-Map<String,String> paramMap

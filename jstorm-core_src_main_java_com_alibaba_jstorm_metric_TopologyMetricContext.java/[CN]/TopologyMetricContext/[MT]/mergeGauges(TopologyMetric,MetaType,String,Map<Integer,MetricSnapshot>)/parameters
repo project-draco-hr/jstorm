@@ -1,0 +1,4 @@
+TopologyMetric tpMetric
+MetaType metaType
+String meta
+Map<Integer,MetricSnapshot> data

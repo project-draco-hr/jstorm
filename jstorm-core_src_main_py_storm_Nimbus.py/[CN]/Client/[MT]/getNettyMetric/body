@@ -1,4 +1,0 @@
-def getNettyMetric(self, topologyName, pos):
-    '\n    Parameters:\n     - topologyName\n     - pos\n    '
-    self.send_getNettyMetric(topologyName, pos)
-    return self.recv_getNettyMetric()

@@ -3,8 +3,8 @@ def __hash__(self):
     value = ((value * 31) ^ hash(self.id))
     value = ((value * 31) ^ hash(self.name))
     value = ((value * 31) ^ hash(self.status))
-    value = ((value * 31) ^ hash(self.uptime_secs))
-    value = ((value * 31) ^ hash(self.num_tasks))
-    value = ((value * 31) ^ hash(self.num_workers))
-    value = ((value * 31) ^ hash(self.error_info))
+    value = ((value * 31) ^ hash(self.uptimeSecs))
+    value = ((value * 31) ^ hash(self.numTasks))
+    value = ((value * 31) ^ hash(self.numWorkers))
+    value = ((value * 31) ^ hash(self.errorInfo))
     return value

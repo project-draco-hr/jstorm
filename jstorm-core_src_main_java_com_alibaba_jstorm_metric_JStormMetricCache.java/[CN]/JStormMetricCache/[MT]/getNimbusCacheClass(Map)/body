@@ -1,0 +1,16 @@
+{
+  boolean isLinux=OSInfo.isLinux();
+  boolean isMac=OSInfo.isMac();
+  boolean isLocal=StormConfig.local_mode(conf);
+  if (isLocal) {
+    return TIMEOUT_MEM_CACHE_CLASS;
+  }
+  if (!isLinux && !isMac) {
+    return TIMEOUT_MEM_CACHE_CLASS;
+  }
+  String nimbusCacheClass=ConfigExtension.getNimbusCacheClass(conf);
+  if (!StringUtils.isBlank(nimbusCacheClass)) {
+    return nimbusCacheClass;
+  }
+  return ROCKS_DB_CACHE_CLASS;
+}

@@ -1,0 +1,6 @@
+{
+  if (this.taskHbs == null) {
+    this.taskHbs=new HashMap<Integer,TaskHeartbeat>();
+  }
+  this.taskHbs.put(key,val);
+}

@@ -1,0 +1,14 @@
+{
+  if (o == null) {
+    return null;
+  }
+  if (o instanceof String) {
+    return Boolean.valueOf((String)o);
+  }
+ else   if (o instanceof Boolean) {
+    return (Boolean)o;
+  }
+ else {
+    throw new RuntimeException("Invalid value " + o.getClass().getName() + " "+ o);
+  }
+}

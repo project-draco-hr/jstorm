@@ -1,18 +1,13 @@
 {
   Map<String,List<ResourceWorkerSlot>> supervisorToWorker=new HashMap<String,List<ResourceWorkerSlot>>();
   for (  ResourceWorkerSlot worker : workers) {
-    if (worker.getTasks() == null || worker.getTasks().size() == 0) {
-      List<ResourceWorkerSlot> supervisor=supervisorToWorker.get(worker.getNodeId());
-      if (supervisor == null) {
-        supervisor=new ArrayList<ResourceWorkerSlot>();
-        supervisorToWorker.put(worker.getNodeId(),supervisor);
-      }
-      supervisor.add(worker);
+    List<ResourceWorkerSlot> supervisor=supervisorToWorker.get(worker.getNodeId());
+    if (supervisor == null) {
+      supervisor=new ArrayList<ResourceWorkerSlot>();
+      supervisorToWorker.put(worker.getNodeId(),supervisor);
     }
- else {
-      assignments.add(worker);
-    }
+    supervisor.add(worker);
   }
-  this.workerNum=workers.size() - assignments.size();
+  this.workerNum=workers.size();
   return supervisorToWorker;
 }

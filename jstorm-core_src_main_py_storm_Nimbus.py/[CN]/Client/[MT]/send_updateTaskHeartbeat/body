@@ -1,0 +1,7 @@
+def send_updateTaskHeartbeat(self, taskHbs):
+    self._oprot.writeMessageBegin('updateTaskHeartbeat', TMessageType.CALL, self._seqid)
+    args = updateTaskHeartbeat_args()
+    args.taskHbs = taskHbs
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

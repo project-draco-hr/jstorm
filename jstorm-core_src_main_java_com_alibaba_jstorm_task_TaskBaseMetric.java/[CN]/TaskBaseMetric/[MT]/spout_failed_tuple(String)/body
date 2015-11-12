@@ -1,4 +1,5 @@
 {
-  String failNumName=MetricRegistry.name(MetricDef.FAILED_NUM,Common.ACKER_COMPONENT_ID,stream);
-  update(failNumName,Double.valueOf(1),JStormMetrics.Builder.COUNTER);
+  if (enableMetrics) {
+    update(stream,MetricDef.FAILED_NUM,1,MetricType.COUNTER);
+  }
 }

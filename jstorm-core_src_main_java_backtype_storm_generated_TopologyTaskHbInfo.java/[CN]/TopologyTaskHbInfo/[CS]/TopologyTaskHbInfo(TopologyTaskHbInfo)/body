@@ -1,0 +1,18 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  if (other.is_set_topologyId()) {
+    this.topologyId=other.topologyId;
+  }
+  this.topologyMasterId=other.topologyMasterId;
+  if (other.is_set_taskHbs()) {
+    Map<Integer,TaskHeartbeat> __this__taskHbs=new HashMap<Integer,TaskHeartbeat>(other.taskHbs.size());
+    for (    Map.Entry<Integer,TaskHeartbeat> other_element : other.taskHbs.entrySet()) {
+      Integer other_element_key=other_element.getKey();
+      TaskHeartbeat other_element_value=other_element.getValue();
+      Integer __this__taskHbs_copy_key=other_element_key;
+      TaskHeartbeat __this__taskHbs_copy_value=new TaskHeartbeat(other_element_value);
+      __this__taskHbs.put(__this__taskHbs_copy_key,__this__taskHbs_copy_value);
+    }
+    this.taskHbs=__this__taskHbs;
+  }
+}

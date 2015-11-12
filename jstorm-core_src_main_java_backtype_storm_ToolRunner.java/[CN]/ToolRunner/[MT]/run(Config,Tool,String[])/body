@@ -5,6 +5,7 @@
       conf.putAll(Utils.readStormConfig());
     }
     GenericOptionsParser parser=new GenericOptionsParser(conf,args);
+    LOG.info(conf.toString());
     tool.setConf(conf);
     System.exit(tool.run(parser.getRemainingArgs()));
   }

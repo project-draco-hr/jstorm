@@ -1,0 +1,6 @@
+def validate(self):
+    if (self.time is None):
+        raise TProtocol.TProtocolException(message='Required field time is unset!')
+    if (self.uptime is None):
+        raise TProtocol.TProtocolException(message='Required field uptime is unset!')
+    return

@@ -1,0 +1,8 @@
+{
+  if (taskTrack.start != null && this.start == null) {
+    this.start=taskTrack.start;
+  }
+  if (taskTrack.end != null && this.end == null) {
+    this.end=taskTrack.end;
+  }
+}

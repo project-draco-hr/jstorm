@@ -1,9 +1,0 @@
-{
-  Map<String,String> parameterMap=testCluster();
-  try {
-    TablePage table=new TablePage(parameterMap);
-    System.out.println(table.getTables());
-  }
- catch (  Exception e) {
-  }
-}

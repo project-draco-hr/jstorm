@@ -24,5 +24,17 @@
     if (!(this_present_taskMetric && that_present_taskMetric))     return false;
     if (!this.taskMetric.equals(that.taskMetric))     return false;
   }
+  boolean this_present_streamMetric=true && this.is_set_streamMetric();
+  boolean that_present_streamMetric=true && that.is_set_streamMetric();
+  if (this_present_streamMetric || that_present_streamMetric) {
+    if (!(this_present_streamMetric && that_present_streamMetric))     return false;
+    if (!this.streamMetric.equals(that.streamMetric))     return false;
+  }
+  boolean this_present_nettyMetric=true && this.is_set_nettyMetric();
+  boolean that_present_nettyMetric=true && that.is_set_nettyMetric();
+  if (this_present_nettyMetric || that_present_nettyMetric) {
+    if (!(this_present_nettyMetric && that_present_nettyMetric))     return false;
+    if (!this.nettyMetric.equals(that.nettyMetric))     return false;
+  }
   return true;
 }

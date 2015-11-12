@@ -1,0 +1,42 @@
+{
+  long start=System.currentTimeMillis();
+  LOG.info("request topology info for cluster name: " + cluster + " id:"+ id);
+  int window=UIUtils.parseWindow(win);
+  UIUtils.addWindowAttribute(model,window);
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(cluster);
+    TopologyInfo topologyInfo=client.getClient().getTopologyInfo(id);
+    model.addAttribute("topology",JStormUtils.thriftToMap(topologyInfo.get_topology()));
+    model.addAttribute("supervisorPort",UIUtils.getSupervisorPort(cluster));
+    MetricInfo topologyMetrics=topologyInfo.get_metrics().get_topologyMetric();
+    UISummaryMetric topologyData=getTopologyData(topologyMetrics,window);
+    model.addAttribute("topologyData",topologyData);
+    model.addAttribute("topologyHead",UIMetricUtils.sortHead(topologyData,UISummaryMetric.HEAD));
+    MetricInfo componentMetrics=topologyInfo.get_metrics().get_componentMetric();
+    List<UIUserDefinedMetric> userDefinedMetrics=Lists.newArrayList();
+    List<UIComponentMetric> componentData=getComponentData(componentMetrics,window,topologyInfo.get_components(),userDefinedMetrics);
+    model.addAttribute("componentData",componentData);
+    model.addAttribute("componentHead",UIMetricUtils.sortHead(componentData,UIComponentMetric.HEAD));
+    model.addAttribute("userDefinedMetrics",userDefinedMetrics);
+    MetricInfo workerMetrics=topologyInfo.get_metrics().get_workerMetric();
+    List<UIWorkerMetric> workerData=getWorkerData(workerMetrics,id,window);
+    model.addAttribute("workerData",workerData);
+    model.addAttribute("workerHead",UIMetricUtils.sortHead(workerData,UIWorkerMetric.HEAD));
+    List<TaskEntity> taskData=getTaskEntities(topologyInfo);
+    model.addAttribute("taskData",taskData);
+  }
+ catch (  NotAliveException nae) {
+    model.addAttribute("flush",String.format("The topology: %s is dead.",id));
+  }
+catch (  Exception e) {
+    NimbusClientManager.removeClient(cluster);
+    LOG.error(e.getMessage(),e);
+    UIUtils.addErrorAttribute(model,e);
+  }
+  model.addAttribute("page","topology");
+  model.addAttribute("clusterName",cluster);
+  UIUtils.addTitleAttribute(model,"Topology Summary");
+  LOG.info("topology page show cost:{}ms",System.currentTimeMillis() - start);
+  return "topology";
+}

@@ -7,6 +7,7 @@
     deleteObject(Cluster.storm_task_root(topologyId));
     teardown_heartbeats(topologyId);
     teardown_task_errors(topologyId);
+    teardown_backpressure(topologyId);
     deleteObject(Cluster.metric_path(topologyId));
   }
  catch (  Exception e) {

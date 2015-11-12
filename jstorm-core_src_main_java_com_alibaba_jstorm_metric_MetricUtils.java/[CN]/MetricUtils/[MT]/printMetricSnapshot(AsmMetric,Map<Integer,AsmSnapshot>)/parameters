@@ -1,0 +1,2 @@
+AsmMetric metric
+Map<Integer,AsmSnapshot> snapshots

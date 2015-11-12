@@ -1,25 +1,56 @@
 {
-  this.nimbusCache=nimbusData.getNimbusCache();
-  this.dbCache=nimbusCache.getDbCache();
-  this.topologyWorkers=new ConcurrentHashMap<String,Set<String>>();
-  this.removing=new TimeCacheMap<String,Long>(600);
-  this.queue=new LinkedBlockingDeque<TopologyMetricsRunnable.Event>();
+  setName(getClass().getSimpleName());
+  this.nimbusData=nimbusData;
+  this.localMode=nimbusData.isLocalMode();
+  if (localMode) {
+    this.metricStat=new AtomicIntegerArray(1);
+    return;
+  }
+  LOG.info("create topology metrics runnable.");
+  this.metricCache=nimbusData.getMetricCache();
   this.stormClusterState=nimbusData.getStormClusterState();
   this.isShutdown=nimbusData.getIsShutdown();
-  this.topologyNettyMgr=nimbusData.getTopologyNettyMgr();
-  if (ConfigExtension.isAlimonitorMetricsPost(nimbusData.getConf())) {
-    metricSendClient=new AlimonitorClient(AlimonitorClient.DEFAUT_ADDR,AlimonitorClient.DEFAULT_PORT,true);
+  clusterName=ConfigExtension.getClusterName(nimbusData.getConf());
+  if (clusterName == null) {
+    throw new RuntimeException("cluster.name property must be set in storm.yaml!");
   }
- else {
-    metricSendClient=new MetricSendClient();
-  }
-  localMode=StormConfig.local_mode(nimbusData.getConf());
-  updateHistogram=SimpleJStormMetric.registerHistorgram("TopologyMetricsRunnable_Update");
-  uploadHistogram=SimpleJStormMetric.registerHistorgram("TopologyMetricsRunnable_Upload");
-  SimpleJStormMetric.registerWorkerGauge(new Gauge<Double>(){
-    @Override public Double getValue(){
-      return (double)queue.size();
+  this.maxPendingUploadMetrics=ConfigExtension.getMaxPendingMetricNum(nimbusData.getConf());
+  this.metricStat=new AtomicIntegerArray(this.maxPendingUploadMetrics);
+  int cnt=0;
+  for (int i=0; i < maxPendingUploadMetrics; i++) {
+    TopologyMetricDataInfo obj=getMetricDataInfoFromCache(i);
+    if (obj != null) {
+      this.metricStat.set(i,SET);
+      cnt++;
     }
   }
-,"TopologyMetricsRunnable_Queue");
+  LOG.info("pending upload metrics: {}",cnt);
+  this.refreshTopologies();
+  this.refreshTopologiesThread=new AsyncLoopThread(new RefreshTopologiesThread());
+  this.clusterMetricsUpdateExecutor=Executors.newSingleThreadScheduledExecutor();
+  this.clusterMetricsUpdateExecutor.scheduleAtFixedRate(new Runnable(){
+    @Override public void run(){
+      int secOffset=TimeUtils.secOffset();
+      int offset=55;
+      if (secOffset < offset) {
+        JStormUtils.sleepMs((offset - secOffset) * 1000);
+      }
+ else       if (secOffset == offset) {
+      }
+ else {
+        JStormUtils.sleepMs((60 - secOffset + offset) * 1000);
+      }
+      LOG.info("cluster metrics force upload.");
+      mergeAndUploadClusterMetrics();
+    }
+  }
+,5,60,TimeUnit.SECONDS);
+  JStormMetrics.registerWorkerGauge(JStormMetrics.NIMBUS_METRIC_KEY,MetricDef.MEMORY_USED,new AsmGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      MemoryMXBean memoryMXBean=ManagementFactory.getMemoryMXBean();
+      MemoryUsage memoryUsage=memoryMXBean.getHeapMemoryUsage();
+      return (double)memoryUsage.getUsed();
+    }
+  }
+));
 }

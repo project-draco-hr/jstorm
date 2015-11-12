@@ -1,0 +1,31 @@
+{
+  File file=new File(confPath);
+  if (!isFileModified(file)) {
+    return uiConfig;
+  }
+  Map ret=Utils.readStormConfig();
+  ret.remove(Config.STORM_ZOOKEEPER_ROOT);
+  ret.remove(Config.STORM_ZOOKEEPER_SERVERS);
+  ret.remove("cluster.name");
+  if (file.exists()) {
+    FileInputStream fileStream;
+    try {
+      fileStream=new FileInputStream(file);
+      Yaml yaml=new Yaml();
+      Map clientConf=(Map)yaml.load(fileStream);
+      if (clientConf != null) {
+        ret.putAll(clientConf);
+      }
+    }
+ catch (    FileNotFoundException e) {
+    }
+    if (!ret.containsKey(Config.NIMBUS_HOST)) {
+      ret.put(Config.NIMBUS_HOST,"localhost");
+    }
+    uiConfig=ret;
+    isInitialized=false;
+    flushClusterConfig();
+    flushClusterCache();
+  }
+  return uiConfig;
+}

@@ -4,17 +4,17 @@
   }
 switch (field) {
 case NIMBUS_MASTER:
-    return is_set_nimbus_master();
+    return is_set_nimbusMaster();
 case NIMBUS_SLAVES:
-  return is_set_nimbus_slaves();
+  return is_set_nimbusSlaves();
 case SUPERVISOR_NUM:
-return is_set_supervisor_num();
+return is_set_supervisorNum();
 case TOTAL_PORT_NUM:
-return is_set_total_port_num();
+return is_set_totalPortNum();
 case USED_PORT_NUM:
-return is_set_used_port_num();
+return is_set_usedPortNum();
 case FREE_PORT_NUM:
-return is_set_free_port_num();
+return is_set_freePortNum();
 case VERSION:
 return is_set_version();
 }

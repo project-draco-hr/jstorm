@@ -1,0 +1,15 @@
+def process_updateTopology(self, seqid, iprot, oprot):
+    args = updateTopology_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = updateTopology_result()
+    try:
+        self._handler.updateTopology(args.name, args.uploadedLocation, args.updateConf)
+    except NotAliveException as e:
+        result.e = e
+    except InvalidTopologyException as ite:
+        result.ite = ite
+    oprot.writeMessageBegin('updateTopology', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

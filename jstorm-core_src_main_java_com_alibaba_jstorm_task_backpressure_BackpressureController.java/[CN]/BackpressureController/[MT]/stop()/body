@@ -1,0 +1,15 @@
+{
+  if (sleepTime == minBound) {
+    minBound=0;
+  }
+  sleepTime=JStormUtils.halfValueOfSum(minBound,sleepTime,false);
+  if (sleepTime == 0) {
+    resetBackpressureInfo();
+    TopoMasterCtrlEvent stopBp=new TopoMasterCtrlEvent(EventType.stopBackpressure,null);
+    outputCollector.emit(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID,new Values(stopBp));
+  }
+ else {
+    minBound=sleepTime;
+  }
+  LOG.info("Stop backpressure at spout-{}, sleepTime={}, queueSizeReduced={}, flowCtrlTime={}",taskId,sleepTime,queueSizeReduced);
+}

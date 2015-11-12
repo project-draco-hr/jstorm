@@ -1,0 +1,8 @@
+def send_getNettyMetricSizeByHost(self, topologyId, host):
+    self._oprot.writeMessageBegin('getNettyMetricSizeByHost', TMessageType.CALL, self._seqid)
+    args = getNettyMetricSizeByHost_args()
+    args.topologyId = topologyId
+    args.host = host
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

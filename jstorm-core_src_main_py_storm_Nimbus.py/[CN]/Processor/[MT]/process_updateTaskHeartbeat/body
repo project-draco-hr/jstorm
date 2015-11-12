@@ -1,0 +1,10 @@
+def process_updateTaskHeartbeat(self, seqid, iprot, oprot):
+    args = updateTaskHeartbeat_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = updateTaskHeartbeat_result()
+    self._handler.updateTaskHeartbeat(args.taskHbs)
+    oprot.writeMessageBegin('updateTaskHeartbeat', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

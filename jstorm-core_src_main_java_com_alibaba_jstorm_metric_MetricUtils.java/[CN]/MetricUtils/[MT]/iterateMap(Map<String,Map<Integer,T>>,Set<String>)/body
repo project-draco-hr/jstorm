@@ -1,0 +1,31 @@
+{
+  for (  Map.Entry<String,Map<Integer,T>> entry : map.entrySet()) {
+    String name=entry.getKey();
+    boolean print=false;
+    if (metrics == null) {
+      print=true;
+    }
+ else {
+      for (      String metric : metrics) {
+        if (name.contains(metric)) {
+          print=true;
+          break;
+        }
+      }
+    }
+    if (print) {
+      Map<Integer,T> winData=entry.getValue();
+      for (      Map.Entry<Integer,T> win : winData.entrySet()) {
+        T v=win.getValue();
+        String str;
+        if (v instanceof MetricSnapshot) {
+          str=MetricUtils.str(v);
+        }
+ else {
+          str=v.toString();
+        }
+        LOG.info("metric:{}, win:{}, data:{}",name,win.getKey(),str);
+      }
+    }
+  }
+}

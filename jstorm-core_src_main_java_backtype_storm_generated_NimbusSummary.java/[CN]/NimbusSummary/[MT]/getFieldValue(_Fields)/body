@@ -1,17 +1,17 @@
 {
 switch (field) {
 case NIMBUS_MASTER:
-    return get_nimbus_master();
+    return get_nimbusMaster();
 case NIMBUS_SLAVES:
-  return get_nimbus_slaves();
+  return get_nimbusSlaves();
 case SUPERVISOR_NUM:
-return Integer.valueOf(get_supervisor_num());
+return Integer.valueOf(get_supervisorNum());
 case TOTAL_PORT_NUM:
-return Integer.valueOf(get_total_port_num());
+return Integer.valueOf(get_totalPortNum());
 case USED_PORT_NUM:
-return Integer.valueOf(get_used_port_num());
+return Integer.valueOf(get_usedPortNum());
 case FREE_PORT_NUM:
-return Integer.valueOf(get_free_port_num());
+return Integer.valueOf(get_freePortNum());
 case VERSION:
 return get_version();
 }

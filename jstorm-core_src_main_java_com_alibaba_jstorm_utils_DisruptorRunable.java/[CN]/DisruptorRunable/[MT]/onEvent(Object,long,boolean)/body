@@ -8,6 +8,6 @@
   }
   finally {
     long end=System.nanoTime();
-    timer.update((end - start) / 1000000.0d);
+    timer.update((end - start) / TimeUtils.NS_PER_US);
   }
 }

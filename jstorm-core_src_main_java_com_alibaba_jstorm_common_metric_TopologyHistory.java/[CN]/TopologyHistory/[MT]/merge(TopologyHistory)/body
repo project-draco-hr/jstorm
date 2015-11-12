@@ -1,0 +1,8 @@
+{
+  if (history.start != null && this.start == null) {
+    this.start=history.start;
+  }
+  if (history.end != null && this.end == null) {
+    this.end=history.end;
+  }
+}

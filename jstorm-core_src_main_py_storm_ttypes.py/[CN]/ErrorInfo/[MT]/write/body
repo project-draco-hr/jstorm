@@ -7,9 +7,9 @@ def write(self, oprot):
         oprot.writeFieldBegin('error', TType.STRING, 1)
         oprot.writeString(self.error.encode('utf-8'))
         oprot.writeFieldEnd()
-    if (self.error_time_secs is not None):
-        oprot.writeFieldBegin('error_time_secs', TType.I32, 2)
-        oprot.writeI32(self.error_time_secs)
+    if (self.errorTimeSecs is not None):
+        oprot.writeFieldBegin('errorTimeSecs', TType.I32, 2)
+        oprot.writeI32(self.errorTimeSecs)
         oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()

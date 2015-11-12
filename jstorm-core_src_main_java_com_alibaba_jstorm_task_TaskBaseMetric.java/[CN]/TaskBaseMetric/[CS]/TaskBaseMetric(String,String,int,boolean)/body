@@ -1,0 +1,7 @@
+{
+  this.topologyId=topologyId;
+  this.componentId=componentId;
+  this.taskId=taskId;
+  this.enableMetrics=enableMetrics;
+  logger.info("init task base metric, tp id:{}, comp id:{}, task id:{}",topologyId,componentId,taskId);
+}

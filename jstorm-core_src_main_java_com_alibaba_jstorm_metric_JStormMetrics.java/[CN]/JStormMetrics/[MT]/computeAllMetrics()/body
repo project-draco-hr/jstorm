@@ -1,0 +1,53 @@
+{
+  long start=System.currentTimeMillis();
+  MetricInfo metricInfo=MetricUtils.mkMetricInfo();
+  List<Map.Entry<String,AsmMetric>> entries=Lists.newArrayList();
+  entries.addAll(streamMetrics.metrics.entrySet());
+  entries.addAll(taskMetrics.metrics.entrySet());
+  entries.addAll(componentMetrics.metrics.entrySet());
+  entries.addAll(workerMetrics.metrics.entrySet());
+  entries.addAll(nettyMetrics.metrics.entrySet());
+  entries.addAll(topologyMetrics.metrics.entrySet());
+  for (  Map.Entry<String,AsmMetric> entry : entries) {
+    String name=entry.getKey();
+    AsmMetric metric=entry.getValue();
+    Map<Integer,AsmSnapshot> snapshots=metric.getSnapshots();
+    int op=metric.getOp();
+    if ((op & AsmMetric.MetricOp.LOG) == AsmMetric.MetricOp.LOG) {
+      MetricUtils.printMetricSnapshot(metric,snapshots);
+    }
+    if ((op & AsmMetric.MetricOp.REPORT) == AsmMetric.MetricOp.REPORT) {
+      MetaType metaType=MetricUtils.metaType(metric.getMetricName());
+      try {
+        if (metric instanceof AsmCounter) {
+          Map data=MetricUtils.toThriftCounterSnapshots(snapshots);
+          putIfNotEmpty(metricInfo.get_metrics(),name,data);
+        }
+ else         if (metric instanceof AsmGauge) {
+          Map data=MetricUtils.toThriftGaugeSnapshots(snapshots);
+          putIfNotEmpty(metricInfo.get_metrics(),name,data);
+        }
+ else         if (metric instanceof AsmMeter) {
+          Map data=MetricUtils.toThriftMeterSnapshots(snapshots);
+          putIfNotEmpty(metricInfo.get_metrics(),name,data);
+        }
+ else         if (metric instanceof AsmHistogram) {
+          Map data=MetricUtils.toThriftHistoSnapshots(metaType,snapshots);
+          putIfNotEmpty(metricInfo.get_metrics(),name,data);
+        }
+ else         if (metric instanceof AsmTimer) {
+          Map data=MetricUtils.toThriftTimerSnapshots(metaType,snapshots);
+          putIfNotEmpty(metricInfo.get_metrics(),name,data);
+        }
+      }
+ catch (      Exception ex) {
+        LOG.error("Error",ex);
+      }
+    }
+  }
+  if (debug) {
+    MetricUtils.printMetricInfo(metricInfo,debugMetricNames);
+  }
+  LOG.info("compute all metrics, cost:{}",System.currentTimeMillis() - start);
+  return metricInfo;
+}

@@ -1,8 +1,0 @@
-{
-  final Metric metric=metrics.remove(name);
-  if (metric != null) {
-    LOG.info("Successfully unregister metric of {}",name);
-    return true;
-  }
-  return false;
-}

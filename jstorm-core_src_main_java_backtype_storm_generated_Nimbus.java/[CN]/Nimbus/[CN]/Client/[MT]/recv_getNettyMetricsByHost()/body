@@ -1,0 +1,8 @@
+{
+  getNettyMetricsByHost_result result=new getNettyMetricsByHost_result();
+  receiveBase(result,"getNettyMetricsByHost");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getNettyMetricsByHost failed: unknown result");
+}

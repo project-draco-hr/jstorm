@@ -1,0 +1,7 @@
+{
+  Counter counter=counterMap.get(window);
+  if (counter != null) {
+    AsmSnapshot snapshot=new AsmCounterSnapshot().setValue(counter.getCount()).setTs(System.currentTimeMillis()).setMetricId(metricId);
+    snapshots.put(window,snapshot);
+  }
+}

@@ -1,0 +1,13 @@
+{
+  StringBuilder sb=new StringBuilder("TaskHeartbeat(");
+  boolean first=true;
+  sb.append("time:");
+  sb.append(this.time);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("uptime:");
+  sb.append(this.uptime);
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

@@ -1,0 +1,18 @@
+{
+  this.sendTargets=task.getTaskSendTargets();
+  this.storm_conf=task.getStormConf();
+  this.transfer_fn=task.getTaskTransfer();
+  this.pending=pending;
+  this.topology_context=task.getTopologyContext();
+  this.disruptorAckerQueue=disruptorAckerQueue;
+  this.task_stats=task.getTaskStats();
+  this.spout=(ISpout)task.getTaskObj();
+  this.task_id=task.getTaskId();
+  this.report_error=task.getReportErrorDie();
+  ackerNum=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
+  isDebug=JStormUtils.parseBoolean(storm_conf.get(Config.TOPOLOGY_DEBUG),false);
+  random=new Random();
+  random.setSeed(System.currentTimeMillis());
+  String componentId=topology_context.getThisComponentId();
+  emitTotalTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topology_context.getTopologyId(),componentId,task_id,MetricDef.COLLECTOR_EMIT_TIME,MetricType.HISTOGRAM),new AsmHistogram());
+}

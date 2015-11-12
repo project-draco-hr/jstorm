@@ -1,0 +1,1 @@
+org.apache.thrift.AsyncProcessFunction<I,getTaskMetrics_args,MetricInfo>

@@ -1,0 +1,24 @@
+{
+  if (metricInfo.get_metrics_size() > MAX_BATCH_SIZE) {
+    Map<String,Map<Integer,MetricSnapshot>> data=metricInfo.get_metrics();
+    Map<String,Map<Integer,MetricSnapshot>> part=Maps.newHashMapWithExpectedSize(MAX_BATCH_SIZE);
+    MetricInfo uploadPart=new MetricInfo();
+    int i=0;
+    for (    Map.Entry<String,Map<Integer,MetricSnapshot>> entry : data.entrySet()) {
+      part.put(entry.getKey(),entry.getValue());
+      if (++i >= MAX_BATCH_SIZE) {
+        uploadPart.set_metrics(part);
+        doUpload(client,topologyId,uploadPart,metaType);
+        i=0;
+        part.clear();
+      }
+    }
+    if (part.size() > 0) {
+      uploadPart.set_metrics(part);
+      doUpload(client,topologyId,uploadPart,metaType);
+    }
+  }
+ else {
+    doUpload(client,topologyId,metricInfo,metaType);
+  }
+}

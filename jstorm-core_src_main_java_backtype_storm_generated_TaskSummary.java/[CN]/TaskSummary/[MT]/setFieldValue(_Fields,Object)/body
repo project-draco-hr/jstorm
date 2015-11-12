@@ -2,10 +2,10 @@
 switch (field) {
 case TASK_ID:
     if (value == null) {
-      unset_task_id();
+      unset_taskId();
     }
  else {
-      set_task_id((Integer)value);
+      set_taskId((Integer)value);
     }
   break;
 case UPTIME:

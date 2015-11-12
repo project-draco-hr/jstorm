@@ -9,7 +9,7 @@ def read(self, iprot):
             break
         if (fid == 1):
             if (ftype == TType.I32):
-                self.task_id = iprot.readI32()
+                self.taskId = iprot.readI32()
             else:
                 iprot.skip(ftype)
         elif (fid == 2):
@@ -35,11 +35,11 @@ def read(self, iprot):
         elif (fid == 6):
             if (ftype == TType.LIST):
                 self.errors = []
-                (_etype208, _size205) = iprot.readListBegin()
-                for _i209 in xrange(_size205):
-                    _elem210 = ErrorInfo()
-                    _elem210.read(iprot)
-                    self.errors.append(_elem210)
+                (_etype161, _size158) = iprot.readListBegin()
+                for _i162 in xrange(_size158):
+                    _elem163 = ErrorInfo()
+                    _elem163.read(iprot)
+                    self.errors.append(_elem163)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)

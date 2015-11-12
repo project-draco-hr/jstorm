@@ -1,0 +1,7 @@
+{
+  List<MetricInfo> metricInfoList=data.getMetricCache().getMetricData(topologyId,MetaType.NETTY);
+  if (metricInfoList != null && metricInfoList.size() > 0) {
+    return metricInfoList.get(0);
+  }
+  return new MetricInfo();
+}

@@ -1,0 +1,197 @@
+{
+  if (!getClass().equals(other.getClass())) {
+    return getClass().getName().compareTo(other.getClass().getName());
+  }
+  int lastComparison=0;
+  lastComparison=Boolean.valueOf(is_set_metricId()).compareTo(other.is_set_metricId());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_metricId()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.metricId,other.metricId);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_ts()).compareTo(other.is_set_ts());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_ts()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.ts,other.ts);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_metricType()).compareTo(other.is_set_metricType());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_metricType()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.metricType,other.metricType);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_longValue()).compareTo(other.is_set_longValue());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_longValue()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.longValue,other.longValue);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_doubleValue()).compareTo(other.is_set_doubleValue());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_doubleValue()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.doubleValue,other.doubleValue);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_m1()).compareTo(other.is_set_m1());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_m1()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.m1,other.m1);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_m5()).compareTo(other.is_set_m5());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_m5()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.m5,other.m5);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_m15()).compareTo(other.is_set_m15());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_m15()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.m15,other.m15);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_mean()).compareTo(other.is_set_mean());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_mean()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.mean,other.mean);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_min()).compareTo(other.is_set_min());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_min()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.min,other.min);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_max()).compareTo(other.is_set_max());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_max()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.max,other.max);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_p50()).compareTo(other.is_set_p50());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_p50()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.p50,other.p50);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_p75()).compareTo(other.is_set_p75());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_p75()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.p75,other.p75);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_p95()).compareTo(other.is_set_p95());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_p95()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.p95,other.p95);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_p98()).compareTo(other.is_set_p98());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_p98()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.p98,other.p98);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_p99()).compareTo(other.is_set_p99());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_p99()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.p99,other.p99);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_p999()).compareTo(other.is_set_p999());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_p999()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.p999,other.p999);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_stddev()).compareTo(other.is_set_stddev());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_stddev()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.stddev,other.stddev);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_points()).compareTo(other.is_set_points());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_points()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.points,other.points);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  return 0;
+}

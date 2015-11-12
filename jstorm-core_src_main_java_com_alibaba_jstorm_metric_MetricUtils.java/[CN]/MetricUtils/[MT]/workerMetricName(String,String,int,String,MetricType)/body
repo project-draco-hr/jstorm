@@ -1,0 +1,3 @@
+{
+  return concat(MetaType.WORKER.getV() + type.getV(),topologyId,host,port,DEFAULT_GROUP,name);
+}

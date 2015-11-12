@@ -1,0 +1,8 @@
+{
+  getSummarizedTopologyMetrics_result result=new getSummarizedTopologyMetrics_result();
+  receiveBase(result,"getSummarizedTopologyMetrics");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getSummarizedTopologyMetrics failed: unknown result");
+}

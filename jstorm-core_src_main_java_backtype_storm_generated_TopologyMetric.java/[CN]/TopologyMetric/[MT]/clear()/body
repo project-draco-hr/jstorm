@@ -3,4 +3,6 @@
   this.componentMetric=null;
   this.workerMetric=null;
   this.taskMetric=null;
+  this.streamMetric=null;
+  this.nettyMetric=null;
 }

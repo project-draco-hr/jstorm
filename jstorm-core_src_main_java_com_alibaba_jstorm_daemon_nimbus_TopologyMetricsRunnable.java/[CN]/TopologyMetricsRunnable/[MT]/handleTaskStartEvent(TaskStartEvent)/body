@@ -1,0 +1,13 @@
+{
+  Assignment assignment=event.newAssignment;
+  TopologyMetricContext metricContext=topologyMetricContexts.get(event.topologyId);
+  if (metricContext != null) {
+    metricContext.setWorkerSet(assignment.getWorkers());
+  }
+ else {
+    metricContext=new TopologyMetricContext();
+    metricContext.setWorkerSet(assignment.getWorkers());
+    topologyMetricContexts.put(event.topologyId,metricContext);
+  }
+  metricUploader.sendEvent(this.clusterName,event);
+}

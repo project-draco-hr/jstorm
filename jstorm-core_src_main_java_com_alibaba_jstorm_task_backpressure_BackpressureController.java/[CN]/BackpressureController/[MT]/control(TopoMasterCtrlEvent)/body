@@ -1,0 +1,29 @@
+{
+  if (isBackpressureEnable == false) {
+    return;
+  }
+  EventType eventType=ctrlEvent.getEventType();
+  LOG.debug("Received control event, " + eventType.toString());
+  if (eventType.equals(EventType.startBackpressure)) {
+    List<Object> value=ctrlEvent.getEventValue();
+    int flowCtrlTime=value.get(0) != null ? (Integer)value.get(0) : 0;
+    start(flowCtrlTime);
+  }
+ else   if (eventType.equals(EventType.stopBackpressure)) {
+    stop();
+  }
+ else   if (eventType.equals(EventType.updateBackpressureConfig)) {
+    List<Object> value=ctrlEvent.getEventValue();
+    if (value != null) {
+      Map stormConf=(Map)value.get(0);
+      updateConfig(stormConf);
+      if (isBackpressureEnable == false) {
+        LOG.info("Disable backpressure in controller.");
+        resetBackpressureInfo();
+      }
+ else {
+        LOG.info("Enable backpressure in controller");
+      }
+    }
+  }
+}

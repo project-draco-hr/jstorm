@@ -1,0 +1,3 @@
+Map<Integer,LocalAssignment> localAssignments
+Map<Integer,LocalAssignment> zkAssignments
+Map<String,Assignment> assignments

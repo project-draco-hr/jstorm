@@ -1,0 +1,6 @@
+{
+  int beforeSize=sources.size();
+  sources.addAll(srcs);
+  int afterSize=sources.size();
+  return beforeSize == afterSize;
+}

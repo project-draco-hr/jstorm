@@ -10,10 +10,10 @@ case ERROR:
   break;
 case ERROR_TIME_SECS:
 if (value == null) {
-  unset_error_time_secs();
+  unset_errorTimeSecs();
 }
  else {
-  set_error_time_secs((Integer)value);
+  set_errorTimeSecs((Integer)value);
 }
 break;
 }

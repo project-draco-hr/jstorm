@@ -1,0 +1,9 @@
+{
+  MetaType meta=MetaType.parse(metaType);
+  MetricType metric=MetricType.parse(metricType);
+  String types=meta.getV() + metric.getV();
+  if (isWorkerMetric()) {
+    return MetricUtils.concat2(types,topologyId,host,port,metricGroup,metricName);
+  }
+  return MetricUtils.concat2(types,topologyId,component,taskId,streamId,metricGroup,metricName);
+}

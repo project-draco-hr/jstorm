@@ -1,0 +1,6 @@
+{
+  getNettyMetricSizeByHost_args args=new getNettyMetricSizeByHost_args();
+  args.set_topologyId(topologyId);
+  args.set_host(host);
+  sendBase("getNettyMetricSizeByHost",args);
+}

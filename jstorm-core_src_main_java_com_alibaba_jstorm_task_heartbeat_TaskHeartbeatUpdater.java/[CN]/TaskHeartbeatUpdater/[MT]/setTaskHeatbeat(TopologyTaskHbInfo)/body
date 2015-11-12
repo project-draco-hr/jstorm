@@ -1,0 +1,23 @@
+{
+  try {
+    if (topologyTaskHbInfo == null) {
+      return;
+    }
+    if (topologyTaskHbInfo.get_taskHbs() == null) {
+      return;
+    }
+    client.getClient().updateTaskHeartbeat(topologyTaskHbInfo);
+    String info="";
+    for (    Entry<Integer,TaskHeartbeat> entry : topologyTaskHbInfo.get_taskHbs().entrySet()) {
+      info+=" " + entry.getKey() + "-"+ entry.getValue().get_time();
+    }
+    LOG.info("Update task heartbeat:" + info);
+  }
+ catch (  TException e) {
+    LOG.error("Failed to update task heartbeat info",e);
+    if (client != null) {
+      client.close();
+      client=NimbusClient.getConfiguredClient(conf);
+    }
+  }
+}

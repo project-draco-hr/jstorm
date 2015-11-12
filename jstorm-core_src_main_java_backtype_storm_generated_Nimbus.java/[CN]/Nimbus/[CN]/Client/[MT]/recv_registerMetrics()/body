@@ -1,0 +1,8 @@
+{
+  registerMetrics_result result=new registerMetrics_result();
+  receiveBase(result,"registerMetrics");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"registerMetrics failed: unknown result");
+}

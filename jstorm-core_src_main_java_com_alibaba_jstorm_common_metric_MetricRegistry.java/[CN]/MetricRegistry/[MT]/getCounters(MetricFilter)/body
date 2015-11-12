@@ -1,3 +1,0 @@
-{
-  return getMetrics(Counter.class,filter);
-}

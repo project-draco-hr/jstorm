@@ -1,0 +1,3 @@
+{
+  iface.updateTopology(args.name,args.uploadedLocation,args.updateConf,resultHandler);
+}

@@ -1,9 +1,0 @@
-{
-  MetricRegistry ret=taskMetrics.get(taskId);
-  if (ret == null) {
-    ret=new MetricRegistry();
-    taskMetrics.put(taskId,ret);
-    LOG.info("Register task MetricRegistry " + taskId);
-  }
-  return ret;
-}

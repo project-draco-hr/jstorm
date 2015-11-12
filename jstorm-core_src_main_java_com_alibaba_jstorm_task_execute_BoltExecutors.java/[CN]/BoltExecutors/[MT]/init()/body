@@ -1,0 +1,3 @@
+{
+  bolt.prepare(storm_conf,userTopologyCtx,outputCollector);
+}

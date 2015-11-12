@@ -1,0 +1,14 @@
+{
+  for (  ErrorInfo er : e) {
+    if (isWarningMsg(er.get_error())) {
+      isWarning=true;
+    }
+  }
+  int err_num=e.size();
+  if (isWarning) {
+    return String.format("W(%d)",err_num);
+  }
+ else {
+    return String.format("E(%d)",err_num);
+  }
+}

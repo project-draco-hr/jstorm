@@ -1,8 +1,7 @@
 {
-  String taskName=JStormServerUtils.getName(componentid,taskid);
-  TaskReceiver taskReceiver;
-  if (isTaskBatchTuple)   taskReceiver=new TaskBatchReceiver(this,taskid,stormConf,topologyContext,innerTaskTransfer,taskStatus,taskName);
- else   taskReceiver=new TaskReceiver(this,taskid,stormConf,topologyContext,innerTaskTransfer,taskStatus,taskName);
-  deserializeQueues.put(taskid,taskReceiver.getDeserializeQueue());
+  String taskName=JStormServerUtils.getName(componentId,taskId);
+  if (isTaskBatchTuple)   taskReceiver=new TaskBatchReceiver(this,taskId,stormConf,topologyContext,innerTaskTransfer,taskStatus,taskName);
+ else   taskReceiver=new TaskReceiver(this,taskId,stormConf,topologyContext,innerTaskTransfer,taskStatus,taskName);
+  deserializeQueues.put(taskId,taskReceiver.getDeserializeQueue());
   return taskReceiver;
 }

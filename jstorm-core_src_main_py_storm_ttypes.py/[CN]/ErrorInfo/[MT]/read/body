@@ -14,7 +14,7 @@ def read(self, iprot):
                 iprot.skip(ftype)
         elif (fid == 2):
             if (ftype == TType.I32):
-                self.error_time_secs = iprot.readI32()
+                self.errorTimeSecs = iprot.readI32()
             else:
                 iprot.skip(ftype)
         else:

@@ -20,7 +20,7 @@
     }
  else {
       curr=new AckObject();
-      curr.val=Long.valueOf(input.getLong(1));
+      curr.val=input.getLong(1);
       pending.put(id,curr);
     }
   }

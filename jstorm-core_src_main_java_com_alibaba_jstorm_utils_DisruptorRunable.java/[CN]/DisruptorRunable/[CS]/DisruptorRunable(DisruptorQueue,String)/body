@@ -1,8 +1,8 @@
 {
   this.queue=queue;
-  this.timer=JStormMetrics.registerWorkerTimer(idStr + MetricDef.TIME_TYPE);
   this.idStr=idStr;
-  QueueGauge queueGauge=new QueueGauge(idStr + MetricDef.QUEUE_TYPE,queue);
-  JStormMetrics.registerWorkerGauge(queueGauge,idStr + MetricDef.QUEUE_TYPE);
+  this.timer=(AsmHistogram)JStormMetrics.registerWorkerMetric(MetricUtils.workerMetricName(idStr + MetricDef.TIME_TYPE,MetricType.HISTOGRAM),new AsmHistogram());
+  QueueGauge queueGauge=new QueueGauge(queue,idStr,MetricDef.QUEUE_TYPE);
+  JStormMetrics.registerWorkerMetric(MetricUtils.workerMetricName(idStr + MetricDef.QUEUE_TYPE,MetricType.GAUGE),new AsmGauge(queueGauge));
   JStormHealthCheck.registerWorkerHealthCheck(idStr,queueGauge);
 }

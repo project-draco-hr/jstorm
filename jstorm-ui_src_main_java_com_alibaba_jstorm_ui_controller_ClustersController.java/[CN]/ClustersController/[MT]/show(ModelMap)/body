@@ -1,0 +1,11 @@
+{
+  UIUtils.readUiConfig();
+  long start=System.currentTimeMillis();
+  LOG.info("nimbus config: " + UIUtils.clusterConfig);
+  Collection<ClusterEntity> clusterEntities=UIUtils.clustersCache.values();
+  model.addAttribute("clusters",clusterEntities);
+  model.addAttribute("nodes",getNodeCount(clusterEntities));
+  UIUtils.addTitleAttribute(model,null);
+  LOG.info("clusters page show cost:{}ms",System.currentTimeMillis() - start);
+  return "clusters";
+}

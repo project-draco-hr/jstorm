@@ -1,7 +1,11 @@
 def exec_storm_class(klass, jvmtype='-server', childopts='', extrajars=[], args=[]):
     nativepath = confvalue('java.library.path', extrajars)
     args_str = ' '.join(map((lambda s: (('"' + s) + '"')), args))
-    command = ((((((((((((((('java ' + jvmtype) + ' -Djstorm.home=') + JSTORM_DIR) + ' ') + get_config_opts()) + ' -Djava.library.path=') + nativepath) + ' ') + childopts) + ' -cp ') + get_classpath(extrajars)) + ' ') + klass) + ' ') + args_str)
+    print args_str
+    if ('NimbusServer' in klass):
+        command = ((((((((((((((((('java ' + jvmtype) + ' -Djstorm.home=') + JSTORM_DIR) + ' ') + get_config_opts()) + ' -Djava.library.path=') + nativepath) + ' ') + childopts) + ' -cp ') + get_classpath(extrajars)) + ':') + JSTORM_DIR) + '/lib/ext/* ') + klass) + ' ') + args_str)
+    else:
+        command = ((((((((((((((('java ' + jvmtype) + ' -Djstorm.home=') + JSTORM_DIR) + ' ') + get_config_opts()) + ' -Djava.library.path=') + nativepath) + ' ') + childopts) + ' -cp ') + get_classpath(extrajars)) + ' ') + klass) + ' ') + args_str)
     print ('Running: ' + command)
     global STATUS
     STATUS = os.system(command)

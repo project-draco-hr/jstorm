@@ -1,6 +1,0 @@
-{
-  LOG.debug("!!!!!!! workerUploadMetric:{}:{}:{} ",uploadMetrics.get_topology_id(),uploadMetrics.get_supervisor_id(),uploadMetrics.get_port());
-  TopologyMetricsRunnable.Update event=new TopologyMetricsRunnable.Update();
-  event.workerMetrics=uploadMetrics;
-  data.getMetricRunnable().pushEvent(event);
-}

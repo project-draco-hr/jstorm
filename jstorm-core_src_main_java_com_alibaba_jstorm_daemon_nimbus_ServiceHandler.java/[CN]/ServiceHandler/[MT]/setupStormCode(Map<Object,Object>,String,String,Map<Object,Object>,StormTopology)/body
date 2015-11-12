@@ -5,4 +5,5 @@
   setupJar(conf,tmpJarLocation,stormroot);
   FileUtils.writeByteArrayToFile(new File(StormConfig.stormcode_path(stormroot)),Utils.serialize(topology));
   FileUtils.writeByteArrayToFile(new File(StormConfig.stormconf_path(stormroot)),Utils.serialize(stormConf));
+  StormConfig.write_nimbus_topology_timestamp(data.getConf(),topologyId,System.currentTimeMillis());
 }

@@ -1,7 +1,7 @@
 {
   TTupleProtocol iprot=(TTupleProtocol)prot;
-  struct.task_id=iprot.readI32();
-  struct.set_task_id_isSet(true);
+  struct.taskId=iprot.readI32();
+  struct.set_taskId_isSet(true);
   struct.uptime=iprot.readI32();
   struct.set_uptime_isSet(true);
   struct.status=iprot.readString();
@@ -13,13 +13,13 @@
   BitSet incoming=iprot.readBitSet(1);
   if (incoming.get(0)) {
 {
-      org.apache.thrift.protocol.TList _list235=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
-      struct.errors=new ArrayList<ErrorInfo>(_list235.size);
-      ErrorInfo _elem236;
-      for (int _i237=0; _i237 < _list235.size; ++_i237) {
-        _elem236=new ErrorInfo();
-        _elem236.read(iprot);
-        struct.errors.add(_elem236);
+      org.apache.thrift.protocol.TList _list183=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+      struct.errors=new ArrayList<ErrorInfo>(_list183.size);
+      ErrorInfo _elem184;
+      for (int _i185=0; _i185 < _list183.size; ++_i185) {
+        _elem184=new ErrorInfo();
+        _elem184.read(iprot);
+        struct.errors.add(_elem184);
       }
     }
     struct.set_errors_isSet(true);

@@ -1,0 +1,15 @@
+{
+  List<String> sortedHead=new ArrayList<>();
+  Set<String> keys=new HashSet<>();
+  for (  UIBasicMetric metric : list) {
+    keys.addAll(metric.getMetrics().keySet());
+  }
+  for (  String h : HEAD) {
+    if (keys.contains(h)) {
+      sortedHead.add(h);
+      keys.remove(h);
+    }
+  }
+  sortedHead.addAll(keys);
+  return sortedHead;
+}

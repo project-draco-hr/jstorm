@@ -6,13 +6,13 @@ switch (field) {
 case HOST:
     return is_set_host();
 case SUPERVISOR_ID:
-  return is_set_supervisor_id();
+  return is_set_supervisorId();
 case UPTIME_SECS:
-return is_set_uptime_secs();
+return is_set_uptimeSecs();
 case NUM_WORKERS:
-return is_set_num_workers();
+return is_set_numWorkers();
 case NUM_USED_WORKERS:
-return is_set_num_used_workers();
+return is_set_numUsedWorkers();
 }
 throw new IllegalStateException();
 }

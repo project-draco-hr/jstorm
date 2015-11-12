@@ -1,0 +1,2 @@
+List<MetricInfo> componentMetrics
+Map<String,TopologyNode> nodes

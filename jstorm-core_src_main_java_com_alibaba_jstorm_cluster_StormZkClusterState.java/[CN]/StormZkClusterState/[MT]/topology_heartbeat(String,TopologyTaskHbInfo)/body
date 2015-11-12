@@ -1,0 +1,4 @@
+{
+  String taskPath=Cluster.taskbeat_storm_root(topologyId);
+  setObject(taskPath,info);
+}

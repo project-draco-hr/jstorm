@@ -1,0 +1,16 @@
+{
+  if (that == null)   return false;
+  boolean this_present_topologyId=true && this.is_set_topologyId();
+  boolean that_present_topologyId=true && that.is_set_topologyId();
+  if (this_present_topologyId || that_present_topologyId) {
+    if (!(this_present_topologyId && that_present_topologyId))     return false;
+    if (!this.topologyId.equals(that.topologyId))     return false;
+  }
+  boolean this_present_metrics=true && this.is_set_metrics();
+  boolean that_present_metrics=true && that.is_set_metrics();
+  if (this_present_metrics || that_present_metrics) {
+    if (!(this_present_metrics && that_present_metrics))     return false;
+    if (!this.metrics.equals(that.metrics))     return false;
+  }
+  return true;
+}

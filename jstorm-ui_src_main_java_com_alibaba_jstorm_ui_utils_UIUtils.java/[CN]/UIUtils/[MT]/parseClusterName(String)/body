@@ -1,0 +1,11 @@
+{
+  if (zkRoot == null) {
+    return UIDef.DEFAULT_CLUSTER_NAME;
+  }
+ else   if (zkRoot.startsWith("/")) {
+    return zkRoot.substring(1);
+  }
+ else {
+    return zkRoot;
+  }
+}

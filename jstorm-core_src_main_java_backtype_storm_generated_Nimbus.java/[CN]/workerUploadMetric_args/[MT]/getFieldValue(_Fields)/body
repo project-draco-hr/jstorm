@@ -1,7 +1,0 @@
-{
-switch (field) {
-case UPLOAD_METRICS:
-    return get_uploadMetrics();
-}
-throw new IllegalStateException();
-}

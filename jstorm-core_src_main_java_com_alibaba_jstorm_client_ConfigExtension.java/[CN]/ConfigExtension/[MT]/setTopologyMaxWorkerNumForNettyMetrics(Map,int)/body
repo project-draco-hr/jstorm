@@ -1,0 +1,3 @@
+{
+  conf.put(TOPOLOGY_MAX_WORKER_NUM_FOR_NETTY_METRICS,num);
+}

@@ -13,7 +13,7 @@ if (value == null) {
   unset_componentMetric();
 }
  else {
-  set_componentMetric((Map<String,MetricInfo>)value);
+  set_componentMetric((MetricInfo)value);
 }
 break;
 case WORKER_METRIC:
@@ -21,7 +21,7 @@ if (value == null) {
 unset_workerMetric();
 }
  else {
-set_workerMetric((Map<String,MetricInfo>)value);
+set_workerMetric((MetricInfo)value);
 }
 break;
 case TASK_METRIC:
@@ -29,7 +29,23 @@ if (value == null) {
 unset_taskMetric();
 }
  else {
-set_taskMetric((Map<Integer,MetricInfo>)value);
+set_taskMetric((MetricInfo)value);
+}
+break;
+case STREAM_METRIC:
+if (value == null) {
+unset_streamMetric();
+}
+ else {
+set_streamMetric((MetricInfo)value);
+}
+break;
+case NETTY_METRIC:
+if (value == null) {
+unset_nettyMetric();
+}
+ else {
+set_nettyMetric((MetricInfo)value);
 }
 break;
 }

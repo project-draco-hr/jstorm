@@ -1,0 +1,2 @@
+MetaType metaType
+Map<Integer,AsmSnapshot> snapshots

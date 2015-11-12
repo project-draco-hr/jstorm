@@ -1,5 +1,0 @@
-{
-  this.connections=null;
-  set_connectionNum_isSet(false);
-  this.connectionNum=0;
-}

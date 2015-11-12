@@ -1,0 +1,33 @@
+{
+  while (!isShutdown.get()) {
+    long start=System.currentTimeMillis();
+    try {
+      if (nimbusData.isLeader() && metricUploader != null) {
+        for (        Map.Entry<String,TopologyMetricContext> entry : topologyMetricContexts.entrySet()) {
+          String topologyId=entry.getKey();
+          TopologyMetricContext metricContext=entry.getValue();
+          Map<String,Long> cachedMeta=metricCache.getMeta(topologyId);
+          if (cachedMeta == null) {
+            cachedMeta=new HashMap<>();
+          }
+          Map<String,Long> memMeta=metricContext.getMemMeta();
+          if (memMeta.size() > cachedMeta.size()) {
+            cachedMeta.putAll(memMeta);
+          }
+          metricCache.putMeta(topologyId,cachedMeta);
+          int curSize=cachedMeta.size();
+          if (curSize != metricContext.getFlushedMetaNum()) {
+            metricContext.setFlushedMetaNum(curSize);
+            metricUploader.registerMetrics(clusterName,topologyId,cachedMeta);
+            LOG.info("flush metric meta, topology:{}, total:{}, cost:{}.",topologyId,curSize,System.currentTimeMillis() - start);
+          }
+          stormClusterState.set_topology_metric(topologyId,curSize);
+        }
+      }
+      JStormUtils.sleepMs(15000);
+    }
+ catch (    Exception ex) {
+      LOG.error("Error",ex);
+    }
+  }
+}

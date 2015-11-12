@@ -1,0 +1,13 @@
+{
+  Set<Integer> ret=new HashSet<Integer>();
+  for (  Entry<String,SourceBackpressureInfo> entry : SourceTobackpressureInfo.entrySet()) {
+    SourceBackpressureInfo sourceInfo=entry.getValue();
+    if (sourceInfo.getTasks().size() > 0) {
+      ret.addAll(sourceInfo.getTasks());
+      for (      Entry<String,TargetBackpressureInfo> targetEntry : sourceInfo.getTargetTasks().entrySet()) {
+        ret.addAll(targetEntry.getValue().getTasks());
+      }
+    }
+  }
+  return ret;
+}

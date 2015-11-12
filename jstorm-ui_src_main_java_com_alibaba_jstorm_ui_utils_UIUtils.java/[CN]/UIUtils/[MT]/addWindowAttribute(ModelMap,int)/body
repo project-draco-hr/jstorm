@@ -1,0 +1,26 @@
+{
+  String DEFAULT="label-default";
+  String PRIMARY="label-primary";
+  String cls_60=DEFAULT;
+  String cls_600=DEFAULT;
+  String cls_7200=DEFAULT;
+  String cls_86400=DEFAULT;
+switch (window) {
+case 60:
+    cls_60=PRIMARY;
+  break;
+case 600:
+cls_600=PRIMARY;
+break;
+case 7200:
+cls_7200=PRIMARY;
+break;
+case 86400:
+cls_86400=PRIMARY;
+break;
+}
+model.addAttribute("cls_60",cls_60);
+model.addAttribute("cls_600",cls_600);
+model.addAttribute("cls_7200",cls_7200);
+model.addAttribute("cls_86400",cls_86400);
+}

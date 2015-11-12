@@ -1,0 +1,9 @@
+{
+  this();
+  this.metricId=metricId;
+  set_metricId_isSet(true);
+  this.ts=ts;
+  set_ts_isSet(true);
+  this.metricType=metricType;
+  set_metricType_isSet(true);
+}

@@ -1,0 +1,5 @@
+{
+  if (task_obj instanceof IDynamicComponent) {
+    ((IDynamicComponent)task_obj).update(conf);
+  }
+}

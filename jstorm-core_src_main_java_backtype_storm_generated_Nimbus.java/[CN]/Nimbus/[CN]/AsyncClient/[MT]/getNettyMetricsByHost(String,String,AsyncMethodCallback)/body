@@ -1,0 +1,6 @@
+{
+  checkReady();
+  getNettyMetricsByHost_call method_call=new getNettyMetricsByHost_call(topologyId,host,resultHandler,this,___protocolFactory,___transport);
+  this.___currentMethod=method_call;
+  ___manager.call(method_call);
+}

@@ -1,0 +1,5 @@
+{
+  getMetrics_result result=new getMetrics_result();
+  result.success=iface.getMetrics(args.topologyId,args.type);
+  return result;
+}

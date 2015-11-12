@@ -1,5 +1,5 @@
 {
-  StormTopology topology=null;
+  StormTopology topology;
   try {
     StormTopology stormtopology=StormConfig.read_nimbus_topology_code(conf,id);
     if (stormtopology == null) {

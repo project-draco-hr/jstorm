@@ -4,4 +4,6 @@ def __hash__(self):
     value = ((value * 31) ^ hash(self.componentMetric))
     value = ((value * 31) ^ hash(self.workerMetric))
     value = ((value * 31) ^ hash(self.taskMetric))
+    value = ((value * 31) ^ hash(self.streamMetric))
+    value = ((value * 31) ^ hash(self.nettyMetric))
     return value

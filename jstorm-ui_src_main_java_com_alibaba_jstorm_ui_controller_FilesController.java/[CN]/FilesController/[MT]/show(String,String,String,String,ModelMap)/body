@@ -1,0 +1,27 @@
+{
+  dirs.clear();
+  files.clear();
+  Map conf=UIUtils.readUiConfig();
+  if (StringUtils.isBlank(dir)) {
+    dir=".";
+  }
+  String[] path=dir.split("/");
+  model.addAttribute("path",path);
+  int i_port;
+  if (StringUtils.isBlank(port)) {
+    i_port=ConfigExtension.getNimbusDeamonHttpserverPort(conf);
+  }
+ else {
+    i_port=JStormUtils.parseInt(port);
+  }
+  String summary=requestFiles(host,i_port,dir);
+  model.addAttribute("summary",summary);
+  model.addAttribute("files",files);
+  model.addAttribute("dirs",dirs);
+  model.addAttribute("clusterName",cluster_name);
+  model.addAttribute("host",host);
+  model.addAttribute("port",i_port);
+  model.addAttribute("parent",dir);
+  UIUtils.addTitleAttribute(model,"Files");
+  return "files";
+}

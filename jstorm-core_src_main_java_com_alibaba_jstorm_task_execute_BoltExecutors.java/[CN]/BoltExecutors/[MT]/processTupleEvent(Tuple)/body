@@ -1,8 +1,13 @@
 {
   task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
-  tuple_start_times.put(tuple,System.currentTimeMillis());
+  tuple_start_times.put(tuple,System.nanoTime());
   try {
-    bolt.execute(tuple);
+    if (isSystemBolt == false && tuple.getSourceStreamId().equals(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID)) {
+      backpressureTrigger.handle(tuple);
+    }
+ else {
+      bolt.execute(tuple);
+    }
   }
  catch (  Throwable e) {
     error=e;
@@ -10,10 +15,12 @@
     report_error.report(e);
   }
   if (ackerNum == 0) {
-    Long start_time=(Long)tuple_start_times.remove(tuple);
-    if (start_time != null) {
-      Long delta=TimeUtils.time_delta_ms(start_time);
-      task_stats.bolt_acked_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId(),Double.valueOf(delta));
+    Long startTime=(Long)tuple_start_times.remove(tuple);
+    if (startTime != null) {
+      Long endTime=System.nanoTime();
+      long latency=(endTime - startTime) / TimeUtils.NS_PER_US;
+      long lifeCycle=(System.currentTimeMillis() - ((TupleExt)tuple).getCreationTimeStamp()) * TimeUtils.NS_PER_US;
+      task_stats.bolt_acked_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId(),latency,lifeCycle);
     }
   }
 }

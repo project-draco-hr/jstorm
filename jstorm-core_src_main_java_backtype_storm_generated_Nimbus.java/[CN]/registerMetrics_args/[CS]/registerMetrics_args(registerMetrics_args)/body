@@ -1,0 +1,9 @@
+{
+  if (other.is_set_topologyId()) {
+    this.topologyId=other.topologyId;
+  }
+  if (other.is_set_metrics()) {
+    Set<String> __this__metrics=new HashSet<String>(other.metrics);
+    this.metrics=__this__metrics;
+  }
+}

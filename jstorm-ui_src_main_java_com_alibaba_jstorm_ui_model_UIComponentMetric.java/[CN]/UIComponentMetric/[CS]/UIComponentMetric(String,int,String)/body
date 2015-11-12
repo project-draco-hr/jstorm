@@ -1,0 +1,5 @@
+{
+  this.componentName=componentName;
+  this.parallel=parallel;
+  this.type=type;
+}

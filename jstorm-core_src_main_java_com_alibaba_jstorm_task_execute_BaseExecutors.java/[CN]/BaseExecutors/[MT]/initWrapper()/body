@@ -1,0 +1,18 @@
+{
+  try {
+    LOG.info("{} begin to init",idStr);
+    init();
+    if (taskId == getMinTaskIdOfWorker()) {
+      metricsReporter.setOutputCollector(getOutputCollector());
+    }
+    isFinishInit=true;
+  }
+ catch (  Throwable e) {
+    error=e;
+    LOG.error("Init error ",e);
+    report_error.report(e);
+  }
+ finally {
+    LOG.info("{} initialization finished",idStr);
+  }
+}

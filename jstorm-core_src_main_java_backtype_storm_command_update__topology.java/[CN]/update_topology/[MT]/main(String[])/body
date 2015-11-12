@@ -1,0 +1,26 @@
+{
+  if (args == null || args.length < 3) {
+    System.out.println("Invalid parameter");
+    usage();
+    return;
+  }
+  String topologyName=args[0];
+  try {
+    String[] str2=Arrays.copyOfRange(args,1,args.length);
+    CommandLineParser parser=new GnuParser();
+    Options r=buildGeneralOptions(new Options());
+    CommandLine commandLine=parser.parse(r,str2,true);
+    String pathConf=null;
+    String pathJar=null;
+    if (commandLine.hasOption("conf")) {
+      pathConf=(commandLine.getOptionValues("conf"))[0];
+    }
+    if (commandLine.hasOption("jar")) {
+      pathJar=(commandLine.getOptionValues("jar"))[0];
+    }
+    if (pathConf != null || pathJar != null)     updateTopology(topologyName,pathJar,pathConf);
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+  }
+}

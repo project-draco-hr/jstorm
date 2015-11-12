@@ -3,7 +3,8 @@
     try {
       Double value=0.0;
       String pid=JStormUtils.process_pid();
-      String output=SystemOperation.exec("top -b -n 1 | grep " + pid);
+      String command=String.format("top -b -n 1 -p %s | grep -w %s",pid,pid);
+      String output=SystemOperation.exec(command);
       int m=0;
       String[] strArray=output.split(" ");
       for (int i=0; i < strArray.length; i++) {

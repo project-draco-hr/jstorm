@@ -1,0 +1,8 @@
+{
+  ClusterConfig nimbus=clusterConfig.get(clusterName);
+  if (nimbus == null)   return conf;
+  conf.put(Config.STORM_ZOOKEEPER_ROOT,nimbus.getZkRoot());
+  conf.put(Config.STORM_ZOOKEEPER_SERVERS,nimbus.getZkServers());
+  conf.put(Config.STORM_ZOOKEEPER_PORT,nimbus.getZkPort());
+  return conf;
+}

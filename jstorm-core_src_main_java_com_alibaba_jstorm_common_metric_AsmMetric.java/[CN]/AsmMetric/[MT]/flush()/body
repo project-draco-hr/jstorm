@@ -1,0 +1,22 @@
+{
+  long time=TimeUtils.current_time_secs();
+  List<Integer> windows=getValidWindows();
+  if (windows.size() == 0) {
+    return;
+  }
+  doFlush();
+  List<Integer> rollwindows=rollWindows(time,windows);
+  for (  int win : windows) {
+    if (rollwindows.contains(win)) {
+      updateSnapshot(win);
+      Map<Integer,T> metricMap=getWindowMetricMap();
+      if (metricMap != null) {
+        metricMap.put(win,mkInstance());
+      }
+    }
+ else     if (!rollingDirtyMap.get(win)) {
+      updateSnapshot(win);
+    }
+  }
+  this.lastFlushTime=TimeUtils.current_time_secs();
+}

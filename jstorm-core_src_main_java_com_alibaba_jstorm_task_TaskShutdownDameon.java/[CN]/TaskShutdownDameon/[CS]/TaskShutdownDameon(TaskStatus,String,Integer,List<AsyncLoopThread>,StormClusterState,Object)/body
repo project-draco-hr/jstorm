@@ -1,8 +1,0 @@
-{
-  this.taskStatus=taskStatus;
-  this.topology_id=topology_id;
-  this.task_id=task_id;
-  this.all_threads=all_threads;
-  this.zkCluster=zkCluster;
-  this.task_obj=task_obj;
-}

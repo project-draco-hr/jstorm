@@ -1,0 +1,6 @@
+{
+  String stormRoot=masterStormdistRoot(conf,topologyId);
+  String timeStampPath=stormts_path(stormRoot);
+  byte[] data=JStormUtils.longToBytes(timeStamp);
+  FileUtils.writeByteArrayToFile(new File(timeStampPath),data);
+}

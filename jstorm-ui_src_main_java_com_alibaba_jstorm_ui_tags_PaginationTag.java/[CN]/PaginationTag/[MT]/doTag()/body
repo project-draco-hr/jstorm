@@ -1,0 +1,52 @@
+{
+  if (pageSize <= 1)   return;
+  JspWriter out=getJspContext().getOut();
+  try {
+    StringBuilder sb=new StringBuilder();
+    sb.append("<nav class='netty-pagination'><ul class='pagination'>");
+    if (curPage > 1) {
+      sb.append(String.format("<li><a href='%s' class='previous'>",getUrl(curPage - 1)));
+      sb.append("<span class='glyphicon glyphicon-chevron-left'></span></a>");
+      sb.append("</li>");
+    }
+    if (pageSize <= 10) {
+      for (int i=1; i <= pageSize; i++) {
+        sb.append(createPage(i,i == curPage));
+      }
+    }
+ else {
+      if (curPage <= 5) {
+        for (int i=1; i <= curPage; i++) {
+          sb.append(createPage(i,i == curPage));
+        }
+      }
+ else {
+        sb.append(createPage(curPage - 4,"...",false));
+        for (int i=curPage - 3; i <= curPage; i++) {
+          sb.append(createPage(i,i == curPage));
+        }
+      }
+      if (pageSize - curPage <= 5) {
+        for (int i=curPage + 1; i <= pageSize; i++) {
+          sb.append(createPage(i,false));
+        }
+      }
+ else {
+        for (int i=curPage + 1; i <= curPage + 3; i++) {
+          sb.append(createPage(i,false));
+        }
+        sb.append(createPage(curPage + 4,"...",false));
+      }
+    }
+    if (curPage < pageSize) {
+      sb.append(String.format("<li><a href='%s' class='next'>",getUrl(curPage + 1)));
+      sb.append("<span class='glyphicon glyphicon-chevron-right'></span></a>");
+      sb.append("</li>");
+    }
+    sb.append("</ul></nav>");
+    out.write(sb.toString());
+  }
+ catch (  IOException e) {
+    throw new JspException("Error: " + e.getMessage());
+  }
+}

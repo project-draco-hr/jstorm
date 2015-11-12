@@ -14,39 +14,33 @@ def read(self, iprot):
             else:
                 iprot.skip(ftype)
         elif (fid == 2):
-            if (ftype == TType.MAP):
-                self.componentMetric = {}
-                (_ktype149, _vtype150, _size148) = iprot.readMapBegin()
-                for _i152 in xrange(_size148):
-                    _key153 = iprot.readString().decode('utf-8')
-                    _val154 = MetricInfo()
-                    _val154.read(iprot)
-                    self.componentMetric[_key153] = _val154
-                iprot.readMapEnd()
+            if (ftype == TType.STRUCT):
+                self.componentMetric = MetricInfo()
+                self.componentMetric.read(iprot)
             else:
                 iprot.skip(ftype)
         elif (fid == 3):
-            if (ftype == TType.MAP):
-                self.workerMetric = {}
-                (_ktype156, _vtype157, _size155) = iprot.readMapBegin()
-                for _i159 in xrange(_size155):
-                    _key160 = iprot.readString().decode('utf-8')
-                    _val161 = MetricInfo()
-                    _val161.read(iprot)
-                    self.workerMetric[_key160] = _val161
-                iprot.readMapEnd()
+            if (ftype == TType.STRUCT):
+                self.workerMetric = MetricInfo()
+                self.workerMetric.read(iprot)
             else:
                 iprot.skip(ftype)
         elif (fid == 4):
-            if (ftype == TType.MAP):
-                self.taskMetric = {}
-                (_ktype163, _vtype164, _size162) = iprot.readMapBegin()
-                for _i166 in xrange(_size162):
-                    _key167 = iprot.readI32()
-                    _val168 = MetricInfo()
-                    _val168.read(iprot)
-                    self.taskMetric[_key167] = _val168
-                iprot.readMapEnd()
+            if (ftype == TType.STRUCT):
+                self.taskMetric = MetricInfo()
+                self.taskMetric.read(iprot)
+            else:
+                iprot.skip(ftype)
+        elif (fid == 5):
+            if (ftype == TType.STRUCT):
+                self.streamMetric = MetricInfo()
+                self.streamMetric.read(iprot)
+            else:
+                iprot.skip(ftype)
+        elif (fid == 6):
+            if (ftype == TType.STRUCT):
+                self.nettyMetric = MetricInfo()
+                self.nettyMetric.read(iprot)
             else:
                 iprot.skip(ftype)
         else:

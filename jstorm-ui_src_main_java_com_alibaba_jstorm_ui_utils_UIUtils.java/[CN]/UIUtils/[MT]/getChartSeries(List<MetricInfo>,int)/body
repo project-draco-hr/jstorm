@@ -1,0 +1,33 @@
+{
+  Map<String,ChartSeries> chartMap=Maps.newHashMap();
+  for (  MetricInfo info : infos) {
+    for (    Map.Entry<String,Map<Integer,MetricSnapshot>> metric : info.get_metrics().entrySet()) {
+      String name=metric.getKey();
+      String[] split_name=name.split("@");
+      String metricName=UIMetricUtils.extractMetricName(split_name);
+      if (!metric.getValue().containsKey(window)) {
+        LOG.info("snapshot {} missing window:{}",metric.getKey(),window);
+        continue;
+      }
+      MetricSnapshot snapshot=metric.getValue().get(window);
+      ChartSeries series;
+      if (chartMap.containsKey(metricName)) {
+        series=chartMap.get(metricName);
+      }
+ else {
+        series=new ChartSeries(metricName);
+        chartMap.put(metricName,series);
+      }
+      Number number=UIMetricUtils.getMetricNumberValue(snapshot);
+      series.addData(number);
+      if (metricName != null && metricName.equals(MetricDef.MEMORY_USED)) {
+        series.addLabel(UIUtils.prettyFileSize(number.longValue()));
+      }
+ else {
+        series.addLabel(UIMetricUtils.getMetricValue(snapshot));
+      }
+      series.addCategory(UIUtils.parseDayTime(snapshot.get_ts()));
+    }
+  }
+  return Lists.newArrayList(chartMap.values());
+}

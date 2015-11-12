@@ -1,0 +1,86 @@
+def write(self, oprot):
+    if ((oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+        return
+    oprot.writeStructBegin('MetricSnapshot')
+    if (self.metricId is not None):
+        oprot.writeFieldBegin('metricId', TType.I64, 1)
+        oprot.writeI64(self.metricId)
+        oprot.writeFieldEnd()
+    if (self.ts is not None):
+        oprot.writeFieldBegin('ts', TType.I64, 2)
+        oprot.writeI64(self.ts)
+        oprot.writeFieldEnd()
+    if (self.metricType is not None):
+        oprot.writeFieldBegin('metricType', TType.I32, 3)
+        oprot.writeI32(self.metricType)
+        oprot.writeFieldEnd()
+    if (self.longValue is not None):
+        oprot.writeFieldBegin('longValue', TType.I64, 4)
+        oprot.writeI64(self.longValue)
+        oprot.writeFieldEnd()
+    if (self.doubleValue is not None):
+        oprot.writeFieldBegin('doubleValue', TType.DOUBLE, 5)
+        oprot.writeDouble(self.doubleValue)
+        oprot.writeFieldEnd()
+    if (self.m1 is not None):
+        oprot.writeFieldBegin('m1', TType.DOUBLE, 6)
+        oprot.writeDouble(self.m1)
+        oprot.writeFieldEnd()
+    if (self.m5 is not None):
+        oprot.writeFieldBegin('m5', TType.DOUBLE, 7)
+        oprot.writeDouble(self.m5)
+        oprot.writeFieldEnd()
+    if (self.m15 is not None):
+        oprot.writeFieldBegin('m15', TType.DOUBLE, 8)
+        oprot.writeDouble(self.m15)
+        oprot.writeFieldEnd()
+    if (self.mean is not None):
+        oprot.writeFieldBegin('mean', TType.DOUBLE, 9)
+        oprot.writeDouble(self.mean)
+        oprot.writeFieldEnd()
+    if (self.min is not None):
+        oprot.writeFieldBegin('min', TType.I64, 10)
+        oprot.writeI64(self.min)
+        oprot.writeFieldEnd()
+    if (self.max is not None):
+        oprot.writeFieldBegin('max', TType.I64, 11)
+        oprot.writeI64(self.max)
+        oprot.writeFieldEnd()
+    if (self.p50 is not None):
+        oprot.writeFieldBegin('p50', TType.DOUBLE, 12)
+        oprot.writeDouble(self.p50)
+        oprot.writeFieldEnd()
+    if (self.p75 is not None):
+        oprot.writeFieldBegin('p75', TType.DOUBLE, 13)
+        oprot.writeDouble(self.p75)
+        oprot.writeFieldEnd()
+    if (self.p95 is not None):
+        oprot.writeFieldBegin('p95', TType.DOUBLE, 14)
+        oprot.writeDouble(self.p95)
+        oprot.writeFieldEnd()
+    if (self.p98 is not None):
+        oprot.writeFieldBegin('p98', TType.DOUBLE, 15)
+        oprot.writeDouble(self.p98)
+        oprot.writeFieldEnd()
+    if (self.p99 is not None):
+        oprot.writeFieldBegin('p99', TType.DOUBLE, 16)
+        oprot.writeDouble(self.p99)
+        oprot.writeFieldEnd()
+    if (self.p999 is not None):
+        oprot.writeFieldBegin('p999', TType.DOUBLE, 17)
+        oprot.writeDouble(self.p999)
+        oprot.writeFieldEnd()
+    if (self.stddev is not None):
+        oprot.writeFieldBegin('stddev', TType.DOUBLE, 18)
+        oprot.writeDouble(self.stddev)
+        oprot.writeFieldEnd()
+    if (self.points is not None):
+        oprot.writeFieldBegin('points', TType.LIST, 19)
+        oprot.writeListBegin(TType.I64, len(self.points))
+        for iter109 in self.points:
+            oprot.writeI64(iter109)
+        oprot.writeListEnd()
+        oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()

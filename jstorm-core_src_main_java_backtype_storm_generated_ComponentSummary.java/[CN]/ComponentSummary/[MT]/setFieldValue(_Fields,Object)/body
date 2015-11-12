@@ -26,10 +26,10 @@ set_type((String)value);
 break;
 case TASK_IDS:
 if (value == null) {
-unset_task_ids();
+unset_taskIds();
 }
  else {
-set_task_ids((List<Integer>)value);
+set_taskIds((List<Integer>)value);
 }
 break;
 case ERRORS:

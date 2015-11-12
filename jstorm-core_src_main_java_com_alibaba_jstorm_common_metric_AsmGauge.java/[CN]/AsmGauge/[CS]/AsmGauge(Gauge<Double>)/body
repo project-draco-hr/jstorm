@@ -1,0 +1,4 @@
+{
+  this.aggregate=false;
+  this.gauge=gauge;
+}

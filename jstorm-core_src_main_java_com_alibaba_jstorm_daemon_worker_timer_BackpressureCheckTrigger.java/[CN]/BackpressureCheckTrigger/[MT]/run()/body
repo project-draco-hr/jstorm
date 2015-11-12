@@ -1,0 +1,9 @@
+{
+  try {
+    trigger.checkAndTrigger();
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to publish timer event to " + name,e);
+    return;
+  }
+}

@@ -1,0 +1,4 @@
+{
+  String userMetricName=getMetricName(name,group,MetricType.TIMER);
+  return (AsmTimer)JStormMetrics.registerTaskMetric(userMetricName,new AsmTimer());
+}

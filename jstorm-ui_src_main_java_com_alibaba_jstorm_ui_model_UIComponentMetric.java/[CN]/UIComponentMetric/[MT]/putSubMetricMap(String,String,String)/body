@@ -1,0 +1,11 @@
+{
+  if (subMetricMap.containsKey(metricName)) {
+    Map<String,String> map=subMetricMap.get(metricName);
+    map.put(parentComp,value);
+  }
+ else {
+    Map<String,String> map=new HashMap<>();
+    map.put(parentComp,value);
+    subMetricMap.put(metricName,map);
+  }
+}

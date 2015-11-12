@@ -1,0 +1,10 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TASK_HBS:
+    return is_set_taskHbs();
+}
+throw new IllegalStateException();
+}

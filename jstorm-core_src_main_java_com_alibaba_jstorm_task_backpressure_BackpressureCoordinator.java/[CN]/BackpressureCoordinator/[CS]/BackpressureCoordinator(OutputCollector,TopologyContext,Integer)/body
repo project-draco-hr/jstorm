@@ -1,0 +1,33 @@
+{
+  super(topologyContext.getStormConf());
+  this.context=topologyContext;
+  this.topology=topologyContext.getRawTopology();
+  this.spouts=new HashMap<String,SpoutSpec>();
+  if (this.topology.get_spouts() != null) {
+    this.spouts.putAll(this.topology.get_spouts());
+  }
+  this.bolts=new HashMap<String,Bolt>();
+  if (this.topology.get_bolts() != null) {
+    this.bolts.putAll(this.topology.get_bolts());
+  }
+  this.taskIdToComponentId=topologyContext.getTaskToComponent();
+  this.topologyMasterId=taskId;
+  this.output=output;
+  int checkInterval=ConfigExtension.getBackpressureCheckIntervl(context.getStormConf());
+  int sampleNum=ConfigExtension.getBackpressureTriggerSampleNumber(context.getStormConf());
+  this.period=checkInterval * sampleNum;
+  this.zkCluster=topologyContext.getZkCluster();
+  try {
+    this.SourceTobackpressureInfo=zkCluster.get_backpressure_info(context.getTopologyId());
+    if (this.SourceTobackpressureInfo == null) {
+      this.SourceTobackpressureInfo=new HashMap<String,SourceBackpressureInfo>();
+    }
+ else {
+      LOG.info("Successfully retrieve existing SourceTobackpressureInfo from zk: " + SourceTobackpressureInfo);
+    }
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to get SourceTobackpressureInfo from zk",e);
+    this.SourceTobackpressureInfo=new HashMap<String,SourceBackpressureInfo>();
+  }
+}

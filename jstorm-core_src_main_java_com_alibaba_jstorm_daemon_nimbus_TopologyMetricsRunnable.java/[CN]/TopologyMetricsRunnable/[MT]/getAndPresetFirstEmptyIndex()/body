@@ -1,0 +1,10 @@
+{
+  for (int i=0; i < maxPendingUploadMetrics; i++) {
+    if (metricStat.get(i) == UNSET) {
+      if (metricStat.compareAndSet(i,UNSET,PRE_SET)) {
+        return i;
+      }
+    }
+  }
+  return -1;
+}

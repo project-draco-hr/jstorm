@@ -1,0 +1,6 @@
+{
+  if (this.metrics == null) {
+    this.metrics=new HashMap<String,Map<Integer,MetricSnapshot>>();
+  }
+  this.metrics.put(key,val);
+}

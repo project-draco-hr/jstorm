@@ -1,0 +1,6 @@
+{
+  Histogram histogram=new Histogram(new ExponentiallyDecayingReservoir());
+  List<Long> points=snapshot.get_points();
+  updateHistogramPoints(histogram,points);
+  return histogram;
+}

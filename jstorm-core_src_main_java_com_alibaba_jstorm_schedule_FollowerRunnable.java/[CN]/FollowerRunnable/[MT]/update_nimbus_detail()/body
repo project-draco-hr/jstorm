@@ -1,0 +1,15 @@
+{
+  StormClusterState zkClusterState=data.getStormClusterState();
+  String master_stormdist_root=StormConfig.masterStormdistRoot(data.getConf());
+  List<String> code_ids=PathUtils.read_dir_contents(master_stormdist_root);
+  List<String> assignments_ids=data.getStormClusterState().assignments(callback);
+  assignments_ids.removeAll(code_ids);
+  Map mtmp=zkClusterState.get_nimbus_detail(hostPort,false);
+  if (mtmp == null) {
+    mtmp=new HashMap();
+  }
+  mtmp.put(NIMBUS_DIFFER_COUNT_ZK,assignments_ids.size());
+  zkClusterState.update_nimbus_detail(hostPort,mtmp);
+  LOG.debug("update nimbus's detail " + mtmp);
+  return assignments_ids.size();
+}

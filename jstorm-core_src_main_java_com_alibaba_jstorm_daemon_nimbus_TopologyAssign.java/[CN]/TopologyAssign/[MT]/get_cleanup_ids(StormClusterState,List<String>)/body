@@ -4,6 +4,7 @@
   List<String> error_ids=clusterState.task_error_storms();
   List<String> assignment_ids=clusterState.assignments(null);
   List<String> metric_ids=clusterState.get_metrics();
+  List<String> backpressure_ids=clusterState.backpressureInfos();
   List<String> code_ids=new ArrayList<String>();
   HashSet<String> latest_code_ids=new HashSet<String>();
   get_code_ids(code_ids,latest_code_ids);
@@ -26,6 +27,9 @@
   }
   if (metric_ids != null) {
     to_cleanup_ids.addAll(metric_ids);
+  }
+  if (backpressure_ids != null) {
+    to_cleanup_ids.addAll(backpressure_ids);
   }
   if (active_topologys != null) {
     to_cleanup_ids.removeAll(active_topologys);

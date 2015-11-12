@@ -1,5 +1,0 @@
-{
-  getTopologyMetric_result result=new getTopologyMetric_result();
-  result.success=iface.getTopologyMetric(args.topologyName);
-  return result;
-}

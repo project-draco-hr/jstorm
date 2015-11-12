@@ -1,0 +1,9 @@
+{
+switch (field) {
+case TIME:
+    return Integer.valueOf(get_time());
+case UPTIME:
+  return Integer.valueOf(get_uptime());
+}
+throw new IllegalStateException();
+}

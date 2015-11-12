@@ -1,0 +1,3 @@
+{
+  return getMetricName(name,GROUP_UDF,type);
+}

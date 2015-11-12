@@ -1,23 +1,10 @@
 {
-  if (firstTime == true) {
-    int delayRun=ConfigExtension.getSpoutDelayRunSeconds(storm_conf);
-    JStormUtils.sleepMs(delayRun * 1000);
-    emptyCpuCounter.init();
-    if (taskStatus.isRun() == true) {
-      spout.activate();
-    }
- else {
-      spout.deactivate();
-    }
-    firstTime=false;
-    LOG.info(idStr + " is ready ");
-  }
-  if (taskStatus.isRun() == false) {
+  if (!taskStatus.isRun()) {
     JStormUtils.sleepMs(1);
     return;
   }
   if (max_spout_pending == null || pending.size() < max_spout_pending) {
-    emptyCpuCounter.stop();
+    emptyCpuGauge.stop();
     long start=System.nanoTime();
     try {
       spout.nextTuple();
@@ -29,14 +16,13 @@
     }
  finally {
       long end=System.nanoTime();
-      nextTupleTimer.update((end - start) / 1000000.0d);
+      nextTupleTimer.update((end - start) / TimeUtils.NS_PER_US);
     }
-    return;
   }
  else {
     if (isSpoutFullSleep) {
       JStormUtils.sleepMs(1);
     }
-    emptyCpuCounter.start();
+    emptyCpuGauge.start();
   }
 }

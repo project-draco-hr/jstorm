@@ -1,0 +1,14 @@
+{
+  long pos=index * pageSize;
+  String url=String.format("log?cluster=%s&host=%s&port=%s&file=%s&pos=%s&dir=%s",e.clusterName,e.host,e.logServerPort,e.logName,pos,e.dir);
+  Pagination page=new Pagination();
+  page.url=url;
+  page.text=text;
+  if (isDisable) {
+    page.status="disabled";
+  }
+ else   if (isActive) {
+    page.status="active";
+  }
+  return page;
+}

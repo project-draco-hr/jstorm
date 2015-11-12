@@ -1,0 +1,13 @@
+{
+  Set<Integer> ret=new HashSet<Integer>();
+  try {
+    Set<Integer> taskIds=assignment.getCurrentWorkerTasks(workerData.getSupervisorId(),workerData.getPort());
+    for (    Integer taskId : taskIds) {
+      if ((workerData.getTaskids().contains(taskId)))       ret.add(taskId);
+    }
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to get updated task list for" + workerData.getTopologyId());
+  }
+  return ret;
+}

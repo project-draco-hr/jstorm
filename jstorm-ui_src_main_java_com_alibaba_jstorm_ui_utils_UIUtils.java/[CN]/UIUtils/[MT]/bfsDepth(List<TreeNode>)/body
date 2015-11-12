@@ -1,0 +1,29 @@
+{
+  LinkedList<TreeNode> queue=Lists.newLinkedList();
+  for (  TreeNode root : roots) {
+    root.setLayer(0);
+    queue.push(root);
+  }
+  int depth=0;
+  while (!queue.isEmpty()) {
+    TreeNode cur=queue.poll();
+    if (cur.getLayer() > depth) {
+      depth=cur.getLayer();
+    }
+    for (    TreeNode n : cur.getChildren()) {
+      int newLayer=cur.getLayer() + 1;
+      if (!n.isVisited() || n.getLayer() < newLayer) {
+        if (!n.inCircle(cur)) {
+          n.setLayer(newLayer);
+          if (!queue.contains(n)) {
+            queue.push(n);
+          }
+        }
+ else         if (n.addLoopNode(cur)) {
+          n.setLayer(newLayer);
+        }
+      }
+    }
+  }
+  return depth;
+}

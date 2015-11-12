@@ -1,0 +1,3 @@
+{
+  return WIN_TO_STR.get(win);
+}

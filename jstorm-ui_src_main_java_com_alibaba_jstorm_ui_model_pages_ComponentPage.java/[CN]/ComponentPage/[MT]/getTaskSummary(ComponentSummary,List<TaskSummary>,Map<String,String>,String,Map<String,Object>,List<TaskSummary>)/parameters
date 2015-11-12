@@ -1,6 +1,0 @@
-ComponentSummary componentSummary
-List<TaskSummary> tasks
-Map<String,String> paramMap
-String topologyId
-Map<String,Object> nimbusConf
-List<TaskSummary> showTasks

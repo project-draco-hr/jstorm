@@ -8,16 +8,19 @@
   this.innerTaskTransfer=workerData.getInnerTaskTransfer();
   this.nodeportSocket=workerData.getNodeportSocket();
   this.taskNodeport=workerData.getTaskNodeport();
+  this.topolgyId=workerData.getTopologyId();
+  this.componentId=this.task.getComponentId();
+  this.taskId=this.task.getTaskId();
   int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_SEND_BUFFER_SIZE));
   WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(storm_conf);
   this.serializeQueue=DisruptorQueue.mkInstance(taskName,ProducerType.MULTI,queue_size,waitStrategy);
   this.serializeQueue.consumerStarted();
   String taskId=taskName.substring(taskName.indexOf(":") + 1);
-  String metricName=MetricRegistry.name(MetricDef.SERIALIZE_QUEUE,taskName);
-  QueueGauge serializeQueueGauge=new QueueGauge(metricName,serializeQueue);
-  JStormMetrics.registerTaskGauge(serializeQueueGauge,Integer.valueOf(taskId),MetricDef.SERIALIZE_QUEUE);
+  QueueGauge serializeQueueGauge=new QueueGauge(serializeQueue,taskName,MetricDef.SERIALIZE_QUEUE);
+  JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topolgyId,componentId,this.taskId,MetricDef.SERIALIZE_QUEUE,MetricType.GAUGE),new AsmGauge(serializeQueueGauge));
   JStormHealthCheck.registerTaskHealthCheck(Integer.valueOf(taskId),MetricDef.SERIALIZE_QUEUE,serializeQueueGauge);
-  timer=JStormMetrics.registerTaskTimer(Integer.valueOf(taskId),MetricDef.SERIALIZE_TIME);
+  serializeTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topolgyId,componentId,this.taskId,MetricDef.SERIALIZE_TIME,MetricType.HISTOGRAM),new AsmHistogram());
   serializeThread=setupSerializeThread();
+  backpressureController=new BackpressureController(storm_conf,task.getTaskId(),serializeQueue,queue_size);
   LOG.info("Successfully start TaskTransfer thread");
 }

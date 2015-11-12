@@ -1,0 +1,4 @@
+{
+  this.longValue=longValue;
+  set_longValue_isSet(true);
+}

@@ -1,5 +1,5 @@
 {
   this();
   this.host=host;
-  this.uptime_secs=uptime_secs;
+  this.uptimeSecs=uptimeSecs;
 }

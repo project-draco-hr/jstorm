@@ -2,18 +2,18 @@
 switch (field) {
 case TOPOLOGY_ID:
     if (value == null) {
-      unset_topology_id();
+      unset_topologyId();
     }
  else {
-      set_topology_id((String)value);
+      set_topologyId((String)value);
     }
   break;
 case SUPERVISOR_ID:
 if (value == null) {
-  unset_supervisor_id();
+  unset_supervisorId();
 }
  else {
-  set_supervisor_id((String)value);
+  set_supervisorId((String)value);
 }
 break;
 case PORT:
@@ -24,28 +24,12 @@ unset_port();
 set_port((Integer)value);
 }
 break;
-case WORKER_METRIC:
+case ALL_METRICS:
 if (value == null) {
-unset_workerMetric();
+unset_allMetrics();
 }
  else {
-set_workerMetric((MetricInfo)value);
-}
-break;
-case NETTY_METRIC:
-if (value == null) {
-unset_nettyMetric();
-}
- else {
-set_nettyMetric((NettyMetric)value);
-}
-break;
-case TASK_METRIC:
-if (value == null) {
-unset_taskMetric();
-}
- else {
-set_taskMetric((Map<Integer,MetricInfo>)value);
+set_allMetrics((MetricInfo)value);
 }
 break;
 }

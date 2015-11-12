@@ -1,0 +1,9 @@
+{
+  boolean ret=false;
+  if (time != 0) {
+    if (System.currentTimeMillis() - time > period) {
+      ret=true;
+    }
+  }
+  return ret;
+}

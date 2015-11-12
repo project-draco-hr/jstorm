@@ -1,0 +1,42 @@
+{
+  if (TimeUtils.current_time_secs() - start < initialDelay) {
+    return;
+  }
+  if (processing) {
+    LOG.info("still processing, skip...");
+  }
+ else {
+    processing=true;
+    long start=System.currentTimeMillis();
+    try {
+      Set<String> names=new HashSet<>();
+      for (      AsmMetricRegistry registry : JStormMetrics.allRegistries) {
+        Map<String,AsmMetric> metricMap=registry.getMetrics();
+        for (        Map.Entry<String,AsmMetric> metricEntry : metricMap.entrySet()) {
+          AsmMetric metric=metricEntry.getValue();
+          if (((metric.getOp() & AsmMetric.MetricOp.REPORT) == AsmMetric.MetricOp.REPORT) && metric.getMetricId() == 0L) {
+            names.add(metricEntry.getKey());
+          }
+        }
+      }
+      if (names.size() > 0) {
+        Map<String,Long> nameIdMap=registerMetrics(names);
+        if (nameIdMap != null) {
+          for (          String name : nameIdMap.keySet()) {
+            AsmMetric metric=JStormMetrics.find(name);
+            if (metric != null) {
+              long id=nameIdMap.get(name);
+              metric.setMetricId(id);
+              LOG.info("set metric id, {}:{}",name,id);
+            }
+          }
+        }
+        LOG.info("register metrics, size:{}, cost:{}",names.size(),System.currentTimeMillis() - start);
+      }
+    }
+ catch (    Exception ex) {
+      LOG.error("Error",ex);
+    }
+    processing=false;
+  }
+}

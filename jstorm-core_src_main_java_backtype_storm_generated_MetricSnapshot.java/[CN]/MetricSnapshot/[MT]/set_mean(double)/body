@@ -1,0 +1,4 @@
+{
+  this.mean=mean;
+  set_mean_isSet(true);
+}

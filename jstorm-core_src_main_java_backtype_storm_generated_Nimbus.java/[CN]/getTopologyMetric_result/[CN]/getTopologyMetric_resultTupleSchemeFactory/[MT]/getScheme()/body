@@ -1,3 +1,0 @@
-{
-  return new getTopologyMetric_resultTupleScheme();
-}

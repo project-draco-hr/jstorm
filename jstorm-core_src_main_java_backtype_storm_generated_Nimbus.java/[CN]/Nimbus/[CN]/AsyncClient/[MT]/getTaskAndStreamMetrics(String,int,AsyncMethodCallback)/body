@@ -1,0 +1,6 @@
+{
+  checkReady();
+  getTaskAndStreamMetrics_call method_call=new getTaskAndStreamMetrics_call(topologyId,taskId,resultHandler,this,___protocolFactory,___transport);
+  this.___currentMethod=method_call;
+  ___manager.call(method_call);
+}

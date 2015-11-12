@@ -1,0 +1,3 @@
+I iface
+killTopologyWithOpts_args args
+AsyncMethodCallback<Void> resultHandler

@@ -1,0 +1,8 @@
+{
+  for (int i=0; i < maxPendingUploadMetrics; i++) {
+    if (metricStat.get(i) == SET) {
+      return i;
+    }
+  }
+  return -1;
+}

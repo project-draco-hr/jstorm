@@ -1,0 +1,20 @@
+{
+switch (field) {
+case TIME:
+    if (value == null) {
+      unset_time();
+    }
+ else {
+      set_time((Integer)value);
+    }
+  break;
+case UPTIME:
+if (value == null) {
+  unset_uptime();
+}
+ else {
+  set_uptime((Integer)value);
+}
+break;
+}
+}

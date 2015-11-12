@@ -5,6 +5,6 @@
     setting.remove(topologyName);
     LOG.info("Remove {} netty metrics setting ",topologyName);
   }
- catch (  InvalidTopologyException e) {
+ catch (  InvalidTopologyException ignored) {
   }
 }

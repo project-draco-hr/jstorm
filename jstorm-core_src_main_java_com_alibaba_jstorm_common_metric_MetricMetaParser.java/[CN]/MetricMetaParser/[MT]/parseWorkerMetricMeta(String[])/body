@@ -1,0 +1,11 @@
+{
+  MetricMeta meta=new MetricMeta();
+  meta.setMetaType(MetaType.parse(parts[0].charAt(0)).getT());
+  meta.setMetricType(MetricType.parse(parts[0].charAt(1)).getT());
+  meta.setTopologyId(parts[1]);
+  meta.setHost(parts[2]);
+  meta.setPort(Integer.valueOf(parts[3]));
+  meta.setMetricGroup(parts[4]);
+  meta.setMetricName(parts[5]);
+  return meta;
+}

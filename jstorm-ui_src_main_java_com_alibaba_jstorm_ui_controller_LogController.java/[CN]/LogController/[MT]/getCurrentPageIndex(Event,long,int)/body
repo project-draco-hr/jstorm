@@ -1,0 +1,7 @@
+{
+  long currentPos=totalSize;
+  if (e.pos >= 0) {
+    currentPos=e.pos;
+  }
+  return currentPos / pageSize;
+}

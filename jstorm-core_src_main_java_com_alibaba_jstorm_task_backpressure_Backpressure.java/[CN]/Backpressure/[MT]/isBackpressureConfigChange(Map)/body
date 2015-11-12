@@ -1,0 +1,11 @@
+{
+  if (stormConf == null) {
+    return false;
+  }
+  if (stormConf.containsKey(ConfigExtension.TOPOLOGY_BACKPRESSURE_ENABLE) || stormConf.containsKey(ConfigExtension.TOPOLOGY_BACKPRESSURE_WATER_MARK_HIGH) || stormConf.containsKey(ConfigExtension.TOPOLOGY_BACKPRESSURE_WATER_MARK_LOW)|| stormConf.containsKey(ConfigExtension.TOPOLOGY_BACKPRESSURE_COORDINATOR_RATIO)|| stormConf.containsKey(BACKPRESSURE_DELAY_TIME)) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

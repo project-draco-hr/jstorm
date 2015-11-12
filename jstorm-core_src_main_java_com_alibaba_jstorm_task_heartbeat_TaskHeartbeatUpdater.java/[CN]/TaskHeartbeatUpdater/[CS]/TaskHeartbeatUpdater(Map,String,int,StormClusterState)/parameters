@@ -1,0 +1,4 @@
+Map conf
+String topologyId
+int taskId
+StormClusterState zkCluster

@@ -1,0 +1,4 @@
+def getNettyMetricSizeByHost(self, topologyId, host):
+    '\n    Parameters:\n     - topologyId\n     - host\n    '
+    self.send_getNettyMetricSizeByHost(topologyId, host)
+    return self.recv_getNettyMetricSizeByHost()

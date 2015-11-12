@@ -5,9 +5,9 @@
     oprot.writeFieldBegin(SERIALIZED_PARTS_FIELD_DESC);
 {
       oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,struct.serialized_parts.size()));
-      for (      Map.Entry<String,ThriftSerializedObject> _iter268 : struct.serialized_parts.entrySet()) {
-        oprot.writeString(_iter268.getKey());
-        _iter268.getValue().write(oprot);
+      for (      Map.Entry<String,ThriftSerializedObject> _iter216 : struct.serialized_parts.entrySet()) {
+        oprot.writeString(_iter216.getKey());
+        _iter216.getValue().write(oprot);
       }
       oprot.writeMapEnd();
     }

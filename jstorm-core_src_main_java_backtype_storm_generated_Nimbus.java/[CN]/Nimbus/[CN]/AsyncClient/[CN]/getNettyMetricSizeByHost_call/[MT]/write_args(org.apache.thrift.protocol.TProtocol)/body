@@ -1,0 +1,8 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getNettyMetricSizeByHost",org.apache.thrift.protocol.TMessageType.CALL,0));
+  getNettyMetricSizeByHost_args args=new getNettyMetricSizeByHost_args();
+  args.set_topologyId(topologyId);
+  args.set_host(host);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

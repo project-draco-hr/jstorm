@@ -1,0 +1,20 @@
+{
+  try {
+    int memSize=context.getMemMeta().size();
+    int zkSize=(Integer)stormClusterState.get_topology_metric(topologyId);
+    if (memSize != zkSize) {
+      ConcurrentMap<String,Long> memMeta=context.getMemMeta();
+      for (      MetaType metaType : MetaType.values()) {
+        List<MetricMeta> metaList=metricQueryClient.getMetricMeta(clusterName,topologyId,metaType);
+        LOG.info("get remote metric meta, topology:{}, metaType:{}, mem:{}, zk:{}, new size:{}",topologyId,metaType,memSize,zkSize,metaList.size());
+        for (        MetricMeta meta : metaList) {
+          memMeta.putIfAbsent(meta.getFQN(),meta.getId());
+        }
+      }
+      metricCache.putMeta(topologyId,memMeta);
+    }
+  }
+ catch (  Exception ex) {
+    LOG.error("failed to sync remote meta",ex);
+  }
+}

@@ -1,0 +1,42 @@
+{
+  long start=System.currentTimeMillis();
+  int window=UIUtils.parseWindow(win);
+  UIUtils.addWindowAttribute(model,window);
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    TopologyInfo topologyInfo=client.getClient().getTopologyInfo(topology_id);
+    MetricInfo componentMetrics=topologyInfo.get_metrics().get_componentMetric();
+    UIComponentMetric componentMetric=getComponentMetric(componentMetrics,window,component,topologyInfo.get_components());
+    model.addAttribute("comp",componentMetric);
+    model.addAttribute("compHead",UIMetricUtils.sortHead(componentMetric,UIComponentMetric.HEAD));
+    model.addAttribute("tasks",getTaskEntities(topologyInfo,component));
+    MetricInfo taskMetrics=client.getClient().getTaskMetrics(topology_id,component);
+    List<UITaskMetric> taskData=getTaskData(taskMetrics,component,window);
+    model.addAttribute("taskData",taskData);
+    model.addAttribute("taskHead",UIMetricUtils.sortHead(taskData,UITaskMetric.HEAD));
+  }
+ catch (  NotAliveException nae) {
+    model.addAttribute("flush",String.format("The topology: %s is dead.",topology_id));
+  }
+catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    LOG.error(e.getMessage(),e);
+    UIUtils.addErrorAttribute(model,e);
+  }
+  model.addAttribute("clusterName",clusterName);
+  model.addAttribute("topologyId",topology_id);
+  model.addAttribute("compName",component);
+  model.addAttribute("page","component");
+  model.addAttribute("supervisorPort",UIUtils.getSupervisorPort(clusterName));
+  UIUtils.addTitleAttribute(model,"Component Summary");
+  try {
+    String topologyName=Common.topologyIdToName(topology_id);
+    model.addAttribute("topologyName",topologyName);
+  }
+ catch (  InvalidTopologyException e) {
+    e.printStackTrace();
+  }
+  LOG.info("component page show cost:{}ms",System.currentTimeMillis() - start);
+  return "component";
+}

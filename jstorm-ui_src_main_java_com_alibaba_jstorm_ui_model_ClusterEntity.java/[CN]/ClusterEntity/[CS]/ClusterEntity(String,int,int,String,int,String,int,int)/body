@@ -1,0 +1,10 @@
+{
+  this.name=name;
+  this.supervisor_num=supervisor_num;
+  this.topology_num=topology_num;
+  this.ip=ip;
+  this.port=port;
+  this.version=version;
+  this.total_ports=total_ports;
+  this.used_ports=used_ports;
+}

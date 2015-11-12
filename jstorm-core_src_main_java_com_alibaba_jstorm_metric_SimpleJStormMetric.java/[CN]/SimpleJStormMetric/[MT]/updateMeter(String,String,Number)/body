@@ -1,0 +1,8 @@
+{
+  String formalName=MetricUtils.workerMetricName(key,host,0,name,MetricType.METER);
+  AsmMeter meter=(AsmMeter)metrics.getMetric(formalName);
+  if (meter == null) {
+    meter=registerMeter(name);
+  }
+  meter.update(obj);
+}

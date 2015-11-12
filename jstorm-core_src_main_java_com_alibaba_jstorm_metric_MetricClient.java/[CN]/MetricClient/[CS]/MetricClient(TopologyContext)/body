@@ -1,0 +1,5 @@
+{
+  taskId=context.getThisTaskId();
+  this.topologyId=context.getTopologyId();
+  this.componentId=context.getThisComponentId();
+}

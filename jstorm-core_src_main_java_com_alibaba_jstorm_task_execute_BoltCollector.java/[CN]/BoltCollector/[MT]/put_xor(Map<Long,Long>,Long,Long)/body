@@ -1,7 +1,7 @@
 {
   Long curr=pending.get(key);
   if (curr == null) {
-    curr=Long.valueOf(0);
+    curr=0L;
   }
   pending.put(key,JStormUtils.bit_xor(curr,id));
 }

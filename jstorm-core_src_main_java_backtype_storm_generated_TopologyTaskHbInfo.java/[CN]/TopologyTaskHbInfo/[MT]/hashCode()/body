@@ -1,0 +1,13 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_topologyId=true && (is_set_topologyId());
+  list.add(present_topologyId);
+  if (present_topologyId)   list.add(topologyId);
+  boolean present_topologyMasterId=true;
+  list.add(present_topologyMasterId);
+  if (present_topologyMasterId)   list.add(topologyMasterId);
+  boolean present_taskHbs=true && (is_set_taskHbs());
+  list.add(present_taskHbs);
+  if (present_taskHbs)   list.add(taskHbs);
+  return list.hashCode();
+}

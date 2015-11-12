@@ -1,0 +1,4 @@
+Nimbus.Client client
+String topologyId
+MetricInfo metricInfo
+MetaType metaType

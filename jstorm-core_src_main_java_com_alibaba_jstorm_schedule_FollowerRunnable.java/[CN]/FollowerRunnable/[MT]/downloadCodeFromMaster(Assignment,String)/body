@@ -4,7 +4,16 @@
     String tmpDir=StormConfig.masterInbox(data.getConf()) + "/" + UUID.randomUUID().toString();
     String masterCodeDir=assignment.getMasterCodeDir();
     JStormServerUtils.downloadCodeFromMaster(data.getConf(),tmpDir,masterCodeDir,topologyId,false);
-    FileUtils.moveDirectory(new File(tmpDir),new File(localRoot));
+    File srcDir=new File(tmpDir);
+    File destDir=new File(localRoot);
+    try {
+      FileUtils.moveDirectory(srcDir,destDir);
+    }
+ catch (    FileExistsException e) {
+      FileUtils.copyDirectory(srcDir,destDir);
+      FileUtils.deleteQuietly(srcDir);
+    }
+    StormConfig.write_nimbus_topology_timestamp(data.getConf(),topologyId,System.currentTimeMillis());
   }
  catch (  TException e) {
     LOG.error(e + " downloadStormCode failed " + "topologyId:"+ topologyId+ "masterCodeDir:"+ assignment.getMasterCodeDir());

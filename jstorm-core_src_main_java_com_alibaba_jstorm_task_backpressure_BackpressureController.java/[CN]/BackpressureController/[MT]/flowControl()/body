@@ -1,0 +1,14 @@
+{
+  if (isBackpressureEnable == false) {
+    return;
+  }
+  try {
+    Thread.sleep(sleepTime);
+    while (isQueueCapacityAvailable() == false) {
+      Thread.sleep(1);
+    }
+  }
+ catch (  InterruptedException e) {
+    LOG.error("Sleep was interrupted!");
+  }
+}

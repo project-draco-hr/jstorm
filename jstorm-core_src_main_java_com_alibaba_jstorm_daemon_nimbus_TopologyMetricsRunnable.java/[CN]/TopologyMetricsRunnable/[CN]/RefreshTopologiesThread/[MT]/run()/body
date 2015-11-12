@@ -1,0 +1,5 @@
+{
+  if (!isShutdown.get()) {
+    pushEvent(new Refresh());
+  }
+}

@@ -1,0 +1,35 @@
+def read(self, iprot):
+    if ((iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and isinstance(iprot.trans, TTransport.CReadableTransport) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+        return
+    iprot.readStructBegin()
+    while True:
+        (fname, ftype, fid) = iprot.readFieldBegin()
+        if (ftype == TType.STOP):
+            break
+        if (fid == 1):
+            if (ftype == TType.STRING):
+                self.topologyId = iprot.readString().decode('utf-8')
+            else:
+                iprot.skip(ftype)
+        elif (fid == 2):
+            if (ftype == TType.I32):
+                self.topologyMasterId = iprot.readI32()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 3):
+            if (ftype == TType.MAP):
+                self.taskHbs = {}
+                (_ktype198, _vtype199, _size197) = iprot.readMapBegin()
+                for _i201 in xrange(_size197):
+                    _key202 = iprot.readI32()
+                    _val203 = TaskHeartbeat()
+                    _val203.read(iprot)
+                    self.taskHbs[_key202] = _val203
+                iprot.readMapEnd()
+            else:
+                iprot.skip(ftype)
+        else:
+            iprot.skip(ftype)
+        iprot.readFieldEnd()
+    iprot.readStructEnd()

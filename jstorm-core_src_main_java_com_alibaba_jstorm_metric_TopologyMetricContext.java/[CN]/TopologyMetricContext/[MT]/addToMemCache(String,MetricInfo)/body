@@ -1,0 +1,4 @@
+{
+  memCache.put(workerSlot,metricInfo);
+  LOG.info("update mem cache, worker:{}, total uploaded:{}",workerSlot,memCache.size());
+}

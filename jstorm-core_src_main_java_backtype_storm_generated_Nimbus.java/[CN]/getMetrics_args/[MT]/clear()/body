@@ -1,0 +1,5 @@
+{
+  this.topologyId=null;
+  set_type_isSet(false);
+  this.type=0;
+}

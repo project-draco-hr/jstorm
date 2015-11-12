@@ -1,0 +1,18 @@
+{
+  if (TimeUtils.isTimeAligned()) {
+    int cnt=0;
+    try {
+      for (      AsmMetricRegistry registry : JStormMetrics.allRegistries) {
+        for (        Map.Entry<String,AsmMetric> entry : registry.getMetrics().entrySet()) {
+          entry.getValue().flush();
+          cnt++;
+        }
+      }
+      LOG.info("flush metrics, total:{}.",cnt);
+      doUpload();
+    }
+ catch (    Exception ex) {
+      LOG.error("Error",ex);
+    }
+  }
+}

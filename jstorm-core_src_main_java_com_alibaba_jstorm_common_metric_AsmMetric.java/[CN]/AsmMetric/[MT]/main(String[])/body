@@ -1,0 +1,13 @@
+{
+  AsmMeter meter=new AsmMeter();
+  int t=0, f=0;
+  for (int i=0; i < 100; i++) {
+    if (meter.sample()) {
+      t++;
+    }
+ else {
+      f++;
+    }
+  }
+  System.out.println(t + "," + f);
+}

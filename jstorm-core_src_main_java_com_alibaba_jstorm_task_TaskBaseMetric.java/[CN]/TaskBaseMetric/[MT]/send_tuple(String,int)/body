@@ -1,9 +1,6 @@
 {
-  if (num_out_tasks <= 0) {
-    return;
+  if (enableMetrics && num_out_tasks > 0) {
+    update(stream,MetricDef.EMMITTED_NUM,num_out_tasks,MetricType.COUNTER);
+    update(stream,MetricDef.SEND_TPS,num_out_tasks,MetricType.METER);
   }
-  String emmitedName=MetricRegistry.name(MetricDef.EMMITTED_NUM,stream);
-  update(emmitedName,Double.valueOf(num_out_tasks),JStormMetrics.Builder.COUNTER);
-  String sendTpsName=MetricRegistry.name(MetricDef.SEND_TPS,stream);
-  update(sendTpsName,Double.valueOf(num_out_tasks),JStormMetrics.Builder.METER);
 }

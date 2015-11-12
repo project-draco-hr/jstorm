@@ -1,40 +1,40 @@
 {
   if (that == null)   return false;
-  boolean this_present_nimbus_master=true && this.is_set_nimbus_master();
-  boolean that_present_nimbus_master=true && that.is_set_nimbus_master();
-  if (this_present_nimbus_master || that_present_nimbus_master) {
-    if (!(this_present_nimbus_master && that_present_nimbus_master))     return false;
-    if (!this.nimbus_master.equals(that.nimbus_master))     return false;
+  boolean this_present_nimbusMaster=true && this.is_set_nimbusMaster();
+  boolean that_present_nimbusMaster=true && that.is_set_nimbusMaster();
+  if (this_present_nimbusMaster || that_present_nimbusMaster) {
+    if (!(this_present_nimbusMaster && that_present_nimbusMaster))     return false;
+    if (!this.nimbusMaster.equals(that.nimbusMaster))     return false;
   }
-  boolean this_present_nimbus_slaves=true && this.is_set_nimbus_slaves();
-  boolean that_present_nimbus_slaves=true && that.is_set_nimbus_slaves();
-  if (this_present_nimbus_slaves || that_present_nimbus_slaves) {
-    if (!(this_present_nimbus_slaves && that_present_nimbus_slaves))     return false;
-    if (!this.nimbus_slaves.equals(that.nimbus_slaves))     return false;
+  boolean this_present_nimbusSlaves=true && this.is_set_nimbusSlaves();
+  boolean that_present_nimbusSlaves=true && that.is_set_nimbusSlaves();
+  if (this_present_nimbusSlaves || that_present_nimbusSlaves) {
+    if (!(this_present_nimbusSlaves && that_present_nimbusSlaves))     return false;
+    if (!this.nimbusSlaves.equals(that.nimbusSlaves))     return false;
   }
-  boolean this_present_supervisor_num=true;
-  boolean that_present_supervisor_num=true;
-  if (this_present_supervisor_num || that_present_supervisor_num) {
-    if (!(this_present_supervisor_num && that_present_supervisor_num))     return false;
-    if (this.supervisor_num != that.supervisor_num)     return false;
+  boolean this_present_supervisorNum=true;
+  boolean that_present_supervisorNum=true;
+  if (this_present_supervisorNum || that_present_supervisorNum) {
+    if (!(this_present_supervisorNum && that_present_supervisorNum))     return false;
+    if (this.supervisorNum != that.supervisorNum)     return false;
   }
-  boolean this_present_total_port_num=true;
-  boolean that_present_total_port_num=true;
-  if (this_present_total_port_num || that_present_total_port_num) {
-    if (!(this_present_total_port_num && that_present_total_port_num))     return false;
-    if (this.total_port_num != that.total_port_num)     return false;
+  boolean this_present_totalPortNum=true;
+  boolean that_present_totalPortNum=true;
+  if (this_present_totalPortNum || that_present_totalPortNum) {
+    if (!(this_present_totalPortNum && that_present_totalPortNum))     return false;
+    if (this.totalPortNum != that.totalPortNum)     return false;
   }
-  boolean this_present_used_port_num=true;
-  boolean that_present_used_port_num=true;
-  if (this_present_used_port_num || that_present_used_port_num) {
-    if (!(this_present_used_port_num && that_present_used_port_num))     return false;
-    if (this.used_port_num != that.used_port_num)     return false;
+  boolean this_present_usedPortNum=true;
+  boolean that_present_usedPortNum=true;
+  if (this_present_usedPortNum || that_present_usedPortNum) {
+    if (!(this_present_usedPortNum && that_present_usedPortNum))     return false;
+    if (this.usedPortNum != that.usedPortNum)     return false;
   }
-  boolean this_present_free_port_num=true;
-  boolean that_present_free_port_num=true;
-  if (this_present_free_port_num || that_present_free_port_num) {
-    if (!(this_present_free_port_num && that_present_free_port_num))     return false;
-    if (this.free_port_num != that.free_port_num)     return false;
+  boolean this_present_freePortNum=true;
+  boolean that_present_freePortNum=true;
+  if (this_present_freePortNum || that_present_freePortNum) {
+    if (!(this_present_freePortNum && that_present_freePortNum))     return false;
+    if (this.freePortNum != that.freePortNum)     return false;
   }
   boolean this_present_version=true && this.is_set_version();
   boolean that_present_version=true && that.is_set_version();

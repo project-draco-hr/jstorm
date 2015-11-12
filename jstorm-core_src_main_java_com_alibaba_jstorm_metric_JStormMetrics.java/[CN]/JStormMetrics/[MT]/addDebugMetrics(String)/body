@@ -1,0 +1,10 @@
+{
+  String[] metrics=names.split(",");
+  for (  String metric : metrics) {
+    metric=metric.trim();
+    if (!StringUtils.isBlank(metric)) {
+      debugMetricNames.add(metric);
+    }
+  }
+  LOG.info("debug metric names:{}",Joiner.on(",").join(debugMetricNames));
+}

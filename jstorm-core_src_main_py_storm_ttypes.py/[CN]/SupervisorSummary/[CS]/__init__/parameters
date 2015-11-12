@@ -1,6 +1,6 @@
 self
 host
-supervisor_id
-uptime_secs
-num_workers
-num_used_workers
+supervisorId
+uptimeSecs
+numWorkers
+numUsedWorkers

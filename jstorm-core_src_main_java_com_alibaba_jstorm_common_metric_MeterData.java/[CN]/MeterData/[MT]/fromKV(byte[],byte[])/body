@@ -1,0 +1,8 @@
+{
+  parseKey(key);
+  this.m1=Bytes.toDouble(value,0);
+  this.m5=Bytes.toDouble(value,8);
+  this.m15=Bytes.toDouble(value,16);
+  this.mean=Bytes.toDouble(value,24);
+  return this;
+}

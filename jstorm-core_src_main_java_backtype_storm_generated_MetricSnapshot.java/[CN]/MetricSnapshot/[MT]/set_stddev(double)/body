@@ -1,0 +1,4 @@
+{
+  this.stddev=stddev;
+  set_stddev_isSet(true);
+}

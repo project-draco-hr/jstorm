@@ -1,0 +1,3 @@
+def getMetrics(self, topologyId, type):
+    '\n    Parameters:\n     - topologyId\n     - type\n    '
+    pass

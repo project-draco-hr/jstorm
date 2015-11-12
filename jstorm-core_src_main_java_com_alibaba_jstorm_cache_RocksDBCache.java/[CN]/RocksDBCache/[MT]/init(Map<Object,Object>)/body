@@ -22,7 +22,7 @@
       try {
         PathUtils.rmr(rootDir);
       }
- catch (      IOException e1) {
+ catch (      IOException ignored) {
       }
     }
   }

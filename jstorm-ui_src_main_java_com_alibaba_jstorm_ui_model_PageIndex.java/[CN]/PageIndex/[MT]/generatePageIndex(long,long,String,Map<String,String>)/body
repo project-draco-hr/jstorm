@@ -1,9 +1,0 @@
-{
-  PageIndex.Event event=new PageIndex.Event();
-  event.totalSize=totalSize;
-  event.pos=JStormUtils.parseLong(paramMap.get(UIDef.POS),0);
-  event.pageSize=pageSize;
-  event.url=url;
-  event.paramMap=paramMap;
-  return generatePageIndex(event);
-}

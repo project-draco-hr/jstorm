@@ -1,0 +1,23 @@
+{
+  Object ret=null;
+  if (obj instanceof org.apache.thrift.TBase) {
+    ret=thriftToMap((org.apache.thrift.TBase)obj);
+  }
+ else   if (obj instanceof List) {
+    ret=new ArrayList<>();
+    for (    Object item : (List)obj) {
+      ((List)ret).add(thriftToObject(item));
+    }
+  }
+ else   if (obj instanceof Map) {
+    ret=new HashMap<String,Object>();
+    Set<Entry> entrySet=((Map)obj).entrySet();
+    for (    Entry entry : entrySet) {
+      ((Map)ret).put(String.valueOf(entry.getKey()),thriftToObject(entry.getValue()));
+    }
+  }
+ else {
+    ret=String.valueOf(obj);
+  }
+  return ret;
+}

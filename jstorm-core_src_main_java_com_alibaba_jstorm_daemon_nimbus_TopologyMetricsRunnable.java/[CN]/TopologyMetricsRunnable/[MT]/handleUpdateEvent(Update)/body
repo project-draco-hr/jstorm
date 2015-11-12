@@ -1,19 +1,42 @@
 {
-  long start=System.currentTimeMillis();
-  WorkerUploadMetrics workerMetrics=event.workerMetrics;
-  String topologyId=workerMetrics.get_topology_id();
-  if (removing.containsKey(topologyId) == true) {
-    LOG.info("Topology " + topologyId + " has been removed, skip update");
-    return;
+  TopologyMetric topologyMetrics=event.topologyMetrics;
+  final String topologyId=event.topologyId;
+  if (this.topologyMetricContexts.containsKey(topologyId)) {
+    if (!JStormMetrics.CLUSTER_METRIC_KEY.equals(topologyId)) {
+      updateClusterMetrics(topologyId,topologyMetrics);
+    }
+    metricCache.putMetricData(topologyId,topologyMetrics);
+    int idx=getAndPresetFirstEmptyIndex();
+    if (idx >= 0) {
+      TopologyMetricDataInfo summary=new TopologyMetricDataInfo();
+      summary.topologyId=topologyId;
+      summary.timestamp=event.timestamp;
+      if (topologyId.equals(JStormMetrics.NIMBUS_METRIC_KEY) || topologyId.equals(JStormMetrics.CLUSTER_METRIC_KEY)) {
+        summary.type=MetricUploader.METRIC_TYPE_TOPLOGY;
+      }
+ else {
+        if (topologyMetrics.get_topologyMetric().get_metrics_size() > 0 || topologyMetrics.get_componentMetric().get_metrics_size() > 0) {
+          if (topologyMetrics.get_taskMetric().get_metrics_size() + topologyMetrics.get_workerMetric().get_metrics_size() + topologyMetrics.get_nettyMetric().get_metrics_size()+ topologyMetrics.get_streamMetric().get_metrics_size() > 0) {
+            summary.type=MetricUploader.METRIC_TYPE_ALL;
+          }
+ else {
+            summary.type=MetricUploader.METRIC_TYPE_TOPLOGY;
+          }
+        }
+ else {
+          summary.type=MetricUploader.METRIC_TYPE_TASK;
+        }
+      }
+      metricCache.put(PENDING_UPLOAD_METRIC_DATA_INFO + idx,summary);
+      metricCache.put(PENDING_UPLOAD_METRIC_DATA + idx,topologyMetrics);
+      markSet(idx);
+      LOG.info("put metric data to local cache, topology:{}, idx:{}",topologyId,idx);
+    }
+ else {
+      LOG.error("exceeding maxPendingUploadMetrics, skip metrics data for topology:{}",topologyId);
+    }
   }
-  Set<String> workers=topologyWorkers.get(topologyId);
-  if (workers == null) {
-    workers=new HashSet<String>();
-    topologyWorkers.put(topologyId,workers);
+ else {
+    LOG.warn("topology {} has been killed or has not started, skip update.",topologyId);
   }
-  String workerSlot=getWorkerSlotName(workerMetrics.get_supervisor_id(),workerMetrics.get_port());
-  workers.add(workerSlot);
-  dbCache.put(getWorkerKey(topologyId,workerSlot),workerMetrics);
-  long end=System.currentTimeMillis();
-  updateHistogram.update((end - start));
 }

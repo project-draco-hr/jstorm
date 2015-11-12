@@ -1,0 +1,3 @@
+{
+  cache.remove(TOPOLOGY_SAMPLE_RATE + topologyId);
+}

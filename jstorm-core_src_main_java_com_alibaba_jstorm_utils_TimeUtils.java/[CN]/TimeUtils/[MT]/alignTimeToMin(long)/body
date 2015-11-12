@@ -1,0 +1,3 @@
+{
+  return alignTimeToWin(ts,AsmWindow.M1_WINDOW);
+}

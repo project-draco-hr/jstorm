@@ -1,0 +1,4 @@
+{
+  send_getPagingNettyMetrics(topologyId,host,page);
+  return recv_getPagingNettyMetrics();
+}

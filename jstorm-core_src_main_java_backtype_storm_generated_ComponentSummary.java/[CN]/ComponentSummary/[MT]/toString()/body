@@ -23,12 +23,12 @@
   }
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("task_ids:");
-  if (this.task_ids == null) {
+  sb.append("taskIds:");
+  if (this.taskIds == null) {
     sb.append("null");
   }
  else {
-    sb.append(this.task_ids);
+    sb.append(this.taskIds);
   }
   first=false;
   if (is_set_errors()) {

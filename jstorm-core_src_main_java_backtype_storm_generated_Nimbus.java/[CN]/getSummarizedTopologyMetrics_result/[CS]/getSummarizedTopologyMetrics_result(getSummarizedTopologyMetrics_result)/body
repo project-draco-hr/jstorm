@@ -1,0 +1,9 @@
+{
+  if (other.is_set_success()) {
+    List<MetricInfo> __this__success=new ArrayList<MetricInfo>(other.success.size());
+    for (    MetricInfo other_element : other.success) {
+      __this__success.add(new MetricInfo(other_element));
+    }
+    this.success=__this__success;
+  }
+}

@@ -1,0 +1,22 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  BitSet optionals=new BitSet();
+  if (struct.is_set_topologyId()) {
+    optionals.set(0);
+  }
+  if (struct.is_set_metrics()) {
+    optionals.set(1);
+  }
+  oprot.writeBitSet(optionals,2);
+  if (struct.is_set_topologyId()) {
+    oprot.writeString(struct.topologyId);
+  }
+  if (struct.is_set_metrics()) {
+{
+      oprot.writeI32(struct.metrics.size());
+      for (      String _iter236 : struct.metrics) {
+        oprot.writeString(_iter236);
+      }
+    }
+  }
+}

@@ -9,49 +9,19 @@ def read(self, iprot):
             break
         if (fid == 1):
             if (ftype == TType.MAP):
-                self.baseMetric = {}
-                (_ktype104, _vtype105, _size103) = iprot.readMapBegin()
-                for _i107 in xrange(_size103):
-                    _key108 = iprot.readString().decode('utf-8')
-                    _val109 = MetricWindow()
-                    _val109.read(iprot)
-                    self.baseMetric[_key108] = _val109
-                iprot.readMapEnd()
-            else:
-                iprot.skip(ftype)
-        elif (fid == 2):
-            if (ftype == TType.MAP):
-                self.inputMetric = {}
+                self.metrics = {}
                 (_ktype111, _vtype112, _size110) = iprot.readMapBegin()
                 for _i114 in xrange(_size110):
                     _key115 = iprot.readString().decode('utf-8')
                     _val116 = {}
                     (_ktype118, _vtype119, _size117) = iprot.readMapBegin()
                     for _i121 in xrange(_size117):
-                        _key122 = iprot.readString().decode('utf-8')
-                        _val123 = MetricWindow()
+                        _key122 = iprot.readI32()
+                        _val123 = MetricSnapshot()
                         _val123.read(iprot)
                         _val116[_key122] = _val123
                     iprot.readMapEnd()
-                    self.inputMetric[_key115] = _val116
-                iprot.readMapEnd()
-            else:
-                iprot.skip(ftype)
-        elif (fid == 3):
-            if (ftype == TType.MAP):
-                self.outputMetric = {}
-                (_ktype125, _vtype126, _size124) = iprot.readMapBegin()
-                for _i128 in xrange(_size124):
-                    _key129 = iprot.readString().decode('utf-8')
-                    _val130 = {}
-                    (_ktype132, _vtype133, _size131) = iprot.readMapBegin()
-                    for _i135 in xrange(_size131):
-                        _key136 = iprot.readString().decode('utf-8')
-                        _val137 = MetricWindow()
-                        _val137.read(iprot)
-                        _val130[_key136] = _val137
-                    iprot.readMapEnd()
-                    self.outputMetric[_key129] = _val130
+                    self.metrics[_key115] = _val116
                 iprot.readMapEnd()
             else:
                 iprot.skip(ftype)

@@ -1,0 +1,4 @@
+def uploadTopologyMetrics(self, topologyId, topologyMetrics):
+    '\n    Parameters:\n     - topologyId\n     - topologyMetrics\n    '
+    self.send_uploadTopologyMetrics(topologyId, topologyMetrics)
+    self.recv_uploadTopologyMetrics()

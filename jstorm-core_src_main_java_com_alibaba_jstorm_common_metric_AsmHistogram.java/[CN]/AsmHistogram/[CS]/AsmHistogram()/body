@@ -1,0 +1,6 @@
+{
+  super();
+  for (  int win : windowSeconds) {
+    histogramMap.put(win,newHistogram());
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (other.is_set_success()) {
+    Map<String,Long> __this__success=new HashMap<String,Long>(other.success);
+    this.success=__this__success;
+  }
+}

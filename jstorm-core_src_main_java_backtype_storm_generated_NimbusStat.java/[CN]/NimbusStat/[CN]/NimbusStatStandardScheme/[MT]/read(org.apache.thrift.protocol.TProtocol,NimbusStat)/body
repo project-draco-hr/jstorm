@@ -18,8 +18,8 @@ case 1:
     break;
 case 2:
   if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-    struct.uptime_secs=iprot.readString();
-    struct.set_uptime_secs_isSet(true);
+    struct.uptimeSecs=iprot.readString();
+    struct.set_uptimeSecs_isSet(true);
   }
  else {
     org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);

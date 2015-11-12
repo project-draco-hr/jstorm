@@ -24,6 +24,8 @@
   }
  finally {
     long end=System.nanoTime();
-    sendTimer.update((end - start) / 1000000.0d);
+    if (sendTimer != null) {
+      sendTimer.update((end - start) / TimeUtils.NS_PER_US);
+    }
   }
 }

@@ -1,0 +1,17 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  BitSet optionals=new BitSet();
+  if (struct.is_set_success()) {
+    optionals.set(0);
+  }
+  oprot.writeBitSet(optionals,1);
+  if (struct.is_set_success()) {
+{
+      oprot.writeI32(struct.success.size());
+      for (      Map.Entry<String,Long> _iter245 : struct.success.entrySet()) {
+        oprot.writeString(_iter245.getKey());
+        oprot.writeI64(_iter245.getValue());
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+def process_getNettyMetricSizeByHost(self, seqid, iprot, oprot):
+    args = getNettyMetricSizeByHost_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getNettyMetricSizeByHost_result()
+    result.success = self._handler.getNettyMetricSizeByHost(args.topologyId, args.host)
+    oprot.writeMessageBegin('getNettyMetricSizeByHost', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

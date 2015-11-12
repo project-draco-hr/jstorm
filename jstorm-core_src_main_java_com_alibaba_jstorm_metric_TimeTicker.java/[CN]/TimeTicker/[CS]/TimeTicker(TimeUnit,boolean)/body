@@ -1,0 +1,6 @@
+{
+  this(unit);
+  if (start) {
+    start();
+  }
+}

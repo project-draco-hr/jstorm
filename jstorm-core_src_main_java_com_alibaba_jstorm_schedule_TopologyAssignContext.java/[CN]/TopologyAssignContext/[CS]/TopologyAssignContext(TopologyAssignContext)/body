@@ -9,4 +9,7 @@
   this.deadTaskIds=copy.getDeadTaskIds();
   this.unstoppedTaskIds=copy.getUnstoppedTaskIds();
   this.isReassign=copy.isReassign();
+  this.topologyId=copy.getTopologyId();
+  this.topoMasterTaskId=copy.getTopologyMasterTaskId();
+  this.assignSingleWorkerForTM=copy.getAssignSingleWorkerForTM();
 }

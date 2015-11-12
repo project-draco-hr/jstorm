@@ -1,0 +1,21 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.name != null) {
+    oprot.writeFieldBegin(NAME_FIELD_DESC);
+    oprot.writeString(struct.name);
+    oprot.writeFieldEnd();
+  }
+  if (struct.uploadedLocation != null) {
+    oprot.writeFieldBegin(UPLOADED_LOCATION_FIELD_DESC);
+    oprot.writeString(struct.uploadedLocation);
+    oprot.writeFieldEnd();
+  }
+  if (struct.updateConf != null) {
+    oprot.writeFieldBegin(UPDATE_CONF_FIELD_DESC);
+    oprot.writeString(struct.updateConf);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

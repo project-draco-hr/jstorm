@@ -1,0 +1,6 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.topologyId))
+    value = ((value * 31) ^ hash(self.topologyMasterId))
+    value = ((value * 31) ^ hash(self.taskHbs))
+    return value

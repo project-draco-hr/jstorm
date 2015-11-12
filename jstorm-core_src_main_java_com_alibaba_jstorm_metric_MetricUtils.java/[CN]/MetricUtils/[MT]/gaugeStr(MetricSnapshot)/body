@@ -1,0 +1,5 @@
+{
+  StringBuilder sb=new StringBuilder(32);
+  sb.append("id:").append(snapshot.get_metricId()).append(",v:").append(snapshot.get_doubleValue());
+  return sb.toString();
+}

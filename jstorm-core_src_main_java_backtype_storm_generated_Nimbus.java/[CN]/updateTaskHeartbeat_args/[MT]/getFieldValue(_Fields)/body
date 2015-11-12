@@ -1,0 +1,7 @@
+{
+switch (field) {
+case TASK_HBS:
+    return get_taskHbs();
+}
+throw new IllegalStateException();
+}

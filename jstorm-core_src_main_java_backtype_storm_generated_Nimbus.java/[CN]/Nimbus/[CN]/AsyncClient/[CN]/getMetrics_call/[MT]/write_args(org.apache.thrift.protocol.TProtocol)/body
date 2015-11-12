@@ -1,0 +1,8 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getMetrics",org.apache.thrift.protocol.TMessageType.CALL,0));
+  getMetrics_args args=new getMetrics_args();
+  args.set_topologyId(topologyId);
+  args.set_type(type);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

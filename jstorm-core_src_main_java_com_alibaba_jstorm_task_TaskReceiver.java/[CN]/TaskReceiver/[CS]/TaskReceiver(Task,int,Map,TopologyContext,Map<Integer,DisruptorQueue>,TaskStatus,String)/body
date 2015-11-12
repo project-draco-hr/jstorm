@@ -11,8 +11,10 @@
   this.deserializeQueue=DisruptorQueue.mkInstance("TaskDeserialize",ProducerType.MULTI,queueSize,waitStrategy);
   setDeserializeThread();
   this.deserializer=new KryoTupleDeserializer(stormConf,topologyContext);
-  deserializeTimer=JStormMetrics.registerTaskHistogram(taskId,MetricDef.DESERIALIZE_TIME);
-  QueueGauge deserializeQueueGauge=new QueueGauge(idStr + MetricDef.DESERIALIZE_QUEUE,deserializeQueue);
-  JStormMetrics.registerTaskGauge(deserializeQueueGauge,taskId,MetricDef.DESERIALIZE_QUEUE);
+  String topologyId=topologyContext.getTopologyId();
+  String component=topologyContext.getThisComponentId();
+  deserializeTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,component,taskId,MetricDef.DESERIALIZE_TIME,MetricType.HISTOGRAM),new AsmHistogram());
+  QueueGauge deserializeQueueGauge=new QueueGauge(deserializeQueue,idStr,MetricDef.DESERIALIZE_QUEUE);
+  JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,component,taskId,MetricDef.DESERIALIZE_QUEUE,MetricType.GAUGE),new AsmGauge(deserializeQueueGauge));
   JStormHealthCheck.registerTaskHealthCheck(taskId,MetricDef.DESERIALIZE_QUEUE,deserializeQueueGauge);
 }

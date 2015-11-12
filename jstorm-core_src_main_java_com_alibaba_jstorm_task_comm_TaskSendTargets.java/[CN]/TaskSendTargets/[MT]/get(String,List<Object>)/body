@@ -1,5 +1,5 @@
 {
-  java.util.List<Integer> out_tasks=new ArrayList<Integer>();
+  List<Integer> out_tasks=new ArrayList<Integer>();
   Map<String,MkGrouper> componentCrouping=streamComponentgrouper.get(stream);
   if (componentCrouping == null) {
     LOG.debug("Failed to get Grouper of " + stream + " in "+ debugIdStr);

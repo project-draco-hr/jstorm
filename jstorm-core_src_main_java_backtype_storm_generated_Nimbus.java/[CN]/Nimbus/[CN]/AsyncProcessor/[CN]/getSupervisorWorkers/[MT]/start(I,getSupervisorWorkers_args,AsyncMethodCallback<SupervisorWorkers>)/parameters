@@ -1,0 +1,3 @@
+I iface
+getSupervisorWorkers_args args
+AsyncMethodCallback<SupervisorWorkers> resultHandler

@@ -1,0 +1,19 @@
+{
+  if (isBackpressureEnable == false) {
+    return;
+  }
+  int sourceTask=input.getSourceTask();
+  String componentId=taskIdToComponentId.get(sourceTask);
+  if (componentId == null) {
+    LOG.warn("Receive tuple from unknown task-" + sourceTask);
+    return;
+  }
+  if (spouts.keySet().contains(componentId)) {
+    if (SourceTobackpressureInfo.get(componentId) != null) {
+      handleEventFromSpout(sourceTask,input);
+    }
+  }
+ else   if (bolts.keySet().contains(componentId)) {
+    handleEventFromBolt(sourceTask,input);
+  }
+}

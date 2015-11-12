@@ -1,0 +1,4 @@
+String topology_id
+Integer worker_port
+Set<Integer> tasks
+String error

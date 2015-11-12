@@ -1,7 +1,0 @@
-{
-  List<Map> uiClusters=ConfigExtension.getUiClusters(conf);
-  Map cluster=ConfigExtension.getUiClusterInfo(uiClusters,clusterName);
-  conf.put(Config.STORM_ZOOKEEPER_ROOT,ConfigExtension.getUiClusterZkRoot(cluster));
-  conf.put(Config.STORM_ZOOKEEPER_SERVERS,ConfigExtension.getUiClusterZkServers(cluster));
-  conf.put(Config.STORM_ZOOKEEPER_PORT,ConfigExtension.getUiClusterZkPort(cluster));
-}

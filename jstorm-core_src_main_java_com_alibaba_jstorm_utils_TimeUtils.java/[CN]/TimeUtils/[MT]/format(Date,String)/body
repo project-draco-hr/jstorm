@@ -1,0 +1,4 @@
+{
+  SimpleDateFormat df=new SimpleDateFormat(fmt);
+  return df.format(time);
+}

@@ -1,0 +1,5 @@
+{
+  AsmHistogram histogram=new AsmHistogram();
+  histogram.setOp(AsmMetric.MetricOp.LOG);
+  return registerWorkerHistogram(NIMBUS_METRIC_KEY,name,histogram);
+}

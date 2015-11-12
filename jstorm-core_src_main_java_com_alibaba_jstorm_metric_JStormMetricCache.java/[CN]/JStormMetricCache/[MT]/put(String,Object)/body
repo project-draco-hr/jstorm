@@ -1,0 +1,4 @@
+{
+  cache.put(k,v);
+  return cache;
+}

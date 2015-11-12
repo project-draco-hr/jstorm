@@ -1,4 +1,0 @@
-{
-  String taskbeatPath=Cluster.taskbeat_path(topologyId,taskId);
-  return (TaskHeartbeat)getObjectSync(taskbeatPath,false);
-}

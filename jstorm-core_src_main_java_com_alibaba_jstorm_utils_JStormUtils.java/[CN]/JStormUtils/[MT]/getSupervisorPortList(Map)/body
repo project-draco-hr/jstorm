@@ -18,6 +18,7 @@
     LOG.info("Invalid supervisor.slots.port.cpu.weight setting :" + cpuWeight + ", cpu cores:"+ sysCpuNum);
     cpuPortNum=1;
   }
+  Double memWeight=ConfigExtension.getSupervisorSlotsPortMemWeight(conf);
   int memPortNum=Integer.MAX_VALUE;
   Long physicalMemSize=JStormUtils.getPhysicMemorySize();
   if (physicalMemSize == null) {
@@ -26,7 +27,7 @@
  else {
     LOG.info("Get system memory size :" + physicalMemSize);
     long workerMemSize=ConfigExtension.getMemSizePerWorker(conf);
-    memPortNum=(int)(physicalMemSize / workerMemSize);
+    memPortNum=(int)(physicalMemSize / (workerMemSize * memWeight));
     if (memPortNum < 1) {
       LOG.info("Invalide worker.memory.size setting:" + workerMemSize);
       memPortNum=4;

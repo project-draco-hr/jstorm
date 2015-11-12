@@ -10,8 +10,14 @@
   this.startTime=TimeUtils.current_time_secs();
   this.inimubs=inimbus;
   localMode=StormConfig.local_mode(conf);
-  this.topologyNettyMgr=new TopologyNettyMgr(conf);
+  this.metricCache=new JStormMetricCache(conf,this.stormClusterState);
+  this.clusterName=ConfigExtension.getClusterName(conf);
   this.metricRunnable=new TopologyMetricsRunnable(this);
+  this.metricRunnable.init();
   pendingSubmitTopologys=new TimeCacheMap<String,Object>(JStormUtils.MIN_30);
   topologyTaskTimeout=new ConcurrentHashMap<String,Integer>();
+  tasksHeartbeat=new ConcurrentHashMap<String,TopologyTaskHbInfo>();
+  if (!localMode) {
+    startMetricThreads();
+  }
 }

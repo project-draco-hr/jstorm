@@ -1,13 +1,12 @@
 {
-  for (  Integer taskId : tasks) {
+  if (tasks == null)   return;
+  List<TaskShutdownDameon> shutdowns=workerData.getShutdownDaemonbyTaskIds(tasks);
+  for (  TaskShutdownDameon shutdown : shutdowns) {
     try {
-      List<TaskShutdownDameon> shutdowns=workerData.getShutdownDaemonbyTaskIds(tasks);
-      for (      TaskShutdownDameon shutdown : shutdowns) {
-        shutdown.shutdown();
-      }
+      shutdown.shutdown();
     }
  catch (    Exception e) {
-      LOG.error("Failed to shutdown task-" + taskId,e);
+      LOG.error("Failed to shutdown task-" + shutdown.getTaskId(),e);
     }
   }
 }

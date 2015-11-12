@@ -1,0 +1,5 @@
+{
+  TopoMasterCtrlEvent stopBp=new TopoMasterCtrlEvent(EventType.stopBackpressure,null);
+  output.emit(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID,new Values(stopBp));
+  LOG.debug("Send stop backpressure request for task-{}",taskId);
+}

@@ -1,0 +1,2 @@
+org.apache.thrift.protocol.TProtocol oprot
+getTaskAndStreamMetrics_result struct

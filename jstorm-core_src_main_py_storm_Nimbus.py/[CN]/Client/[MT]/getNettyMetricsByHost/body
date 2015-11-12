@@ -1,0 +1,4 @@
+def getNettyMetricsByHost(self, topologyId, host):
+    '\n    Parameters:\n     - topologyId\n     - host\n    '
+    self.send_getNettyMetricsByHost(topologyId, host)
+    return self.recv_getNettyMetricsByHost()

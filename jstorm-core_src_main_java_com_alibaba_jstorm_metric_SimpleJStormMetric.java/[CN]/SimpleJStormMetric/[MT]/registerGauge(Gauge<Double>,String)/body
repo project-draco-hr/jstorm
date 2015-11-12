@@ -1,0 +1,5 @@
+{
+  AsmGauge gauge1=new AsmGauge(gauge);
+  gauge1.setOp(AsmMetric.MetricOp.LOG);
+  return registerWorkerGauge(topologyId,name,gauge1);
+}

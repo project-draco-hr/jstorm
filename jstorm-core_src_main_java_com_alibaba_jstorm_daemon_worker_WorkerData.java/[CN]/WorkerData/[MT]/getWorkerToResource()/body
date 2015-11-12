@@ -1,3 +1,5 @@
 {
-  return workerToResource;
+synchronized (workerToResource) {
+    return workerToResource;
+  }
 }

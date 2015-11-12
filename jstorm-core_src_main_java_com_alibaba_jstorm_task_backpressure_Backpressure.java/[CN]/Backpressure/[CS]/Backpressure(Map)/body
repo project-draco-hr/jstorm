@@ -1,0 +1,6 @@
+{
+  this.isBackpressureEnable=ConfigExtension.isBackpressureEnable(stormConf);
+  this.highWaterMark=ConfigExtension.getBackpressureWaterMarkHigh(stormConf);
+  this.lowWaterMark=ConfigExtension.getBackpressureWaterMarkLow(stormConf);
+  this.triggerBpRatio=ConfigExtension.getBackpressureCoordinatorRatio(stormConf);
+}

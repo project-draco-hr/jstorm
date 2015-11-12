@@ -1,0 +1,4 @@
+{
+  this.type=type;
+  set_type_isSet(true);
+}

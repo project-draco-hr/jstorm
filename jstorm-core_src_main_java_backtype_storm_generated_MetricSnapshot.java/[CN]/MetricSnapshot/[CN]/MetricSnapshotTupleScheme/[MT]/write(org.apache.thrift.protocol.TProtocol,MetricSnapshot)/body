@@ -1,0 +1,109 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  oprot.writeI64(struct.metricId);
+  oprot.writeI64(struct.ts);
+  oprot.writeI32(struct.metricType);
+  BitSet optionals=new BitSet();
+  if (struct.is_set_longValue()) {
+    optionals.set(0);
+  }
+  if (struct.is_set_doubleValue()) {
+    optionals.set(1);
+  }
+  if (struct.is_set_m1()) {
+    optionals.set(2);
+  }
+  if (struct.is_set_m5()) {
+    optionals.set(3);
+  }
+  if (struct.is_set_m15()) {
+    optionals.set(4);
+  }
+  if (struct.is_set_mean()) {
+    optionals.set(5);
+  }
+  if (struct.is_set_min()) {
+    optionals.set(6);
+  }
+  if (struct.is_set_max()) {
+    optionals.set(7);
+  }
+  if (struct.is_set_p50()) {
+    optionals.set(8);
+  }
+  if (struct.is_set_p75()) {
+    optionals.set(9);
+  }
+  if (struct.is_set_p95()) {
+    optionals.set(10);
+  }
+  if (struct.is_set_p98()) {
+    optionals.set(11);
+  }
+  if (struct.is_set_p99()) {
+    optionals.set(12);
+  }
+  if (struct.is_set_p999()) {
+    optionals.set(13);
+  }
+  if (struct.is_set_stddev()) {
+    optionals.set(14);
+  }
+  if (struct.is_set_points()) {
+    optionals.set(15);
+  }
+  oprot.writeBitSet(optionals,16);
+  if (struct.is_set_longValue()) {
+    oprot.writeI64(struct.longValue);
+  }
+  if (struct.is_set_doubleValue()) {
+    oprot.writeDouble(struct.doubleValue);
+  }
+  if (struct.is_set_m1()) {
+    oprot.writeDouble(struct.m1);
+  }
+  if (struct.is_set_m5()) {
+    oprot.writeDouble(struct.m5);
+  }
+  if (struct.is_set_m15()) {
+    oprot.writeDouble(struct.m15);
+  }
+  if (struct.is_set_mean()) {
+    oprot.writeDouble(struct.mean);
+  }
+  if (struct.is_set_min()) {
+    oprot.writeI64(struct.min);
+  }
+  if (struct.is_set_max()) {
+    oprot.writeI64(struct.max);
+  }
+  if (struct.is_set_p50()) {
+    oprot.writeDouble(struct.p50);
+  }
+  if (struct.is_set_p75()) {
+    oprot.writeDouble(struct.p75);
+  }
+  if (struct.is_set_p95()) {
+    oprot.writeDouble(struct.p95);
+  }
+  if (struct.is_set_p98()) {
+    oprot.writeDouble(struct.p98);
+  }
+  if (struct.is_set_p99()) {
+    oprot.writeDouble(struct.p99);
+  }
+  if (struct.is_set_p999()) {
+    oprot.writeDouble(struct.p999);
+  }
+  if (struct.is_set_stddev()) {
+    oprot.writeDouble(struct.stddev);
+  }
+  if (struct.is_set_points()) {
+{
+      oprot.writeI32(struct.points.size());
+      for (      long _iter120 : struct.points) {
+        oprot.writeI64(_iter120);
+      }
+    }
+  }
+}

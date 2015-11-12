@@ -1,0 +1,156 @@
+{
+switch (field) {
+case METRIC_ID:
+    if (value == null) {
+      unset_metricId();
+    }
+ else {
+      set_metricId((Long)value);
+    }
+  break;
+case TS:
+if (value == null) {
+  unset_ts();
+}
+ else {
+  set_ts((Long)value);
+}
+break;
+case METRIC_TYPE:
+if (value == null) {
+unset_metricType();
+}
+ else {
+set_metricType((Integer)value);
+}
+break;
+case LONG_VALUE:
+if (value == null) {
+unset_longValue();
+}
+ else {
+set_longValue((Long)value);
+}
+break;
+case DOUBLE_VALUE:
+if (value == null) {
+unset_doubleValue();
+}
+ else {
+set_doubleValue((Double)value);
+}
+break;
+case M1:
+if (value == null) {
+unset_m1();
+}
+ else {
+set_m1((Double)value);
+}
+break;
+case M5:
+if (value == null) {
+unset_m5();
+}
+ else {
+set_m5((Double)value);
+}
+break;
+case M15:
+if (value == null) {
+unset_m15();
+}
+ else {
+set_m15((Double)value);
+}
+break;
+case MEAN:
+if (value == null) {
+unset_mean();
+}
+ else {
+set_mean((Double)value);
+}
+break;
+case MIN:
+if (value == null) {
+unset_min();
+}
+ else {
+set_min((Long)value);
+}
+break;
+case MAX:
+if (value == null) {
+unset_max();
+}
+ else {
+set_max((Long)value);
+}
+break;
+case P50:
+if (value == null) {
+unset_p50();
+}
+ else {
+set_p50((Double)value);
+}
+break;
+case P75:
+if (value == null) {
+unset_p75();
+}
+ else {
+set_p75((Double)value);
+}
+break;
+case P95:
+if (value == null) {
+unset_p95();
+}
+ else {
+set_p95((Double)value);
+}
+break;
+case P98:
+if (value == null) {
+unset_p98();
+}
+ else {
+set_p98((Double)value);
+}
+break;
+case P99:
+if (value == null) {
+unset_p99();
+}
+ else {
+set_p99((Double)value);
+}
+break;
+case P999:
+if (value == null) {
+unset_p999();
+}
+ else {
+set_p999((Double)value);
+}
+break;
+case STDDEV:
+if (value == null) {
+unset_stddev();
+}
+ else {
+set_stddev((Double)value);
+}
+break;
+case POINTS:
+if (value == null) {
+unset_points();
+}
+ else {
+set_points((List<Long>)value);
+}
+break;
+}
+}

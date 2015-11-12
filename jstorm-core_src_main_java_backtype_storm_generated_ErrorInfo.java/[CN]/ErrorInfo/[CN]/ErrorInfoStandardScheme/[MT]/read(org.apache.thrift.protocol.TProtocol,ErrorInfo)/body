@@ -18,8 +18,8 @@ case 1:
     break;
 case 2:
   if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-    struct.error_time_secs=iprot.readI32();
-    struct.set_error_time_secs_isSet(true);
+    struct.errorTimeSecs=iprot.readI32();
+    struct.set_errorTimeSecs_isSet(true);
   }
  else {
     org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);

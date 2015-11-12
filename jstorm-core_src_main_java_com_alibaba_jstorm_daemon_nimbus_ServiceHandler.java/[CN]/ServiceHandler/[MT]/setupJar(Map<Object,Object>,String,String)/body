@@ -26,6 +26,5 @@
     File destFile=new File(path);
     FileUtils.copyFile(srcFile,destFile);
     srcFile.delete();
-    return;
   }
 }

@@ -1,0 +1,4 @@
+def __init__(self, name=None, uploadedLocation=None, updateConf=None):
+    self.name = name
+    self.uploadedLocation = uploadedLocation
+    self.updateConf = updateConf

@@ -1,0 +1,12 @@
+{
+switch (field) {
+case TASK_HBS:
+    if (value == null) {
+      unset_taskHbs();
+    }
+ else {
+      set_taskHbs((TopologyTaskHbInfo)value);
+    }
+  break;
+}
+}

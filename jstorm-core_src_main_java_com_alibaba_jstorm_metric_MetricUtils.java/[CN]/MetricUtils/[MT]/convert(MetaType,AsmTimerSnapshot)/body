@@ -1,0 +1,32 @@
+{
+  MetricSnapshot ret=new MetricSnapshot();
+  ret.set_metricId(snapshot.getMetricId());
+  ret.set_ts(TimeUtils.alignTimeToMin(snapshot.getTs()));
+  ret.set_metricType(MetricType.TIMER.getT());
+  Snapshot ws=snapshot.getHistogram();
+  ret.set_min(ws.getMin());
+  ret.set_max(ws.getMax());
+  ret.set_p50(ws.getMedian());
+  ret.set_p75(ws.get75thPercentile());
+  ret.set_p95(ws.get95thPercentile());
+  ret.set_p98(ws.get98thPercentile());
+  ret.set_p99(ws.get99thPercentile());
+  ret.set_p999(ws.get999thPercentile());
+  ret.set_mean(ws.getMean());
+  ret.set_stddev(ws.getStdDev());
+  AsmMeterSnapshot ms=snapshot.getMeter();
+  ret.set_m1(ms.getM1());
+  ret.set_m15(ms.getM5());
+  ret.set_m15(ms.getM15());
+  if (metaType == MetaType.COMPONENT || metaType == MetaType.TOPOLOGY) {
+    List<Long> pts=Lists.newArrayListWithCapacity(ws.getValues().length);
+    for (    Long pt : ws.getValues()) {
+      pts.add(pt);
+    }
+    ret.set_points(pts);
+  }
+ else {
+    ret.set_points(new ArrayList<Long>(0));
+  }
+  return ret;
+}

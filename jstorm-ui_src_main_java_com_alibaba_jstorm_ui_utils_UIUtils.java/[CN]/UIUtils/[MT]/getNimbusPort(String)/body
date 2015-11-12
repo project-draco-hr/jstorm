@@ -1,0 +1,12 @@
+{
+  if (clusterConfig.containsKey(name)) {
+    Integer port=clusterConfig.get(name).getNimbusPort();
+    if (port == null) {
+      flushClusterConfig();
+      port=clusterConfig.get(name).getNimbusPort();
+    }
+    return port;
+  }
+  LOG.info("can not find the cluster with name:" + name);
+  return null;
+}

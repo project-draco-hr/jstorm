@@ -11,4 +11,6 @@ def recv_fetchRequest(self):
     iprot.readMessageEnd()
     if (result.success is not None):
         return result.success
+    if (result.aze is not None):
+        raise result.aze
     raise TApplicationException(TApplicationException.MISSING_RESULT, 'fetchRequest failed: unknown result')

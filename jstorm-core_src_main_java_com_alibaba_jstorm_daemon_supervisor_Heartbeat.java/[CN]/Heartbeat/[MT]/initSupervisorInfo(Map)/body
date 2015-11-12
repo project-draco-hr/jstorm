@@ -16,7 +16,7 @@
     supervisorInfo=new SupervisorInfo(myHostName,supervisorId,ports);
   }
  else {
-    Set<Integer> ports=JStormUtils.listToSet(portList.subList(0,1));
+    Set<Integer> ports=JStormUtils.listToSet(portList);
     supervisorInfo=new SupervisorInfo(myHostName,supervisorId,ports);
   }
 }

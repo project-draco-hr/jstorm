@@ -1,6 +1,9 @@
 {
-  stormClusterState.setup_heartbeats(topologyId);
   Map<Integer,TaskInfo> taskToTaskInfo=mkTaskComponentAssignments(conf,topologyId);
+  int masterId=NimbusUtils.getTopologyMasterId(taskToTaskInfo);
+  TopologyTaskHbInfo topoTaskHbinfo=new TopologyTaskHbInfo(topologyId,masterId);
+  data.getTasksHeartbeat().put(topologyId,topoTaskHbinfo);
+  stormClusterState.topology_heartbeat(topologyId,topoTaskHbinfo);
   if (taskToTaskInfo == null || taskToTaskInfo.size() == 0) {
     throw new InvalidTopologyException("Failed to generate TaskIDs map");
   }

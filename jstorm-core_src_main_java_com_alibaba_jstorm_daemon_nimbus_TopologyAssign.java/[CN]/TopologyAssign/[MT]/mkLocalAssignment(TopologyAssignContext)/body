@@ -8,7 +8,14 @@
     supervisorId=entry.getKey();
     localSupervisor=entry.getValue();
   }
-  int port=localSupervisor.getAvailableWorkerPorts().iterator().next();
+  int port=-1;
+  if (localSupervisor.getAvailableWorkerPorts().iterator().hasNext()) {
+    port=localSupervisor.getAvailableWorkerPorts().iterator().next();
+  }
+ else {
+    LOG.info(" amount of worker's ports is not enough");
+    throw new FailedAssignTopologyException("Failed to make assignment " + ", due to no enough ports");
+  }
   ResourceWorkerSlot worker=new ResourceWorkerSlot(supervisorId,port);
   worker.setTasks(new HashSet<Integer>(context.getAllTaskIds()));
   worker.setHostname(localSupervisor.getHostName());

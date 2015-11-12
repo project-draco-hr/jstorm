@@ -3,12 +3,8 @@
     throw new IllegalArgumentException();
   }
 switch (field) {
-case BASE_METRIC:
-    return is_set_baseMetric();
-case INPUT_METRIC:
-  return is_set_inputMetric();
-case OUTPUT_METRIC:
-return is_set_outputMetric();
+case METRICS:
+    return is_set_metrics();
 }
 throw new IllegalStateException();
 }

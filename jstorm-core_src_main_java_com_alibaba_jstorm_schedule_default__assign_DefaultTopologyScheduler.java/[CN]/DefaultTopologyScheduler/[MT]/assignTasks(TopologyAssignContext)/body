@@ -15,7 +15,7 @@
   ret.addAll(keepAssigns);
   ret.addAll(defaultContext.getUnstoppedWorkers());
   int allocWorkerNum=defaultContext.getTotalWorkerNum() - defaultContext.getUnstoppedWorkerNum() - keepAssigns.size();
-  LOG.info("allocWorkerNum=" + allocWorkerNum + ", totalWorkerNum="+ defaultContext.getTotalWorkerNum());
+  LOG.info("allocWorkerNum=" + allocWorkerNum + ", totalWorkerNum="+ defaultContext.getTotalWorkerNum()+ ", keepWorkerNum="+ keepAssigns.size());
   if (allocWorkerNum <= 0) {
     LOG.warn("Don't need assign workers, all workers are fine " + defaultContext.toDetailString());
     throw new FailedAssignTopologyException("Don't need assign worker, all workers are fine ");

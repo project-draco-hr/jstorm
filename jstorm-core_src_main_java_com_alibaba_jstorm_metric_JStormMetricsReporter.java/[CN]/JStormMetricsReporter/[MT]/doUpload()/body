@@ -1,0 +1,24 @@
+{
+  if (test) {
+    return;
+  }
+  try {
+    long start=System.currentTimeMillis();
+    MetricInfo workerMetricInfo=JStormMetrics.computeAllMetrics();
+    WorkerUploadMetrics upload=new WorkerUploadMetrics();
+    upload.set_topologyId(topologyId);
+    upload.set_supervisorId(host);
+    upload.set_port(port);
+    upload.set_allMetrics(workerMetricInfo);
+    if (workerMetricInfo.get_metrics_size() > 0) {
+      uploadMetric(upload);
+      LOG.info("Successfully upload worker metrics, size:{}, cost:{}",workerMetricInfo.get_metrics_size(),System.currentTimeMillis() - start);
+    }
+ else {
+      LOG.info("No metrics to upload.");
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to upload worker metrics",e);
+  }
+}

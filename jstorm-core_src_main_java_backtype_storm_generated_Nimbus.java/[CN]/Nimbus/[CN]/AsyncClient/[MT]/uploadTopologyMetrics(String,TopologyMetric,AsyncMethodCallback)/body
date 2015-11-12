@@ -1,0 +1,6 @@
+{
+  checkReady();
+  uploadTopologyMetrics_call method_call=new uploadTopologyMetrics_call(topologyId,topologyMetrics,resultHandler,this,___protocolFactory,___transport);
+  this.___currentMethod=method_call;
+  ___manager.call(method_call);
+}

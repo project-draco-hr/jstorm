@@ -4,7 +4,7 @@
   }
 switch (field) {
 case TASK_ID:
-    return is_set_task_id();
+    return is_set_taskId();
 case UPTIME:
   return is_set_uptime();
 case STATUS:

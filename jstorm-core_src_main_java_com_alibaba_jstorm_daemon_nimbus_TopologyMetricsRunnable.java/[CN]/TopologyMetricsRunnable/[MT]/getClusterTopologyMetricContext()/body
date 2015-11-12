@@ -1,0 +1,3 @@
+{
+  return topologyMetricContexts.get(JStormMetrics.CLUSTER_METRIC_KEY);
+}

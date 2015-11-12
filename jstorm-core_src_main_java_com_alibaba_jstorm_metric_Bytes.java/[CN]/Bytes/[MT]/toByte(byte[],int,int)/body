@@ -1,0 +1,6 @@
+{
+  if (length != SIZEOF_BYTE || offset + length > bytes.length) {
+    throw explainWrongLengthOrOffset(bytes,offset,length,SIZEOF_BYTE);
+  }
+  return bytes[offset];
+}

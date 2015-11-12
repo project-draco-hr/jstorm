@@ -1,6 +1,0 @@
-{
-  checkReady();
-  workerUploadMetric_call method_call=new workerUploadMetric_call(uploadMetrics,resultHandler,this,___protocolFactory,___transport);
-  this.___currentMethod=method_call;
-  ___manager.call(method_call);
-}

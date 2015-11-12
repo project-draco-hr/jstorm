@@ -18,11 +18,11 @@
     if (!(this_present_type && that_present_type))     return false;
     if (!this.type.equals(that.type))     return false;
   }
-  boolean this_present_task_ids=true && this.is_set_task_ids();
-  boolean that_present_task_ids=true && that.is_set_task_ids();
-  if (this_present_task_ids || that_present_task_ids) {
-    if (!(this_present_task_ids && that_present_task_ids))     return false;
-    if (!this.task_ids.equals(that.task_ids))     return false;
+  boolean this_present_taskIds=true && this.is_set_taskIds();
+  boolean that_present_taskIds=true && that.is_set_taskIds();
+  if (this_present_taskIds || that_present_taskIds) {
+    if (!(this_present_taskIds && that_present_taskIds))     return false;
+    if (!this.taskIds.equals(that.taskIds))     return false;
   }
   boolean this_present_errors=true && this.is_set_errors();
   boolean that_present_errors=true && that.is_set_errors();

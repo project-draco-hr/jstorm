@@ -1,0 +1,7 @@
+{
+  if (points != null) {
+    for (    Long pt : points) {
+      histogram.update(pt);
+    }
+  }
+}

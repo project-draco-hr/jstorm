@@ -1,0 +1,44 @@
+{
+  GlobalStreamId stream=null;
+  Grouping group=null;
+  Map<GlobalStreamId,Grouping> spout_inputs=new HashMap<GlobalStreamId,Grouping>();
+  Map<String,SpoutSpec> spout_ids=topology.get_spouts();
+  for (  Entry<String,SpoutSpec> spout : spout_ids.entrySet()) {
+    String id=spout.getKey();
+    stream=new GlobalStreamId(id,TOPOLOGY_MASTER_HB_STREAM_ID);
+    group=Thrift.mkAllGrouping();
+    spout_inputs.put(stream,group);
+    stream=new GlobalStreamId(id,TOPOLOGY_MASTER_METRICS_STREAM_ID);
+    group=Thrift.mkAllGrouping();
+    spout_inputs.put(stream,group);
+    stream=new GlobalStreamId(id,TOPOLOGY_MASTER_CONTROL_STREAM_ID);
+    group=Thrift.mkAllGrouping();
+    spout_inputs.put(stream,group);
+  }
+  Map<String,Bolt> bolt_ids=topology.get_bolts();
+  Map<GlobalStreamId,Grouping> bolt_inputs=new HashMap<GlobalStreamId,Grouping>();
+  for (  Entry<String,Bolt> bolt : bolt_ids.entrySet()) {
+    String id=bolt.getKey();
+    stream=new GlobalStreamId(id,TOPOLOGY_MASTER_HB_STREAM_ID);
+    group=Thrift.mkAllGrouping();
+    bolt_inputs.put(stream,group);
+    stream=new GlobalStreamId(id,TOPOLOGY_MASTER_METRICS_STREAM_ID);
+    group=Thrift.mkAllGrouping();
+    bolt_inputs.put(stream,group);
+    stream=new GlobalStreamId(id,TOPOLOGY_MASTER_CONTROL_STREAM_ID);
+    group=Thrift.mkAllGrouping();
+    bolt_inputs.put(stream,group);
+  }
+  Map<GlobalStreamId,Grouping> himself_inputs=new HashMap<GlobalStreamId,Grouping>();
+  stream=new GlobalStreamId(TOPOLOGY_MASTER_COMPONENT_ID,TOPOLOGY_MASTER_HB_STREAM_ID);
+  group=Thrift.mkAllGrouping();
+  himself_inputs.put(stream,group);
+  stream=new GlobalStreamId(TOPOLOGY_MASTER_COMPONENT_ID,TOPOLOGY_MASTER_METRICS_STREAM_ID);
+  group=Thrift.mkAllGrouping();
+  himself_inputs.put(stream,group);
+  Map<GlobalStreamId,Grouping> allInputs=new HashMap<GlobalStreamId,Grouping>();
+  allInputs.putAll(bolt_inputs);
+  allInputs.putAll(spout_inputs);
+  allInputs.putAll(himself_inputs);
+  return allInputs;
+}

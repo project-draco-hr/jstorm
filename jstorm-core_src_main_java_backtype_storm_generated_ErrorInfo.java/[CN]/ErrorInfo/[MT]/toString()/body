@@ -10,8 +10,8 @@
   }
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("error_time_secs:");
-  sb.append(this.error_time_secs);
+  sb.append("errorTimeSecs:");
+  sb.append(this.errorTimeSecs);
   first=false;
   sb.append(")");
   return sb.toString();

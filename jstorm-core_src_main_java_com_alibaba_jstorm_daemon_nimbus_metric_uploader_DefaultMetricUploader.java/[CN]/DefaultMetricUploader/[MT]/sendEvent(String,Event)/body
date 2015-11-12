@@ -1,0 +1,4 @@
+{
+  logger.info("Successfully sendEvent {} of {}",event,clusterName);
+  return true;
+}

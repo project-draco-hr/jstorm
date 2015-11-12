@@ -1,0 +1,22 @@
+{
+  String[] keyParts=new String(key).split(MetricUtils.DELIM);
+  long time=0;
+  if (keyParts.length >= 3) {
+    this.clusterName=keyParts[0];
+    this.topologyName=keyParts[1];
+    time=Long.valueOf(keyParts[2]);
+  }
+  String[] valueParts=new String(value).split(MetricUtils.DELIM);
+  if (valueParts.length >= 3) {
+    this.topologyId=valueParts[0];
+    String tag=valueParts[1];
+    if (tag.equals(KVSerializable.START)) {
+      this.start=new Date(time);
+    }
+ else {
+      this.end=new Date(time);
+    }
+    this.sampleRate=JStormUtils.parseDouble(valueParts[2],0.1d);
+  }
+  return this;
+}

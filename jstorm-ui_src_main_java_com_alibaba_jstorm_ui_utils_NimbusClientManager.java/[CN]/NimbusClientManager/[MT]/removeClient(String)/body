@@ -1,0 +1,9 @@
+{
+  if (StringUtils.isBlank(clusterName)) {
+    clusterName=UIDef.DEFAULT_CLUSTER_NAME;
+  }
+  NimbusClient client=(NimbusClient)clientManager.remove(clusterName);
+  if (client != null) {
+    client.close();
+  }
+}

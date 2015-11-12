@@ -3,15 +3,15 @@
   struct.supervisor.write(oprot);
 {
     oprot.writeI32(struct.workers.size());
-    for (    WorkerSummary _iter205 : struct.workers) {
-      _iter205.write(oprot);
+    for (    WorkerSummary _iter153 : struct.workers) {
+      _iter153.write(oprot);
     }
   }
 {
     oprot.writeI32(struct.workerMetric.size());
-    for (    Map.Entry<String,MetricInfo> _iter206 : struct.workerMetric.entrySet()) {
-      oprot.writeString(_iter206.getKey());
-      _iter206.getValue().write(oprot);
+    for (    Map.Entry<String,MetricInfo> _iter154 : struct.workerMetric.entrySet()) {
+      oprot.writeString(_iter154.getKey());
+      _iter154.getValue().write(oprot);
     }
   }
 }

@@ -1,0 +1,18 @@
+{
+  if (StringUtils.isBlank(dir)) {
+    dir=".";
+  }
+  Map conf=UIUtils.getNimbusConf(clusterName);
+  Event event=new Event(clusterName,host,logServerPort,logName,topologyId,workerPort,pos,dir,conf);
+  try {
+    requestLog(event,model);
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  model.addAttribute("logName",event.logName);
+  model.addAttribute("host",host);
+  model.addAttribute("dir",event.dir);
+  model.addAttribute("clusterName",clusterName);
+  return "log";
+}

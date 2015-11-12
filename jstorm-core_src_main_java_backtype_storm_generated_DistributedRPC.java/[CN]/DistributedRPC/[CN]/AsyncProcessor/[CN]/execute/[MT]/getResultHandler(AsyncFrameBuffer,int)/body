@@ -22,6 +22,11 @@
         result.set_e_isSet(true);
         msg=result;
       }
+ else       if (e instanceof AuthorizationException) {
+        result.aze=(AuthorizationException)e;
+        result.set_aze_isSet(true);
+        msg=result;
+      }
  else {
         msgType=org.apache.thrift.protocol.TMessageType.EXCEPTION;
         msg=(org.apache.thrift.TBase)new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.INTERNAL_ERROR,e.getMessage());

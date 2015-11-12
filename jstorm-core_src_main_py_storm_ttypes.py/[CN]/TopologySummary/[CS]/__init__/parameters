@@ -2,7 +2,7 @@ self
 id
 name
 status
-uptime_secs
-num_tasks
-num_workers
-error_info
+uptimeSecs
+numTasks
+numWorkers
+errorInfo

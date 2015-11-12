@@ -1,0 +1,24 @@
+{
+  if (tpMetric.get_topologyMetric().get_metrics_size() > 0) {
+    TopologyMetricContext context=getClusterTopologyMetricContext();
+    MetricInfo topologyMetrics=tpMetric.get_topologyMetric();
+    MetricInfo clusterMetrics=MetricUtils.mkMetricInfo();
+    Set<String> metricNames=new HashSet<>();
+    for (    Map.Entry<String,Map<Integer,MetricSnapshot>> entry : topologyMetrics.get_metrics().entrySet()) {
+      String metricName=MetricUtils.topo2clusterName(entry.getKey());
+      MetricType metricType=MetricUtils.metricType(metricName);
+      Map<Integer,MetricSnapshot> winData=new HashMap<>();
+      for (      Map.Entry<Integer,MetricSnapshot> entryData : entry.getValue().entrySet()) {
+        MetricSnapshot snapshot=entryData.getValue().deepCopy();
+        winData.put(entryData.getKey(),snapshot);
+        if (metricType == MetricType.HISTOGRAM || metricType == MetricType.TIMER) {
+          entryData.getValue().set_points(new ArrayList<Long>(0));
+        }
+      }
+      clusterMetrics.put_to_metrics(metricName,winData);
+      metricNames.add(metricName);
+    }
+    context.addToMemCache(topologyId,clusterMetrics);
+    registerMetrics(JStormMetrics.CLUSTER_METRIC_KEY,metricNames);
+  }
+}

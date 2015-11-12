@@ -1,8 +1,8 @@
-def __init__(self, nimbus_master=None, nimbus_slaves=None, supervisor_num=None, total_port_num=None, used_port_num=None, free_port_num=None, version=None):
-    self.nimbus_master = nimbus_master
-    self.nimbus_slaves = nimbus_slaves
-    self.supervisor_num = supervisor_num
-    self.total_port_num = total_port_num
-    self.used_port_num = used_port_num
-    self.free_port_num = free_port_num
+def __init__(self, nimbusMaster=None, nimbusSlaves=None, supervisorNum=None, totalPortNum=None, usedPortNum=None, freePortNum=None, version=None):
+    self.nimbusMaster = nimbusMaster
+    self.nimbusSlaves = nimbusSlaves
+    self.supervisorNum = supervisorNum
+    self.totalPortNum = totalPortNum
+    self.usedPortNum = usedPortNum
+    self.freePortNum = freePortNum
     self.version = version

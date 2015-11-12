@@ -1,0 +1,27 @@
+{
+  String NODE_DIM=MetricDef.EMMITTED_NUM;
+  List<String> FILTER=Arrays.asList(MetricDef.EMMITTED_NUM,MetricDef.SEND_TPS,MetricDef.RECV_TPS);
+  for (  MetricInfo info : componentMetrics) {
+    if (info == null)     continue;
+    for (    Map.Entry<String,Map<Integer,MetricSnapshot>> metric : info.get_metrics().entrySet()) {
+      String name=metric.getKey();
+      String[] split_name=name.split("@");
+      String metricName=UIMetricUtils.extractMetricName(split_name);
+      String compName=UIMetricUtils.extractComponentName(split_name);
+      TopologyNode node=nodes.get(compName);
+      if (node != null && FILTER.contains(metricName)) {
+        for (        Map.Entry<Integer,MetricSnapshot> winData : metric.getValue().entrySet()) {
+          node.putMapValue(metricName,winData.getKey(),UIMetricUtils.getMetricValue(winData.getValue()));
+        }
+      }
+      if (metricName == null || !metricName.equals(NODE_DIM)) {
+        continue;
+      }
+      MetricSnapshot snapshot=metric.getValue().get(AsmWindow.M1_WINDOW);
+      if (node != null) {
+        node.setValue(snapshot.get_longValue());
+        nodes.get(compName).setTitle("Emitted: " + UIMetricUtils.getMetricValue(snapshot));
+      }
+    }
+  }
+}

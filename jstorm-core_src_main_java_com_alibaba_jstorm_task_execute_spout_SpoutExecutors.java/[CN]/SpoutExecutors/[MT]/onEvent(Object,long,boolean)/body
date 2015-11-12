@@ -6,10 +6,12 @@
     }
     Runnable runnable=null;
     if (event instanceof Tuple) {
+      processControlEvent();
       runnable=processTupleEvent((Tuple)event);
     }
  else     if (event instanceof BatchTuple) {
       for (      Tuple tuple : ((BatchTuple)event).getTuples()) {
+        processControlEvent();
         runnable=processTupleEvent(tuple);
         if (runnable != null) {
           runnable.run();
@@ -41,6 +43,6 @@
   }
  finally {
     long end=System.nanoTime();
-    ackerTimer.update((end - start) / 1000000.0d);
+    ackerTimer.update((end - start) / TimeUtils.NS_PER_US);
   }
 }

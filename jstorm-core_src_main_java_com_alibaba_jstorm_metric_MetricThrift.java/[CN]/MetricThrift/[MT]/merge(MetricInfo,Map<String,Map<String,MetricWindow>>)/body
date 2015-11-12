@@ -1,6 +1,0 @@
-{
-  for (  Entry<String,Map<String,MetricWindow>> entry : extraMap.entrySet()) {
-    String metricName=entry.getKey();
-    metricInfo.put_to_baseMetric(metricName,merge(entry.getValue()));
-  }
-}

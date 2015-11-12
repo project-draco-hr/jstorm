@@ -1,4 +1,4 @@
 {
-  cache=new NimbusCache(conf,stormClusterState);
-  ((StormZkClusterState)stormClusterState).setCache(cache.getMemCache());
+  nimbusCache=new NimbusCache(conf,stormClusterState);
+  ((StormZkClusterState)stormClusterState).setCache(nimbusCache.getMemCache());
 }

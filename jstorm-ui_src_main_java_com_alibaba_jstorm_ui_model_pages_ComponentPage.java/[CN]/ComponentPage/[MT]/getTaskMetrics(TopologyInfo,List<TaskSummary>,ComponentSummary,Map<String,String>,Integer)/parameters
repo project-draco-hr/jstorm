@@ -1,5 +1,0 @@
-TopologyInfo topologyInfo
-List<TaskSummary> showTasks
-ComponentSummary componentSummary
-Map<String,String> paramMap
-Integer window

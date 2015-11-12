@@ -1,0 +1,3 @@
+def __init__(self, time=None, uptime=None):
+    self.time = time
+    self.uptime = uptime

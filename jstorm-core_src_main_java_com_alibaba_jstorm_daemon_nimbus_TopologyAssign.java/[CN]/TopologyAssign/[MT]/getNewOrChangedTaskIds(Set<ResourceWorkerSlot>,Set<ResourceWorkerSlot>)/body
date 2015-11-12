@@ -10,7 +10,9 @@
       }
     }
  else {
-      rtn.addAll(worker.getTasks());
+      if (worker.getTasks() != null) {
+        rtn.addAll(worker.getTasks());
+      }
     }
   }
   return rtn;

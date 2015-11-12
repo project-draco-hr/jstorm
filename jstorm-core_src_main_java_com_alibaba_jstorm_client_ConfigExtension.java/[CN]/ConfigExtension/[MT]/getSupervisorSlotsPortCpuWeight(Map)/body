@@ -1,8 +1,8 @@
 {
   Object value=conf.get(SUPERVISOR_SLOTS_PORT_CPU_WEIGHT);
   Double ret=JStormUtils.convertToDouble(value);
-  if (ret == null) {
-    return 1.0;
+  if (ret == null || ret <= 0) {
+    return 1.2;
   }
  else {
     return ret;

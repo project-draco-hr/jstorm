@@ -22,7 +22,9 @@
   name=remote_addr.toString();
   connectMyself=isConnectMyself(stormConf,host,port);
   address=JStormServerUtils.getName(host,port);
-  if (connectMyself == false) {
+  this.enableNettyMetrics=MetricUtils.isEnableNettyMetrics(storm_conf);
+  LOG.info("** enable netty metrics: {}",this.enableNettyMetrics);
+  if (!connectMyself) {
     registerMetrics();
   }
   closingChannel=new HashSet<Channel>();

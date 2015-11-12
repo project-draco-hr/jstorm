@@ -1,0 +1,8 @@
+{
+  if (sampleRate == null) {
+    this.sampleRate=1.0d;
+  }
+ else {
+    this.sampleRate=sampleRate;
+  }
+}

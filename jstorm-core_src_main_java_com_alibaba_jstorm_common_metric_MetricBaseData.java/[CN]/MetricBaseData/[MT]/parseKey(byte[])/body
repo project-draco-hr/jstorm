@@ -1,0 +1,5 @@
+{
+  this.metricId=Bytes.toLong(key,0,KVSerializable.LONG_SIZE);
+  this.win=Bytes.toInt(key,8,KVSerializable.INT_SIZE);
+  this.ts=new Date(Bytes.toLong(key,12,KVSerializable.LONG_SIZE));
+}

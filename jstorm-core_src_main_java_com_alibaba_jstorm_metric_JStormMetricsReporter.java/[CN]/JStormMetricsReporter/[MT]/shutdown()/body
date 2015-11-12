@@ -1,6 +1,6 @@
 {
-  if (client != null) {
-    client.close();
-    client=null;
+  if (!localMode && enableMetrics) {
+    this.checkMetricMetaThread.cleanup();
+    this.flushMetricThread.cleanup();
   }
 }

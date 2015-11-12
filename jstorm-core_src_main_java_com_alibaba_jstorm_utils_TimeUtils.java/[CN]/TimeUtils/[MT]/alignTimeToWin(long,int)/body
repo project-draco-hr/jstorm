@@ -1,0 +1,20 @@
+{
+  if (win != AsmWindow.D1_WINDOW) {
+    long curTimeSec=ts / 1000;
+    return (curTimeSec - curTimeSec % win) * 1000;
+  }
+ else {
+    Calendar cal=Calendar.getInstance();
+    cal.setTimeInMillis(ts);
+    int year=cal.get(Calendar.YEAR);
+    int month=cal.get(Calendar.MONTH);
+    int day=cal.get(Calendar.DAY_OF_MONTH);
+    int hour=cal.get(Calendar.HOUR);
+    int min=cal.get(Calendar.MINUTE);
+    int sec=cal.get(Calendar.SECOND);
+    if (sec + min + hour > 0) {
+      cal.set(year,month,day + 1,0,0,0);
+    }
+    return cal.getTimeInMillis();
+  }
+}

@@ -1,9 +1,0 @@
-{
-switch (field) {
-case CONNECTIONS:
-    return get_connections();
-case CONNECTION_NUM:
-  return Integer.valueOf(get_connectionNum());
-}
-throw new IllegalStateException();
-}

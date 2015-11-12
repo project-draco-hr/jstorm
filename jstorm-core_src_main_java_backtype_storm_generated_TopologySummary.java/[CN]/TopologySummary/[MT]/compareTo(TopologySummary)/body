@@ -33,42 +33,42 @@
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_uptime_secs()).compareTo(other.is_set_uptime_secs());
+  lastComparison=Boolean.valueOf(is_set_uptimeSecs()).compareTo(other.is_set_uptimeSecs());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_uptime_secs()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.uptime_secs,other.uptime_secs);
+  if (is_set_uptimeSecs()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.uptimeSecs,other.uptimeSecs);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_num_tasks()).compareTo(other.is_set_num_tasks());
+  lastComparison=Boolean.valueOf(is_set_numTasks()).compareTo(other.is_set_numTasks());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_num_tasks()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_tasks,other.num_tasks);
+  if (is_set_numTasks()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.numTasks,other.numTasks);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_num_workers()).compareTo(other.is_set_num_workers());
+  lastComparison=Boolean.valueOf(is_set_numWorkers()).compareTo(other.is_set_numWorkers());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_num_workers()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.num_workers,other.num_workers);
+  if (is_set_numWorkers()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.numWorkers,other.numWorkers);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_error_info()).compareTo(other.is_set_error_info());
+  lastComparison=Boolean.valueOf(is_set_errorInfo()).compareTo(other.is_set_errorInfo());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_error_info()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.error_info,other.error_info);
+  if (is_set_errorInfo()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.errorInfo,other.errorInfo);
     if (lastComparison != 0) {
       return lastComparison;
     }

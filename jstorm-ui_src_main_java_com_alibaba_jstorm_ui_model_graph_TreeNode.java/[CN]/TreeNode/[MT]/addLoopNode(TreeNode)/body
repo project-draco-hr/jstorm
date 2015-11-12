@@ -1,0 +1,10 @@
+{
+  if (loopNodes.contains(node) || node.getLoopNodes().contains(this)) {
+    return false;
+  }
+ else {
+    loopNodes.add(node);
+    node.getLoopNodes().add(this);
+    return true;
+  }
+}

@@ -3,6 +3,6 @@
   set_parallel_isSet(false);
   this.parallel=0;
   this.type=null;
-  this.task_ids=null;
+  this.taskIds=null;
   this.errors=null;
 }

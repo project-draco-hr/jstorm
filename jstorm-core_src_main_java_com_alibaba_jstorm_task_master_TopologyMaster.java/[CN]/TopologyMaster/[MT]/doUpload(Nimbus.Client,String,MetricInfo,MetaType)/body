@@ -1,0 +1,19 @@
+{
+  try {
+    if (metaType == MetaType.TASK) {
+      client.uploadTopologyMetrics(topologyId,new TopologyMetric(dummy,dummy,dummy,part,dummy,dummy));
+    }
+ else     if (metaType == MetaType.STREAM) {
+      client.uploadTopologyMetrics(topologyId,new TopologyMetric(dummy,dummy,dummy,dummy,part,dummy));
+    }
+ else     if (metaType == MetaType.WORKER) {
+      client.uploadTopologyMetrics(topologyId,new TopologyMetric(dummy,dummy,part,dummy,dummy,dummy));
+    }
+ else     if (metaType == MetaType.NETTY) {
+      client.uploadTopologyMetrics(topologyId,new TopologyMetric(dummy,dummy,dummy,dummy,dummy,part));
+    }
+  }
+ catch (  Exception ex) {
+    LOG.error("Error",ex);
+  }
+}

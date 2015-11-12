@@ -1,0 +1,21 @@
+{
+  if (type == MetaType.TASK) {
+    return topologyMetric.get_taskMetric();
+  }
+ else   if (type == MetaType.WORKER) {
+    return topologyMetric.get_workerMetric();
+  }
+ else   if (type == MetaType.COMPONENT) {
+    return topologyMetric.get_componentMetric();
+  }
+ else   if (type == MetaType.STREAM) {
+    return topologyMetric.get_streamMetric();
+  }
+ else   if (type == MetaType.NETTY) {
+    return topologyMetric.get_nettyMetric();
+  }
+ else   if (type == MetaType.TOPOLOGY) {
+    return topologyMetric.get_topologyMetric();
+  }
+  return null;
+}

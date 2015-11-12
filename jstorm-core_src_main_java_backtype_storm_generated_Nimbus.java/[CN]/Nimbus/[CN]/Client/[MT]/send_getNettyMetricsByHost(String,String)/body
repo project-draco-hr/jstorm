@@ -1,0 +1,6 @@
+{
+  getNettyMetricsByHost_args args=new getNettyMetricsByHost_args();
+  args.set_topologyId(topologyId);
+  args.set_host(host);
+  sendBase("getNettyMetricsByHost",args);
+}

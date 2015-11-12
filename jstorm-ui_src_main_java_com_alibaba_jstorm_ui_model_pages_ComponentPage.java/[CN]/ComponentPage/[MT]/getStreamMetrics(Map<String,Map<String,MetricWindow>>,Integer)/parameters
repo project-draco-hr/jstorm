@@ -1,2 +1,0 @@
-Map<String,Map<String,MetricWindow>> streamMetric
-Integer window

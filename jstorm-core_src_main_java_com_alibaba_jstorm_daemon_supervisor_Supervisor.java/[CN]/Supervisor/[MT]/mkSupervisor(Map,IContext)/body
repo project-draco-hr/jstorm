@@ -3,6 +3,8 @@
   String path=StormConfig.supervisorTmpDir(conf);
   FileUtils.cleanDirectory(new File(path));
   StormClusterState stormClusterState=Cluster.mk_storm_cluster_state(conf);
+  String hostName=JStormServerUtils.getHostName(conf);
+  WorkerReportError workerReportError=new WorkerReportError(stormClusterState,hostName);
   LocalState localState=StormConfig.supervisorState(conf);
   String supervisorId=(String)localState.get(Common.LS_ID);
   if (supervisorId == null) {
@@ -22,7 +24,7 @@
   AsyncLoopThread processEventThread=new AsyncLoopThread(processEventManager);
   threads.add(processEventThread);
   ConcurrentHashMap<String,String> workerThreadPids=new ConcurrentHashMap<String,String>();
-  SyncProcessEvent syncProcessEvent=new SyncProcessEvent(supervisorId,conf,localState,workerThreadPids,sharedContext);
+  SyncProcessEvent syncProcessEvent=new SyncProcessEvent(supervisorId,conf,localState,workerThreadPids,sharedContext,workerReportError);
   EventManagerImp syncSupEventManager=new EventManagerImp();
   AsyncLoopThread syncSupEventThread=new AsyncLoopThread(syncSupEventManager);
   threads.add(syncSupEventThread);

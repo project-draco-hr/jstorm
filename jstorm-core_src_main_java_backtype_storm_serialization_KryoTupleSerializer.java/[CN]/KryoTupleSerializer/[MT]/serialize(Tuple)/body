@@ -1,16 +1,5 @@
 {
-  try {
-    _kryoOut.clear();
-    if (tuple instanceof TupleExt) {
-      _kryoOut.writeInt(((TupleExt)tuple).getTargetTaskId());
-    }
-    _kryoOut.writeInt(tuple.getSourceTask(),true);
-    _kryoOut.writeInt(_ids.getStreamId(tuple.getSourceComponent(),tuple.getSourceStreamId()),true);
-    tuple.getMessageId().serialize(_kryoOut);
-    _kryo.serializeInto(tuple.getValues(),_kryoOut);
-    return _kryoOut.toBytes();
-  }
- catch (  IOException e) {
-    throw new RuntimeException(e);
-  }
+  _kryoOut.clear();
+  serializeTuple(_kryoOut,tuple);
+  return _kryoOut.toBytes();
 }

@@ -1,0 +1,14 @@
+{
+  Map<String,Object> metricMap=convertMap(clusterName,topologyId,tpMetric);
+  if (metricMap == null || metricMap.isEmpty() == true) {
+    return false;
+  }
+  try {
+    sendRequest(collectionFlag,errorInfo,metricMap);
+    return true;
+  }
+ catch (  Exception e) {
+    LOG.error("Failed upload metric to Alimonitor",e);
+    return false;
+  }
+}

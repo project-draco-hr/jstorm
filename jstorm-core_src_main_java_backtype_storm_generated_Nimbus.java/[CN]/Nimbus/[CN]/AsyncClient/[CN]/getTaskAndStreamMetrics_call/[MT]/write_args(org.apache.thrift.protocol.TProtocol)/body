@@ -1,0 +1,8 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getTaskAndStreamMetrics",org.apache.thrift.protocol.TMessageType.CALL,0));
+  getTaskAndStreamMetrics_args args=new getTaskAndStreamMetrics_args();
+  args.set_topologyId(topologyId);
+  args.set_taskId(taskId);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

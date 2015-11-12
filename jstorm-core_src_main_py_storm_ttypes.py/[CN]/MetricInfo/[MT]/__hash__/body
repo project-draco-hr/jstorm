@@ -1,6 +1,4 @@
 def __hash__(self):
     value = 17
-    value = ((value * 31) ^ hash(self.baseMetric))
-    value = ((value * 31) ^ hash(self.inputMetric))
-    value = ((value * 31) ^ hash(self.outputMetric))
+    value = ((value * 31) ^ hash(self.metrics))
     return value

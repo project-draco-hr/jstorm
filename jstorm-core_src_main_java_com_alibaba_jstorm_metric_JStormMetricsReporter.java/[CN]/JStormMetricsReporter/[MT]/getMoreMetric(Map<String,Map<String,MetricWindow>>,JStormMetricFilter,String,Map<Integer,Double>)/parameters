@@ -1,4 +1,0 @@
-Map<String,Map<String,MetricWindow>> extraMap
-JStormMetricFilter metricFilter
-String metricFullName
-Map<Integer,Double> metricWindow

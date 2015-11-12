@@ -1,3 +1,0 @@
-def __init__(self, connections=None, connectionNum=None):
-    self.connections = connections
-    self.connectionNum = connectionNum

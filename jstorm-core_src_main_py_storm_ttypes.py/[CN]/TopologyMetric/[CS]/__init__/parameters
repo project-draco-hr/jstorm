@@ -3,3 +3,5 @@ topologyMetric
 componentMetric
 workerMetric
 taskMetric
+streamMetric
+nettyMetric

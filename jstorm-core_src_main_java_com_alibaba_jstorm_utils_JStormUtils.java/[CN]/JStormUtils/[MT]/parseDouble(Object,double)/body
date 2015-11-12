@@ -1,0 +1,11 @@
+{
+  if (o == null) {
+    return defaultValue;
+  }
+  try {
+    return parseDouble(o);
+  }
+ catch (  Exception ignored) {
+    return defaultValue;
+  }
+}

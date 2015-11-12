@@ -1,0 +1,5 @@
+{
+  this.metricRunnable.start();
+  this.metricsReporter=new JStormMetricsReporter(this);
+  this.metricsReporter.init();
+}

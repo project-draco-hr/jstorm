@@ -36,6 +36,24 @@
     sb.append(this.taskMetric);
   }
   first=false;
+  if (!first)   sb.append(", ");
+  sb.append("streamMetric:");
+  if (this.streamMetric == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.streamMetric);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("nettyMetric:");
+  if (this.nettyMetric == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.nettyMetric);
+  }
+  first=false;
   sb.append(")");
   return sb.toString();
 }

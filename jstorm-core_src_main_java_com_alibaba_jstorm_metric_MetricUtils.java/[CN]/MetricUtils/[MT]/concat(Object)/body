@@ -1,0 +1,12 @@
+{
+  StringBuilder sb=new StringBuilder(50);
+  int last=args.length - 1;
+  if (args[last] instanceof String) {
+    args[last]=removeDelimIfPossible((String)args[last]);
+  }
+  for (  Object arg : args) {
+    sb.append(arg).append(DELIM);
+  }
+  sb.deleteCharAt(sb.length() - 1);
+  return sb.toString();
+}

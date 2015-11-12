@@ -1,0 +1,5 @@
+{
+  List<String> subDirs=null;
+  subDirs=cluster_state.get_children(path,watch);
+  return subDirs;
+}

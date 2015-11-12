@@ -1,7 +1,7 @@
 {
 switch (field) {
 case TASK_ID:
-    return Integer.valueOf(get_task_id());
+    return Integer.valueOf(get_taskId());
 case UPTIME:
   return Integer.valueOf(get_uptime());
 case STATUS:

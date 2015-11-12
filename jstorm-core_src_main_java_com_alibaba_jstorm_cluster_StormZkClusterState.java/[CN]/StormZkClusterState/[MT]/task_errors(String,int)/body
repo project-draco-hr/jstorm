@@ -1,8 +1,10 @@
 {
-  String path=Cluster.taskerror_path(topologyId,taskId);
-  cluster_state.mkdirs(path);
-  List<String> children=cluster_state.get_children(path,false);
   List<TaskError> errors=new ArrayList<TaskError>();
+  String path=Cluster.taskerror_path(topologyId,taskId);
+  if (cluster_state.node_existed(path,false) == false) {
+    return errors;
+  }
+  List<String> children=cluster_state.get_children(path,false);
   for (  String str : children) {
     byte[] v=cluster_state.get_data(path + "/" + str,false);
     if (v != null) {

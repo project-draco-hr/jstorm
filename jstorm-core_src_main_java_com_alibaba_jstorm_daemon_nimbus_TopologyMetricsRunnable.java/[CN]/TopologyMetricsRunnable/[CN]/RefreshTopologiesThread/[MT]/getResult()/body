@@ -1,0 +1,3 @@
+{
+  return TimeUtils.SEC_PER_MIN;
+}

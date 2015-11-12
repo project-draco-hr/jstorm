@@ -7,9 +7,9 @@ def write(self, oprot):
         oprot.writeFieldBegin('host', TType.STRING, 1)
         oprot.writeString(self.host.encode('utf-8'))
         oprot.writeFieldEnd()
-    if (self.uptime_secs is not None):
-        oprot.writeFieldBegin('uptime_secs', TType.STRING, 2)
-        oprot.writeString(self.uptime_secs.encode('utf-8'))
+    if (self.uptimeSecs is not None):
+        oprot.writeFieldBegin('uptimeSecs', TType.STRING, 2)
+        oprot.writeString(self.uptimeSecs.encode('utf-8'))
         oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()

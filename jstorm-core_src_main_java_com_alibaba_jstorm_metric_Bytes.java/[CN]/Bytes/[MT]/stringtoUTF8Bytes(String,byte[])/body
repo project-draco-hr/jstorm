@@ -1,0 +1,19 @@
+{
+  int index=0;
+  for (int i=0; i < str.length(); i++) {
+    char strChar=str.charAt(i);
+    if ((strChar & 0xFF80) == 0) {
+      buffer[index++]=(byte)(strChar & 0x00FF);
+    }
+ else     if ((strChar & 0xF800) == 0) {
+      buffer[index++]=(byte)((strChar >> 6) | 0x00c0);
+      buffer[index++]=(byte)((strChar & 0x003F) | 0x0080);
+    }
+ else {
+      buffer[index++]=(byte)((strChar >> 12) | 0x00e0);
+      buffer[index++]=(byte)(((strChar >> 6) & 0x003F) | 0x0080);
+      buffer[index++]=(byte)((strChar & 0x003F) | 0x0080);
+    }
+  }
+  return index;
+}

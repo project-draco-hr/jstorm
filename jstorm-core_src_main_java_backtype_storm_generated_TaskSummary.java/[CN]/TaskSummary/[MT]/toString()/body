@@ -1,8 +1,8 @@
 {
   StringBuilder sb=new StringBuilder("TaskSummary(");
   boolean first=true;
-  sb.append("task_id:");
-  sb.append(this.task_id);
+  sb.append("taskId:");
+  sb.append(this.taskId);
   first=false;
   if (!first)   sb.append(", ");
   sb.append("uptime:");

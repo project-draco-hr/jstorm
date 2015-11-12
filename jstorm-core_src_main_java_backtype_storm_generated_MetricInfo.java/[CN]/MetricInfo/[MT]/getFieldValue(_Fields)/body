@@ -1,11 +1,7 @@
 {
 switch (field) {
-case BASE_METRIC:
-    return get_baseMetric();
-case INPUT_METRIC:
-  return get_inputMetric();
-case OUTPUT_METRIC:
-return get_outputMetric();
+case METRICS:
+    return get_metrics();
 }
 throw new IllegalStateException();
 }

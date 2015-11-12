@@ -1,5 +1,0 @@
-{
-  getServerNettyMetric_result result=new getServerNettyMetric_result();
-  result.success=iface.getServerNettyMetric(args.topologyName,args.serverName);
-  return result;
-}

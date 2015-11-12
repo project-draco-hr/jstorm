@@ -1,0 +1,14 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TOPOLOGY_ID:
+    return is_set_topologyId();
+case HOST:
+  return is_set_host();
+case PAGE:
+return is_set_page();
+}
+throw new IllegalStateException();
+}

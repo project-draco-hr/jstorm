@@ -1,0 +1,56 @@
+{
+  long start=System.currentTimeMillis();
+  if (getMemCache().size() == 0) {
+    return null;
+  }
+  if (isMerging()) {
+    LOG.info("topology {} is already merging, skip...",topologyId);
+    return null;
+  }
+  setMerging(true);
+  try {
+    Map<String,MetricInfo> workerMetricMap=this.memCache;
+    this.memCache=new ConcurrentHashMap<>();
+    MetricInfo topologyMetrics=MetricUtils.mkMetricInfo();
+    MetricInfo componentMetrics=MetricUtils.mkMetricInfo();
+    MetricInfo taskMetrics=MetricUtils.mkMetricInfo();
+    MetricInfo streamMetrics=MetricUtils.mkMetricInfo();
+    MetricInfo workerMetrics=MetricUtils.mkMetricInfo();
+    MetricInfo nettyMetrics=MetricUtils.mkMetricInfo();
+    TopologyMetric tpMetric=new TopologyMetric(topologyMetrics,componentMetrics,workerMetrics,taskMetrics,streamMetrics,nettyMetrics);
+    Map<String,Integer> metricNameCounters=new HashMap<>();
+    Map<String,Map<Integer,Histogram>> histograms=new HashMap<>();
+    Map<String,Map<Integer,Timer>> timers=new HashMap<>();
+    for (    ConcurrentMap.Entry<String,MetricInfo> metricEntry : workerMetricMap.entrySet()) {
+      MetricInfo metricInfo=metricEntry.getValue();
+      Map<String,Map<Integer,MetricSnapshot>> metrics=metricInfo.get_metrics();
+      for (      Map.Entry<String,Map<Integer,MetricSnapshot>> metric : metrics.entrySet()) {
+        String metricName=metric.getKey();
+        Map<Integer,MetricSnapshot> data=metric.getValue();
+        MetaType metaType=MetricUtils.metaType(metricName);
+        MetricType metricType=MetricUtils.metricType(metricName);
+        if (metricType == MetricType.COUNTER) {
+          mergeCounters(tpMetric,metaType,metricName,data);
+        }
+ else         if (metricType == MetricType.GAUGE) {
+          mergeGauges(tpMetric,metaType,metricName,data);
+        }
+ else         if (metricType == MetricType.METER) {
+          mergeMeters(getMetricInfoByType(tpMetric,metaType),metricName,data,metricNameCounters);
+        }
+ else         if (metricType == MetricType.HISTOGRAM) {
+          mergeHistograms(getMetricInfoByType(tpMetric,metaType),metricName,data,metricNameCounters,histograms);
+        }
+ else         if (metricType == MetricType.TIMER) {
+          mergeTimers(getMetricInfoByType(tpMetric,metaType),metricName,data,metricNameCounters,timers);
+        }
+      }
+    }
+    adjustHistogramTimerMetrics(tpMetric,metricNameCounters,histograms,timers);
+    LOG.info("merge topology metrics:{}, cost:{}",topologyId,System.currentTimeMillis() - start);
+    return tpMetric;
+  }
+  finally {
+    setMerging(false);
+  }
+}

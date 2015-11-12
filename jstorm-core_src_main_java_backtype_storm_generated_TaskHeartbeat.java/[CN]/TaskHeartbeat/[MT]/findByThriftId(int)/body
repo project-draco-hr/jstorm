@@ -1,0 +1,10 @@
+{
+switch (fieldId) {
+case 1:
+    return TIME;
+case 2:
+  return UPTIME;
+default :
+return null;
+}
+}

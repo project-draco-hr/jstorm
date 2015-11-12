@@ -1,3 +1,0 @@
-{
-  conf.put(TOPOLOGY_ENABLE_NETTY_METRICS,enable);
-}

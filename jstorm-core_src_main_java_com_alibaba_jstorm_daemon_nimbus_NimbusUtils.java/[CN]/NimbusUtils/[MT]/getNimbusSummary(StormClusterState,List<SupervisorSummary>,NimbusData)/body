@@ -3,29 +3,29 @@
   String master=stormClusterState.get_leader_host();
   NimbusStat nimbusMaster=new NimbusStat();
   nimbusMaster.set_host(master);
-  nimbusMaster.set_uptime_secs(String.valueOf(data.uptime()));
-  ret.set_nimbus_master(nimbusMaster);
+  nimbusMaster.set_uptimeSecs(String.valueOf(data.uptime()));
+  ret.set_nimbusMaster(nimbusMaster);
   List<NimbusStat> nimbusSlaveList=new ArrayList<NimbusStat>();
-  ret.set_nimbus_slaves(nimbusSlaveList);
+  ret.set_nimbusSlaves(nimbusSlaveList);
   Map<String,String> nimbusSlaveMap=Cluster.get_all_nimbus_slave(stormClusterState);
   if (nimbusSlaveMap != null) {
     for (    Entry<String,String> entry : nimbusSlaveMap.entrySet()) {
       NimbusStat slave=new NimbusStat();
       slave.set_host(entry.getKey());
-      slave.set_uptime_secs(entry.getValue());
+      slave.set_uptimeSecs(entry.getValue());
       nimbusSlaveList.add(slave);
     }
   }
   int totalPort=0;
   int usedPort=0;
   for (  SupervisorSummary supervisor : supervisorSummaries) {
-    totalPort+=supervisor.get_num_workers();
-    usedPort+=supervisor.get_num_used_workers();
+    totalPort+=supervisor.get_numWorkers();
+    usedPort+=supervisor.get_numUsedWorkers();
   }
-  ret.set_supervisor_num(supervisorSummaries.size());
-  ret.set_total_port_num(totalPort);
-  ret.set_used_port_num(usedPort);
-  ret.set_free_port_num(totalPort - usedPort);
+  ret.set_supervisorNum(supervisorSummaries.size());
+  ret.set_totalPortNum(totalPort);
+  ret.set_usedPortNum(usedPort);
+  ret.set_freePortNum(totalPort - usedPort);
   ret.set_version(Utils.getVersion());
   return ret;
 }

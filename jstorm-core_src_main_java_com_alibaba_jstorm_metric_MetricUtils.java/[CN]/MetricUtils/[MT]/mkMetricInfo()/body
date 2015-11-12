@@ -1,0 +1,5 @@
+{
+  MetricInfo ret=new MetricInfo();
+  ret.set_metrics(new HashMap<String,Map<Integer,MetricSnapshot>>());
+  return ret;
+}

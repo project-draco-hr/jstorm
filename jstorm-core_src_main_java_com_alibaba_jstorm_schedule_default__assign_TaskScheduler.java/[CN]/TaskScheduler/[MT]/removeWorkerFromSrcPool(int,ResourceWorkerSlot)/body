@@ -1,0 +1,30 @@
+{
+  Set<ResourceWorkerSlot> ret=new HashSet<ResourceWorkerSlot>();
+  if (leftTaskNum <= 0) {
+    if (taskNum >= avgTaskNum) {
+      taskContext.getWorkerToTaskNum().remove(worker);
+      assignments.add(worker);
+      ret.add(worker);
+    }
+  }
+ else {
+    if (taskNum > avgTaskNum) {
+      taskContext.getWorkerToTaskNum().remove(worker);
+      leftTaskNum=leftTaskNum - (taskNum - avgTaskNum);
+      assignments.add(worker);
+      ret.add(worker);
+    }
+    if (leftTaskNum <= 0) {
+      List<ResourceWorkerSlot> needDelete=new ArrayList<ResourceWorkerSlot>();
+      for (      Entry<ResourceWorkerSlot,Integer> entry : taskContext.getWorkerToTaskNum().entrySet()) {
+        if (entry.getValue() == avgTaskNum)         needDelete.add(entry.getKey());
+      }
+      for (      ResourceWorkerSlot workerToDelete : needDelete) {
+        taskContext.getWorkerToTaskNum().remove(workerToDelete);
+        assignments.add(workerToDelete);
+        ret.add(workerToDelete);
+      }
+    }
+  }
+  return ret;
+}

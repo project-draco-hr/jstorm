@@ -10,8 +10,8 @@
     oprot.writeFieldBegin(COMPONENTS_FIELD_DESC);
 {
       oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.components.size()));
-      for (      ComponentSummary _iter244 : struct.components) {
-        _iter244.write(oprot);
+      for (      ComponentSummary _iter192 : struct.components) {
+        _iter192.write(oprot);
       }
       oprot.writeListEnd();
     }
@@ -21,8 +21,8 @@
     oprot.writeFieldBegin(TASKS_FIELD_DESC);
 {
       oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.tasks.size()));
-      for (      TaskSummary _iter245 : struct.tasks) {
-        _iter245.write(oprot);
+      for (      TaskSummary _iter193 : struct.tasks) {
+        _iter193.write(oprot);
       }
       oprot.writeListEnd();
     }

@@ -7,7 +7,7 @@
       wait_amt=options.get_wait_secs();
     }
     NimbusUtils.transitionName(data,topologyName,true,StatusType.kill,wait_amt);
-    TopologyMetricsRunnable.Remove event=new TopologyMetricsRunnable.Remove();
+    Remove event=new Remove();
     event.topologyId=topologyId;
     data.getMetricRunnable().pushEvent(event);
   }

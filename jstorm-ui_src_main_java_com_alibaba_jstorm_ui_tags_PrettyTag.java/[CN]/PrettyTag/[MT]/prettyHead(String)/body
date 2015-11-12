@@ -1,0 +1,8 @@
+{
+  if (UIDef.HEAD_MAP.containsKey(head)) {
+    return UIDef.HEAD_MAP.get(head);
+  }
+ else {
+    return head;
+  }
+}

@@ -1,4 +1,0 @@
-{
-  this.total_port_num=total_port_num;
-  set_total_port_num_isSet(true);
-}

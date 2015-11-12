@@ -1,0 +1,12 @@
+{
+  metric.setMetricName(name);
+  final AsmMetric existing=metrics.putIfAbsent(name,metric);
+  if (existing == null) {
+    LOG.info("Successfully register metric of {}",name);
+    return metric;
+  }
+ else {
+    LOG.warn("duplicate metric: {}",name);
+    return existing;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  TopologyTaskHbInfo topologyTaskHbs=data.getTasksHeartbeat().get(topologyId);
+  if (topologyTaskHbs != null) {
+    Map<Integer,TaskHeartbeat> taskHbs=topologyTaskHbs.get_taskHbs();
+    if (taskHbs != null) {
+      taskHbs.remove(taskId);
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (componentId.equals(Acker.ACKER_COMPONENT_ID) || componentId.equals(Common.TOPOLOGY_MASTER_COMPONENT_ID)) {
+    return true;
+  }
+  return false;
+}

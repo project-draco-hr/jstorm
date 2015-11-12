@@ -1,0 +1,44 @@
+{
+  org.apache.thrift.protocol.TField schemeField;
+  iprot.readStructBegin();
+  while (true) {
+    schemeField=iprot.readFieldBegin();
+    if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+      break;
+    }
+switch (schemeField.id) {
+case 1:
+      if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+        struct.topologyId=iprot.readString();
+        struct.set_topologyId_isSet(true);
+      }
+ else {
+        org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+      }
+    break;
+case 2:
+  if (schemeField.type == org.apache.thrift.protocol.TType.SET) {
+{
+      org.apache.thrift.protocol.TSet _set232=iprot.readSetBegin();
+      struct.metrics=new HashSet<String>(2 * _set232.size);
+      String _elem233;
+      for (int _i234=0; _i234 < _set232.size; ++_i234) {
+        _elem233=iprot.readString();
+        struct.metrics.add(_elem233);
+      }
+      iprot.readSetEnd();
+    }
+    struct.set_metrics_isSet(true);
+  }
+ else {
+    org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+  }
+break;
+default :
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+iprot.readFieldEnd();
+}
+iprot.readStructEnd();
+struct.validate();
+}

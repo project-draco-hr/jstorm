@@ -1,0 +1,5 @@
+{
+  if (other.is_set_taskHbs()) {
+    this.taskHbs=new TopologyTaskHbInfo(other.taskHbs);
+  }
+}

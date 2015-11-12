@@ -1,0 +1,3 @@
+{
+  return (this.taskHbs == null) ? 0 : this.taskHbs.size();
+}

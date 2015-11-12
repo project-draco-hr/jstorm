@@ -26,8 +26,7 @@ case TimerConstants.TICK_TUPLE:
   }
 case TimerConstants.TASK_HEARTBEAT:
 {
-  Integer taskId=(Integer)event.getMsg();
-  TaskHeartbeatRunable.updateTaskHbStats(taskId,task);
+  taskHbTrigger.setExeThreadHbTime(TimeUtils.current_time_secs());
   break;
 }
 default :

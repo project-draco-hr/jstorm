@@ -1,0 +1,4 @@
+Map<String,MetricInfo> workerMetricInfo
+List<WorkerSummary> workerSummaries
+String host
+int window

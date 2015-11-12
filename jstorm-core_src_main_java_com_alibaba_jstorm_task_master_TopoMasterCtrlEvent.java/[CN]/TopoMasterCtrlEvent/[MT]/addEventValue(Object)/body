@@ -1,0 +1,6 @@
+{
+  if (eventValue == null) {
+    eventValue=new ArrayList<Object>();
+  }
+  eventValue.add(value);
+}

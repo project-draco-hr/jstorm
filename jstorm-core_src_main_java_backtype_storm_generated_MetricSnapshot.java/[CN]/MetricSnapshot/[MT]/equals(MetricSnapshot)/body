@@ -1,0 +1,118 @@
+{
+  if (that == null)   return false;
+  boolean this_present_metricId=true;
+  boolean that_present_metricId=true;
+  if (this_present_metricId || that_present_metricId) {
+    if (!(this_present_metricId && that_present_metricId))     return false;
+    if (this.metricId != that.metricId)     return false;
+  }
+  boolean this_present_ts=true;
+  boolean that_present_ts=true;
+  if (this_present_ts || that_present_ts) {
+    if (!(this_present_ts && that_present_ts))     return false;
+    if (this.ts != that.ts)     return false;
+  }
+  boolean this_present_metricType=true;
+  boolean that_present_metricType=true;
+  if (this_present_metricType || that_present_metricType) {
+    if (!(this_present_metricType && that_present_metricType))     return false;
+    if (this.metricType != that.metricType)     return false;
+  }
+  boolean this_present_longValue=true && this.is_set_longValue();
+  boolean that_present_longValue=true && that.is_set_longValue();
+  if (this_present_longValue || that_present_longValue) {
+    if (!(this_present_longValue && that_present_longValue))     return false;
+    if (this.longValue != that.longValue)     return false;
+  }
+  boolean this_present_doubleValue=true && this.is_set_doubleValue();
+  boolean that_present_doubleValue=true && that.is_set_doubleValue();
+  if (this_present_doubleValue || that_present_doubleValue) {
+    if (!(this_present_doubleValue && that_present_doubleValue))     return false;
+    if (this.doubleValue != that.doubleValue)     return false;
+  }
+  boolean this_present_m1=true && this.is_set_m1();
+  boolean that_present_m1=true && that.is_set_m1();
+  if (this_present_m1 || that_present_m1) {
+    if (!(this_present_m1 && that_present_m1))     return false;
+    if (this.m1 != that.m1)     return false;
+  }
+  boolean this_present_m5=true && this.is_set_m5();
+  boolean that_present_m5=true && that.is_set_m5();
+  if (this_present_m5 || that_present_m5) {
+    if (!(this_present_m5 && that_present_m5))     return false;
+    if (this.m5 != that.m5)     return false;
+  }
+  boolean this_present_m15=true && this.is_set_m15();
+  boolean that_present_m15=true && that.is_set_m15();
+  if (this_present_m15 || that_present_m15) {
+    if (!(this_present_m15 && that_present_m15))     return false;
+    if (this.m15 != that.m15)     return false;
+  }
+  boolean this_present_mean=true && this.is_set_mean();
+  boolean that_present_mean=true && that.is_set_mean();
+  if (this_present_mean || that_present_mean) {
+    if (!(this_present_mean && that_present_mean))     return false;
+    if (this.mean != that.mean)     return false;
+  }
+  boolean this_present_min=true && this.is_set_min();
+  boolean that_present_min=true && that.is_set_min();
+  if (this_present_min || that_present_min) {
+    if (!(this_present_min && that_present_min))     return false;
+    if (this.min != that.min)     return false;
+  }
+  boolean this_present_max=true && this.is_set_max();
+  boolean that_present_max=true && that.is_set_max();
+  if (this_present_max || that_present_max) {
+    if (!(this_present_max && that_present_max))     return false;
+    if (this.max != that.max)     return false;
+  }
+  boolean this_present_p50=true && this.is_set_p50();
+  boolean that_present_p50=true && that.is_set_p50();
+  if (this_present_p50 || that_present_p50) {
+    if (!(this_present_p50 && that_present_p50))     return false;
+    if (this.p50 != that.p50)     return false;
+  }
+  boolean this_present_p75=true && this.is_set_p75();
+  boolean that_present_p75=true && that.is_set_p75();
+  if (this_present_p75 || that_present_p75) {
+    if (!(this_present_p75 && that_present_p75))     return false;
+    if (this.p75 != that.p75)     return false;
+  }
+  boolean this_present_p95=true && this.is_set_p95();
+  boolean that_present_p95=true && that.is_set_p95();
+  if (this_present_p95 || that_present_p95) {
+    if (!(this_present_p95 && that_present_p95))     return false;
+    if (this.p95 != that.p95)     return false;
+  }
+  boolean this_present_p98=true && this.is_set_p98();
+  boolean that_present_p98=true && that.is_set_p98();
+  if (this_present_p98 || that_present_p98) {
+    if (!(this_present_p98 && that_present_p98))     return false;
+    if (this.p98 != that.p98)     return false;
+  }
+  boolean this_present_p99=true && this.is_set_p99();
+  boolean that_present_p99=true && that.is_set_p99();
+  if (this_present_p99 || that_present_p99) {
+    if (!(this_present_p99 && that_present_p99))     return false;
+    if (this.p99 != that.p99)     return false;
+  }
+  boolean this_present_p999=true && this.is_set_p999();
+  boolean that_present_p999=true && that.is_set_p999();
+  if (this_present_p999 || that_present_p999) {
+    if (!(this_present_p999 && that_present_p999))     return false;
+    if (this.p999 != that.p999)     return false;
+  }
+  boolean this_present_stddev=true && this.is_set_stddev();
+  boolean that_present_stddev=true && that.is_set_stddev();
+  if (this_present_stddev || that_present_stddev) {
+    if (!(this_present_stddev && that_present_stddev))     return false;
+    if (this.stddev != that.stddev)     return false;
+  }
+  boolean this_present_points=true && this.is_set_points();
+  boolean that_present_points=true && that.is_set_points();
+  if (this_present_points || that_present_points) {
+    if (!(this_present_points && that_present_points))     return false;
+    if (!this.points.equals(that.points))     return false;
+  }
+  return true;
+}

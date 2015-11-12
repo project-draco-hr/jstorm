@@ -1,0 +1,35 @@
+{
+  LOG.debug("Syncing processes, interval seconds:" + TimeUtils.time_delta(lastTime));
+  lastTime=TimeUtils.current_time_secs();
+  try {
+    if (localAssignments == null) {
+      localAssignments=new HashMap<Integer,LocalAssignment>();
+    }
+    LOG.debug("Assigned tasks: " + localAssignments);
+    Map<String,StateHeartbeat> localWorkerStats=null;
+    try {
+      localWorkerStats=getLocalWorkerStats(conf,localState,localAssignments);
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to get Local worker stats");
+      throw e;
+    }
+    LOG.debug("Allocated: " + localWorkerStats);
+    Map<String,Integer> taskCleaupTimeoutMap=null;
+    Set<Integer> keepPorts=null;
+    try {
+      taskCleaupTimeoutMap=(Map<String,Integer>)localState.get(Common.LS_TASK_CLEANUP_TIMEOUT);
+      keepPorts=killUselessWorkers(localWorkerStats,localAssignments,taskCleaupTimeoutMap);
+      localState.put(Common.LS_TASK_CLEANUP_TIMEOUT,taskCleaupTimeoutMap);
+    }
+ catch (    IOException e) {
+      LOG.error("Failed to kill workers",e);
+    }
+    checkNewWorkers(conf);
+    checkNeedUpdateTopologys(localWorkerStats,localAssignments);
+    startNewWorkers(keepPorts,localAssignments,downloadFailedTopologyIds);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed Sync Process",e);
+  }
+}

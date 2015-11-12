@@ -1,0 +1,46 @@
+{
+  if (!topologyMetricContexts.containsKey(JStormMetrics.NIMBUS_METRIC_KEY)) {
+    LOG.info("adding __nimbus__ to metric context.");
+    Set<ResourceWorkerSlot> workerSlot=Sets.newHashSet(new ResourceWorkerSlot());
+    TopologyMetricContext metricContext=new TopologyMetricContext(workerSlot);
+    topologyMetricContexts.putIfAbsent(JStormMetrics.NIMBUS_METRIC_KEY,metricContext);
+    syncMetaFromCache(JStormMetrics.NIMBUS_METRIC_KEY,topologyMetricContexts.get(JStormMetrics.NIMBUS_METRIC_KEY));
+  }
+  if (!topologyMetricContexts.containsKey(JStormMetrics.CLUSTER_METRIC_KEY)) {
+    LOG.info("adding __cluster__ to metric context.");
+    Set<ResourceWorkerSlot> workerSlot=Sets.newHashSet(new ResourceWorkerSlot());
+    Map conf=new HashMap();
+    conf.put(ConfigExtension.TOPOLOGY_METRIC_SAMPLE_RATE,1.0);
+    TopologyMetricContext metricContext=new TopologyMetricContext(JStormMetrics.CLUSTER_METRIC_KEY,workerSlot,conf);
+    topologyMetricContexts.putIfAbsent(JStormMetrics.CLUSTER_METRIC_KEY,metricContext);
+    syncMetaFromCache(JStormMetrics.CLUSTER_METRIC_KEY,topologyMetricContexts.get(JStormMetrics.CLUSTER_METRIC_KEY));
+  }
+  Map<String,Assignment> assignMap;
+  try {
+    assignMap=Cluster.get_all_assignment(stormClusterState,null);
+    for (    String topologyId : assignMap.keySet()) {
+      if (!topologyMetricContexts.containsKey(topologyId)) {
+        Assignment assignment=assignMap.get(topologyId);
+        TopologyMetricContext metricContext=new TopologyMetricContext(assignment.getWorkers());
+        metricContext.setTaskNum(NimbusUtils.getTopologyTaskNum(assignment));
+        syncMetaFromCache(topologyId,metricContext);
+        LOG.info("adding {} to metric context.",topologyId);
+        topologyMetricContexts.put(topologyId,metricContext);
+      }
+    }
+  }
+ catch (  Exception e1) {
+    LOG.warn("failed to get assignments");
+    return;
+  }
+  List<String> removing=new ArrayList<>();
+  for (  String topologyId : topologyMetricContexts.keySet()) {
+    if (!JStormMetrics.NIMBUS_METRIC_KEY.equals(topologyId) && !JStormMetrics.CLUSTER_METRIC_KEY.equals(topologyId) && !assignMap.containsKey(topologyId)) {
+      removing.add(topologyId);
+    }
+  }
+  for (  String topologyId : removing) {
+    LOG.info("removing topology:{}",topologyId);
+    removeTopology(topologyId);
+  }
+}

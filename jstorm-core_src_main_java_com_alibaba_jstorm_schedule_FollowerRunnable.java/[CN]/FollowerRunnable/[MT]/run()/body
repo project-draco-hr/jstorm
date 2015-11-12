@@ -19,11 +19,13 @@
       }
       if (isZkLeader == true) {
         zkClusterState.unregister_nimbus_host(hostPort);
+        zkClusterState.unregister_nimbus_detail(hostPort);
         data.setLeader(true);
         continue;
       }
       check();
       zkClusterState.update_nimbus_slave(hostPort,data.uptime());
+      update_nimbus_detail();
     }
  catch (    InterruptedException e) {
       continue;

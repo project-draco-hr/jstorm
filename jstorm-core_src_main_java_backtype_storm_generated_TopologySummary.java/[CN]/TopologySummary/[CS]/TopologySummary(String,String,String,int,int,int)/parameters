@@ -1,6 +1,6 @@
 String id
 String name
 String status
-int uptime_secs
-int num_tasks
-int num_workers
+int uptimeSecs
+int numTasks
+int numWorkers

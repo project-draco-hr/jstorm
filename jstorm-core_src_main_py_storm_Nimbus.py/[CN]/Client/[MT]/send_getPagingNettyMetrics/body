@@ -1,0 +1,9 @@
+def send_getPagingNettyMetrics(self, topologyId, host, page):
+    self._oprot.writeMessageBegin('getPagingNettyMetrics', TMessageType.CALL, self._seqid)
+    args = getPagingNettyMetrics_args()
+    args.topologyId = topologyId
+    args.host = host
+    args.page = page
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

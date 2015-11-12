@@ -1,0 +1,7 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    return get_topologyId();
+}
+throw new IllegalStateException();
+}

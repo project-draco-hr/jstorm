@@ -1,0 +1,43 @@
+{
+  Map<String,ClusterConfig> configMap=new HashMap<>();
+  List<Map> uiClusters=ConfigExtension.getUiClusters(uiConfig);
+  if (uiClusters != null && uiClusters.size() > 0) {
+    for (    Map cluster : uiClusters) {
+      String zkRoot=ConfigExtension.getUiClusterZkRoot(cluster);
+      String clusterName=ConfigExtension.getUiClusterName(cluster);
+      if (clusterName == null)       clusterName=parseClusterName(zkRoot);
+      List<String> zkServers=ConfigExtension.getUiClusterZkServers(cluster);
+      Integer zkPort=ConfigExtension.getUiClusterZkPort(cluster);
+      ClusterConfig conf=new ClusterConfig(zkRoot,zkServers,zkPort);
+      if (isInitialized) {
+        Map<String,Object> nimbusConf=getNimbusConf(clusterName);
+        Integer nimbusPort=ConfigExtension.getNimbusDeamonHttpserverPort(nimbusConf);
+        Integer supervisorPort=ConfigExtension.getSupervisorDeamonHttpserverPort(nimbusConf);
+        conf.setNimbusPort(nimbusPort);
+        conf.setSupervisorPort(supervisorPort);
+      }
+      if (conf.isAvailable()) {
+        configMap.put(clusterName,conf);
+      }
+    }
+  }
+ else {
+    String zkRoot=(String)uiConfig.get(Config.STORM_ZOOKEEPER_ROOT);
+    String clusterName=ConfigExtension.getClusterName(uiConfig);
+    if (clusterName == null)     clusterName=parseClusterName(zkRoot);
+    List<String> zkServers=(List<String>)uiConfig.get(Config.STORM_ZOOKEEPER_SERVERS);
+    Integer zkPort=JStormUtils.parseInt(uiConfig.get(Config.STORM_ZOOKEEPER_PORT));
+    ClusterConfig conf=new ClusterConfig(zkRoot,zkServers,zkPort);
+    if (isInitialized) {
+      Map<String,Object> nimbusConf=getNimbusConf(clusterName);
+      conf.setNimbusPort(ConfigExtension.getNimbusDeamonHttpserverPort(nimbusConf));
+      conf.setSupervisorPort(ConfigExtension.getSupervisorDeamonHttpserverPort(nimbusConf));
+    }
+    if (conf.isAvailable()) {
+      configMap.put(clusterName,conf);
+    }
+  }
+  clusterConfig=configMap;
+  isInitialized=true;
+  LOG.debug("nimbus config: " + clusterConfig);
+}

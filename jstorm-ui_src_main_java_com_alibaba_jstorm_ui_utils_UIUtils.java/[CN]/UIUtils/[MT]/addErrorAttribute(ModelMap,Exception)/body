@@ -1,0 +1,5 @@
+{
+  String errMsg=JStormUtils.getErrorInfo(e);
+  String err="!!!!!!!!!!!!!!!! Error:" + e.getMessage() + " !!!!!!!!!\r\n\r\n"+ errMsg;
+  model.addAttribute("error",err);
+}

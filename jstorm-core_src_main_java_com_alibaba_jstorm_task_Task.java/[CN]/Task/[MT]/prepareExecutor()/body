@@ -1,0 +1,6 @@
+{
+  ITaskReportErr reportError=new TaskReportError(zkCluster,topologyId,taskId);
+  reportErrorDie=new TaskReportErrorAndDie(reportError,workHalt);
+  final BaseExecutors baseExecutor=mkExecutor();
+  return baseExecutor;
+}

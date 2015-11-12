@@ -1,0 +1,18 @@
+{
+  MetaType type=MetricUtils.metaType(name);
+  String[] parts=name.split(MetricUtils.DELIM);
+  if (parts[1].equals("")) {
+    parts[1]=topologyId;
+  }
+  if (type != MetaType.WORKER && parts[5].equals("")) {
+    parts[5]=group;
+  }
+ else   if (parts[2].equals("")) {
+    parts[2]=host;
+    parts[3]=port + "";
+    if (parts[4].equals("")) {
+      parts[4]=group;
+    }
+  }
+  return MetricUtils.concat(parts);
+}

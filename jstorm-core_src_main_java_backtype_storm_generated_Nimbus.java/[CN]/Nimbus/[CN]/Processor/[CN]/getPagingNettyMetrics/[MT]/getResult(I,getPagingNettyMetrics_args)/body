@@ -1,0 +1,5 @@
+{
+  getPagingNettyMetrics_result result=new getPagingNettyMetrics_result();
+  result.success=iface.getPagingNettyMetrics(args.topologyId,args.host,args.page);
+  return result;
+}

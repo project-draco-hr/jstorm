@@ -1,0 +1,5 @@
+{
+  String proxyUrl="http://%s:%s/logview?cmd=showConf";
+  String url=String.format(proxyUrl,host,port);
+  return getHttpResponse(url);
+}

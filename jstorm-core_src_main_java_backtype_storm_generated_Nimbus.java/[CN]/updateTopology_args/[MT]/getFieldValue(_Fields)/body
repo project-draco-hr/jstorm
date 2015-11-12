@@ -1,0 +1,11 @@
+{
+switch (field) {
+case NAME:
+    return get_name();
+case UPLOADED_LOCATION:
+  return get_uploadedLocation();
+case UPDATE_CONF:
+return get_updateConf();
+}
+throw new IllegalStateException();
+}

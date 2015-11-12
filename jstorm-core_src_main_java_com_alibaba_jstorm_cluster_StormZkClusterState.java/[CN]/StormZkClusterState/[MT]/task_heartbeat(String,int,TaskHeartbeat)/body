@@ -1,4 +1,0 @@
-{
-  String taskPath=Cluster.taskbeat_path(topologyId,taskId);
-  setObject(taskPath,info);
-}

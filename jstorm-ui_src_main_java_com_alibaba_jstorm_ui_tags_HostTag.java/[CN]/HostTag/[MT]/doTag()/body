@@ -1,0 +1,9 @@
+{
+  JspWriter out=getJspContext().getOut();
+  try {
+    out.write(NetWorkUtils.ip2Host(ip));
+  }
+ catch (  IOException e) {
+    throw new JspException("Error: " + e.getMessage());
+  }
+}

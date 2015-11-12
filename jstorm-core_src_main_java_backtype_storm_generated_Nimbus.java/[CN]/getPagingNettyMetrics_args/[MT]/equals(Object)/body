@@ -1,0 +1,5 @@
+{
+  if (that == null)   return false;
+  if (that instanceof getPagingNettyMetrics_args)   return this.equals((getPagingNettyMetrics_args)that);
+  return false;
+}

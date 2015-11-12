@@ -10,6 +10,6 @@
   allThreads.add(recvThread);
   AsyncLoopThread serializeThread=taskTransfer.getSerializeThread();
   allThreads.add(serializeThread);
-  TaskShutdownDameon shutdown=new TaskShutdownDameon(taskStatus,topologyid,taskid,allThreads,zkCluster,taskObj);
+  TaskShutdownDameon shutdown=new TaskShutdownDameon(taskStatus,topologyId,taskId,allThreads,zkCluster,taskObj,this);
   return shutdown;
 }

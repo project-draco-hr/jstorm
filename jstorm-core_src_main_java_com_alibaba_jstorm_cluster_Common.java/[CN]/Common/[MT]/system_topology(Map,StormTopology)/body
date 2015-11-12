@@ -1,6 +1,7 @@
 {
   StormTopology ret=topology.deepCopy();
   add_acker(storm_conf,ret);
+  if (StormConfig.local_mode(storm_conf) == false)   addTopologyMaster(storm_conf,ret);
   add_metrics_component(ret);
   add_system_components(ret);
   return ret;

@@ -1,4 +1,0 @@
-def getServerNettyMetric(self, topologyName, serverName):
-    '\n    Parameters:\n     - topologyName\n     - serverName\n    '
-    self.send_getServerNettyMetric(topologyName, serverName)
-    return self.recv_getServerNettyMetric()

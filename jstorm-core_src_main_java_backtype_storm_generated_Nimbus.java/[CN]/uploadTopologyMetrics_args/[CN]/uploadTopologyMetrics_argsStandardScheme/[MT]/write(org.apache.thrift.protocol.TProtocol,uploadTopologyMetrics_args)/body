@@ -1,0 +1,16 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.topologyId != null) {
+    oprot.writeFieldBegin(TOPOLOGY_ID_FIELD_DESC);
+    oprot.writeString(struct.topologyId);
+    oprot.writeFieldEnd();
+  }
+  if (struct.topologyMetrics != null) {
+    oprot.writeFieldBegin(TOPOLOGY_METRICS_FIELD_DESC);
+    struct.topologyMetrics.write(oprot);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

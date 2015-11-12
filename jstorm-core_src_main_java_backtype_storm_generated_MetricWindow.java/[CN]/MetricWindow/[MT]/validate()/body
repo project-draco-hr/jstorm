@@ -1,5 +1,5 @@
 {
   if (!is_set_metricWindow()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'metricWindow' is unset! Struct:" + toString());
+    throw new TProtocolException("Required field 'metricWindow' is unset! Struct:" + toString());
   }
 }

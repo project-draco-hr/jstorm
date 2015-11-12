@@ -1,0 +1,3 @@
+{
+  return (AsmHistogram)registerWorkerMetric(MetricUtils.workerMetricName(topologyId,host,0,name,MetricType.HISTOGRAM),histogram);
+}

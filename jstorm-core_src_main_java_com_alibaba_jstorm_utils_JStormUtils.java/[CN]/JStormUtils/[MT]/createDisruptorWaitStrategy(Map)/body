@@ -1,7 +1,7 @@
 {
   String waitStrategy=(String)conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY);
   Object ret;
-  if (waitStrategy.indexOf("TimeoutBlockingWaitStrategy") != -1) {
+  if (waitStrategy.contains("TimeoutBlockingWaitStrategy")) {
     long timeout=parseLong(conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_TIMEOUT),10);
     ret=Utils.newInstance(waitStrategy,timeout,TimeUnit.MILLISECONDS);
   }

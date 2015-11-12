@@ -1,0 +1,5 @@
+{
+  if (that == null)   return false;
+  if (that instanceof updateTaskHeartbeat_result)   return this.equals((updateTaskHeartbeat_result)that);
+  return false;
+}

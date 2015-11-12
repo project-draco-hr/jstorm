@@ -1,0 +1,3 @@
+{
+  iface.updateTaskHeartbeat(args.taskHbs,resultHandler);
+}

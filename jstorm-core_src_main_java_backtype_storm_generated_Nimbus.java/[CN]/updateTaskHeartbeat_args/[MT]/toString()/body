@@ -1,0 +1,14 @@
+{
+  StringBuilder sb=new StringBuilder("updateTaskHeartbeat_args(");
+  boolean first=true;
+  sb.append("taskHbs:");
+  if (this.taskHbs == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.taskHbs);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

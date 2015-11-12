@@ -1,0 +1,4 @@
+{
+  name=fixNameIfPossible(name,NETTY_GROUP);
+  nettyMetrics.remove(name);
+}

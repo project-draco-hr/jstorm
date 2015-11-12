@@ -1,5 +1,5 @@
 {
   TTupleProtocol oprot=(TTupleProtocol)prot;
   oprot.writeString(struct.error);
-  oprot.writeI32(struct.error_time_secs);
+  oprot.writeI32(struct.errorTimeSecs);
 }

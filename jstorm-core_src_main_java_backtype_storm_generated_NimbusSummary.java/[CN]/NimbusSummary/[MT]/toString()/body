@@ -1,38 +1,38 @@
 {
   StringBuilder sb=new StringBuilder("NimbusSummary(");
   boolean first=true;
-  sb.append("nimbus_master:");
-  if (this.nimbus_master == null) {
+  sb.append("nimbusMaster:");
+  if (this.nimbusMaster == null) {
     sb.append("null");
   }
  else {
-    sb.append(this.nimbus_master);
+    sb.append(this.nimbusMaster);
   }
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("nimbus_slaves:");
-  if (this.nimbus_slaves == null) {
+  sb.append("nimbusSlaves:");
+  if (this.nimbusSlaves == null) {
     sb.append("null");
   }
  else {
-    sb.append(this.nimbus_slaves);
+    sb.append(this.nimbusSlaves);
   }
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("supervisor_num:");
-  sb.append(this.supervisor_num);
+  sb.append("supervisorNum:");
+  sb.append(this.supervisorNum);
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("total_port_num:");
-  sb.append(this.total_port_num);
+  sb.append("totalPortNum:");
+  sb.append(this.totalPortNum);
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("used_port_num:");
-  sb.append(this.used_port_num);
+  sb.append("usedPortNum:");
+  sb.append(this.usedPortNum);
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("free_port_num:");
-  sb.append(this.free_port_num);
+  sb.append("freePortNum:");
+  sb.append(this.freePortNum);
   first=false;
   if (!first)   sb.append(", ");
   sb.append("version:");

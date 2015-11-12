@@ -1,0 +1,5 @@
+{
+  double v=(Double)gauge.getValue();
+  AsmSnapshot snapshot=new AsmGaugeSnapshot().setValue(v).setTs(System.currentTimeMillis()).setMetricId(metricId);
+  snapshots.put(window,snapshot);
+}

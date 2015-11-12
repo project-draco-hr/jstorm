@@ -1,0 +1,15 @@
+{
+  super(stormConf);
+  this.task=task;
+  this.taskId=task.getTaskId();
+  int sampleNum=ConfigExtension.getBackpressureTriggerSampleNumber(stormConf);
+  int smapleInterval=sampleNum * (ConfigExtension.getBackpressureCheckIntervl(stormConf));
+  this.intervalCheck=new IntervalCheck();
+  this.intervalCheck.setIntervalMs(smapleInterval);
+  this.intervalCheck.start();
+  this.samplingSet=new ArrayList<EventType>();
+  this.triggerSampleRate=ConfigExtension.getBackpressureTriggerSampleRate(stormConf);
+  this.output=output;
+  this.boltExecutor=boltExecutor;
+  LOG.info("Finished BackpressureTrigger init, highWaterMark=" + highWaterMark + ", lowWaterMark="+ lowWaterMark+ ", sendInterval="+ intervalCheck.getInterval());
+}

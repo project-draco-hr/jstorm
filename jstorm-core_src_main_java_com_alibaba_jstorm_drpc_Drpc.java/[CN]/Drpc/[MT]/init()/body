@@ -1,6 +1,7 @@
 {
   conf=StormConfig.read_storm_config();
   LOG.info("Configuration is \n" + conf);
+  createPid(conf);
   initClearThread();
   initThrift();
 }

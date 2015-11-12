@@ -1,4 +1,0 @@
-Map<String,String> topologyCodes
-List<String> downloadedTopologyIds
-Set<String> updateTopologys
-Map<String,Assignment> assignments

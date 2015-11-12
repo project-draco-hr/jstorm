@@ -1,0 +1,25 @@
+{
+  List<String> ret=new ArrayList<>();
+  for (  ErrorInfo er : e) {
+    long ts=((long)er.get_errorTimeSecs()) * 1000;
+    int index=er.get_error().lastIndexOf(",");
+    if (index == -1) {
+      int idx=er.get_error().indexOf("\n");
+      int length=er.get_error().length();
+      if (idx != -1) {
+        String first_line=er.get_error().substring(0,idx);
+        String rest_lines=er.get_error().substring(idx + 1,length - 2);
+        ret.add(first_line + " , at " + UIUtils.parseDateTime(ts));
+        ret.add(rest_lines);
+      }
+ else {
+        ret.add(er.get_error() + " , at " + UIUtils.parseDateTime(ts));
+      }
+    }
+ else {
+      ret.add(er.get_error() + ", at " + UIUtils.parseDateTime(ts));
+    }
+  }
+  Joiner joiner=Joiner.on("\n");
+  return "<pre>" + joiner.join(ret) + "</pre>";
+}

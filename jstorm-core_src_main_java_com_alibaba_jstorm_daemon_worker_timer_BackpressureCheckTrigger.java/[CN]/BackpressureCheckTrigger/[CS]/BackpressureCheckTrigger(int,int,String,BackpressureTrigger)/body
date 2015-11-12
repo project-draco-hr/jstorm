@@ -1,0 +1,9 @@
+{
+  if (frequence <= 0) {
+    LOG.warn(" The frequence of " + name + " is invalid");
+    frequence=1;
+  }
+  this.firstTime=initDelay;
+  this.frequence=frequence;
+  this.trigger=trigger;
+}

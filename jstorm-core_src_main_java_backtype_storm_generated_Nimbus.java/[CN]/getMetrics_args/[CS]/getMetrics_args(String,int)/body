@@ -1,0 +1,6 @@
+{
+  this();
+  this.topologyId=topologyId;
+  this.type=type;
+  set_type_isSet(true);
+}

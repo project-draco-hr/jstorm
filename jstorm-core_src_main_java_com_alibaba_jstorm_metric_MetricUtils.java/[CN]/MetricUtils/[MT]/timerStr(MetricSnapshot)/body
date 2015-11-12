@@ -1,0 +1,6 @@
+{
+  StringBuilder sb=new StringBuilder(128);
+  sb.append("timer");
+  sb.append("(").append("id:").append(snapshot.get_metricId()).append(",").append("min:").append(snapshot.get_min()).append(",").append("max:").append(snapshot.get_max()).append(",").append("mean:").append(snapshot.get_mean()).append(",").append("p50:").append(snapshot.get_p50()).append(",").append("p75:").append(snapshot.get_p75()).append(",").append("p95:").append(snapshot.get_p95()).append(",").append("p98:").append(snapshot.get_p98()).append(",").append("p99:").append(snapshot.get_p99()).append(",").append("m1:").append(snapshot.get_m1()).append(",").append("m5:").append(snapshot.get_m5()).append(",").append("m15:").append(snapshot.get_m15()).append(",").append("pts:").append(snapshot.get_points_size()).append(")");
+  return sb.toString();
+}

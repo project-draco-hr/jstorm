@@ -1,0 +1,9 @@
+{
+  if (!context.syncMeta()) {
+    Map<String,Long> meta=metricCache.getMeta(topologyId);
+    if (meta != null) {
+      context.getMemMeta().putAll(meta);
+    }
+    context.setSyncMeta(true);
+  }
+}

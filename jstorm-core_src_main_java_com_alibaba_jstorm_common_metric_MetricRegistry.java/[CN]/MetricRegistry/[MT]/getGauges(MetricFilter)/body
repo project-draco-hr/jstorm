@@ -1,3 +1,0 @@
-{
-  return getMetrics(Gauge.class,filter);
-}

@@ -10,11 +10,13 @@
     if (assignment == null) {
       throw new NotAliveException("No topology of " + topologyId);
     }
-    Map<String,TaskHeartbeat> taskHBMap=Cluster.get_all_task_heartbeat(stormClusterState,topologyId);
+    TopologyTaskHbInfo topologyTaskHbInfo=data.getTasksHeartbeat().get(topologyId);
+    Map<Integer,TaskHeartbeat> taskHbMap=null;
+    if (topologyTaskHbInfo != null)     taskHbMap=topologyTaskHbInfo.get_taskHbs();
     Map<Integer,TaskInfo> taskInfoMap=Cluster.get_all_taskInfo(stormClusterState,topologyId);
     Map<Integer,String> taskToComponent=Cluster.get_all_task_component(stormClusterState,topologyId,taskInfoMap);
     Map<Integer,String> taskToType=Cluster.get_all_task_type(stormClusterState,topologyId,taskInfoMap);
-    String errorString=null;
+    String errorString;
     if (Cluster.is_topology_exist_error(stormClusterState,topologyId)) {
       errorString="Y";
     }
@@ -24,12 +26,11 @@
     TopologySummary topologySummary=new TopologySummary();
     topologySummary.set_id(topologyId);
     topologySummary.set_name(base.getStormName());
-    topologySummary.set_uptime_secs(TimeUtils.time_delta(base.getLanchTimeSecs()));
-    ;
+    topologySummary.set_uptimeSecs(TimeUtils.time_delta(base.getLanchTimeSecs()));
     topologySummary.set_status(base.getStatusString());
-    topologySummary.set_num_tasks(NimbusUtils.getTopologyTaskNum(assignment));
-    topologySummary.set_num_workers(assignment.getWorkers().size());
-    topologySummary.set_error_info(errorString);
+    topologySummary.set_numTasks(NimbusUtils.getTopologyTaskNum(assignment));
+    topologySummary.set_numWorkers(assignment.getWorkers().size());
+    topologySummary.set_errorInfo(errorString);
     Map<String,ComponentSummary> componentSummaryMap=new HashMap<String,ComponentSummary>();
     HashMap<String,List<Integer>> componentToTasks=JStormUtils.reverse_map(taskToComponent);
     for (    Entry<String,List<Integer>> entry : componentToTasks.entrySet()) {
@@ -44,22 +45,30 @@
       componentSummary.set_name(name);
       componentSummary.set_type(taskToType.get(taskIds.get(0)));
       componentSummary.set_parallel(taskIds.size());
-      componentSummary.set_task_ids(taskIds);
+      componentSummary.set_taskIds(taskIds);
     }
     Map<Integer,TaskSummary> taskSummaryMap=new TreeMap<Integer,TaskSummary>();
     Map<Integer,List<TaskError>> taskErrors=Cluster.get_all_task_errors(stormClusterState,topologyId);
     for (    Integer taskId : taskInfoMap.keySet()) {
       TaskSummary taskSummary=new TaskSummary();
       taskSummaryMap.put(taskId,taskSummary);
-      taskSummary.set_task_id(taskId);
-      TaskHeartbeat hb=taskHBMap.get(String.valueOf(taskId));
-      if (hb == null) {
+      taskSummary.set_taskId(taskId);
+      if (taskHbMap == null) {
         taskSummary.set_status("Starting");
         taskSummary.set_uptime(0);
       }
  else {
-        taskSummary.set_status("ACTIVE");
-        taskSummary.set_uptime(hb.getUptimeSecs());
+        TaskHeartbeat hb=taskHbMap.get(taskId);
+        if (hb == null) {
+          taskSummary.set_status("Starting");
+          taskSummary.set_uptime(0);
+        }
+ else {
+          boolean isInactive=NimbusUtils.isTaskDead(data,topologyId,taskId);
+          if (isInactive)           taskSummary.set_status("INACTIVE");
+ else           taskSummary.set_status("ACTIVE");
+          taskSummary.set_uptime(hb.get_uptime());
+        }
       }
       if (StringUtils.isBlank(errorString)) {
         continue;
@@ -87,7 +96,33 @@
     topologyInfo.set_topology(topologySummary);
     topologyInfo.set_components(JStormUtils.mk_list(componentSummaryMap.values()));
     topologyInfo.set_tasks(JStormUtils.mk_list(taskSummaryMap.values()));
-    topologyInfo.set_metrics(data.getMetricRunnable().getTopologyMetric(topologyId));
+    List<MetricInfo> tpMetricList=data.getMetricCache().getMetricData(topologyId,MetaType.TOPOLOGY);
+    List<MetricInfo> compMetricList=data.getMetricCache().getMetricData(topologyId,MetaType.COMPONENT);
+    List<MetricInfo> workerMetricList=data.getMetricCache().getMetricData(topologyId,MetaType.WORKER);
+    MetricInfo taskMetric=MetricUtils.mkMetricInfo();
+    MetricInfo streamMetric=MetricUtils.mkMetricInfo();
+    MetricInfo nettyMetric=MetricUtils.mkMetricInfo();
+    MetricInfo tpMetric, compMetric, workerMetric;
+    if (tpMetricList == null || tpMetricList.size() == 0) {
+      tpMetric=MetricUtils.mkMetricInfo();
+    }
+ else {
+      tpMetric=tpMetricList.get(tpMetricList.size() - 1);
+    }
+    if (compMetricList == null || compMetricList.size() == 0) {
+      compMetric=MetricUtils.mkMetricInfo();
+    }
+ else {
+      compMetric=compMetricList.get(0);
+    }
+    if (workerMetricList == null || workerMetricList.size() == 0) {
+      workerMetric=MetricUtils.mkMetricInfo();
+    }
+ else {
+      workerMetric=workerMetricList.get(0);
+    }
+    TopologyMetric topologyMetrics=new TopologyMetric(tpMetric,compMetric,workerMetric,taskMetric,streamMetric,nettyMetric);
+    topologyInfo.set_metrics(topologyMetrics);
     return topologyInfo;
   }
  catch (  TException e) {
@@ -100,8 +135,6 @@ catch (  Exception e) {
   }
  finally {
     long end=System.nanoTime();
-    double spend=(end - start) / 1000000.0d;
-    SimpleJStormMetric.updateHistorgram("getTopologyInfo",spend);
-    LOG.info("Finish getTopologyInfo {}, spend {} ms",topologyId,spend);
+    SimpleJStormMetric.updateNimbusHistogram("getTopologyInfo",(end - start) / TimeUtils.NS_PER_US);
   }
 }

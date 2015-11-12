@@ -1,0 +1,9 @@
+{
+  if (topologyMetricContext.getUploadedWorkerNum() > 0) {
+    TopologyMetric tpMetric=topologyMetricContext.mergeMetrics();
+    if (tpMetric != null) {
+      uploadMetrics(tpMetric);
+    }
+    topologyMetricContext.resetUploadedMetrics();
+  }
+}

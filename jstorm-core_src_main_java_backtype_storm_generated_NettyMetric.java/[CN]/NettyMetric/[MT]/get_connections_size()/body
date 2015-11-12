@@ -1,3 +1,0 @@
-{
-  return (this.connections == null) ? 0 : this.connections.size();
-}

@@ -1,3 +1,0 @@
-def getNettyMetric(self, topologyName, pos):
-    '\n    Parameters:\n     - topologyName\n     - pos\n    '
-    pass

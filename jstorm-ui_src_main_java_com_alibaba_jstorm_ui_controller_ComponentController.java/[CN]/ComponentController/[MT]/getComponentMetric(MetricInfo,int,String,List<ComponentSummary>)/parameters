@@ -1,0 +1,4 @@
+MetricInfo info
+int window
+String compName
+List<ComponentSummary> componentSummaries

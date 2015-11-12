@@ -1,0 +1,4 @@
+def getTopologyMetrics(self, topologyId):
+    '\n    Parameters:\n     - topologyId\n    '
+    self.send_getTopologyMetrics(topologyId)
+    return self.recv_getTopologyMetrics()

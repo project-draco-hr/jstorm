@@ -1,0 +1,3 @@
+{
+  return data.getMetricCache().getMetricData(topologyId,MetaType.TOPOLOGY);
+}

@@ -1,0 +1,6 @@
+{
+  if (channel.isWritable()) {
+    MessageBatch messageBatch=messageBatchRef.getAndSet(null);
+    flushRequest(channel,messageBatch);
+  }
+}

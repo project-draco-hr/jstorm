@@ -1,0 +1,28 @@
+{
+  JspWriter out=getJspContext().getOut();
+  try {
+    String label="default";
+switch (status.toLowerCase()) {
+case STARTING:
+      label="primary";
+    break;
+case ACTIVE:
+  label="success";
+break;
+case KILLED:
+label="warning";
+break;
+case INACTIVE:
+label="default";
+break;
+case REBALANCING:
+label="info";
+break;
+}
+String result=String.format("<span class='label label-%s'>%s</span>",label,status);
+out.write(result);
+}
+ catch (IOException e) {
+throw new JspException("Error: " + e.getMessage());
+}
+}

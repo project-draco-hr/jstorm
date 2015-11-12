@@ -1,3 +1,0 @@
-SupervisorWorkers supervisorWorkers
-Map<String,String> paramMap
-Map<String,Object> nimbusConf

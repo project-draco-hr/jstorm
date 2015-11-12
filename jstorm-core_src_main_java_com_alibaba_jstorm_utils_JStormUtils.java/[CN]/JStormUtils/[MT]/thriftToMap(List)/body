@@ -1,0 +1,7 @@
+{
+  List<Map<String,Object>> ret=new ArrayList<Map<String,Object>>();
+  for (  Object thriftObj : thriftObjs) {
+    ret.add(thriftToMap((org.apache.thrift.TBase)thriftObj));
+  }
+  return ret;
+}

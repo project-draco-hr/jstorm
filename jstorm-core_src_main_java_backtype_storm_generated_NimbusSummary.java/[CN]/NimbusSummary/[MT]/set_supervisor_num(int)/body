@@ -1,4 +1,0 @@
-{
-  this.supervisor_num=supervisor_num;
-  set_supervisor_num_isSet(true);
-}

@@ -1,0 +1,36 @@
+{
+  JspWriter out=getJspContext().getOut();
+  try {
+    if (!StringUtils.isBlank(ratio)) {
+      double value=JStormUtils.parseDouble(ratio);
+      double danger_threshold=workers * 100;
+      double warn_threshold=danger_threshold * THRESHOLD;
+      String status_success="success";
+      String status_warning="warning";
+      String status_danger="danger";
+      StringBuilder sb=new StringBuilder();
+      sb.append("<div class='progress cpu-ratio-bar'>");
+      if (Double.compare(value,warn_threshold) <= 0) {
+        double width=value / danger_threshold * 100;
+        appendBar(sb,width,value,status_success);
+      }
+ else       if (Double.compare(value,danger_threshold) <= 0) {
+        double width1=THRESHOLD * 100;
+        double width2=(value - warn_threshold) / danger_threshold * 100;
+        appendBar(sb,width1,value,status_success);
+        appendBar(sb,width2,value,status_warning);
+      }
+ else {
+        double width1=danger_threshold / value * 100;
+        double width2=100 - width1;
+        appendBar(sb,width1,value,status_success);
+        appendBar(sb,width2,value,status_danger);
+      }
+      sb.append("</div>");
+      out.write(sb.toString());
+    }
+  }
+ catch (  IOException e) {
+    throw new JspException("Error: " + e.getMessage());
+  }
+}

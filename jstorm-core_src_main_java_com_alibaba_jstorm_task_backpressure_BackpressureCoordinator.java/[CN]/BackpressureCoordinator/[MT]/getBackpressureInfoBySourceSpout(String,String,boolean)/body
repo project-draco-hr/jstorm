@@ -1,0 +1,18 @@
+{
+  TargetBackpressureInfo ret=null;
+  SourceBackpressureInfo info=SourceTobackpressureInfo.get(sourceSpout);
+  if (info == null) {
+    if (created) {
+      info=new SourceBackpressureInfo();
+      SourceTobackpressureInfo.put(sourceSpout,info);
+    }
+  }
+ else {
+    ret=info.getTargetTasks().get(targetComponentId);
+  }
+  if (ret == null && created) {
+    ret=new TargetBackpressureInfo();
+    info.getTargetTasks().put(targetComponentId,ret);
+  }
+  return ret;
+}

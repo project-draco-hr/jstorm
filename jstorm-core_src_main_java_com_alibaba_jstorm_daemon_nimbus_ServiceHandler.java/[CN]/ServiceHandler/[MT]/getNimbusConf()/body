@@ -1,7 +1,6 @@
 {
   try {
-    String ret=JStormUtils.to_json(data.getConf());
-    return ret;
+    return JStormUtils.to_json(data.getConf());
   }
  catch (  Exception e) {
     String err="Failed to generate Nimbus configuration";

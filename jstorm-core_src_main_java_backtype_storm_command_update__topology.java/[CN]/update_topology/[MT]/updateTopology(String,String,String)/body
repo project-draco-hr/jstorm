@@ -1,0 +1,55 @@
+{
+  NimbusClient client=null;
+  Map loadMap=null;
+  if (pathConf != null) {
+    loadMap=Utils.loadConf(pathConf);
+  }
+ else {
+    loadMap=new HashMap();
+  }
+  Map conf=Utils.readStormConfig();
+  conf.putAll(loadMap);
+  client=NimbusClient.getConfiguredClient(conf);
+  try {
+    String uploadLocation=null;
+    if (pathJar != null) {
+      System.out.println("Jar update to master yet. Submitting jar of " + pathJar);
+      String path=client.getClient().beginFileUpload();
+      String[] pathCache=path.split("/");
+      uploadLocation=path + "/stormjar-" + pathCache[pathCache.length - 1]+ ".jar";
+      List<String> lib=(List<String>)conf.get(GenericOptionsParser.TOPOLOGY_LIB_NAME);
+      Map<String,String> libPath=(Map<String,String>)conf.get(GenericOptionsParser.TOPOLOGY_LIB_PATH);
+      if (lib != null && lib.size() != 0) {
+        for (        String libName : lib) {
+          String jarPath=path + "/lib/" + libName;
+          client.getClient().beginLibUpload(jarPath);
+          StormSubmitter.submitJar(conf,libPath.get(libName),jarPath,client);
+        }
+      }
+ else {
+        if (pathJar == null) {
+          throw new RuntimeException("No client app jar, please upload it");
+        }
+      }
+      if (pathJar != null) {
+        StormSubmitter.submitJar(conf,pathJar,uploadLocation,client);
+      }
+ else {
+        client.getClient().finishFileUpload(uploadLocation);
+      }
+    }
+    String jsonConf=Utils.to_json(loadMap);
+    System.out.println("New configuration:\n" + jsonConf);
+    client.getClient().updateTopology(topologyName,uploadLocation,jsonConf);
+    System.out.println("Successfully submit command update " + topologyName);
+  }
+ catch (  Exception e) {
+    e.printStackTrace();
+    throw new RuntimeException(e);
+  }
+ finally {
+    if (client != null) {
+      client.close();
+    }
+  }
+}

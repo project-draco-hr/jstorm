@@ -24,22 +24,22 @@ def read(self, iprot):
                 iprot.skip(ftype)
         elif (fid == 4):
             if (ftype == TType.I32):
-                self.uptime_secs = iprot.readI32()
+                self.uptimeSecs = iprot.readI32()
             else:
                 iprot.skip(ftype)
         elif (fid == 5):
             if (ftype == TType.I32):
-                self.num_tasks = iprot.readI32()
+                self.numTasks = iprot.readI32()
             else:
                 iprot.skip(ftype)
         elif (fid == 6):
             if (ftype == TType.I32):
-                self.num_workers = iprot.readI32()
+                self.numWorkers = iprot.readI32()
             else:
                 iprot.skip(ftype)
         elif (fid == 7):
             if (ftype == TType.STRING):
-                self.error_info = iprot.readString().decode('utf-8')
+                self.errorInfo = iprot.readString().decode('utf-8')
             else:
                 iprot.skip(ftype)
         else:

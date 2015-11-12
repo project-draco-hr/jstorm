@@ -3,62 +3,62 @@
     return getClass().getName().compareTo(other.getClass().getName());
   }
   int lastComparison=0;
-  lastComparison=Boolean.valueOf(is_set_nimbus_master()).compareTo(other.is_set_nimbus_master());
+  lastComparison=Boolean.valueOf(is_set_nimbusMaster()).compareTo(other.is_set_nimbusMaster());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_nimbus_master()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.nimbus_master,other.nimbus_master);
+  if (is_set_nimbusMaster()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.nimbusMaster,other.nimbusMaster);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_nimbus_slaves()).compareTo(other.is_set_nimbus_slaves());
+  lastComparison=Boolean.valueOf(is_set_nimbusSlaves()).compareTo(other.is_set_nimbusSlaves());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_nimbus_slaves()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.nimbus_slaves,other.nimbus_slaves);
+  if (is_set_nimbusSlaves()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.nimbusSlaves,other.nimbusSlaves);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_supervisor_num()).compareTo(other.is_set_supervisor_num());
+  lastComparison=Boolean.valueOf(is_set_supervisorNum()).compareTo(other.is_set_supervisorNum());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_supervisor_num()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.supervisor_num,other.supervisor_num);
+  if (is_set_supervisorNum()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.supervisorNum,other.supervisorNum);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_total_port_num()).compareTo(other.is_set_total_port_num());
+  lastComparison=Boolean.valueOf(is_set_totalPortNum()).compareTo(other.is_set_totalPortNum());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_total_port_num()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.total_port_num,other.total_port_num);
+  if (is_set_totalPortNum()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.totalPortNum,other.totalPortNum);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_used_port_num()).compareTo(other.is_set_used_port_num());
+  lastComparison=Boolean.valueOf(is_set_usedPortNum()).compareTo(other.is_set_usedPortNum());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_used_port_num()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.used_port_num,other.used_port_num);
+  if (is_set_usedPortNum()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.usedPortNum,other.usedPortNum);
     if (lastComparison != 0) {
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_free_port_num()).compareTo(other.is_set_free_port_num());
+  lastComparison=Boolean.valueOf(is_set_freePortNum()).compareTo(other.is_set_freePortNum());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_free_port_num()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.free_port_num,other.free_port_num);
+  if (is_set_freePortNum()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.freePortNum,other.freePortNum);
     if (lastComparison != 0) {
       return lastComparison;
     }

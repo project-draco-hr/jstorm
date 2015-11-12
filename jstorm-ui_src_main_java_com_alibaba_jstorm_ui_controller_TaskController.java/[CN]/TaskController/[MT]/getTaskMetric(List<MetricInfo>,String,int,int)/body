@@ -1,0 +1,24 @@
+{
+  UITaskMetric taskMetric=new UITaskMetric(component,id);
+  if (taskStreamMetrics.size() > 1) {
+    MetricInfo info=taskStreamMetrics.get(0);
+    if (info != null) {
+      for (      Map.Entry<String,Map<Integer,MetricSnapshot>> metric : info.get_metrics().entrySet()) {
+        String name=metric.getKey();
+        String[] split_name=name.split("@");
+        int taskId=JStormUtils.parseInt(UIMetricUtils.extractTaskId(split_name));
+        if (taskId != id)         continue;
+        String metricName=UIMetricUtils.extractMetricName(split_name);
+        String parentComp=null;
+        if (metricName != null && metricName.contains(".")) {
+          parentComp=metricName.split("\\.")[0];
+          metricName=metricName.split("\\.")[1];
+        }
+        MetricSnapshot snapshot=metric.getValue().get(window);
+        taskMetric.setMetricValue(snapshot,parentComp,metricName);
+      }
+    }
+  }
+  taskMetric.mergeValue();
+  return taskMetric;
+}

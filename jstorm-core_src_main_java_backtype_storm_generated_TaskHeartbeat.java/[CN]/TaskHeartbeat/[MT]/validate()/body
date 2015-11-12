@@ -1,0 +1,8 @@
+{
+  if (!is_set_time()) {
+    throw new TProtocolException("Required field 'time' is unset! Struct:" + toString());
+  }
+  if (!is_set_uptime()) {
+    throw new TProtocolException("Required field 'uptime' is unset! Struct:" + toString());
+  }
+}

@@ -1,0 +1,9 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    return get_topologyId();
+case METRICS:
+  return get_metrics();
+}
+throw new IllegalStateException();
+}

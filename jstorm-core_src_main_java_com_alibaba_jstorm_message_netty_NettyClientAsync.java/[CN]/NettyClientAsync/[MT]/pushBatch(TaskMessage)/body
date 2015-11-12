@@ -25,5 +25,4 @@
     }
  else     LOG.error("MessageBatch will be lost. This should not happen.");
   }
-  return;
 }

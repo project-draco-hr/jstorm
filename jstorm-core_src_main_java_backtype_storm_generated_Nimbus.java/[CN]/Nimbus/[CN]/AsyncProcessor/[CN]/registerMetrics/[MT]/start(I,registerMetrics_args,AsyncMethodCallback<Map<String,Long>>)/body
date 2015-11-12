@@ -1,0 +1,3 @@
+{
+  iface.registerMetrics(args.topologyId,args.metrics,resultHandler);
+}

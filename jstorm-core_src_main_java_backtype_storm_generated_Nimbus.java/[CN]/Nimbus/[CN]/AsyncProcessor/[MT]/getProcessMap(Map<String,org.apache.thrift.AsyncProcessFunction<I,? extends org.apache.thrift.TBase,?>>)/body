@@ -24,11 +24,19 @@
   processMap.put("getTopologyInfoByName",new getTopologyInfoByName());
   processMap.put("getTopology",new getTopology());
   processMap.put("getUserTopology",new getUserTopology());
-  processMap.put("workerUploadMetric",new workerUploadMetric());
-  processMap.put("getTopologyMetric",new getTopologyMetric());
-  processMap.put("getNettyMetric",new getNettyMetric());
-  processMap.put("getServerNettyMetric",new getServerNettyMetric());
+  processMap.put("uploadTopologyMetrics",new uploadTopologyMetrics());
+  processMap.put("registerMetrics",new registerMetrics());
+  processMap.put("getTopologyMetrics",new getTopologyMetrics());
+  processMap.put("getMetrics",new getMetrics());
+  processMap.put("getNettyMetrics",new getNettyMetrics());
+  processMap.put("getNettyMetricsByHost",new getNettyMetricsByHost());
+  processMap.put("getPagingNettyMetrics",new getPagingNettyMetrics());
+  processMap.put("getNettyMetricSizeByHost",new getNettyMetricSizeByHost());
+  processMap.put("getTaskMetrics",new getTaskMetrics());
+  processMap.put("getTaskAndStreamMetrics",new getTaskAndStreamMetrics());
+  processMap.put("getSummarizedTopologyMetrics",new getSummarizedTopologyMetrics());
   processMap.put("getVersion",new getVersion());
-  processMap.put("updateConf",new updateConf());
+  processMap.put("updateTopology",new updateTopology());
+  processMap.put("updateTaskHeartbeat",new updateTaskHeartbeat());
   return processMap;
 }

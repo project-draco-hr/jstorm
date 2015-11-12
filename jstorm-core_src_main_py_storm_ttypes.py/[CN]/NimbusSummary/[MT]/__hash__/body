@@ -1,10 +1,10 @@
 def __hash__(self):
     value = 17
-    value = ((value * 31) ^ hash(self.nimbus_master))
-    value = ((value * 31) ^ hash(self.nimbus_slaves))
-    value = ((value * 31) ^ hash(self.supervisor_num))
-    value = ((value * 31) ^ hash(self.total_port_num))
-    value = ((value * 31) ^ hash(self.used_port_num))
-    value = ((value * 31) ^ hash(self.free_port_num))
+    value = ((value * 31) ^ hash(self.nimbusMaster))
+    value = ((value * 31) ^ hash(self.nimbusSlaves))
+    value = ((value * 31) ^ hash(self.supervisorNum))
+    value = ((value * 31) ^ hash(self.totalPortNum))
+    value = ((value * 31) ^ hash(self.usedPortNum))
+    value = ((value * 31) ^ hash(self.freePortNum))
     value = ((value * 31) ^ hash(self.version))
     return value

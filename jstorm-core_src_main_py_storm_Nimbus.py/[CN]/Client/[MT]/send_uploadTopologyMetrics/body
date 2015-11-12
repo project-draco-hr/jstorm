@@ -1,0 +1,8 @@
+def send_uploadTopologyMetrics(self, topologyId, topologyMetrics):
+    self._oprot.writeMessageBegin('uploadTopologyMetrics', TMessageType.CALL, self._seqid)
+    args = uploadTopologyMetrics_args()
+    args.topologyId = topologyId
+    args.topologyMetrics = topologyMetrics
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

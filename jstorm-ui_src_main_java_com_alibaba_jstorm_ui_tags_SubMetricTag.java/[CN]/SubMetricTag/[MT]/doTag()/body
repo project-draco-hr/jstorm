@@ -1,0 +1,27 @@
+{
+  JspWriter out=getJspContext().getOut();
+  try {
+    StringBuilder sb=new StringBuilder();
+    if (metric.size() > 0) {
+      if (isHidden) {
+        sb.append(String.format("<div class='%s hidden'>",clazz));
+      }
+ else {
+        sb.append(String.format("<div class='%s'>",clazz));
+      }
+      for (      String parent : parentComp) {
+        String key=metricName + "@" + parent;
+        String v=metric.get(key);
+        if (v != null) {
+          sb.append(v);
+        }
+        sb.append("<br/>");
+      }
+      sb.append("</div>");
+      out.write(sb.toString());
+    }
+  }
+ catch (  IOException e) {
+    throw new JspException("Error: " + e.getMessage());
+  }
+}

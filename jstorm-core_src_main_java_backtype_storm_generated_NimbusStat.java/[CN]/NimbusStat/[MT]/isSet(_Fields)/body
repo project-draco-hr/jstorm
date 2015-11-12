@@ -6,7 +6,7 @@ switch (field) {
 case HOST:
     return is_set_host();
 case UPTIME_SECS:
-  return is_set_uptime_secs();
+  return is_set_uptimeSecs();
 }
 throw new IllegalStateException();
 }

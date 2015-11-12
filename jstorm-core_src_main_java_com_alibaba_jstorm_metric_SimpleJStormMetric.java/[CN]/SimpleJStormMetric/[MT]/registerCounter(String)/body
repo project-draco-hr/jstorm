@@ -1,0 +1,5 @@
+{
+  AsmCounter counter=new AsmCounter();
+  counter.setOp(AsmMetric.MetricOp.LOG);
+  return registerWorkerCounter(NIMBUS_METRIC_KEY,name,counter);
+}

@@ -1,0 +1,25 @@
+{
+  MetricInfo ret=new MetricInfo();
+  int start=(page - 1) * MetricUtils.NETTY_METRIC_PAGE_SIZE;
+  int end=page * MetricUtils.NETTY_METRIC_PAGE_SIZE;
+  int cur=-1;
+  List<MetricInfo> metricInfoList=data.getMetricCache().getMetricData(topologyId,MetaType.NETTY);
+  if (metricInfoList != null && metricInfoList.size() > 0) {
+    MetricInfo metricInfo=metricInfoList.get(0);
+    for (    Entry<String,Map<Integer,MetricSnapshot>> metricEntry : metricInfo.get_metrics().entrySet()) {
+      String metricName=metricEntry.getKey();
+      Map<Integer,MetricSnapshot> data=metricEntry.getValue();
+      if (metricName.contains(host)) {
+        ++cur;
+        if (cur >= start && cur < end) {
+          ret.put_to_metrics(metricName,data);
+        }
+        if (cur >= end) {
+          break;
+        }
+      }
+    }
+  }
+  LOG.info("getNettyMetricsByHost, total size:{}",ret.get_metrics_size());
+  return ret;
+}

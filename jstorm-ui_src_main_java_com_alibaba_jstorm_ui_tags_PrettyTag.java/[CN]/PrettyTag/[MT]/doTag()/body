@@ -1,0 +1,29 @@
+{
+  JspWriter out=getJspContext().getOut();
+  try {
+    String output;
+switch (type) {
+case "uptime":
+      int uptime=JStormUtils.parseInt(input,0);
+    output=StatBuckets.prettyUptime(uptime);
+  break;
+case "datetime":
+output=UIUtils.prettyDateTime(input);
+break;
+case "filesize":
+long size=UIUtils.parseLong(input,0);
+output=UIUtils.prettyFileSize(size);
+break;
+case "head":
+output=prettyHead(input);
+break;
+default :
+output="Input Error";
+break;
+}
+out.write(output);
+}
+ catch (IOException e) {
+throw new JspException("Error: " + e.getMessage());
+}
+}

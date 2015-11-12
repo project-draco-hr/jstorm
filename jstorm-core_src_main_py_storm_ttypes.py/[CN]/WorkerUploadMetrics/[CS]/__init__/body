@@ -1,7 +1,5 @@
-def __init__(self, topology_id=None, supervisor_id=None, port=None, workerMetric=None, nettyMetric=None, taskMetric=None):
-    self.topology_id = topology_id
-    self.supervisor_id = supervisor_id
+def __init__(self, topologyId=None, supervisorId=None, port=None, allMetrics=None):
+    self.topologyId = topologyId
+    self.supervisorId = supervisorId
     self.port = port
-    self.workerMetric = workerMetric
-    self.nettyMetric = nettyMetric
-    self.taskMetric = taskMetric
+    self.allMetrics = allMetrics

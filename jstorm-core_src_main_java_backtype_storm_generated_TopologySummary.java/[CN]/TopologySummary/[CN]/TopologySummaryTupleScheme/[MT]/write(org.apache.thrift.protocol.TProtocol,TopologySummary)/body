@@ -3,15 +3,15 @@
   oprot.writeString(struct.id);
   oprot.writeString(struct.name);
   oprot.writeString(struct.status);
-  oprot.writeI32(struct.uptime_secs);
-  oprot.writeI32(struct.num_tasks);
-  oprot.writeI32(struct.num_workers);
+  oprot.writeI32(struct.uptimeSecs);
+  oprot.writeI32(struct.numTasks);
+  oprot.writeI32(struct.numWorkers);
   BitSet optionals=new BitSet();
-  if (struct.is_set_error_info()) {
+  if (struct.is_set_errorInfo()) {
     optionals.set(0);
   }
   oprot.writeBitSet(optionals,1);
-  if (struct.is_set_error_info()) {
-    oprot.writeString(struct.error_info);
+  if (struct.is_set_errorInfo()) {
+    oprot.writeString(struct.errorInfo);
   }
 }

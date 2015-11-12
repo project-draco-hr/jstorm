@@ -1,0 +1,24 @@
+{
+  JStormMetrics.topologyId="topologyId";
+  JStormMetrics.host="127.0.0.1";
+  JStormMetrics.port=6800;
+  String tpId="test";
+  String compName="bolt";
+  int taskId=1;
+  String streamId="defaultStream";
+  String type=MetaType.STREAM.getV() + MetricType.COUNTER.getV();
+  String metricName="counter1";
+  String group="udf";
+  String name=MetricUtils.metricName(type,tpId,compName,taskId,streamId,group,metricName);
+  System.out.println(name);
+  AsmCounter counter=new AsmCounter();
+  AsmMetric ret1=JStormMetrics.registerStreamMetric(name,counter,false);
+  AsmMetric ret2=JStormMetrics.registerStreamMetric(name,counter,false);
+  System.out.println(ret1 == ret2);
+  counter.update(1L);
+  metricName=MetricUtils.workerMetricName("metric1",MetricType.COUNTER);
+  System.out.println(metricName);
+  metricName=fixNameIfPossible(metricName);
+  System.out.println(metricName);
+  System.out.println(fixNameIfPossible(metricName));
+}

@@ -1,0 +1,12 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  BitSet incoming=iprot.readBitSet(2);
+  if (incoming.get(0)) {
+    struct.topologyId=iprot.readString();
+    struct.set_topologyId_isSet(true);
+  }
+  if (incoming.get(1)) {
+    struct.taskId=iprot.readI32();
+    struct.set_taskId_isSet(true);
+  }
+}

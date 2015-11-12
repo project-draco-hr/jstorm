@@ -1,6 +1,0 @@
-def validate(self):
-    if (self.connections is None):
-        raise TProtocol.TProtocolException(message='Required field connections is unset!')
-    if (self.connectionNum is None):
-        raise TProtocol.TProtocolException(message='Required field connectionNum is unset!')
-    return

@@ -1,0 +1,5 @@
+{
+  getTaskAndStreamMetrics_result result=new getTaskAndStreamMetrics_result();
+  result.success=iface.getTaskAndStreamMetrics(args.topologyId,args.taskId);
+  return result;
+}

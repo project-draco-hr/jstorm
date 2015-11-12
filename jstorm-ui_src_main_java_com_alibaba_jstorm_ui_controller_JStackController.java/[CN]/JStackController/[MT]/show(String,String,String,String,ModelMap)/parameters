@@ -1,0 +1,5 @@
+String clusterName
+String host
+String logServerPort
+String workerPort
+ModelMap model

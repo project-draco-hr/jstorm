@@ -1,0 +1,10 @@
+{
+  Integer window;
+  if (StringUtils.isBlank(windowStr)) {
+    window=AsmWindow.M1_WINDOW;
+  }
+ else {
+    window=Integer.valueOf(windowStr);
+  }
+  return window;
+}

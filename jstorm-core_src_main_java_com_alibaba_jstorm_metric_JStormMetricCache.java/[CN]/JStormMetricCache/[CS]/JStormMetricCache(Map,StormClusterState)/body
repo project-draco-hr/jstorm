@@ -1,0 +1,29 @@
+{
+  String dbCacheClass=getNimbusCacheClass(conf);
+  LOG.info("JStorm metrics cache will use {}",dbCacheClass);
+  boolean reset=ConfigExtension.getMetricCacheReset(conf);
+  try {
+    cache=(JStormCache)Utils.newInstance(dbCacheClass);
+    String dbDir=StormConfig.metricDbDir(conf);
+    conf.put(RocksDBCache.ROCKSDB_ROOT_DIR,dbDir);
+    conf.put(RocksDBCache.ROCKSDB_RESET,reset);
+    cache.init(conf);
+  }
+ catch (  Exception e) {
+    if (!reset && cache != null) {
+      LOG.error("Failed to init rocks db, will reset and try to re-init...");
+      conf.put(RocksDBCache.ROCKSDB_RESET,true);
+      try {
+        cache.init(conf);
+      }
+ catch (      Exception ex) {
+        LOG.error("Error",ex);
+      }
+    }
+ else {
+      LOG.error("Failed to create metrics cache!",e);
+      throw new RuntimeException(e);
+    }
+  }
+  this.zkCluster=zkCluster;
+}

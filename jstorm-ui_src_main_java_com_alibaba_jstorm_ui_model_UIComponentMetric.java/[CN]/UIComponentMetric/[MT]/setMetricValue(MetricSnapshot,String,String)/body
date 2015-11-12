@@ -1,0 +1,10 @@
+{
+  if (parentComp != null) {
+    String value=UIMetricUtils.getMetricRawValue(snapshot);
+    putSubMetricMap(metricName,parentComp,value);
+  }
+ else {
+    String value=UIMetricUtils.getMetricValue(snapshot);
+    setValue(metricName,value);
+  }
+}

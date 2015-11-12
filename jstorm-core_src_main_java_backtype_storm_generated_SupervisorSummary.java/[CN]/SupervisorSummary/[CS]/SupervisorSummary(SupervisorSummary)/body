@@ -3,10 +3,10 @@
   if (other.is_set_host()) {
     this.host=other.host;
   }
-  if (other.is_set_supervisor_id()) {
-    this.supervisor_id=other.supervisor_id;
+  if (other.is_set_supervisorId()) {
+    this.supervisorId=other.supervisorId;
   }
-  this.uptime_secs=other.uptime_secs;
-  this.num_workers=other.num_workers;
-  this.num_used_workers=other.num_used_workers;
+  this.uptimeSecs=other.uptimeSecs;
+  this.numWorkers=other.numWorkers;
+  this.numUsedWorkers=other.numUsedWorkers;
 }

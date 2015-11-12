@@ -1,0 +1,3 @@
+{
+  this.reporterror.report(error);
+}

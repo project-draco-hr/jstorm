@@ -1,5 +1,0 @@
-{
-  MetricWindow metricWindow=new MetricWindow();
-  metricWindow.set_metricWindow(windowSet);
-  metricInfo.put_to_baseMetric(key,metricWindow);
-}

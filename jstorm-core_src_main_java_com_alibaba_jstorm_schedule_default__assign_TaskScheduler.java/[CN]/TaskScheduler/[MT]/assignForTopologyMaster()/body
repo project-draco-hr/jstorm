@@ -1,0 +1,25 @@
+{
+  int taskId=context.getTopologyMasterTaskId();
+  ResourceWorkerSlot workerAssigned=null;
+  int workerNumOfSuperv=0;
+  for (  ResourceWorkerSlot workerSlot : taskContext.getWorkerToTaskNum().keySet()) {
+    List<ResourceWorkerSlot> workers=taskContext.getSupervisorToWorker().get(workerSlot.getNodeId());
+    if (workers != null && workers.size() > workerNumOfSuperv) {
+      for (      ResourceWorkerSlot worker : workers) {
+        Set<Integer> tasks=worker.getTasks();
+        if (tasks == null || tasks.size() == 0) {
+          workerAssigned=worker;
+          workerNumOfSuperv=workers.size();
+          break;
+        }
+      }
+    }
+  }
+  if (workerAssigned == null)   throw new FailedAssignTopologyException("there's no enough workers for the assignment of topology master");
+  updateAssignedTasksOfWorker(taskId,workerAssigned);
+  taskContext.getWorkerToTaskNum().remove(workerAssigned);
+  assignments.add(workerAssigned);
+  tasks.remove(taskId);
+  workerNum--;
+  LOG.info("assignForTopologyMaster, assignments=" + assignments);
+}

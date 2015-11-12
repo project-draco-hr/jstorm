@@ -1,0 +1,3 @@
+{
+  return MetaType.parse(name.charAt(0) + EMPTY);
+}

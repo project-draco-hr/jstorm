@@ -1,0 +1,14 @@
+{
+  TimeTicker ticker=new TimeTicker(TimeUnit.MILLISECONDS,true);
+  try {
+    refreshTopologies();
+    LOG.info("refresh topologies, cost:{}",ticker.stopAndRestart());
+    if (!nimbusData.isLeader()) {
+      syncTopologyMeta();
+      LOG.info("sync topology meta, cost:{}",ticker.stop());
+    }
+  }
+ catch (  Exception ex) {
+    LOG.error("handleRefreshEvent error:",ex);
+  }
+}

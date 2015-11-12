@@ -1,0 +1,18 @@
+{
+  if (snapshot instanceof AsmCounterSnapshot) {
+    return ((AsmCounterSnapshot)snapshot).getV();
+  }
+ else   if (snapshot instanceof AsmGaugeSnapshot) {
+    return ((AsmGaugeSnapshot)snapshot).getV();
+  }
+ else   if (snapshot instanceof AsmMeterSnapshot) {
+    return ((AsmMeterSnapshot)snapshot).getM1();
+  }
+ else   if (snapshot instanceof AsmHistogramSnapshot) {
+    return ((AsmHistogramSnapshot)snapshot).getSnapshot().getMean();
+  }
+ else   if (snapshot instanceof AsmTimerSnapshot) {
+    return ((AsmTimerSnapshot)snapshot).getHistogram().getMean();
+  }
+  return 0;
+}

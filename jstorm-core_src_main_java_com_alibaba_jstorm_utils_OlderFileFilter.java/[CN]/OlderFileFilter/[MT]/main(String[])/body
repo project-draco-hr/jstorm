@@ -1,0 +1,11 @@
+{
+  long current_time=System.currentTimeMillis();
+  String test="test";
+  File file=new File(test);
+  file.delete();
+  file.mkdir();
+  file.setLastModified(current_time);
+  JStormUtils.sleepMs(10 * 1000);
+  File newFile=new File(test);
+  System.out.println("modify time: " + newFile.lastModified() + ", raw:"+ current_time);
+}

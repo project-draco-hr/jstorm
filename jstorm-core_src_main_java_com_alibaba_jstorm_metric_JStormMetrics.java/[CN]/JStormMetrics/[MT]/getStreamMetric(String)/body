@@ -1,0 +1,4 @@
+{
+  name=fixNameIfPossible(name);
+  return streamMetrics.getMetric(name);
+}

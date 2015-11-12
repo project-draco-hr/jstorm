@@ -1,3 +1,0 @@
-{
-  iface.updateConf(args.name,args.conf,resultHandler);
-}

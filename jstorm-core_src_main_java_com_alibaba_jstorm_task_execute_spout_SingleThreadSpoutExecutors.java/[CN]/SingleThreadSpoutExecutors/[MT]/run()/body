@@ -1,4 +1,7 @@
 {
+  if (isFinishInit == false) {
+    initWrapper();
+  }
   executeEvent();
   super.nextTuple();
   processControlEvent();

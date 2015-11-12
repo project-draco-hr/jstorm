@@ -1,0 +1,7 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getNettyMetrics",org.apache.thrift.protocol.TMessageType.CALL,0));
+  getNettyMetrics_args args=new getNettyMetrics_args();
+  args.set_topologyId(topologyId);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

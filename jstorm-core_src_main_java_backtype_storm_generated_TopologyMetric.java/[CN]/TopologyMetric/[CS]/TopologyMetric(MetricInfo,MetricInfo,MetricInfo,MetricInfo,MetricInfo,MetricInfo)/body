@@ -1,0 +1,9 @@
+{
+  this();
+  this.topologyMetric=topologyMetric;
+  this.componentMetric=componentMetric;
+  this.workerMetric=workerMetric;
+  this.taskMetric=taskMetric;
+  this.streamMetric=streamMetric;
+  this.nettyMetric=nettyMetric;
+}

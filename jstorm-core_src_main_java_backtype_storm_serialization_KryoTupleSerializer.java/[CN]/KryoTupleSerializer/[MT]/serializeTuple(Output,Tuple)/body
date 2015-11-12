@@ -1,0 +1,15 @@
+{
+  try {
+    if (tuple instanceof TupleExt) {
+      output.writeInt(((TupleExt)tuple).getTargetTaskId());
+      output.writeLong(((TupleExt)tuple).getCreationTimeStamp());
+    }
+    output.writeInt(tuple.getSourceTask(),true);
+    output.writeInt(_ids.getStreamId(tuple.getSourceComponent(),tuple.getSourceStreamId()),true);
+    tuple.getMessageId().serialize(output);
+    _kryo.serializeInto(tuple.getValues(),output);
+  }
+ catch (  IOException e) {
+    throw new RuntimeException(e);
+  }
+}

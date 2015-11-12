@@ -1,0 +1,8 @@
+{
+  name=fixNameIfPossible(name);
+  AsmMetric ret=workerMetrics.register(name,metric);
+  String topologyMetricName=MetricUtils.worker2topologyName(name);
+  AsmMetric topologyMetric=topologyMetrics.register(topologyMetricName,ret.clone());
+  ret.addAssocMetrics(topologyMetric);
+  return ret;
+}

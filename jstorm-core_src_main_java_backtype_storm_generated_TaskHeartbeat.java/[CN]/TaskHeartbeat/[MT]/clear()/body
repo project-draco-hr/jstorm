@@ -1,0 +1,6 @@
+{
+  set_time_isSet(false);
+  this.time=0;
+  set_uptime_isSet(false);
+  this.uptime=0;
+}

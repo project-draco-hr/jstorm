@@ -4,5 +4,6 @@
   assignEvent.setScratch(false);
   assignEvent.setOldStatus(oldStatus);
   TopologyAssign.push(assignEvent);
+  assignEvent.waitFinish();
   return null;
 }

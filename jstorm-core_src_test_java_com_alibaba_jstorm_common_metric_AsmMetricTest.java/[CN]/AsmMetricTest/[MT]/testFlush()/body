@@ -1,0 +1,11 @@
+{
+  AsmCounter counter=new AsmCounter();
+  counter.setMetricName("mock@metric@name");
+  Random random=new Random();
+  for (int i=0; i < 100; i++) {
+    int c=random.nextInt(10);
+    counter.update(c);
+  }
+  counter.flush();
+  assertEquals(4,counter.getSnapshots().size());
+}

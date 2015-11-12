@@ -1,0 +1,11 @@
+{
+  if (bytes.length - offset < SIZEOF_LONG) {
+    throw new IllegalArgumentException("Not enough room to put a long at" + " offset " + offset + " in a "+ bytes.length+ " byte array");
+  }
+  for (int i=offset + 7; i > offset; i--) {
+    bytes[i]=(byte)val;
+    val>>>=8;
+  }
+  bytes[offset]=(byte)val;
+  return offset + SIZEOF_LONG;
+}

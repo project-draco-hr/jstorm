@@ -1,0 +1,7 @@
+{
+synchronized (windowSeconds) {
+    windowSeconds.clear();
+    windowSeconds.addAll(windows);
+    minWindow=getMinWindow(windows);
+  }
+}

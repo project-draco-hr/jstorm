@@ -1,41 +1,58 @@
 {
-  LOG.info("Receive " + topologyname + ", uploadedJarLocation:"+ uploadedJarLocation);
+  LOG.info("Receive " + topologyName + ", uploadedJarLocation:"+ uploadedJarLocation);
   long start=System.nanoTime();
+  if (!Common.charValidate(topologyName)) {
+    throw new InvalidTopologyException(topologyName + " is not a valid topology name");
+  }
   try {
-    checkTopologyActive(data,topologyname,false);
+    checkTopologyActive(data,topologyName,false);
   }
  catch (  AlreadyAliveException e) {
-    LOG.info(topologyname + " is already exist ");
+    LOG.info(topologyName + " already exists ");
     throw e;
   }
 catch (  Throwable e) {
     LOG.info("Failed to check whether topology is alive or not",e);
     throw new TException(e);
   }
-  int counter=data.getSubmittedCount().incrementAndGet();
-  String topologyId=Common.topologyNameToId(topologyname,counter);
-  data.getPendingSubmitTopoloygs().put(topologyId,null);
+  String topologyId=null;
+synchronized (data) {
+    Set<String> pendingTopologys=data.getPendingSubmitTopoloygs().keySet();
+    for (    String cachTopologyId : pendingTopologys) {
+      if (cachTopologyId.contains(topologyName + "-"))       throw new AlreadyAliveException(topologyName + "  were submitted");
+    }
+    int counter=data.getSubmittedCount().incrementAndGet();
+    topologyId=Common.topologyNameToId(topologyName,counter);
+    data.getPendingSubmitTopoloygs().put(topologyId,null);
+  }
   try {
     Map<Object,Object> serializedConf=(Map<Object,Object>)JStormUtils.from_json(jsonConf);
     if (serializedConf == null) {
       LOG.warn("Failed to serialized Configuration");
-      throw new InvalidTopologyException("Failed to serilaze topology configuration");
+      throw new InvalidTopologyException("Failed to serialize topology configuration");
     }
     serializedConf.put(Config.TOPOLOGY_ID,topologyId);
-    serializedConf.put(Config.TOPOLOGY_NAME,topologyname);
+    serializedConf.put(Config.TOPOLOGY_NAME,topologyName);
     Map<Object,Object> stormConf;
     stormConf=NimbusUtils.normalizeConf(conf,serializedConf,topology);
     LOG.info("Normalized configuration:" + stormConf);
-    data.getTopologyNettyMgr().setTopology(stormConf);
     Map<Object,Object> totalStormConf=new HashMap<Object,Object>(conf);
     totalStormConf.putAll(stormConf);
     StormTopology normalizedTopology=NimbusUtils.normalizeTopology(stormConf,topology,true);
     Common.validate_basic(normalizedTopology,totalStormConf,topologyId);
     StormClusterState stormClusterState=data.getStormClusterState();
+    double metricsSampleRate=ConfigExtension.getMetricSampleRate(stormConf);
     setupStormCode(conf,topologyId,uploadedJarLocation,stormConf,normalizedTopology);
     setupZkTaskInfo(conf,topologyId,stormClusterState);
-    LOG.info("Submit for " + topologyname + " with conf "+ serializedConf);
-    makeAssignment(topologyname,topologyId,options.get_initial_status());
+    LOG.info("Submit for " + topologyName + " with conf "+ serializedConf);
+    makeAssignment(topologyName,topologyId,options.get_initial_status());
+    data.getPendingSubmitTopoloygs().remove(topologyId);
+    StartTopologyEvent startEvent=new StartTopologyEvent();
+    startEvent.clusterName=this.data.getClusterName();
+    startEvent.topologyId=topologyId;
+    startEvent.timestamp=System.currentTimeMillis();
+    startEvent.sampleRate=metricsSampleRate;
+    this.data.getMetricRunnable().pushEvent(startEvent);
   }
  catch (  FailedAssignTopologyException e) {
     StringBuilder sb=new StringBuilder();
@@ -83,8 +100,8 @@ catch (  Throwable e) {
     throw new TopologyAssignException(sb.toString());
   }
  finally {
-    double spend=(System.nanoTime() - start) / 1000000.0d;
-    SimpleJStormMetric.updateHistorgram("submitTopologyWithOpts",spend);
-    LOG.info("submitTopologyWithOpts {} spend {}ms",topologyname,spend);
+    double spend=(System.nanoTime() - start) / TimeUtils.NS_PER_US;
+    SimpleJStormMetric.updateNimbusHistogram("submitTopologyWithOpts",spend);
+    LOG.info("submitTopologyWithOpts {} costs {}ms",topologyName,spend);
   }
 }

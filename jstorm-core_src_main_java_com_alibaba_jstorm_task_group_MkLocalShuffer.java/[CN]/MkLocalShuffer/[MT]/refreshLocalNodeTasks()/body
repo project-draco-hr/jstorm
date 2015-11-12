@@ -1,0 +1,18 @@
+{
+  Set<Integer> localNodeTasks=workerData.getLocalNodeTasks();
+  if (localNodeTasks == null || localNodeTasks.equals(lastLocalNodeTasks)) {
+    return;
+  }
+  LOG.info("Old localNodeTasks:" + lastLocalNodeTasks + ", new:"+ localNodeTasks);
+  lastLocalNodeTasks=localNodeTasks;
+  List<Integer> localNodeOutTasks=new ArrayList<Integer>();
+  for (  Integer outTask : outTasks) {
+    if (localNodeTasks.contains(outTask)) {
+      localNodeOutTasks.add(outTask);
+    }
+  }
+  if (localNodeOutTasks.isEmpty() == false) {
+    this.outTasks=localNodeOutTasks;
+  }
+  randomrange=new RandomRange(outTasks.size());
+}

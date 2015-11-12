@@ -1,8 +1,8 @@
 {
   List<Object> list=new ArrayList<Object>();
-  boolean present_task_id=true;
-  list.add(present_task_id);
-  if (present_task_id)   list.add(task_id);
+  boolean present_taskId=true;
+  list.add(present_taskId);
+  if (present_taskId)   list.add(taskId);
   boolean present_uptime=true;
   list.add(present_uptime);
   if (present_uptime)   list.add(uptime);

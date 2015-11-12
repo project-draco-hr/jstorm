@@ -1,5 +1,0 @@
-{
-  Counter<Double> ret=(Counter<Double>)Builder.mkInstance(Builder.COUNTER);
-  registerTaskMetric(ret,taskId,name,args);
-  return ret;
-}

@@ -1,0 +1,9 @@
+{
+  try {
+    String backpressurePath=Cluster.backpressure_path(topologyId);
+    cluster_state.delete_node(backpressurePath);
+  }
+ catch (  Exception e) {
+    LOG.warn("Could not teardown backpressure info for " + topologyId,e);
+  }
+}

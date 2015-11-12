@@ -1,0 +1,10 @@
+{
+  TopologyMetric emptyTopologyMetric=new TopologyMetric();
+  emptyTopologyMetric.set_topologyMetric(new MetricInfo());
+  emptyTopologyMetric.set_componentMetric(new MetricInfo());
+  emptyTopologyMetric.set_workerMetric(new MetricInfo());
+  emptyTopologyMetric.set_taskMetric(new MetricInfo());
+  emptyTopologyMetric.set_streamMetric(new MetricInfo());
+  emptyTopologyMetric.set_nettyMetric(new MetricInfo());
+  return emptyTopologyMetric;
+}

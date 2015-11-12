@@ -1,0 +1,5 @@
+{
+  LOG.info("Begin to shutdown");
+  metricUploader.cleanup();
+  LOG.info("Successfully shutdown");
+}

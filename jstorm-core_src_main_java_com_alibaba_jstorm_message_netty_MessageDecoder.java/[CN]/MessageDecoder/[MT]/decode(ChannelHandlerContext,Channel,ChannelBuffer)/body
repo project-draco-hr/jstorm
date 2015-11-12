@@ -22,14 +22,15 @@
       available-=12;
       if (ctrl_msg == ControlMessage.EOB_MESSAGE) {
         long interval=System.currentTimeMillis() - timeStamp;
-        if (interval > 0) {
-          Histogram netTransTime=getTransmitHistogram(channel,clientPort);
+        if (interval < 0)         interval=0;
+        if (enableTransitTimeMetrics) {
+          AsmHistogram netTransTime=getTransmitHistogram(channel,clientPort);
           if (netTransTime != null) {
-            netTransTime.update(interval);
+            netTransTime.update(interval * TimeUtils.NS_PER_US);
           }
         }
-        recvSpeed.update(Double.valueOf(ControlMessage.encodeLength()));
       }
+      recvSpeed.update(ControlMessage.encodeLength());
       return ctrl_msg;
     }
     short task=code;
@@ -50,13 +51,13 @@
     ChannelBuffer payload=buf.readBytes(length);
     byte[] rawBytes=payload.array();
     TaskMessage ret=new TaskMessage(task,rawBytes);
-    recvSpeed.update(Double.valueOf(rawBytes.length + 6));
+    recvSpeed.update(rawBytes.length + 6);
     return ret;
   }
   finally {
     if (isServer) {
       Long endTime=System.nanoTime();
-      timer.update((endTime - startTime) / 1000000.0d);
+      msgDecodeTime.update((endTime - startTime) / TimeUtils.NS_PER_US);
     }
   }
 }

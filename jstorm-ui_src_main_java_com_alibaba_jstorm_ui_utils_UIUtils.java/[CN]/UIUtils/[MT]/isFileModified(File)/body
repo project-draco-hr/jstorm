@@ -1,0 +1,10 @@
+{
+  long lastModified=file.lastModified();
+  if (uiConfigLastModified == 0 || uiConfigLastModified < lastModified) {
+    uiConfigLastModified=lastModified;
+    return true;
+  }
+ else {
+    return false;
+  }
+}

@@ -1,0 +1,4 @@
+def getPagingNettyMetrics(self, topologyId, host, page):
+    '\n    Parameters:\n     - topologyId\n     - host\n     - page\n    '
+    self.send_getPagingNettyMetrics(topologyId, host, page)
+    return self.recv_getPagingNettyMetrics()

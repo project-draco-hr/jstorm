@@ -1,0 +1,10 @@
+def process_getSummarizedTopologyMetrics(self, seqid, iprot, oprot):
+    args = getSummarizedTopologyMetrics_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getSummarizedTopologyMetrics_result()
+    result.success = self._handler.getSummarizedTopologyMetrics(args.topologyId)
+    oprot.writeMessageBegin('getSummarizedTopologyMetrics', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

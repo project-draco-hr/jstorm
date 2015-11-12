@@ -1,4 +1,4 @@
 {
   long current_time=System.currentTimeMillis();
-  return (pathname.isFile() && (pathname.lastModified() + seconds * 1000 <= current_time)) || pathname.isDirectory();
+  return (pathname.lastModified() + seconds * 1000 <= current_time);
 }

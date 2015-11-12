@@ -1,4 +1,4 @@
 {
-  JStormMetrics.unregisterWorkerMetric(idStr + MetricDef.QUEUE_TYPE);
+  JStormMetrics.unregisterWorkerMetric(MetricUtils.workerMetricName(idStr + MetricDef.QUEUE_TYPE,MetricType.GAUGE));
   JStormHealthCheck.unregisterWorkerHealthCheck(idStr);
 }

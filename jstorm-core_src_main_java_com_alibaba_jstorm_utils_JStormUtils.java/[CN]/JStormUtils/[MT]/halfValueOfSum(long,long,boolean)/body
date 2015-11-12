@@ -1,0 +1,7 @@
+{
+  long ret=(v1 + v2) / 2;
+  if (increment) {
+    ret+=(v1 + v2) % 2;
+  }
+  return ret;
+}

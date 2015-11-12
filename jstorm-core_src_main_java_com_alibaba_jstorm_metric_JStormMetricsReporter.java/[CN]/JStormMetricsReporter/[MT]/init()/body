@@ -1,0 +1,6 @@
+{
+  if (!localMode && enableMetrics) {
+    this.checkMetricMetaThread=new AsyncLoopThread(new CheckMetricMetaThread());
+    this.flushMetricThread=new AsyncLoopThread(new FlushMetricThread());
+  }
+}

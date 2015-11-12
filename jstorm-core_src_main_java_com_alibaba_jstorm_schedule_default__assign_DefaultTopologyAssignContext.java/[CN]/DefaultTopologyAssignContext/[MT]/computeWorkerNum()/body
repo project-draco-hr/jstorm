@@ -1,6 +1,6 @@
 {
   Integer settingNum=JStormUtils.parseInt(stormConf.get(Config.TOPOLOGY_WORKERS));
-  int hintSum=0;
+  int ret=0, hintSum=0, tmCount=0;
   Map<String,Object> components=ThriftTopologyUtils.getComponents(sysTopology);
   for (  Entry<String,Object> entry : components.entrySet()) {
     String componentName=entry.getKey();
@@ -16,12 +16,30 @@
       common=((StateSpoutSpec)component).get_common();
     }
     int hint=common.get_parallelism_hint();
+    if (componentName.equals(Common.TOPOLOGY_MASTER_COMPONENT_ID)) {
+      tmCount+=hint;
+      continue;
+    }
     hintSum+=hint;
   }
   if (settingNum == null) {
-    return hintSum;
+    ret=hintSum;
   }
  else {
-    return Math.min(settingNum,hintSum);
+    ret=Math.min(settingNum,hintSum);
   }
+  Boolean isTmSingleWorker=ConfigExtension.getTopologyMasterSingleWorker(stormConf);
+  if (isTmSingleWorker != null) {
+    if (isTmSingleWorker == true) {
+      ret+=tmCount;
+      setAssignSingleWorkerForTM(true);
+    }
+  }
+ else {
+    if (ret >= 10) {
+      ret+=tmCount;
+      setAssignSingleWorkerForTM(true);
+    }
+  }
+  return ret;
 }

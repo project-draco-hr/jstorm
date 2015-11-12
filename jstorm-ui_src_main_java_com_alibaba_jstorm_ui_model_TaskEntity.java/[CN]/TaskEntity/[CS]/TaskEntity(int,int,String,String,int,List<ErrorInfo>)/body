@@ -1,0 +1,8 @@
+{
+  this.task_id=task_id;
+  this.uptime=uptime;
+  this.status=status;
+  this.host=host;
+  this.port=port;
+  this.errors=errors;
+}

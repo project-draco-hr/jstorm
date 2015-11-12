@@ -1,0 +1,13 @@
+{
+  while (isActive) {
+    try {
+      Tuple event=queue.take();
+      if (event != null) {
+        eventHandle(event);
+      }
+    }
+ catch (    Throwable e) {
+      LOG.error("Failed to process event",e);
+    }
+  }
+}

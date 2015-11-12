@@ -1,25 +1,9 @@
 {
   TTupleProtocol oprot=(TTupleProtocol)prot;
   struct.topologyMetric.write(oprot);
-{
-    oprot.writeI32(struct.componentMetric.size());
-    for (    Map.Entry<String,MetricInfo> _iter181 : struct.componentMetric.entrySet()) {
-      oprot.writeString(_iter181.getKey());
-      _iter181.getValue().write(oprot);
-    }
-  }
-{
-    oprot.writeI32(struct.workerMetric.size());
-    for (    Map.Entry<String,MetricInfo> _iter182 : struct.workerMetric.entrySet()) {
-      oprot.writeString(_iter182.getKey());
-      _iter182.getValue().write(oprot);
-    }
-  }
-{
-    oprot.writeI32(struct.taskMetric.size());
-    for (    Map.Entry<Integer,MetricInfo> _iter183 : struct.taskMetric.entrySet()) {
-      oprot.writeI32(_iter183.getKey());
-      _iter183.getValue().write(oprot);
-    }
-  }
+  struct.componentMetric.write(oprot);
+  struct.workerMetric.write(oprot);
+  struct.taskMetric.write(oprot);
+  struct.streamMetric.write(oprot);
+  struct.nettyMetric.write(oprot);
 }

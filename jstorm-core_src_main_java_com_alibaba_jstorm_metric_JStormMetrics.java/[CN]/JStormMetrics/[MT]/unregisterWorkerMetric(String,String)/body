@@ -1,4 +1,0 @@
-{
-  String registerName=MetricRegistry.name(name,args);
-  workerMetrics.remove(registerName);
-}

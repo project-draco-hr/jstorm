@@ -3,7 +3,7 @@
   if (StringUtils.isBlank(confDir) == true) {
     throw new RuntimeException("Doesn't set rootDir of rocksDB");
   }
-  boolean clean=ConfigExtension.getNimbusCacheReset(conf);
+  boolean clean=(Boolean)conf.get(ROCKSDB_RESET);
   LOG.info("RocksDB reset is " + clean);
   if (clean == true) {
     try {

@@ -1,0 +1,5 @@
+{
+  Map<String,Bolt> bolts=stormTopology.get_bolts();
+  Map<String,SpoutSpec> spouts=stormTopology.get_spouts();
+  return bolts.size() + spouts.size();
+}

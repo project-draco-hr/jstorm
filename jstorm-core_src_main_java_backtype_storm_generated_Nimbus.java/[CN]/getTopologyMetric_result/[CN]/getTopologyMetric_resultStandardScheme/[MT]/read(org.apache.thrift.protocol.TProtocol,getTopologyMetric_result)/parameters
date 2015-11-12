@@ -1,2 +1,0 @@
-org.apache.thrift.protocol.TProtocol iprot
-getTopologyMetric_result struct

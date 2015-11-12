@@ -1,0 +1,3 @@
+String name
+KillOptions options
+AsyncMethodCallback resultHandler

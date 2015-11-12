@@ -1,0 +1,3 @@
+def registerMetrics(self, topologyId, metrics):
+    '\n    Parameters:\n     - topologyId\n     - metrics\n    '
+    pass

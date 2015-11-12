@@ -1,8 +1,0 @@
-{
-  if (!is_set_connections()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'connections' is unset! Struct:" + toString());
-  }
-  if (!is_set_connectionNum()) {
-    throw new org.apache.thrift.protocol.TProtocolException("Required field 'connectionNum' is unset! Struct:" + toString());
-  }
-}

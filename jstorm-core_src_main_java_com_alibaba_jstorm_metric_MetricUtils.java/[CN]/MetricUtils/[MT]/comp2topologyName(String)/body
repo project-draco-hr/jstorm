@@ -1,0 +1,5 @@
+{
+  String[] parts=old.split(DELIM);
+  parts[0]=MetaType.TOPOLOGY.getV() + parts[0].charAt(1);
+  return concat(parts[0],parts[1],EMPTY,"0",parts[5],parts[6]);
+}

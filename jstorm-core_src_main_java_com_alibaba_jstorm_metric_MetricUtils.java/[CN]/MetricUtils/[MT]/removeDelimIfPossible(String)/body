@@ -1,0 +1,6 @@
+{
+  if (name.contains(DELIM)) {
+    return name.replace(DELIM,EMPTY);
+  }
+  return name;
+}

@@ -1,7 +1,7 @@
 {
   this();
-  this.task_id=task_id;
-  set_task_id_isSet(true);
+  this.taskId=taskId;
+  set_taskId_isSet(true);
   this.uptime=uptime;
   set_uptime_isSet(true);
   this.status=status;

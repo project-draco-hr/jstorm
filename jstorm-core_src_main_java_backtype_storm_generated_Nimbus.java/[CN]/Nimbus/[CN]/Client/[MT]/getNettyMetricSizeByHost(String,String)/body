@@ -1,0 +1,4 @@
+{
+  send_getNettyMetricSizeByHost(topologyId,host);
+  return recv_getNettyMetricSizeByHost();
+}

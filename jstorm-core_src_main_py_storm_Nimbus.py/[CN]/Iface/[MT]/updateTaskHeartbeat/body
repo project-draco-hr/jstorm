@@ -1,0 +1,3 @@
+def updateTaskHeartbeat(self, taskHbs):
+    '\n    Parameters:\n     - taskHbs\n    '
+    pass

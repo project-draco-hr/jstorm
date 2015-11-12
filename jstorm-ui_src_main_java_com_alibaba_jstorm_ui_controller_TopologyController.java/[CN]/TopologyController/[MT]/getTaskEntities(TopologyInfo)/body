@@ -1,0 +1,20 @@
+{
+  Map<Integer,TaskEntity> tasks=new HashMap<>();
+  for (  TaskSummary ts : topologyInfo.get_tasks()) {
+    tasks.put(ts.get_taskId(),new TaskEntity(ts));
+  }
+  for (  ComponentSummary cs : topologyInfo.get_components()) {
+    String compName=cs.get_name();
+    String type=cs.get_type();
+    for (    int id : cs.get_taskIds()) {
+      if (tasks.containsKey(id)) {
+        tasks.get(id).setComponent(compName);
+        tasks.get(id).setType(type);
+      }
+ else {
+        LOG.info("missing task id:{}",id);
+      }
+    }
+  }
+  return new ArrayList<>(tasks.values());
+}

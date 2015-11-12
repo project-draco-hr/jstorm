@@ -1,0 +1,17 @@
+{
+  this.rotateTime=1000L * message_timeout_secs / (Acker.TIMEOUT_BUCKET_NUM - 1);
+  this.reportError=task.getReportErrorDie();
+  this.sendTargets=task.getTaskSendTargets();
+  this.storm_conf=task.getStormConf();
+  this.taskTransfer=task.getTaskTransfer();
+  this.topologyContext=task.getTopologyContext();
+  this.task_id=task.getTaskId();
+  this.task_stats=task.getTaskStats();
+  this.pending_acks=new RotatingMap<Tuple,Long>(Acker.TIMEOUT_BUCKET_NUM);
+  this.tuple_start_times=tuple_start_times;
+  this.ackerNum=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
+  String componentId=topologyContext.getThisComponentId();
+  this.timer=JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyContext.getTopologyId(),componentId,task_id,MetricDef.COLLECTOR_EMIT_TIME,MetricType.HISTOGRAM),new AsmHistogram());
+  random=new Random();
+  random.setSeed(System.currentTimeMillis());
+}

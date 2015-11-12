@@ -1,7 +1,0 @@
-{
-  String errMsg=JStormUtils.getErrorInfo(e);
-  Output ret=new Output();
-  ret.tables=new ArrayList<TableData>();
-  ret.rawData="!!!!!!!!!!!!!!!! Occur Exception:" + e.getMessage() + " !!!!!!!!!\r\n\r\nPlease refresh once again\r\n"+ errMsg;
-  return ret;
-}

@@ -1,0 +1,5 @@
+{
+  int topology_num=cluster.get_topologies_size();
+  NimbusSummary ns=cluster.get_nimbus();
+  return getClusterEntity(ns,topology_num,cluster_name,port);
+}

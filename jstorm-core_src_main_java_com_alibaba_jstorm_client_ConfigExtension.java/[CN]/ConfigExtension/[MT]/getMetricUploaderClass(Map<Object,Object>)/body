@@ -1,0 +1,3 @@
+{
+  return (String)conf.get(METRIC_UPLOADER_CLASS);
+}

@@ -18,8 +18,8 @@ case 1:
     break;
 case 2:
   if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-    struct.supervisor_id=iprot.readString();
-    struct.set_supervisor_id_isSet(true);
+    struct.supervisorId=iprot.readString();
+    struct.set_supervisorId_isSet(true);
   }
  else {
     org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
@@ -27,8 +27,8 @@ case 2:
 break;
 case 3:
 if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-struct.uptime_secs=iprot.readI32();
-struct.set_uptime_secs_isSet(true);
+struct.uptimeSecs=iprot.readI32();
+struct.set_uptimeSecs_isSet(true);
 }
  else {
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
@@ -36,8 +36,8 @@ org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
 break;
 case 4:
 if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-struct.num_workers=iprot.readI32();
-struct.set_num_workers_isSet(true);
+struct.numWorkers=iprot.readI32();
+struct.set_numWorkers_isSet(true);
 }
  else {
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
@@ -45,8 +45,8 @@ org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
 break;
 case 5:
 if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-struct.num_used_workers=iprot.readI32();
-struct.set_num_used_workers_isSet(true);
+struct.numUsedWorkers=iprot.readI32();
+struct.set_numUsedWorkers_isSet(true);
 }
  else {
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);

@@ -1,0 +1,7 @@
+{
+  this.host=host;
+  this.ip=UIUtils.getIp(host);
+  this.port=UIUtils.getPort(host);
+  this.uptime_secs=StatBuckets.prettyUptime(JStormUtils.parseInt(uptime_secs,0));
+  this.version=version;
+}

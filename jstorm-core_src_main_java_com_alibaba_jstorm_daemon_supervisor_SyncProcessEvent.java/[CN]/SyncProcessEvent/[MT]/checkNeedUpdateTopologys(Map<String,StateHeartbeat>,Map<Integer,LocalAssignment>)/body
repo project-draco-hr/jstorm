@@ -1,7 +1,9 @@
 {
   Set<String> topologys=new HashSet<String>();
-  for (  Map.Entry<Integer,LocalAssignment> entry : localAssignments.entrySet()) {
+  Map<String,Long> topologyAssignTimeStamps=new HashMap<String,Long>();
+  for (  Entry<Integer,LocalAssignment> entry : localAssignments.entrySet()) {
     topologys.add(entry.getValue().getTopologyId());
+    topologyAssignTimeStamps.put(entry.getValue().getTopologyId(),entry.getValue().getTimeStamp());
   }
   for (  StateHeartbeat stateHb : localWorkerStats.values()) {
     State state=stateHb.getState();
@@ -14,8 +16,8 @@
   Set<String> needRemoveTopologys=new HashSet<String>();
   for (  String topologyId : topologys) {
     try {
-      long lastModifytime=StormConfig.get_supervisor_topology_Bianrymodify_time(conf,topologyId);
-      if ((currTime - lastModifytime) / 1000 < (JStormUtils.MIN_1 * 2)) {
+      long newAssignTime=topologyAssignTimeStamps.get(topologyId);
+      if ((currTime - newAssignTime) / 1000 < (JStormUtils.MIN_1 * 2)) {
         LOG.debug("less 2 minite ,so removed " + topologyId);
         needRemoveTopologys.add(topologyId);
       }

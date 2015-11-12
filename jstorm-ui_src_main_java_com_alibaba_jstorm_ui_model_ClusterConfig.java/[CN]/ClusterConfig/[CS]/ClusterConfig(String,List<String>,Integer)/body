@@ -1,0 +1,5 @@
+{
+  this.zkRoot=zkRoot;
+  this.zkServers=zkServers;
+  this.zkPort=zkPort;
+}

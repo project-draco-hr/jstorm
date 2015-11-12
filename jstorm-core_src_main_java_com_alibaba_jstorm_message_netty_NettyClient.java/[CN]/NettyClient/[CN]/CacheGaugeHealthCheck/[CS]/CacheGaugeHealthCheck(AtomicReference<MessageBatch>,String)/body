@@ -1,5 +1,5 @@
 {
   this.messageBatchRef=messageBatchRef;
   this.name=name;
-  this.healthy=HealthCheck.Result.healthy();
+  this.healthy=Result.healthy();
 }

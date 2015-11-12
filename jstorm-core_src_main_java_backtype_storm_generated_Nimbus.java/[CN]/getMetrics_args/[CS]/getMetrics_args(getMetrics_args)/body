@@ -1,0 +1,7 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  if (other.is_set_topologyId()) {
+    this.topologyId=other.topologyId;
+  }
+  this.type=other.type;
+}

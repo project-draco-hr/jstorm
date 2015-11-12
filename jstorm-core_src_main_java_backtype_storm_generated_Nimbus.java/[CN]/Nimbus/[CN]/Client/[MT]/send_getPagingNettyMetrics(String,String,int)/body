@@ -1,0 +1,7 @@
+{
+  getPagingNettyMetrics_args args=new getPagingNettyMetrics_args();
+  args.set_topologyId(topologyId);
+  args.set_host(host);
+  args.set_page(page);
+  sendBase("getPagingNettyMetrics",args);
+}

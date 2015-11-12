@@ -1,0 +1,22 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  if (struct.topologyId != null) {
+    oprot.writeFieldBegin(TOPOLOGY_ID_FIELD_DESC);
+    oprot.writeString(struct.topologyId);
+    oprot.writeFieldEnd();
+  }
+  if (struct.metrics != null) {
+    oprot.writeFieldBegin(METRICS_FIELD_DESC);
+{
+      oprot.writeSetBegin(new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING,struct.metrics.size()));
+      for (      String _iter235 : struct.metrics) {
+        oprot.writeString(_iter235);
+      }
+      oprot.writeSetEnd();
+    }
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

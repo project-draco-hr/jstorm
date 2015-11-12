@@ -1,0 +1,6 @@
+{
+  LOG.info("Topology master received new conf:" + conf);
+  if (backpressureCoordinator.isBackpressureConfigChange(conf)) {
+    backpressureCoordinator.updateBackpressureConfig(conf);
+  }
+}

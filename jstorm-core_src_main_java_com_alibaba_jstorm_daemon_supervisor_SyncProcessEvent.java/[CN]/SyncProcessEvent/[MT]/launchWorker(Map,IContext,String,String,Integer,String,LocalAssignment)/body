@@ -7,11 +7,12 @@
   totalConf.putAll(stormConf);
   String stormhome=System.getProperty("jstorm.home");
   long memSize=assignment.getMem();
+  long memMinSize=ConfigExtension.getMemMinSizePerWorker(totalConf);
   int cpuNum=assignment.getCpu();
   long memGsize=memSize / JStormUtils.SIZE_1_G;
   int gcThreadsNum=memGsize > 4 ? (int)(memGsize * 1.5) : 4;
   String childopts=getChildOpts(totalConf);
-  childopts+=getGcDumpParam(totalConf);
+  childopts+=getGcDumpParam(Common.getTopologyNameById(topologyId),totalConf);
   Map<String,String> environment=new HashMap<String,String>();
   if (ConfigExtension.getWorkerRedirectOutput(totalConf)) {
     environment.put("REDIRECT","true");
@@ -31,11 +32,17 @@
     return;
   }
   commandSB.append("java -server ");
-  commandSB.append(" -Xms" + memSize);
+  commandSB.append(" -Xms" + memMinSize);
   commandSB.append(" -Xmx" + memSize + " ");
-  commandSB.append(" -Xmn" + memSize / 3 + " ");
-  commandSB.append(" -XX:PermSize=" + memSize / 16);
-  commandSB.append(" -XX:MaxPermSize=" + memSize / 8);
+  if (memMinSize < (memSize / 2))   commandSB.append(" -Xmn" + memMinSize + " ");
+ else   commandSB.append(" -Xmn" + memSize / 2 + " ");
+  if (memGsize >= 2) {
+    commandSB.append(" -XX:PermSize=" + memSize / 32);
+  }
+ else {
+    commandSB.append(" -XX:PermSize=" + memSize / 16);
+  }
+  commandSB.append(" -XX:MaxPermSize=" + memSize / 16);
   commandSB.append(" -XX:ParallelGCThreads=" + gcThreadsNum);
   commandSB.append(" " + childopts);
   commandSB.append(" " + (assignment.getJvm() == null ? "" : assignment.getJvm()));
@@ -45,6 +52,8 @@
     commandSB.append(" -Djstorm.home=");
     commandSB.append(stormhome);
   }
+  String logDir=System.getProperty("jstorm.log.dir");
+  if (logDir != null)   commandSB.append(" -Djstorm.log.dir=").append(logDir);
   commandSB.append(getLogParameter(totalConf,stormhome,assignment.getTopologyName(),port));
   String classpath=getClassPath(stormjar,stormhome,totalConf);
   String workerClassPath=(String)totalConf.get(Config.TOPOLOGY_CLASSPATH);

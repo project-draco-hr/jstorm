@@ -1,0 +1,46 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case METRIC_ID:
+    return is_set_metricId();
+case TS:
+  return is_set_ts();
+case METRIC_TYPE:
+return is_set_metricType();
+case LONG_VALUE:
+return is_set_longValue();
+case DOUBLE_VALUE:
+return is_set_doubleValue();
+case M1:
+return is_set_m1();
+case M5:
+return is_set_m5();
+case M15:
+return is_set_m15();
+case MEAN:
+return is_set_mean();
+case MIN:
+return is_set_min();
+case MAX:
+return is_set_max();
+case P50:
+return is_set_p50();
+case P75:
+return is_set_p75();
+case P95:
+return is_set_p95();
+case P98:
+return is_set_p98();
+case P99:
+return is_set_p99();
+case P999:
+return is_set_p999();
+case STDDEV:
+return is_set_stddev();
+case POINTS:
+return is_set_points();
+}
+throw new IllegalStateException();
+}

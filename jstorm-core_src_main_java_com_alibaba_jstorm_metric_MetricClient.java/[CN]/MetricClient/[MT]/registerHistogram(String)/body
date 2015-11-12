@@ -1,0 +1,3 @@
+{
+  return registerHistogram(name,GROUP_UDF);
+}

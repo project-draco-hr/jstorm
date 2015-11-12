@@ -16,6 +16,9 @@
     Map<Integer,Integer> startTimes=getTaskStartTimes(context,nimbusData,topologyId,context.getOldAssignment(),assignments);
     String codeDir=StormConfig.masterStormdistRoot(nimbusData.getConf(),topologyId);
     assignment=new Assignment(codeDir,assignments,nodeHost,startTimes);
+    if (event.isScaleTopology()) {
+      assignment.setAssignmentType(Assignment.AssignmentType.ScaleTopology);
+    }
     StormClusterState stormClusterState=nimbusData.getStormClusterState();
     stormClusterState.set_assignment(topologyId,assignment);
     NimbusUtils.updateTaskHbStartTime(nimbusData,assignment,topologyId);

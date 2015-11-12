@@ -1,0 +1,6 @@
+int task_id
+int uptime
+String status
+String host
+int port
+List<ErrorInfo> errors

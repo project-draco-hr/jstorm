@@ -17,7 +17,7 @@
         localAssignment=new HashMap<Integer,LocalAssignment>();
       }
       localState.put(Common.LS_LOCAL_ASSIGNMENTS,zkAssignment);
-      updateTopologys=getUpdateTopologys(localAssignment,zkAssignment);
+      updateTopologys=getUpdateTopologys(localAssignment,zkAssignment,assignments);
       Set<String> reDownloadTopologys=getNeedReDownloadTopologys(localAssignment);
       if (reDownloadTopologys != null) {
         updateTopologys.addAll(reDownloadTopologys);
@@ -28,9 +28,10 @@
       throw e;
     }
     Map<String,String> topologyCodes=getTopologyCodeLocations(assignments,supervisorId);
-    downloadTopology(topologyCodes,downloadedTopologyIds,updateTopologys,assignments);
+    Set<String> downloadFailedTopologyIds=new HashSet<String>();
+    downloadTopology(topologyCodes,downloadedTopologyIds,updateTopologys,assignments,downloadFailedTopologyIds);
     removeUselessTopology(topologyCodes,downloadedTopologyIds);
-    syncProcesses.run(zkAssignment);
+    syncProcesses.run(zkAssignment,downloadFailedTopologyIds);
     heartbeat.updateHbTrigger(true);
   }
  catch (  Exception e) {

@@ -1,0 +1,32 @@
+{
+  this.task=task;
+  this.storm_conf=task.getStormConf();
+  this.userTopologyCtx=task.getUserContext();
+  this.sysTopologyCtx=task.getTopologyContext();
+  this.task_stats=task.getTaskStats();
+  this.taskId=sysTopologyCtx.getThisTaskId();
+  this.innerTaskTransfer=task.getInnerTaskTransfer();
+  this.topologyId=sysTopologyCtx.getTopologyId();
+  this.componentId=sysTopologyCtx.getThisComponentId();
+  this.idStr=JStormServerUtils.getName(componentId,taskId);
+  this.taskStatus=task.getTaskStatus();
+  this.report_error=task.getReportErrorDie();
+  this.taskTransfer=task.getTaskTransfer();
+  this.metricsReporter=task.getWorkerData().getMetricsReporter();
+  this.isDebug=JStormUtils.parseBoolean(storm_conf.get(Config.TOPOLOGY_DEBUG),false);
+  message_timeout_secs=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
+  int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_RECEIVE_BUFFER_SIZE),256);
+  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(storm_conf);
+  this.exeQueue=DisruptorQueue.mkInstance(idStr,ProducerType.MULTI,queue_size,waitStrategy);
+  this.exeQueue.consumerStarted();
+  this.controlQueue=new LinkedBlockingDeque<Object>();
+  this.registerInnerTransfer(exeQueue);
+  QueueGauge exeQueueGauge=new QueueGauge(exeQueue,idStr,MetricDef.EXECUTE_QUEUE);
+  JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.EXECUTE_QUEUE,MetricType.GAUGE),new AsmGauge(exeQueueGauge));
+  JStormHealthCheck.registerTaskHealthCheck(taskId,MetricDef.EXECUTE_QUEUE,exeQueueGauge);
+  rotatingMapTrigger=new RotatingMapTrigger(storm_conf,idStr + "_rotating",exeQueue);
+  rotatingMapTrigger.register();
+  taskHbTrigger=new TaskHeartbeatTrigger(storm_conf,idStr + "_taskHeartbeat",exeQueue,controlQueue,taskId,componentId,sysTopologyCtx,report_error);
+  taskHbTrigger.register();
+  assignmentTs=System.currentTimeMillis();
+}

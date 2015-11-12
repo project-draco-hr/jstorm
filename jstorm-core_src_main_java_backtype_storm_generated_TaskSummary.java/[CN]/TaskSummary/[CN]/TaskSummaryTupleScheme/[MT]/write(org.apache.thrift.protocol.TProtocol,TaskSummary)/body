@@ -1,6 +1,6 @@
 {
   TTupleProtocol oprot=(TTupleProtocol)prot;
-  oprot.writeI32(struct.task_id);
+  oprot.writeI32(struct.taskId);
   oprot.writeI32(struct.uptime);
   oprot.writeString(struct.status);
   oprot.writeString(struct.host);
@@ -13,8 +13,8 @@
   if (struct.is_set_errors()) {
 {
       oprot.writeI32(struct.errors.size());
-      for (      ErrorInfo _iter234 : struct.errors) {
-        _iter234.write(oprot);
+      for (      ErrorInfo _iter182 : struct.errors) {
+        _iter182.write(oprot);
       }
     }
   }

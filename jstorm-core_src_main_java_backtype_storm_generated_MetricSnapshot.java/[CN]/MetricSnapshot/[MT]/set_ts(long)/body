@@ -1,0 +1,4 @@
+{
+  this.ts=ts;
+  set_ts_isSet(true);
+}

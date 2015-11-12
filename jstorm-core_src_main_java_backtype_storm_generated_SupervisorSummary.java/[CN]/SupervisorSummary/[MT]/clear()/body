@@ -1,10 +1,10 @@
 {
   this.host=null;
-  this.supervisor_id=null;
-  set_uptime_secs_isSet(false);
-  this.uptime_secs=0;
-  set_num_workers_isSet(false);
-  this.num_workers=0;
-  set_num_used_workers_isSet(false);
-  this.num_used_workers=0;
+  this.supervisorId=null;
+  set_uptimeSecs_isSet(false);
+  this.uptimeSecs=0;
+  set_numWorkers_isSet(false);
+  this.numWorkers=0;
+  set_numUsedWorkers_isSet(false);
+  this.numUsedWorkers=0;
 }

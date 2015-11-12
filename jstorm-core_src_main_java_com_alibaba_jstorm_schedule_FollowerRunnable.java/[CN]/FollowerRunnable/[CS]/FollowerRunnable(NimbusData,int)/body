@@ -22,18 +22,35 @@
     throw new RuntimeException(e1);
   }
   try {
-    this.tryToBeLeader(data.getConf());
-  }
- catch (  Exception e1) {
-    LOG.error("try to be leader error.",e1);
-    throw new RuntimeException(e1);
-  }
-  try {
     data.getStormClusterState().update_nimbus_slave(hostPort,data.uptime());
+    data.getStormClusterState().update_nimbus_detail(hostPort,null);
   }
  catch (  Exception e) {
     LOG.error("register nimbus host fail!",e);
     throw new RuntimeException();
+  }
+  try {
+    update_nimbus_detail();
+  }
+ catch (  Exception e) {
+    LOG.error("register detail of nimbus fail!",e);
+    throw new RuntimeException();
+  }
+  try {
+    this.tryToBeLeader(data.getConf());
+  }
+ catch (  Exception e1) {
+    try {
+      data.getStormClusterState().unregister_nimbus_host(hostPort);
+      data.getStormClusterState().unregister_nimbus_detail(hostPort);
+    }
+ catch (    Exception e2) {
+      LOG.info("due to task errors, so remove register nimbus infomation");
+    }
+ finally {
+      LOG.error("try to be leader error.",e1);
+      throw new RuntimeException(e1);
+    }
   }
   callback=new RunnableCallback(){
     @Override public void run(){

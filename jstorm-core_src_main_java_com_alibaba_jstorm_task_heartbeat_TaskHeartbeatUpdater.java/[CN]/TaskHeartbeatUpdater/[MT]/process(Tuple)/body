@@ -1,0 +1,31 @@
+{
+  int sourceTask=input.getSourceTask();
+  int uptime=(Integer)input.getValue(0);
+  TaskHeartbeat taskHb=taskHbMap.get(sourceTask);
+  if (taskHb == null) {
+    taskHb=new TaskHeartbeat(TimeUtils.current_time_secs(),uptime);
+    taskHbMap.put(sourceTask,taskHb);
+  }
+ else {
+    taskHb.set_time(TimeUtils.current_time_secs());
+    taskHb.set_uptime(uptime);
+  }
+  if (sourceTask == taskId) {
+    TopologyTaskHbInfo tmpTaskHbInfo=new TopologyTaskHbInfo(topologyId,taskId);
+    Map<Integer,TaskHeartbeat> tmpTaskHbMap=new ConcurrentHashMap<Integer,TaskHeartbeat>();
+    tmpTaskHbInfo.set_taskHbs(tmpTaskHbMap);
+    int sendCount=0;
+    for (    Entry<Integer,TaskHeartbeat> entry : taskHbMap.entrySet()) {
+      tmpTaskHbMap.put(entry.getKey(),entry.getValue());
+      sendCount++;
+      if (sendCount >= MAX_NUM_TASK_HB_SEND) {
+        setTaskHeatbeat(tmpTaskHbInfo);
+        tmpTaskHbMap.clear();
+        sendCount=0;
+      }
+    }
+    if (tmpTaskHbMap.size() > 0) {
+      setTaskHeatbeat(tmpTaskHbInfo);
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  Map<String,Object> ret=new HashMap<String,Object>();
+  ret.put(MetricUploader.METRIC_TIME,timestamp);
+  ret.put(MetricUploader.METRIC_TYPE,type);
+  return ret;
+}

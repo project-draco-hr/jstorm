@@ -1,0 +1,5 @@
+{
+  AsmMeter meter=new AsmMeter();
+  meter.setOp(AsmMetric.MetricOp.LOG);
+  return registerWorkerMeter(NIMBUS_METRIC_KEY,name,meter);
+}

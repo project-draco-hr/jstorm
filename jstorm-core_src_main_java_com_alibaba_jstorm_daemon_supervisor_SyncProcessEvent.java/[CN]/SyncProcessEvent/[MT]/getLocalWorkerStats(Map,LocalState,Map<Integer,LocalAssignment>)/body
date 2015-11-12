@@ -2,7 +2,7 @@
   Map<String,StateHeartbeat> workeridHbstate=new HashMap<String,StateHeartbeat>();
   int now=TimeUtils.current_time_secs();
   Map<String,WorkerHeartbeat> idToHeartbeat=readWorkerHeartbeats(conf);
-  for (  Map.Entry<String,WorkerHeartbeat> entry : idToHeartbeat.entrySet()) {
+  for (  Entry<String,WorkerHeartbeat> entry : idToHeartbeat.entrySet()) {
     String workerid=entry.getKey().toString();
     WorkerHeartbeat whb=entry.getValue();
     State state=null;
@@ -24,10 +24,18 @@
       state=State.disallowed;
     }
  else     if ((now - whb.getTimeSecs()) > JStormUtils.parseInt(conf.get(Config.SUPERVISOR_WORKER_TIMEOUT_SECS))) {
+      if (killingWorkers.containsKey(workerid) == false) {
+        String outTimeInfo=" it is likely to be out of memory, the worker is time out ";
+        workerReportError.report(whb.getTopologyId(),whb.getPort(),whb.getTaskIds(),outTimeInfo);
+      }
       state=State.timedOut;
     }
  else {
       if (isWorkerDead(workerid)) {
+        if (killingWorkers.containsKey(workerid) == false) {
+          String workeDeadInfo="Worker is dead ";
+          workerReportError.report(whb.getTopologyId(),whb.getPort(),whb.getTaskIds(),workeDeadInfo);
+        }
         state=State.timedOut;
       }
  else {

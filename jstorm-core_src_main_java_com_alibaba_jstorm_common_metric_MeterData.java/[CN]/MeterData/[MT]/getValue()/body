@@ -1,0 +1,8 @@
+{
+  byte[] ret=new byte[8 * 4];
+  Bytes.putDouble(ret,0,m1);
+  Bytes.putDouble(ret,8,m5);
+  Bytes.putDouble(ret,16,m15);
+  Bytes.putDouble(ret,24,mean);
+  return ret;
+}

@@ -1,0 +1,7 @@
+{
+  Histogram histogram=histogramMap.get(window);
+  if (histogram != null) {
+    AsmSnapshot snapshot=new AsmHistogramSnapshot().setSnapshot(histogram.getSnapshot()).setTs(System.currentTimeMillis()).setMetricId(metricId);
+    snapshots.put(window,snapshot);
+  }
+}

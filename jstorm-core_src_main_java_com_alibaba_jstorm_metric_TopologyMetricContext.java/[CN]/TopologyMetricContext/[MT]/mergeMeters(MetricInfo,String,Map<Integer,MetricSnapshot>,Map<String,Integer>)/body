@@ -1,0 +1,26 @@
+{
+  Map<Integer,MetricSnapshot> existing=metricInfo.get_metrics().get(meta);
+  if (existing == null) {
+    metricInfo.put_to_metrics(meta,data);
+  }
+ else {
+    for (    Map.Entry<Integer,MetricSnapshot> dataEntry : data.entrySet()) {
+      Integer win=dataEntry.getKey();
+      MetricSnapshot snapshot=dataEntry.getValue();
+      MetricSnapshot old=existing.get(win);
+      if (old == null) {
+        existing.put(win,snapshot);
+      }
+ else {
+        if (snapshot.get_ts() >= old.get_ts()) {
+          old.set_ts(snapshot.get_ts());
+          old.set_mean(old.get_mean() + snapshot.get_mean());
+          old.set_m1(old.get_m1() + snapshot.get_m1());
+          old.set_m5(old.get_m5() + snapshot.get_m5());
+          old.set_m15(old.get_m15() + snapshot.get_m15());
+        }
+      }
+    }
+  }
+  updateMetricCounters(meta,metaCounters);
+}

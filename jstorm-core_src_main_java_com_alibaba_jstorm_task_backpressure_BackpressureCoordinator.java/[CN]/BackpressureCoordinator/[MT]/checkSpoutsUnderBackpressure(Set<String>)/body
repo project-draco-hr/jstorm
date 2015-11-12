@@ -1,0 +1,13 @@
+{
+  boolean ret=false;
+  if (spouts != null) {
+    for (    String spout : spouts) {
+      SourceBackpressureInfo backpressureInfo=SourceTobackpressureInfo.get(spout);
+      if (backpressureInfo != null && backpressureInfo.getTasks().size() > 0) {
+        ret=true;
+        break;
+      }
+    }
+  }
+  return ret;
+}

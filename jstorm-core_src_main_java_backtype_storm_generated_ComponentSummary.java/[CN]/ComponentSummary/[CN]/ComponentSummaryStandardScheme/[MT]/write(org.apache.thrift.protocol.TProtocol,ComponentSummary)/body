@@ -14,12 +14,12 @@
     oprot.writeString(struct.type);
     oprot.writeFieldEnd();
   }
-  if (struct.task_ids != null) {
+  if (struct.taskIds != null) {
     oprot.writeFieldBegin(TASK_IDS_FIELD_DESC);
 {
-      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32,struct.task_ids.size()));
-      for (      int _iter220 : struct.task_ids) {
-        oprot.writeI32(_iter220);
+      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32,struct.taskIds.size()));
+      for (      int _iter168 : struct.taskIds) {
+        oprot.writeI32(_iter168);
       }
       oprot.writeListEnd();
     }
@@ -30,8 +30,8 @@
       oprot.writeFieldBegin(ERRORS_FIELD_DESC);
 {
         oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.errors.size()));
-        for (        ErrorInfo _iter221 : struct.errors) {
-          _iter221.write(oprot);
+        for (        ErrorInfo _iter169 : struct.errors) {
+          _iter169.write(oprot);
         }
         oprot.writeListEnd();
       }

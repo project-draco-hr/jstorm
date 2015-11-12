@@ -1,0 +1,3 @@
+int page
+String text
+boolean isActive

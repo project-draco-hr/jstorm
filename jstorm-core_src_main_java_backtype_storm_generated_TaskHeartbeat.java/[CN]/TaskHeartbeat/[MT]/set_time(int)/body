@@ -1,0 +1,4 @@
+{
+  this.time=time;
+  set_time_isSet(true);
+}

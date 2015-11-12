@@ -1,4 +1,0 @@
-MetricInfo topologyMetric
-Map<String,MetricInfo> componentMetric
-Map<String,MetricInfo> workerMetric
-Map<Integer,MetricInfo> taskMetric

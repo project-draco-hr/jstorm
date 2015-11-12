@@ -1,0 +1,7 @@
+{
+  updateTopology_args args=new updateTopology_args();
+  args.set_name(name);
+  args.set_uploadedLocation(uploadedLocation);
+  args.set_updateConf(updateConf);
+  sendBase("updateTopology",args);
+}

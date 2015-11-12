@@ -1,0 +1,4 @@
+def getSummarizedTopologyMetrics(self, topologyId):
+    '\n    Parameters:\n     - topologyId\n    '
+    self.send_getSummarizedTopologyMetrics(topologyId)
+    return self.recv_getSummarizedTopologyMetrics()

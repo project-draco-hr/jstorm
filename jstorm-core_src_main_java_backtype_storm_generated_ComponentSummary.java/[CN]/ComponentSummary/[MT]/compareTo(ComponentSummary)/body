@@ -33,12 +33,12 @@
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_task_ids()).compareTo(other.is_set_task_ids());
+  lastComparison=Boolean.valueOf(is_set_taskIds()).compareTo(other.is_set_taskIds());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_task_ids()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.task_ids,other.task_ids);
+  if (is_set_taskIds()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.taskIds,other.taskIds);
     if (lastComparison != 0) {
       return lastComparison;
     }

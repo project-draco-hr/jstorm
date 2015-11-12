@@ -1,0 +1,19 @@
+{
+  String[] keyParts=new String(key).split(MetricUtils.DELIM);
+  String[] valueParts=new String(value).split(MetricUtils.DELIM);
+  boolean isStart=false;
+  if (valueParts.length >= 3) {
+    if (valueParts[0].equals(KVSerializable.START))     isStart=true;
+    host=valueParts[1];
+    port=JStormUtils.parseInt(valueParts[2]);
+  }
+  if (keyParts.length >= 4) {
+    clusterName=keyParts[0];
+    topologyId=keyParts[1];
+    taskId=JStormUtils.parseInt(keyParts[2]);
+    long ts=JStormUtils.parseLong(keyParts[3]);
+    if (isStart)     start=new Date(ts);
+ else     end=new Date(ts);
+  }
+  return this;
+}

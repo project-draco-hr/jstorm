@@ -1,0 +1,4 @@
+{
+  this.zkCluster=_storm_cluster_state;
+  this.hostName=_hostName;
+}

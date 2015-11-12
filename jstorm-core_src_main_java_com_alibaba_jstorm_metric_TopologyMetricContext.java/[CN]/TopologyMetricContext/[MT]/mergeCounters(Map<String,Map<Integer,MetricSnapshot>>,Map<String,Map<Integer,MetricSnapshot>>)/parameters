@@ -1,0 +1,2 @@
+Map<String,Map<Integer,MetricSnapshot>> newCounters
+Map<String,Map<Integer,MetricSnapshot>> oldCounters

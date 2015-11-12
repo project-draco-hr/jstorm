@@ -1,45 +1,20 @@
 {
   TTupleProtocol oprot=(TTupleProtocol)prot;
-{
-    oprot.writeI32(struct.baseMetric.size());
-    for (    Map.Entry<String,MetricWindow> _iter141 : struct.baseMetric.entrySet()) {
-      oprot.writeString(_iter141.getKey());
-      _iter141.getValue().write(oprot);
-    }
-  }
   BitSet optionals=new BitSet();
-  if (struct.is_set_inputMetric()) {
+  if (struct.is_set_metrics()) {
     optionals.set(0);
   }
-  if (struct.is_set_outputMetric()) {
-    optionals.set(1);
-  }
-  oprot.writeBitSet(optionals,2);
-  if (struct.is_set_inputMetric()) {
+  oprot.writeBitSet(optionals,1);
+  if (struct.is_set_metrics()) {
 {
-      oprot.writeI32(struct.inputMetric.size());
-      for (      Map.Entry<String,Map<String,MetricWindow>> _iter142 : struct.inputMetric.entrySet()) {
-        oprot.writeString(_iter142.getKey());
+      oprot.writeI32(struct.metrics.size());
+      for (      Map.Entry<String,Map<Integer,MetricSnapshot>> _iter134 : struct.metrics.entrySet()) {
+        oprot.writeString(_iter134.getKey());
 {
-          oprot.writeI32(_iter142.getValue().size());
-          for (          Map.Entry<String,MetricWindow> _iter143 : _iter142.getValue().entrySet()) {
-            oprot.writeString(_iter143.getKey());
-            _iter143.getValue().write(oprot);
-          }
-        }
-      }
-    }
-  }
-  if (struct.is_set_outputMetric()) {
-{
-      oprot.writeI32(struct.outputMetric.size());
-      for (      Map.Entry<String,Map<String,MetricWindow>> _iter144 : struct.outputMetric.entrySet()) {
-        oprot.writeString(_iter144.getKey());
-{
-          oprot.writeI32(_iter144.getValue().size());
-          for (          Map.Entry<String,MetricWindow> _iter145 : _iter144.getValue().entrySet()) {
-            oprot.writeString(_iter145.getKey());
-            _iter145.getValue().write(oprot);
+          oprot.writeI32(_iter134.getValue().size());
+          for (          Map.Entry<Integer,MetricSnapshot> _iter135 : _iter134.getValue().entrySet()) {
+            oprot.writeI32(_iter135.getKey());
+            _iter135.getValue().write(oprot);
           }
         }
       }

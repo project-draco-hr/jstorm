@@ -1,0 +1,197 @@
+{
+  org.apache.thrift.protocol.TField schemeField;
+  iprot.readStructBegin();
+  while (true) {
+    schemeField=iprot.readFieldBegin();
+    if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
+      break;
+    }
+switch (schemeField.id) {
+case 1:
+      if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+        struct.metricId=iprot.readI64();
+        struct.set_metricId_isSet(true);
+      }
+ else {
+        org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+      }
+    break;
+case 2:
+  if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+    struct.ts=iprot.readI64();
+    struct.set_ts_isSet(true);
+  }
+ else {
+    org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+  }
+break;
+case 3:
+if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+struct.metricType=iprot.readI32();
+struct.set_metricType_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 4:
+if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+struct.longValue=iprot.readI64();
+struct.set_longValue_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 5:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.doubleValue=iprot.readDouble();
+struct.set_doubleValue_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 6:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.m1=iprot.readDouble();
+struct.set_m1_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 7:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.m5=iprot.readDouble();
+struct.set_m5_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 8:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.m15=iprot.readDouble();
+struct.set_m15_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 9:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.mean=iprot.readDouble();
+struct.set_mean_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 10:
+if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+struct.min=iprot.readI64();
+struct.set_min_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 11:
+if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
+struct.max=iprot.readI64();
+struct.set_max_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 12:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.p50=iprot.readDouble();
+struct.set_p50_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 13:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.p75=iprot.readDouble();
+struct.set_p75_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 14:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.p95=iprot.readDouble();
+struct.set_p95_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 15:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.p98=iprot.readDouble();
+struct.set_p98_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 16:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.p99=iprot.readDouble();
+struct.set_p99_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 17:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.p999=iprot.readDouble();
+struct.set_p999_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 18:
+if (schemeField.type == org.apache.thrift.protocol.TType.DOUBLE) {
+struct.stddev=iprot.readDouble();
+struct.set_stddev_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 19:
+if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
+{
+org.apache.thrift.protocol.TList _list116=iprot.readListBegin();
+struct.points=new ArrayList<Long>(_list116.size);
+long _elem117;
+for (int _i118=0; _i118 < _list116.size; ++_i118) {
+_elem117=iprot.readI64();
+struct.points.add(_elem117);
+}
+iprot.readListEnd();
+}
+struct.set_points_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+default :
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+iprot.readFieldEnd();
+}
+iprot.readStructEnd();
+struct.validate();
+}

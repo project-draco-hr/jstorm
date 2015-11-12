@@ -1,0 +1,8 @@
+def send_getTaskAndStreamMetrics(self, topologyId, taskId):
+    self._oprot.writeMessageBegin('getTaskAndStreamMetrics', TMessageType.CALL, self._seqid)
+    args = getTaskAndStreamMetrics_args()
+    args.topologyId = topologyId
+    args.taskId = taskId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

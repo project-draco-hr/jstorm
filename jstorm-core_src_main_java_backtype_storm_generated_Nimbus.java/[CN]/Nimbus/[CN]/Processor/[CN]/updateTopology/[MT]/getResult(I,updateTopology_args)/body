@@ -1,0 +1,13 @@
+{
+  updateTopology_result result=new updateTopology_result();
+  try {
+    iface.updateTopology(args.name,args.uploadedLocation,args.updateConf);
+  }
+ catch (  NotAliveException e) {
+    result.e=e;
+  }
+catch (  InvalidTopologyException ite) {
+    result.ite=ite;
+  }
+  return result;
+}

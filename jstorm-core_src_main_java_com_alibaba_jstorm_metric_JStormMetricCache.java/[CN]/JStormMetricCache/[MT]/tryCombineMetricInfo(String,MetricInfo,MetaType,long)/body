@@ -1,0 +1,19 @@
+{
+  Object data=cache.get(key);
+  if (data != null) {
+    try {
+      Object[] parts=(Object[])data;
+      MetricInfo old=(MetricInfo)parts[1];
+      LOG.info("combine {} metrics, old:{}, new:{}",metaType,old.get_metrics_size(),incoming.get_metrics_size());
+      old.get_metrics().putAll(incoming.get_metrics());
+      cache.put(key,new Object[]{ts,old});
+    }
+ catch (    Exception ignored) {
+      cache.remove(key);
+      cache.put(key,new Object[]{ts,incoming});
+    }
+  }
+ else {
+    cache.put(key,new Object[]{ts,incoming});
+  }
+}

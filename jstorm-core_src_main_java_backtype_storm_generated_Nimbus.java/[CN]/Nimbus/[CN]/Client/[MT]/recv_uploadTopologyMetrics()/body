@@ -1,0 +1,5 @@
+{
+  uploadTopologyMetrics_result result=new uploadTopologyMetrics_result();
+  receiveBase(result,"uploadTopologyMetrics");
+  return;
+}

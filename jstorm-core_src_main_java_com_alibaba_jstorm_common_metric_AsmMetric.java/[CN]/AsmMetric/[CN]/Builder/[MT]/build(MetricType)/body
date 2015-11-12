@@ -1,0 +1,19 @@
+{
+  AsmMetric metric;
+  if (metricType == MetricType.COUNTER) {
+    metric=new AsmCounter();
+  }
+ else   if (metricType == MetricType.METER) {
+    metric=new AsmMeter();
+  }
+ else   if (metricType == MetricType.HISTOGRAM) {
+    metric=new AsmHistogram();
+  }
+ else   if (metricType == MetricType.TIMER) {
+    metric=new AsmTimer();
+  }
+ else {
+    throw new IllegalArgumentException("invalid metric type:" + metricType);
+  }
+  return metric;
+}

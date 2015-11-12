@@ -1,0 +1,7 @@
+{
+  this.zkRoot=zkRoot;
+  this.zkServers=zkServers;
+  this.zkPort=zkPort;
+  this.nimbusPort=nimbusPort;
+  this.supervisorPort=supervisorPort;
+}

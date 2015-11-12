@@ -1,0 +1,13 @@
+{
+  Map<String,Object> ret=new HashMap<String,Object>();
+  int i=1;
+  TFieldIdEnum field=thriftObj.fieldForId(i);
+  while (field != null) {
+    if (thriftObj.isSet(field)) {
+      Object obj=thriftObj.getFieldValue(field);
+      ret.put(field.getFieldName(),thriftToObject(obj));
+    }
+    field=thriftObj.fieldForId(++i);
+  }
+  return ret;
+}

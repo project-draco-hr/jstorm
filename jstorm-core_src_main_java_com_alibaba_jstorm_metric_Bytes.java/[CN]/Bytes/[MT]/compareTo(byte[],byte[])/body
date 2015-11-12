@@ -1,0 +1,3 @@
+{
+  return compareByteArrayInLexOrder(left,0,left.length,right,0,right.length);
+}

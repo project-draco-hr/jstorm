@@ -1,5 +1,7 @@
-def __init__(self, topologyMetric=None, componentMetric=None, workerMetric=None, taskMetric=None):
+def __init__(self, topologyMetric=None, componentMetric=None, workerMetric=None, taskMetric=None, streamMetric=None, nettyMetric=None):
     self.topologyMetric = topologyMetric
     self.componentMetric = componentMetric
     self.workerMetric = workerMetric
     self.taskMetric = taskMetric
+    self.streamMetric = streamMetric
+    self.nettyMetric = nettyMetric

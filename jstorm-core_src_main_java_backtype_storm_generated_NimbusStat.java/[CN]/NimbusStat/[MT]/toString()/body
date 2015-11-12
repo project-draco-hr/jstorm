@@ -10,12 +10,12 @@
   }
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("uptime_secs:");
-  if (this.uptime_secs == null) {
+  sb.append("uptimeSecs:");
+  if (this.uptimeSecs == null) {
     sb.append("null");
   }
  else {
-    sb.append(this.uptime_secs);
+    sb.append(this.uptimeSecs);
   }
   first=false;
   sb.append(")");

@@ -2,5 +2,4 @@
   for (  String key : keys) {
     remove(key);
   }
-  return;
 }

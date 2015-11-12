@@ -1,0 +1,4 @@
+{
+  this.topologyId=null;
+  this.topologyMetrics=null;
+}

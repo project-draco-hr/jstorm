@@ -1,0 +1,3 @@
+{
+  return this.metaType == MetaType.NETTY.getT() || this.getMetaType() == MetaType.WORKER.getT() || this.metaType == MetaType.TOPOLOGY.getT();
+}

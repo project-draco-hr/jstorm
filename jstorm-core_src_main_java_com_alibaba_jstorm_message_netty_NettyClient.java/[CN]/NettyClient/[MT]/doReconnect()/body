@@ -28,5 +28,4 @@
   }
 );
   JStormUtils.sleepMs(sleepMs);
-  return;
 }

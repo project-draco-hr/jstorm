@@ -1,0 +1,6 @@
+{
+  this.name=name;
+  data=new ArrayList<>();
+  label=new ArrayList<>();
+  category=new ArrayList<>();
+}

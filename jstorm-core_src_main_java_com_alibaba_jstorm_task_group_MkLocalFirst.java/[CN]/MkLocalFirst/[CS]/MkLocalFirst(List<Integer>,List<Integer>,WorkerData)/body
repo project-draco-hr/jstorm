@@ -14,7 +14,6 @@
   if (localWorkerOutTasks.size() != 0) {
     isLocalWorkerAvail=true;
     localOutTasks.addAll(localWorkerOutTasks);
-    remoteOutTasks.removeAll(localWorkerOutTasks);
   }
  else {
     isLocalWorkerAvail=false;

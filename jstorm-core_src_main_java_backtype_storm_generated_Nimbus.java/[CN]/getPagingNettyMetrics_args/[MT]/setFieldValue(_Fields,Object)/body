@@ -1,0 +1,28 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    if (value == null) {
+      unset_topologyId();
+    }
+ else {
+      set_topologyId((String)value);
+    }
+  break;
+case HOST:
+if (value == null) {
+  unset_host();
+}
+ else {
+  set_host((String)value);
+}
+break;
+case PAGE:
+if (value == null) {
+unset_page();
+}
+ else {
+set_page((Integer)value);
+}
+break;
+}
+}

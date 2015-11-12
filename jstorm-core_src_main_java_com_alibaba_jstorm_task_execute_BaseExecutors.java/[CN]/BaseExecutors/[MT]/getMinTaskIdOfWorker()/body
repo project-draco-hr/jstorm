@@ -1,0 +1,4 @@
+{
+  SortedSet<Integer> tasks=new TreeSet<Integer>(sysTopologyCtx.getThisWorkerTasks());
+  return tasks.first();
+}

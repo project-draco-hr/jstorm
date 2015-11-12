@@ -1,0 +1,4 @@
+def getTaskAndStreamMetrics(self, topologyId, taskId):
+    '\n    Parameters:\n     - topologyId\n     - taskId\n    '
+    self.send_getTaskAndStreamMetrics(topologyId, taskId)
+    return self.recv_getTaskAndStreamMetrics()

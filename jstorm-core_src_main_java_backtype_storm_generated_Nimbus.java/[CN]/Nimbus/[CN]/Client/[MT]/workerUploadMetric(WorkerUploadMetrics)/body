@@ -1,4 +1,0 @@
-{
-  send_workerUploadMetric(uploadMetrics);
-  recv_workerUploadMetric();
-}

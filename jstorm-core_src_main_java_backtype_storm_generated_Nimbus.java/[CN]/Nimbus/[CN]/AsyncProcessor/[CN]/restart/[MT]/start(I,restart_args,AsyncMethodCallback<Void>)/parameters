@@ -1,0 +1,3 @@
+I iface
+restart_args args
+AsyncMethodCallback<Void> resultHandler

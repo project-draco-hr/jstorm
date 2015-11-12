@@ -1,0 +1,9 @@
+{
+  if (enableMetrics) {
+    update(stream,MetricDef.ACKED_NUM,1,MetricType.COUNTER);
+    update(stream,MetricDef.PROCESS_LATENCY,st,MetricType.HISTOGRAM,true);
+    if (lifeCycle > 0) {
+      update(stream,AsmMetric.mkName(Common.ACKER_COMPONENT_ID,MetricDef.TUPLE_LIEF_CYCLE),lifeCycle,MetricType.HISTOGRAM,false);
+    }
+  }
+}

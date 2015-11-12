@@ -1,0 +1,7 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_taskHbs=true && (is_set_taskHbs());
+  list.add(present_taskHbs);
+  if (present_taskHbs)   list.add(taskHbs);
+  return list.hashCode();
+}

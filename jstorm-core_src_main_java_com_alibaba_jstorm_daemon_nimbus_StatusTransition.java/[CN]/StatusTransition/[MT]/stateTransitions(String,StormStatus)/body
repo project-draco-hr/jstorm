@@ -10,7 +10,7 @@
   activeMap.put(StatusType.rebalance,new RebalanceTransitionCallback(data,topologyid,currentStatus));
   activeMap.put(StatusType.do_rebalance,null);
   activeMap.put(StatusType.done_rebalance,null);
-  activeMap.put(StatusType.update_conf,new UpdateConfTransitionCallback(data,topologyid,currentStatus));
+  activeMap.put(StatusType.update_topology,new UpdateTopologyTransitionCallback(data,topologyid,currentStatus));
   rtn.put(StatusType.active,activeMap);
   Map<StatusType,Callback> inactiveMap=new HashMap<StatusType,Callback>();
   inactiveMap.put(StatusType.monitor,new ReassignTransitionCallback(data,topologyid,new StormStatus(StatusType.inactive)));
@@ -22,7 +22,7 @@
   inactiveMap.put(StatusType.rebalance,new RebalanceTransitionCallback(data,topologyid,currentStatus));
   inactiveMap.put(StatusType.do_rebalance,null);
   inactiveMap.put(StatusType.done_rebalance,null);
-  inactiveMap.put(StatusType.update_conf,null);
+  inactiveMap.put(StatusType.update_topology,null);
   rtn.put(StatusType.inactive,inactiveMap);
   Map<StatusType,Callback> killedMap=new HashMap<StatusType,Callback>();
   killedMap.put(StatusType.monitor,null);
@@ -34,7 +34,7 @@
   killedMap.put(StatusType.rebalance,null);
   killedMap.put(StatusType.do_rebalance,null);
   killedMap.put(StatusType.done_rebalance,null);
-  killedMap.put(StatusType.update_conf,null);
+  killedMap.put(StatusType.update_topology,null);
   rtn.put(StatusType.killed,killedMap);
   Map<StatusType,Callback> rebalancingMap=new HashMap<StatusType,Callback>();
   StatusType rebalanceOldStatus=StatusType.active;
@@ -53,7 +53,7 @@
   rebalancingMap.put(StatusType.rebalance,new RebalanceTransitionCallback(data,topologyid,currentStatus));
   rebalancingMap.put(StatusType.do_rebalance,new DoRebalanceTransitionCallback(data,topologyid,new StormStatus(rebalanceOldStatus)));
   rebalancingMap.put(StatusType.done_rebalance,new DoneRebalanceTransitionCallback(data,topologyid));
-  rebalancingMap.put(StatusType.update_conf,null);
+  rebalancingMap.put(StatusType.update_topology,null);
   rtn.put(StatusType.rebalancing,rebalancingMap);
   return rtn;
 }

@@ -1,0 +1,16 @@
+{
+  boolean ret=false;
+  if (workerData.getInnerTaskTransfer().get(taskId) != null) {
+    ret=true;
+  }
+ else {
+    WorkerSlot slot=taskNodeport.get(taskId);
+    if (slot != null) {
+      IConnection connection=nodeportSocket.get(slot);
+      if (connection != null) {
+        ret=connection.available();
+      }
+    }
+  }
+  return ret;
+}

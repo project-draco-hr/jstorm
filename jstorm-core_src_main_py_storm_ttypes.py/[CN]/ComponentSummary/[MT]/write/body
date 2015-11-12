@@ -15,18 +15,18 @@ def write(self, oprot):
         oprot.writeFieldBegin('type', TType.STRING, 3)
         oprot.writeString(self.type.encode('utf-8'))
         oprot.writeFieldEnd()
-    if (self.task_ids is not None):
-        oprot.writeFieldBegin('task_ids', TType.LIST, 4)
-        oprot.writeListBegin(TType.I32, len(self.task_ids))
-        for iter203 in self.task_ids:
-            oprot.writeI32(iter203)
+    if (self.taskIds is not None):
+        oprot.writeFieldBegin('taskIds', TType.LIST, 4)
+        oprot.writeListBegin(TType.I32, len(self.taskIds))
+        for iter156 in self.taskIds:
+            oprot.writeI32(iter156)
         oprot.writeListEnd()
         oprot.writeFieldEnd()
     if (self.errors is not None):
         oprot.writeFieldBegin('errors', TType.LIST, 5)
         oprot.writeListBegin(TType.STRUCT, len(self.errors))
-        for iter204 in self.errors:
-            iter204.write(oprot)
+        for iter157 in self.errors:
+            iter157.write(oprot)
         oprot.writeListEnd()
         oprot.writeFieldEnd()
     oprot.writeFieldStop()

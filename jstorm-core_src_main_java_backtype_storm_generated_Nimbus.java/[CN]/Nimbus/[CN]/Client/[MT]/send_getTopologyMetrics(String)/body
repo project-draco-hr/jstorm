@@ -1,0 +1,5 @@
+{
+  getTopologyMetrics_args args=new getTopologyMetrics_args();
+  args.set_topologyId(topologyId);
+  sendBase("getTopologyMetrics",args);
+}

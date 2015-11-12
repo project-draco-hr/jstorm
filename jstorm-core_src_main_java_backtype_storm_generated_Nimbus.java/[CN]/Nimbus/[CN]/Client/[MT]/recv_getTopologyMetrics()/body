@@ -1,0 +1,8 @@
+{
+  getTopologyMetrics_result result=new getTopologyMetrics_result();
+  receiveBase(result,"getTopologyMetrics");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getTopologyMetrics failed: unknown result");
+}

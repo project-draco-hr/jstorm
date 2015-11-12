@@ -1,0 +1,3 @@
+I iface
+registerMetrics_args args
+AsyncMethodCallback<Map<String,Long>> resultHandler

@@ -1,0 +1,10 @@
+def process_getMetrics(self, seqid, iprot, oprot):
+    args = getMetrics_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getMetrics_result()
+    result.success = self._handler.getMetrics(args.topologyId, args.type)
+    oprot.writeMessageBegin('getMetrics', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

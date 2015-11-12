@@ -1,0 +1,5 @@
+String topologyId
+String host
+int port
+String name
+MetricType type

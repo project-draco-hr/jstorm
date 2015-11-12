@@ -1,5 +1,5 @@
 {
   TTupleProtocol oprot=(TTupleProtocol)prot;
   oprot.writeString(struct.host);
-  oprot.writeString(struct.uptime_secs);
+  oprot.writeString(struct.uptimeSecs);
 }

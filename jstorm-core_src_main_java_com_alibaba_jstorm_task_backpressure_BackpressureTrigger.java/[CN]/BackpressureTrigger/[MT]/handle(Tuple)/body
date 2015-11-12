@@ -1,0 +1,28 @@
+{
+  try {
+    TopoMasterCtrlEvent event=(TopoMasterCtrlEvent)input.getValueByField("ctrlEvent");
+    EventType type=event.getEventType();
+    if (type.equals(EventType.stopBackpressure)) {
+      isUnderBackpressure=false;
+      LOG.info("Received stop backpressure event for task-" + task.getTaskId());
+    }
+ else     if (type.equals(EventType.updateBackpressureConfig)) {
+      Map stormConf=(Map)event.getEventValue().get(0);
+      updateConfig(stormConf);
+      if (isBackpressureEnable == false) {
+        LOG.info("Disable backpressure in trigger.");
+        isUnderBackpressure=false;
+        samplingSet.clear();
+      }
+ else {
+        LOG.info("Enable backpressure in trigger.");
+      }
+    }
+ else {
+      LOG.info("Received unexpected event, " + type.toString());
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to handle event",e);
+  }
+}

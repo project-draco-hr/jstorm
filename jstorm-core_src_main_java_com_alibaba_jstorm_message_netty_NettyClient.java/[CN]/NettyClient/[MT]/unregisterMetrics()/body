@@ -1,9 +1,11 @@
 {
-  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_SEND_TIME,nettyConnection.toString());
-  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_BATCH_SIZE,nettyConnection.toString());
-  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_SEND_PENDING,nettyConnection.toString());
-  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_CACHE_SIZE,nettyConnection.toString());
-  JStormMetrics.unregisterWorkerMetric(MetricDef.NETTY_CLI_SEND_SPEED,nettyConnection.toString());
+  if (this.enableNettyMetrics) {
+    JStormMetrics.unregisterNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_SEND_TIME,nettyConnection),MetricType.HISTOGRAM));
+    JStormMetrics.unregisterNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_BATCH_SIZE,nettyConnection),MetricType.HISTOGRAM));
+    JStormMetrics.unregisterNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_SEND_PENDING,nettyConnection),MetricType.GAUGE));
+    JStormMetrics.unregisterNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_CACHE_SIZE,nettyConnection),MetricType.GAUGE));
+    JStormMetrics.unregisterNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_SEND_SPEED,nettyConnection),MetricType.METER));
+  }
   JStormHealthCheck.unregisterWorkerHealthCheck(MetricDef.NETTY_CLI_CACHE_SIZE + ":" + nettyConnection.toString());
   JStormHealthCheck.unregisterWorkerHealthCheck(MetricDef.NETTY_CLI_CONNECTION + ":" + nettyConnection.toString());
 }

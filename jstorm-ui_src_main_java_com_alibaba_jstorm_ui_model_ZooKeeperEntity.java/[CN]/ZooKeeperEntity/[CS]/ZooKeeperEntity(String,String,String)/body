@@ -1,0 +1,5 @@
+{
+  this.host=host;
+  this.ip=ip;
+  this.port=port;
+}

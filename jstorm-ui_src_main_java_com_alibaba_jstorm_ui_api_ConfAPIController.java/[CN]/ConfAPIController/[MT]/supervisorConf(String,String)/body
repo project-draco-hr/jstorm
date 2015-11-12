@@ -1,0 +1,5 @@
+{
+  int port=UIUtils.getSupervisorPort(name);
+  String json=UIUtils.getSupervisorConf(host,port).getData();
+  return (Map)Utils.from_json(json);
+}

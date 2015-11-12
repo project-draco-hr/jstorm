@@ -1,0 +1,33 @@
+{
+  Map<String,UIWorkerMetric> workerMetrics=new HashMap<>();
+  for (  MetricInfo info : workerMetricInfo.values()) {
+    if (info != null) {
+      for (      Map.Entry<String,Map<Integer,MetricSnapshot>> metric : info.get_metrics().entrySet()) {
+        String name=metric.getKey();
+        String[] split_name=name.split("@");
+        String _host=UIMetricUtils.extractComponentName(split_name);
+        if (!host.equals(_host))         continue;
+        String port=UIMetricUtils.extractTaskId(split_name);
+        String key=host + ":" + port;
+        String metricName=UIMetricUtils.extractMetricName(split_name);
+        MetricSnapshot snapshot=metric.getValue().get(window);
+        UIWorkerMetric workerMetric;
+        if (workerMetrics.containsKey(key)) {
+          workerMetric=workerMetrics.get(key);
+        }
+ else {
+          workerMetric=new UIWorkerMetric(host,port);
+          workerMetrics.put(key,workerMetric);
+        }
+        workerMetric.setMetricValue(snapshot,metricName);
+      }
+    }
+  }
+  for (  WorkerSummary ws : workerSummaries) {
+    String worker=host + ":" + ws.get_port();
+    if (workerMetrics.containsKey(worker)) {
+      workerMetrics.get(worker).setTopology(ws.get_topology());
+    }
+  }
+  return new ArrayList<>(workerMetrics.values());
+}

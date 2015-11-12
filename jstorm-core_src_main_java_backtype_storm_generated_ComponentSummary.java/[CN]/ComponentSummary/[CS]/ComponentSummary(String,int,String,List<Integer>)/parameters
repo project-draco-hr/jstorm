@@ -1,4 +1,4 @@
 String name
 int parallel
 String type
-List<Integer> task_ids
+List<Integer> taskIds

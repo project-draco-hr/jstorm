@@ -1,5 +1,0 @@
-long index
-String text
-boolean isActive
-Event event
-List<PageIndex> ret

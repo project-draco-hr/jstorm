@@ -1,0 +1,8 @@
+{
+  if (isActive) {
+    return String.format("<li class='%s'><a href='%s'>%s</a></li>","active",getUrl(page),text);
+  }
+ else {
+    return String.format("<li><a href='%s'>%s</a></li>",getUrl(page),text);
+  }
+}

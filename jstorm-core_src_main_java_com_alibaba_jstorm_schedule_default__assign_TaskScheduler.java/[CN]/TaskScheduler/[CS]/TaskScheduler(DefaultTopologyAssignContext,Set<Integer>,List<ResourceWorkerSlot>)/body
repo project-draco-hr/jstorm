@@ -2,13 +2,37 @@
   this.tasks=tasks;
   LOG.info("Tasks " + tasks + " is going to be assigned in workers "+ workers);
   this.context=context;
-  this.taskContext=new TaskAssignContext(this.buildSupervisorToWorker(workers),Common.buildSpoutOutoputAndBoltInputMap(context));
+  this.taskContext=new TaskAssignContext(this.buildSupervisorToWorker(workers),Common.buildSpoutOutoputAndBoltInputMap(context),context.getTaskToComponent());
   this.componentSelector=new ComponentNumSelector(taskContext);
   this.inputComponentSelector=new InputComponentNumSelector(taskContext);
   this.totalTaskNumSelector=new TotalTaskNumSelector(taskContext);
   if (tasks.size() == 0)   return;
-  setTaskNum(tasks.size(),workerNum);
+  if (context.getAssignType() != TopologyAssignContext.ASSIGN_TYPE_REBALANCE || context.isReassign() != false) {
+    if (context.getAssignSingleWorkerForTM() && tasks.contains(context.getTopologyMasterTaskId())) {
+      assignForTopologyMaster();
+    }
+  }
+  int taskNum=tasks.size();
+  Map<ResourceWorkerSlot,Integer> workerSlotIntegerMap=taskContext.getWorkerToTaskNum();
+  Set<ResourceWorkerSlot> preAssignWorkers=new HashSet<ResourceWorkerSlot>();
+  for (  Entry<ResourceWorkerSlot,Integer> worker : workerSlotIntegerMap.entrySet()) {
+    if (worker.getValue() > 0) {
+      taskNum+=worker.getValue();
+      preAssignWorkers.add(worker.getKey());
+    }
+  }
+  setTaskNum(taskNum,workerNum);
+  for (  ResourceWorkerSlot worker : preAssignWorkers) {
+    Set<ResourceWorkerSlot> doneWorkers=removeWorkerFromSrcPool(taskContext.getWorkerToTaskNum().get(worker),worker);
+    if (doneWorkers != null) {
+      for (      ResourceWorkerSlot doneWorker : doneWorkers) {
+        taskNum-=doneWorker.getTasks().size();
+        workerNum--;
+      }
+    }
+  }
+  setTaskNum(taskNum,workerNum);
   if (context.getAssignType() == TopologyAssignContext.ASSIGN_TYPE_REBALANCE && context.isReassign() == false) {
-    keepAssignment(context.getOldAssignment().getWorkers());
+    keepAssignment(taskNum,context.getOldAssignment().getWorkers());
   }
 }

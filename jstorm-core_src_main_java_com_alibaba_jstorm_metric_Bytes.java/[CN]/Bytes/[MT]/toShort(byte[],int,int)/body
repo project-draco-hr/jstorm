@@ -1,0 +1,10 @@
+{
+  if (length != SIZEOF_SHORT || offset + length > bytes.length) {
+    throw explainWrongLengthOrOffset(bytes,offset,length,SIZEOF_SHORT);
+  }
+  short n=0;
+  n^=bytes[offset] & 0xFF;
+  n<<=8;
+  n^=bytes[offset + 1] & 0xFF;
+  return n;
+}

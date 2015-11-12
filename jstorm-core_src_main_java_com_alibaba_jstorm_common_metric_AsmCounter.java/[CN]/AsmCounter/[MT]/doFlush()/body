@@ -1,0 +1,10 @@
+{
+  long v=unFlushed.getCount();
+  for (  Counter counter : counterMap.values()) {
+    counter.inc(v);
+  }
+  for (  AsmMetric assocMetric : assocMetrics) {
+    assocMetric.updateDirectly(v);
+  }
+  this.unFlushed.dec(v);
+}

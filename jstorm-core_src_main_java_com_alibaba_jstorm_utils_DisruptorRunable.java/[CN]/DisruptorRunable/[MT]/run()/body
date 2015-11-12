@@ -1,7 +1,7 @@
 {
   LOG.info("Successfully start thread " + idStr);
   queue.consumerStarted();
-  while (shutdown.get() == false) {
+  while (!shutdown.get()) {
     queue.consumeBatchWhenAvailable(this);
   }
   LOG.info("Successfully exit thread " + idStr);

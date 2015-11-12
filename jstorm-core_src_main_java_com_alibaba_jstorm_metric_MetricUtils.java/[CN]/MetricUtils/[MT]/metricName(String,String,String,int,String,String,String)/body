@@ -1,0 +1,3 @@
+{
+  return concat(type,topologyId,componentId,taskId,streamId,group,name);
+}

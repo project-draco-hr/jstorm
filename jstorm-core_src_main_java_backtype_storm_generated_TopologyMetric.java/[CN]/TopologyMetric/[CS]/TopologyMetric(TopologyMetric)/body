@@ -3,36 +3,18 @@
     this.topologyMetric=new MetricInfo(other.topologyMetric);
   }
   if (other.is_set_componentMetric()) {
-    Map<String,MetricInfo> __this__componentMetric=new HashMap<String,MetricInfo>(other.componentMetric.size());
-    for (    Map.Entry<String,MetricInfo> other_element : other.componentMetric.entrySet()) {
-      String other_element_key=other_element.getKey();
-      MetricInfo other_element_value=other_element.getValue();
-      String __this__componentMetric_copy_key=other_element_key;
-      MetricInfo __this__componentMetric_copy_value=new MetricInfo(other_element_value);
-      __this__componentMetric.put(__this__componentMetric_copy_key,__this__componentMetric_copy_value);
-    }
-    this.componentMetric=__this__componentMetric;
+    this.componentMetric=new MetricInfo(other.componentMetric);
   }
   if (other.is_set_workerMetric()) {
-    Map<String,MetricInfo> __this__workerMetric=new HashMap<String,MetricInfo>(other.workerMetric.size());
-    for (    Map.Entry<String,MetricInfo> other_element : other.workerMetric.entrySet()) {
-      String other_element_key=other_element.getKey();
-      MetricInfo other_element_value=other_element.getValue();
-      String __this__workerMetric_copy_key=other_element_key;
-      MetricInfo __this__workerMetric_copy_value=new MetricInfo(other_element_value);
-      __this__workerMetric.put(__this__workerMetric_copy_key,__this__workerMetric_copy_value);
-    }
-    this.workerMetric=__this__workerMetric;
+    this.workerMetric=new MetricInfo(other.workerMetric);
   }
   if (other.is_set_taskMetric()) {
-    Map<Integer,MetricInfo> __this__taskMetric=new HashMap<Integer,MetricInfo>(other.taskMetric.size());
-    for (    Map.Entry<Integer,MetricInfo> other_element : other.taskMetric.entrySet()) {
-      Integer other_element_key=other_element.getKey();
-      MetricInfo other_element_value=other_element.getValue();
-      Integer __this__taskMetric_copy_key=other_element_key;
-      MetricInfo __this__taskMetric_copy_value=new MetricInfo(other_element_value);
-      __this__taskMetric.put(__this__taskMetric_copy_key,__this__taskMetric_copy_value);
-    }
-    this.taskMetric=__this__taskMetric;
+    this.taskMetric=new MetricInfo(other.taskMetric);
+  }
+  if (other.is_set_streamMetric()) {
+    this.streamMetric=new MetricInfo(other.streamMetric);
+  }
+  if (other.is_set_nettyMetric()) {
+    this.nettyMetric=new MetricInfo(other.nettyMetric);
   }
 }

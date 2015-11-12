@@ -1,0 +1,3 @@
+{
+  this.isMerging.set(isMerging);
+}

@@ -1,0 +1,3 @@
+{
+  return sources.contains(node.componentId) && node.getSources().contains(componentId);
+}

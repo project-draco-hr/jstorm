@@ -1,4 +1,4 @@
-int task_id
+int taskId
 int uptime
 String status
 String host

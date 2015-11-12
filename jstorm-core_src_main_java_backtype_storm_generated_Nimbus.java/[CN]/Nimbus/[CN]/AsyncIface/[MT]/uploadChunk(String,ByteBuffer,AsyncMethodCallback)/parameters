@@ -1,0 +1,3 @@
+String location
+ByteBuffer chunk
+AsyncMethodCallback resultHandler

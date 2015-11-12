@@ -1,4 +1,7 @@
 {
+  if (ConfigExtension.isCheckWorkerAliveBySystemInfo(conf) == false) {
+    return false;
+  }
   try {
     List<String> pids=getPid(conf,workerId);
     if (pids == null || pids.size() == 0) {

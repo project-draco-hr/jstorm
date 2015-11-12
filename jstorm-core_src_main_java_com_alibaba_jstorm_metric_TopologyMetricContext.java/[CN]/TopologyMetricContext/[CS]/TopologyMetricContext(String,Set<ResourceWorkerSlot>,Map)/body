@@ -1,0 +1,5 @@
+{
+  this(workerSet);
+  this.topologyId=topologyId;
+  this.conf=conf;
+}

@@ -5,12 +5,24 @@
       LOG.info("Timer " + name + " 's object is null ");
       return;
     }
+    if (intervalCheck.check()) {
+      checkExecuteThreadHb();
+    }
+    if (componentId.equals(Common.TOPOLOGY_MASTER_COMPONENT_ID)) {
+      Values values=new Values(uptime.uptime());
+      TupleExt tuple=new TupleImplExt(sysTopologyCtx,values,taskId,Common.TOPOLOGY_MASTER_HB_STREAM_ID);
+      queue.publish(tuple);
+    }
+ else {
+      sendHbMsg();
+    }
     TimerEvent event=new TimerEvent(opCode,object);
-    controlQueue.offer(event);
-    LOG.debug("Offer task HB event to controlQueue, taskId=" + taskId);
+    boolean ret=controlQueue.offer(event);
+    if (ret)     LOG.debug("Offer task HB event to controlQueue, taskId=" + taskId);
+ else     LOG.debug("Failed to offer task HB event to controlQueue, taskId=" + taskId);
   }
  catch (  Exception e) {
-    LOG.warn("Failed to public timer event to " + name,e);
+    LOG.warn("Failed to publish timer event to " + name,e);
     return;
   }
   LOG.debug(" Trigger timer event to " + name);

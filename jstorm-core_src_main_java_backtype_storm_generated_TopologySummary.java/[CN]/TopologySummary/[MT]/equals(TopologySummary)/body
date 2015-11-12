@@ -18,29 +18,29 @@
     if (!(this_present_status && that_present_status))     return false;
     if (!this.status.equals(that.status))     return false;
   }
-  boolean this_present_uptime_secs=true;
-  boolean that_present_uptime_secs=true;
-  if (this_present_uptime_secs || that_present_uptime_secs) {
-    if (!(this_present_uptime_secs && that_present_uptime_secs))     return false;
-    if (this.uptime_secs != that.uptime_secs)     return false;
+  boolean this_present_uptimeSecs=true;
+  boolean that_present_uptimeSecs=true;
+  if (this_present_uptimeSecs || that_present_uptimeSecs) {
+    if (!(this_present_uptimeSecs && that_present_uptimeSecs))     return false;
+    if (this.uptimeSecs != that.uptimeSecs)     return false;
   }
-  boolean this_present_num_tasks=true;
-  boolean that_present_num_tasks=true;
-  if (this_present_num_tasks || that_present_num_tasks) {
-    if (!(this_present_num_tasks && that_present_num_tasks))     return false;
-    if (this.num_tasks != that.num_tasks)     return false;
+  boolean this_present_numTasks=true;
+  boolean that_present_numTasks=true;
+  if (this_present_numTasks || that_present_numTasks) {
+    if (!(this_present_numTasks && that_present_numTasks))     return false;
+    if (this.numTasks != that.numTasks)     return false;
   }
-  boolean this_present_num_workers=true;
-  boolean that_present_num_workers=true;
-  if (this_present_num_workers || that_present_num_workers) {
-    if (!(this_present_num_workers && that_present_num_workers))     return false;
-    if (this.num_workers != that.num_workers)     return false;
+  boolean this_present_numWorkers=true;
+  boolean that_present_numWorkers=true;
+  if (this_present_numWorkers || that_present_numWorkers) {
+    if (!(this_present_numWorkers && that_present_numWorkers))     return false;
+    if (this.numWorkers != that.numWorkers)     return false;
   }
-  boolean this_present_error_info=true && this.is_set_error_info();
-  boolean that_present_error_info=true && that.is_set_error_info();
-  if (this_present_error_info || that_present_error_info) {
-    if (!(this_present_error_info && that_present_error_info))     return false;
-    if (!this.error_info.equals(that.error_info))     return false;
+  boolean this_present_errorInfo=true && this.is_set_errorInfo();
+  boolean that_present_errorInfo=true && that.is_set_errorInfo();
+  if (this_present_errorInfo || that_present_errorInfo) {
+    if (!(this_present_errorInfo && that_present_errorInfo))     return false;
+    if (!this.errorInfo.equals(that.errorInfo))     return false;
   }
   return true;
 }

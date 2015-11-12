@@ -1,0 +1,5 @@
+{
+  StringBuilder sb=new StringBuilder(64);
+  sb.append(component).append(MetricUtils.AT).append(taskId).append(MetricUtils.AT).append(streamId).append(MetricUtils.AT).append(metricType).append(MetricUtils.AT).append(host).append(MetricUtils.AT).append(port).append(MetricUtils.AT).append(metricGroup).append(MetricUtils.AT).append(metricName);
+  return sb.toString().getBytes();
+}

@@ -1,0 +1,5 @@
+{
+  parseKey(key);
+  this.v=Bytes.toDouble(value);
+  return this;
+}

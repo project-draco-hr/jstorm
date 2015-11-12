@@ -1,0 +1,8 @@
+{
+  Map<Integer,String> winData=mapValue.get(metricName);
+  if (winData == null) {
+    winData=new HashMap<>();
+    mapValue.put(metricName,winData);
+  }
+  winData.put(window,number);
+}

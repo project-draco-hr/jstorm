@@ -1,0 +1,6 @@
+{
+  getNettyMetricSizeByHost_result result=new getNettyMetricSizeByHost_result();
+  result.success=iface.getNettyMetricSizeByHost(args.topologyId,args.host);
+  result.set_success_isSet(true);
+  return result;
+}

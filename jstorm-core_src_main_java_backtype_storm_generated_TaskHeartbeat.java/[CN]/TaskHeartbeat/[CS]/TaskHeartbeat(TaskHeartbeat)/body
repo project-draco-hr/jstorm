@@ -1,0 +1,5 @@
+{
+  __isset_bitfield=other.__isset_bitfield;
+  this.time=other.time;
+  this.uptime=other.uptime;
+}

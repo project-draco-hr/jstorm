@@ -13,5 +13,5 @@
     }
     componentToStreamToFields.put(component,streamToFieldsMap);
   }
-  return new TopologyContext(topology,stormConf,workerData.getTasksToComponent(),workerData.getComponentToSortedTasks(),componentToStreamToFields,topologyId,resourcePath,pidDir,taskId,workerData.getPort(),workerTasks,workerData.getDefaultResources(),workerData.getUserResources(),workerData.getExecutorData(),workerData.getRegisteredMetrics(),openOrPrepareWasCalled);
+  return new TopologyContext(topology,stormConf,workerData.getTasksToComponent(),workerData.getComponentToSortedTasks(),componentToStreamToFields,topologyId,resourcePath,pidDir,taskId,workerData.getPort(),workerTasks,workerData.getDefaultResources(),workerData.getUserResources(),workerData.getExecutorData(),workerData.getRegisteredMetrics(),openOrPrepareWasCalled,workerData.getZkCluster());
 }

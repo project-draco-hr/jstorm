@@ -1,0 +1,23 @@
+{
+  TreeMap<Integer,TaskEntity> tasks=new TreeMap<>();
+  for (  ComponentSummary cs : topologyInfo.get_components()) {
+    String compName=cs.get_name();
+    String type=cs.get_type();
+    if (componentName.equals(compName)) {
+      for (      int id : cs.get_taskIds()) {
+        tasks.put(id,new TaskEntity(id,compName,type));
+      }
+    }
+  }
+  for (  TaskSummary ts : topologyInfo.get_tasks()) {
+    if (tasks.containsKey(ts.get_taskId())) {
+      TaskEntity te=tasks.get(ts.get_taskId());
+      te.setHost(ts.get_host());
+      te.setPort(ts.get_port());
+      te.setStatus(ts.get_status());
+      te.setUptime(ts.get_uptime());
+      te.setErrors(ts.get_errors());
+    }
+  }
+  return new ArrayList<>(tasks.values());
+}

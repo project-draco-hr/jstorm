@@ -1,0 +1,36 @@
+{
+  int targetTaskId=0;
+  long timeStamp=0l;
+  int taskId=0;
+  int streamId=0;
+  String componentName=null;
+  String streamName=null;
+  MessageId id=null;
+  try {
+    targetTaskId=input.readInt();
+    timeStamp=input.readLong();
+    taskId=input.readInt(true);
+    streamId=input.readInt(true);
+    componentName=_context.getComponentId(taskId);
+    streamName=_ids.getStreamName(componentName,streamId);
+    id=MessageId.deserialize(input);
+    List<Object> values=_kryo.deserializeFrom(input);
+    TupleImplExt tuple=new TupleImplExt(_context,values,taskId,streamName,id);
+    tuple.setTargetTaskId(targetTaskId);
+    tuple.setCreationTimeStamp(timeStamp);
+    return tuple;
+  }
+ catch (  Throwable e) {
+    StringBuilder sb=new StringBuilder();
+    sb.append("Deserialize error:");
+    sb.append("targetTaskId:").append(targetTaskId);
+    sb.append(",creationTimeStamp:").append(timeStamp);
+    sb.append(",taskId:").append(taskId);
+    sb.append(",streamId:").append(streamId);
+    sb.append(",componentName:").append(componentName);
+    sb.append(",streamName:").append(streamName);
+    sb.append(",MessageId").append(id);
+    LOG.info(sb.toString(),e);
+    throw new RuntimeException(e);
+  }
+}

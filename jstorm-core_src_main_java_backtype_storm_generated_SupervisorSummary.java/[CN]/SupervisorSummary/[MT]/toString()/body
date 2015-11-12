@@ -10,25 +10,25 @@
   }
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("supervisor_id:");
-  if (this.supervisor_id == null) {
+  sb.append("supervisorId:");
+  if (this.supervisorId == null) {
     sb.append("null");
   }
  else {
-    sb.append(this.supervisor_id);
+    sb.append(this.supervisorId);
   }
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("uptime_secs:");
-  sb.append(this.uptime_secs);
+  sb.append("uptimeSecs:");
+  sb.append(this.uptimeSecs);
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("num_workers:");
-  sb.append(this.num_workers);
+  sb.append("numWorkers:");
+  sb.append(this.numWorkers);
   first=false;
   if (!first)   sb.append(", ");
-  sb.append("num_used_workers:");
-  sb.append(this.num_used_workers);
+  sb.append("numUsedWorkers:");
+  sb.append(this.numUsedWorkers);
   first=false;
   sb.append(")");
   return sb.toString();

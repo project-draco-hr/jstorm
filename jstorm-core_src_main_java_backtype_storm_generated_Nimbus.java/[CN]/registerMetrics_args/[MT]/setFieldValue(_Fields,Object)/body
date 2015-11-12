@@ -1,0 +1,20 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    if (value == null) {
+      unset_topologyId();
+    }
+ else {
+      set_topologyId((String)value);
+    }
+  break;
+case METRICS:
+if (value == null) {
+  unset_metrics();
+}
+ else {
+  set_metrics((Set<String>)value);
+}
+break;
+}
+}

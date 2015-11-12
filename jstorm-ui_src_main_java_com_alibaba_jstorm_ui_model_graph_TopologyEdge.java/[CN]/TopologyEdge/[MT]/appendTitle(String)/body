@@ -1,0 +1,8 @@
+{
+  if (StringUtils.isEmpty(this.title)) {
+    this.title=title;
+  }
+ else {
+    this.title+="<br/>" + title;
+  }
+}

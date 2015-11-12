@@ -1,0 +1,12 @@
+{
+  if (intervalCheck.check()) {
+    Assignment assignment;
+    try {
+      assignment=zkCluster.assignment_info(topologyId,null);
+      this.workerSet=assignment.getWorkers();
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to get assignment for " + topologyId);
+    }
+  }
+}

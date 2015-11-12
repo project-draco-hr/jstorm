@@ -1,3 +1,0 @@
-{
-  iface.workerUploadMetric(args.uploadMetrics,resultHandler);
-}

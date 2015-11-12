@@ -1,0 +1,33 @@
+{
+  String fullPath;
+  if (e.dir == null || e.dir.equals(".")) {
+    fullPath=e.logName;
+  }
+ else {
+    fullPath=e.dir + File.separator + e.logName;
+  }
+  String summary=null;
+  String log=null;
+  if (fullPath.contains("/..") || fullPath.contains("../")) {
+    summary="File Path can't contains <code>..</code> <br/>";
+  }
+ else {
+    Response res=UIUtils.getLog(e.host,e.logServerPort,fullPath,e.pos);
+    if (res.getStatus() != -1) {
+      if (res.getStatus() == 200) {
+        String sizeStr=res.getData().substring(0,16);
+        model.addAttribute("pages",genPageUrl(e,sizeStr));
+        log=res.getData().substring(17);
+      }
+ else {
+        summary="The log file <code>" + e.logName + "</code> isn't exist <br/> "+ res.getData();
+      }
+    }
+ else {
+      summary="Failed to get log file <code>" + e.logName + "</code> <br/>"+ res.getData();
+    }
+  }
+  model.addAttribute("log",log);
+  model.addAttribute("summary",summary);
+  UIUtils.addTitleAttribute(model,"Log");
+}

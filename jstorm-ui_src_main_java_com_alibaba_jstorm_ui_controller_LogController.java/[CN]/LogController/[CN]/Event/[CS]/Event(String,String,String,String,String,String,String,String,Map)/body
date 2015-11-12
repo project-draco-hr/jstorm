@@ -1,0 +1,33 @@
+{
+  this.clusterName=_clusterName;
+  this.host=_host;
+  this.logServerPort=JStormUtils.parseInt(_logServerPort,0);
+  this.logName=_logName;
+  this.topologyId=_topologyId;
+  this.workerPort=_workerPort;
+  this.pos=JStormUtils.parseLong(_pos,-1);
+  this.dir=_dir;
+  logPageSize=ConfigExtension.getLogPageSize(conf);
+  logEncoding=ConfigExtension.getLogViewEncoding(conf);
+  if (host == null) {
+    throw new IllegalArgumentException("Please set host");
+  }
+ else   if (logServerPort == 0) {
+    throw new IllegalArgumentException("Please set log server's port");
+  }
+  if (!StringUtils.isBlank(logName)) {
+    return;
+  }
+  if (topologyId == null || workerPort == null) {
+    throw new IllegalArgumentException("Please set log fileName or topologyId-workerPort");
+  }
+  String topologyName;
+  try {
+    topologyName=Common.topologyIdToName(topologyId);
+  }
+ catch (  Exception e) {
+    throw new IllegalArgumentException("Please set log fileName or topologyId-workerPort");
+  }
+  dir="." + File.separator + topologyName;
+  logName=topologyName + "-worker-" + workerPort+ ".log";
+}

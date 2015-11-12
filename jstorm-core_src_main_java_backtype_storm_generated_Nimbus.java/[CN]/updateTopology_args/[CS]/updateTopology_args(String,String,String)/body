@@ -1,0 +1,6 @@
+{
+  this();
+  this.name=name;
+  this.uploadedLocation=uploadedLocation;
+  this.updateConf=updateConf;
+}

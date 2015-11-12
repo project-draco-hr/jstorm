@@ -1,0 +1,4 @@
+{
+  JStormMetrics.debug=debug;
+  LOG.info("topology metrics debug enabled:{}",debug);
+}

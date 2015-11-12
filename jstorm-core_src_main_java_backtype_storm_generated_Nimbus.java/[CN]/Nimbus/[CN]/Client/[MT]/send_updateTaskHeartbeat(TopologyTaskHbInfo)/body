@@ -1,0 +1,5 @@
+{
+  updateTaskHeartbeat_args args=new updateTaskHeartbeat_args();
+  args.set_taskHbs(taskHbs);
+  sendBase("updateTaskHeartbeat",args);
+}

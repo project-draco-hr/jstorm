@@ -1,14 +1,10 @@
 def validate(self):
-    if (self.topology_id is None):
-        raise TProtocol.TProtocolException(message='Required field topology_id is unset!')
-    if (self.supervisor_id is None):
-        raise TProtocol.TProtocolException(message='Required field supervisor_id is unset!')
+    if (self.topologyId is None):
+        raise TProtocol.TProtocolException(message='Required field topologyId is unset!')
+    if (self.supervisorId is None):
+        raise TProtocol.TProtocolException(message='Required field supervisorId is unset!')
     if (self.port is None):
         raise TProtocol.TProtocolException(message='Required field port is unset!')
-    if (self.workerMetric is None):
-        raise TProtocol.TProtocolException(message='Required field workerMetric is unset!')
-    if (self.nettyMetric is None):
-        raise TProtocol.TProtocolException(message='Required field nettyMetric is unset!')
-    if (self.taskMetric is None):
-        raise TProtocol.TProtocolException(message='Required field taskMetric is unset!')
+    if (self.allMetrics is None):
+        raise TProtocol.TProtocolException(message='Required field allMetrics is unset!')
     return

@@ -1,3 +1,0 @@
-{
-  MetricDef.MERGE_SUM_TAG.add(name);
-}

@@ -1,0 +1,4 @@
+def registerMetrics(self, topologyId, metrics):
+    '\n    Parameters:\n     - topologyId\n     - metrics\n    '
+    self.send_registerMetrics(topologyId, metrics)
+    return self.recv_registerMetrics()

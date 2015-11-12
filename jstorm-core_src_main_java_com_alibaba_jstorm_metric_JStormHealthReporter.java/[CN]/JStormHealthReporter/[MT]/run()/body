@@ -1,0 +1,22 @@
+{
+  StormClusterState clusterState=workerData.getZkCluster();
+  String topologyId=workerData.getTopologyId();
+  Map<Integer,HealthCheckRegistry> taskHealthCheckMap=JStormHealthCheck.getTaskhealthcheckmap();
+  int cnt=0;
+  for (  Map.Entry<Integer,HealthCheckRegistry> entry : taskHealthCheckMap.entrySet()) {
+    Integer taskId=entry.getKey();
+    Map<String,Result> results=entry.getValue().runHealthChecks();
+    for (    Map.Entry<String,Result> result : results.entrySet()) {
+      if (!result.getValue().isHealthy()) {
+        try {
+          clusterState.report_task_error(topologyId,taskId,result.getValue().getMessage(),null);
+          cnt++;
+        }
+ catch (        Exception e) {
+          LOG.error("Failed to update health data in ZK for topo-{} task-{}.",topologyId,taskId,e);
+        }
+      }
+    }
+  }
+  LOG.info("Successfully updated {} health data to ZK for topology:{}",cnt,topologyId);
+}

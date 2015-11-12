@@ -1,6 +1,0 @@
-{
-  if (this.outputMetric == null) {
-    this.outputMetric=new HashMap<String,Map<String,MetricWindow>>();
-  }
-  this.outputMetric.put(key,val);
-}

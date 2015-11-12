@@ -1,0 +1,9 @@
+{
+switch (field) {
+case TOPOLOGY_ID:
+    return get_topologyId();
+case TASK_ID:
+  return Integer.valueOf(get_taskId());
+}
+throw new IllegalStateException();
+}

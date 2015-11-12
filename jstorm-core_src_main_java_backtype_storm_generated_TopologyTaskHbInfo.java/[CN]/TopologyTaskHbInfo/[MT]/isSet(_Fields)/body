@@ -1,0 +1,14 @@
+{
+  if (field == null) {
+    throw new IllegalArgumentException();
+  }
+switch (field) {
+case TOPOLOGY_ID:
+    return is_set_topologyId();
+case TOPOLOGY_MASTER_ID:
+  return is_set_topologyMasterId();
+case TASK_HBS:
+return is_set_taskHbs();
+}
+throw new IllegalStateException();
+}

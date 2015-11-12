@@ -1,3 +1,0 @@
-{
-  return getGauges(MetricFilter.ALL);
-}

@@ -1,0 +1,6 @@
+{
+  if (metrics.size() > 0) {
+    logger.info("register metrics, topology:{}, total:{}",topologyId,metrics.size());
+  }
+  return true;
+}

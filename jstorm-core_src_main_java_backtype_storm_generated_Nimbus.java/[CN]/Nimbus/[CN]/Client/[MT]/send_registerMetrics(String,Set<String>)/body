@@ -1,0 +1,6 @@
+{
+  registerMetrics_args args=new registerMetrics_args();
+  args.set_topologyId(topologyId);
+  args.set_metrics(metrics);
+  sendBase("registerMetrics",args);
+}

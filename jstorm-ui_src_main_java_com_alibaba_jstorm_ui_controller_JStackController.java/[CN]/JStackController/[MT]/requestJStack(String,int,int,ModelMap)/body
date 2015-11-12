@@ -1,0 +1,21 @@
+{
+  String hostip=host + ":" + workerPort;
+  Response res=UIUtils.getJStack(host,logServerPort,workerPort);
+  String summary=null;
+  String jstack=null;
+  if (res.getStatus() > 0) {
+    if (res.getStatus() == 200) {
+      jstack=res.getData();
+    }
+ else {
+      summary="The JStack of <code>" + hostip + "</code> isn't exist <br/> "+ res.getData();
+    }
+  }
+ else {
+    summary="Failed to JStack of <code>" + hostip + "</code> <br/>"+ res.getData();
+  }
+  model.addAttribute("jstack",jstack);
+  model.addAttribute("summary",summary);
+  model.addAttribute("hostip",hostip);
+  UIUtils.addTitleAttribute(model,"JStack");
+}

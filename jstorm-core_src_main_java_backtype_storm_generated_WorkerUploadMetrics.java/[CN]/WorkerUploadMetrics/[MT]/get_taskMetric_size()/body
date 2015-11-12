@@ -1,3 +1,0 @@
-{
-  return (this.taskMetric == null) ? 0 : this.taskMetric.size();
-}

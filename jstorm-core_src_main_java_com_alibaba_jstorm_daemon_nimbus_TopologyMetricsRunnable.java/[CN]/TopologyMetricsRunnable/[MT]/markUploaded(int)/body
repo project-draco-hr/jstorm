@@ -1,0 +1,5 @@
+{
+  this.metricCache.remove(PENDING_UPLOAD_METRIC_DATA + idx);
+  this.metricCache.remove(PENDING_UPLOAD_METRIC_DATA_INFO + idx);
+  this.metricStat.set(idx,UNSET);
+}

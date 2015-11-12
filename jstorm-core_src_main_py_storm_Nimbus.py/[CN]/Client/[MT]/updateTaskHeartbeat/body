@@ -1,0 +1,4 @@
+def updateTaskHeartbeat(self, taskHbs):
+    '\n    Parameters:\n     - taskHbs\n    '
+    self.send_updateTaskHeartbeat(taskHbs)
+    self.recv_updateTaskHeartbeat()

@@ -1,0 +1,6 @@
+{
+  checkReady();
+  updateTopology_call method_call=new updateTopology_call(name,uploadedLocation,updateConf,resultHandler,this,___protocolFactory,___transport);
+  this.___currentMethod=method_call;
+  ___manager.call(method_call);
+}

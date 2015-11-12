@@ -1,0 +1,13 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_name=true && (is_set_name());
+  list.add(present_name);
+  if (present_name)   list.add(name);
+  boolean present_uploadedLocation=true && (is_set_uploadedLocation());
+  list.add(present_uploadedLocation);
+  if (present_uploadedLocation)   list.add(uploadedLocation);
+  boolean present_updateConf=true && (is_set_updateConf());
+  list.add(present_updateConf);
+  if (present_updateConf)   list.add(updateConf);
+  return list.hashCode();
+}

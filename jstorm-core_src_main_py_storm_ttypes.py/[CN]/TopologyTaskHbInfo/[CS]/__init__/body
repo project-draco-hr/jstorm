@@ -1,0 +1,4 @@
+def __init__(self, topologyId=None, topologyMasterId=None, taskHbs=None):
+    self.topologyId = topologyId
+    self.topologyMasterId = topologyMasterId
+    self.taskHbs = taskHbs

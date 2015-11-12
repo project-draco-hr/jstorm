@@ -1,4 +1,0 @@
-Map<String,List<Map<Integer,Double>>> mergeMap
-List<String> mergeList
-Map<Integer,Double> snapshot
-String name

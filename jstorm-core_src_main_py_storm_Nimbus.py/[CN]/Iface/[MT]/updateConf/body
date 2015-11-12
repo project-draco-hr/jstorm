@@ -1,3 +1,0 @@
-def updateConf(self, name, conf):
-    '\n    Parameters:\n     - name\n     - conf\n    '
-    pass

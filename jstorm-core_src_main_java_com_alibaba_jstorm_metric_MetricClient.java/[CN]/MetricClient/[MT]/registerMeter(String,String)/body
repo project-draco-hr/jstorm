@@ -1,0 +1,4 @@
+{
+  String userMetricName=getMetricName(name,group,MetricType.METER);
+  return (AsmMeter)JStormMetrics.registerTaskMetric(userMetricName,new AsmMeter());
+}

@@ -1,0 +1,39 @@
+{
+  HashMap<String,StreamInfo> outputs=new HashMap<String,StreamInfo>();
+  List<String> list=JStormUtils.mk_list(TopologyMaster.FILED_CTRL_EVENT);
+  outputs.put(TOPOLOGY_MASTER_CONTROL_STREAM_ID,Thrift.outputFields(list));
+  list=JStormUtils.mk_list(TopologyMaster.FIELD_METRIC_WORKER,TopologyMaster.FIELD_METRIC_METRICS);
+  outputs.put(TOPOLOGY_MASTER_METRICS_STREAM_ID,Thrift.outputFields(list));
+  list=JStormUtils.mk_list(TopologyMaster.FILED_HEARBEAT_EVENT);
+  outputs.put(TOPOLOGY_MASTER_HB_STREAM_ID,Thrift.outputFields(list));
+  IBolt topologyMaster=new TopologyMaster();
+  Map<GlobalStreamId,Grouping> inputs=topoMasterInputs(ret);
+  Bolt topologyMasterBolt=Thrift.mkBolt(inputs,topologyMaster,outputs,1);
+  for (  Entry<String,Bolt> e : ret.get_bolts().entrySet()) {
+    Bolt bolt=e.getValue();
+    ComponentCommon common=bolt.get_common();
+    List<String> fields=JStormUtils.mk_list(TopologyMaster.FIELD_METRIC_WORKER,TopologyMaster.FIELD_METRIC_METRICS);
+    common.put_to_streams(TOPOLOGY_MASTER_METRICS_STREAM_ID,Thrift.directOutputFields(fields));
+    fields=JStormUtils.mk_list(TopologyMaster.FILED_HEARBEAT_EVENT);
+    common.put_to_streams(TOPOLOGY_MASTER_HB_STREAM_ID,Thrift.directOutputFields(fields));
+    fields=JStormUtils.mk_list(TopologyMaster.FILED_CTRL_EVENT);
+    common.put_to_streams(TOPOLOGY_MASTER_CONTROL_STREAM_ID,Thrift.directOutputFields(fields));
+    GlobalStreamId stream=new GlobalStreamId(TOPOLOGY_MASTER_COMPONENT_ID,TOPOLOGY_MASTER_CONTROL_STREAM_ID);
+    common.put_to_inputs(stream,Thrift.mkDirectGrouping());
+    bolt.set_common(common);
+  }
+  for (  Entry<String,SpoutSpec> kv : ret.get_spouts().entrySet()) {
+    SpoutSpec spout=kv.getValue();
+    ComponentCommon common=spout.get_common();
+    List<String> fields=JStormUtils.mk_list(TopologyMaster.FIELD_METRIC_WORKER,TopologyMaster.FIELD_METRIC_METRICS);
+    common.put_to_streams(TOPOLOGY_MASTER_METRICS_STREAM_ID,Thrift.directOutputFields(fields));
+    fields=JStormUtils.mk_list(TopologyMaster.FILED_HEARBEAT_EVENT);
+    common.put_to_streams(TOPOLOGY_MASTER_HB_STREAM_ID,Thrift.directOutputFields(fields));
+    fields=JStormUtils.mk_list(TopologyMaster.FILED_CTRL_EVENT);
+    common.put_to_streams(TOPOLOGY_MASTER_CONTROL_STREAM_ID,Thrift.directOutputFields(fields));
+    GlobalStreamId stream=new GlobalStreamId(TOPOLOGY_MASTER_COMPONENT_ID,TOPOLOGY_MASTER_CONTROL_STREAM_ID);
+    common.put_to_inputs(stream,Thrift.mkDirectGrouping());
+    spout.set_common(common);
+  }
+  ret.put_to_bolts(TOPOLOGY_MASTER_COMPONENT_ID,topologyMasterBolt);
+}

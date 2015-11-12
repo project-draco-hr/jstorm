@@ -1,5 +1,5 @@
 {
   this.error=null;
-  set_error_time_secs_isSet(false);
-  this.error_time_secs=0;
+  set_errorTimeSecs_isSet(false);
+  this.errorTimeSecs=0;
 }

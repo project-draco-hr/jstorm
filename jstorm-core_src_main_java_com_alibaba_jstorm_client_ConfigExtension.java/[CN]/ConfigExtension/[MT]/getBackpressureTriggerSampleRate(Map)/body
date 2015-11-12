@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseDouble(conf.get(TOPOLOGY_BACKPRESSURE_TRIGGER_SAMPLE_RATE),0.75);
+}

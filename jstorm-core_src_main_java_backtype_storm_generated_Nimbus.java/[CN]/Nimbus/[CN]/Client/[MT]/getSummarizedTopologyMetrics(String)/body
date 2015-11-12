@@ -1,0 +1,4 @@
+{
+  send_getSummarizedTopologyMetrics(topologyId);
+  return recv_getSummarizedTopologyMetrics();
+}

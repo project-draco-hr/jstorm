@@ -1,0 +1,2 @@
+Gauge<Double> gauge
+String name

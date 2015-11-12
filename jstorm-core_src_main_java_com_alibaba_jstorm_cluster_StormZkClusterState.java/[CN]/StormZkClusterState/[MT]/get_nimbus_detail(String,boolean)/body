@@ -1,0 +1,4 @@
+{
+  byte[] data=cluster_state.get_data(Cluster.NIMBUS_SLAVE_DETAIL_SUBTREE + Cluster.ZK_SEPERATOR + hostPort,watch);
+  return (Map)Utils.maybe_deserialize(data);
+}

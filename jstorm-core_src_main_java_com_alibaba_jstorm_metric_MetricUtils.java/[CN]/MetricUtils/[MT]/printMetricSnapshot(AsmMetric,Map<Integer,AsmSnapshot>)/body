@@ -1,0 +1,8 @@
+{
+  StringBuilder sb=new StringBuilder(128);
+  sb.append("metric:").append(metric.getMetricName()).append(", ");
+  for (  Map.Entry<Integer,AsmSnapshot> entry : snapshots.entrySet()) {
+    sb.append("win:").append(entry.getKey()).append(", v:").append(getSnapshotDefaultValue(entry.getValue())).append("; ");
+  }
+  LOG.info(sb.toString());
+}

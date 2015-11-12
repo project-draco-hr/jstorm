@@ -1,0 +1,5 @@
+{
+  String proxyUrl="http://%s:%s/logview?cmd=jstack&workerPort=%s";
+  String url=String.format(proxyUrl,host,port,workerPort);
+  return getHttpResponse(url);
+}

@@ -1,0 +1,8 @@
+{
+  if (other.is_set_topologyId()) {
+    this.topologyId=other.topologyId;
+  }
+  if (other.is_set_component()) {
+    this.component=other.component;
+  }
+}

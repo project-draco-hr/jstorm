@@ -1,0 +1,7 @@
+{
+  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getSummarizedTopologyMetrics",org.apache.thrift.protocol.TMessageType.CALL,0));
+  getSummarizedTopologyMetrics_args args=new getSummarizedTopologyMetrics_args();
+  args.set_topologyId(topologyId);
+  args.write(prot);
+  prot.writeMessageEnd();
+}

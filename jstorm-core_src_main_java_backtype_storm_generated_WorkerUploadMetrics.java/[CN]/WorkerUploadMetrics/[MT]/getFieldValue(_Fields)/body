@@ -1,17 +1,13 @@
 {
 switch (field) {
 case TOPOLOGY_ID:
-    return get_topology_id();
+    return get_topologyId();
 case SUPERVISOR_ID:
-  return get_supervisor_id();
+  return get_supervisorId();
 case PORT:
 return Integer.valueOf(get_port());
-case WORKER_METRIC:
-return get_workerMetric();
-case NETTY_METRIC:
-return get_nettyMetric();
-case TASK_METRIC:
-return get_taskMetric();
+case ALL_METRICS:
+return get_allMetrics();
 }
 throw new IllegalStateException();
 }

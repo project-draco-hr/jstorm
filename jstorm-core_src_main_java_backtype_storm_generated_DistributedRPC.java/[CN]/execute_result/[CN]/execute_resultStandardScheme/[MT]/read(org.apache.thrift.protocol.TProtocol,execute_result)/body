@@ -26,6 +26,16 @@ case 1:
     org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
   }
 break;
+case 2:
+if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+struct.aze=new AuthorizationException();
+struct.aze.read(iprot);
+struct.set_aze_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
 default :
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
 }

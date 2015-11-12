@@ -1,0 +1,43 @@
+{
+switch (field) {
+case METRIC_ID:
+    return Long.valueOf(get_metricId());
+case TS:
+  return Long.valueOf(get_ts());
+case METRIC_TYPE:
+return Integer.valueOf(get_metricType());
+case LONG_VALUE:
+return Long.valueOf(get_longValue());
+case DOUBLE_VALUE:
+return Double.valueOf(get_doubleValue());
+case M1:
+return Double.valueOf(get_m1());
+case M5:
+return Double.valueOf(get_m5());
+case M15:
+return Double.valueOf(get_m15());
+case MEAN:
+return Double.valueOf(get_mean());
+case MIN:
+return Long.valueOf(get_min());
+case MAX:
+return Long.valueOf(get_max());
+case P50:
+return Double.valueOf(get_p50());
+case P75:
+return Double.valueOf(get_p75());
+case P95:
+return Double.valueOf(get_p95());
+case P98:
+return Double.valueOf(get_p98());
+case P99:
+return Double.valueOf(get_p99());
+case P999:
+return Double.valueOf(get_p999());
+case STDDEV:
+return Double.valueOf(get_stddev());
+case POINTS:
+return get_points();
+}
+throw new IllegalStateException();
+}

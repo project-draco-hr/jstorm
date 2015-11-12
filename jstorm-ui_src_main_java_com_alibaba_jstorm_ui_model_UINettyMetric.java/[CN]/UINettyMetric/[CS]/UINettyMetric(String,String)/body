@@ -1,0 +1,11 @@
+{
+  this.connection=connection;
+  this.fromWorker=connection.split("->")[0];
+  this.toWorker=connection.split("->")[1];
+  if (fromWorker.contains(host)) {
+    isFrom=true;
+  }
+  if (toWorker.contains(host)) {
+    isTo=true;
+  }
+}

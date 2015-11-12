@@ -1,6 +1,6 @@
 {
   this();
   this.error=error;
-  this.error_time_secs=error_time_secs;
-  set_error_time_secs_isSet(true);
+  this.errorTimeSecs=errorTimeSecs;
+  set_errorTimeSecs_isSet(true);
 }

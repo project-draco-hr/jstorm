@@ -1,0 +1,34 @@
+{
+  Set<String> ret=new TreeSet<String>();
+  if (componentsTraversed == null) {
+    componentsTraversed=new HashSet<String>();
+  }
+  Bolt bolt=bolts.get(boltComponentId);
+  if (bolt == null) {
+    return ret;
+  }
+  ComponentCommon common=bolt.get_common();
+  Set<GlobalStreamId> inputstreams=common.get_inputs().keySet();
+  Set<String> inputComponents=new TreeSet<String>();
+  for (  GlobalStreamId streamId : inputstreams) {
+    inputComponents.add(streamId.get_componentId());
+  }
+  Set<String> spoutComponentIds=new HashSet<String>(spouts.keySet());
+  Set<String> boltComponentIds=new HashSet<String>(bolts.keySet());
+  for (  String inputComponent : inputComponents) {
+    if (componentsTraversed.contains(inputComponent)) {
+      continue;
+    }
+ else {
+      componentsTraversed.add(inputComponent);
+    }
+    if (spoutComponentIds.contains(inputComponent)) {
+      ret.add(inputComponent);
+    }
+ else     if (boltComponentIds.contains(inputComponent)) {
+      Set<String> inputs=getInputSpoutsForBolt(topology,inputComponent,componentsTraversed);
+      ret.addAll(inputs);
+    }
+  }
+  return ret;
+}

@@ -1,4 +1,4 @@
-String topologyname
+String topologyName
 String uploadedJarLocation
 String jsonConf
 StormTopology topology

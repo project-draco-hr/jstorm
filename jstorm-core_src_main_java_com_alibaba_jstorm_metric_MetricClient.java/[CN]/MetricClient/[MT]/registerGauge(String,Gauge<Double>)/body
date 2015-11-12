@@ -1,0 +1,3 @@
+{
+  return registerGauge(name,GROUP_UDF,gauge);
+}

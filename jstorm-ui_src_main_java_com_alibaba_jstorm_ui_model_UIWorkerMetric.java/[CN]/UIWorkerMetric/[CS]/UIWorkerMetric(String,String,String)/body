@@ -1,0 +1,5 @@
+{
+  host=_host;
+  port=_port;
+  topology=_topology;
+}

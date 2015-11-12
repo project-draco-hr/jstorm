@@ -1,0 +1,11 @@
+{
+  LOG.debug("Nimbus service handler, getTopologyMetric, topology ID: " + topologyId);
+  long start=System.nanoTime();
+  try {
+    return data.getMetricRunnable().getTopologyMetric(topologyId);
+  }
+  finally {
+    long end=System.nanoTime();
+    SimpleJStormMetric.updateNimbusHistogram("getTopologyMetric",(end - start) / TimeUtils.NS_PER_US);
+  }
+}

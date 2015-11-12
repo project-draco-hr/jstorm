@@ -1,0 +1,14 @@
+{
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    String jsonConf=client.getClient().getTopologyConf(topologyId);
+    Map<String,Object> topologyConf=(Map<String,Object>)Utils.from_json(jsonConf);
+    return topologyConf;
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    LOG.error(e.getMessage(),e);
+    return getNimbusConf(clusterName);
+  }
+}

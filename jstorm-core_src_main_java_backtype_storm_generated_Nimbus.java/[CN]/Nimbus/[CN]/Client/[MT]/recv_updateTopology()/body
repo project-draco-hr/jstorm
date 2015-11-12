@@ -1,0 +1,11 @@
+{
+  updateTopology_result result=new updateTopology_result();
+  receiveBase(result,"updateTopology");
+  if (result.e != null) {
+    throw result.e;
+  }
+  if (result.ite != null) {
+    throw result.ite;
+  }
+  return;
+}

@@ -1,6 +1,0 @@
-{
-  checkReady();
-  getServerNettyMetric_call method_call=new getServerNettyMetric_call(topologyName,serverName,resultHandler,this,___protocolFactory,___transport);
-  this.___currentMethod=method_call;
-  ___manager.call(method_call);
-}

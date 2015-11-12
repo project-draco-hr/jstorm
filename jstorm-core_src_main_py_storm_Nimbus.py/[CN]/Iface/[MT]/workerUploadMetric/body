@@ -1,3 +1,0 @@
-def workerUploadMetric(self, uploadMetrics):
-    '\n    Parameters:\n     - uploadMetrics\n    '
-    pass

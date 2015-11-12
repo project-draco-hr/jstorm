@@ -1,0 +1,3 @@
+String clusterName
+String topologyId
+Map<String,Long> metrics

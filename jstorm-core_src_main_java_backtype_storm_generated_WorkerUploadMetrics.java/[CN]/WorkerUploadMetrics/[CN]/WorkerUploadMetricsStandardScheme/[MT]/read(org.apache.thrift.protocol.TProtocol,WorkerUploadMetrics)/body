@@ -9,8 +9,8 @@
 switch (schemeField.id) {
 case 1:
       if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-        struct.topology_id=iprot.readString();
-        struct.set_topology_id_isSet(true);
+        struct.topologyId=iprot.readString();
+        struct.set_topologyId_isSet(true);
       }
  else {
         org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
@@ -18,8 +18,8 @@ case 1:
     break;
 case 2:
   if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-    struct.supervisor_id=iprot.readString();
-    struct.set_supervisor_id_isSet(true);
+    struct.supervisorId=iprot.readString();
+    struct.set_supervisorId_isSet(true);
   }
  else {
     org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
@@ -36,40 +36,9 @@ org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
 break;
 case 4:
 if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-struct.workerMetric=new MetricInfo();
-struct.workerMetric.read(iprot);
-struct.set_workerMetric_isSet(true);
-}
- else {
-org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
-}
-break;
-case 5:
-if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
-struct.nettyMetric=new NettyMetric();
-struct.nettyMetric.read(iprot);
-struct.set_nettyMetric_isSet(true);
-}
- else {
-org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
-}
-break;
-case 6:
-if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
-{
-org.apache.thrift.protocol.TMap _map284=iprot.readMapBegin();
-struct.taskMetric=new HashMap<Integer,MetricInfo>(2 * _map284.size);
-int _key285;
-MetricInfo _val286;
-for (int _i287=0; _i287 < _map284.size; ++_i287) {
-_key285=iprot.readI32();
-_val286=new MetricInfo();
-_val286.read(iprot);
-struct.taskMetric.put(_key285,_val286);
-}
-iprot.readMapEnd();
-}
-struct.set_taskMetric_isSet(true);
+struct.allMetrics=new MetricInfo();
+struct.allMetrics.read(iprot);
+struct.set_allMetrics_isSet(true);
 }
  else {
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);

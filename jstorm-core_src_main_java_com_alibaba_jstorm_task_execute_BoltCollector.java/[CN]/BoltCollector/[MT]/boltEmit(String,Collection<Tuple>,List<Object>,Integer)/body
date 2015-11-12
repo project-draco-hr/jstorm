@@ -1,7 +1,7 @@
 {
-  long start=System.nanoTime();
+  final long start=System.nanoTime();
   try {
-    java.util.List<Integer> out_tasks=null;
+    List<Integer> out_tasks;
     if (out_task_id != null) {
       out_tasks=sendTargets.get(out_task_id,out_stream_id,values);
     }
@@ -36,7 +36,7 @@
   }
  finally {
     long end=System.nanoTime();
-    timer.update((end - start) / 1000000.0d);
+    timer.update((end - start) / TimeUtils.NS_PER_US);
   }
   return new ArrayList<Integer>();
 }

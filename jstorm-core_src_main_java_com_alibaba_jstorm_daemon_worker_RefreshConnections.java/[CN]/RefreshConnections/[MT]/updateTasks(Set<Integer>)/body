@@ -1,0 +1,12 @@
+{
+  if (tasks == null)   return;
+  List<TaskShutdownDameon> shutdowns=workerData.getShutdownDaemonbyTaskIds(tasks);
+  for (  TaskShutdownDameon shutdown : shutdowns) {
+    try {
+      shutdown.getTask().updateTaskData();
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to update task-" + shutdown.getTaskId(),e);
+    }
+  }
+}

@@ -1,6 +1,0 @@
-{
-  checkReady();
-  getTopologyMetric_call method_call=new getTopologyMetric_call(topologyName,resultHandler,this,___protocolFactory,___transport);
-  this.___currentMethod=method_call;
-  ___manager.call(method_call);
-}

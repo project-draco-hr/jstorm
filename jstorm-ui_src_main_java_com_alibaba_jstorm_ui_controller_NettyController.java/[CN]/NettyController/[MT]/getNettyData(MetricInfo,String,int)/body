@@ -1,0 +1,27 @@
+{
+  HashMap<String,UINettyMetric> nettyData=new HashMap<>();
+  if (nettyMetrics == null || nettyMetrics.get_metrics_size() == 0) {
+    return new ArrayList<>(nettyData.values());
+  }
+  for (  Map.Entry<String,Map<Integer,MetricSnapshot>> metric : nettyMetrics.get_metrics().entrySet()) {
+    String name=metric.getKey();
+    String[] split_name=name.split("@");
+    String metricName=UIMetricUtils.extractMetricName(split_name);
+    String connection=null;
+    if (metricName != null) {
+      connection=metricName.substring(metricName.indexOf(".") + 1);
+      metricName=metricName.substring(0,metricName.indexOf("."));
+    }
+    MetricSnapshot snapshot=metric.getValue().get(window);
+    UINettyMetric netty;
+    if (nettyData.containsKey(connection)) {
+      netty=nettyData.get(connection);
+    }
+ else {
+      netty=new UINettyMetric(host,connection);
+      nettyData.put(connection,netty);
+    }
+    netty.setMetricValue(snapshot,metricName);
+  }
+  return new ArrayList<>(nettyData.values());
+}

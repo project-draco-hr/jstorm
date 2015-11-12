@@ -1,4 +1,0 @@
-TopologyInfo topologyInfo
-ComponentSummary componentSummary
-Map<String,String> paramMap
-Integer window

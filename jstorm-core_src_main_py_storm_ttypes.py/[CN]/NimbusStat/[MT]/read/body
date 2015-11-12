@@ -14,7 +14,7 @@ def read(self, iprot):
                 iprot.skip(ftype)
         elif (fid == 2):
             if (ftype == TType.STRING):
-                self.uptime_secs = iprot.readString().decode('utf-8')
+                self.uptimeSecs = iprot.readString().decode('utf-8')
             else:
                 iprot.skip(ftype)
         else:

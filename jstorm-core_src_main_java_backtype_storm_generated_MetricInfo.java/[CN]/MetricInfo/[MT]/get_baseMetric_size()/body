@@ -1,3 +1,0 @@
-{
-  return (this.baseMetric == null) ? 0 : this.baseMetric.size();
-}

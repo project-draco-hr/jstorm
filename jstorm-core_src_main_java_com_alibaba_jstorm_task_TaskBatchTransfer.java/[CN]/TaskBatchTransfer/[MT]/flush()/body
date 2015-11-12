@@ -1,11 +1,13 @@
 {
+  Map<Integer,BatchTuple> oldBatchMap=null;
 synchronized (lock) {
-    for (    Entry<Integer,BatchTuple> entry : batchMap.entrySet()) {
-      int taskId=entry.getKey();
-      BatchTuple batch=entry.getValue();
-      if (batch != null && batch.currBatchSize() > 0) {
-        pushToQueue(taskId,batch);
-      }
+    oldBatchMap=batchMap;
+    batchMap=new HashMap<Integer,BatchTuple>();
+  }
+  for (  Entry<Integer,BatchTuple> entry : oldBatchMap.entrySet()) {
+    BatchTuple batch=entry.getValue();
+    if (batch != null && batch.currBatchSize() > 0) {
+      serializeQueue.publish(batch);
     }
   }
 }

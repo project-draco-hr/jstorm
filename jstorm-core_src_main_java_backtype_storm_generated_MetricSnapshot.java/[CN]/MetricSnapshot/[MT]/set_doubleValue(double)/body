@@ -1,0 +1,4 @@
+{
+  this.doubleValue=doubleValue;
+  set_doubleValue_isSet(true);
+}

@@ -1,4 +1,5 @@
 {
+  if (tasks == null)   return;
   for (  Integer taskId : tasks) {
     try {
       TaskShutdownDameon shutdown=Task.mk_task(workerData,taskId);

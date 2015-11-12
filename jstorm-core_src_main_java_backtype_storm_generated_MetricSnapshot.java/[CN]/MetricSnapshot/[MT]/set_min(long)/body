@@ -1,0 +1,4 @@
+{
+  this.min=min;
+  set_min_isSet(true);
+}

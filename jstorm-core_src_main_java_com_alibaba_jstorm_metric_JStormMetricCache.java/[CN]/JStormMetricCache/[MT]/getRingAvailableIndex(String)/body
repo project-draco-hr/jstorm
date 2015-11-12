@@ -1,0 +1,21 @@
+{
+  int page=0;
+  long last_ts=0;
+  for (int idx=1; idx <= 30; idx++) {
+    String key=keyPrefix + idx;
+    if (cache.get(key) != null) {
+      long timestamp=(long)((Object[])cache.get(key))[0];
+      if (timestamp > last_ts) {
+        last_ts=timestamp;
+        page=idx;
+      }
+    }
+  }
+  if (page < 30) {
+    page+=1;
+  }
+ else {
+    page=1;
+  }
+  return page;
+}

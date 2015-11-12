@@ -1,0 +1,18 @@
+{
+  if (snapshot == null)   return null;
+  MetricType type=MetricType.parse(snapshot.get_metricType());
+switch (type) {
+case COUNTER:
+    return format(snapshot.get_longValue());
+case GAUGE:
+  return format(snapshot.get_doubleValue());
+case METER:
+return format(snapshot.get_m1());
+case HISTOGRAM:
+return format(snapshot.get_mean());
+case TIMER:
+return format(snapshot.get_mean());
+default :
+return "0";
+}
+}

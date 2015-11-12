@@ -1,0 +1,5 @@
+String cluster_name
+String host
+String port
+String dir
+ModelMap model

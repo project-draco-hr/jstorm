@@ -2,19 +2,19 @@
   if (event == null) {
     return;
   }
-  long start=System.currentTimeMillis();
+  long start=System.nanoTime();
   try {
-    TupleExt tuple=(TupleExt)event;
+    ITupleExt tuple=(ITupleExt)event;
     int taskid=tuple.getTargetTaskId();
-    byte[] tupleMessage=serializer.serialize(tuple);
-    TaskMessage taskMessage=new TaskMessage(taskid,tupleMessage);
     IConnection conn=getConnection(taskid);
     if (conn != null) {
+      byte[] tupleMessage=serialize(tuple);
+      TaskMessage taskMessage=new TaskMessage(taskid,tupleMessage);
       conn.send(taskMessage);
     }
   }
   finally {
-    long end=System.currentTimeMillis();
-    timer.update(end - start);
+    long end=System.nanoTime();
+    serializeTimer.update((end - start) / TimeUtils.NS_PER_US);
   }
 }

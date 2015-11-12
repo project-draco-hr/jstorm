@@ -1,0 +1,4 @@
+{
+  Boolean ret=JStormUtils.parseBoolean(conf.get(TOPOLOGY_MASTER_SINGLE_WORKER));
+  return ret;
+}

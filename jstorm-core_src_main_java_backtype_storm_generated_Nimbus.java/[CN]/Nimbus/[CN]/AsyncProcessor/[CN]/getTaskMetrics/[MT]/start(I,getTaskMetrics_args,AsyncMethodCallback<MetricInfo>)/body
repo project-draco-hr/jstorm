@@ -1,0 +1,3 @@
+{
+  iface.getTaskMetrics(args.topologyId,args.component,resultHandler);
+}

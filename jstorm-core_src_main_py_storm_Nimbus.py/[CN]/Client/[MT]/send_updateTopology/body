@@ -1,0 +1,9 @@
+def send_updateTopology(self, name, uploadedLocation, updateConf):
+    self._oprot.writeMessageBegin('updateTopology', TMessageType.CALL, self._seqid)
+    args = updateTopology_args()
+    args.name = name
+    args.uploadedLocation = uploadedLocation
+    args.updateConf = updateConf
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

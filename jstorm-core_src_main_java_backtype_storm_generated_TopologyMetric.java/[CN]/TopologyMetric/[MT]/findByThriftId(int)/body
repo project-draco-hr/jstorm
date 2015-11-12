@@ -8,6 +8,10 @@ case 3:
 return WORKER_METRIC;
 case 4:
 return TASK_METRIC;
+case 5:
+return STREAM_METRIC;
+case 6:
+return NETTY_METRIC;
 default :
 return null;
 }

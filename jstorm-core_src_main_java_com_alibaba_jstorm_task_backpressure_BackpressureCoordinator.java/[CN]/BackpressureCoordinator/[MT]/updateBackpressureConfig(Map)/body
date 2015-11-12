@@ -1,0 +1,18 @@
+{
+  updateConfig(conf);
+  if (isBackpressureEnable == false) {
+    LOG.info("Disable backpressure in coordinator.");
+    SourceTobackpressureInfo.clear();
+  }
+ else {
+    LOG.info("Enable backpressure in coordinator.");
+  }
+  TopoMasterCtrlEvent updateBpConfig=new TopoMasterCtrlEvent(EventType.updateBackpressureConfig,new ArrayList<Object>());
+  updateBpConfig.addEventValue(conf);
+  Values values=new Values(updateBpConfig);
+  Set<Integer> targetTasks=new TreeSet<Integer>(taskIdToComponentId.keySet());
+  targetTasks.remove(topologyMasterId);
+  targetTasks.removeAll(context.getComponentTasks(Acker.ACKER_COMPONENT_ID));
+  sendBackpressureMessage(targetTasks,values,EventType.updateBackpressureConfig);
+  reportBackpressureStatus();
+}

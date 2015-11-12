@@ -1,0 +1,113 @@
+def read(self, iprot):
+    if ((iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated) and isinstance(iprot.trans, TTransport.CReadableTransport) and (self.thrift_spec is not None) and (fastbinary is not None)):
+        fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+        return
+    iprot.readStructBegin()
+    while True:
+        (fname, ftype, fid) = iprot.readFieldBegin()
+        if (ftype == TType.STOP):
+            break
+        if (fid == 1):
+            if (ftype == TType.I64):
+                self.metricId = iprot.readI64()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 2):
+            if (ftype == TType.I64):
+                self.ts = iprot.readI64()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 3):
+            if (ftype == TType.I32):
+                self.metricType = iprot.readI32()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 4):
+            if (ftype == TType.I64):
+                self.longValue = iprot.readI64()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 5):
+            if (ftype == TType.DOUBLE):
+                self.doubleValue = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 6):
+            if (ftype == TType.DOUBLE):
+                self.m1 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 7):
+            if (ftype == TType.DOUBLE):
+                self.m5 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 8):
+            if (ftype == TType.DOUBLE):
+                self.m15 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 9):
+            if (ftype == TType.DOUBLE):
+                self.mean = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 10):
+            if (ftype == TType.I64):
+                self.min = iprot.readI64()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 11):
+            if (ftype == TType.I64):
+                self.max = iprot.readI64()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 12):
+            if (ftype == TType.DOUBLE):
+                self.p50 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 13):
+            if (ftype == TType.DOUBLE):
+                self.p75 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 14):
+            if (ftype == TType.DOUBLE):
+                self.p95 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 15):
+            if (ftype == TType.DOUBLE):
+                self.p98 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 16):
+            if (ftype == TType.DOUBLE):
+                self.p99 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 17):
+            if (ftype == TType.DOUBLE):
+                self.p999 = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 18):
+            if (ftype == TType.DOUBLE):
+                self.stddev = iprot.readDouble()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 19):
+            if (ftype == TType.LIST):
+                self.points = []
+                (_etype106, _size103) = iprot.readListBegin()
+                for _i107 in xrange(_size103):
+                    _elem108 = iprot.readI64()
+                    self.points.append(_elem108)
+                iprot.readListEnd()
+            else:
+                iprot.skip(ftype)
+        else:
+            iprot.skip(ftype)
+        iprot.readFieldEnd()
+    iprot.readStructEnd()

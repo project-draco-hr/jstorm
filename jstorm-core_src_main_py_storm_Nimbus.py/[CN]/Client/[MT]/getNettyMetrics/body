@@ -1,0 +1,4 @@
+def getNettyMetrics(self, topologyId):
+    '\n    Parameters:\n     - topologyId\n    '
+    self.send_getNettyMetrics(topologyId)
+    return self.recv_getNettyMetrics()

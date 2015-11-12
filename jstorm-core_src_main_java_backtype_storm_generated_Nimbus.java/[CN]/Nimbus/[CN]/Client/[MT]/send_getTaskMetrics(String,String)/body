@@ -1,0 +1,6 @@
+{
+  getTaskMetrics_args args=new getTaskMetrics_args();
+  args.set_topologyId(topologyId);
+  args.set_component(component);
+  sendBase("getTaskMetrics",args);
+}

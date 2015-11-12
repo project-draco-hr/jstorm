@@ -1,0 +1,6 @@
+{
+  if (unit != TimeUnit.NANOSECONDS && unit != TimeUnit.MILLISECONDS) {
+    throw new IllegalArgumentException("invalid unit!");
+  }
+  this.unit=unit;
+}

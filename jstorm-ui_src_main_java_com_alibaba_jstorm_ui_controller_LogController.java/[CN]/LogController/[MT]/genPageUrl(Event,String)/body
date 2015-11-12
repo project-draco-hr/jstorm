@@ -1,0 +1,38 @@
+{
+  long totalSize=Long.valueOf(sizeStr);
+  int pageSize=e.logPageSize;
+  long pageNum=(totalSize + pageSize - 1) / pageSize;
+  long currentPageIndex=getCurrentPageIndex(e,totalSize,pageSize);
+  List<Pagination> pages=new ArrayList<>();
+  if (pageNum <= 10) {
+    for (long i=pageNum - 1; i >= 0; i--) {
+      pages.add(createPage(e,i,pageSize,String.valueOf(i + 1),false,i == currentPageIndex));
+    }
+    return pages;
+  }
+  if (pageNum - currentPageIndex < 5) {
+    for (long i=pageNum - 1; i >= currentPageIndex; i--) {
+      pages.add(createPage(e,i,pageSize,String.valueOf(i + 1),false,i == currentPageIndex));
+    }
+  }
+ else {
+    pages.add(createPage(e,pageNum - 1,pageSize,"End",false,pageNum - 1 == currentPageIndex));
+    pages.add(createPage(e,currentPageIndex + 4,pageSize,"...",false,false));
+    for (long i=currentPageIndex + 3; i >= currentPageIndex; i--) {
+      pages.add(createPage(e,i,pageSize,String.valueOf(i + 1),false,i == currentPageIndex));
+    }
+  }
+  if (currentPageIndex < 5) {
+    for (long i=currentPageIndex - 1; i > 0; i--) {
+      pages.add(createPage(e,i,pageSize,String.valueOf(i + 1),false,i == currentPageIndex));
+    }
+  }
+ else {
+    for (long i=currentPageIndex - 1; i >= currentPageIndex - 3; i--) {
+      pages.add(createPage(e,i,pageSize,String.valueOf(i + 1),false,i == currentPageIndex));
+    }
+    pages.add(createPage(e,currentPageIndex - 4,pageSize,"...",false,false));
+    pages.add(createPage(e,0,pageSize,"Begin",false,0 == currentPageIndex));
+  }
+  return pages;
+}

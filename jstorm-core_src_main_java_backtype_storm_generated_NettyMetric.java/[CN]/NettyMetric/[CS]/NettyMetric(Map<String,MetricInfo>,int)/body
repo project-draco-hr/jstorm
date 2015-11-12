@@ -1,6 +1,0 @@
-{
-  this();
-  this.connections=connections;
-  this.connectionNum=connectionNum;
-  set_connectionNum_isSet(true);
-}

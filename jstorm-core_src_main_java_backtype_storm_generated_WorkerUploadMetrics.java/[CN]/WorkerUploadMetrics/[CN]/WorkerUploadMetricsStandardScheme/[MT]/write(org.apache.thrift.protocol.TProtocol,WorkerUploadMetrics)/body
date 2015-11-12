@@ -1,39 +1,22 @@
 {
   struct.validate();
   oprot.writeStructBegin(STRUCT_DESC);
-  if (struct.topology_id != null) {
+  if (struct.topologyId != null) {
     oprot.writeFieldBegin(TOPOLOGY_ID_FIELD_DESC);
-    oprot.writeString(struct.topology_id);
+    oprot.writeString(struct.topologyId);
     oprot.writeFieldEnd();
   }
-  if (struct.supervisor_id != null) {
+  if (struct.supervisorId != null) {
     oprot.writeFieldBegin(SUPERVISOR_ID_FIELD_DESC);
-    oprot.writeString(struct.supervisor_id);
+    oprot.writeString(struct.supervisorId);
     oprot.writeFieldEnd();
   }
   oprot.writeFieldBegin(PORT_FIELD_DESC);
   oprot.writeI32(struct.port);
   oprot.writeFieldEnd();
-  if (struct.workerMetric != null) {
-    oprot.writeFieldBegin(WORKER_METRIC_FIELD_DESC);
-    struct.workerMetric.write(oprot);
-    oprot.writeFieldEnd();
-  }
-  if (struct.nettyMetric != null) {
-    oprot.writeFieldBegin(NETTY_METRIC_FIELD_DESC);
-    struct.nettyMetric.write(oprot);
-    oprot.writeFieldEnd();
-  }
-  if (struct.taskMetric != null) {
-    oprot.writeFieldBegin(TASK_METRIC_FIELD_DESC);
-{
-      oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,struct.taskMetric.size()));
-      for (      Map.Entry<Integer,MetricInfo> _iter288 : struct.taskMetric.entrySet()) {
-        oprot.writeI32(_iter288.getKey());
-        _iter288.getValue().write(oprot);
-      }
-      oprot.writeMapEnd();
-    }
+  if (struct.allMetrics != null) {
+    oprot.writeFieldBegin(ALL_METRICS_FIELD_DESC);
+    struct.allMetrics.write(oprot);
     oprot.writeFieldEnd();
   }
   oprot.writeFieldStop();

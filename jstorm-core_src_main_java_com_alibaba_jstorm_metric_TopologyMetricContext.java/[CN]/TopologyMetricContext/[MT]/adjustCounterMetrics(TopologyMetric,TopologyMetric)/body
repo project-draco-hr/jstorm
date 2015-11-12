@@ -1,0 +1,9 @@
+{
+  if (oldMetric != null) {
+    mergeCounters(tpMetric.get_streamMetric().get_metrics(),oldMetric.get_streamMetric().get_metrics());
+    mergeCounters(tpMetric.get_taskMetric().get_metrics(),oldMetric.get_taskMetric().get_metrics());
+    mergeCounters(tpMetric.get_componentMetric().get_metrics(),oldMetric.get_componentMetric().get_metrics());
+    mergeCounters(tpMetric.get_workerMetric().get_metrics(),oldMetric.get_workerMetric().get_metrics());
+    mergeCounters(tpMetric.get_nettyMetric().get_metrics(),oldMetric.get_nettyMetric().get_metrics());
+  }
+}

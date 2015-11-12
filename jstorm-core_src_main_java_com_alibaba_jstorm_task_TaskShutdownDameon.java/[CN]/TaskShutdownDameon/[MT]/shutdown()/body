@@ -21,20 +21,10 @@ synchronized (this) {
   }
   closeComponent(task_obj);
   try {
-    JStormMetrics.unregisterTask(task_id);
-    TaskHeartbeatRunable.unregisterTaskStats(task_id);
-    zkCluster.remove_task_heartbeat(topology_id,task_id);
+    zkCluster.disconnect();
   }
  catch (  Exception e) {
-    LOG.info("Failed to cleanup");
-  }
- finally {
-    try {
-      zkCluster.disconnect();
-    }
- catch (    Exception e) {
-      LOG.info("Failed to disconnect",e);
-    }
+    LOG.error("Failed to disconnect zk for task-" + task_id);
   }
   LOG.info("Successfully shutdown task " + topology_id + ":"+ task_id);
 }

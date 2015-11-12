@@ -1,0 +1,8 @@
+{
+  List<Object> value=new ArrayList<Object>();
+  Double flowCtrlTime=Double.valueOf(boltExecutor.getExecuteTime() / 1000);
+  value.add(flowCtrlTime.intValue());
+  TopoMasterCtrlEvent startBp=new TopoMasterCtrlEvent(EventType.startBackpressure,value);
+  output.emit(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID,new Values(startBp));
+  LOG.debug("Send start backpressure request for task-{}, flowCtrlTime={}",taskId,flowCtrlTime.intValue());
+}

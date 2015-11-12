@@ -1,6 +1,6 @@
 def validate(self):
-    if (self.task_id is None):
-        raise TProtocol.TProtocolException(message='Required field task_id is unset!')
+    if (self.taskId is None):
+        raise TProtocol.TProtocolException(message='Required field taskId is unset!')
     if (self.uptime is None):
         raise TProtocol.TProtocolException(message='Required field uptime is unset!')
     if (self.status is None):

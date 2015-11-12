@@ -49,6 +49,7 @@
     ackerNum=Integer.valueOf(1);
   }
   Map rtn=new HashMap();
+  rtn.put(Config.STORM_CLUSTER_MODE,conf.get(Config.STORM_CLUSTER_MODE));
   rtn.putAll(stormConf);
   rtn.put(Config.TOPOLOGY_KRYO_DECORATORS,decoratorList);
   rtn.put(Config.TOPOLOGY_KRYO_REGISTER,kryoRegisterMap);

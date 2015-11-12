@@ -6,11 +6,11 @@
     if (!(this_present_host && that_present_host))     return false;
     if (!this.host.equals(that.host))     return false;
   }
-  boolean this_present_uptime_secs=true && this.is_set_uptime_secs();
-  boolean that_present_uptime_secs=true && that.is_set_uptime_secs();
-  if (this_present_uptime_secs || that_present_uptime_secs) {
-    if (!(this_present_uptime_secs && that_present_uptime_secs))     return false;
-    if (!this.uptime_secs.equals(that.uptime_secs))     return false;
+  boolean this_present_uptimeSecs=true && this.is_set_uptimeSecs();
+  boolean that_present_uptimeSecs=true && that.is_set_uptimeSecs();
+  if (this_present_uptimeSecs || that_present_uptimeSecs) {
+    if (!(this_present_uptimeSecs && that_present_uptimeSecs))     return false;
+    if (!this.uptimeSecs.equals(that.uptimeSecs))     return false;
   }
   return true;
 }

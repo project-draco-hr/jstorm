@@ -1,0 +1,11 @@
+{
+  if (!is_set_metricId()) {
+    throw new TProtocolException("Required field 'metricId' is unset! Struct:" + toString());
+  }
+  if (!is_set_ts()) {
+    throw new TProtocolException("Required field 'ts' is unset! Struct:" + toString());
+  }
+  if (!is_set_metricType()) {
+    throw new TProtocolException("Required field 'metricType' is unset! Struct:" + toString());
+  }
+}

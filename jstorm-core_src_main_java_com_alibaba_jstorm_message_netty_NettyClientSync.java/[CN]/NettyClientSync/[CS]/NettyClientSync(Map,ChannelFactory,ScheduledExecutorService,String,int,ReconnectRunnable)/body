@@ -1,7 +1,7 @@
 {
   super(storm_conf,factory,scheduler,host,port,reconnector);
   batchQueue=new ConcurrentLinkedQueue<MessageBatch>();
-  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(storm_conf);
+  WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   disruptorQueue=DisruptorQueue.mkInstance(name,ProducerType.MULTI,MAX_SEND_PENDING * 8,waitStrategy);
   disruptorQueue.consumerStarted();
   if (connectMyself == false) {

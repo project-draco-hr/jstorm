@@ -1,13 +1,13 @@
 {
   Map<Integer,LocalAssignment> portTasks=new HashMap<Integer,LocalAssignment>();
-  Set<ResourceWorkerSlot> workers=assignmenInfo.getWorkers();
+  Set<ResourceWorkerSlot> workers=assignmentInfo.getWorkers();
   if (workers == null) {
-    LOG.error("No worker of assignement's " + assignmenInfo);
+    LOG.error("No worker of assignment's " + assignmentInfo);
     return portTasks;
   }
   for (  ResourceWorkerSlot worker : workers) {
     if (!supervisorId.equals(worker.getNodeId()))     continue;
-    portTasks.put(worker.getPort(),new LocalAssignment(topologyId,worker.getTasks(),Common.topologyIdToName(topologyId),worker.getMemSize(),worker.getCpu(),worker.getJvm(),assignmenInfo.getTimeStamp()));
+    portTasks.put(worker.getPort(),new LocalAssignment(topologyId,worker.getTasks(),Common.topologyIdToName(topologyId),worker.getMemSize(),worker.getCpu(),worker.getJvm(),assignmentInfo.getTimeStamp()));
   }
   return portTasks;
 }

@@ -1,5 +1,0 @@
-{
-  Histogram ret=(Histogram)Builder.mkInstance(Builder.HISTOGRAM);
-  registerTaskMetric(ret,taskId,name,args);
-  return ret;
-}

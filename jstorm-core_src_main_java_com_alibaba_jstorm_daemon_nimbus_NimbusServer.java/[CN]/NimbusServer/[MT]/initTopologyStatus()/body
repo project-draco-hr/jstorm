@@ -4,6 +4,7 @@
     for (    String topologyid : active_ids) {
       NimbusUtils.transition(data,topologyid,false,StatusType.startup);
       NimbusUtils.updateTopologyTaskTimeout(data,topologyid);
+      NimbusUtils.updateTopologyTaskHb(data,topologyid);
     }
   }
   LOG.info("Successfully init topology status");

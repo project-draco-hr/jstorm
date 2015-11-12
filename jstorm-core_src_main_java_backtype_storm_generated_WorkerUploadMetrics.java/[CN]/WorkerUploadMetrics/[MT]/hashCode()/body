@@ -1,22 +1,16 @@
 {
   List<Object> list=new ArrayList<Object>();
-  boolean present_topology_id=true && (is_set_topology_id());
-  list.add(present_topology_id);
-  if (present_topology_id)   list.add(topology_id);
-  boolean present_supervisor_id=true && (is_set_supervisor_id());
-  list.add(present_supervisor_id);
-  if (present_supervisor_id)   list.add(supervisor_id);
+  boolean present_topologyId=true && (is_set_topologyId());
+  list.add(present_topologyId);
+  if (present_topologyId)   list.add(topologyId);
+  boolean present_supervisorId=true && (is_set_supervisorId());
+  list.add(present_supervisorId);
+  if (present_supervisorId)   list.add(supervisorId);
   boolean present_port=true;
   list.add(present_port);
   if (present_port)   list.add(port);
-  boolean present_workerMetric=true && (is_set_workerMetric());
-  list.add(present_workerMetric);
-  if (present_workerMetric)   list.add(workerMetric);
-  boolean present_nettyMetric=true && (is_set_nettyMetric());
-  list.add(present_nettyMetric);
-  if (present_nettyMetric)   list.add(nettyMetric);
-  boolean present_taskMetric=true && (is_set_taskMetric());
-  list.add(present_taskMetric);
-  if (present_taskMetric)   list.add(taskMetric);
+  boolean present_allMetrics=true && (is_set_allMetrics());
+  list.add(present_allMetrics);
+  if (present_allMetrics)   list.add(allMetrics);
   return list.hashCode();
 }

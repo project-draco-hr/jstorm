@@ -6,11 +6,11 @@
     if (!(this_present_error && that_present_error))     return false;
     if (!this.error.equals(that.error))     return false;
   }
-  boolean this_present_error_time_secs=true;
-  boolean that_present_error_time_secs=true;
-  if (this_present_error_time_secs || that_present_error_time_secs) {
-    if (!(this_present_error_time_secs && that_present_error_time_secs))     return false;
-    if (this.error_time_secs != that.error_time_secs)     return false;
+  boolean this_present_errorTimeSecs=true;
+  boolean that_present_errorTimeSecs=true;
+  if (this_present_errorTimeSecs || that_present_errorTimeSecs) {
+    if (!(this_present_errorTimeSecs && that_present_errorTimeSecs))     return false;
+    if (this.errorTimeSecs != that.errorTimeSecs)     return false;
   }
   return true;
 }

@@ -1,0 +1,8 @@
+{
+  metricUploader.sendEvent(this.clusterName,event);
+  Set<ResourceWorkerSlot> workers=new HashSet<>();
+  workers.addAll(event.deadTasks.values());
+  for (  ResourceWorkerSlot worker : workers) {
+    metricCache.unregisterWorker(event.topologyId,worker.getHostname(),worker.getPort());
+  }
+}

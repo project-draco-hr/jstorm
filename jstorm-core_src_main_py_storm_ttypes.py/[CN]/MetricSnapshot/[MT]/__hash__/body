@@ -1,0 +1,22 @@
+def __hash__(self):
+    value = 17
+    value = ((value * 31) ^ hash(self.metricId))
+    value = ((value * 31) ^ hash(self.ts))
+    value = ((value * 31) ^ hash(self.metricType))
+    value = ((value * 31) ^ hash(self.longValue))
+    value = ((value * 31) ^ hash(self.doubleValue))
+    value = ((value * 31) ^ hash(self.m1))
+    value = ((value * 31) ^ hash(self.m5))
+    value = ((value * 31) ^ hash(self.m15))
+    value = ((value * 31) ^ hash(self.mean))
+    value = ((value * 31) ^ hash(self.min))
+    value = ((value * 31) ^ hash(self.max))
+    value = ((value * 31) ^ hash(self.p50))
+    value = ((value * 31) ^ hash(self.p75))
+    value = ((value * 31) ^ hash(self.p95))
+    value = ((value * 31) ^ hash(self.p98))
+    value = ((value * 31) ^ hash(self.p99))
+    value = ((value * 31) ^ hash(self.p999))
+    value = ((value * 31) ^ hash(self.stddev))
+    value = ((value * 31) ^ hash(self.points))
+    return value

@@ -1,0 +1,3 @@
+{
+  cache.put(TOPOLOGY_SAMPLE_RATE + topologyId,sampleRate);
+}

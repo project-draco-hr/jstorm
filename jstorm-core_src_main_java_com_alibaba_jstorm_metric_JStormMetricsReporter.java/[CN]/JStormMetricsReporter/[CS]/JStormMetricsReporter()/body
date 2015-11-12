@@ -1,0 +1,6 @@
+{
+  LOG.info("Successfully started jstorm metrics reporter for test.");
+  this.test=true;
+  this.flushMetricThreadCycle=1;
+  this.checkMetaThreadCycle=30;
+}

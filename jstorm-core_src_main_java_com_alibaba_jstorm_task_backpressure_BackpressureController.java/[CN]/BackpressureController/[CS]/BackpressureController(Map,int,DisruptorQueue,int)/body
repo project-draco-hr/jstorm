@@ -1,0 +1,9 @@
+{
+  super(conf);
+  this.queueControlled=queue;
+  this.totalQueueSize=queueSize;
+  this.queueSizeReduced=queueSize;
+  this.taskId=taskId;
+  this.maxBound=0l;
+  this.minBound=0l;
+}

@@ -1,0 +1,7 @@
+{
+  int savedPos=buf.position();
+  byte[] newBytes=new byte[buf.remaining()];
+  buf.get(newBytes);
+  buf.position(savedPos);
+  return newBytes;
+}

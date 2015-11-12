@@ -1,0 +1,4 @@
+{
+  String userMetricName=getMetricName(name,group,type);
+  JStormMetrics.unregisterTaskMetric(userMetricName);
+}

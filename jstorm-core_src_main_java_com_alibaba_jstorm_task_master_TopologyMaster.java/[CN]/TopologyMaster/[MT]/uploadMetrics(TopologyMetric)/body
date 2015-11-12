@@ -1,0 +1,39 @@
+{
+  long start=System.currentTimeMillis();
+  if (StormConfig.local_mode(conf)) {
+    return;
+  }
+ else {
+    NimbusClient client=null;
+    try {
+      client=NimbusClient.getConfiguredClient(conf);
+      Nimbus.Client client1=client.getClient();
+      MetricInfo topologyMetrics=tpMetric.get_topologyMetric();
+      MetricInfo componentMetrics=tpMetric.get_componentMetric();
+      MetricInfo taskMetrics=tpMetric.get_taskMetric();
+      MetricInfo streamMetrics=tpMetric.get_streamMetric();
+      MetricInfo workerMetrics=tpMetric.get_workerMetric();
+      MetricInfo nettyMetrics=tpMetric.get_nettyMetric();
+      int totalSize=topologyMetrics.get_metrics_size() + componentMetrics.get_metrics_size() + taskMetrics.get_metrics_size()+ streamMetrics.get_metrics_size()+ workerMetrics.get_metrics_size()+ nettyMetrics.get_metrics_size();
+      if (totalSize < MAX_BATCH_SIZE) {
+        client1.uploadTopologyMetrics(topologyId,new TopologyMetric(topologyMetrics,componentMetrics,workerMetrics,taskMetrics,streamMetrics,nettyMetrics));
+      }
+ else {
+        client1.uploadTopologyMetrics(topologyId,new TopologyMetric(topologyMetrics,componentMetrics,dummy,dummy,dummy,dummy));
+        batchUploadMetrics(client1,topologyId,workerMetrics,MetaType.WORKER);
+        batchUploadMetrics(client1,topologyId,taskMetrics,MetaType.TASK);
+        batchUploadMetrics(client1,topologyId,streamMetrics,MetaType.STREAM);
+        batchUploadMetrics(client1,topologyId,nettyMetrics,MetaType.NETTY);
+      }
+    }
+ catch (    Exception e) {
+      LOG.error("Failed to upload worker metrics",e);
+    }
+ finally {
+      if (client != null) {
+        client.close();
+      }
+    }
+  }
+  metricLogger.info("upload metrics, cost:{}",System.currentTimeMillis() - start);
+}

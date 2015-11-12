@@ -1,7 +1,7 @@
 {
-  long startTime=System.nanoTime();
+  final long startTime=System.nanoTime();
   try {
-    java.util.List<Integer> out_tasks=null;
+    List<Integer> out_tasks;
     if (out_task_id != null) {
       out_tasks=sendTargets.get(out_task_id,out_stream_id,values);
     }
@@ -15,7 +15,7 @@
     Boolean needAck=(message_id != null) && (ackerNum > 0);
     Long root_id=MessageId.generateId(random);
     if (needAck) {
-      while (pending.containsKey(root_id) == true) {
+      while (pending.containsKey(root_id)) {
         root_id=MessageId.generateId(random);
       }
     }
@@ -38,7 +38,7 @@
       info.setStream(out_stream_id);
       info.setValues(values);
       info.setMessageId(message_id);
-      info.setTimestamp(System.currentTimeMillis());
+      info.setTimestamp(System.nanoTime());
       pending.putHead(root_id,info);
       List<Object> ackerTuple=JStormUtils.mk_list((Object)root_id,JStormUtils.bit_xor_vals(ackSeq),task_id);
       UnanchoredSend.send(topology_context,sendTargets,transfer_fn,Acker.ACKER_INIT_STREAM_ID,ackerTuple);
@@ -49,13 +49,13 @@
       info.setValues(values);
       info.setMessageId(message_id);
       info.setTimestamp(0);
-      AckSpoutMsg ack=new AckSpoutMsg(spout,info,task_stats,isDebug);
+      AckSpoutMsg ack=new AckSpoutMsg(spout,null,info,task_stats,isDebug);
       ack.run();
     }
     return out_tasks;
   }
   finally {
     long endTime=System.nanoTime();
-    emitTotalTimer.update((endTime - startTime) / 1000000.0d);
+    emitTotalTimer.update((endTime - startTime) / TimeUtils.NS_PER_US);
   }
 }

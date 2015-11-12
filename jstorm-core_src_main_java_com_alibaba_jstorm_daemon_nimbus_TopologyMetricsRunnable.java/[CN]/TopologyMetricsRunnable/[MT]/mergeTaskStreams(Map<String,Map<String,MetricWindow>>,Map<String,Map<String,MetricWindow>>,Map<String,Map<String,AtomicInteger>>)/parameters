@@ -1,3 +1,0 @@
-Map<String,Map<String,MetricWindow>> componentStreams
-Map<String,Map<String,MetricWindow>> taskStreams
-Map<String,Map<String,AtomicInteger>> componentStreamParallel

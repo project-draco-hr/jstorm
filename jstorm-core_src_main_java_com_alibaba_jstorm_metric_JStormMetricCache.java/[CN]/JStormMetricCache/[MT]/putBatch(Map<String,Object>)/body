@@ -1,0 +1,6 @@
+{
+  if (kv.size() > 0) {
+    cache.putBatch(kv);
+  }
+  return cache;
+}

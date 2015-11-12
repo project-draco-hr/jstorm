@@ -1,0 +1,23 @@
+{
+  TTupleProtocol iprot=(TTupleProtocol)prot;
+  struct.topologyId=iprot.readString();
+  struct.set_topologyId_isSet(true);
+  struct.topologyMasterId=iprot.readI32();
+  struct.set_topologyMasterId_isSet(true);
+  BitSet incoming=iprot.readBitSet(1);
+  if (incoming.get(0)) {
+{
+      org.apache.thrift.protocol.TMap _map228=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+      struct.taskHbs=new HashMap<Integer,TaskHeartbeat>(2 * _map228.size);
+      int _key229;
+      TaskHeartbeat _val230;
+      for (int _i231=0; _i231 < _map228.size; ++_i231) {
+        _key229=iprot.readI32();
+        _val230=new TaskHeartbeat();
+        _val230.read(iprot);
+        struct.taskHbs.put(_key229,_val230);
+      }
+    }
+    struct.set_taskHbs_isSet(true);
+  }
+}

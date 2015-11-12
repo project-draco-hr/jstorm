@@ -1,0 +1,9 @@
+{
+  for (  AsmMetricRegistry registry : allRegistries) {
+    AsmMetric metric=registry.getMetric(name);
+    if (metric != null) {
+      return metric;
+    }
+  }
+  return null;
+}

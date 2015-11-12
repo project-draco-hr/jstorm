@@ -1,0 +1,4 @@
+def getTaskMetrics(self, topologyId, component):
+    '\n    Parameters:\n     - topologyId\n     - component\n    '
+    self.send_getTaskMetrics(topologyId, component)
+    return self.recv_getTaskMetrics()

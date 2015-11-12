@@ -1,0 +1,6 @@
+{
+  String userMetricName=getMetricName(name,group,MetricType.GAUGE);
+  AsmGauge asmGauge=new AsmGauge(gauge);
+  JStormMetrics.registerTaskMetric(userMetricName,asmGauge);
+  return asmGauge;
+}

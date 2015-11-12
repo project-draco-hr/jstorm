@@ -1,4 +1,0 @@
-{
-  Event event=new Event(Event.REGISTER_TYPE,taskId,taskStats);
-  eventQueue.offer(event);
-}

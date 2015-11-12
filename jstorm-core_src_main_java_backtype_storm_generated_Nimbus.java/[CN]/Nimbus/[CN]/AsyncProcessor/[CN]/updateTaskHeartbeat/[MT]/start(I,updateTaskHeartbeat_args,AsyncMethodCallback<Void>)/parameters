@@ -1,0 +1,3 @@
+I iface
+updateTaskHeartbeat_args args
+AsyncMethodCallback<Void> resultHandler

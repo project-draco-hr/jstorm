@@ -1,8 +1,0 @@
-{
-  String registerName=MetricRegistry.name(name,args);
-  MetricRegistry metrics=taskMetrics.get(taskId);
-  if (metrics == null) {
-    throw new IllegalArgumentException("Invalid taskId");
-  }
-  metrics.remove(registerName);
-}

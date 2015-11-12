@@ -1,0 +1,3 @@
+{
+  iterateMap(metricInfo.get_metrics(),metrics);
+}

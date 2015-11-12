@@ -3,9 +3,9 @@ def write(self, oprot):
         oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
         return
     oprot.writeStructBegin('TaskSummary')
-    if (self.task_id is not None):
-        oprot.writeFieldBegin('task_id', TType.I32, 1)
-        oprot.writeI32(self.task_id)
+    if (self.taskId is not None):
+        oprot.writeFieldBegin('taskId', TType.I32, 1)
+        oprot.writeI32(self.taskId)
         oprot.writeFieldEnd()
     if (self.uptime is not None):
         oprot.writeFieldBegin('uptime', TType.I32, 2)
@@ -26,8 +26,8 @@ def write(self, oprot):
     if (self.errors is not None):
         oprot.writeFieldBegin('errors', TType.LIST, 6)
         oprot.writeListBegin(TType.STRUCT, len(self.errors))
-        for iter211 in self.errors:
-            iter211.write(oprot)
+        for iter164 in self.errors:
+            iter164.write(oprot)
         oprot.writeListEnd()
         oprot.writeFieldEnd()
     oprot.writeFieldStop()

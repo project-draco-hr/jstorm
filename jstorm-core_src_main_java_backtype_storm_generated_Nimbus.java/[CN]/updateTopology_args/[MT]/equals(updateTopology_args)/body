@@ -1,0 +1,22 @@
+{
+  if (that == null)   return false;
+  boolean this_present_name=true && this.is_set_name();
+  boolean that_present_name=true && that.is_set_name();
+  if (this_present_name || that_present_name) {
+    if (!(this_present_name && that_present_name))     return false;
+    if (!this.name.equals(that.name))     return false;
+  }
+  boolean this_present_uploadedLocation=true && this.is_set_uploadedLocation();
+  boolean that_present_uploadedLocation=true && that.is_set_uploadedLocation();
+  if (this_present_uploadedLocation || that_present_uploadedLocation) {
+    if (!(this_present_uploadedLocation && that_present_uploadedLocation))     return false;
+    if (!this.uploadedLocation.equals(that.uploadedLocation))     return false;
+  }
+  boolean this_present_updateConf=true && this.is_set_updateConf();
+  boolean that_present_updateConf=true && that.is_set_updateConf();
+  if (this_present_updateConf || that_present_updateConf) {
+    if (!(this_present_updateConf && that_present_updateConf))     return false;
+    if (!this.updateConf.equals(that.updateConf))     return false;
+  }
+  return true;
+}

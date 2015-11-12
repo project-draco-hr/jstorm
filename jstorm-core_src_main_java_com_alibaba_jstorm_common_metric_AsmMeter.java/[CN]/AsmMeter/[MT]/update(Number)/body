@@ -1,0 +1,6 @@
+{
+  meter.mark(obj.longValue());
+  for (  AsmMetric metric : this.assocMetrics) {
+    metric.update(obj);
+  }
+}

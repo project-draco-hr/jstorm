@@ -1,0 +1,10 @@
+{
+synchronized (lock) {
+    BatchTuple batch=getBatchTuple(taskId);
+    batch.addToBatch(tuple);
+    if (batch.isBatchFull()) {
+      serializeQueue.publish(batch);
+      batchMap.put(taskId,new BatchTuple(taskId,batchSize));
+    }
+  }
+}

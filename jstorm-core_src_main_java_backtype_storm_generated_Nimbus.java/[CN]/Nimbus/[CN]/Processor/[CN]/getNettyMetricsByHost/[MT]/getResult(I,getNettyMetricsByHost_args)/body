@@ -1,0 +1,5 @@
+{
+  getNettyMetricsByHost_result result=new getNettyMetricsByHost_result();
+  result.success=iface.getNettyMetricsByHost(args.topologyId,args.host);
+  return result;
+}

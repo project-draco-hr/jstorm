@@ -1,0 +1,16 @@
+{
+  double value=0d;
+  if (metricName.equals(MetricDef.EMMITTED_NUM) || metricName.equals(MetricDef.ACKED_NUM) || metricName.equals(MetricDef.FAILED_NUM)) {
+    for (    String s : list.values()) {
+      value+=JStormUtils.parseDouble(s);
+    }
+    return UIMetricUtils.format((long)value);
+  }
+ else {
+    for (    String s : list.values()) {
+      value+=JStormUtils.parseDouble(s);
+    }
+    if (list.size() > 0)     value=value / list.size();
+    return UIMetricUtils.format(value);
+  }
+}

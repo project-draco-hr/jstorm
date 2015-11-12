@@ -1,0 +1,5 @@
+String streamId
+String name
+Number value
+MetricType metricType
+boolean mergeTopology

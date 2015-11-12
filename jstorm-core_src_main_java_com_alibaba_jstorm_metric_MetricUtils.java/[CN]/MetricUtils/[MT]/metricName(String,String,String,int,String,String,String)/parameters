@@ -1,0 +1,7 @@
+String type
+String topologyId
+String componentId
+int taskId
+String streamId
+String group
+String name

@@ -1,0 +1,9 @@
+{
+  try {
+    batchTransfer.startCheck();
+  }
+ catch (  Exception e) {
+    LOG.warn("Failed to public timer event to " + name,e);
+    return;
+  }
+}

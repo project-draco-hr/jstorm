@@ -1,0 +1,5 @@
+{
+  getSummarizedTopologyMetrics_result result=new getSummarizedTopologyMetrics_result();
+  result.success=iface.getSummarizedTopologyMetrics(args.topologyId);
+  return result;
+}

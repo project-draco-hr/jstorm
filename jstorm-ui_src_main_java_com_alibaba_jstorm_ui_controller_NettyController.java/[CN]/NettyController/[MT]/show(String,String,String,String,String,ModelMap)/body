@@ -1,0 +1,39 @@
+{
+  long start=System.currentTimeMillis();
+  host=NetWorkUtils.host2Ip(host);
+  int window=UIUtils.parseWindow(win);
+  UIUtils.addWindowAttribute(model,window);
+  int _page=JStormUtils.parseInt(page,1);
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    MetricInfo nettyMetric=client.getClient().getPagingNettyMetrics(topology_id,host,_page);
+    List<UINettyMetric> nettyData=getNettyData(nettyMetric,host,window);
+    model.addAttribute("nettyMetrics",nettyData);
+    model.addAttribute("nettyHead",UIMetricUtils.sortHead(nettyData,UINettyMetric.HEAD));
+    int size=client.getClient().getNettyMetricSizeByHost(topology_id,host);
+    int pageSize=(size + PAGE_SIZE - 1) / PAGE_SIZE;
+    model.addAttribute("pageSize",pageSize);
+    model.addAttribute("curPage",_page);
+    if (size == 0) {
+      Map conf=UIUtils.getTopologyConf(clusterName,topology_id);
+      boolean enable=MetricUtils.isEnableNettyMetrics(conf);
+      if (!enable) {
+        model.addAttribute("flush","the netty metrics is not enabled");
+      }
+    }
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    LOG.error(e.getMessage(),e);
+    UIUtils.addErrorAttribute(model,e);
+  }
+  model.addAttribute("clusterName",clusterName);
+  model.addAttribute("host",host);
+  model.addAttribute("page","netty");
+  model.addAttribute("topologyId",topology_id);
+  model.addAttribute("supervisorPort",UIUtils.getSupervisorPort(clusterName));
+  UIUtils.addTitleAttribute(model,"Netty Summary");
+  LOG.info("netty page show cost:{}ms",System.currentTimeMillis() - start);
+  return "netty";
+}

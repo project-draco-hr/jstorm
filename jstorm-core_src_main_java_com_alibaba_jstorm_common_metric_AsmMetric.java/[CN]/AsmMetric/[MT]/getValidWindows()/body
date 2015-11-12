@@ -1,0 +1,10 @@
+{
+  long diff=TimeUtils.current_time_secs() - this.lastFlushTime + 5;
+  if (diff < minWindow) {
+    return EMPTY_WIN;
+  }
+  if (this.metricName.startsWith(MetaType.NETTY.getV())) {
+    return nettyWindows;
+  }
+  return windowSeconds;
+}

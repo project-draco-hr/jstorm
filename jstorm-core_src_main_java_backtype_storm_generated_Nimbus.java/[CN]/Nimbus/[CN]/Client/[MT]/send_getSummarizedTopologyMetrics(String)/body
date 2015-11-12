@@ -1,0 +1,5 @@
+{
+  getSummarizedTopologyMetrics_args args=new getSummarizedTopologyMetrics_args();
+  args.set_topologyId(topologyId);
+  sendBase("getSummarizedTopologyMetrics",args);
+}

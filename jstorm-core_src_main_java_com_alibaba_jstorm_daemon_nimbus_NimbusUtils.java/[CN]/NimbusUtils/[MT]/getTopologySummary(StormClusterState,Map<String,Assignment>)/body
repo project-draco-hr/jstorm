@@ -23,10 +23,10 @@
     topology.set_id(topologyId);
     topology.set_name(base.getStormName());
     topology.set_status(base.getStatusString());
-    topology.set_uptime_secs(TimeUtils.time_delta(base.getLanchTimeSecs()));
-    topology.set_num_workers(num_workers);
-    topology.set_num_tasks(num_tasks);
-    topology.set_error_info(errorString);
+    topology.set_uptimeSecs(TimeUtils.time_delta(base.getLanchTimeSecs()));
+    topology.set_numWorkers(num_workers);
+    topology.set_numTasks(num_tasks);
+    topology.set_errorInfo(errorString);
     topologySummaries.add(topology);
   }
   return topologySummaries;

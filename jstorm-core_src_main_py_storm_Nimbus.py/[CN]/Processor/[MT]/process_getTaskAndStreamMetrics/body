@@ -1,0 +1,10 @@
+def process_getTaskAndStreamMetrics(self, seqid, iprot, oprot):
+    args = getTaskAndStreamMetrics_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = getTaskAndStreamMetrics_result()
+    result.success = self._handler.getTaskAndStreamMetrics(args.topologyId, args.taskId)
+    oprot.writeMessageBegin('getTaskAndStreamMetrics', TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()

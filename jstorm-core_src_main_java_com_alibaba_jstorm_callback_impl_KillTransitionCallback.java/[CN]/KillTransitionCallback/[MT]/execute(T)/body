@@ -1,0 +1,8 @@
+{
+  TopologyMetricsRunnable.KillTopologyEvent event=new TopologyMetricsRunnable.KillTopologyEvent();
+  event.clusterName=this.data.getClusterName();
+  event.topologyId=this.topologyid;
+  event.timestamp=System.currentTimeMillis();
+  this.data.getMetricRunnable().pushEvent(event);
+  return super.execute(args);
+}

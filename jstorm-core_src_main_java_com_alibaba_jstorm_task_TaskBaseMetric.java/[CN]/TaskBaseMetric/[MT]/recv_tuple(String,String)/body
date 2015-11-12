@@ -1,4 +1,5 @@
 {
-  String name=MetricRegistry.name(MetricDef.RECV_TPS,component,stream);
-  update(name,Double.valueOf(1),JStormMetrics.Builder.METER);
+  if (enableMetrics) {
+    update(stream,AsmMetric.mkName(component,MetricDef.RECV_TPS),1,MetricType.METER);
+  }
 }

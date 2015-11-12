@@ -1,0 +1,8 @@
+def send_registerMetrics(self, topologyId, metrics):
+    self._oprot.writeMessageBegin('registerMetrics', TMessageType.CALL, self._seqid)
+    args = registerMetrics_args()
+    args.topologyId = topologyId
+    args.metrics = metrics
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()

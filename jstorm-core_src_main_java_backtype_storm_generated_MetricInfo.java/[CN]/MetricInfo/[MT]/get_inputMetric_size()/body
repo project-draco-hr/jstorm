@@ -1,3 +1,0 @@
-{
-  return (this.inputMetric == null) ? 0 : this.inputMetric.size();
-}

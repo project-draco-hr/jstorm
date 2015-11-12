@@ -1,0 +1,4 @@
+String host
+int logServerPort
+int workerPort
+ModelMap model

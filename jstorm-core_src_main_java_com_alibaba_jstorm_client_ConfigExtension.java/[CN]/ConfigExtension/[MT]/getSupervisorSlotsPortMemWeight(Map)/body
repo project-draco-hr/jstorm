@@ -1,0 +1,10 @@
+{
+  Object value=conf.get(SUPERVISOR_SLOTS_PORT_MEM_WEIGHT);
+  Double ret=JStormUtils.convertToDouble(value);
+  if (ret == null || ret <= 0) {
+    return 0.7;
+  }
+ else {
+    return ret;
+  }
+}

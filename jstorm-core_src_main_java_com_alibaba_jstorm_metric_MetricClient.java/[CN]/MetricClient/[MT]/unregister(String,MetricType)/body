@@ -1,0 +1,3 @@
+{
+  unregister(name,GROUP_UDF,type);
+}

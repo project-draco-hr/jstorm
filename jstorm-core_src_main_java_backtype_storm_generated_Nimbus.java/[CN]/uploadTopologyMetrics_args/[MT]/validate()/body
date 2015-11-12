@@ -1,0 +1,5 @@
+{
+  if (topologyMetrics != null) {
+    topologyMetrics.validate();
+  }
+}

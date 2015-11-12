@@ -1,0 +1,29 @@
+{
+  String title=null;
+  String uri=String.format("api/v1/cluster/%s",name);
+  if (!StringUtils.isBlank(type)) {
+    if (type.equals("supervisor")) {
+      uri+=String.format("/supervisor/%s/configuration",host);
+      title="Supervisor Conf";
+      model.addAttribute("subtitle",host);
+      model.addAttribute("host",host);
+    }
+ else     if (type.equals("topology")) {
+      uri+=String.format("/topology/%s/configuration",topologyId);
+      title="Topology Conf";
+      model.addAttribute("subtitle",topologyId);
+      model.addAttribute("topologyId",topologyId);
+    }
+  }
+ else {
+    uri+="/configuration";
+    title="Nimbus Conf";
+    model.addAttribute("subtitle",name);
+  }
+  model.addAttribute("clusterName",name);
+  model.addAttribute("uri",uri);
+  model.addAttribute("pageTitle",title);
+  model.addAttribute("page","conf");
+  UIUtils.addTitleAttribute(model,"Configuration");
+  return "conf";
+}

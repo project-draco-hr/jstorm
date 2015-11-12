@@ -13,5 +13,15 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_aze()).compareTo(other.is_set_aze());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_aze()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.aze,other.aze);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   return 0;
 }

@@ -1,0 +1,38 @@
+{
+  if (flowCtrlTime > 0) {
+    if (maxBound < flowCtrlTime) {
+      sleepTime=flowCtrlTime;
+    }
+ else     if (maxBound == flowCtrlTime) {
+      if (sleepTime >= maxBound) {
+        sleepTime++;
+      }
+ else {
+        sleepTime=JStormUtils.halfValueOfSum(flowCtrlTime,sleepTime,true);
+      }
+    }
+ else {
+      if (maxBound <= sleepTime) {
+        sleepTime++;
+      }
+ else {
+        if (sleepTime >= flowCtrlTime) {
+          sleepTime=JStormUtils.halfValueOfSum(maxBound,sleepTime,true);
+        }
+ else {
+          sleepTime=JStormUtils.halfValueOfSum(flowCtrlTime,sleepTime,true);
+        }
+      }
+    }
+  }
+ else {
+    sleepTime++;
+  }
+  if (sleepTime > maxBound) {
+    maxBound=sleepTime;
+  }
+  int size=totalQueueSize / 100;
+  queueSizeReduced=size > 10 ? size : 10;
+  isBackpressureMode=true;
+  LOG.info("Start backpressure at spout-{}, sleepTime={}, queueSizeReduced={}, flowCtrlTime={}",taskId,sleepTime,queueSizeReduced,flowCtrlTime);
+}

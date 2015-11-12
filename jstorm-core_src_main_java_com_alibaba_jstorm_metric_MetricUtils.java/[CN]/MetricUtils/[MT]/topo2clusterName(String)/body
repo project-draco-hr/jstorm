@@ -1,0 +1,5 @@
+{
+  String[] parts=old.split(DELIM);
+  parts[1]=JStormMetrics.CLUSTER_METRIC_KEY;
+  return concat(parts);
+}

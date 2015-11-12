@@ -1,5 +1,0 @@
-{
-  workerUploadMetric_result result=new workerUploadMetric_result();
-  iface.workerUploadMetric(args.uploadMetrics);
-  return result;
-}

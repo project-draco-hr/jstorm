@@ -1,0 +1,96 @@
+{
+  Map<String,Bolt> bolts=stormTopology.get_bolts();
+  Map<String,SpoutSpec> spouts=stormTopology.get_spouts();
+  String[] remove_ids=new String[]{"__acker","__system","__topology_master"};
+  for (  String id : remove_ids) {
+    bolts.remove(id);
+  }
+  Map<String,TopologyNode> nodes=Maps.newHashMap();
+  Map<String,TopologyEdge> edges=Maps.newHashMap();
+  List<TreeNode> roots=Lists.newArrayList();
+  Map<String,TreeNode> linkMap=Maps.newHashMap();
+  for (  Map.Entry<String,SpoutSpec> entry : spouts.entrySet()) {
+    String componentId=entry.getKey();
+    nodes.put(componentId,new TopologyNode(componentId,componentId,true));
+    TreeNode node=new TreeNode(componentId);
+    roots.add(node);
+    linkMap.put(componentId,node);
+  }
+  for (  Map.Entry<String,Bolt> entry : bolts.entrySet()) {
+    String componentId=entry.getKey();
+    nodes.put(componentId,new TopologyNode(componentId,componentId,false));
+    linkMap.put(componentId,new TreeNode(componentId));
+  }
+  int edgeId=1;
+  for (  Map.Entry<String,Bolt> entry : bolts.entrySet()) {
+    String componentId=entry.getKey();
+    Bolt bolt=entry.getValue();
+    TreeNode node=linkMap.get(componentId);
+    for (    Map.Entry<GlobalStreamId,Grouping> input : bolt.get_common().get_inputs().entrySet()) {
+      GlobalStreamId streamId=input.getKey();
+      String src=streamId.get_componentId();
+      if (nodes.containsKey(src)) {
+        TopologyEdge edge=new TopologyEdge(src,componentId,edgeId++);
+        edges.put(edge.getKey(),edge);
+        linkMap.get(src).addChild(node);
+        node.addSource(src);
+        node.addParent(linkMap.get(src));
+      }
+    }
+  }
+  boolean isFixed=false;
+  while (!isFixed) {
+    isFixed=true;
+    for (    TreeNode node : linkMap.values()) {
+      for (      TreeNode parent : node.getParents()) {
+        if (!node.addSources(parent.getSources())) {
+          isFixed=false;
+        }
+      }
+    }
+  }
+  fillTPSValue2Edge(componentMetrics,edges);
+  fillTLCValue2Edge(componentMetrics,edges);
+  fillValue2Node(componentMetrics,nodes);
+  int maxDepth=bfsDepth(roots);
+  Map<Integer,Integer> counter=Maps.newHashMap();
+  int maxBreadth=1;
+  for (  Map.Entry<String,TreeNode> entry : linkMap.entrySet()) {
+    int layer=entry.getValue().getLayer();
+    nodes.get(entry.getKey()).setLevel(layer);
+    int breadth=1;
+    if (counter.containsKey(layer)) {
+      breadth=counter.get(layer) + 1;
+    }
+    counter.put(layer,breadth);
+    if (maxBreadth < breadth) {
+      maxBreadth=breadth;
+    }
+  }
+  String PREFIX="__adjust_prefix_";
+  int count=1;
+  for (  TreeNode node : linkMap.values()) {
+    int layer=node.getLayer();
+    node.setBreadth(counter.get(layer));
+  }
+  for (  TreeNode tree : linkMap.values()) {
+    if (isInOneLine(tree.getChildren())) {
+      String id=PREFIX + count++;
+      TopologyNode node=new TopologyNode(id,id,false);
+      node.setLevel(tree.getLayer() + 1);
+      node.setIsHidden(true);
+      nodes.put(id,node);
+      TreeNode furthest=getFurthestNode(tree.getChildren());
+      TopologyEdge toEdge=new TopologyEdge(id,furthest.getComponentId(),edgeId++);
+      toEdge.setIsHidden(true);
+      edges.put(toEdge.getKey(),toEdge);
+      TopologyEdge fromEdge=new TopologyEdge(tree.getComponentId(),id,edgeId++);
+      fromEdge.setIsHidden(true);
+      edges.put(fromEdge.getKey(),fromEdge);
+    }
+  }
+  TopologyGraph graph=new TopologyGraph(Lists.newArrayList(nodes.values()),Lists.newArrayList(edges.values()));
+  graph.setDepth(maxDepth);
+  graph.setBreadth(maxBreadth);
+  return graph;
+}

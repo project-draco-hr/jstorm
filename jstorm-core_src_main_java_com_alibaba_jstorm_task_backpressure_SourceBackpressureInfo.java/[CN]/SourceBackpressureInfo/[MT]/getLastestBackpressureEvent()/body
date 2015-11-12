@@ -1,0 +1,12 @@
+{
+  EventType ret=null;
+  long timeStamp=0;
+  for (  Entry<String,TargetBackpressureInfo> entry : targetTasks.entrySet()) {
+    TargetBackpressureInfo info=entry.getValue();
+    if (info.getTimeStamp() > timeStamp) {
+      timeStamp=info.getTimeStamp();
+      ret=info.getBackpressureStatus();
+    }
+  }
+  return ret;
+}

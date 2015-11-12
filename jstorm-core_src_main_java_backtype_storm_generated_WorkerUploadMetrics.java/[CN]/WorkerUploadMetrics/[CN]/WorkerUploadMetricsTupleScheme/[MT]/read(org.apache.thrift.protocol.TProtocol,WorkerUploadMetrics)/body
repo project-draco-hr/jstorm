@@ -1,28 +1,12 @@
 {
   TTupleProtocol iprot=(TTupleProtocol)prot;
-  struct.topology_id=iprot.readString();
-  struct.set_topology_id_isSet(true);
-  struct.supervisor_id=iprot.readString();
-  struct.set_supervisor_id_isSet(true);
+  struct.topologyId=iprot.readString();
+  struct.set_topologyId_isSet(true);
+  struct.supervisorId=iprot.readString();
+  struct.set_supervisorId_isSet(true);
   struct.port=iprot.readI32();
   struct.set_port_isSet(true);
-  struct.workerMetric=new MetricInfo();
-  struct.workerMetric.read(iprot);
-  struct.set_workerMetric_isSet(true);
-  struct.nettyMetric=new NettyMetric();
-  struct.nettyMetric.read(iprot);
-  struct.set_nettyMetric_isSet(true);
-{
-    org.apache.thrift.protocol.TMap _map290=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
-    struct.taskMetric=new HashMap<Integer,MetricInfo>(2 * _map290.size);
-    int _key291;
-    MetricInfo _val292;
-    for (int _i293=0; _i293 < _map290.size; ++_i293) {
-      _key291=iprot.readI32();
-      _val292=new MetricInfo();
-      _val292.read(iprot);
-      struct.taskMetric.put(_key291,_val292);
-    }
-  }
-  struct.set_taskMetric_isSet(true);
+  struct.allMetrics=new MetricInfo();
+  struct.allMetrics.read(iprot);
+  struct.set_allMetrics_isSet(true);
 }

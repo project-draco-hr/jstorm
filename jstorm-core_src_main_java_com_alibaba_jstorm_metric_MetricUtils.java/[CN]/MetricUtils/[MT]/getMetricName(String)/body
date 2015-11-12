@@ -1,0 +1,4 @@
+{
+  String[] parts=fullName.split(DELIM);
+  return parts[parts.length - 1];
+}

@@ -1,0 +1,3 @@
+{
+  return (TopologyMetric)metricCache.get(PENDING_UPLOAD_METRIC_DATA + idx);
+}

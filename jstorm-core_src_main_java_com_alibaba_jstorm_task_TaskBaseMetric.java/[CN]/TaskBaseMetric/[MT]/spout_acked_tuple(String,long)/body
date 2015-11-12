@@ -1,6 +1,0 @@
-{
-  String ackNumName=MetricRegistry.name(MetricDef.ACKED_NUM,Common.ACKER_COMPONENT_ID,stream);
-  update(ackNumName,Double.valueOf(1),JStormMetrics.Builder.COUNTER);
-  String processName=MetricRegistry.name(MetricDef.PROCESS_LATENCY,Common.ACKER_COMPONENT_ID,stream);
-  update(processName,Double.valueOf(st),JStormMetrics.Builder.HISTOGRAM);
-}

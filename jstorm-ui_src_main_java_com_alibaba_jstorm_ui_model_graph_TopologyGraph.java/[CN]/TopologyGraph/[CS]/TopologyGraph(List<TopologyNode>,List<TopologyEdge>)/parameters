@@ -1,0 +1,2 @@
+List<TopologyNode> nodes
+List<TopologyEdge> edges

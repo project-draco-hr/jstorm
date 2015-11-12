@@ -1,3 +1,0 @@
-{
-  return (this.outputMetric == null) ? 0 : this.outputMetric.size();
-}

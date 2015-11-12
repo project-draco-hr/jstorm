@@ -1,0 +1,5 @@
+{
+  uploadTopologyMetrics_result result=new uploadTopologyMetrics_result();
+  iface.uploadTopologyMetrics(args.topologyId,args.topologyMetrics);
+  return result;
+}

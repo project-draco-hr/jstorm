@@ -1,0 +1,18 @@
+{
+  updateTopologyWorkerSet();
+  String stream=input.getSourceStreamId();
+  try {
+    if (stream.equals(Common.TOPOLOGY_MASTER_HB_STREAM_ID)) {
+      taskHeartbeatUpdater.process(input);
+    }
+ else     if (stream.equals(Common.TOPOLOGY_MASTER_METRICS_STREAM_ID)) {
+      updateMetrics(input);
+    }
+ else     if (stream.equals(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID)) {
+      backpressureCoordinator.process(input);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to handle event: " + input.toString(),e);
+  }
+}

@@ -1,0 +1,7 @@
+{
+  String rate=(String)cache.get(TOPOLOGY_SAMPLE_RATE + topologyId);
+  if (rate == null) {
+    return ConfigExtension.DEFAULT_METRIC_SAMPLE_RATE;
+  }
+  return Double.parseDouble(rate);
+}

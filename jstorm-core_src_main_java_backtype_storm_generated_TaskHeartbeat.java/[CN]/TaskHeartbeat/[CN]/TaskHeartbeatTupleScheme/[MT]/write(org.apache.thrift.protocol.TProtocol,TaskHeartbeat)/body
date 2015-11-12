@@ -1,0 +1,5 @@
+{
+  TTupleProtocol oprot=(TTupleProtocol)prot;
+  oprot.writeI32(struct.time);
+  oprot.writeI32(struct.uptime);
+}

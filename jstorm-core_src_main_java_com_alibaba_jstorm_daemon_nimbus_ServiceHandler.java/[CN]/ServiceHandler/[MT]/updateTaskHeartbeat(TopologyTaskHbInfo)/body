@@ -1,0 +1,20 @@
+{
+  String topologyId=taskHbs.get_topologyId();
+  Integer topologyMasterId=taskHbs.get_topologyMasterId();
+  TopologyTaskHbInfo nimbusTaskHbs=data.getTasksHeartbeat().get(topologyId);
+  if (nimbusTaskHbs == null) {
+    nimbusTaskHbs=new TopologyTaskHbInfo(topologyId,topologyMasterId);
+    data.getTasksHeartbeat().put(topologyId,nimbusTaskHbs);
+  }
+  Map<Integer,TaskHeartbeat> nimbusTaskHbMap=nimbusTaskHbs.get_taskHbs();
+  if (nimbusTaskHbMap == null) {
+    nimbusTaskHbMap=new ConcurrentHashMap<Integer,TaskHeartbeat>();
+    nimbusTaskHbs.set_taskHbs(nimbusTaskHbMap);
+  }
+  Map<Integer,TaskHeartbeat> taskHbMap=taskHbs.get_taskHbs();
+  if (taskHbMap != null) {
+    for (    Entry<Integer,TaskHeartbeat> entry : taskHbMap.entrySet()) {
+      nimbusTaskHbMap.put(entry.getKey(),entry.getValue());
+    }
+  }
+}

@@ -6,9 +6,9 @@
     oprot.writeString(struct.host);
     oprot.writeFieldEnd();
   }
-  if (struct.uptime_secs != null) {
+  if (struct.uptimeSecs != null) {
     oprot.writeFieldBegin(UPTIME_SECS_FIELD_DESC);
-    oprot.writeString(struct.uptime_secs);
+    oprot.writeString(struct.uptimeSecs);
     oprot.writeFieldEnd();
   }
   oprot.writeFieldStop();

@@ -26,34 +26,34 @@ set_status((String)value);
 break;
 case UPTIME_SECS:
 if (value == null) {
-unset_uptime_secs();
+unset_uptimeSecs();
 }
  else {
-set_uptime_secs((Integer)value);
+set_uptimeSecs((Integer)value);
 }
 break;
 case NUM_TASKS:
 if (value == null) {
-unset_num_tasks();
+unset_numTasks();
 }
  else {
-set_num_tasks((Integer)value);
+set_numTasks((Integer)value);
 }
 break;
 case NUM_WORKERS:
 if (value == null) {
-unset_num_workers();
+unset_numWorkers();
 }
  else {
-set_num_workers((Integer)value);
+set_numWorkers((Integer)value);
 }
 break;
 case ERROR_INFO:
 if (value == null) {
-unset_error_info();
+unset_errorInfo();
 }
  else {
-set_error_info((String)value);
+set_errorInfo((String)value);
 }
 break;
 }

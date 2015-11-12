@@ -1,0 +1,3 @@
+{
+  iface.getNettyMetricSizeByHost(args.topologyId,args.host,resultHandler);
+}

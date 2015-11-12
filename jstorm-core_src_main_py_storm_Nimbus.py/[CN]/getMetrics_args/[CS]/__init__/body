@@ -1,0 +1,3 @@
+def __init__(self, topologyId=None, type=None):
+    self.topologyId = topologyId
+    self.type = type

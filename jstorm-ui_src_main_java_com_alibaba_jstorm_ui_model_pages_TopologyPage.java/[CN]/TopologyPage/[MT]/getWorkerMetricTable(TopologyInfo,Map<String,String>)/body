@@ -1,8 +1,0 @@
-{
-  String windowStr=paramMap.get(UIDef.WINDOW);
-  Integer window=StatBuckets.getTimeKey(windowStr);
-  if (topologyInfo.get_metrics() == null || topologyInfo.get_metrics().get_workerMetric() == null) {
-    return null;
-  }
-  return UIUtils.getWorkerMetricsTable(topologyInfo.get_metrics().get_workerMetric(),window,paramMap);
-}

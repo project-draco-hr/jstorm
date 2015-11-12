@@ -1,0 +1,6 @@
+{
+  this.tasks=new TreeSet<Integer>();
+  this.backpressureStatus=EventType.defaultType;
+  this.flowCtrlTime=-1;
+  this.timeStamp=0l;
+}

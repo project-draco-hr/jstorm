@@ -1,49 +1,20 @@
 {
-  if (other.is_set_baseMetric()) {
-    Map<String,MetricWindow> __this__baseMetric=new HashMap<String,MetricWindow>(other.baseMetric.size());
-    for (    Map.Entry<String,MetricWindow> other_element : other.baseMetric.entrySet()) {
+  if (other.is_set_metrics()) {
+    Map<String,Map<Integer,MetricSnapshot>> __this__metrics=new HashMap<String,Map<Integer,MetricSnapshot>>(other.metrics.size());
+    for (    Map.Entry<String,Map<Integer,MetricSnapshot>> other_element : other.metrics.entrySet()) {
       String other_element_key=other_element.getKey();
-      MetricWindow other_element_value=other_element.getValue();
-      String __this__baseMetric_copy_key=other_element_key;
-      MetricWindow __this__baseMetric_copy_value=new MetricWindow(other_element_value);
-      __this__baseMetric.put(__this__baseMetric_copy_key,__this__baseMetric_copy_value);
-    }
-    this.baseMetric=__this__baseMetric;
-  }
-  if (other.is_set_inputMetric()) {
-    Map<String,Map<String,MetricWindow>> __this__inputMetric=new HashMap<String,Map<String,MetricWindow>>(other.inputMetric.size());
-    for (    Map.Entry<String,Map<String,MetricWindow>> other_element : other.inputMetric.entrySet()) {
-      String other_element_key=other_element.getKey();
-      Map<String,MetricWindow> other_element_value=other_element.getValue();
-      String __this__inputMetric_copy_key=other_element_key;
-      Map<String,MetricWindow> __this__inputMetric_copy_value=new HashMap<String,MetricWindow>(other_element_value.size());
-      for (      Map.Entry<String,MetricWindow> other_element_value_element : other_element_value.entrySet()) {
-        String other_element_value_element_key=other_element_value_element.getKey();
-        MetricWindow other_element_value_element_value=other_element_value_element.getValue();
-        String __this__inputMetric_copy_value_copy_key=other_element_value_element_key;
-        MetricWindow __this__inputMetric_copy_value_copy_value=new MetricWindow(other_element_value_element_value);
-        __this__inputMetric_copy_value.put(__this__inputMetric_copy_value_copy_key,__this__inputMetric_copy_value_copy_value);
+      Map<Integer,MetricSnapshot> other_element_value=other_element.getValue();
+      String __this__metrics_copy_key=other_element_key;
+      Map<Integer,MetricSnapshot> __this__metrics_copy_value=new HashMap<Integer,MetricSnapshot>(other_element_value.size());
+      for (      Map.Entry<Integer,MetricSnapshot> other_element_value_element : other_element_value.entrySet()) {
+        Integer other_element_value_element_key=other_element_value_element.getKey();
+        MetricSnapshot other_element_value_element_value=other_element_value_element.getValue();
+        Integer __this__metrics_copy_value_copy_key=other_element_value_element_key;
+        MetricSnapshot __this__metrics_copy_value_copy_value=new MetricSnapshot(other_element_value_element_value);
+        __this__metrics_copy_value.put(__this__metrics_copy_value_copy_key,__this__metrics_copy_value_copy_value);
       }
-      __this__inputMetric.put(__this__inputMetric_copy_key,__this__inputMetric_copy_value);
+      __this__metrics.put(__this__metrics_copy_key,__this__metrics_copy_value);
     }
-    this.inputMetric=__this__inputMetric;
-  }
-  if (other.is_set_outputMetric()) {
-    Map<String,Map<String,MetricWindow>> __this__outputMetric=new HashMap<String,Map<String,MetricWindow>>(other.outputMetric.size());
-    for (    Map.Entry<String,Map<String,MetricWindow>> other_element : other.outputMetric.entrySet()) {
-      String other_element_key=other_element.getKey();
-      Map<String,MetricWindow> other_element_value=other_element.getValue();
-      String __this__outputMetric_copy_key=other_element_key;
-      Map<String,MetricWindow> __this__outputMetric_copy_value=new HashMap<String,MetricWindow>(other_element_value.size());
-      for (      Map.Entry<String,MetricWindow> other_element_value_element : other_element_value.entrySet()) {
-        String other_element_value_element_key=other_element_value_element.getKey();
-        MetricWindow other_element_value_element_value=other_element_value_element.getValue();
-        String __this__outputMetric_copy_value_copy_key=other_element_value_element_key;
-        MetricWindow __this__outputMetric_copy_value_copy_value=new MetricWindow(other_element_value_element_value);
-        __this__outputMetric_copy_value.put(__this__outputMetric_copy_value_copy_key,__this__outputMetric_copy_value_copy_value);
-      }
-      __this__outputMetric.put(__this__outputMetric_copy_key,__this__outputMetric_copy_value);
-    }
-    this.outputMetric=__this__outputMetric;
+    this.metrics=__this__metrics;
   }
 }

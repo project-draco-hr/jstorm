@@ -1,28 +1,33 @@
 {
-  if (StormConfig.local_mode(conf)) {
-    try {
-      byte[] temp=Utils.serialize(upload);
-      LocalCluster.getInstance().getLocalClusterMap().getNimbus().workerUploadMetric(upload);
+  if (isInWorker) {
+    if (boltOutput != null) {
+      LOG.info("emit metrics through bolt collector.");
+      boltOutput.emit(Common.TOPOLOGY_MASTER_METRICS_STREAM_ID,new Values(JStormServerUtils.getName(host,port),metrics));
     }
- catch (    TException e) {
-      LOG.error("Failed to upload worker metrics",e);
+ else     if (spoutOutput != null) {
+      LOG.info("emit metrics through spout collector.");
+      spoutOutput.emit(Common.TOPOLOGY_MASTER_METRICS_STREAM_ID,new Values(JStormServerUtils.getName(host,port),metrics));
     }
   }
  else {
+    LOG.info("emit metrics through nimbus client.");
+    Update event=new Update();
+    TopologyMetric tpMetric=MetricUtils.mkTopologyMetric();
+    tpMetric.set_workerMetric(metrics.get_allMetrics());
+    event.topologyMetrics=tpMetric;
+    event.topologyId=topologyId;
     try {
       if (client == null) {
         client=NimbusClient.getConfiguredClient(conf);
       }
-      client.getClient().workerUploadMetric(upload);
+      client.getClient().uploadTopologyMetrics(topologyId,tpMetric);
     }
- catch (    Exception e) {
-      LOG.error("Failed to upload worker metrics",e);
+ catch (    Exception ex) {
+      LOG.error("upload metric error:",ex);
       if (client != null) {
         client.close();
-        client=null;
+        client=NimbusClient.getConfiguredClient(conf);
       }
-    }
- finally {
     }
   }
 }

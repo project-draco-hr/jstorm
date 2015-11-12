@@ -9,6 +9,7 @@
     LOG.info("Cleaning up " + topologyId);
     clusterState.try_remove_storm(topologyId);
     nimbusData.getTaskHeartbeatsCache().remove(topologyId);
+    nimbusData.getTasksHeartbeat().remove(topologyId);
     NimbusUtils.removeTopologyTaskTimeout(nimbusData,topologyId);
     String master_stormdist_root=StormConfig.masterStormdistRoot(nimbusData.getConf(),topologyId);
     try {

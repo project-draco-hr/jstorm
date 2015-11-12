@@ -7,13 +7,13 @@ case NAME:
 case STATUS:
 return get_status();
 case UPTIME_SECS:
-return Integer.valueOf(get_uptime_secs());
+return Integer.valueOf(get_uptimeSecs());
 case NUM_TASKS:
-return Integer.valueOf(get_num_tasks());
+return Integer.valueOf(get_numTasks());
 case NUM_WORKERS:
-return Integer.valueOf(get_num_workers());
+return Integer.valueOf(get_numWorkers());
 case ERROR_INFO:
-return get_error_info();
+return get_errorInfo();
 }
 throw new IllegalStateException();
 }

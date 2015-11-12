@@ -1,0 +1,6 @@
+{
+  checkReady();
+  registerMetrics_call method_call=new registerMetrics_call(topologyId,metrics,resultHandler,this,___protocolFactory,___transport);
+  this.___currentMethod=method_call;
+  ___manager.call(method_call);
+}

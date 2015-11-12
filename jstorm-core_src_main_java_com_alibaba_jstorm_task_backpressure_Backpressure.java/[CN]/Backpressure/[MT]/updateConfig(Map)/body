@@ -1,0 +1,23 @@
+{
+  if (stormConf == null) {
+    return;
+  }
+  if (stormConf.containsKey(ConfigExtension.TOPOLOGY_BACKPRESSURE_ENABLE)) {
+    this.isBackpressureEnable=ConfigExtension.isBackpressureEnable(stormConf);
+  }
+  if (stormConf.containsKey(ConfigExtension.TOPOLOGY_BACKPRESSURE_WATER_MARK_HIGH)) {
+    this.highWaterMark=ConfigExtension.getBackpressureWaterMarkHigh(stormConf);
+  }
+  if (stormConf.containsKey(ConfigExtension.TOPOLOGY_BACKPRESSURE_WATER_MARK_LOW)) {
+    this.lowWaterMark=ConfigExtension.getBackpressureWaterMarkLow(stormConf);
+  }
+  if (stormConf.containsKey(ConfigExtension.TOPOLOGY_BACKPRESSURE_COORDINATOR_RATIO)) {
+    this.triggerBpRatio=ConfigExtension.getBackpressureCoordinatorRatio(stormConf);
+  }
+  if (stormConf.containsKey(BACKPRESSURE_DELAY_TIME)) {
+    long time=JStormUtils.parseLong(stormConf,0l);
+    if (time != 0l) {
+      this.sleepTime=time;
+    }
+  }
+}

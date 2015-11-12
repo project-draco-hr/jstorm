@@ -1,7 +1,0 @@
-{
-  prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getTopologyMetric",org.apache.thrift.protocol.TMessageType.CALL,0));
-  getTopologyMetric_args args=new getTopologyMetric_args();
-  args.set_topologyName(topologyName);
-  args.write(prot);
-  prot.writeMessageEnd();
-}

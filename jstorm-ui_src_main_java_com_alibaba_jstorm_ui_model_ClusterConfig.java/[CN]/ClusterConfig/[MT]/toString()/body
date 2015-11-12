@@ -1,0 +1,3 @@
+{
+  return "ClusterConfig{" + "zkRoot='" + zkRoot + '\''+ ", zkServers="+ zkServers+ ", zkPort="+ zkPort+ ", nimbusPort="+ nimbusPort+ ", supervisorPort="+ supervisorPort+ '}';
+}

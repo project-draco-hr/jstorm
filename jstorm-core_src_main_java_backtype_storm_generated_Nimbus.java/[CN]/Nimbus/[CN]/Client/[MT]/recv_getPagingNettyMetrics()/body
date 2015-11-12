@@ -1,0 +1,8 @@
+{
+  getPagingNettyMetrics_result result=new getPagingNettyMetrics_result();
+  receiveBase(result,"getPagingNettyMetrics");
+  if (result.is_set_success()) {
+    return result.success;
+  }
+  throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT,"getPagingNettyMetrics failed: unknown result");
+}

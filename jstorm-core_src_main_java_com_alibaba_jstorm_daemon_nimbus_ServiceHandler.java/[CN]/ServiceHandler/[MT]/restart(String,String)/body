@@ -1,7 +1,7 @@
 {
   LOG.info("Begin to restart " + name + ", new configuration:"+ jsonConf);
   StormClusterState stormClusterState=data.getStormClusterState();
-  String topologyId=null;
+  String topologyId;
   try {
     topologyId=Cluster.get_topology_id(stormClusterState,name);
   }
@@ -15,8 +15,8 @@
   deactivate(name);
   JStormUtils.sleepMs(5000);
   LOG.info("Deactivate " + name);
-  StormTopology topology=null;
-  Map topologyConf=null;
+  StormTopology topology;
+  Map topologyConf;
   String topologyCodeLocation=null;
   try {
     topology=StormConfig.read_nimbus_topology_code(conf,topologyId);
@@ -30,7 +30,9 @@
     topologyCodeLocation=parent + PathUtils.SEPERATOR + topologyId;
     FileUtils.forceMkdir(new File(topologyCodeLocation));
     FileUtils.cleanDirectory(new File(topologyCodeLocation));
-    FileUtils.copyDirectory(new File(oldDistDir),new File(topologyCodeLocation));
+    File stormDistDir=new File(oldDistDir);
+    stormDistDir.setLastModified(System.currentTimeMillis());
+    FileUtils.copyDirectory(stormDistDir,new File(topologyCodeLocation));
     LOG.info("Successfully read old jar/conf/topology " + name);
   }
  catch (  Exception e) {
@@ -39,7 +41,7 @@
       try {
         PathUtils.rmr(topologyCodeLocation);
       }
- catch (      IOException e1) {
+ catch (      IOException ignored) {
       }
     }
     throw new TException("Failed to read old jar/conf/topology ");
@@ -47,6 +49,14 @@
   RemoveTransitionCallback killCb=new RemoveTransitionCallback(data,topologyId);
   killCb.execute(new Object[0]);
   LOG.info("Successfully kill the topology " + name);
+  TopologyMetricsRunnable.KillTopologyEvent killEvent=new TopologyMetricsRunnable.KillTopologyEvent();
+  killEvent.clusterName=this.data.getClusterName();
+  killEvent.topologyId=topologyId;
+  killEvent.timestamp=System.currentTimeMillis();
+  this.data.getMetricRunnable().pushEvent(killEvent);
+  Remove removeEvent=new Remove();
+  removeEvent.topologyId=topologyId;
+  this.data.getMetricRunnable().pushEvent(removeEvent);
   try {
     submitTopology(name,topologyCodeLocation,JStormUtils.to_json(topologyConf),topology);
   }
@@ -58,7 +68,7 @@
     try {
       PathUtils.rmr(topologyCodeLocation);
     }
- catch (    IOException e1) {
+ catch (    IOException ignored) {
     }
   }
 }

@@ -1,0 +1,7 @@
+{
+  Map<Integer,MetricSnapshot> ret=Maps.newHashMapWithExpectedSize(snapshots.size());
+  for (  Map.Entry<Integer,AsmSnapshot> entry : snapshots.entrySet()) {
+    ret.put(entry.getKey(),convert((AsmCounterSnapshot)entry.getValue()));
+  }
+  return ret;
+}

@@ -1,0 +1,4 @@
+{
+  name=fixNameIfPossible(name);
+  return taskMetrics.getMetric(name);
+}

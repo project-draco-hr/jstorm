@@ -1,8 +1,31 @@
 {
-  Assignment assignment=null;
+  Assignment assignment;
   try {
+    Assignment oldAssignment=null;
+    boolean isReassign=event.isScratch();
+    if (isReassign) {
+      oldAssignment=nimbusData.getStormClusterState().assignment_info(event.getTopologyId(),null);
+    }
     assignment=mkAssignment(event);
-    if (!(event.isScratch()))     setTopologyStatus(event);
+    TaskStartEvent taskEvent=new TaskStartEvent();
+    taskEvent.oldAssignment=oldAssignment;
+    taskEvent.newAssignment=assignment;
+    taskEvent.topologyId=event.getTopologyId();
+    taskEvent.clusterName=nimbusData.getClusterName();
+    taskEvent.timestamp=System.currentTimeMillis();
+    Map<Integer,String> task2Component;
+    Map<Integer,TaskInfo> taskInfoMap=Cluster.get_all_taskInfo(nimbusData.getStormClusterState(),event.getTopologyId());
+    if (taskInfoMap != null) {
+      task2Component=Common.getTaskToComponent(taskInfoMap);
+    }
+ else {
+      task2Component=Common.getTaskToComponent(Cluster.get_all_taskInfo(nimbusData.getStormClusterState(),event.getTopologyId()));
+    }
+    taskEvent.task2Component=task2Component;
+    nimbusData.getMetricRunnable().pushEvent(taskEvent);
+    if (!isReassign) {
+      setTopologyStatus(event);
+    }
   }
  catch (  Throwable e) {
     LOG.error("Failed to assign topology " + event.getTopologyId(),e);

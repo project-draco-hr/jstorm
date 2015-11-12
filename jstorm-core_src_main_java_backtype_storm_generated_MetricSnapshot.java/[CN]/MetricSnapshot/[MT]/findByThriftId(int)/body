@@ -1,0 +1,44 @@
+{
+switch (fieldId) {
+case 1:
+    return METRIC_ID;
+case 2:
+  return TS;
+case 3:
+return METRIC_TYPE;
+case 4:
+return LONG_VALUE;
+case 5:
+return DOUBLE_VALUE;
+case 6:
+return M1;
+case 7:
+return M5;
+case 8:
+return M15;
+case 9:
+return MEAN;
+case 10:
+return MIN;
+case 11:
+return MAX;
+case 12:
+return P50;
+case 13:
+return P75;
+case 14:
+return P95;
+case 15:
+return P98;
+case 16:
+return P99;
+case 17:
+return P999;
+case 18:
+return STDDEV;
+case 19:
+return POINTS;
+default :
+return null;
+}
+}

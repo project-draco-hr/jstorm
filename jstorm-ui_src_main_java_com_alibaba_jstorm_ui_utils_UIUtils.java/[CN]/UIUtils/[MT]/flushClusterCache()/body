@@ -1,0 +1,16 @@
+{
+  NimbusClient client=null;
+  Map<String,ClusterEntity> clusterEntities=new HashMap<>();
+  for (  String name : UIUtils.clusterConfig.keySet()) {
+    try {
+      client=NimbusClientManager.getNimbusClient(name);
+      int port=getNimbusPort(name);
+      clusterEntities.put(name,getClusterEntity(client.getClient().getClusterInfo(),name,port));
+    }
+ catch (    Exception e) {
+      NimbusClientManager.removeClient(name);
+      LOG.error(e.getMessage(),e);
+    }
+  }
+  clustersCache=clusterEntities;
+}

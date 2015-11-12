@@ -1,16 +1,16 @@
 {
   struct.validate();
   oprot.writeStructBegin(STRUCT_DESC);
-  if (struct.nimbus_master != null) {
+  if (struct.nimbusMaster != null) {
     oprot.writeFieldBegin(NIMBUS_MASTER_FIELD_DESC);
-    struct.nimbus_master.write(oprot);
+    struct.nimbusMaster.write(oprot);
     oprot.writeFieldEnd();
   }
-  if (struct.nimbus_slaves != null) {
+  if (struct.nimbusSlaves != null) {
     oprot.writeFieldBegin(NIMBUS_SLAVES_FIELD_DESC);
 {
-      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.nimbus_slaves.size()));
-      for (      NimbusStat _iter77 : struct.nimbus_slaves) {
+      oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.nimbusSlaves.size()));
+      for (      NimbusStat _iter77 : struct.nimbusSlaves) {
         _iter77.write(oprot);
       }
       oprot.writeListEnd();
@@ -18,16 +18,16 @@
     oprot.writeFieldEnd();
   }
   oprot.writeFieldBegin(SUPERVISOR_NUM_FIELD_DESC);
-  oprot.writeI32(struct.supervisor_num);
+  oprot.writeI32(struct.supervisorNum);
   oprot.writeFieldEnd();
   oprot.writeFieldBegin(TOTAL_PORT_NUM_FIELD_DESC);
-  oprot.writeI32(struct.total_port_num);
+  oprot.writeI32(struct.totalPortNum);
   oprot.writeFieldEnd();
   oprot.writeFieldBegin(USED_PORT_NUM_FIELD_DESC);
-  oprot.writeI32(struct.used_port_num);
+  oprot.writeI32(struct.usedPortNum);
   oprot.writeFieldEnd();
   oprot.writeFieldBegin(FREE_PORT_NUM_FIELD_DESC);
-  oprot.writeI32(struct.free_port_num);
+  oprot.writeI32(struct.freePortNum);
   oprot.writeFieldEnd();
   if (struct.version != null) {
     oprot.writeFieldBegin(VERSION_FIELD_DESC);

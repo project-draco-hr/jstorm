@@ -26,7 +26,7 @@
   }
  finally {
     long end=System.nanoTime();
-    deserializeTimer.update((end - start) / 1000000.0d);
+    deserializeTimer.update((end - start) / TimeUtils.NS_PER_US);
   }
   return null;
 }

@@ -1,5 +1,0 @@
-{
-  if (that == null)   return false;
-  if (that instanceof getNettyMetric_result)   return this.equals((getNettyMetric_result)that);
-  return false;
-}

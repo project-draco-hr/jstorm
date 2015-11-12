@@ -1,0 +1,4 @@
+def updateTopology(self, name, uploadedLocation, updateConf):
+    '\n    Parameters:\n     - name\n     - uploadedLocation\n     - updateConf\n    '
+    self.send_updateTopology(name, uploadedLocation, updateConf)
+    self.recv_updateTopology()

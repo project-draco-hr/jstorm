@@ -1,5 +1,5 @@
-def __init__(self, task_id=None, uptime=None, status=None, host=None, port=None, errors=None):
-    self.task_id = task_id
+def __init__(self, taskId=None, uptime=None, status=None, host=None, port=None, errors=None):
+    self.taskId = taskId
     self.uptime = uptime
     self.status = status
     self.host = host

@@ -1,0 +1,5 @@
+{
+  getNettyMetrics_args args=new getNettyMetrics_args();
+  args.set_topologyId(topologyId);
+  sendBase("getNettyMetrics",args);
+}

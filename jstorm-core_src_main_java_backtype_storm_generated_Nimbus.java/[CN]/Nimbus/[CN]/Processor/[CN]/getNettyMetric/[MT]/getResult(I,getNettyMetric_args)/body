@@ -1,5 +1,0 @@
-{
-  getNettyMetric_result result=new getNettyMetric_result();
-  result.success=iface.getNettyMetric(args.topologyName,args.pos);
-  return result;
-}

@@ -6,6 +6,7 @@
   StringBuilder commandSB=new StringBuilder();
   commandSB.append(" -Dlogfile.name=");
   commandSB.append(logFileName);
+  commandSB.append(" -Dtopology.name=").append(topologyName);
   String userDefLogbackConf=ConfigExtension.getUserDefinedLogbackConf(conf);
   String logConf=System.getProperty(LOGBACK_CONF_TAG);
   if (StringUtils.isBlank(userDefLogbackConf) == false) {

@@ -1,4 +1,0 @@
-com.codahale.metrics.Gauge<Double> rawGauge
-int taskId
-String name
-String args

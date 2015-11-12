@@ -1,3 +1,0 @@
-{
-  return (this.nimbus_slaves == null) ? null : this.nimbus_slaves.iterator();
-}

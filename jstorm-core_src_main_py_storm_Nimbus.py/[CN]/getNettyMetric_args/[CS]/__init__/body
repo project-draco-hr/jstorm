@@ -1,3 +1,0 @@
-def __init__(self, topologyName=None, pos=None):
-    self.topologyName = topologyName
-    self.pos = pos

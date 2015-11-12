@@ -1,10 +1,10 @@
 {
   if (that == null)   return false;
-  boolean this_present_task_id=true;
-  boolean that_present_task_id=true;
-  if (this_present_task_id || that_present_task_id) {
-    if (!(this_present_task_id && that_present_task_id))     return false;
-    if (this.task_id != that.task_id)     return false;
+  boolean this_present_taskId=true;
+  boolean that_present_taskId=true;
+  if (this_present_taskId || that_present_taskId) {
+    if (!(this_present_taskId && that_present_taskId))     return false;
+    if (this.taskId != that.taskId)     return false;
   }
   boolean this_present_uptime=true;
   boolean that_present_uptime=true;

@@ -9,7 +9,8 @@
     needAssign.removeAll(context.getUnstoppedTaskIds());
   }
  else {
-    needAssign.addAll(context.getDeadTaskIds());
+    Set<Integer> deadTasks=context.getDeadTaskIds();
+    needAssign.addAll(deadTasks);
   }
   return needAssign;
 }

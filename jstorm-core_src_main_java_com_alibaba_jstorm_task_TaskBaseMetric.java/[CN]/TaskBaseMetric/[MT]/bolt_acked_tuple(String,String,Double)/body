@@ -1,9 +1,0 @@
-{
-  if (latency_ms == null) {
-    return;
-  }
-  String ackNumName=MetricRegistry.name(MetricDef.ACKED_NUM,component,stream);
-  update(ackNumName,Double.valueOf(1),JStormMetrics.Builder.COUNTER);
-  String processName=MetricRegistry.name(MetricDef.PROCESS_LATENCY,component,stream);
-  update(processName,latency_ms,JStormMetrics.Builder.HISTOGRAM);
-}

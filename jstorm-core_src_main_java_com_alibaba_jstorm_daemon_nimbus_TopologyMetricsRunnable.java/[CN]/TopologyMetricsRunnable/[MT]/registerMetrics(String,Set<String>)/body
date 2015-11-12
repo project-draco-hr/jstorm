@@ -1,0 +1,24 @@
+{
+  TimeTicker ticker=new TimeTicker(TimeUnit.MILLISECONDS,true);
+  ConcurrentMap<String,Long> memMeta=topologyMetricContexts.get(topologyId).getMemMeta();
+  Map<String,Long> ret=new HashMap<>();
+  for (  String metricName : metricNames) {
+    Long id=memMeta.get(metricName);
+    if (id != null && MetricUtils.isValidId(id)) {
+      ret.put(metricName,id);
+    }
+ else {
+      id=metricIDGenerator.genMetricId(metricName);
+      Long old=memMeta.putIfAbsent(metricName,id);
+      if (old == null) {
+        ret.put(metricName,id);
+      }
+ else {
+        ret.put(metricName,old);
+      }
+    }
+  }
+  long cost=ticker.stop();
+  LOG.info("register metrics, topology:{}, size:{}, cost:{}",topologyId,metricNames.size(),cost);
+  return ret;
+}

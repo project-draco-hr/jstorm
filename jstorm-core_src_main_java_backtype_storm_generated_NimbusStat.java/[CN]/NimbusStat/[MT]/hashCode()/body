@@ -3,8 +3,8 @@
   boolean present_host=true && (is_set_host());
   list.add(present_host);
   if (present_host)   list.add(host);
-  boolean present_uptime_secs=true && (is_set_uptime_secs());
-  list.add(present_uptime_secs);
-  if (present_uptime_secs)   list.add(uptime_secs);
+  boolean present_uptimeSecs=true && (is_set_uptimeSecs());
+  list.add(present_uptimeSecs);
+  if (present_uptimeSecs)   list.add(uptimeSecs);
   return list.hashCode();
 }

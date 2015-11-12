@@ -1,0 +1,23 @@
+{
+  StringBuilder sb=new StringBuilder("uploadTopologyMetrics_args(");
+  boolean first=true;
+  sb.append("topologyId:");
+  if (this.topologyId == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.topologyId);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("topologyMetrics:");
+  if (this.topologyMetrics == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.topologyMetrics);
+  }
+  first=false;
+  sb.append(")");
+  return sb.toString();
+}

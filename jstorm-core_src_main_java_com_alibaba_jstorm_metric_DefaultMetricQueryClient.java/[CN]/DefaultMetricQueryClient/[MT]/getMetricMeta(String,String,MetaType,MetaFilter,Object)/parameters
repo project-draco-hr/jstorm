@@ -1,0 +1,5 @@
+String clusterName
+String topologyId
+MetaType type
+MetaFilter filter
+Object arg

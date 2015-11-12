@@ -16,7 +16,7 @@
       memCache.init(conf);
     }
   }
- catch (  java.lang.UnsupportedClassVersionError e) {
+ catch (  UnsupportedClassVersionError e) {
     if (e.getMessage().indexOf("Unsupported major.minor version") >= 0) {
       LOG.error("!!!Please update jdk version to 7 or higher!!!");
     }

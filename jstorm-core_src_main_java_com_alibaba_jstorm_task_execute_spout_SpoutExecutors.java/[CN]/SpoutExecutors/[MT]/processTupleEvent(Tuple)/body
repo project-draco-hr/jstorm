@@ -1,28 +1,34 @@
 {
-  Runnable runnable;
+  Runnable runnable=null;
   Tuple tuple=(Tuple)event;
-  Object id=tuple.getValue(0);
-  Object obj=pending.remove((Long)id);
-  if (obj == null) {
-    if (isDebug) {
-      LOG.info("Pending map no entry:" + id);
-    }
-    runnable=null;
+  if (event.getSourceStreamId().equals(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID)) {
+    TopoMasterCtrlEvent ctrlEvent=(TopoMasterCtrlEvent)tuple.getValueByField("ctrlEvent");
+    taskTransfer.getBackpressureController().control(ctrlEvent);
   }
  else {
-    TupleInfo tupleInfo=(TupleInfo)obj;
-    String stream_id=tuple.getSourceStreamId();
-    if (stream_id.equals(Acker.ACKER_ACK_STREAM_ID)) {
-      runnable=new AckSpoutMsg(spout,tupleInfo,task_stats,isDebug);
-    }
- else     if (stream_id.equals(Acker.ACKER_FAIL_STREAM_ID)) {
-      runnable=new FailSpoutMsg(id,spout,tupleInfo,task_stats,isDebug);
-    }
- else {
-      LOG.warn("Receive one unknow source Tuple " + idStr);
+    Object id=tuple.getValue(0);
+    Object obj=pending.remove((Long)id);
+    if (obj == null) {
+      if (isDebug) {
+        LOG.info("Pending map no entry:" + id);
+      }
       runnable=null;
     }
+ else {
+      TupleInfo tupleInfo=(TupleInfo)obj;
+      String stream_id=tuple.getSourceStreamId();
+      if (stream_id.equals(Acker.ACKER_ACK_STREAM_ID)) {
+        runnable=new AckSpoutMsg(spout,tuple,tupleInfo,task_stats,isDebug);
+      }
+ else       if (stream_id.equals(Acker.ACKER_FAIL_STREAM_ID)) {
+        runnable=new FailSpoutMsg(id,spout,tupleInfo,task_stats,isDebug);
+      }
+ else {
+        LOG.warn("Receive one unknow source Tuple " + idStr);
+        runnable=null;
+      }
+    }
+    task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
   }
-  task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
   return runnable;
 }

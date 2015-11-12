@@ -1,0 +1,26 @@
+{
+  String nimbus=JStormMetrics.NIMBUS_METRIC_KEY;
+  if (topologyMetricContexts.containsKey(nimbus)) {
+    syncMetaFromRemote(nimbus,topologyMetricContexts.get(nimbus));
+  }
+  String cluster=JStormMetrics.CLUSTER_METRIC_KEY;
+  if (topologyMetricContexts.containsKey(cluster)) {
+    syncMetaFromRemote(cluster,topologyMetricContexts.get(cluster));
+  }
+  Map<String,Assignment> assignMap;
+  try {
+    assignMap=Cluster.get_all_assignment(stormClusterState,null);
+    for (    String topologyId : assignMap.keySet()) {
+      if (topologyMetricContexts.containsKey(topologyId)) {
+        Assignment assignment=assignMap.get(topologyId);
+        TopologyMetricContext metricContext=new TopologyMetricContext(assignment.getWorkers());
+        metricContext.setTaskNum(NimbusUtils.getTopologyTaskNum(assignment));
+        syncMetaFromCache(topologyId,metricContext);
+        syncMetaFromRemote(topologyId,metricContext);
+      }
+    }
+  }
+ catch (  Exception e1) {
+    LOG.warn("failed to get assignments");
+  }
+}

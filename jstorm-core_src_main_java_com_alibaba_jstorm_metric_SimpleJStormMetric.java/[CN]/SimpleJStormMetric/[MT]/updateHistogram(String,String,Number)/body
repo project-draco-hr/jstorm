@@ -1,0 +1,8 @@
+{
+  String formalName=MetricUtils.workerMetricName(key,host,0,name,MetricType.HISTOGRAM);
+  AsmHistogram histogram=(AsmHistogram)metrics.getMetric(formalName);
+  if (histogram == null) {
+    histogram=registerHistogram(name);
+  }
+  histogram.update(obj);
+}

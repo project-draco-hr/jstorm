@@ -1,7 +1,0 @@
-{
-  for (  Map.Entry<String,Metric> entry : metrics.entrySet()) {
-    if (filter.matches(entry.getKey(),entry.getValue())) {
-      remove(entry.getKey());
-    }
-  }
-}

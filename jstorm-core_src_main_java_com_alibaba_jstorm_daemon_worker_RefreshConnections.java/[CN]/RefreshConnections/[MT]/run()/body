@@ -11,22 +11,24 @@ synchronized (this) {
         Long localAssignmentTS=StormConfig.read_supervisor_topology_timestamp(conf,topologyId);
         if (localAssignmentTS.longValue() > workerData.getAssignmentTs().longValue()) {
           try {
-            if (assignment.getAssignmentType() == AssignmentType.Config) {
+            if (assignment.getAssignmentType() == AssignmentType.UpdateTopology) {
               LOG.info("Get config reload request for " + topologyId);
               List<TaskShutdownDameon> taskShutdowns=workerData.getShutdownTasks();
               Map newConf=StormConfig.read_supervisor_topology_conf(conf,topologyId);
               workerData.getStormConf().putAll(newConf);
               for (              TaskShutdownDameon taskSD : taskShutdowns) {
-                taskSD.updateConf(newConf);
+                taskSD.update(newConf);
               }
-              workerData.setAssignmentType(AssignmentType.Config);
+              workerData.setAssignmentType(AssignmentType.UpdateTopology);
             }
  else {
               Set<Integer> addedTasks=getAddedTasks(assignment);
               Set<Integer> removedTasks=getRemovedTasks(assignment);
+              Set<Integer> updatedTasks=getUpdatedTasks(assignment);
               workerData.updateWorkerData(assignment);
-              if (removedTasks.size() > 0)               shutdownTasks(removedTasks);
-              if (addedTasks.size() > 0)               createTasks(addedTasks);
+              shutdownTasks(removedTasks);
+              createTasks(addedTasks);
+              updateTasks(updatedTasks);
               Set<Integer> tmpOutboundTasks=Worker.worker_output_tasks(workerData);
               if (outboundTasks.equals(tmpOutboundTasks) == false) {
                 for (                int taskId : tmpOutboundTasks) {
@@ -58,13 +60,15 @@ synchronized (this) {
         LOG.error(errMsg);
         return;
       }
-      workerData.getWorkerToResource().addAll(workers);
+      workerData.updateWorkerToResource(workers);
       Map<Integer,WorkerSlot> my_assignment=new HashMap<Integer,WorkerSlot>();
       Map<String,String> node=assignment.getNodeHost();
       Set<WorkerSlot> need_connections=new HashSet<WorkerSlot>();
       Set<Integer> localTasks=new HashSet<Integer>();
+      Set<Integer> localNodeTasks=new HashSet<Integer>();
       if (workers != null && outboundTasks != null) {
         for (        ResourceWorkerSlot worker : workers) {
+          if (supervisorId.equals(worker.getNodeId()))           localNodeTasks.addAll(worker.getTasks());
           if (supervisorId.equals(worker.getNodeId()) && worker.getPort() == workerData.getPort())           localTasks.addAll(worker.getTasks());
           for (          Integer id : worker.getTasks()) {
             if (outboundTasks.contains(id)) {
@@ -76,6 +80,7 @@ synchronized (this) {
       }
       taskNodeport.putAll(my_assignment);
       workerData.setLocalTasks(localTasks);
+      workerData.setLocalNodeTasks(localNodeTasks);
       Set<WorkerSlot> current_connections=nodeportSocket.keySet();
       Set<WorkerSlot> new_connections=new HashSet<WorkerSlot>();
       Set<WorkerSlot> remove_connections=new HashSet<WorkerSlot>();
@@ -101,14 +106,7 @@ synchronized (this) {
         nodeportSocket.remove(node_port).close();
       }
       for (      Integer taskId : outboundTasks) {
-        boolean isActive=false;
-        int currentTime=TimeUtils.current_time_secs();
-        TaskHeartbeat tHB=zkCluster.task_heartbeat(topologyId,taskId);
-        if (tHB != null) {
-          int taskReportTime=tHB.getTimeSecs();
-          if ((currentTime - taskReportTime) < taskTimeoutSecs)           isActive=true;
-        }
-        workerData.updateOutboundTaskStatus(taskId,isActive);
+        workerData.updateOutboundTaskStatus(taskId,isOutTaskConnected(taskId));
       }
     }
   }

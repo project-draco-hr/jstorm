@@ -1,9 +1,0 @@
-{
-  TopologyMetric emptyTopologyMetric=new TopologyMetric();
-  MetricInfo topologyMetricInfo=MetricThrift.mkMetricInfo();
-  emptyTopologyMetric.set_topologyMetric(topologyMetricInfo);
-  emptyTopologyMetric.set_componentMetric(new HashMap<String,MetricInfo>());
-  emptyTopologyMetric.set_workerMetric(new HashMap<String,MetricInfo>());
-  emptyTopologyMetric.set_taskMetric(new HashMap<Integer,MetricInfo>());
-  return emptyTopologyMetric;
-}

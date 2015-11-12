@@ -6,19 +6,19 @@
     oprot.writeString(struct.host);
     oprot.writeFieldEnd();
   }
-  if (struct.supervisor_id != null) {
+  if (struct.supervisorId != null) {
     oprot.writeFieldBegin(SUPERVISOR_ID_FIELD_DESC);
-    oprot.writeString(struct.supervisor_id);
+    oprot.writeString(struct.supervisorId);
     oprot.writeFieldEnd();
   }
   oprot.writeFieldBegin(UPTIME_SECS_FIELD_DESC);
-  oprot.writeI32(struct.uptime_secs);
+  oprot.writeI32(struct.uptimeSecs);
   oprot.writeFieldEnd();
   oprot.writeFieldBegin(NUM_WORKERS_FIELD_DESC);
-  oprot.writeI32(struct.num_workers);
+  oprot.writeI32(struct.numWorkers);
   oprot.writeFieldEnd();
   oprot.writeFieldBegin(NUM_USED_WORKERS_FIELD_DESC);
-  oprot.writeI32(struct.num_used_workers);
+  oprot.writeI32(struct.numUsedWorkers);
   oprot.writeFieldEnd();
   oprot.writeFieldStop();
   oprot.writeStructEnd();

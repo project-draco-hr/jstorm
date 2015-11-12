@@ -1,13 +1,12 @@
 {
-  setComponentType();
   taskSendTargets=echoToSystemBolt();
   taskTransfer=mkTaskSending(workerData);
-  RunnableCallback baseExecutor=mkExecutor(taskSendTargets);
+  RunnableCallback baseExecutor=prepareExecutor();
   AsyncLoopThread executor_threads=new AsyncLoopThread(baseExecutor,false,Thread.MAX_PRIORITY,true);
   taskReceiver=mkTaskReceiver();
   List<AsyncLoopThread> allThreads=new ArrayList<AsyncLoopThread>();
   allThreads.add(executor_threads);
-  TaskHeartbeatRunable.registerTaskStats(taskid,new TaskStats(componentType,taskStats));
-  LOG.info("Finished loading task " + componentid + ":"+ taskid);
-  return getShutdown(allThreads,taskReceiver.getDeserializeQueue(),baseExecutor);
+  LOG.info("Finished loading task " + componentId + ":"+ taskId);
+  taskShutdownDameon=getShutdown(allThreads,taskReceiver.getDeserializeQueue(),baseExecutor);
+  return taskShutdownDameon;
 }

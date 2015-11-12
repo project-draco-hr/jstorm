@@ -13,12 +13,12 @@
       return lastComparison;
     }
   }
-  lastComparison=Boolean.valueOf(is_set_error_time_secs()).compareTo(other.is_set_error_time_secs());
+  lastComparison=Boolean.valueOf(is_set_errorTimeSecs()).compareTo(other.is_set_errorTimeSecs());
   if (lastComparison != 0) {
     return lastComparison;
   }
-  if (is_set_error_time_secs()) {
-    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.error_time_secs,other.error_time_secs);
+  if (is_set_errorTimeSecs()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.errorTimeSecs,other.errorTimeSecs);
     if (lastComparison != 0) {
       return lastComparison;
     }

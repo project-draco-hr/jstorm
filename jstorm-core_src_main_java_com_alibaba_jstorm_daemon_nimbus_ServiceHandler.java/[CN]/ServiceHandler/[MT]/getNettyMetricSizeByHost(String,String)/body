@@ -1,0 +1,3 @@
+{
+  return getNettyMetricsByHost(topologyId,host).get_metrics_size();
+}

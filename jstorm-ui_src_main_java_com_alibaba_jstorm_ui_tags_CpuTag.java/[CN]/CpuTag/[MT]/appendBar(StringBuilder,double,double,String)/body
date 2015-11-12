@@ -1,0 +1,7 @@
+{
+  sb.append(String.format("<div class='progress-bar progress-bar-%s' style='min-width: 2em;width: %s%%'>",status,width));
+  if (status.equals("success")) {
+    sb.append(String.format("<span>%s%%</span>",format(value)));
+  }
+  sb.append("</div>");
+}

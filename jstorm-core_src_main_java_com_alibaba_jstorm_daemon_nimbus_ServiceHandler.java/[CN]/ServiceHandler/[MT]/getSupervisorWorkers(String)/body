@@ -20,14 +20,13 @@
     }
     Map<String,Assignment> assignments=Cluster.get_all_assignment(stormClusterState,null);
     Map<Integer,WorkerSummary> portWorkerSummarys=new TreeMap<Integer,WorkerSummary>();
-    Map<String,MetricInfo> metricInfoMap=new HashMap<String,MetricInfo>();
     int usedSlotNumber=0;
     Map<String,Map<Integer,String>> topologyTaskToComponent=new HashMap<String,Map<Integer,String>>();
+    Map<String,MetricInfo> metricInfoMap=new HashMap<String,MetricInfo>();
     for (    Entry<String,Assignment> entry : assignments.entrySet()) {
       String topologyId=entry.getKey();
       Assignment assignment=entry.getValue();
       Set<ResourceWorkerSlot> workers=assignment.getWorkers();
-      TopologyMetric topologyMetric=data.getMetricRunnable().getTopologyMetric(topologyId);
       for (      ResourceWorkerSlot worker : workers) {
         if (supervisorId.equals(worker.getNodeId()) == false) {
           continue;
@@ -59,26 +58,26 @@
           workerSummary.add_to_tasks(taskComponent);
         }
         workerSummary.set_uptime(TimeUtils.time_delta(earliest));
-        if (topologyMetric == null) {
-          LOG.warn("Failed to get topologyMetric of " + topologyId);
-          continue;
-        }
-        String workerSlotName=TopologyMetricsRunnable.getWorkerSlotName(supervisorInfo.getHostName(),port);
-        if (topologyMetric.get_workerMetric() != null) {
-          MetricInfo workerMetricInfo=topologyMetric.get_workerMetric().get(workerSlotName);
-          if (workerMetricInfo != null) {
-            metricInfoMap.put(workerSlotName,workerMetricInfo);
+        String workerSlotName=getWorkerSlotName(supervisorInfo.getHostName(),port);
+        List<MetricInfo> workerMetricInfoList=this.data.getMetricCache().getMetricData(topologyId,MetaType.WORKER);
+        if (workerMetricInfoList.size() > 0) {
+          MetricInfo workerMetricInfo=workerMetricInfoList.get(0);
+          for (Iterator<String> itr=workerMetricInfo.get_metrics().keySet().iterator(); itr.hasNext(); ) {
+            String metricName=itr.next();
+            if (!metricName.contains(host)) {
+              itr.remove();
+            }
           }
+          metricInfoMap.put(workerSlotName,workerMetricInfo);
         }
       }
     }
-    List<WorkerSummary> wokersList=new ArrayList<WorkerSummary>();
-    wokersList.addAll(portWorkerSummarys.values());
+    List<WorkerSummary> workerList=new ArrayList<WorkerSummary>();
+    workerList.addAll(portWorkerSummarys.values());
     Map<String,Integer> supervisorToUsedSlotNum=new HashMap<String,Integer>();
     supervisorToUsedSlotNum.put(supervisorId,usedSlotNumber);
     SupervisorSummary supervisorSummary=NimbusUtils.mkSupervisorSummary(supervisorInfo,supervisorId,supervisorToUsedSlotNum);
-    SupervisorWorkers ret=new SupervisorWorkers(supervisorSummary,wokersList,metricInfoMap);
-    return ret;
+    return new SupervisorWorkers(supervisorSummary,workerList,metricInfoMap);
   }
  catch (  TException e) {
     LOG.info("Failed to get ClusterSummary ",e);
@@ -89,8 +88,7 @@ catch (  Exception e) {
     throw new TException(e);
   }
  finally {
-    double spend=(System.nanoTime() - start) / 1000000.0d;
-    SimpleJStormMetric.updateHistorgram("getSupervisorWorkers",spend);
-    LOG.info("getSupervisorWorkers, {} spend {} ms",host,spend);
+    long end=System.nanoTime();
+    SimpleJStormMetric.updateNimbusHistogram("getSupervisorWorkers",(end - start) / TimeUtils.NS_PER_US);
   }
 }

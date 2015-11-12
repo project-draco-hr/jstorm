@@ -1,4 +1,0 @@
-{
-  double ret=(value != null ? value.doubleValue() : 0.0);
-  return ret;
-}

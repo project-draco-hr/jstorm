@@ -11,9 +11,6 @@
         continue;
       }
       long modify=file.lastModified();
-      if (now - modify < cleanupTimeoutSec * 1000) {
-        latest_code_ids.add(dir);
-      }
     }
  catch (    Exception exception) {
       LOG.error("Failed to get modify time of " + dir,exception);

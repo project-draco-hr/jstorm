@@ -1,0 +1,3 @@
+{
+  return getCounters(AsmMetricFilter.ALL);
+}

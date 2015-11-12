@@ -1,0 +1,15 @@
+{
+  BaseExecutors baseExecutor=null;
+  if (taskObj instanceof IBolt) {
+    baseExecutor=new BoltExecutors(this);
+  }
+ else   if (taskObj instanceof ISpout) {
+    if (isSingleThread(stormConf) == true) {
+      baseExecutor=new SingleThreadSpoutExecutors(this);
+    }
+ else {
+      baseExecutor=new MultipleThreadSpoutExecutors(this);
+    }
+  }
+  return baseExecutor;
+}

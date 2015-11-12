@@ -1,11 +1,11 @@
 {
   this();
   this.host=host;
-  this.supervisor_id=supervisor_id;
-  this.uptime_secs=uptime_secs;
-  set_uptime_secs_isSet(true);
-  this.num_workers=num_workers;
-  set_num_workers_isSet(true);
-  this.num_used_workers=num_used_workers;
-  set_num_used_workers_isSet(true);
+  this.supervisorId=supervisorId;
+  this.uptimeSecs=uptimeSecs;
+  set_uptimeSecs_isSet(true);
+  this.numWorkers=numWorkers;
+  set_numWorkers_isSet(true);
+  this.numUsedWorkers=numUsedWorkers;
+  set_numUsedWorkers_isSet(true);
 }

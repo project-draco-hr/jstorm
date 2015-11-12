@@ -1,6 +1,0 @@
-String topology_id
-String supervisor_id
-int port
-MetricInfo workerMetric
-NettyMetric nettyMetric
-Map<Integer,MetricInfo> taskMetric

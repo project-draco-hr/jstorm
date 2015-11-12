@@ -1,0 +1,16 @@
+{
+  if (that == null)   return false;
+  boolean this_present_time=true;
+  boolean that_present_time=true;
+  if (this_present_time || that_present_time) {
+    if (!(this_present_time && that_present_time))     return false;
+    if (this.time != that.time)     return false;
+  }
+  boolean this_present_uptime=true;
+  boolean that_present_uptime=true;
+  if (this_present_uptime || that_present_uptime) {
+    if (!(this_present_uptime && that_present_uptime))     return false;
+    if (this.uptime != that.uptime)     return false;
+  }
+  return true;
+}

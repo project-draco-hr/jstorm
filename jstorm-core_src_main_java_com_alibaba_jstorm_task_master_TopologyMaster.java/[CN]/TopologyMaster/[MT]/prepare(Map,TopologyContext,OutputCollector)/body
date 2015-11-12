@@ -1,0 +1,45 @@
+{
+  this.conf=context.getStormConf();
+  this.collector=collector;
+  this.taskId=context.getThisTaskId();
+  this.topologyId=context.getTopologyId();
+  this.zkCluster=context.getZkCluster();
+  try {
+    Assignment assignment=zkCluster.assignment_info(topologyId,null);
+    this.workerSet=assignment.getWorkers();
+    intervalCheck=new IntervalCheck();
+    intervalCheck.setInterval(10);
+    intervalCheck.start();
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to get assignment for " + topologyId);
+  }
+  this.taskHeartbeatUpdater=new TaskHeartbeatUpdater(this.conf,topologyId,taskId,zkCluster);
+  this.backpressureCoordinator=new BackpressureCoordinator(collector,context,taskId);
+  this.topologyMetricContext=new TopologyMetricContext(topologyId,this.workerSet,this.conf);
+  this.uploadMetricsExecutor=Executors.newSingleThreadScheduledExecutor();
+  this.uploadMetricsExecutor.scheduleAtFixedRate(new Runnable(){
+    @Override public void run(){
+      int secOffset=TimeUtils.secOffset();
+      int offset=35;
+      if (secOffset < offset) {
+        JStormUtils.sleepMs((offset - secOffset) * 1000);
+      }
+ else       if (secOffset == offset) {
+      }
+ else {
+        JStormUtils.sleepMs((60 - secOffset + offset) * 1000);
+      }
+      if (topologyMetricContext.getUploadedWorkerNum() > 0) {
+        metricLogger.info("force upload metrics.");
+        mergeAndUpload();
+      }
+    }
+  }
+,5,60,TimeUnit.SECONDS);
+  updateThread=new Thread(new TopologyMasterRunnable());
+  updateThread.start();
+  threadAliveCheck=new IntervalCheck();
+  threadAliveCheck.setInterval(30);
+  threadAliveCheck.start();
+}

@@ -4,6 +4,23 @@
     String master_stormdist_root=StormConfig.masterStormdistRoot(data.getConf());
     List<String> code_ids=PathUtils.read_dir_contents(master_stormdist_root);
     List<String> assignments_ids=clusterState.assignments(callback);
+    Map<String,Assignment> assignmentMap=new HashMap<String,Assignment>();
+    List<String> update_ids=new ArrayList<String>();
+    for (    String id : assignments_ids) {
+      Assignment assignment=clusterState.assignment_info(id,null);
+      Long localCodeDownTS;
+      try {
+        Long tmp=StormConfig.read_nimbus_topology_timestamp(data.getConf(),id);
+        localCodeDownTS=(tmp == null ? 0L : tmp);
+      }
+ catch (      FileNotFoundException e) {
+        localCodeDownTS=0L;
+      }
+      if (assignment != null && assignment.isTopologyChange(localCodeDownTS.longValue())) {
+        update_ids.add(id);
+      }
+      assignmentMap.put(id,assignment);
+    }
     List<String> done_ids=new ArrayList<String>();
     for (    String id : code_ids) {
       if (assignments_ids.contains(id)) {
@@ -14,12 +31,12 @@
       assignments_ids.remove(id);
       code_ids.remove(id);
     }
+    assignments_ids.addAll(update_ids);
     for (    String topologyId : code_ids) {
       deleteLocalTopology(topologyId);
     }
     for (    String id : assignments_ids) {
-      Assignment assignment=clusterState.assignment_info(id,null);
-      downloadCodeFromMaster(assignment,id);
+      downloadCodeFromMaster(assignmentMap.get(id),id);
     }
   }
  catch (  IOException e) {

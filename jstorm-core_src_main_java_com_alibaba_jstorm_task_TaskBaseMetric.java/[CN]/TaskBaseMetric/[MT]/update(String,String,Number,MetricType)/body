@@ -1,0 +1,3 @@
+{
+  update(streamId,name,value,metricType,true);
+}

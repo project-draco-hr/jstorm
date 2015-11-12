@@ -1,0 +1,6 @@
+{
+  checkReady();
+  getPagingNettyMetrics_call method_call=new getPagingNettyMetrics_call(topologyId,host,page,resultHandler,this,___protocolFactory,___transport);
+  this.___currentMethod=method_call;
+  ___manager.call(method_call);
+}

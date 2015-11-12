@@ -1,27 +1,27 @@
 {
   TTupleProtocol iprot=(TTupleProtocol)prot;
-  struct.nimbus_master=new NimbusStat();
-  struct.nimbus_master.read(iprot);
-  struct.set_nimbus_master_isSet(true);
+  struct.nimbusMaster=new NimbusStat();
+  struct.nimbusMaster.read(iprot);
+  struct.set_nimbusMaster_isSet(true);
 {
     org.apache.thrift.protocol.TList _list79=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
-    struct.nimbus_slaves=new ArrayList<NimbusStat>(_list79.size);
+    struct.nimbusSlaves=new ArrayList<NimbusStat>(_list79.size);
     NimbusStat _elem80;
     for (int _i81=0; _i81 < _list79.size; ++_i81) {
       _elem80=new NimbusStat();
       _elem80.read(iprot);
-      struct.nimbus_slaves.add(_elem80);
+      struct.nimbusSlaves.add(_elem80);
     }
   }
-  struct.set_nimbus_slaves_isSet(true);
-  struct.supervisor_num=iprot.readI32();
-  struct.set_supervisor_num_isSet(true);
-  struct.total_port_num=iprot.readI32();
-  struct.set_total_port_num_isSet(true);
-  struct.used_port_num=iprot.readI32();
-  struct.set_used_port_num_isSet(true);
-  struct.free_port_num=iprot.readI32();
-  struct.set_free_port_num_isSet(true);
+  struct.set_nimbusSlaves_isSet(true);
+  struct.supervisorNum=iprot.readI32();
+  struct.set_supervisorNum_isSet(true);
+  struct.totalPortNum=iprot.readI32();
+  struct.set_totalPortNum_isSet(true);
+  struct.usedPortNum=iprot.readI32();
+  struct.set_usedPortNum_isSet(true);
+  struct.freePortNum=iprot.readI32();
+  struct.set_freePortNum_isSet(true);
   struct.version=iprot.readString();
   struct.set_version_isSet(true);
 }

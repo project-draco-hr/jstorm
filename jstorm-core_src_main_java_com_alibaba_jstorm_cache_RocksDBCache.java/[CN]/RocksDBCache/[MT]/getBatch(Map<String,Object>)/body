@@ -14,7 +14,7 @@
       if (keyByte == null || valueByte == null) {
         continue;
       }
-      Object value=null;
+      Object value;
       try {
         value=Utils.javaDeserialize(valueByte);
       }
@@ -25,10 +25,8 @@
       }
       map.put(new String(keyByte),value);
     }
-    return;
   }
  catch (  Exception e) {
     LOG.error("Failed to query " + map.keySet() + ", in window: ");
   }
-  return;
 }

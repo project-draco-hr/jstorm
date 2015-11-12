@@ -1,0 +1,9 @@
+{
+  TreeNode the=children.get(0);
+  for (  TreeNode node : children) {
+    if (node.getLayer() > the.getLayer()) {
+      the=node;
+    }
+  }
+  return the;
+}

@@ -1,0 +1,118 @@
+{
+  StringBuilder sb=new StringBuilder("MetricSnapshot(");
+  boolean first=true;
+  sb.append("metricId:");
+  sb.append(this.metricId);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("ts:");
+  sb.append(this.ts);
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("metricType:");
+  sb.append(this.metricType);
+  first=false;
+  if (is_set_longValue()) {
+    if (!first)     sb.append(", ");
+    sb.append("longValue:");
+    sb.append(this.longValue);
+    first=false;
+  }
+  if (is_set_doubleValue()) {
+    if (!first)     sb.append(", ");
+    sb.append("doubleValue:");
+    sb.append(this.doubleValue);
+    first=false;
+  }
+  if (is_set_m1()) {
+    if (!first)     sb.append(", ");
+    sb.append("m1:");
+    sb.append(this.m1);
+    first=false;
+  }
+  if (is_set_m5()) {
+    if (!first)     sb.append(", ");
+    sb.append("m5:");
+    sb.append(this.m5);
+    first=false;
+  }
+  if (is_set_m15()) {
+    if (!first)     sb.append(", ");
+    sb.append("m15:");
+    sb.append(this.m15);
+    first=false;
+  }
+  if (is_set_mean()) {
+    if (!first)     sb.append(", ");
+    sb.append("mean:");
+    sb.append(this.mean);
+    first=false;
+  }
+  if (is_set_min()) {
+    if (!first)     sb.append(", ");
+    sb.append("min:");
+    sb.append(this.min);
+    first=false;
+  }
+  if (is_set_max()) {
+    if (!first)     sb.append(", ");
+    sb.append("max:");
+    sb.append(this.max);
+    first=false;
+  }
+  if (is_set_p50()) {
+    if (!first)     sb.append(", ");
+    sb.append("p50:");
+    sb.append(this.p50);
+    first=false;
+  }
+  if (is_set_p75()) {
+    if (!first)     sb.append(", ");
+    sb.append("p75:");
+    sb.append(this.p75);
+    first=false;
+  }
+  if (is_set_p95()) {
+    if (!first)     sb.append(", ");
+    sb.append("p95:");
+    sb.append(this.p95);
+    first=false;
+  }
+  if (is_set_p98()) {
+    if (!first)     sb.append(", ");
+    sb.append("p98:");
+    sb.append(this.p98);
+    first=false;
+  }
+  if (is_set_p99()) {
+    if (!first)     sb.append(", ");
+    sb.append("p99:");
+    sb.append(this.p99);
+    first=false;
+  }
+  if (is_set_p999()) {
+    if (!first)     sb.append(", ");
+    sb.append("p999:");
+    sb.append(this.p999);
+    first=false;
+  }
+  if (is_set_stddev()) {
+    if (!first)     sb.append(", ");
+    sb.append("stddev:");
+    sb.append(this.stddev);
+    first=false;
+  }
+  if (is_set_points()) {
+    if (!first)     sb.append(", ");
+    sb.append("points:");
+    if (this.points == null) {
+      sb.append("null");
+    }
+ else {
+      sb.append(this.points);
+    }
+    first=false;
+  }
+  sb.append(")");
+  return sb.toString();
+}

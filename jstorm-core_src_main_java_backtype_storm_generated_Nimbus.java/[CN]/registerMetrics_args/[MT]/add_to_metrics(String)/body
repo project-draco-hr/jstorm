@@ -1,0 +1,6 @@
+{
+  if (this.metrics == null) {
+    this.metrics=new HashSet<String>();
+  }
+  this.metrics.add(elem);
+}

@@ -1,0 +1,5 @@
+{
+  for (  Map.Entry<String,T> entry : map.entrySet()) {
+    func.exec(entry,args);
+  }
+}

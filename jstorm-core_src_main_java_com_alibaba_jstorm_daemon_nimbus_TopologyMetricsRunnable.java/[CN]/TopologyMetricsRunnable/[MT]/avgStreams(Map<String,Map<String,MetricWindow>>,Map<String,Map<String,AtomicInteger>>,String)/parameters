@@ -1,3 +1,0 @@
-Map<String,Map<String,MetricWindow>> tagStreamsMetrics
-Map<String,Map<String,AtomicInteger>> counters
-String tag

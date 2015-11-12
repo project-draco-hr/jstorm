@@ -1,0 +1,54 @@
+{
+  for (  Map.Entry<String,Map<Integer,MetricSnapshot>> metricEntry : metrics.entrySet()) {
+    String meta=metricEntry.getKey();
+    MetricType metricType=MetricUtils.metricType(meta);
+    MetaType metaType=MetricUtils.metaType(meta);
+    Map<Integer,MetricSnapshot> winData=metricEntry.getValue();
+    if (metricType == MetricType.HISTOGRAM) {
+      for (      Map.Entry<Integer,MetricSnapshot> dataEntry : winData.entrySet()) {
+        MetricSnapshot snapshot=dataEntry.getValue();
+        Integer cnt=metaCounters.get(meta);
+        Histogram histogram=histograms.get(meta).get(dataEntry.getKey());
+        if (cnt != null && cnt > 1) {
+          Snapshot snapshot1=histogram.getSnapshot();
+          snapshot.set_mean(snapshot1.getMean());
+          snapshot.set_p50(snapshot1.getMedian());
+          snapshot.set_p75(snapshot1.get75thPercentile());
+          snapshot.set_p95(snapshot1.get95thPercentile());
+          snapshot.set_p98(snapshot1.get98thPercentile());
+          snapshot.set_p99(snapshot1.get99thPercentile());
+          snapshot.set_p999(snapshot1.get999thPercentile());
+          snapshot.set_stddev(snapshot1.getStdDev());
+          snapshot.set_min(snapshot1.getMin());
+          snapshot.set_max(snapshot1.getMax());
+          if (metaType == MetaType.TOPOLOGY) {
+            snapshot.set_points(Arrays.asList(ArrayUtils.toObject(snapshot1.getValues())));
+          }
+        }
+        if (metaType != MetaType.TOPOLOGY) {
+          snapshot.set_points(new ArrayList<Long>(0));
+        }
+      }
+    }
+ else     if (metricType == MetricType.TIMER) {
+      for (      Map.Entry<Integer,MetricSnapshot> dataEntry : winData.entrySet()) {
+        MetricSnapshot snapshot=dataEntry.getValue();
+        Integer cnt=metaCounters.get(meta);
+        if (cnt != null && cnt > 1) {
+          Timer timer=timers.get(meta).get(dataEntry.getKey());
+          Snapshot snapshot1=timer.getSnapshot();
+          snapshot.set_p50(snapshot1.getMedian());
+          snapshot.set_p75(snapshot1.get75thPercentile());
+          snapshot.set_p95(snapshot1.get95thPercentile());
+          snapshot.set_p98(snapshot1.get98thPercentile());
+          snapshot.set_p99(snapshot1.get99thPercentile());
+          snapshot.set_p999(snapshot1.get999thPercentile());
+          snapshot.set_stddev(snapshot1.getStdDev());
+          snapshot.set_min(snapshot1.getMin());
+          snapshot.set_max(snapshot1.getMax());
+        }
+        snapshot.set_points(new ArrayList<Long>(0));
+      }
+    }
+  }
+}

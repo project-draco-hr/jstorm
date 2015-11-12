@@ -1,0 +1,16 @@
+{
+  try {
+    String[] parts=name.split(MetricUtils.DELIM);
+    char ch=parts[0].charAt(0);
+    if (ch == 'W' || ch == 'N' || ch == 'P') {
+      return parseWorkerMetricMeta(parts);
+    }
+ else {
+      return parseTaskMetricMeta(parts);
+    }
+  }
+ catch (  Exception ex) {
+    logger.error("Error parsing metric meta, name:{}",name,ex);
+  }
+  return null;
+}

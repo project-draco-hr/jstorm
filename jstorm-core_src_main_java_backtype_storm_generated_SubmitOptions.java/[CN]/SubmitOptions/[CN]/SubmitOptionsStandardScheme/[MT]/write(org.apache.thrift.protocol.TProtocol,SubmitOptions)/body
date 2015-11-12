@@ -6,6 +6,13 @@
     oprot.writeI32(struct.initial_status.getValue());
     oprot.writeFieldEnd();
   }
+  if (struct.creds != null) {
+    if (struct.is_set_creds()) {
+      oprot.writeFieldBegin(CREDS_FIELD_DESC);
+      struct.creds.write(oprot);
+      oprot.writeFieldEnd();
+    }
+  }
   oprot.writeFieldStop();
   oprot.writeStructEnd();
 }

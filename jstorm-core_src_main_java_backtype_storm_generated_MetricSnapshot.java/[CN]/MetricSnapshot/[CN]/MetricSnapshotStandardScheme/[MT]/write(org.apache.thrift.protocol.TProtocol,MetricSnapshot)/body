@@ -1,0 +1,103 @@
+{
+  struct.validate();
+  oprot.writeStructBegin(STRUCT_DESC);
+  oprot.writeFieldBegin(METRIC_ID_FIELD_DESC);
+  oprot.writeI64(struct.metricId);
+  oprot.writeFieldEnd();
+  oprot.writeFieldBegin(TS_FIELD_DESC);
+  oprot.writeI64(struct.ts);
+  oprot.writeFieldEnd();
+  oprot.writeFieldBegin(METRIC_TYPE_FIELD_DESC);
+  oprot.writeI32(struct.metricType);
+  oprot.writeFieldEnd();
+  if (struct.is_set_longValue()) {
+    oprot.writeFieldBegin(LONG_VALUE_FIELD_DESC);
+    oprot.writeI64(struct.longValue);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_doubleValue()) {
+    oprot.writeFieldBegin(DOUBLE_VALUE_FIELD_DESC);
+    oprot.writeDouble(struct.doubleValue);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_m1()) {
+    oprot.writeFieldBegin(M1_FIELD_DESC);
+    oprot.writeDouble(struct.m1);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_m5()) {
+    oprot.writeFieldBegin(M5_FIELD_DESC);
+    oprot.writeDouble(struct.m5);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_m15()) {
+    oprot.writeFieldBegin(M15_FIELD_DESC);
+    oprot.writeDouble(struct.m15);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_mean()) {
+    oprot.writeFieldBegin(MEAN_FIELD_DESC);
+    oprot.writeDouble(struct.mean);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_min()) {
+    oprot.writeFieldBegin(MIN_FIELD_DESC);
+    oprot.writeI64(struct.min);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_max()) {
+    oprot.writeFieldBegin(MAX_FIELD_DESC);
+    oprot.writeI64(struct.max);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_p50()) {
+    oprot.writeFieldBegin(P50_FIELD_DESC);
+    oprot.writeDouble(struct.p50);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_p75()) {
+    oprot.writeFieldBegin(P75_FIELD_DESC);
+    oprot.writeDouble(struct.p75);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_p95()) {
+    oprot.writeFieldBegin(P95_FIELD_DESC);
+    oprot.writeDouble(struct.p95);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_p98()) {
+    oprot.writeFieldBegin(P98_FIELD_DESC);
+    oprot.writeDouble(struct.p98);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_p99()) {
+    oprot.writeFieldBegin(P99_FIELD_DESC);
+    oprot.writeDouble(struct.p99);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_p999()) {
+    oprot.writeFieldBegin(P999_FIELD_DESC);
+    oprot.writeDouble(struct.p999);
+    oprot.writeFieldEnd();
+  }
+  if (struct.is_set_stddev()) {
+    oprot.writeFieldBegin(STDDEV_FIELD_DESC);
+    oprot.writeDouble(struct.stddev);
+    oprot.writeFieldEnd();
+  }
+  if (struct.points != null) {
+    if (struct.is_set_points()) {
+      oprot.writeFieldBegin(POINTS_FIELD_DESC);
+{
+        oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64,struct.points.size()));
+        for (        long _iter119 : struct.points) {
+          oprot.writeI64(_iter119);
+        }
+        oprot.writeListEnd();
+      }
+      oprot.writeFieldEnd();
+    }
+  }
+  oprot.writeFieldStop();
+  oprot.writeStructEnd();
+}

@@ -1,0 +1,10 @@
+{
+  name=fixNameIfPossible(name);
+  AsmMetric ret=taskMetrics.register(name,metric);
+  if (metric.isAggregate()) {
+    String compMetricName=MetricUtils.task2compName(name);
+    AsmMetric componentMetric=componentMetrics.register(compMetricName,ret.clone());
+    ret.addAssocMetrics(componentMetric);
+  }
+  return ret;
+}

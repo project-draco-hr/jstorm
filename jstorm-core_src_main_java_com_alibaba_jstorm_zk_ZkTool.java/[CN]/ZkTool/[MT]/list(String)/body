@@ -1,0 +1,33 @@
+{
+  DistributedClusterState zkClusterState=null;
+  try {
+    conf.put(Config.STORM_ZOOKEEPER_ROOT,"/");
+    zkClusterState=new DistributedClusterState(conf);
+    List<String> children=zkClusterState.get_children(path,false);
+    if (children == null || children.isEmpty()) {
+      LOG.info("No children of " + path);
+    }
+ else {
+      StringBuilder sb=new StringBuilder();
+      sb.append("Zk node children of " + path + "\n");
+      for (      String str : children) {
+        sb.append(" " + str + ",");
+      }
+      sb.append("\n");
+      LOG.info(sb.toString());
+    }
+  }
+ catch (  Exception e) {
+    if (zkClusterState == null) {
+      LOG.error("Failed to connect ZK ",e);
+    }
+ else {
+      LOG.error("Failed to list children of  " + path + "\n",e);
+    }
+  }
+ finally {
+    if (zkClusterState != null) {
+      zkClusterState.close();
+    }
+  }
+}

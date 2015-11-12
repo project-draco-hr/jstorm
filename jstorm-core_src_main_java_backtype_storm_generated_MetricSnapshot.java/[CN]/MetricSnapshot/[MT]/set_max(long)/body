@@ -1,0 +1,4 @@
+{
+  this.max=max;
+  set_max_isSet(true);
+}

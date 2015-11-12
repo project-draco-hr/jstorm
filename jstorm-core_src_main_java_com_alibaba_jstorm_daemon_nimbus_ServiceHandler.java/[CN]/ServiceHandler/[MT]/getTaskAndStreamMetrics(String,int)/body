@@ -1,0 +1,36 @@
+{
+  List<MetricInfo> taskMetricList=getMetrics(topologyId,MetaType.TASK.getT());
+  List<MetricInfo> streamMetricList=getMetrics(topologyId,MetaType.STREAM.getT());
+  String taskIdStr=taskId + "";
+  MetricInfo taskMetricInfo;
+  if (taskMetricList != null && taskMetricList.size() > 0) {
+    taskMetricInfo=taskMetricList.get(0);
+    Map<String,Map<Integer,MetricSnapshot>> metrics=taskMetricInfo.get_metrics();
+    for (Iterator<String> itr=metrics.keySet().iterator(); itr.hasNext(); ) {
+      String metricName=itr.next();
+      String[] parts=metricName.split(MetricUtils.DELIM);
+      if (parts.length < 7 || !parts[3].equals(taskIdStr)) {
+        itr.remove();
+      }
+    }
+  }
+ else {
+    taskMetricInfo=MetricUtils.mkMetricInfo();
+  }
+  MetricInfo streamMetricInfo;
+  if (streamMetricList != null && streamMetricList.size() > 0) {
+    streamMetricInfo=streamMetricList.get(0);
+    Map<String,Map<Integer,MetricSnapshot>> metrics=streamMetricInfo.get_metrics();
+    for (Iterator<String> itr=metrics.keySet().iterator(); itr.hasNext(); ) {
+      String metricName=itr.next();
+      String[] parts=metricName.split(MetricUtils.DELIM);
+      if (parts.length < 7 || !parts[3].equals(taskIdStr)) {
+        itr.remove();
+      }
+    }
+  }
+ else {
+    streamMetricInfo=MetricUtils.mkMetricInfo();
+  }
+  return Lists.newArrayList(taskMetricInfo,streamMetricInfo);
+}

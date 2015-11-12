@@ -3,4 +3,8 @@
   LOG.info(ZkTool.class.getName() + " read zkpath");
   LOG.info("\nDelete topology backup assignment, please do as following:");
   LOG.info(ZkTool.class.getName() + " rm topologyname");
+  LOG.info("\nlist subdirectory of zkPath , please do as following:");
+  LOG.info(ZkTool.class.getName() + " list zkpath");
+  LOG.info("\nDelete all nodes about a topologyId of zk , please do as following:");
+  LOG.info(ZkTool.class.getName() + " clean topologyId");
 }

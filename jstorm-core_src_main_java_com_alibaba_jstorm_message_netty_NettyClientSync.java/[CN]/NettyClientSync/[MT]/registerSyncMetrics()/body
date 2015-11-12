@@ -1,11 +1,13 @@
 {
-  JStormMetrics.registerWorkerGauge(new Gauge<Double>(){
-    @Override public Double getValue(){
-      return Double.valueOf(batchQueue.size());
+  if (enableNettyMetrics) {
+    JStormMetrics.registerNettyMetric(MetricUtils.nettyMetricName(MetricDef.NETTY_CLI_SYNC_BATCH_QUEUE + nettyConnection.toString(),MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+      @Override public Double getValue(){
+        return (double)batchQueue.size();
+      }
     }
+));
+    QueueGauge cacheQueueGauge=new QueueGauge(disruptorQueue,MetricDef.NETTY_CLI_SYNC_DISR_QUEUE,nettyConnection.toString());
+    JStormMetrics.registerNettyMetric(MetricUtils.nettyMetricName(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE + nettyConnection.toString(),MetricType.GAUGE),new AsmGauge(cacheQueueGauge));
+    JStormHealthCheck.registerWorkerHealthCheck(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE + ":" + nettyConnection.toString(),cacheQueueGauge);
   }
-,MetricDef.NETTY_CLI_SYNC_BATCH_QUEUE,nettyConnection.toString());
-  QueueGauge cacheQueueGauge=new QueueGauge(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE + nettyConnection.toString(),disruptorQueue);
-  JStormMetrics.registerWorkerGauge(cacheQueueGauge,MetricDef.NETTY_CLI_SYNC_DISR_QUEUE,nettyConnection.toString());
-  JStormHealthCheck.registerWorkerHealthCheck(MetricDef.NETTY_CLI_SYNC_DISR_QUEUE + ":" + nettyConnection.toString(),cacheQueueGauge);
 }

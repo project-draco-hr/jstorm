@@ -3,7 +3,7 @@
     LOG.info(debugIdStr + stream + " to "+ out_task_id+ ":"+ tuple.toString());
   }
   taskStats.send_tuple(stream,1);
-  java.util.List<Integer> out_tasks=new ArrayList<Integer>();
+  List<Integer> out_tasks=new ArrayList<Integer>();
   out_tasks.add(out_task_id);
   return out_tasks;
 }

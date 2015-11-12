@@ -7,11 +7,7 @@ case 2:
 case 3:
 return PORT;
 case 4:
-return WORKER_METRIC;
-case 5:
-return NETTY_METRIC;
-case 6:
-return TASK_METRIC;
+return ALL_METRICS;
 default :
 return null;
 }

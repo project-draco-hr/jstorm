@@ -1,0 +1,8 @@
+{
+synchronized (workerToResource) {
+    Set<ResourceWorkerSlot> oldWorkers=workerToResource.clone();
+    oldWorkers.removeAll(workers);
+    if (oldWorkers.size() > 0)     workerToResource.removeAll(workers);
+    workerToResource.addAll(workers);
+  }
+}

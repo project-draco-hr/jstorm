@@ -1,0 +1,6 @@
+{
+  if (this.success == null) {
+    this.success=new HashMap<String,Long>();
+  }
+  this.success.put(key,val);
+}

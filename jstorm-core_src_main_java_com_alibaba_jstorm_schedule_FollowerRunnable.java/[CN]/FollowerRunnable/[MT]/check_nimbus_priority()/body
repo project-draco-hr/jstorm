@@ -1,0 +1,30 @@
+{
+  int gap=update_nimbus_detail();
+  if (gap == 0) {
+    return true;
+  }
+  int left=SLAVE_NIMBUS_WAIT_TIME;
+  while (left > 0) {
+    LOG.info("After " + left + " seconds, nimbus will try to be Leader!");
+    Thread.sleep(10 * 1000);
+    left-=10;
+  }
+  StormClusterState zkClusterState=data.getStormClusterState();
+  List<String> followers=zkClusterState.list_dirs(Cluster.NIMBUS_SLAVE_DETAIL_SUBTREE,false);
+  if (followers == null || followers.size() == 0) {
+    return false;
+  }
+  for (  String follower : followers) {
+    if (follower != null && !follower.equals(hostPort)) {
+      Map bMap=zkClusterState.get_nimbus_detail(follower,false);
+      if (bMap != null) {
+        Object object=bMap.get(NIMBUS_DIFFER_COUNT_ZK);
+        if (object != null && (JStormUtils.parseInt(object)) < gap) {
+          LOG.info("Current node can't be leader, due to {} has higher priority",follower);
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+}

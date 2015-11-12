@@ -1,6 +1,0 @@
-{
-  if (this.connections == null) {
-    this.connections=new HashMap<String,MetricInfo>();
-  }
-  this.connections.put(key,val);
-}

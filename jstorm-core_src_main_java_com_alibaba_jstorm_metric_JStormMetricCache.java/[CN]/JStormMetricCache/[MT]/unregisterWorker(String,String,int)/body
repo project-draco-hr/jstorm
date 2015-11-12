@@ -1,0 +1,32 @@
+{
+  String prefix=MetricUtils.workerMetricPrefix(topologyId,host,port);
+synchronized (lock) {
+    Map<String,Long> nodes=(Map<String,Long>)cache.get(METRIC_META_PREFIX + topologyId);
+    if (nodes != null) {
+      Iterator<String> keyIterator=nodes.keySet().iterator();
+      while (keyIterator.hasNext()) {
+        String metricName=keyIterator.next();
+        metricName=metricName.charAt(0) + metricName.substring(2,metricName.length());
+        if (metricName.startsWith(prefix)) {
+          keyIterator.remove();
+        }
+      }
+      cache.put(METRIC_META_PREFIX + topologyId,nodes);
+    }
+    Object data=cache.get(METRIC_DATA_30M_WORKER + topologyId);
+    if (data != null) {
+      Object[] parts=(Object[])data;
+      MetricInfo old=(MetricInfo)parts[1];
+      Iterator<String> oldKeys=old.get_metrics().keySet().iterator();
+      while (oldKeys.hasNext()) {
+        String metricName=oldKeys.next();
+        metricName=metricName.charAt(0) + metricName.substring(2,metricName.length());
+        if (metricName.startsWith(prefix)) {
+          oldKeys.remove();
+          LOG.info("remove dead worker metric : {}",metricName);
+        }
+      }
+      cache.put(METRIC_DATA_30M_WORKER + topologyId,data);
+    }
+  }
+}

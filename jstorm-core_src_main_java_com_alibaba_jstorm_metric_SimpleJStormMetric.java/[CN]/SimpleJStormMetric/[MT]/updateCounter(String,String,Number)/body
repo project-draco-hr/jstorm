@@ -1,0 +1,8 @@
+{
+  String formalName=MetricUtils.workerMetricName(key,host,0,name,MetricType.COUNTER);
+  AsmCounter counter=(AsmCounter)metrics.getMetric(formalName);
+  if (counter == null) {
+    counter=registerCounter(name);
+  }
+  counter.update(obj);
+}

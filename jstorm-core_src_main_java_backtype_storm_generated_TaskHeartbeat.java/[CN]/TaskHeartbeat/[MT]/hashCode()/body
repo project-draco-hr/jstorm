@@ -1,0 +1,10 @@
+{
+  List<Object> list=new ArrayList<Object>();
+  boolean present_time=true;
+  list.add(present_time);
+  if (present_time)   list.add(time);
+  boolean present_uptime=true;
+  list.add(present_uptime);
+  if (present_uptime)   list.add(uptime);
+  return list.hashCode();
+}
