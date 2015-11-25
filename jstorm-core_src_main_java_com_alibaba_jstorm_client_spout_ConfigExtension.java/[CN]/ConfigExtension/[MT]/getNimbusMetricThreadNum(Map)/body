@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(NIMBUS_METRICS_THREAD_NUM),2);
+}

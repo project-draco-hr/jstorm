@@ -1,0 +1,3 @@
+{
+  conf.put(TASK_ERROR_INFO_REPORT_INTERVAL,interval);
+}

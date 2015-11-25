@@ -1,0 +1,4 @@
+{
+  long size=memSize * 1024l;
+  setMemSizePerWorkerByMB(conf,size);
+}

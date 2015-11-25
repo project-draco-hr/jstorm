@@ -1,3 +1,4 @@
 {
+  metricsRunnable.markUploaded((Integer)key);
   return true;
 }

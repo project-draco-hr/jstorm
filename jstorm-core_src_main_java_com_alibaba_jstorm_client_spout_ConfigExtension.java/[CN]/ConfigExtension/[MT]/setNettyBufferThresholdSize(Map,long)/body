@@ -1,0 +1,3 @@
+{
+  conf.put(NETTY_BUFFER_THRESHOLD_SIZE,size);
+}

@@ -1,0 +1,3 @@
+{
+  conf.put(MIN_MEMSIZE_PER_WORKER,memSize);
+}

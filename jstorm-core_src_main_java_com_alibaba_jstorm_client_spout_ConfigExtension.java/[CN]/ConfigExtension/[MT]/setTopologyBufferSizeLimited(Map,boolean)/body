@@ -1,0 +1,3 @@
+{
+  conf.put(TOPOLOGY_BUFFER_SIZE_LIMITED,limited);
+}

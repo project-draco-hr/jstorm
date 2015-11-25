@@ -1,0 +1,11 @@
+{
+  Map ret=null;
+  for (  Map cluster : uiClusters) {
+    String clusterName=getUiClusterName(cluster);
+    if (clusterName.equals(name)) {
+      ret=cluster;
+      break;
+    }
+  }
+  return ret;
+}

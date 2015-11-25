@@ -1,0 +1,6 @@
+{
+  Integer ret=null;
+  Map<String,String> map=(Map<String,String>)(conf.get(BOLT_PARALLELISM));
+  if (map != null)   ret=JStormUtils.parseInt(map.get(componentName));
+  return ret;
+}

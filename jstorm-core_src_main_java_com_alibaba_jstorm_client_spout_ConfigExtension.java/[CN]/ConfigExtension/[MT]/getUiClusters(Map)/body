@@ -1,0 +1,3 @@
+{
+  return (List<Map>)conf.get(UI_CLUSTERS);
+}

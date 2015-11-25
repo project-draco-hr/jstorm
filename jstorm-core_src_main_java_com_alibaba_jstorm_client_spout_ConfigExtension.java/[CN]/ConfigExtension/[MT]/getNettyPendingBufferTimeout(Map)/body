@@ -1,0 +1,4 @@
+{
+  int messageTimeout=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),120);
+  return JStormUtils.parseLong(conf.get(NETTY_PENDING_BUFFER_TIMEOUT),messageTimeout * 1000);
+}

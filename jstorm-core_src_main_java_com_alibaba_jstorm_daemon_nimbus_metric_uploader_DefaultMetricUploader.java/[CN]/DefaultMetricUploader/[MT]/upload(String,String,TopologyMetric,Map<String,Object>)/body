@@ -3,6 +3,7 @@
     logger.info("No metric of {}",topologyId);
     return true;
   }
-  logger.info("send metrics info, topology:{}, metric:{}, metricContext:{}",topologyId,Utils.toPrettyJsonString(tpMetric),metricContext);
+  int totalSize=tpMetric.get_topologyMetric().get_metrics_size() + tpMetric.get_componentMetric().get_metrics_size() + tpMetric.get_taskMetric().get_metrics_size()+ tpMetric.get_streamMetric().get_metrics_size()+ tpMetric.get_workerMetric().get_metrics_size()+ tpMetric.get_nettyMetric().get_metrics_size();
+  logger.info("send metrics, cluster:{}, topology:{}, metric size:{}, metricContext:{}",clusterName,topologyId,totalSize,metricContext);
   return true;
 }

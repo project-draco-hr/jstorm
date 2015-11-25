@@ -1,0 +1,3 @@
+{
+  conf.put(LOG_PAGE_SIZE,pageSize);
+}

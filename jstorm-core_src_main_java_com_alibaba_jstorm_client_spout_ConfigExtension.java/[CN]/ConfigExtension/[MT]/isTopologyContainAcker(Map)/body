@@ -1,0 +1,9 @@
+{
+  int num=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_ACKER_EXECUTORS),1);
+  if (num > 0) {
+    return true;
+  }
+ else {
+    return false;
+  }
+}

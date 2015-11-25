@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(TOPOLOGY_MAX_WORKER_NUM_FOR_NETTY_METRICS),100);
+}

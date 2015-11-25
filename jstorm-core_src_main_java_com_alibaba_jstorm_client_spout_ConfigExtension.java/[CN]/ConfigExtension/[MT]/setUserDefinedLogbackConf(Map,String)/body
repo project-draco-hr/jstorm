@@ -1,0 +1,3 @@
+{
+  conf.put(USER_DEFINED_LOGBACK_CONF,fileName);
+}

@@ -6,9 +6,11 @@
       ConcurrentMap<String,Long> memMeta=context.getMemMeta();
       for (      MetaType metaType : MetaType.values()) {
         List<MetricMeta> metaList=metricQueryClient.getMetricMeta(clusterName,topologyId,metaType);
-        LOG.info("get remote metric meta, topology:{}, metaType:{}, mem:{}, zk:{}, new size:{}",topologyId,metaType,memSize,zkSize,metaList.size());
-        for (        MetricMeta meta : metaList) {
-          memMeta.putIfAbsent(meta.getFQN(),meta.getId());
+        if (metaList != null) {
+          LOG.info("get remote metric meta, topology:{}, metaType:{}, mem:{}, zk:{}, new size:{}",topologyId,metaType,memSize,zkSize,metaList.size());
+          for (          MetricMeta meta : metaList) {
+            memMeta.putIfAbsent(meta.getFQN(),meta.getId());
+          }
         }
       }
       metricCache.putMeta(topologyId,memMeta);

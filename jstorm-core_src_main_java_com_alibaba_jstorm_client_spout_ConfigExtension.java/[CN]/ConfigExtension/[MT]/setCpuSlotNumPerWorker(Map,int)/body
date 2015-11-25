@@ -1,0 +1,3 @@
+{
+  conf.put(CPU_SLOT_PER_WORKER,slotNum);
+}
