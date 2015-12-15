@@ -5,9 +5,8 @@
     }
     try {
       if (this.metricUploader != null) {
-        Event event=queue.poll();
+        Event event=queue.poll(1,TimeUnit.MILLISECONDS);
         if (event == null) {
-          JStormUtils.sleepMs(1);
           continue;
         }
         if (event instanceof Remove) {
