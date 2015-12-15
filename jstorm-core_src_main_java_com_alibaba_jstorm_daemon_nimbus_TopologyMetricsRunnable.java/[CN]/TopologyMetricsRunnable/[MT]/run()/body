@@ -5,7 +5,7 @@
     }
     try {
       if (this.metricUploader != null) {
-        Event event=queue.poll(100,TimeUnit.MILLISECONDS);
+        Event event=queue.poll(1,TimeUnit.MILLISECONDS);
         if (event == null) {
           continue;
         }
