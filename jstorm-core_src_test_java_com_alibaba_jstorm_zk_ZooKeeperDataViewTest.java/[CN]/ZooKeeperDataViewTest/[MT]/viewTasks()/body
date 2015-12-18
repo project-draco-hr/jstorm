@@ -1,0 +1,8 @@
+{
+  List<String> assignments=zkobj.getChildren(zk,Cluster.TASKS_SUBTREE,false);
+  for (  String child : assignments) {
+    byte[] data=zkobj.getData(zk,Cluster.storm_task_root(child),false);
+    Map<Integer,TaskInfo> taskInfoMap=(Map<Integer,TaskInfo>)Utils.maybe_deserialize(data);
+    System.out.println(gson.toJson(taskInfoMap));
+  }
+}
