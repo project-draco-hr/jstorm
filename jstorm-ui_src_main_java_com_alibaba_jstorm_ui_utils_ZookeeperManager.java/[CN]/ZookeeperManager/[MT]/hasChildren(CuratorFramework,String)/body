@@ -1,0 +1,4 @@
+{
+  List<String> children=getChildren(client,path);
+  return children != null && !children.isEmpty();
+}

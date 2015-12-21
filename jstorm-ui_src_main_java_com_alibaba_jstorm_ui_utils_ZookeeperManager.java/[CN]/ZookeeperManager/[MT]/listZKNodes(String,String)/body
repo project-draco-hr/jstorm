@@ -1,0 +1,16 @@
+{
+  CuratorFramework client=createAndGetClient(clusterName);
+  List<ZookeeperNode> nodes=new ArrayList<>();
+  try {
+    List<String> elements=zookeeper.getChildren(client,path,false);
+    for (    String element : elements) {
+      String newPath=PathUtils.normalize_path(path + Cluster.ZK_SEPERATOR + element);
+      ZookeeperNode node=new ZookeeperNode(path,element,hasChildren(client,newPath));
+      nodes.add(node);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Get zookeeper info error!",e);
+  }
+  return nodes;
+}

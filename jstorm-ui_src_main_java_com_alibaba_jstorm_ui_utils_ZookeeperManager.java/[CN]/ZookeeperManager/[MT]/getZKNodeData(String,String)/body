@@ -1,0 +1,15 @@
+{
+  CuratorFramework client=createAndGetClient(clusterName);
+  String out=null;
+  try {
+    byte[] data=zookeeper.getData(client,PathUtils.normalize_path(path),false);
+    if (data != null && data.length > 0) {
+      Object obj=Utils.maybe_deserialize(data);
+      out=gson.toJson(obj);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Get zookeeper data error!",e);
+  }
+  return out;
+}
