@@ -1,3 +1,0 @@
-{
-  return zookeeper.getChildren(client,path,false);
-}

@@ -1,8 +1,11 @@
 {
-  CuratorFramework client=createAndGetClient(clusterName);
   String out=null;
   try {
-    byte[] data=zookeeper.getData(client,PathUtils.normalize_path(path),false);
+    ClusterState clusterState=getAndCreateClusterState(clusterName);
+    if (clusterState == null) {
+      throw new IllegalStateException("Cluster state is null");
+    }
+    byte[] data=clusterState.get_data(PathUtils.normalize_path(path),false);
     if (data != null && data.length > 0) {
       Object obj=Utils.maybe_deserialize(data);
       out=gson.toJson(obj);

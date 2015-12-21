@@ -1,3 +1,0 @@
-{
-  return zookeeper.getData(client,path,false);
-}
