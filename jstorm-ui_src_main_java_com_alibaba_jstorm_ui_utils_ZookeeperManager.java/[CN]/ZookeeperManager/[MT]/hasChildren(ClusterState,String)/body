@@ -1,0 +1,7 @@
+{
+  if (clusterState == null || path == null) {
+    return false;
+  }
+  List<String> children=clusterState.get_children(path,false);
+  return children != null && !children.isEmpty();
+}

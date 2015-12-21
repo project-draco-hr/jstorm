@@ -1,0 +1,24 @@
+{
+  ClusterState state=null;
+  try {
+    state=clusterSates.get(clusterName);
+    if (state == null) {
+      Map zkConf=UIUtils.resetZKConfig(Utils.readStormConfig(),clusterName);
+      state=new DistributedClusterState(zkConf);
+      ClusterState old=clusterSates.putIfAbsent(clusterName,state);
+      if (old != null) {
+        try {
+          state.close();
+        }
+ catch (        Exception e) {
+          LOG.warn("Close state error!",e);
+        }
+        state=old;
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Create cluster state error!");
+  }
+  return state;
+}

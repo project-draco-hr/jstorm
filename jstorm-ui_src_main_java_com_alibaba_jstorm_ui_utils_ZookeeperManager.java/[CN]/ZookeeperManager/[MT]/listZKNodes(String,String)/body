@@ -1,12 +1,14 @@
 {
-  CuratorFramework client=createAndGetClient(clusterName);
   List<ZookeeperNode> nodes=new ArrayList<>();
   try {
-    List<String> elements=zookeeper.getChildren(client,path,false);
+    ClusterState clusterState=getAndCreateClusterState(clusterName);
+    if (clusterState == null) {
+      throw new IllegalStateException("Cluster state is null");
+    }
+    List<String> elements=clusterState.get_children(parent,false);
     for (    String element : elements) {
-      String newPath=PathUtils.normalize_path(path + Cluster.ZK_SEPERATOR + element);
-      ZookeeperNode node=new ZookeeperNode(path,element,hasChildren(client,newPath));
-      nodes.add(node);
+      String path=PathUtils.normalize_path(parent + Cluster.ZK_SEPERATOR + element);
+      nodes.add(new ZookeeperNode(parent,element,hasChildren(clusterState,path)));
     }
   }
  catch (  Exception e) {
