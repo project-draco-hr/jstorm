@@ -1,0 +1,8 @@
+{
+  List<String> assignments=zkobj.getChildren(zk,Cluster.TASKBEATS_SUBTREE,false);
+  for (  String child : assignments) {
+    byte[] data=zkobj.getData(zk,Cluster.taskbeat_storm_root(child),false);
+    TopologyTaskHbInfo taskHbInfo=(TopologyTaskHbInfo)Utils.maybe_deserialize(data);
+    System.out.println(gson.toJson(taskHbInfo));
+  }
+}

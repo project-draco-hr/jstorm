@@ -1,0 +1,8 @@
+{
+  List<String> assignments=zkobj.getChildren(zk,Cluster.ASSIGNMENTS_SUBTREE,false);
+  for (  String child : assignments) {
+    byte[] data=zkobj.getData(zk,Cluster.assignment_path(child),false);
+    Assignment assignment=(Assignment)Utils.maybe_deserialize(data);
+    System.out.println(gson.toJson(assignment));
+  }
+}

@@ -1,0 +1,6 @@
+{
+  List<ZookeeperNode> result=ZookeeperManager.listZKNodes(clusterName,path);
+  Map<String,Object> map=new HashMap<>();
+  map.put("nodes",result);
+  return map;
+}

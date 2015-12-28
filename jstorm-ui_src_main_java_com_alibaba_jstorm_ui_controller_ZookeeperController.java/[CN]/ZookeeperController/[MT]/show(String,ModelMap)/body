@@ -1,0 +1,22 @@
+{
+  long start=System.currentTimeMillis();
+  try {
+    ClusterConfig config=UIUtils.clusterConfig.get(name);
+    StringBuilder builder=new StringBuilder("");
+    for (    String ip : config.getZkServers()) {
+      builder.append(ip).append(",");
+    }
+    builder.deleteCharAt(builder.length() - 1);
+    builder.append(":");
+    builder.append(config.getZkPort());
+    model.addAttribute("zkRoot",config.getZkRoot());
+    model.addAttribute("zkServers",builder.toString());
+    model.addAttribute("clusterName",name);
+  }
+ catch (  Exception e) {
+    LOG.error(e.getMessage(),e);
+    UIUtils.addErrorAttribute(model,e);
+  }
+  LOG.info("zookeeper page show cost:{}ms",System.currentTimeMillis() - start);
+  return "zookeeper";
+}

@@ -1,0 +1,18 @@
+{
+  List<ZookeeperNode> nodes=new ArrayList<>();
+  try {
+    ClusterState clusterState=getAndCreateClusterState(clusterName);
+    if (clusterState == null) {
+      throw new IllegalStateException("Cluster state is null");
+    }
+    List<String> elements=clusterState.get_children(parent,false);
+    for (    String element : elements) {
+      String path=PathUtils.normalize_path(parent + Cluster.ZK_SEPERATOR + element);
+      nodes.add(new ZookeeperNode(parent,element,hasChildren(clusterState,path)));
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Get zookeeper info error!",e);
+  }
+  return nodes;
+}

@@ -1,0 +1,6 @@
+{
+  String data=ZookeeperManager.getZKNodeData(clusterName,path);
+  Map<String,Object> map=new HashMap<>();
+  map.put("data",data);
+  return map;
+}
