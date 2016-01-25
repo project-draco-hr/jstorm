@@ -1,5 +1,5 @@
 {
-  while (!isShutdown.get()) {
+  while (isShutdown != null && !isShutdown.get()) {
     if (localMode) {
       return;
     }
