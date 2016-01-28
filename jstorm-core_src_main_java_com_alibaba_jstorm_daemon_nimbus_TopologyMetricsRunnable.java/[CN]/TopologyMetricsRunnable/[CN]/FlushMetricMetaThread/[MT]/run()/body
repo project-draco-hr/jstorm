@@ -1,5 +1,5 @@
 {
-  while (!isShutdown.get()) {
+  while (isShutdown != null && !isShutdown.get()) {
     long start=System.currentTimeMillis();
     try {
       if (nimbusData.isLeader() && metricUploader != null) {

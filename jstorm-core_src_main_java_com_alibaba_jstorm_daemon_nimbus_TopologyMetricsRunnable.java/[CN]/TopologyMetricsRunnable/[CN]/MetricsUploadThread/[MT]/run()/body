@@ -1,5 +1,5 @@
 {
-  while (!isShutdown.get()) {
+  while (isShutdown != null && !isShutdown.get()) {
     try {
       if (metricUploader != null && nimbusData.isLeader()) {
         final int idx=getFirstPendingUploadIndex();
