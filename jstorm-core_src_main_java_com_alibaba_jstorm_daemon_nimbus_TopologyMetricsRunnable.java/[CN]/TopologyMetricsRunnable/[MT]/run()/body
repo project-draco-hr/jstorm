@@ -1,11 +1,11 @@
 {
-  while (!isShutdown.get()) {
+  while (isShutdown != null && !isShutdown.get()) {
     if (localMode) {
       return;
     }
     try {
       if (this.metricUploader != null) {
-        Event event=queue.poll();
+        Event event=queue.poll(1,TimeUnit.MILLISECONDS);
         if (event == null) {
           continue;
         }

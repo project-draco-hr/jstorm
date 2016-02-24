@@ -1,0 +1,9 @@
+{
+  String path="";
+  String id=pid + "/" + name;
+  int pos=id.indexOf("/");
+  if (pos != -1) {
+    path=id.substring(pos);
+  }
+  return path;
+}

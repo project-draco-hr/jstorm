@@ -1,0 +1,13 @@
+{
+  List<String> elements=zkobj.getChildren(zk,parent.getPath(),false);
+  for (  String element : elements) {
+    Node node=new Node((parent.getPath().length() > 1 ? parent.getPath() : "") + Cluster.ZK_SEPERATOR + element);
+    byte[] data=zkobj.getData(zk,node.getPath(),false);
+    if (data != null && data.length > 0) {
+      Object obj=Utils.maybe_deserialize(data);
+      node.setData(obj);
+    }
+    parent.addNode(node);
+    viewNode(node);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  List<String> assignments=zkobj.getChildren(zk,Cluster.SUPERVISORS_SUBTREE,false);
+  for (  String child : assignments) {
+    byte[] data=zkobj.getData(zk,Cluster.supervisor_path(child),false);
+    SupervisorInfo supervisorInfo=(SupervisorInfo)Utils.maybe_deserialize(data);
+    System.out.println(gson.toJson(supervisorInfo));
+  }
+}

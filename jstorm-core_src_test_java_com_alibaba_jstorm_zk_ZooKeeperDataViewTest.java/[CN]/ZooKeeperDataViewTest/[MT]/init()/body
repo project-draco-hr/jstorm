@@ -1,0 +1,6 @@
+{
+  System.getProperties().setProperty("storm.conf.file","/home/admin/jstorm/conf/storm.yaml");
+  Map conf=Utils.readStormConfig();
+  zk=zkobj.mkClient(conf,(List<String>)conf.get(Config.STORM_ZOOKEEPER_SERVERS),conf.get(Config.STORM_ZOOKEEPER_PORT),(String)conf.get(Config.STORM_ZOOKEEPER_ROOT));
+  gson=new GsonBuilder().setPrettyPrinting().create();
+}

@@ -1,0 +1,6 @@
+{
+  super();
+  this.pid=pid;
+  this.name=name;
+  this.parent=parent;
+}

@@ -1,8 +1,0 @@
-{
-  long l=UIUtils.parseLong("",0);
-  Assert.assertEquals(0L,l);
-  l=UIUtils.parseLong(null,0);
-  Assert.assertEquals(0L,l);
-  l=UIUtils.parseLong("1232",0);
-  Assert.assertEquals(1232L,l);
-}

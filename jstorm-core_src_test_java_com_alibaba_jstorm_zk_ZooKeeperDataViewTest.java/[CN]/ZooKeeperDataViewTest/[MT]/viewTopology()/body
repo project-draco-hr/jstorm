@@ -1,0 +1,8 @@
+{
+  List<String> assignments=zkobj.getChildren(zk,Cluster.STORMS_SUBTREE,false);
+  for (  String child : assignments) {
+    byte[] data=zkobj.getData(zk,Cluster.storm_path(child),false);
+    StormBase stormBase=(StormBase)Utils.maybe_deserialize(data);
+    System.out.println(gson.toJson(stormBase));
+  }
+}
