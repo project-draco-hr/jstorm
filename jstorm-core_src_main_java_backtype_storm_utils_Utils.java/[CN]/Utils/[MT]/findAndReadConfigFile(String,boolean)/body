@@ -1,3 +1,0 @@
-{
-  return LoadConf.findAndReadYaml(name,mustExist,false);
-}

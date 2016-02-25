@@ -3,7 +3,7 @@
   String confFile=System.getProperty("storm.conf.file");
   Map storm;
   if (StringUtils.isBlank(confFile) == true) {
-    storm=findAndReadConfigFile("storm.yaml",false);
+    storm=LoadConf.findAndReadYaml("storm.yaml",false,false);
   }
  else {
     storm=loadDefinedConf(confFile);

@@ -6,7 +6,7 @@
  else {
     ret=new HashMap<String,Number>(ret);
   }
-  Map fromFile=Utils.findAndReadConfigFile("multitenant-scheduler.yaml",false);
+  Map fromFile=LoadConf.findAndReadYaml("multitenant-scheduler.yaml",false,false);
   Map<String,Number> tmp=(Map<String,Number>)fromFile.get(Config.MULTITENANT_SCHEDULER_USER_POOLS);
   if (tmp != null) {
     ret.putAll(tmp);
