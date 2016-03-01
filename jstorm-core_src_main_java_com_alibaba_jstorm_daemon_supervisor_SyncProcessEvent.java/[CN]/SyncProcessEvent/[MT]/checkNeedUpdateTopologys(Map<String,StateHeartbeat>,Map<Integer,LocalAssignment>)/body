@@ -1,35 +1,33 @@
 {
-  Set<String> topologys=new HashSet<String>();
-  Map<String,Long> topologyAssignTimeStamps=new HashMap<String,Long>();
-  for (  Entry<Integer,LocalAssignment> entry : localAssignments.entrySet()) {
-    topologys.add(entry.getValue().getTopologyId());
-    topologyAssignTimeStamps.put(entry.getValue().getTopologyId(),entry.getValue().getTimeStamp());
+  Set<String> topologies=new HashSet<>();
+  for (  Map.Entry<Integer,LocalAssignment> entry : localAssignments.entrySet()) {
+    topologies.add(entry.getValue().getTopologyId());
   }
   for (  StateHeartbeat stateHb : localWorkerStats.values()) {
     State state=stateHb.getState();
     if (!state.equals(State.notStarted)) {
       String topologyId=stateHb.getHeartbeat().getTopologyId();
-      topologys.remove(topologyId);
+      topologies.remove(topologyId);
     }
   }
   long currTime=System.currentTimeMillis();
-  Set<String> needRemoveTopologys=new HashSet<String>();
-  for (  String topologyId : topologys) {
+  Set<String> needRemoveTopologies=new HashSet<>();
+  for (  String topologyId : topologies) {
     try {
-      long newAssignTime=topologyAssignTimeStamps.get(topologyId);
-      if ((currTime - newAssignTime) / 1000 < (JStormUtils.MIN_1 * 2)) {
+      long lastModifytime=StormConfig.get_supervisor_topology_Bianrymodify_time(conf,topologyId);
+      if ((currTime - lastModifytime) / 1000 < (JStormUtils.MIN_1 * 2)) {
         LOG.debug("less 2 minite ,so removed " + topologyId);
-        needRemoveTopologys.add(topologyId);
+        needRemoveTopologies.add(topologyId);
       }
     }
  catch (    Exception e) {
       LOG.error("Failed to get the time of file last modification for topology" + topologyId,e);
-      needRemoveTopologys.add(topologyId);
+      needRemoveTopologies.add(topologyId);
     }
   }
-  topologys.removeAll(needRemoveTopologys);
-  if (topologys.size() > 0) {
-    LOG.debug("Following topologys is going to re-download the jars, " + topologys);
+  topologies.removeAll(needRemoveTopologies);
+  if (topologies.size() > 0) {
+    LOG.debug("Following topologies are going to re-download the jars, " + topologies);
   }
-  needDownloadTopologys.set(topologys);
+  needDownloadTopologys.set(topologies);
 }

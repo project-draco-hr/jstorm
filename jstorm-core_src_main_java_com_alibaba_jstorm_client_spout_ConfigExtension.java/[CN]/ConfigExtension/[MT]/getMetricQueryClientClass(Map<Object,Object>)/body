@@ -1,3 +1,0 @@
-{
-  return (String)conf.get(METRIC_QUERY_CLIENT_CLASS);
-}

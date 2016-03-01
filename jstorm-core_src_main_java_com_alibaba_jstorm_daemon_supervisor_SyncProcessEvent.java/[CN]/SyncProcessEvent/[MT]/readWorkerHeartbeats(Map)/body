@@ -1,5 +1,5 @@
 {
-  Map<String,WorkerHeartbeat> workerHeartbeats=new HashMap<String,WorkerHeartbeat>();
+  Map<String,WorkerHeartbeat> workerHeartbeats=new HashMap<>();
   String path=StormConfig.worker_root(conf);
   List<String> workerIds=PathUtils.read_dir_contents(path);
   if (workerIds == null) {

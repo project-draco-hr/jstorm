@@ -5,7 +5,7 @@
     return;
   }
   LOG.info("Begin to get jstack of " + workerPort);
-  StringBuffer sb=new StringBuffer();
+  StringBuilder sb=new StringBuilder();
   List<Integer> pids=Worker.getOldPortPids(workerPort);
   for (  Integer pid : pids) {
     sb.append("!!!!!!!!!!!!!!!!!!\r\n");
@@ -14,8 +14,5 @@
     handleJstack(sb,pid);
   }
   byte[] data=sb.toString().getBytes();
-  t.sendResponseHeaders(HttpURLConnection.HTTP_OK,data.length);
-  OutputStream os=t.getResponseBody();
-  os.write(data);
-  os.close();
+  sendResponse(t,HttpURLConnection.HTTP_OK,data);
 }

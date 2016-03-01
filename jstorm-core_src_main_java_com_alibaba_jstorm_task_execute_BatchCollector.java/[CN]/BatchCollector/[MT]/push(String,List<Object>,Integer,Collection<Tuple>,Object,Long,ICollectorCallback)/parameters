@@ -1,0 +1,7 @@
+String streamId
+List<Object> tuple
+Integer outTaskId
+Collection<Tuple> anchors
+Object messageId
+Long rootId
+ICollectorCallback callback

@@ -1,6 +1,6 @@
 {
   WorkerClassLoader.enable=enable;
-  if (enable == false) {
+  if (!enable) {
     LOG.info("Don't enable UserDefine ClassLoader");
     return null;
   }

@@ -1,0 +1,10 @@
+{
+  int task_num=0;
+  for (  TopologySummary ts : cluster.get_topologies()) {
+    task_num+=ts.get_numTasks();
+  }
+  int topology_num=cluster.get_topologies_size();
+  NimbusSummary ns=cluster.get_nimbus();
+  ClusterEntity ce=new ClusterEntity(cluster_name,ns.get_supervisorNum(),topology_num,ns.get_version(),ns.get_totalPortNum(),ns.get_usedPortNum(),task_num);
+  return ce;
+}

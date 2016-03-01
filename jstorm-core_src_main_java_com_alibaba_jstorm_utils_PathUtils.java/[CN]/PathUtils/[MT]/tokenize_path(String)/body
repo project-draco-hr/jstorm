@@ -1,6 +1,6 @@
 {
   String[] toks=path.split(SEPERATOR);
-  ArrayList<String> rtn=new ArrayList<String>();
+  java.util.ArrayList<String> rtn=new ArrayList<String>();
   for (  String str : toks) {
     if (!str.isEmpty()) {
       rtn.add(str);

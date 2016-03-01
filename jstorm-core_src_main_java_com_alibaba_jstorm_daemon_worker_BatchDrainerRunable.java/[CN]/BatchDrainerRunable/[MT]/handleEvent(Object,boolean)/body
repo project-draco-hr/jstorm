@@ -1,4 +1,0 @@
-{
-  Pair<IConnection,List<TaskMessage>> pair=(Pair<IConnection,List<TaskMessage>>)event;
-  pair.getFirst().send(pair.getSecond());
-}

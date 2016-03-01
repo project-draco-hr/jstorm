@@ -1,6 +1,6 @@
 {
   StringBuilder sb=new StringBuilder(128);
   sb.append("histogram");
-  sb.append("(").append("id:").append(snapshot.get_metricId()).append(",").append("min:").append(snapshot.get_min()).append(",").append("max:").append(snapshot.get_max()).append(",").append("mean:").append(snapshot.get_mean()).append(",").append("p50:").append(snapshot.get_p50()).append(",").append("p75:").append(snapshot.get_p75()).append(",").append("p95:").append(snapshot.get_p95()).append(",").append("p98:").append(snapshot.get_p98()).append(",").append("p99:").append(snapshot.get_p99()).append(",").append("pts:").append(snapshot.get_points_size()).append(")");
+  sb.append("(").append("id:").append(snapshot.get_metricId()).append(",min:").append(snapshot.get_min()).append(",max:").append(snapshot.get_max()).append(",mean:").append(snapshot.get_mean()).append(",p50:").append(snapshot.get_p50()).append(",p75:").append(snapshot.get_p75()).append(",p95:").append(snapshot.get_p95()).append(",p98:").append(snapshot.get_p98()).append(",p99:").append(snapshot.get_p99()).append(",pts:").append(snapshot.get_pointSize()).append(")");
   return sb.toString();
 }

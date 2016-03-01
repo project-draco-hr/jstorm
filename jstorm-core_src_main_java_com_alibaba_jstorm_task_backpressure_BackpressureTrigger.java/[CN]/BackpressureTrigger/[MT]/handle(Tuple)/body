@@ -4,7 +4,7 @@
     EventType type=event.getEventType();
     if (type.equals(EventType.stopBackpressure)) {
       isUnderBackpressure=false;
-      LOG.info("Received stop backpressure event for task-" + task.getTaskId());
+      LOG.debug("Received stop backpressure event for task-" + task.getTaskId());
     }
  else     if (type.equals(EventType.updateBackpressureConfig)) {
       Map stormConf=(Map)event.getEventValue().get(0);

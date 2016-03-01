@@ -1,4 +1,5 @@
 {
+  clusterName=StringEscapeUtils.escapeHtml(clusterName);
   long start=System.currentTimeMillis();
   host=NetWorkUtils.host2Ip(host);
   int window=UIUtils.parseWindow(win);
@@ -7,11 +8,11 @@
   try {
     client=NimbusClientManager.getNimbusClient(clusterName);
     SupervisorWorkers supervisorWorkers=client.getClient().getSupervisorWorkers(host);
-    model.addAttribute("supervisor",JStormUtils.thriftToMap(supervisorWorkers.get_supervisor()));
+    model.addAttribute("supervisor",new SupervisorEntity(supervisorWorkers.get_supervisor()));
     List<WorkerSummary> workerSummaries=supervisorWorkers.get_workers();
-    model.addAttribute("workerSummary",JStormUtils.thriftToMap(workerSummaries));
+    model.addAttribute("workerSummary",UIUtils.getWorkerEntities(workerSummaries));
     Map<String,MetricInfo> workerMetricInfo=supervisorWorkers.get_workerMetric();
-    List<UIWorkerMetric> workerMetrics=getWorkerMetrics(workerMetricInfo,workerSummaries,host,window);
+    List<UIWorkerMetric> workerMetrics=UIMetricUtils.getWorkerMetrics(workerMetricInfo,workerSummaries,host,window);
     model.addAttribute("workerMetrics",workerMetrics);
     model.addAttribute("workerHead",UIMetricUtils.sortHead(workerMetrics,UIWorkerMetric.HEAD));
   }

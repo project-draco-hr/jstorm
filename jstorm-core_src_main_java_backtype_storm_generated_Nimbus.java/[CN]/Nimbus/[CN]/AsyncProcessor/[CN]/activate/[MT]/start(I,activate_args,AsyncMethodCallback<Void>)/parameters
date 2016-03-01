@@ -1,3 +1,0 @@
-I iface
-activate_args args
-AsyncMethodCallback<Void> resultHandler

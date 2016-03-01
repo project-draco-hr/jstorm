@@ -1,5 +1,5 @@
 {
-  if (sample()) {
+  if (JStormMetrics.enabled && sample() && enabled.get()) {
     this.unFlushed.update(obj.longValue());
   }
 }

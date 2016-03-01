@@ -1,0 +1,3 @@
+String outStreamId
+String outTaskId
+List<MsgInfo> batchTobeFlushed

@@ -1,3 +1,0 @@
-I iface
-getTopologyInfoByName_args args
-AsyncMethodCallback<TopologyInfo> resultHandler

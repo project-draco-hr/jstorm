@@ -16,10 +16,8 @@
  else {
       sendHbMsg();
     }
-    TimerEvent event=new TimerEvent(opCode,object);
-    boolean ret=controlQueue.offer(event);
-    if (ret)     LOG.debug("Offer task HB event to controlQueue, taskId=" + taskId);
- else     LOG.debug("Failed to offer task HB event to controlQueue, taskId=" + taskId);
+    queue.publish(new TimerEvent(opCode,object),false);
+    LOG.debug("Offer task HB event to controlQueue, taskId=" + taskId);
   }
  catch (  Exception e) {
     LOG.warn("Failed to publish timer event to " + name,e);

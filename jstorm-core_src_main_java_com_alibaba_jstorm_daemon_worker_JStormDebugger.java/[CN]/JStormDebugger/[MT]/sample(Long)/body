@@ -1,0 +1,6 @@
+{
+  if (Double.compare(sampleRate,1.0d) >= 0)   return true;
+  int mod=(int)(Math.abs(root_id) % PRECISION);
+  int threshold=(int)(sampleRate * PRECISION);
+  return mod < threshold;
+}

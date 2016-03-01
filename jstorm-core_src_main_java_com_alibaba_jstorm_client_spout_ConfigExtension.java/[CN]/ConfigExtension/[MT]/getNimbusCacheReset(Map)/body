@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseBoolean(conf.get(NIMBUS_CACHE_RESET),true);
-}

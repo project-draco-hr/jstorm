@@ -11,7 +11,8 @@
   this.tuple_start_times=tuple_start_times;
   this.ackerNum=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_ACKER_EXECUTORS));
   String componentId=topologyContext.getThisComponentId();
-  this.timer=JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyContext.getTopologyId(),componentId,task_id,MetricDef.COLLECTOR_EMIT_TIME,MetricType.HISTOGRAM),new AsmHistogram());
+  this.emitTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyContext.getTopologyId(),componentId,task_id,MetricDef.COLLECTOR_EMIT_TIME,MetricType.HISTOGRAM),new AsmHistogram());
+  this.emitTimer.setEnabled(false);
   random=new Random();
   random.setSeed(System.currentTimeMillis());
 }

@@ -5,7 +5,7 @@
   }
   if (max_spout_pending == null || pending.size() < max_spout_pending) {
     emptyCpuGauge.stop();
-    long start=System.nanoTime();
+    long start=nextTupleTimer.getTime();
     try {
       spout.nextTuple();
     }
@@ -15,8 +15,7 @@
       report_error.report(e);
     }
  finally {
-      long end=System.nanoTime();
-      nextTupleTimer.update((end - start) / TimeUtils.NS_PER_US);
+      nextTupleTimer.updateTime(start);
     }
   }
  else {

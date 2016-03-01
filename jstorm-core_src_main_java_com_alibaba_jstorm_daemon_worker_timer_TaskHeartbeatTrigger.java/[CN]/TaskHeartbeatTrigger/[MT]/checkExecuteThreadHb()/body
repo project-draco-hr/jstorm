@@ -2,6 +2,6 @@
   long currentTime=TimeUtils.current_time_secs();
   if (currentTime - executeThreadHbTime > taskHbTimeout) {
     String error="No response from Task-" + taskId + ", last report time(sec) is "+ executeThreadHbTime;
-    reportError.report(error);
+    reportError.report(error,ErrorConstants.WARN,ErrorConstants.CODE_TASK_NO_RESPONSE,ErrorConstants.DURATION_SECS_DEFAULT);
   }
 }

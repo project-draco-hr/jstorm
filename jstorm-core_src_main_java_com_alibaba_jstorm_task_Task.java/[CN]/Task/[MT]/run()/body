@@ -4,5 +4,11 @@
   }
  catch (  Throwable e) {
     LOG.error("init task take error",e);
+    if (reportErrorDie != null) {
+      reportErrorDie.report(e);
+    }
+ else {
+      throw new RuntimeException(e);
+    }
   }
 }

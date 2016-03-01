@@ -1,0 +1,7 @@
+String name
+int supervisor_num
+int topology_num
+String version
+int total_ports
+int used_ports
+int task_num

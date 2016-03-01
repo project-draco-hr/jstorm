@@ -1,0 +1,4 @@
+String command
+List<String> cmdlist
+Map<String,String> environment
+boolean backend

@@ -1,0 +1,4 @@
+{
+  readProcMemInfoFile(true);
+  return (ramSizeFree + swapSizeFree + inactiveSize) * 1024;
+}

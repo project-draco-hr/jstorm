@@ -1,0 +1,33 @@
+{
+  String logLevelUpper=(logLevel == null) ? "OFF" : logLevel.toUpperCase();
+  try {
+    Package logbackPackage=Package.getPackage(LOGBACK_CLASSIC);
+    if (logbackPackage == null) {
+      LOG.warn("Logback is not in the classpath!");
+      return false;
+    }
+    if ((loggerName == null) || loggerName.trim().isEmpty()) {
+      loggerName=(String)getFieldVaulue(LOGBACK_CLASSIC_LOGGER,"ROOT_LOGGER_NAME");
+    }
+    Logger loggerObtained=LoggerFactory.getLogger(loggerName);
+    if (loggerObtained == null) {
+      LOG.warn("No logger for the name: {}",loggerName);
+      return false;
+    }
+    Object logLevelObj=getFieldVaulue(LOGBACK_CLASSIC_LEVEL,logLevelUpper);
+    if (logLevelObj == null) {
+      LOG.warn("No such log level: {}",logLevelUpper);
+      return false;
+    }
+    Class<?>[] paramTypes={logLevelObj.getClass()};
+    Object[] params={logLevelObj};
+    Class<?> clz=Class.forName(LOGBACK_CLASSIC_LOGGER);
+    Method method=clz.getMethod("setLevel",paramTypes);
+    method.invoke(loggerObtained,params);
+    LOG.info("LogBack level set to {} for the logger '{}'",logLevelUpper,loggerName);
+    return true;
+  }
+ catch (  Exception e) {
+    return false;
+  }
+}

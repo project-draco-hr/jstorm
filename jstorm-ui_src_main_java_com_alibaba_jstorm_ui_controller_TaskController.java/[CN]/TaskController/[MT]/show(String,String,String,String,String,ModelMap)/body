@@ -1,4 +1,6 @@
 {
+  clusterName=StringEscapeUtils.escapeHtml(clusterName);
+  topology_id=StringEscapeUtils.escapeHtml(topology_id);
   long start=System.currentTimeMillis();
   int window=UIUtils.parseWindow(win);
   UIUtils.addWindowAttribute(model,window);
@@ -7,13 +9,14 @@
     client=NimbusClientManager.getNimbusClient(clusterName);
     TopologyInfo topologyInfo=client.getClient().getTopologyInfo(topology_id);
     int id=JStormUtils.parseInt(task_id);
-    TaskEntity task=getTaskEntity(topologyInfo.get_tasks(),id,component);
+    TaskEntity task=UIUtils.getTaskEntity(topologyInfo.get_tasks(),id);
+    task.setComponent(component);
     model.addAttribute("task",task);
     List<MetricInfo> taskStreamMetrics=client.getClient().getTaskAndStreamMetrics(topology_id,id);
-    UITaskMetric taskMetric=getTaskMetric(taskStreamMetrics,component,id,window);
+    UITaskMetric taskMetric=UIMetricUtils.getTaskMetric(taskStreamMetrics,component,id,window);
     model.addAttribute("taskMetric",taskMetric);
     model.addAttribute("taskHead",UIMetricUtils.sortHead(taskMetric,UITaskMetric.HEAD));
-    List<UIStreamMetric> streamData=getStreamData(taskStreamMetrics,component,id,window);
+    List<UIStreamMetric> streamData=UIMetricUtils.getStreamMetrics(taskStreamMetrics,component,id,window);
     model.addAttribute("streamData",streamData);
     model.addAttribute("streamHead",UIMetricUtils.sortHead(streamData,UIStreamMetric.HEAD));
   }

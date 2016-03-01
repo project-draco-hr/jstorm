@@ -1,0 +1,37 @@
+{
+  int maxMatch=JStormUtils.parseInt(paramMap.get("max_match"),ConfigExtension.getMaxMatchPerLogSearch(conf));
+  long offset=JStormUtils.parseLong(paramMap.get("offset"),0);
+  String logFile=paramMap.get("file");
+  int lookBack=JStormUtils.parseInt(paramMap.get("look_back"),2);
+  int lookAhead=JStormUtils.parseInt(paramMap.get("look_ahead"),10);
+  boolean caseIgnore=JStormUtils.parseBoolean(paramMap.get("case_ignore"),false);
+  int maxBlocks=ConfigExtension.getMaxBlocksPerLogSearch(conf);
+  int blockSize=HttpserverUtils.LOG_SEARCH_BLOCK_SIZE;
+  String key=paramMap.get("key");
+  if (caseIgnore) {
+    key=key.toLowerCase();
+  }
+  key=URLDecoder.decode(key,"UTF-8");
+  Map<Object,Object> ret=new HashMap<>();
+  if (StringUtils.isBlank(key)) {
+    error(ret,"search key cannot be empty!");
+    String resp=JStormUtils.to_json(ret);
+    sendResponse(t,HttpURLConnection.HTTP_OK,resp);
+    return;
+  }
+  if (debug) {
+    System.out.println("Search for key:" + key);
+    System.out.println("===================================\n");
+  }
+  logFile=Joiner.on(File.separator).join(logDir,logFile);
+  accessCheck(logFile);
+  String searchFrom=paramMap.get("search_from");
+  if (searchFrom != null && searchFrom.equals("head")) {
+    ret=searchFromHead(logFile,offset,key,maxMatch,lookBack,lookAhead,maxBlocks,blockSize,caseIgnore);
+  }
+ else {
+    ret=searchFromTail(logFile,offset,key,maxMatch,lookBack,lookAhead,maxBlocks,blockSize,caseIgnore);
+  }
+  String resp=JStormUtils.to_json(ret);
+  sendResponse(t,HttpURLConnection.HTTP_OK,resp);
+}

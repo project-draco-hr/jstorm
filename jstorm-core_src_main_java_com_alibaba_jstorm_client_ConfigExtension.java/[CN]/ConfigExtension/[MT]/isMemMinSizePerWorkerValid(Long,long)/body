@@ -1,0 +1,12 @@
+{
+  if (size == null) {
+    return false;
+  }
+ else   if (size <= 128 * 1024 * 1024) {
+    return false;
+  }
+ else   if (size > maxMemSize) {
+    return false;
+  }
+  return true;
+}

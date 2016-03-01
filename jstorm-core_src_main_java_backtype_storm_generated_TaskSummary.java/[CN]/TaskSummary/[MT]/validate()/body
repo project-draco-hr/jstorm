@@ -1,17 +1,17 @@
 {
   if (!is_set_taskId()) {
-    throw new TProtocolException("Required field 'taskId' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'taskId' is unset! Struct:" + toString());
   }
   if (!is_set_uptime()) {
-    throw new TProtocolException("Required field 'uptime' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'uptime' is unset! Struct:" + toString());
   }
   if (!is_set_status()) {
-    throw new TProtocolException("Required field 'status' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'status' is unset! Struct:" + toString());
   }
   if (!is_set_host()) {
-    throw new TProtocolException("Required field 'host' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'host' is unset! Struct:" + toString());
   }
   if (!is_set_port()) {
-    throw new TProtocolException("Required field 'port' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'port' is unset! Struct:" + toString());
   }
 }

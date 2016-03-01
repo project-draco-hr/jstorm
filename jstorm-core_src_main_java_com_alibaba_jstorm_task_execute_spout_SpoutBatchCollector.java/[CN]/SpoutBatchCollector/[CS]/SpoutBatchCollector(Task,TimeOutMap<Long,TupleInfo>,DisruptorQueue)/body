@@ -1,0 +1,38 @@
+{
+  super(task,pending,disruptorAckerQueue);
+  String componentId=topology_context.getThisComponentId();
+  batchCollector=new BatchCollector(task_id,componentId,storm_conf){
+    public List<MsgInfo> push(    String streamId,    List<Object> tuple,    Integer outTaskId,    Collection<Tuple> anchors,    Object messageId,    Long rootId,    ICollectorCallback callback){
+      if (outTaskId != null) {
+synchronized (directBatches) {
+          return addToBatches(outTaskId.toString() + "-" + streamId,directBatches,streamId,tuple,outTaskId,messageId,rootId,batchSize,callback);
+        }
+      }
+ else {
+synchronized (streamToBatches) {
+          return addToBatches(streamId,streamToBatches,streamId,tuple,outTaskId,messageId,rootId,batchSize,callback);
+        }
+      }
+    }
+    public void flush(){
+synchronized (streamToBatches) {
+        for (        Map.Entry<String,List<MsgInfo>> entry : streamToBatches.entrySet()) {
+          if (entry.getValue() != null && entry.getValue().size() > 0) {
+            sendBatch(entry.getKey(),null,entry.getValue());
+            streamToBatches.put(entry.getKey(),null);
+          }
+        }
+      }
+synchronized (directBatches) {
+        for (        Map.Entry<String,List<MsgInfo>> entry : directBatches.entrySet()) {
+          if (entry.getValue() != null && entry.getValue().size() > 0) {
+            String[] strings=entry.getKey().split("-",2);
+            sendBatch(strings[1],strings[0],entry.getValue());
+            directBatches.put(entry.getKey(),null);
+          }
+        }
+      }
+    }
+  }
+;
+}

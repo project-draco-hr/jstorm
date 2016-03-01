@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseBoolean(conf.get(SPOUT_PEND_FULL_SLEEP),false);
-}

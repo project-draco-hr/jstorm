@@ -1,0 +1,10 @@
+{
+  this.taskId=taskId;
+  this.componentId=componentId;
+  this.conf=conf;
+  batchSize=ConfigExtension.getTaskMsgBatchSize(conf);
+  int flushTime=ConfigExtension.getTaskMsgFlushInervalMs(conf);
+  TaskBatchFlushTrigger batchFlushTrigger=new TaskBatchFlushTrigger(flushTime,componentId + "-" + taskId,this);
+  batchFlushTrigger.register(TimeUnit.MILLISECONDS);
+  LOG.info("BatchCollector: batchSize=" + batchSize + ", flushTime="+ flushTime);
+}

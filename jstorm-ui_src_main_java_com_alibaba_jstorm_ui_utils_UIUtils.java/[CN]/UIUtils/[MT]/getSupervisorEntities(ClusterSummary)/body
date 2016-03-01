@@ -1,0 +1,8 @@
+{
+  List<SupervisorEntity> ret=new ArrayList<>();
+  for (  SupervisorSummary summary : cluster.get_supervisors()) {
+    SupervisorEntity entity=new SupervisorEntity(summary.get_supervisorId(),summary.get_host(),summary.get_uptimeSecs(),summary.get_numWorkers(),summary.get_numUsedWorkers());
+    ret.add(entity);
+  }
+  return ret;
+}

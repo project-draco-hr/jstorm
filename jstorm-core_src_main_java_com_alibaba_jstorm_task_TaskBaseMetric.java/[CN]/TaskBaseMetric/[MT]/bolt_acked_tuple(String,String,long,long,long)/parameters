@@ -1,0 +1,5 @@
+String component
+String stream
+long latencyStart
+long lifeCycleStart
+long endTime

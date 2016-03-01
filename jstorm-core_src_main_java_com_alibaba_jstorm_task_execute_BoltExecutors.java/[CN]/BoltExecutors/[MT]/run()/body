@@ -1,14 +1,14 @@
 {
-  if (isFinishInit == false) {
+  if (!isFinishInit) {
     initWrapper();
   }
-  while (taskStatus.isShutdown() == false) {
+  while (!taskStatus.isShutdown()) {
     try {
       exeQueue.consumeBatchWhenAvailable(this);
       processControlEvent();
     }
  catch (    Throwable e) {
-      if (taskStatus.isShutdown() == false) {
+      if (!taskStatus.isShutdown()) {
         LOG.error(idStr + " bolt exeutor  error",e);
       }
     }

@@ -1,3 +1,0 @@
-{
-  conf.put(TASK_MSG_BATCH_SIZE,batchSize);
-}

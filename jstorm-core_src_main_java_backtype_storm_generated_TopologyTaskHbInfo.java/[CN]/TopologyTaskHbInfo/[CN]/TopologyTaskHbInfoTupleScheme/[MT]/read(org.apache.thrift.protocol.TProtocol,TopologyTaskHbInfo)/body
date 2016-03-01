@@ -7,15 +7,15 @@
   BitSet incoming=iprot.readBitSet(1);
   if (incoming.get(0)) {
 {
-      org.apache.thrift.protocol.TMap _map228=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
-      struct.taskHbs=new HashMap<Integer,TaskHeartbeat>(2 * _map228.size);
-      int _key229;
-      TaskHeartbeat _val230;
-      for (int _i231=0; _i231 < _map228.size; ++_i231) {
-        _key229=iprot.readI32();
-        _val230=new TaskHeartbeat();
-        _val230.read(iprot);
-        struct.taskHbs.put(_key229,_val230);
+      org.apache.thrift.protocol.TMap _map220=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+      struct.taskHbs=new HashMap<Integer,TaskHeartbeat>(2 * _map220.size);
+      int _key221;
+      TaskHeartbeat _val222;
+      for (int _i223=0; _i223 < _map220.size; ++_i223) {
+        _key221=iprot.readI32();
+        _val222=new TaskHeartbeat();
+        _val222.read(iprot);
+        struct.taskHbs.put(_key221,_val222);
       }
     }
     struct.set_taskHbs_isSet(true);

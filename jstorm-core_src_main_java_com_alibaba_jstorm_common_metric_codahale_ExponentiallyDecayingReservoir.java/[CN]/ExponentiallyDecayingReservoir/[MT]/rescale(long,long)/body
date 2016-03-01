@@ -1,0 +1,20 @@
+{
+  if (nextScaleTime.compareAndSet(next,now + RESCALE_THRESHOLD)) {
+    lockForRescale();
+    try {
+      final long oldStartTime=startTime;
+      this.startTime=currentTimeInSeconds();
+      final double scalingFactor=exp(-alpha * (startTime - oldStartTime));
+      final ArrayList<Double> keys=new ArrayList<>(values.keySet());
+      for (      Double key : keys) {
+        final WeightedSnapshot.WeightedSample sample=values.remove(key);
+        final WeightedSnapshot.WeightedSample newSample=new WeightedSnapshot.WeightedSample(sample.value,sample.weight * scalingFactor);
+        values.put(key * scalingFactor,newSample);
+      }
+      count.set(values.size());
+    }
+  finally {
+      unlockForRescale();
+    }
+  }
+}

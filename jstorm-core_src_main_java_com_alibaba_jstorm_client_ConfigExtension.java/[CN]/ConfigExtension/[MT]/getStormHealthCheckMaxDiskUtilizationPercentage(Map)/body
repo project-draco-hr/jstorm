@@ -1,0 +1,3 @@
+{
+  return (float)(conf.get(STORM_HEALTH_CHECK_MAX_DISK_UTILIZATION_PERCENTAGE));
+}

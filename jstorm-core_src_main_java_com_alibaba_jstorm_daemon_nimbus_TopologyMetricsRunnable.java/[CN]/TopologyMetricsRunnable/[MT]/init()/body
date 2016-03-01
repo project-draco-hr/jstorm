@@ -1,4 +1,7 @@
 {
+  if (localMode) {
+    return;
+  }
   String metricUploadClass=ConfigExtension.getMetricUploaderClass(nimbusData.getConf());
   if (StringUtils.isBlank(metricUploadClass)) {
     metricUploadClass=DefaultMetricUploader.class.getName();
@@ -31,7 +34,7 @@
  catch (  Exception e) {
     throw new RuntimeException(e);
   }
-  this.uploadThread.start();
+  this.uploadControlThread.start();
   this.flushMetricMetaThread.start();
   LOG.info("init topology metric runnable done.");
 }

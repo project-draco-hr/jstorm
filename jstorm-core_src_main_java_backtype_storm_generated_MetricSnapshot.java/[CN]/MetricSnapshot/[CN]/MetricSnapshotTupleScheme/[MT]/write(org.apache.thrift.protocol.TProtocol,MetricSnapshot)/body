@@ -52,7 +52,10 @@
   if (struct.is_set_points()) {
     optionals.set(15);
   }
-  oprot.writeBitSet(optionals,16);
+  if (struct.is_set_pointSize()) {
+    optionals.set(16);
+  }
+  oprot.writeBitSet(optionals,17);
   if (struct.is_set_longValue()) {
     oprot.writeI64(struct.longValue);
   }
@@ -99,11 +102,9 @@
     oprot.writeDouble(struct.stddev);
   }
   if (struct.is_set_points()) {
-{
-      oprot.writeI32(struct.points.size());
-      for (      long _iter120 : struct.points) {
-        oprot.writeI64(_iter120);
-      }
-    }
+    oprot.writeBinary(struct.points);
+  }
+  if (struct.is_set_pointSize()) {
+    oprot.writeI32(struct.pointSize);
   }
 }

@@ -11,8 +11,8 @@
   }
  else   if (obj instanceof Map) {
     ret=new HashMap<String,Object>();
-    Set<Entry> entrySet=((Map)obj).entrySet();
-    for (    Entry entry : entrySet) {
+    Set<Map.Entry> entrySet=((Map)obj).entrySet();
+    for (    Map.Entry entry : entrySet) {
       ((Map)ret).put(String.valueOf(entry.getKey()),thriftToObject(entry.getValue()));
     }
   }

@@ -1,3 +1,0 @@
-{
-  return (List<Integer>)conf.get(CACHE_TIMEOUT_LIST);
-}

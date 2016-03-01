@@ -1,0 +1,6 @@
+{
+  Map ret=new HashMap<>();
+  List<ZooKeeperEntity> zkServers=UIUtils.getZooKeeperEntities(clusterName);
+  ret.put("zookeepers",zkServers);
+  return ret;
+}

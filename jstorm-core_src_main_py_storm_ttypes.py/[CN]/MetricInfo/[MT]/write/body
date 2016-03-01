@@ -6,12 +6,12 @@ def write(self, oprot):
     if (self.metrics is not None):
         oprot.writeFieldBegin('metrics', TType.MAP, 1)
         oprot.writeMapBegin(TType.STRING, TType.MAP, len(self.metrics))
-        for (kiter124, viter125) in self.metrics.items():
-            oprot.writeString(kiter124.encode('utf-8'))
-            oprot.writeMapBegin(TType.I32, TType.STRUCT, len(viter125))
-            for (kiter126, viter127) in viter125.items():
-                oprot.writeI32(kiter126)
-                viter127.write(oprot)
+        for (kiter117, viter118) in self.metrics.items():
+            oprot.writeString(kiter117.encode('utf-8'))
+            oprot.writeMapBegin(TType.I32, TType.STRUCT, len(viter118))
+            for (kiter119, viter120) in viter118.items():
+                oprot.writeI32(kiter119)
+                viter120.write(oprot)
             oprot.writeMapEnd()
         oprot.writeMapEnd()
         oprot.writeFieldEnd()

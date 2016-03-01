@@ -193,5 +193,15 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_pointSize()).compareTo(other.is_set_pointSize());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_pointSize()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.pointSize,other.pointSize);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   return 0;
 }

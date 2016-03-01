@@ -1,6 +1,0 @@
-{
-  this();
-  this.error=error;
-  this.errorTimeSecs=errorTimeSecs;
-  set_errorTimeSecs_isSet(true);
-}

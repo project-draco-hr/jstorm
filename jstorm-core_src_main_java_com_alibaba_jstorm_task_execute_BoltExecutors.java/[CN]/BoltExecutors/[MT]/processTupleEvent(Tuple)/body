@@ -1,8 +1,8 @@
 {
   task_stats.recv_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId());
-  tuple_start_times.put(tuple,System.nanoTime());
+  tuple_start_times.put(tuple,System.currentTimeMillis());
   try {
-    if (isSystemBolt == false && tuple.getSourceStreamId().equals(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID)) {
+    if (!isSystemBolt && tuple.getSourceStreamId().equals(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID)) {
       backpressureTrigger.handle(tuple);
     }
  else {
@@ -15,12 +15,11 @@
     report_error.report(e);
   }
   if (ackerNum == 0) {
-    Long startTime=(Long)tuple_start_times.remove(tuple);
-    if (startTime != null) {
-      Long endTime=System.nanoTime();
-      long latency=(endTime - startTime) / TimeUtils.NS_PER_US;
-      long lifeCycle=(System.currentTimeMillis() - ((TupleExt)tuple).getCreationTimeStamp()) * TimeUtils.NS_PER_US;
-      task_stats.bolt_acked_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId(),latency,lifeCycle);
+    Long latencyStart=(Long)tuple_start_times.remove(tuple);
+    if (latencyStart != null && JStormMetrics.enabled) {
+      long endTime=System.currentTimeMillis();
+      long lifeCycleStart=((TupleExt)tuple).getCreationTimeStamp();
+      task_stats.bolt_acked_tuple(tuple.getSourceComponent(),tuple.getSourceStreamId(),latencyStart,lifeCycleStart,endTime);
     }
   }
 }

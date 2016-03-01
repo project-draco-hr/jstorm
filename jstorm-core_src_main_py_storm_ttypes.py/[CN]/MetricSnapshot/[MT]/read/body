@@ -98,13 +98,13 @@ def read(self, iprot):
             else:
                 iprot.skip(ftype)
         elif (fid == 19):
-            if (ftype == TType.LIST):
-                self.points = []
-                (_etype106, _size103) = iprot.readListBegin()
-                for _i107 in xrange(_size103):
-                    _elem108 = iprot.readI64()
-                    self.points.append(_elem108)
-                iprot.readListEnd()
+            if (ftype == TType.STRING):
+                self.points = iprot.readString()
+            else:
+                iprot.skip(ftype)
+        elif (fid == 20):
+            if (ftype == TType.I32):
+                self.pointSize = iprot.readI32()
             else:
                 iprot.skip(ftype)
         else:

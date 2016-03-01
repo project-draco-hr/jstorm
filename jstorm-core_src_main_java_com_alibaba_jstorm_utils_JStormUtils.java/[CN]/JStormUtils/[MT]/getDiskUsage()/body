@@ -3,7 +3,7 @@
     return 0.0;
   }
   try {
-    String output=SystemOperation.exec("df -h /");
+    String output=SystemOperation.exec("df -h /home");
     if (output != null) {
       String[] lines=output.split("[\\r\\n]+");
       if (lines.length >= 2) {
@@ -18,7 +18,7 @@
     }
   }
  catch (  Exception e) {
-    LOG.warn("failed to get disk usage:",e);
+    LOG.warn("failed to get disk usage.");
   }
   return 0.0;
 }

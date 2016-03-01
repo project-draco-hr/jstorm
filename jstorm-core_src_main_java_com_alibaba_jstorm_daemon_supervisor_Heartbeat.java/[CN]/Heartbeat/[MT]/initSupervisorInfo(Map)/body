@@ -3,7 +3,7 @@
   if (!StormConfig.local_mode(conf)) {
     try {
       boolean isLocaliP=false;
-      isLocaliP=myHostName.equals("127.0.0.1");
+      isLocaliP=myHostName.equals("127.0.0.1") || myHostName.equals("localhost");
       if (isLocaliP) {
         throw new Exception("the hostname which  supervisor get is localhost");
       }

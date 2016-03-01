@@ -5,9 +5,9 @@
     oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
 {
       oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.I64,struct.success.size()));
-      for (      Map.Entry<String,Long> _iter244 : struct.success.entrySet()) {
-        oprot.writeString(_iter244.getKey());
-        oprot.writeI64(_iter244.getValue());
+      for (      Map.Entry<String,Long> _iter236 : struct.success.entrySet()) {
+        oprot.writeString(_iter236.getKey());
+        oprot.writeI64(_iter236.getValue());
       }
       oprot.writeMapEnd();
     }

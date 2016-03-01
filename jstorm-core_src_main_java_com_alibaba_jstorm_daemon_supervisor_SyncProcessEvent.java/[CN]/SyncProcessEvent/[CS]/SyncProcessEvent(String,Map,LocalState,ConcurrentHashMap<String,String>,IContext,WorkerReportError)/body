@@ -5,11 +5,11 @@
   this.workerThreadPids=workerThreadPids;
   this.sharedContext=sharedContext;
   this.sandBoxMaker=new SandBoxMaker(conf);
-  this.workerIdToStartTimeAndPort=new HashMap<String,Pair<Integer,Integer>>();
-  this.needDownloadTopologys=new AtomicReference<Set>();
+  this.workerIdToStartTimeAndPort=new HashMap<>();
+  this.needDownloadTopologys=new AtomicReference<>();
   if (ConfigExtension.isEnableCgroup(conf)) {
     cgroupManager=new CgroupManager(conf);
   }
-  killingWorkers=new HashMap<String,Integer>();
+  killingWorkers=new HashMap<>();
   this.workerReportError=workerReportError;
 }

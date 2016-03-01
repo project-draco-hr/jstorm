@@ -6,7 +6,7 @@
   LOG.info("Old localNodeTasks:" + lastLocalNodeTasks + ", new:"+ localNodeTasks);
   lastLocalNodeTasks=localNodeTasks;
   List<Integer> localNodeOutTasks=new ArrayList<Integer>();
-  for (  Integer outTask : outTasks) {
+  for (  Integer outTask : allTargetTasks) {
     if (localNodeTasks.contains(outTask)) {
       localNodeOutTasks.add(outTask);
     }

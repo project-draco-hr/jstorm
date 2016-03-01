@@ -1,0 +1,4 @@
+{
+  MachineCheckStatus checkStatus=health.check();
+  this.checkStatus.SetType(checkStatus.getType());
+}

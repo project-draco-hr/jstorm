@@ -1,7 +1,12 @@
 {
   failedCount++;
   handleCounter.decrementAndGet();
-  Long failId=(Long)id;
-  LOG.info("Failed to handle " + failId);
+  if (id instanceof Long) {
+    Long failId=(Long)id;
+    LOG.info("Failed to handle " + failId);
+  }
+ else   if (id instanceof String) {
+    LOG.info("Failed to handle " + id);
+  }
   return;
 }

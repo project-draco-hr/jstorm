@@ -1,0 +1,39 @@
+{
+  final long startTime=emitTotalTimer.getTime();
+  try {
+    boolean needAck=(message_id != null) && (ackerNum > 0);
+    Long root_id=getRootId(message_id);
+    java.util.List<Integer> out_tasks=null;
+    if (out_task_id != null) {
+      out_tasks=sendTargets.get(out_task_id,out_stream_id,values,null,root_id);
+    }
+ else {
+      out_tasks=sendTargets.get(out_stream_id,values,null,root_id);
+    }
+    if (out_tasks.size() == 0) {
+      return out_tasks;
+    }
+    List<Long> ackSeq=null;
+    for (    Integer t : out_tasks) {
+      MessageId msgid;
+      if (needAck) {
+        ackSeq=new ArrayList<Long>();
+        Long as=MessageId.generateId(random);
+        msgid=MessageId.makeRootId(root_id,as);
+        ackSeq.add(as);
+      }
+ else {
+        msgid=MessageId.makeUnanchored();
+      }
+      TupleImplExt tp=new TupleImplExt(topology_context,values,task_id,out_stream_id,msgid);
+      tp.setTargetTaskId(t);
+      transfer_fn.transfer(tp);
+    }
+    sendMsgToAck(out_stream_id,values,message_id,root_id,ackSeq,needAck);
+    if (callback != null)     callback.execute(out_tasks);
+    return out_tasks;
+  }
+  finally {
+    emitTotalTimer.updateTime(startTime);
+  }
+}

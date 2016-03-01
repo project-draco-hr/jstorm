@@ -1,0 +1,3 @@
+{
+  return (int)min(size,count.get());
+}

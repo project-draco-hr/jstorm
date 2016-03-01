@@ -1,0 +1,19 @@
+{
+  TaskMessage message=(TaskMessage)event;
+  int task=message.task();
+  Object tuple=null;
+  try {
+    tuple=deserialize(message.message(),task);
+  }
+ catch (  Throwable e) {
+    LOG.warn("serialize happened errors!!!",e);
+  }
+  DisruptorQueue queue=controlQueues.get(task);
+  if (queue == null) {
+    LOG.warn("Received invalid control message directed at port " + task + ". Dropping...");
+    return;
+  }
+  if (tuple != null) {
+    queue.publish(tuple);
+  }
+}

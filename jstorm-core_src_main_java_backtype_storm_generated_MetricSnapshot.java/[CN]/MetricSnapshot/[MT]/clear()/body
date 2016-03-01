@@ -36,4 +36,6 @@
   set_stddev_isSet(false);
   this.stddev=0.0;
   this.points=null;
+  set_pointSize_isSet(false);
+  this.pointSize=0;
 }

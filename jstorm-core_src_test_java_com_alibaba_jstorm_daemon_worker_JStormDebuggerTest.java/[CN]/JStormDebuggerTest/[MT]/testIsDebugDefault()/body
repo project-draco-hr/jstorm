@@ -1,0 +1,14 @@
+{
+  ConfigExtension.setTopologyDebugSampleRate(conf,1.0);
+  JStormDebugger.update(conf);
+  int tries=50000;
+  int lottery=0;
+  int num=tries;
+  while (num-- > 0) {
+    Long root_id=random.nextLong();
+    if (JStormDebugger.isDebug(root_id)) {
+      lottery++;
+    }
+  }
+  assertEquals(tries,lottery,0);
+}

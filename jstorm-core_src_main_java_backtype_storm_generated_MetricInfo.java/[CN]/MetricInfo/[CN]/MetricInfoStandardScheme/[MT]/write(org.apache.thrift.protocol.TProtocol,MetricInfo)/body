@@ -6,13 +6,13 @@
       oprot.writeFieldBegin(METRICS_FIELD_DESC);
 {
         oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,struct.metrics.size()));
-        for (        Map.Entry<String,Map<Integer,MetricSnapshot>> _iter132 : struct.metrics.entrySet()) {
-          oprot.writeString(_iter132.getKey());
+        for (        Map.Entry<String,Map<Integer,MetricSnapshot>> _iter124 : struct.metrics.entrySet()) {
+          oprot.writeString(_iter124.getKey());
 {
-            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,_iter132.getValue().size()));
-            for (            Map.Entry<Integer,MetricSnapshot> _iter133 : _iter132.getValue().entrySet()) {
-              oprot.writeI32(_iter133.getKey());
-              _iter133.getValue().write(oprot);
+            oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,_iter124.getValue().size()));
+            for (            Map.Entry<Integer,MetricSnapshot> _iter125 : _iter124.getValue().entrySet()) {
+              oprot.writeI32(_iter125.getKey());
+              _iter125.getValue().write(oprot);
             }
             oprot.writeMapEnd();
           }

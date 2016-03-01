@@ -1,0 +1,17 @@
+{
+  if (obj == null || !(obj instanceof TaskError)) {
+    return false;
+  }
+ else   if (obj == this) {
+    return true;
+  }
+ else {
+    TaskError taskError=(TaskError)obj;
+    if (taskError.getError().equals(error) && taskError.getCode() == code && taskError.getLevel().equals(level) && taskError.getTimSecs() == timSecs && taskError.getDurationSecs() == durationSecs) {
+      return true;
+    }
+ else {
+      return false;
+    }
+  }
+}

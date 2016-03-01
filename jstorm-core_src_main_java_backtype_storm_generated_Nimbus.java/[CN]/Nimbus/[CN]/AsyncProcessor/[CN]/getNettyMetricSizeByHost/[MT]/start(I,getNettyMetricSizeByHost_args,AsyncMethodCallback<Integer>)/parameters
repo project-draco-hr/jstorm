@@ -1,3 +1,0 @@
-I iface
-getNettyMetricSizeByHost_args args
-AsyncMethodCallback<Integer> resultHandler

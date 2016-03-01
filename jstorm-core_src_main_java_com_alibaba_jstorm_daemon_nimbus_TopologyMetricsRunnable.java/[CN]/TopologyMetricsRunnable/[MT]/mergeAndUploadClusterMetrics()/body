@@ -14,8 +14,8 @@
     for (    Map.Entry<Integer,MetricSnapshot> metric : entry.getValue().entrySet()) {
       MetricSnapshot snapshot=metric.getValue();
       snapshot.set_metricId(metricId);
-      if (metricType == MetricType.HISTOGRAM || metricType == MetricType.TIMER) {
-        snapshot.set_points(new ArrayList<Long>(0));
+      if (metricType == MetricType.HISTOGRAM) {
+        snapshot.set_points(new byte[0]);
       }
     }
   }

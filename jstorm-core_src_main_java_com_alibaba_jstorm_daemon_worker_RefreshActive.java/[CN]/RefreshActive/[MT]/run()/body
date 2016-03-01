@@ -10,30 +10,30 @@
       newTopologyStatus=base.getStatus().getStatusType();
     }
     StatusType oldTopologyStatus=workerData.getTopologyStatus();
-    if (newTopologyStatus.equals(oldTopologyStatus)) {
-      return;
-    }
-    LOG.info("Old TopologyStatus:" + oldTopologyStatus + ", new TopologyStatus:"+ newTopologyStatus);
     List<TaskShutdownDameon> tasks=workerData.getShutdownTasks();
     if (tasks == null) {
       LOG.info("Tasks aren't ready or begin to shutdown");
       return;
     }
-    if (newTopologyStatus.equals(StatusType.active)) {
-      for (      TaskShutdownDameon task : tasks) {
-        task.active();
+    boolean workerNewStatus=newTopologyStatus.equals(StatusType.active) && workerData.getWorkeInitConnectionStatus().get();
+    boolean workerOldStatus=workerData.getWorkerOldStatus().get();
+    if (workerNewStatus != workerOldStatus) {
+      if (workerNewStatus) {
+        for (        TaskShutdownDameon task : tasks) {
+          task.active();
+        }
       }
-    }
- else     if (newTopologyStatus.equals(StatusType.rebalancing)) {
-      for (      TaskShutdownDameon task : tasks) {
-        task.deactive();
-      }
-    }
  else {
-      for (      TaskShutdownDameon task : tasks) {
-        task.deactive();
+        for (        TaskShutdownDameon task : tasks) {
+          task.deactive();
+        }
       }
+      workerData.getWorkerOldStatus().set(workerNewStatus);
     }
+    if (newTopologyStatus.equals(oldTopologyStatus)) {
+      return;
+    }
+    LOG.info("Old TopologyStatus:" + oldTopologyStatus + ", new TopologyStatus:"+ newTopologyStatus);
     workerData.setTopologyStatus(newTopologyStatus);
     boolean newMonitorEnable=base.isEnableMonitor();
     boolean oldMonitorEnable=monitorEnable.get();

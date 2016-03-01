@@ -1,4 +1,5 @@
 {
+  _type=0;
   _task=task;
   _message=message;
 }

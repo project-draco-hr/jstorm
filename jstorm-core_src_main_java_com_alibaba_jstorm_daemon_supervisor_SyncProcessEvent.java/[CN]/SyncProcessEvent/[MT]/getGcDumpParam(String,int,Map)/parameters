@@ -1,0 +1,3 @@
+String topologyId
+int port
+Map totalConf

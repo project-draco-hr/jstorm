@@ -1,0 +1,16 @@
+{
+  IConnection conn=null;
+  WorkerSlot nodePort=taskNodeport.get(taskId);
+  if (nodePort == null) {
+    String errormsg="IConnection to " + taskId + " can't be found";
+    LOG.warn("Internal transfer warn, throw tuple,",new Exception(errormsg));
+  }
+ else {
+    conn=nodeportSocket.get(nodePort);
+    if (conn == null) {
+      String errormsg="NodePort to" + nodePort + " can't be found";
+      LOG.warn("Internal transfer warn, throw tuple,",new Exception(errormsg));
+    }
+  }
+  return conn;
+}

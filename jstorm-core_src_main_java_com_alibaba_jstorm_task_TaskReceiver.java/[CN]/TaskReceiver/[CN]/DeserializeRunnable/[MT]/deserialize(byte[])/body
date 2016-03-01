@@ -1,5 +1,5 @@
 {
-  long start=System.nanoTime();
+  long start=deserializeTimer.getTime();
   try {
     if (ser_msg == null) {
       return null;
@@ -14,7 +14,7 @@
       return null;
     }
     Tuple tuple=deserializer.deserialize(ser_msg);
-    if (isDebugRecv) {
+    if (JStormDebugger.isDebugRecv(tuple.getMessageId().getAnchors())) {
       LOG.info(idStr + " receive " + tuple.toString());
     }
     return tuple;
@@ -23,13 +23,12 @@
     throw new RuntimeException(e);
   }
 catch (  Throwable e) {
-    if (taskStatus.isShutdown() == false) {
+    if (!taskStatus.isShutdown()) {
       LOG.error(idStr + " recv thread error " + JStormUtils.toPrintableString(ser_msg)+ "\n",e);
     }
   }
  finally {
-    long end=System.nanoTime();
-    deserializeTimer.update((end - start) / TimeUtils.NS_PER_US);
+    deserializeTimer.updateTime(start);
   }
   return null;
 }

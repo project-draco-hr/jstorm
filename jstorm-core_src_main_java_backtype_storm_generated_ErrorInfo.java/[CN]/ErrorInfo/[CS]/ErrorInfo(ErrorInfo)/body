@@ -4,4 +4,8 @@
     this.error=other.error;
   }
   this.errorTimeSecs=other.errorTimeSecs;
+  if (other.is_set_errorLevel()) {
+    this.errorLevel=other.errorLevel;
+  }
+  this.errorCode=other.errorCode;
 }

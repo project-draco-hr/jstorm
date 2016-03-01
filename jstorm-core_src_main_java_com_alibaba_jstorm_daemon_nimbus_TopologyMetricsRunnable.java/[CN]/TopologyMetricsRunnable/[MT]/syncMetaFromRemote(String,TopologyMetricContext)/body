@@ -2,7 +2,7 @@
   try {
     int memSize=context.getMemMeta().size();
     Integer zkSize=(Integer)stormClusterState.get_topology_metric(topologyId);
-    if (zkSize != null && memSize != zkSize.intValue()) {
+    if (zkSize != null && memSize != zkSize) {
       ConcurrentMap<String,Long> memMeta=context.getMemMeta();
       for (      MetaType metaType : MetaType.values()) {
         List<MetricMeta> metaList=metricQueryClient.getMetricMeta(clusterName,topologyId,metaType);

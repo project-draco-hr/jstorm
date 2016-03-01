@@ -8,5 +8,5 @@
     return port;
   }
   LOG.info("can not find the cluster with name:" + name);
-  return null;
+  return 0;
 }

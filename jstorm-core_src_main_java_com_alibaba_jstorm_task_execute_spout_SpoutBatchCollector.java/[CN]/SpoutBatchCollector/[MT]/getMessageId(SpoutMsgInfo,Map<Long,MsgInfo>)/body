@@ -1,0 +1,28 @@
+{
+  MessageId msgId;
+  if (msg.rootId != null) {
+    Long as=MessageId.generateId(random);
+    msgId=MessageId.makeRootId(msg.rootId,as);
+    MsgInfo msgInfo=ackBatch.get(msg.rootId);
+    List<Object> ackerTuple;
+    if (msgInfo == null) {
+      TupleInfo info=new TupleInfo();
+      info.setStream(msg.streamId);
+      info.setValues(msg.values);
+      info.setMessageId(msg.messageId);
+      info.setTimestamp(System.currentTimeMillis());
+      pending.putHead(msg.rootId,info);
+      ackerTuple=JStormUtils.mk_list((Object)msg.rootId,JStormUtils.bit_xor_vals(as),task_id);
+      msgInfo=new SpoutMsgInfo(Acker.ACKER_INIT_STREAM_ID,ackerTuple,null,null,null,null);
+      ackBatch.put(msg.rootId,msgInfo);
+    }
+ else {
+      ackerTuple=msgInfo.values;
+      ackerTuple.set(1,JStormUtils.bit_xor_vals(ackerTuple.get(1),as));
+    }
+  }
+ else {
+    msgId=MessageId.makeUnanchored();
+  }
+  return msgId;
+}

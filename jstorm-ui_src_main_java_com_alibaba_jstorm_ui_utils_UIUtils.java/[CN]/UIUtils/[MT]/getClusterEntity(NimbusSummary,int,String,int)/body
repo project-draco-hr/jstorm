@@ -1,5 +1,0 @@
-{
-  String ip=ns.get_nimbusMaster().get_host().split(":")[0];
-  ClusterEntity ce=new ClusterEntity(cluster_name,ns.get_supervisorNum(),topology_num,ip,port,ns.get_version(),ns.get_totalPortNum(),ns.get_usedPortNum());
-  return ce;
-}

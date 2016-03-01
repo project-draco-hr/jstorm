@@ -1,0 +1,12 @@
+{
+  this.conf=conf;
+  this.supervisorId=supervisorId;
+  this.frequence=ConfigExtension.getSupervisorFrequencyCheck(conf);
+  this.timeOut=ConfigExtension.getStormHealthTimeoutMs(conf);
+  this.active=new AtomicBoolean(true);
+  this.checkStatus=status;
+  String errorDir=ConfigExtension.getStormMachineResourceErrorCheckDir(conf);
+  String panicDir=ConfigExtension.getStormMachineResourcePanicCheckDir(conf);
+  String warnDir=ConfigExtension.getStormMachineResourceWarningCheckDir(conf);
+  LOG.info("start supervisor health check , timeout is " + timeOut + ","+ " scripts directory is: "+ panicDir+ ";"+ errorDir+ ";"+ warnDir);
+}

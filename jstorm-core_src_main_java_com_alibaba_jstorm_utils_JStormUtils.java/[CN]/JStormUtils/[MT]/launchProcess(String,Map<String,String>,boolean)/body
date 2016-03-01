@@ -1,0 +1,10 @@
+{
+  String[] cmds=command.split(" ");
+  ArrayList<String> cmdList=new ArrayList<String>();
+  for (  String tok : cmds) {
+    if (!StringUtils.isBlank(tok)) {
+      cmdList.add(tok);
+    }
+  }
+  return launchProcess(command,cmdList,environment,backend);
+}

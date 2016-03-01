@@ -1,0 +1,4 @@
+{
+  output.writeInt(object.array().length);
+  output.write(object.array());
+}

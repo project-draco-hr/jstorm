@@ -15,6 +15,9 @@
     init(conf);
   }
  catch (  Throwable e) {
+    if (e instanceof OutOfMemoryError) {
+      LOG.error("Halting due to Out Of Memory Error...");
+    }
     LOG.error("Fail to run nimbus ",e);
   }
  finally {

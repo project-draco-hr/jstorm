@@ -38,6 +38,8 @@ case STDDEV:
 return Double.valueOf(get_stddev());
 case POINTS:
 return get_points();
+case POINT_SIZE:
+return Integer.valueOf(get_pointSize());
 }
 throw new IllegalStateException();
 }

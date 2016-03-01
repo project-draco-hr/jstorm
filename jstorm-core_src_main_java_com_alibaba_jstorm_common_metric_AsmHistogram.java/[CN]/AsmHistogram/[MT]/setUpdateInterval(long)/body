@@ -1,0 +1,6 @@
+{
+  if (interval < 0 || interval > TimeUtils.MS_PER_SEC) {
+    throw new RuntimeException("timerUpdateInterval must be between 0~1000");
+  }
+  updateInterval=interval;
+}

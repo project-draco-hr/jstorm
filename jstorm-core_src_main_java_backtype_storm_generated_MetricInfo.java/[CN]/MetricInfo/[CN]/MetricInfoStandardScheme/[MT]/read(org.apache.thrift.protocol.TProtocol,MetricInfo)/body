@@ -10,26 +10,26 @@ switch (schemeField.id) {
 case 1:
       if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
 {
-          org.apache.thrift.protocol.TMap _map124=iprot.readMapBegin();
-          struct.metrics=new HashMap<String,Map<Integer,MetricSnapshot>>(2 * _map124.size);
-          String _key125;
-          Map<Integer,MetricSnapshot> _val126;
-          for (int _i127=0; _i127 < _map124.size; ++_i127) {
-            _key125=iprot.readString();
+          org.apache.thrift.protocol.TMap _map116=iprot.readMapBegin();
+          struct.metrics=new HashMap<String,Map<Integer,MetricSnapshot>>(2 * _map116.size);
+          String _key117;
+          Map<Integer,MetricSnapshot> _val118;
+          for (int _i119=0; _i119 < _map116.size; ++_i119) {
+            _key117=iprot.readString();
 {
-              org.apache.thrift.protocol.TMap _map128=iprot.readMapBegin();
-              _val126=new HashMap<Integer,MetricSnapshot>(2 * _map128.size);
-              int _key129;
-              MetricSnapshot _val130;
-              for (int _i131=0; _i131 < _map128.size; ++_i131) {
-                _key129=iprot.readI32();
-                _val130=new MetricSnapshot();
-                _val130.read(iprot);
-                _val126.put(_key129,_val130);
+              org.apache.thrift.protocol.TMap _map120=iprot.readMapBegin();
+              _val118=new HashMap<Integer,MetricSnapshot>(2 * _map120.size);
+              int _key121;
+              MetricSnapshot _val122;
+              for (int _i123=0; _i123 < _map120.size; ++_i123) {
+                _key121=iprot.readI32();
+                _val122=new MetricSnapshot();
+                _val122.read(iprot);
+                _val118.put(_key121,_val122);
               }
               iprot.readMapEnd();
             }
-            struct.metrics.put(_key125,_val126);
+            struct.metrics.put(_key117,_val118);
           }
           iprot.readMapEnd();
         }

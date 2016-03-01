@@ -1,0 +1,8 @@
+{
+  java.util.List<Integer> outTasks=new ArrayList<Integer>();
+  List<MsgInfo> batchTobeFlushed=batchCollector.push(outStreamId,values,outTaskId,anchors,null,null,callback);
+  if (batchTobeFlushed != null && batchTobeFlushed.size() > 0) {
+    outTasks=sendBatch(outStreamId,(outTaskId != null ? outTaskId.toString() : null),batchTobeFlushed);
+  }
+  return outTasks;
+}

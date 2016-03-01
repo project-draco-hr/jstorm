@@ -16,5 +16,21 @@ if (value == null) {
   set_errorTimeSecs((Integer)value);
 }
 break;
+case ERROR_LEVEL:
+if (value == null) {
+unset_errorLevel();
+}
+ else {
+set_errorLevel((String)value);
+}
+break;
+case ERROR_CODE:
+if (value == null) {
+unset_errorCode();
+}
+ else {
+set_errorCode((Integer)value);
+}
+break;
 }
 }

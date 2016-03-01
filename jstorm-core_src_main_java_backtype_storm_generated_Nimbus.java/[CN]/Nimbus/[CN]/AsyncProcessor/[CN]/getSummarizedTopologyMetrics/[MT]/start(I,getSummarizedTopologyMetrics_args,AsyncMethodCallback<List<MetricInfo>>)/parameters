@@ -1,3 +1,0 @@
-I iface
-getSummarizedTopologyMetrics_args args
-AsyncMethodCallback<List<MetricInfo>> resultHandler

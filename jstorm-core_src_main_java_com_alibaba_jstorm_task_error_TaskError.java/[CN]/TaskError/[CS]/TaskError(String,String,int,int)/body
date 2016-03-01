@@ -1,0 +1,7 @@
+{
+  this.error=error;
+  this.level=level;
+  this.code=code;
+  this.timSecs=timSecs;
+  this.durationSecs=ErrorConstants.DURATION_SECS_DEFAULT;
+}

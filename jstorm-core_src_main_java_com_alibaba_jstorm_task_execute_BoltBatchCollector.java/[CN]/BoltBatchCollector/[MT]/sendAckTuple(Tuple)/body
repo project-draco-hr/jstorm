@@ -1,0 +1,20 @@
+{
+  boolean ret=false;
+  Integer pendingCount;
+synchronized (pendingTuples) {
+    pendingCount=pendingTuples.get(input);
+  }
+  if (pendingCount == null || pendingCount <= 0) {
+    long ack_val=0L;
+    Object pend_val=pending_acks.remove(input);
+    if (pend_val != null) {
+      ack_val=(Long)(pend_val);
+    }
+    for (    Map.Entry<Long,Long> e : input.getMessageId().getAnchorsToIds().entrySet()) {
+      List<Object> ackTuple=JStormUtils.mk_list((Object)e.getKey(),JStormUtils.bit_xor(e.getValue(),ack_val));
+      sendBoltMsg(Acker.ACKER_ACK_STREAM_ID,null,ackTuple,null,null);
+    }
+    ret=true;
+  }
+  return ret;
+}

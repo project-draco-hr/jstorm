@@ -1,2 +1,7 @@
 {
+  long v=unflushed.getAndSet(0l);
+  meter.mark(v);
+  for (  AsmMetric metric : this.assocMetrics) {
+    metric.update(v);
+  }
 }

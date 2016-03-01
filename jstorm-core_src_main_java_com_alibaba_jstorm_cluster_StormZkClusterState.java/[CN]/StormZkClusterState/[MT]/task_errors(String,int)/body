@@ -6,9 +6,9 @@
   }
   List<String> children=cluster_state.get_children(path,false);
   for (  String str : children) {
-    byte[] v=cluster_state.get_data(path + "/" + str,false);
-    if (v != null) {
-      TaskError error=new TaskError(new String(v),Integer.parseInt(str));
+    Object obj=getObject(path + Cluster.ZK_SEPERATOR + str,false);
+    if (obj != null) {
+      TaskError error=(TaskError)obj;
       errors.add(error);
     }
   }

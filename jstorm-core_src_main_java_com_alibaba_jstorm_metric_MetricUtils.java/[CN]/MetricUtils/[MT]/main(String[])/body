@@ -1,4 +1,0 @@
-{
-  String workerName="WC@SequenceTest@10.1.1.0@6800@sys@Counter";
-  System.out.println(worker2topologyName(workerName));
-}

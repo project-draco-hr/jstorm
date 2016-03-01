@@ -1,0 +1,35 @@
+{
+  Map<String,Object> ret=new HashMap<>();
+  int win=UIUtils.parseWindow(window);
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    TopologyInfo topologyInfo=client.getClient().getTopologyInfo(topology);
+    String component=null;
+    String type=null;
+    for (    ComponentSummary summary : topologyInfo.get_components()) {
+      if (summary.get_taskIds().contains(taskId)) {
+        component=summary.get_name();
+        type=summary.get_type();
+      }
+    }
+    ret.put("topologyId",topology);
+    ret.put("topologyName",topologyInfo.get_topology().get_name());
+    ret.put("component",component);
+    TaskEntity task=UIUtils.getTaskEntity(topologyInfo.get_tasks(),taskId);
+    task.setComponent(component);
+    task.setType(type);
+    ret.put("task",task);
+    List<MetricInfo> taskStreamMetrics=client.getClient().getTaskAndStreamMetrics(topology,taskId);
+    UITaskMetric taskMetric=UIMetricUtils.getTaskMetric(taskStreamMetrics,component,taskId,win);
+    ret.put("taskMetric",taskMetric);
+    List<UIStreamMetric> streamMetrics=UIMetricUtils.getStreamMetrics(taskStreamMetrics,component,taskId,win);
+    ret.put("streamMetrics",streamMetrics);
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    ret=UIUtils.exceptionJson(e);
+    LOG.error(e.getMessage(),e);
+  }
+  return ret;
+}

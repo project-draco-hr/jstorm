@@ -1,0 +1,6 @@
+{
+  this.timestamp=timestamp;
+  this.trade=trade;
+  this.customer=customer;
+  this.buffer=str;
+}

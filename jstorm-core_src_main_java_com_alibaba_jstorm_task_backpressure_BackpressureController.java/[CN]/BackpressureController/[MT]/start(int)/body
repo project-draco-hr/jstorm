@@ -34,5 +34,5 @@
   int size=totalQueueSize / 100;
   queueSizeReduced=size > 10 ? size : 10;
   isBackpressureMode=true;
-  LOG.info("Start backpressure at spout-{}, sleepTime={}, queueSizeReduced={}, flowCtrlTime={}",taskId,sleepTime,queueSizeReduced,flowCtrlTime);
+  LOG.debug("Start backpressure at spout-{}, sleepTime={}, queueSizeReduced={}, flowCtrlTime={}",taskId,sleepTime,queueSizeReduced,flowCtrlTime);
 }

@@ -9,4 +9,7 @@
       WorkerClassLoader.restoreThreadContext();
     }
   }
+ else {
+    taskStatus.setStatus(TaskStatus.RUN);
+  }
 }

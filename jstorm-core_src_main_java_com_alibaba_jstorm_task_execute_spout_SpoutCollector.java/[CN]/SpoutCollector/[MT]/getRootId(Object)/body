@@ -1,0 +1,11 @@
+{
+  Boolean needAck=(messageId != null) && (ackerNum > 0);
+  Long rootId=null;
+  if (needAck) {
+    rootId=MessageId.generateId(random);
+    while (pending.containsKey(rootId)) {
+      rootId=MessageId.generateId(random);
+    }
+  }
+  return rootId;
+}

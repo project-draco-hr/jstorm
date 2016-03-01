@@ -1,0 +1,31 @@
+{
+  this.conf=conf;
+  this.supervisorId=supervisorId;
+  this.shutdown=new AtomicBoolean(false);
+  this.threads=threads;
+  this.eventManager=eventManager;
+  this.httpserver=httpserver;
+  this.stormClusterState=stormClusterState;
+  this.workerThreadPidsAtom=workerThreadPidsAtom;
+  this.metricsReporter=new JStormMetricsReporter(this);
+  this.metricsReporter.init();
+  JStormMetrics.registerWorkerMetric(JStormMetrics.workerMetricName(MetricDef.CPU_USED_RATIO,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return JStormUtils.getTotalCpuUsage();
+    }
+  }
+));
+  JStormMetrics.registerWorkerMetric(JStormMetrics.workerMetricName(MetricDef.DISK_USAGE,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return JStormUtils.getDiskUsage();
+    }
+  }
+));
+  JStormMetrics.registerWorkerMetric(JStormMetrics.workerMetricName(MetricDef.MEMORY_USAGE,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+    @Override public Double getValue(){
+      return JStormUtils.getTotalMemUsage();
+    }
+  }
+));
+  Runtime.getRuntime().addShutdownHook(new Thread(this));
+}

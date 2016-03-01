@@ -1,4 +1,6 @@
 {
   LOG.info("Begin to shut down master");
+  ITopologyActionNotifierPlugin nimbusNotify=data.getNimbusNotify();
+  if (nimbusNotify != null)   nimbusNotify.cleanup();
   LOG.info("Successfully shut down master");
 }

@@ -2,11 +2,11 @@
   if (isInWorker) {
     if (boltOutput != null) {
       LOG.info("emit metrics through bolt collector.");
-      boltOutput.emit(Common.TOPOLOGY_MASTER_METRICS_STREAM_ID,new Values(JStormServerUtils.getName(host,port),metrics));
+      ((BoltCollector)boltOutput.getDelegate()).emitCtrl(Common.TOPOLOGY_MASTER_METRICS_STREAM_ID,null,new Values(JStormServerUtils.getName(host,port),metrics));
     }
  else     if (spoutOutput != null) {
       LOG.info("emit metrics through spout collector.");
-      spoutOutput.emit(Common.TOPOLOGY_MASTER_METRICS_STREAM_ID,new Values(JStormServerUtils.getName(host,port),metrics));
+      ((SpoutCollector)spoutOutput.getDelegate()).emitCtrl(Common.TOPOLOGY_MASTER_METRICS_STREAM_ID,new Values(JStormServerUtils.getName(host,port),metrics),null);
     }
   }
  else {

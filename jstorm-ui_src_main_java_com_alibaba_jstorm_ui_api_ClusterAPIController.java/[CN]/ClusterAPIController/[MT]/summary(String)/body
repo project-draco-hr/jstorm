@@ -1,0 +1,4 @@
+{
+  UIUtils.readUiConfig();
+  return UIUtils.clustersCache.get(clusterName);
+}

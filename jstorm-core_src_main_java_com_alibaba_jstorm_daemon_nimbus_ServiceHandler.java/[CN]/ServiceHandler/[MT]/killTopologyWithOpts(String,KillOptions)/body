@@ -10,6 +10,7 @@
     Remove event=new Remove();
     event.topologyId=topologyId;
     data.getMetricRunnable().pushEvent(event);
+    notifyTopologyActionListener(topologyName,"killTopology");
   }
  catch (  NotAliveException e) {
     String errMsg="KillTopology Error, no this topology " + topologyName;

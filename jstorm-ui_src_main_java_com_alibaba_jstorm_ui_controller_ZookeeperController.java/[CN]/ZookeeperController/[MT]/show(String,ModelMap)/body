@@ -1,4 +1,5 @@
 {
+  name=StringEscapeUtils.escapeHtml(name);
   long start=System.currentTimeMillis();
   try {
     ClusterConfig config=UIUtils.clusterConfig.get(name);

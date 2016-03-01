@@ -1,0 +1,19 @@
+{
+  FileParse fileParse=new FileParse(procfsStatFile,new LineParse(){
+    @Override public void prepare(){
+    }
+    @Override public boolean parseLine(    String line){
+      Matcher mat=CPU_TIME_FORMAT.matcher(line);
+      if (mat.find()) {
+        long uTime=Long.parseLong(mat.group(1));
+        long nTime=Long.parseLong(mat.group(2));
+        long sTime=Long.parseLong(mat.group(3));
+        cpuUsageCalculator.updateElapsedJiffies(BigInteger.valueOf(uTime + nTime + sTime),getCurrentTime());
+        return true;
+      }
+      return false;
+    }
+  }
+);
+  fileParse.parse();
+}

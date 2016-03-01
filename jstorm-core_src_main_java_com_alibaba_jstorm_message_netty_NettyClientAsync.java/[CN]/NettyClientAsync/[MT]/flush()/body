@@ -1,8 +1,8 @@
 {
-  if (isClosed() == true) {
+  if (isClosed()) {
     return;
   }
-  if (flush_later.get() == false) {
+  if (!flush_later.get()) {
     return;
   }
   Channel channel=isChannelReady();

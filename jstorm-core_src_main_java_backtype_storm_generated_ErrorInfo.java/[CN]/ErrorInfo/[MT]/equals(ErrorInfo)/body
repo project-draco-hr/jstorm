@@ -12,5 +12,17 @@
     if (!(this_present_errorTimeSecs && that_present_errorTimeSecs))     return false;
     if (this.errorTimeSecs != that.errorTimeSecs)     return false;
   }
+  boolean this_present_errorLevel=true && this.is_set_errorLevel();
+  boolean that_present_errorLevel=true && that.is_set_errorLevel();
+  if (this_present_errorLevel || that_present_errorLevel) {
+    if (!(this_present_errorLevel && that_present_errorLevel))     return false;
+    if (!this.errorLevel.equals(that.errorLevel))     return false;
+  }
+  boolean this_present_errorCode=true;
+  boolean that_present_errorCode=true;
+  if (this_present_errorCode || that_present_errorCode) {
+    if (!(this_present_errorCode && that_present_errorCode))     return false;
+    if (this.errorCode != that.errorCode)     return false;
+  }
   return true;
 }

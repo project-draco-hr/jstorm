@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(SUPERVISOR_FREQUENCY_CHECK),60);
+}

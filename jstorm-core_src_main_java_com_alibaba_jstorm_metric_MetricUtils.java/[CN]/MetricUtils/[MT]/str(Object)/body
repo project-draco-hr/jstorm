@@ -14,9 +14,6 @@
  else     if (type == MetricType.HISTOGRAM) {
       return histogramStr(snapshot);
     }
- else     if (type == MetricType.TIMER) {
-      return timerStr(snapshot);
-    }
   }
   return obj.toString();
 }

@@ -1,0 +1,3 @@
+{
+  this.statusType=StatusType.info;
+}

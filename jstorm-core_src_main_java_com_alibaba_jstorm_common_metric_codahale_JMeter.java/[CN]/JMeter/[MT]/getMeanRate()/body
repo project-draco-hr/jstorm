@@ -1,0 +1,9 @@
+{
+  if (getCount() == 0) {
+    return 0.0;
+  }
+ else {
+    final double elapsed=(System.currentTimeMillis() - startTime);
+    return getCount() / elapsed * TimeUnit.SECONDS.toMillis(1);
+  }
+}

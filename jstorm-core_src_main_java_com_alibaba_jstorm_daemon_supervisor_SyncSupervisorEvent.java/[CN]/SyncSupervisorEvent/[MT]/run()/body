@@ -1,15 +1,34 @@
 {
   LOG.debug("Synchronizing supervisor, interval seconds:" + TimeUtils.time_delta(lastTime));
   lastTime=TimeUtils.current_time_secs();
+  MachineCheckStatus checkStatus=new MachineCheckStatus();
+  checkStatus.SetType(heartbeat.getCheckStatus().getType());
   try {
     RunnableCallback syncCallback=new EventManagerZkPusher(this,syncSupEventManager);
-    Map<String,Assignment> assignments=Cluster.get_all_assignment(stormClusterState,syncCallback);
+    Map<String,Integer> assignmentVersion=(Map<String,Integer>)localState.get(Common.LS_LOCAL_ZK_ASSIGNMENT_VERSION);
+    if (assignmentVersion == null) {
+      assignmentVersion=new HashMap<String,Integer>();
+    }
+    Map<String,Assignment> assignments=(Map<String,Assignment>)localState.get(Common.LS_LOCAl_ZK_ASSIGNMENTS);
+    if (assignments == null) {
+      assignments=new HashMap<String,Assignment>();
+    }
+    LOG.debug("get local assignments  " + assignments);
+    LOG.debug("get local assignments version " + assignmentVersion);
+    if (checkStatus.getType().equals(MachineCheckStatus.StatusType.panic) || checkStatus.getType().equals(MachineCheckStatus.StatusType.error)) {
+      assignmentVersion.clear();
+      assignments.clear();
+      LOG.warn("Supervisor Machine Check Status :" + checkStatus.getType() + ", so kill all workers.");
+    }
+ else {
+      getAllAssignments(assignmentVersion,assignments,syncCallback);
+    }
     LOG.debug("Get all assignments " + assignments);
     List<String> downloadedTopologyIds=StormConfig.get_supervisor_toplogy_list(conf);
     LOG.debug("Downloaded storm ids: " + downloadedTopologyIds);
-    Map<Integer,LocalAssignment> zkAssignment=getLocalAssign(stormClusterState,supervisorId,assignments);
+    Map<Integer,LocalAssignment> zkAssignment;
+    zkAssignment=getLocalAssign(stormClusterState,supervisorId,assignments);
     Map<Integer,LocalAssignment> localAssignment;
-    Set<String> updateTopologys;
     try {
       LOG.debug("Writing local assignment " + zkAssignment);
       localAssignment=(Map<Integer,LocalAssignment>)localState.get(Common.LS_LOCAL_ASSIGNMENTS);
@@ -17,15 +36,16 @@
         localAssignment=new HashMap<Integer,LocalAssignment>();
       }
       localState.put(Common.LS_LOCAL_ASSIGNMENTS,zkAssignment);
-      updateTopologys=getUpdateTopologys(localAssignment,zkAssignment,assignments);
-      Set<String> reDownloadTopologys=getNeedReDownloadTopologys(localAssignment);
-      if (reDownloadTopologys != null) {
-        updateTopologys.addAll(reDownloadTopologys);
-      }
     }
  catch (    IOException e) {
       LOG.error("put LS_LOCAL_ASSIGNMENTS " + zkAssignment + " of localState failed");
       throw e;
+    }
+    Set<String> updateTopologys;
+    updateTopologys=getUpdateTopologys(localAssignment,zkAssignment,assignments);
+    Set<String> reDownloadTopologys=getNeedReDownloadTopologys(localAssignment);
+    if (reDownloadTopologys != null) {
+      updateTopologys.addAll(reDownloadTopologys);
     }
     Map<String,String> topologyCodes=getTopologyCodeLocations(assignments,supervisorId);
     Set<String> downloadFailedTopologyIds=new HashSet<String>();
@@ -33,8 +53,19 @@
     removeUselessTopology(topologyCodes,downloadedTopologyIds);
     syncProcesses.run(zkAssignment,downloadFailedTopologyIds);
     heartbeat.updateHbTrigger(true);
+    try {
+      localState.put(Common.LS_LOCAL_ZK_ASSIGNMENT_VERSION,assignmentVersion);
+      localState.put(Common.LS_LOCAl_ZK_ASSIGNMENTS,assignments);
+    }
+ catch (    IOException e) {
+      LOG.error("put LS_LOCAL_ZK_ASSIGNMENT_VERSION&&LS_LOCAl_ZK_ASSIGNMENTS  failed");
+      throw e;
+    }
   }
  catch (  Exception e) {
     LOG.error("Failed to Sync Supervisor",e);
+  }
+  if (checkStatus.getType().equals(MachineCheckStatus.StatusType.panic)) {
+    JStormUtils.halt_process(0,"Supervisor Machine Check Status : Panic , !!!!shutdown!!!!");
   }
 }

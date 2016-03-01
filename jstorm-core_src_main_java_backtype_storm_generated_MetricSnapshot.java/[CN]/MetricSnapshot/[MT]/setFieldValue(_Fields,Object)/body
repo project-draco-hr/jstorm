@@ -149,7 +149,15 @@ if (value == null) {
 unset_points();
 }
  else {
-set_points((List<Long>)value);
+set_points((ByteBuffer)value);
+}
+break;
+case POINT_SIZE:
+if (value == null) {
+unset_pointSize();
+}
+ else {
+set_pointSize((Integer)value);
 }
 break;
 }

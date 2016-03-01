@@ -1,3 +1,0 @@
-{
-  conf.put(NETTY_MAX_SEND_PENDING,pending);
-}

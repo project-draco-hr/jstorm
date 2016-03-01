@@ -1,0 +1,41 @@
+{
+  clusterName=StringEscapeUtils.escapeHtml(clusterName);
+  topologyId=StringEscapeUtils.escapeHtml(topologyId);
+  boolean _caseIgnore=!StringUtils.isBlank(caseIgnore);
+  int port=UIUtils.getSupervisorPort(clusterName);
+  model.addAttribute("keyword",keyword);
+  List<Future<Void>> futures=new ArrayList<>();
+  ConcurrentLinkedQueue<Map> result=new ConcurrentLinkedQueue<>();
+  if (filterKeyword(model,keyword)) {
+    NimbusClient client=null;
+    try {
+      keyword=URLEncoder.encode(keyword,"UTF-8");
+      client=NimbusClientManager.getNimbusClient(clusterName);
+      TopologyInfo info=client.getClient().getTopologyInfo(topologyId);
+      String topologyName=info.get_topology().get_name();
+      List<UIWorkerMetric> workerData=UIMetricUtils.getWorkerMetrics(info.get_metrics().get_workerMetric(),topologyId,60);
+      String dir="." + File.separator + topologyName;
+      for (      UIWorkerMetric metric : workerData) {
+        String logFile=topologyName + "-worker-" + metric.getPort()+ ".log";
+        String url=String.format("http://%s:%s/logview?cmd=searchLog&file=%s&key=%s&offset=%s&case_ignore=%s",metric.getHost(),port,getFullFile(dir,logFile),keyword,0,_caseIgnore);
+        futures.add(_backround.submit(new SearchRequest(url,metric.getHost(),metric.getPort(),dir,logFile,result)));
+      }
+      checkFutures(futures);
+      model.addAttribute("result",result);
+    }
+ catch (    NotAliveException nae) {
+      model.addAttribute("tip",String.format("The topology: %s is dead.",topologyId));
+    }
+catch (    Exception e) {
+      NimbusClientManager.removeClient(clusterName);
+      LOG.error(e.getMessage(),e);
+      UIUtils.addErrorAttribute(model,e);
+    }
+  }
+  model.addAttribute("clusterName",clusterName);
+  model.addAttribute("topologyId",topologyId);
+  model.addAttribute("logServerPort",port);
+  model.addAttribute("caseIgnore",_caseIgnore);
+  UIUtils.addTitleAttribute(model,"DeepSearch");
+  return "deepSearch";
+}

@@ -1,0 +1,3 @@
+{
+  _bolt.prepare(stormConf,context,new ControlOutputCollector(collector));
+}

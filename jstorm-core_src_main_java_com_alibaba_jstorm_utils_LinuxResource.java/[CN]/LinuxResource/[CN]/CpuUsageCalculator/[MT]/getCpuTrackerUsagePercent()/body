@@ -1,0 +1,13 @@
+{
+  if (lastSampleTime == -1 || lastSampleTime > sampleTime) {
+    lastSampleTime=sampleTime;
+    lastSystemCpuTime=systemCpuTime;
+    return cpuUsage;
+  }
+  if (sampleTime > lastSampleTime + MINIMUM_UPDATE_INTERVAL) {
+    cpuUsage=((systemCpuTime.subtract(lastSystemCpuTime)).floatValue()) * 100F / ((float)(sampleTime - lastSampleTime));
+    lastSampleTime=sampleTime;
+    lastSystemCpuTime=systemCpuTime;
+  }
+  return cpuUsage;
+}

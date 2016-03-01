@@ -1,0 +1,16 @@
+{
+  if (JStormMetrics.enabled) {
+    long now=System.currentTimeMillis();
+    long elapsed=now - lastUpdateTime;
+    if (elapsed >= updateInterval) {
+      lastUpdateTime=now;
+      if (timeUnit == TimeUnit.MILLISECONDS) {
+        return now;
+      }
+ else {
+        return System.nanoTime();
+      }
+    }
+  }
+  return -1L;
+}

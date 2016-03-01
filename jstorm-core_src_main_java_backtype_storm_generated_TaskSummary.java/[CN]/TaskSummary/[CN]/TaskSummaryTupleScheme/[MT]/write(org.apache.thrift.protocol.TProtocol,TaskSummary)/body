@@ -13,8 +13,8 @@
   if (struct.is_set_errors()) {
 {
       oprot.writeI32(struct.errors.size());
-      for (      ErrorInfo _iter182 : struct.errors) {
-        _iter182.write(oprot);
+      for (      ErrorInfo _iter174 : struct.errors) {
+        _iter174.write(oprot);
       }
     }
   }

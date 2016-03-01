@@ -5,4 +5,10 @@
   if (!is_set_errorTimeSecs()) {
     throw new TProtocolException("Required field 'errorTimeSecs' is unset! Struct:" + toString());
   }
+  if (!is_set_errorLevel()) {
+    throw new TProtocolException("Required field 'errorLevel' is unset! Struct:" + toString());
+  }
+  if (!is_set_errorCode()) {
+    throw new TProtocolException("Required field 'errorCode' is unset! Struct:" + toString());
+  }
 }

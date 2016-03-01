@@ -1,6 +1,7 @@
 {
   try {
     NimbusUtils.transitionName(data,topologyName,true,StatusType.activate);
+    notifyTopologyActionListener(topologyName,"activate");
   }
  catch (  NotAliveException e) {
     String errMsg="Activate Error, no this topology " + topologyName;

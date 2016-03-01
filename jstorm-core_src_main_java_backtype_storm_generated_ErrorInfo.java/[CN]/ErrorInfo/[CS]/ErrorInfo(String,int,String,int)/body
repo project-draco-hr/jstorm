@@ -1,0 +1,9 @@
+{
+  this();
+  this.error=error;
+  this.errorTimeSecs=errorTimeSecs;
+  set_errorTimeSecs_isSet(true);
+  this.errorLevel=errorLevel;
+  this.errorCode=errorCode;
+  set_errorCode_isSet(true);
+}

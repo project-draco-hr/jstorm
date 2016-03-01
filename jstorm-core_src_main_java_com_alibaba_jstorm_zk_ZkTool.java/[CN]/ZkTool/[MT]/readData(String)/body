@@ -5,14 +5,14 @@
     zkClusterState=new DistributedClusterState(conf);
     String data=getData(zkClusterState,path);
     if (data == null) {
-      LOG.info("No data of " + path);
+      System.out.println("No data of " + path);
     }
     StringBuilder sb=new StringBuilder();
     sb.append("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n");
     sb.append("Zk node " + path + "\n");
     sb.append("Readable data:" + data + "\n");
     sb.append("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n");
-    LOG.info(sb.toString());
+    System.out.println(sb.toString());
   }
  catch (  Exception e) {
     if (zkClusterState == null) {

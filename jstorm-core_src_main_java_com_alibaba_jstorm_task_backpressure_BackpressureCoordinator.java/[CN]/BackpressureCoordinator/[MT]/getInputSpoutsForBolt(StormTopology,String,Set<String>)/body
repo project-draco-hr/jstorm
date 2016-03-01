@@ -1,5 +1,5 @@
 {
-  Set<String> ret=new TreeSet<String>();
+  Set<String> ret=new HashSet<String>();
   if (componentsTraversed == null) {
     componentsTraversed=new HashSet<String>();
   }
@@ -9,7 +9,7 @@
   }
   ComponentCommon common=bolt.get_common();
   Set<GlobalStreamId> inputstreams=common.get_inputs().keySet();
-  Set<String> inputComponents=new TreeSet<String>();
+  Set<String> inputComponents=new HashSet<String>();
   for (  GlobalStreamId streamId : inputstreams) {
     inputComponents.add(streamId.get_componentId());
   }

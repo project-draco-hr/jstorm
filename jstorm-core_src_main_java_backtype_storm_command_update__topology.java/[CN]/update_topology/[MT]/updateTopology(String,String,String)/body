@@ -1,6 +1,6 @@
 {
-  NimbusClient client=null;
-  Map loadMap=null;
+  NimbusClient client;
+  Map loadMap;
   if (pathConf != null) {
     loadMap=Utils.loadConf(pathConf);
   }
@@ -26,17 +26,7 @@
           StormSubmitter.submitJar(conf,libPath.get(libName),jarPath,client);
         }
       }
- else {
-        if (pathJar == null) {
-          throw new RuntimeException("No client app jar, please upload it");
-        }
-      }
-      if (pathJar != null) {
-        StormSubmitter.submitJar(conf,pathJar,uploadLocation,client);
-      }
- else {
-        client.getClient().finishFileUpload(uploadLocation);
-      }
+      StormSubmitter.submitJar(conf,pathJar,uploadLocation,client);
     }
     String jsonConf=Utils.to_json(loadMap);
     System.out.println("New configuration:\n" + jsonConf);

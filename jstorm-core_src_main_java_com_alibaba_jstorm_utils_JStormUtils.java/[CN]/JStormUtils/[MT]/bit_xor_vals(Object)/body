@@ -1,5 +1,5 @@
 {
-  Long rtn=0l;
+  long rtn=0l;
   for (  Object n : vals) {
     rtn=bit_xor(rtn,n);
   }

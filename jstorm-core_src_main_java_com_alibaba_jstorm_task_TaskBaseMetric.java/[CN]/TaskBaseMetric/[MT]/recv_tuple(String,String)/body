@@ -1,5 +1,5 @@
 {
-  if (enableMetrics) {
-    update(stream,AsmMetric.mkName(component,MetricDef.RECV_TPS),1,MetricType.METER);
+  if (JStormMetrics.enabled) {
+    update(stream,fastConcat(component,MetricDef.RECV_TPS),1,MetricType.METER);
   }
 }

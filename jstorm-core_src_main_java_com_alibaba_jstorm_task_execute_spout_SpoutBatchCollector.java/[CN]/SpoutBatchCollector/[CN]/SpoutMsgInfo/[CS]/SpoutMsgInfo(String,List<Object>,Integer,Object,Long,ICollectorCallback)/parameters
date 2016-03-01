@@ -1,0 +1,6 @@
+String streamId
+List<Object> values
+Integer outTaskId
+Object messageId
+Long rootId
+ICollectorCallback callback

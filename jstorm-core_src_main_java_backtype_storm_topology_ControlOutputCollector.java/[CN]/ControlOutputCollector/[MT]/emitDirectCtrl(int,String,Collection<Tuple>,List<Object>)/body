@@ -1,0 +1,3 @@
+{
+  ((BoltCollector)(out.getDelegate())).emitDirectCtrl(taskId,streamId,anchors,tuple);
+}

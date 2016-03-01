@@ -5,7 +5,6 @@
   this.topologyContext=topologyContext;
   this.innerTaskTransfer=innerTaskTransfer;
   this.taskStatus=taskStatus;
-  this.isDebugRecv=ConfigExtension.isTopologyDebugRecvTuple(stormConf);
   int queueSize=JStormUtils.parseInt(stormConf.get(Config.TOPOLOGY_EXECUTOR_RECEIVE_BUFFER_SIZE),256);
   WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(stormConf);
   this.deserializeQueue=DisruptorQueue.mkInstance("TaskDeserialize",ProducerType.MULTI,queueSize,waitStrategy);

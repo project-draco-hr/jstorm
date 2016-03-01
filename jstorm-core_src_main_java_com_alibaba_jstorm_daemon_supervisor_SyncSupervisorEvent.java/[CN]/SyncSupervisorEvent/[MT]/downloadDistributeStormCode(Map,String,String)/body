@@ -3,7 +3,7 @@
   String stormroot=StormConfig.supervisor_stormdist_root(conf,topologyId);
   JStormServerUtils.downloadCodeFromMaster(conf,tmproot,masterCodeDir,topologyId,true);
   String localFileJarTmp=StormConfig.stormjar_path(tmproot);
-  JStormUtils.extract_dir_from_jar(localFileJarTmp,StormConfig.RESOURCES_SUBDIR,tmproot);
+  JStormUtils.extractDirFromJar(localFileJarTmp,StormConfig.RESOURCES_SUBDIR,tmproot);
   File srcDir=new File(tmproot);
   File destDir=new File(stormroot);
   try {

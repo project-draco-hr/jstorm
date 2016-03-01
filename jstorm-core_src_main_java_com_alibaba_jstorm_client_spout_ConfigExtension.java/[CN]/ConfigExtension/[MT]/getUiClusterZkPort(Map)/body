@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(uiCluster.get(UI_CLUSTER_ZK_PORT));
-}

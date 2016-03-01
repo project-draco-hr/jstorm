@@ -55,13 +55,13 @@ break;
 case 6:
 if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
 {
-org.apache.thrift.protocol.TList _list178=iprot.readListBegin();
-struct.errors=new ArrayList<ErrorInfo>(_list178.size);
-ErrorInfo _elem179;
-for (int _i180=0; _i180 < _list178.size; ++_i180) {
-_elem179=new ErrorInfo();
-_elem179.read(iprot);
-struct.errors.add(_elem179);
+org.apache.thrift.protocol.TList _list170=iprot.readListBegin();
+struct.errors=new ArrayList<ErrorInfo>(_list170.size);
+ErrorInfo _elem171;
+for (int _i172=0; _i172 < _list170.size; ++_i172) {
+_elem171=new ErrorInfo();
+_elem171.read(iprot);
+struct.errors.add(_elem171);
 }
 iprot.readListEnd();
 }

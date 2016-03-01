@@ -1,3 +1,26 @@
 {
-  _delegate=delegate;
+  _delegate=new OutputCollectorCb(delegate){
+    @Override public List<Integer> emit(    String streamId,    Collection<Tuple> anchors,    List<Object> tuple){
+      return delegate.emit(streamId,anchors,tuple);
+    }
+    @Override public void emitDirect(    int taskId,    String streamId,    Collection<Tuple> anchors,    List<Object> tuple){
+      delegate.emitDirect(taskId,streamId,anchors,tuple);
+    }
+    @Override public void ack(    Tuple input){
+      delegate.ack(input);
+    }
+    @Override public void fail(    Tuple input){
+      delegate.fail(input);
+    }
+    @Override public void reportError(    Throwable error){
+      delegate.reportError(error);
+    }
+    @Override public List<Integer> emit(    String streamId,    Collection<Tuple> anchors,    List<Object> tuple,    ICollectorCallback callback){
+      throw new RuntimeException("This method should not be called!");
+    }
+    @Override public void emitDirect(    int taskId,    String streamId,    Collection<Tuple> anchors,    List<Object> tuple,    ICollectorCallback callback){
+      throw new RuntimeException("This method should not be called!");
+    }
+  }
+;
 }

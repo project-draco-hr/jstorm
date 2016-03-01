@@ -1,5 +1,5 @@
 {
   double sampleRate=count / samplingSet.size();
-  if (sampleRate > triggerSampleRate)   return true;
+  if (sampleRate >= triggerSampleRate)   return true;
  else   return false;
 }

@@ -15,5 +15,14 @@
       }
     }
   }
+  String excludeJars=System.getProperty("exclude.jars");
+  if (excludeJars != null) {
+    ret.put("exclude.jars",excludeJars);
+  }
+  String tridentOptions=System.getProperty("trident.batch.option");
+  if (tridentOptions != null && tridentOptions.equals("off")) {
+    ConfigExtension.setTaskBatchTuple(ret,false);
+    System.setProperty("trident.batch.option","");
+  }
   return ret;
 }

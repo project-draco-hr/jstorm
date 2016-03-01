@@ -1,0 +1,3 @@
+{
+  ((SpoutCollector)(out.getDelegate())).emitDirectCtrl(taskId,streamId,tuple,messageId);
+}

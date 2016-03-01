@@ -1,0 +1,3 @@
+String name
+String jsonConf
+org.apache.thrift.async.AsyncMethodCallback resultHandler

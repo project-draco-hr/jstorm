@@ -1,5 +1,6 @@
 {
   LOG.info("Begin to start Drpc server");
+  Thread.setDefaultUncaughtExceptionHandler(new DefaultUncaughtExceptionHandler());
   final Drpc service=new Drpc();
   service.init();
 }

@@ -1,0 +1,6 @@
+{
+  int taskId=tupleExt.getTargetTaskId();
+  BatchTuple batchTuple=new BatchTuple(taskId,1);
+  batchTuple.addToBatch(tupleExt);
+  taskTransfer.transferControl(batchTuple);
+}

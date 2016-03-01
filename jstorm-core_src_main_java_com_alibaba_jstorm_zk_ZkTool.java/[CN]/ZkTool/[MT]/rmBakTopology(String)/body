@@ -6,14 +6,14 @@
     List<String> bakTopologys=zkClusterState.get_children(path,false);
     for (    String tid : bakTopologys) {
       if (tid.equals(topologyName)) {
-        LOG.info("Find backup " + topologyName);
+        System.out.println("Find backup " + topologyName);
         String topologyPath=assignment_bak_path(topologyName);
         zkClusterState.delete_node(topologyPath);
-        LOG.info("Successfully delete topology " + topologyName + " backup Assignment");
+        System.out.println("Successfully delete topology " + topologyName + " backup Assignment");
         return;
       }
     }
-    LOG.info("No backup topology " + topologyName + " Assignment");
+    System.out.println("No backup topology " + topologyName + " Assignment");
   }
  catch (  Exception e) {
     if (zkClusterState == null) {

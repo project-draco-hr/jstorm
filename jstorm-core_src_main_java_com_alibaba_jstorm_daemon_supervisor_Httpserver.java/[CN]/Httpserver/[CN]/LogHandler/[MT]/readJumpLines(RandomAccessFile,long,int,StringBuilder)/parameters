@@ -1,0 +1,4 @@
+RandomAccessFile randomAccessFile
+long pos
+int lines
+StringBuilder matchContent

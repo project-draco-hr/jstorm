@@ -1,6 +1,6 @@
 {
   long[] values=unFlushed.getSnapshot().getValues();
-  for (  Histogram histogram : histogramMap.values()) {
+  for (  JHistogram histogram : histogramMap.values()) {
     for (    long val : values) {
       histogram.update(val);
     }

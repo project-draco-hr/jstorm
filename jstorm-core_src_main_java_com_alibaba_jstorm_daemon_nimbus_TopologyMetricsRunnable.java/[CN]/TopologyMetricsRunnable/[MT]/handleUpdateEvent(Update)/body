@@ -9,14 +9,18 @@
     int idx=getAndPresetFirstEmptyIndex();
     if (idx >= 0) {
       TopologyMetricDataInfo summary=new TopologyMetricDataInfo();
+      int total=0;
       summary.topologyId=topologyId;
       summary.timestamp=event.timestamp;
       if (topologyId.equals(JStormMetrics.NIMBUS_METRIC_KEY) || topologyId.equals(JStormMetrics.CLUSTER_METRIC_KEY)) {
         summary.type=MetricUploader.METRIC_TYPE_TOPLOGY;
       }
  else {
-        if (topologyMetrics.get_topologyMetric().get_metrics_size() > 0 || topologyMetrics.get_componentMetric().get_metrics_size() > 0) {
-          if (topologyMetrics.get_taskMetric().get_metrics_size() + topologyMetrics.get_workerMetric().get_metrics_size() + topologyMetrics.get_nettyMetric().get_metrics_size()+ topologyMetrics.get_streamMetric().get_metrics_size() > 0) {
+        total+=topologyMetrics.get_topologyMetric().get_metrics_size() + topologyMetrics.get_componentMetric().get_metrics_size();
+        if (total > 0) {
+          int sub=topologyMetrics.get_taskMetric().get_metrics_size() + topologyMetrics.get_workerMetric().get_metrics_size() + topologyMetrics.get_nettyMetric().get_metrics_size()+ topologyMetrics.get_streamMetric().get_metrics_size();
+          if (sub > 0) {
+            total+=sub;
             summary.type=MetricUploader.METRIC_TYPE_ALL;
           }
  else {
@@ -25,15 +29,16 @@
         }
  else {
           summary.type=MetricUploader.METRIC_TYPE_TASK;
+          total+=topologyMetrics.get_taskMetric().get_metrics_size();
         }
       }
       metricCache.put(PENDING_UPLOAD_METRIC_DATA_INFO + idx,summary);
       metricCache.put(PENDING_UPLOAD_METRIC_DATA + idx,topologyMetrics);
       markSet(idx);
-      LOG.info("put metric data to local cache, topology:{}, idx:{}",topologyId,idx);
+      LOG.info("put metric data to local cache, topology:{}, idx:{}, total:{}",topologyId,idx,total);
     }
  else {
-      LOG.error("exceeding maxPendingUploadMetrics, skip metrics data for topology:{}",topologyId);
+      LOG.error("exceeding maxPendingUploadMetrics, skip caching metrics data for topology:{}",topologyId);
     }
   }
  else {

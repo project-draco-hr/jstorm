@@ -1,5 +1,6 @@
 def get_server_childopts(log_name):
     jstorm_log_dir = get_log_dir()
-    gc_log_path = (((jstorm_log_dir + '/') + log_name) + '.gc')
-    ret = (' -Xloggc:%s -Dlogfile.name=%s -Dlogback.configurationFile=%s -Djstorm.log.dir=%s ' % (gc_log_path, log_name, LOGBACK_CONF, jstorm_log_dir))
+    filename = (log_name + '.log')
+    gc_log_path = (((((jstorm_log_dir + '/') + log_name) + '-gc-') + str(int(time.time()))) + '.log')
+    ret = (' -Xloggc:%s -Dlogfile.name=%s -Dlogback.configurationFile=%s -Djstorm.log.dir=%s ' % (gc_log_path, filename, LOGBACK_CONF, jstorm_log_dir))
     return ret

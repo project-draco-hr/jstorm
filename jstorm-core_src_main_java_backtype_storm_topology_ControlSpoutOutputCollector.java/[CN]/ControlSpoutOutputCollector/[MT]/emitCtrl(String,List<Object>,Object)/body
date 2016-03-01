@@ -1,0 +1,3 @@
+{
+  return ((SpoutCollector)(out.getDelegate())).emitCtrl(streamId,tuple,messageId);
+}

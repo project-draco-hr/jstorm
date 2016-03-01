@@ -6,7 +6,7 @@
   List<MetricInfo> metricInfoList=data.getMetricCache().getMetricData(topologyId,MetaType.NETTY);
   if (metricInfoList != null && metricInfoList.size() > 0) {
     MetricInfo metricInfo=metricInfoList.get(0);
-    for (    Entry<String,Map<Integer,MetricSnapshot>> metricEntry : metricInfo.get_metrics().entrySet()) {
+    for (    Map.Entry<String,Map<Integer,MetricSnapshot>> metricEntry : metricInfo.get_metrics().entrySet()) {
       String metricName=metricEntry.getKey();
       Map<Integer,MetricSnapshot> data=metricEntry.getValue();
       if (metricName.contains(host)) {

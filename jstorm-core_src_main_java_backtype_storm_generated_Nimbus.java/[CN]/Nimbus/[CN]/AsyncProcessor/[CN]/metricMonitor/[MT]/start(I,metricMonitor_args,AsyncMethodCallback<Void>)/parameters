@@ -1,3 +1,0 @@
-I iface
-metricMonitor_args args
-AsyncMethodCallback<Void> resultHandler

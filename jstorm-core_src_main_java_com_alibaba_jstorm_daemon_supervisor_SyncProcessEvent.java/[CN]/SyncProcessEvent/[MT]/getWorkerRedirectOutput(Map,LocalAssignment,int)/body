@@ -1,0 +1,17 @@
+{
+  String DEFAULT_OUT_TARGET_FILE=JStormUtils.genLogName(assignment.getTopologyName(),port);
+  if (DEFAULT_OUT_TARGET_FILE == null) {
+    DEFAULT_OUT_TARGET_FILE="/dev/null";
+  }
+ else {
+    DEFAULT_OUT_TARGET_FILE+=".out";
+  }
+  String outputFile=ConfigExtension.getWorkerRedirectOutputFile(totalConf);
+  if (outputFile == null) {
+    outputFile=DEFAULT_OUT_TARGET_FILE;
+  }
+ else {
+    outputFile=outputFile + "-" + assignment.getTopologyName()+ "-"+ port;
+  }
+  return outputFile;
+}

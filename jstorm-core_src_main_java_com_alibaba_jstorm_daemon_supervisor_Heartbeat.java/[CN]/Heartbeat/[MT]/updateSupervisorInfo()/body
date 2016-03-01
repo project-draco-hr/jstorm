@@ -1,0 +1,5 @@
+{
+  List<Integer> portList=calculatorAvailablePorts();
+  Set<Integer> ports=JStormUtils.listToSet(portList);
+  supervisorInfo.setWorkerPorts(ports);
+}

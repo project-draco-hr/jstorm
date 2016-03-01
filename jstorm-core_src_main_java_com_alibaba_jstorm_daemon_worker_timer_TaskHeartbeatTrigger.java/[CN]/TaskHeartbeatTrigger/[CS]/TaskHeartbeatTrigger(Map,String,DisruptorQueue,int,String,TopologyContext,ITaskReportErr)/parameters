@@ -1,0 +1,7 @@
+Map conf
+String name
+DisruptorQueue controlQueue
+int taskId
+String componentId
+TopologyContext sysTopologyCtx
+ITaskReportErr reportError

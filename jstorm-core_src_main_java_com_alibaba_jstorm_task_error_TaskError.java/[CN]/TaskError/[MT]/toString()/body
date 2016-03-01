@@ -1,0 +1,3 @@
+{
+  return "TaskError{" + "error='" + error + '\''+ ", level='"+ level+ '\''+ ", code="+ code+ ", timSecs="+ timSecs+ ", durationSecs="+ durationSecs+ '}';
+}

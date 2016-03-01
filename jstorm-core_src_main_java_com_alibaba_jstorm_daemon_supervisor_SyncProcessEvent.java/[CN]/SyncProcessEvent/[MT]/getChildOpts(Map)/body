@@ -1,10 +1,10 @@
 {
-  String childopts=" ";
+  String childOpts=" ";
   if (stormConf.get(Config.TOPOLOGY_WORKER_CHILDOPTS) != null) {
-    childopts+=(String)stormConf.get(Config.TOPOLOGY_WORKER_CHILDOPTS);
+    childOpts+=(String)stormConf.get(Config.TOPOLOGY_WORKER_CHILDOPTS);
   }
  else   if (ConfigExtension.getWorkerGc(stormConf) != null) {
-    childopts+=ConfigExtension.getWorkerGc(stormConf);
+    childOpts+=ConfigExtension.getWorkerGc(stormConf);
   }
-  return childopts;
+  return childOpts;
 }

@@ -3,7 +3,7 @@
     LOG.warn("Client is being closed, and does not take requests any more");
     return;
   }
-  long start=System.nanoTime();
+  long start=enableNettyMetrics ? sendTimer.getTime() : 0L;
   try {
     pushBatch(message);
   }
@@ -11,9 +11,8 @@
     throw new RuntimeException(e);
   }
  finally {
-    long end=System.nanoTime();
-    if (sendTimer != null) {
-      sendTimer.update((end - start) / TimeUtils.NS_PER_US);
+    if (sendTimer != null && enableNettyMetrics) {
+      sendTimer.updateTime(start);
     }
   }
 }

@@ -1,0 +1,6 @@
+String url
+String host
+String port
+String dir
+String file
+ConcurrentLinkedQueue<Map> result

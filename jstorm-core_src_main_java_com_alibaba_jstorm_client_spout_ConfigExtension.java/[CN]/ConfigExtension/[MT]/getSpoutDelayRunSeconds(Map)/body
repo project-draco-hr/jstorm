@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(SPOUT_DELAY_RUN),30);
-}

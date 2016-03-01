@@ -1,6 +1,10 @@
 {
   long maxMemSize=getMemSizePerWorker(conf);
   Long size=JStormUtils.parseLong(conf.get(MIN_MEMSIZE_PER_WORKER));
-  long minMemSize=(size == null || size == 0) ? maxMemSize : size;
-  return minMemSize;
+  if (isMemMinSizePerWorkerValid(size,maxMemSize)) {
+    return size;
+  }
+ else {
+    return maxMemSize;
+  }
 }

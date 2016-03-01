@@ -2,7 +2,9 @@
   for (  Entry<String,Integer> e : drpcService.getIdtoStart().entrySet()) {
     if (TimeUtils.time_delta(e.getValue()) > REQUEST_TIMEOUT_SECS) {
       String id=e.getKey();
-      drpcService.getIdtoResult().put(id,new DRPCExecutionException("Request timed out"));
+      LOG.warn("Timeout DRPC request id: {} start at {}",id,e.getValue());
+      ConcurrentLinkedQueue<DRPCRequest> queue=drpcService.acquireQueue(drpcService.getIdtoFunction().get(id));
+      queue.remove(drpcService.getIdtoRequest().get(id));
       Semaphore s=drpcService.getIdtoSem().get(id);
       if (s != null) {
         s.release();

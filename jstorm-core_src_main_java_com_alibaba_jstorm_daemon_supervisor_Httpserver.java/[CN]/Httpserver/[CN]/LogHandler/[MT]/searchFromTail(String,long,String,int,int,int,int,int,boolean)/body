@@ -1,0 +1,103 @@
+{
+  Map<Object,Object> ret=new HashMap<>();
+  Map<Long,String> matchResults=new HashMap<>();
+  int match=0;
+  String encoding=ConfigExtension.getLogViewEncoding(conf);
+  FileChannel fc=null;
+  MappedByteBuffer fout;
+  final long fileSize;
+  try {
+    RandomAccessFile randomAccess=new RandomAccessFile(logFile,"r");
+    fc=randomAccess.getChannel();
+    fileSize=fc.size();
+    if (offset == 0 || offset < fileSize) {
+      long pos=fileSize;
+      if (offset > 0) {
+        pos=offset;
+      }
+      long matchOffset=pos;
+      int jumpLines=0;
+      StringBuilder matchContent=new StringBuilder();
+      for (int i=0; i < maxBlocks && pos > 0 && match < maxMatch; i++) {
+        long bufferSize=blockSize;
+        if (pos < blockSize) {
+          bufferSize=pos;
+          pos=0;
+        }
+ else {
+          pos=pos - bufferSize;
+        }
+        fout=fc.map(FileChannel.MapMode.READ_ONLY,pos,bufferSize);
+        byte[] buffer=new byte[(int)bufferSize];
+        fout.get(buffer);
+        String data=new String(buffer,encoding);
+        String[] lines=data.split("\\r\\n|\\n|\\r");
+        int[] line2pos=new int[lines.length];
+        for (int j=0; j < lines.length; j++) {
+          line2pos[j]=lines[j].getBytes(encoding).length;
+          if (j > 0) {
+            line2pos[j]+=line2pos[j - 1];
+          }
+        }
+        for (int j=0; j < lines.length; ) {
+          String line=lines[j];
+          boolean isMatch=caseIgnore ? line.toLowerCase().contains(key) : line.contains(key);
+          if (isMatch) {
+            int start=Math.max(0,j - lookBack);
+            j+=lookAhead;
+            matchOffset=start > 0 ? pos + line2pos[start - 1] : pos;
+            if (j >= lines.length) {
+              jumpLines=j - lines.length + 1;
+              j=lines.length - 1;
+            }
+            match++;
+            for (int k=start; k < j; k++) {
+              matchContent.append(lines[k]).append("\n");
+            }
+            if (jumpLines > 0) {
+              readJumpLines(randomAccess,pos + line2pos[j],jumpLines,matchContent);
+              jumpLines=0;
+              j=lines.length;
+            }
+            matchResults.put(matchOffset,matchContent.toString());
+            if (debug) {
+              System.out.println("==== match " + match + " ==== offset: "+ matchOffset);
+              System.out.println(matchContent.toString());
+              System.out.println();
+            }
+            matchContent=new StringBuilder();
+          }
+ else {
+            j++;
+          }
+        }
+        if (match < maxMatch && pos > 0) {
+          int lineBreakOffset=lines[0].getBytes(encoding).length;
+          if (lineBreakOffset < blockSize) {
+            pos=pos + lineBreakOffset;
+          }
+        }
+      }
+      ret.put("num_match",match);
+      ret.put("match_results",matchResults);
+      ret.put("next_offset",pos);
+    }
+ else {
+      error(ret,"pos exceeds file size!");
+    }
+  }
+ catch (  FileNotFoundException e) {
+    LOG.warn("Error",e);
+    error(ret,"Bad Request, Failed to find " + logFile);
+  }
+catch (  IOException e) {
+    LOG.warn("Error",e);
+    error(ret,"Bad Request, Failed to open " + logFile);
+  }
+ finally {
+    if (fc != null) {
+      IOUtils.closeQuietly(fc);
+    }
+  }
+  return ret;
+}

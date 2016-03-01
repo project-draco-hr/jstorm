@@ -1,0 +1,41 @@
+{
+  String enabledMetrics=ConfigExtension.getEnabledMetricNames(newConf);
+  String disabledMetrics=ConfigExtension.getDisabledMetricNames(newConf);
+  if (enabledMetrics != null || disabledMetrics != null) {
+    Set<String> enabledMetricSet=toSet(enabledMetrics,",");
+    Set<String> disabledMetricsSet=toSet(disabledMetrics,",");
+    AsmMetricRegistry[] registries=new AsmMetricRegistry[]{JStormMetrics.getTopologyMetrics(),JStormMetrics.getComponentMetrics(),JStormMetrics.getTaskMetrics(),JStormMetrics.getStreamMetrics(),JStormMetrics.getNettyMetrics(),JStormMetrics.getWorkerMetrics()};
+    for (    AsmMetricRegistry registry : registries) {
+      Collection<AsmMetric> metrics=registry.getMetrics().values();
+      for (      AsmMetric metric : metrics) {
+        String metricName=metric.getMetricName();
+        if (enabledMetricSet.contains(metricName)) {
+          metric.setEnabled(true);
+        }
+ else         if (disabledMetricsSet.contains(metricName)) {
+          metric.setEnabled(false);
+        }
+      }
+    }
+  }
+  long updateInterval=ConfigExtension.getTimerUpdateInterval(newConf);
+  if (updateInterval != AsmHistogram.getUpdateInterval()) {
+    AsmHistogram.setUpdateInterval(updateInterval);
+  }
+  boolean enableStreamMetrics=ConfigExtension.isEnableStreamMetrics(newConf);
+  if (enableStreamMetrics != JStormMetrics.enableStreamMetrics) {
+    JStormMetrics.enableStreamMetrics=enableStreamMetrics;
+    LOG.info("switch topology stream metric enable to {}",enableStreamMetrics);
+  }
+  boolean enableMetrics=ConfigExtension.isEnableMetrics(newConf);
+  if (enableMetrics != JStormMetrics.enabled) {
+    JStormMetrics.enabled=enableMetrics;
+    if (enableMetrics) {
+      init();
+    }
+ else {
+      shutdown();
+    }
+    LOG.info("switch topology metric enable to {}",enableMetrics);
+  }
+}

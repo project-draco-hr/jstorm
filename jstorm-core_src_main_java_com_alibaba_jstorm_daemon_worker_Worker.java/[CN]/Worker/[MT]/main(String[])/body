@@ -1,14 +1,16 @@
 {
+  StringBuilder sb=new StringBuilder();
+  for (  String arg : args) {
+    sb.append(arg + " ");
+  }
+  LOG.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  LOG.info("Begin to start worker:" + sb.toString());
+  LOG.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   if (args.length < 5) {
-    StringBuilder sb=new StringBuilder();
-    sb.append("The length of args is less than 5 ");
-    for (    String arg : args) {
-      sb.append(arg + " ");
-    }
-    LOG.error(sb.toString());
+    LOG.error("The length of args is less than 5 ");
     System.exit(-1);
   }
-  StringBuilder sb=new StringBuilder();
+  sb=new StringBuilder();
   try {
     String topology_id=args[0];
     String supervisor_id=args[1];
@@ -25,7 +27,9 @@
     sb.append("jar_path:" + jar_path + "\n");
     WorkerShutdown sd=mk_worker(conf,null,topology_id,supervisor_id,Integer.parseInt(port_str),worker_id,jar_path);
     sd.join();
+    LOG.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     LOG.info("Successfully shutdown worker " + sb.toString());
+    LOG.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
   }
  catch (  Throwable e) {
     String errMsg="Failed to create worker, " + sb.toString();

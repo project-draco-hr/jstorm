@@ -1,3 +1,0 @@
-I iface
-getClusterInfo_args args
-AsyncMethodCallback<ClusterSummary> resultHandler

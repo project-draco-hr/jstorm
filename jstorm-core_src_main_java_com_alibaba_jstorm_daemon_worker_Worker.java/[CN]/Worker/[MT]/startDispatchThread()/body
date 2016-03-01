@@ -1,6 +1,22 @@
 {
   IContext context=workerData.getContext();
   String topologyId=workerData.getTopologyId();
-  IConnection recvConnection=context.bind(topologyId,workerData.getPort(),workerData.getDeserializeQueues());
+  Map stormConf=workerData.getStormConf();
+  WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(stormConf);
+  int queueSize=JStormUtils.parseInt(stormConf.get(Config.TOPOLOGY_CTRL_BUFFER_SIZE),256);
+  DisruptorQueue recvControlQueue=DisruptorQueue.mkInstance("Dispatch-control",ProducerType.MULTI,queueSize,waitStrategy);
+  QueueGauge revCtrlGauge=new QueueGauge(recvControlQueue,MetricDef.RECV_CTRL_QUEUE);
+  JStormMetrics.registerWorkerMetric(JStormMetrics.workerMetricName(MetricDef.RECV_CTRL_QUEUE,MetricType.GAUGE),new AsmGauge(revCtrlGauge));
+  IConnection recvConnection=context.bind(topologyId,workerData.getPort(),workerData.getDeserializeQueues(),recvControlQueue);
   workerData.setRecvConnection(recvConnection);
+  RunnableCallback recvControlDispather=null;
+  boolean isTaskBatchTuple=ConfigExtension.isTaskBatchTuple(stormConf);
+  if (isTaskBatchTuple) {
+    recvControlDispather=new VirtualPortBatchCtrlDispatch(workerData,recvConnection,recvControlQueue,MetricDef.BATCH_RECV_THREAD);
+  }
+ else {
+    recvControlDispather=new VirtualPortCtrlDispatch(workerData,recvConnection,recvControlQueue,MetricDef.RECV_THREAD);
+  }
+  AsyncLoopThread recvControlThread=new AsyncLoopThread(recvControlDispather,false,Thread.MAX_PRIORITY,true);
+  return recvControlThread;
 }

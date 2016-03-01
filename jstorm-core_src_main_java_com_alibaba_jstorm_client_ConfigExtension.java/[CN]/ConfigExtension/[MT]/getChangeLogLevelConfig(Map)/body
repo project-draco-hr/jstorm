@@ -1,0 +1,3 @@
+{
+  return (Map<String,String>)conf.get(CHANGE_LOG_LEVEL_CONFIG);
+}

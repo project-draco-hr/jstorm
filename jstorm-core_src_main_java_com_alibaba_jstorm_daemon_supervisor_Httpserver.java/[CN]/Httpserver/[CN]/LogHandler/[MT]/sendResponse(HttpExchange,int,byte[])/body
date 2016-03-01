@@ -1,0 +1,8 @@
+{
+  if (t != null) {
+    t.sendResponseHeaders(retCode,data.length);
+    OutputStream os=t.getResponseBody();
+    os.write(data);
+    os.close();
+  }
+}

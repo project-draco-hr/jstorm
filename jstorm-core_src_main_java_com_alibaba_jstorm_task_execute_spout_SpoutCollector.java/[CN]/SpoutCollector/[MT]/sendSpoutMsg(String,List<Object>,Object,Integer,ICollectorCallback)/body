@@ -1,0 +1,5 @@
+{
+  java.util.List<Integer> outTasks=null;
+  outTasks=sendMsg(outStreamId,values,messageId,outTaskId,callback);
+  return outTasks;
+}

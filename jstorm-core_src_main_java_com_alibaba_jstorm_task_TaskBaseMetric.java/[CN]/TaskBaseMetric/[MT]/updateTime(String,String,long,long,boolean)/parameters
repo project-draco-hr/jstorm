@@ -1,0 +1,5 @@
+String streamId
+String name
+long start
+long end
+boolean mergeTopology

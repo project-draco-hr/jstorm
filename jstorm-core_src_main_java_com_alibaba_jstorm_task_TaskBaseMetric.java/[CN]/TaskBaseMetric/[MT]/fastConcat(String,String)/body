@@ -1,0 +1,4 @@
+{
+  StringBuilder sb=new StringBuilder(32);
+  return sb.append(componentId).append(".").append(metricName).toString();
+}

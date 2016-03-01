@@ -1,5 +1,5 @@
 {
-  long start=System.nanoTime();
+  long start=enableNettyMetrics ? sendTimer.getTime() : 0;
   try {
     MessageBatch batch=batchQueue.poll();
     if (batch == null) {
@@ -15,9 +15,8 @@
     JStormUtils.halt_process(-1,err);
   }
  finally {
-    long end=System.nanoTime();
-    if (sendTimer != null) {
-      sendTimer.update((end - start) / TimeUtils.NS_PER_US);
+    if (sendTimer != null && enableNettyMetrics) {
+      sendTimer.updateTime(start);
     }
   }
 }

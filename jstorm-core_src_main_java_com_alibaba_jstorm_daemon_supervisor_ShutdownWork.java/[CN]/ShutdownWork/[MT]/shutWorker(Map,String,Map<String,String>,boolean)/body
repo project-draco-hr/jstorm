@@ -1,0 +1,47 @@
+{
+  Map<String,List<String>> workerId2Pids=new HashMap<String,List<String>>();
+  int maxWaitTime=0;
+  maxWaitTime=Math.max(maxWaitTime,ConfigExtension.getTaskCleanupTimeoutSec(conf));
+  Map<String,Integer> killingWorkers=new HashMap<String,Integer>();
+  for (  Entry<String,String> entry : removed.entrySet()) {
+    String workerId=entry.getKey();
+    String topologyId=entry.getValue();
+    List<String> pids=null;
+    try {
+      pids=getPid(conf,workerId);
+    }
+ catch (    IOException e1) {
+      LOG.error("Failed to get pid for " + workerId + " of "+ topologyId);
+    }
+    workerId2Pids.put(workerId,pids);
+    if (killingWorkers.get(workerId) == null) {
+      killingWorkers.put(workerId,TimeUtils.current_time_secs());
+      LOG.info("Begin to shut down " + topologyId + ":"+ workerId);
+      try {
+        for (        String pid : pids) {
+          JStormUtils.process_killed(Integer.parseInt(pid));
+        }
+      }
+ catch (      Exception e) {
+        LOG.info("Failed to shutdown ",e);
+      }
+    }
+  }
+  if (block) {
+    JStormUtils.sleepMs(maxWaitTime * 1000);
+  }
+  for (  Entry<String,String> entry : removed.entrySet()) {
+    String workerId=entry.getKey();
+    List<String> pids=workerId2Pids.get(workerId);
+    int cleanupTimeout=ConfigExtension.getTaskCleanupTimeoutSec(conf);
+    int initCleanUpTime=killingWorkers.get(workerId);
+    if (TimeUtils.current_time_secs() - initCleanUpTime > cleanupTimeout) {
+      for (      String pid : pids) {
+        JStormUtils.ensure_process_killed(Integer.parseInt(pid));
+      }
+      tryCleanupWorkerDir(conf,workerId);
+      LOG.info("Successfully shut down " + workerId);
+      killingWorkers.remove(workerId);
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  if (ackerNum > 0) {
+    if (!sendAckTuple(input)) {
+      pendingAcks.add(input);
+    }
+  }
+  Long latencyStart=(Long)tuple_start_times.remove(input);
+  if (latencyStart != null && JStormMetrics.enabled) {
+    long endTime=System.currentTimeMillis();
+    long lifeCycleStart=((TupleExt)input).getCreationTimeStamp();
+    task_stats.bolt_acked_tuple(input.getSourceComponent(),input.getSourceStreamId(),latencyStart,lifeCycleStart,endTime);
+  }
+}

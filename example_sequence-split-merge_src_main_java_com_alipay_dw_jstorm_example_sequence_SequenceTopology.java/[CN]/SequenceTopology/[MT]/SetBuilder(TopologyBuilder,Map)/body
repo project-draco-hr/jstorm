@@ -5,7 +5,7 @@
   boolean isEnableSplit=JStormUtils.parseBoolean(conf.get("enable.split"),false);
   if (isEnableSplit == false) {
     BoltDeclarer boltDeclarer=builder.setBolt(SequenceTopologyDef.TOTAL_BOLT_NAME,new TotalCount(),bolt_Parallelism_hint);
-    boltDeclarer.shuffleGrouping(SequenceTopologyDef.SEQUENCE_SPOUT_NAME).addConfiguration(Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS,3);
+    boltDeclarer.shuffleGrouping(SequenceTopologyDef.SEQUENCE_SPOUT_NAME).allGrouping(SequenceTopologyDef.SEQUENCE_SPOUT_NAME,SequenceTopologyDef.CONTROL_STREAM_ID).addConfiguration(Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS,3);
   }
  else {
     builder.setBolt(SequenceTopologyDef.SPLIT_BOLT_NAME,new SplitRecord(),bolt_Parallelism_hint).localOrShuffleGrouping(SequenceTopologyDef.SEQUENCE_SPOUT_NAME);
@@ -19,8 +19,8 @@
     System.out.println("Use Kryo ");
     boolean useJavaSer=JStormUtils.parseBoolean(conf.get("fall.back.on.java.serialization"),true);
     Config.setFallBackOnJavaSerialization(conf,useJavaSer);
-    Config.registerSerialization(conf,TradeCustomer.class);
-    Config.registerSerialization(conf,Pair.class);
+    Config.registerSerialization(conf,TradeCustomer.class,TradeCustomerSerializer.class);
+    Config.registerSerialization(conf,Pair.class,PairSerializer.class);
   }
   int ackerNum=JStormUtils.parseInt(conf.get(Config.TOPOLOGY_ACKER_EXECUTORS),1);
   Config.setNumAckers(conf,ackerNum);

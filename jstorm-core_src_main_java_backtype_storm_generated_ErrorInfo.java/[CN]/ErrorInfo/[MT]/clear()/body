@@ -2,4 +2,7 @@
   this.error=null;
   set_errorTimeSecs_isSet(false);
   this.errorTimeSecs=0;
+  this.errorLevel=null;
+  set_errorCode_isSet(false);
+  this.errorCode=0;
 }

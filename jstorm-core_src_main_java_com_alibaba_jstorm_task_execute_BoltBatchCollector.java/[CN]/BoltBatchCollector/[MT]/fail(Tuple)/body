@@ -1,0 +1,10 @@
+{
+  if (ackerNum > 0) {
+    pending_acks.remove(input);
+    for (    Map.Entry<Long,Long> e : input.getMessageId().getAnchorsToIds().entrySet()) {
+      List<Object> ackTuple=JStormUtils.mk_list((Object)e.getKey());
+      sendBoltMsg(Acker.ACKER_FAIL_STREAM_ID,null,ackTuple,null,null);
+    }
+  }
+  task_stats.bolt_failed_tuple(input.getSourceComponent(),input.getSourceStreamId());
+}

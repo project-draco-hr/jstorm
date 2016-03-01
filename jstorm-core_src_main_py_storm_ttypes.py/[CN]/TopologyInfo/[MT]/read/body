@@ -16,22 +16,22 @@ def read(self, iprot):
         elif (fid == 2):
             if (ftype == TType.LIST):
                 self.components = []
-                (_etype168, _size165) = iprot.readListBegin()
-                for _i169 in xrange(_size165):
-                    _elem170 = ComponentSummary()
-                    _elem170.read(iprot)
-                    self.components.append(_elem170)
+                (_etype161, _size158) = iprot.readListBegin()
+                for _i162 in xrange(_size158):
+                    _elem163 = ComponentSummary()
+                    _elem163.read(iprot)
+                    self.components.append(_elem163)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)
         elif (fid == 3):
             if (ftype == TType.LIST):
                 self.tasks = []
-                (_etype174, _size171) = iprot.readListBegin()
-                for _i175 in xrange(_size171):
-                    _elem176 = TaskSummary()
-                    _elem176.read(iprot)
-                    self.tasks.append(_elem176)
+                (_etype167, _size164) = iprot.readListBegin()
+                for _i168 in xrange(_size164):
+                    _elem169 = TaskSummary()
+                    _elem169.read(iprot)
+                    self.tasks.append(_elem169)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)

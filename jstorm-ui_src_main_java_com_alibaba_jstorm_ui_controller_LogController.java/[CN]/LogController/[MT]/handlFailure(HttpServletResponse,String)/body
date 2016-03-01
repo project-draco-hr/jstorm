@@ -1,0 +1,9 @@
+{
+  LOG.error(errorMsg);
+  byte[] data=errorMsg.getBytes();
+  response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+  response.setContentLength(data.length);
+  OutputStream os=response.getOutputStream();
+  os.write(data);
+  os.close();
+}

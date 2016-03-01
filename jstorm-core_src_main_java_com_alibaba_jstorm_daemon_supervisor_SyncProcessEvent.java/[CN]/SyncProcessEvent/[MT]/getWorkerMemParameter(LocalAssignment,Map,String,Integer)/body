@@ -1,0 +1,25 @@
+{
+  long memSize=assignment.getMem();
+  long memMinSize=ConfigExtension.getMemMinSizePerWorker(totalConf);
+  long memGsize=memSize / JStormUtils.SIZE_1_G;
+  int gcThreadsNum=memGsize > 4 ? (int)(memGsize * 1.5) : 4;
+  String childOpts=getChildOpts(totalConf);
+  childOpts+=getGcDumpParam(topologyId,port,totalConf);
+  StringBuilder commandSB=new StringBuilder();
+  commandSB.append(" -Xms").append(memMinSize).append(" -Xmx").append(memSize).append(" ");
+  if (memMinSize < (memSize / 2))   commandSB.append(" -Xmn").append(memMinSize / 2).append(" ");
+ else   commandSB.append(" -Xmn").append(memSize / 2).append(" ");
+  if (memGsize >= 2) {
+    commandSB.append(" -XX:PermSize=").append(memSize / 32);
+  }
+ else {
+    commandSB.append(" -XX:PermSize=").append(memSize / 16);
+  }
+  commandSB.append(" -XX:MaxPermSize=").append(memSize / 16);
+  commandSB.append(" -XX:ParallelGCThreads=").append(gcThreadsNum);
+  commandSB.append(" ").append(childOpts);
+  if (StringUtils.isBlank(assignment.getJvm()) == false) {
+    commandSB.append(" ").append(assignment.getJvm());
+  }
+  return commandSB.toString();
+}

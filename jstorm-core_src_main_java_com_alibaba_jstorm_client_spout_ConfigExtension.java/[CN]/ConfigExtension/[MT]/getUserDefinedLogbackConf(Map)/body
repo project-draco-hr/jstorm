@@ -1,3 +1,0 @@
-{
-  return (String)conf.get(USER_DEFINED_LOGBACK_CONF);
-}

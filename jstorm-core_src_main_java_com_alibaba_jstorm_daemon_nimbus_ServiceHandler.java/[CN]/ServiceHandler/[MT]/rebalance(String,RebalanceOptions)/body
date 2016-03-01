@@ -12,6 +12,7 @@
     LOG.info("Begin to rebalance " + topologyName + "wait_time:"+ wait_amt+ ", reassign: "+ reassign+ ", new worker/bolt configuration:"+ jsonConf);
     Map<Object,Object> conf=(Map<Object,Object>)JStormUtils.from_json(jsonConf);
     NimbusUtils.transitionName(data,topologyName,true,StatusType.rebalance,wait_amt,reassign,conf);
+    notifyTopologyActionListener(topologyName,"rebalance");
   }
  catch (  NotAliveException e) {
     String errMsg="Rebalance Error, no this topology " + topologyName;

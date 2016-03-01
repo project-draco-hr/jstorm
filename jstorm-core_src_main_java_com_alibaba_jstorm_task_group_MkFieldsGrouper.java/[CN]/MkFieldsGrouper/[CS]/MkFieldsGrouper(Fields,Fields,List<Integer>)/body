@@ -6,4 +6,5 @@
   this.out_fields=_out_fields;
   this.group_fields=_group_fields;
   this.out_tasks=_out_tasks;
+  this.hash_targetTasks=new HashMap<Integer,List<Integer>>();
 }

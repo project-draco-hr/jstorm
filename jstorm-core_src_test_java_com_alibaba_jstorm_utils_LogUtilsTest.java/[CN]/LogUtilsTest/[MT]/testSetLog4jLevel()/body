@@ -1,0 +1,12 @@
+{
+  assertEquals(true,LogUtils.setLog4jLevel(null,null));
+  assertEquals(true,LogUtils.setLog4jLevel(null,"TRACE"));
+  assertEquals(true,LogUtils.setLog4jLevel(".","DEBUG"));
+  assertEquals(true,LogUtils.setLog4jLevel(null,"INFO"));
+  assertEquals(true,LogUtils.setLog4jLevel(null,"WARN"));
+  assertEquals(false,LogUtils.setLog4jLevel(null,"WARNING"));
+  assertEquals(false,LogUtils.setLog4jLevel(null,""));
+  assertEquals(false,LogUtils.setLog4jLevel(null,"-"));
+  assertEquals(true,LogUtils.setLog4jLevel("com.alibaba.jstorm","TRACE"));
+  assertEquals(true,LogUtils.setLog4jLevel("a.b.c","DEBUG"));
+}

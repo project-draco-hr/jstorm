@@ -1,0 +1,4 @@
+{
+  this.systemCpuTime=elapedJiffies.multiply(jiffyLengthInMillis);
+  this.sampleTime=sampleTime;
+}

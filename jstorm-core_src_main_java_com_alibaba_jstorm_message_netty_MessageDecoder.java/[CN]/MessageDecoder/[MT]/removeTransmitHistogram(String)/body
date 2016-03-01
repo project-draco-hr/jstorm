@@ -1,9 +1,0 @@
-{
-  Channel oldChannel=null;
-  for (  Entry<Channel,String> entry : transmitNameMap.entrySet()) {
-    if (nettyConnection.equals(entry.getValue())) {
-      oldChannel=entry.getKey();
-    }
-  }
-  removeTransmitHistogram(oldChannel);
-}

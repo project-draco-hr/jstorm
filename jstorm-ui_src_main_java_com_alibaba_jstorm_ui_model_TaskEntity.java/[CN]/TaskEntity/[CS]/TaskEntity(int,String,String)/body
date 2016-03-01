@@ -1,5 +1,5 @@
 {
-  this.task_id=task_id;
+  this.id=task_id;
   this.component=component;
   this.type=type;
 }

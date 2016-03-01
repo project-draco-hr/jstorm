@@ -1,39 +1,37 @@
 {
-  Map<String,String> removed=new HashMap<String,String>();
-  Set<Integer> keepPorts=new HashSet<Integer>();
+  Map<String,String> removed=new HashMap<>();
+  Set<Integer> keepPorts=new HashSet<>();
   for (  Entry<String,StateHeartbeat> entry : localWorkerStats.entrySet()) {
-    String workerid=entry.getKey();
-    StateHeartbeat hbstate=entry.getValue();
-    if (workerIdToStartTimeAndPort.containsKey(workerid) && hbstate.getState().equals(State.notStarted))     continue;
-    if (hbstate.getState().equals(State.valid)) {
-      keepPorts.add(hbstate.getHeartbeat().getPort());
+    String workerId=entry.getKey();
+    StateHeartbeat hbState=entry.getValue();
+    if (workerIdToStartTimeAndPort.containsKey(workerId) && hbState.getState().equals(State.notStarted))     continue;
+    if (hbState.getState().equals(State.valid)) {
+      keepPorts.add(hbState.getHeartbeat().getPort());
     }
  else {
-      if (hbstate.getHeartbeat() != null) {
-        removed.put(workerid,hbstate.getHeartbeat().getTopologyId());
+      if (hbState.getHeartbeat() != null) {
+        removed.put(workerId,hbState.getHeartbeat().getTopologyId());
       }
  else {
-        removed.put(workerid,null);
+        removed.put(workerId,null);
       }
-      if (killingWorkers.containsKey(workerid) == false) {
+      if (!killingWorkers.containsKey(workerId)) {
         StringBuilder sb=new StringBuilder();
-        sb.append("Shutting down and clearing state for id ");
-        sb.append(workerid);
-        sb.append(";State:");
-        sb.append(hbstate);
+        sb.append("Shutting down and clearing state for id ").append(workerId);
+        sb.append(";State:").append(hbState);
         LOG.info(sb.toString());
       }
     }
   }
   shutWorker(conf,supervisorId,removed,workerThreadPids,cgroupManager,false,killingWorkers,taskCleanupTimeoutMap);
-  Set<String> activeTopologys=new HashSet<String>();
+  Set<String> activeTopologies=new HashSet<>();
   if (killingWorkers.size() == 0) {
     for (    Entry<Integer,LocalAssignment> entry : localAssignments.entrySet()) {
-      activeTopologys.add(entry.getValue().getTopologyId());
+      activeTopologies.add(entry.getValue().getTopologyId());
     }
-    Set<String> obsoleteTopologys=new HashSet<String>();
+    Set<String> obsoleteTopologys=new HashSet<>();
     for (    String topologyId : taskCleanupTimeoutMap.keySet()) {
-      if (activeTopologys.contains(topologyId) == false) {
+      if (!activeTopologies.contains(topologyId)) {
         obsoleteTopologys.add(topologyId);
       }
     }
@@ -46,8 +44,8 @@
   }
   for (  Entry<String,Pair<Integer,Integer>> entry : workerIdToStartTimeAndPort.entrySet()) {
     String workerId=entry.getKey();
-    StateHeartbeat hbstate=localWorkerStats.get(workerId);
-    if (hbstate != null)     if (hbstate.getState().equals(State.notStarted)) {
+    StateHeartbeat hbState=localWorkerStats.get(workerId);
+    if (hbState != null)     if (hbState.getState().equals(State.notStarted)) {
       keepPorts.add(entry.getValue().getSecond());
     }
   }

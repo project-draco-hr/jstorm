@@ -1,0 +1,5 @@
+String id
+String host
+int uptimeSeconds
+int slotsTotal
+int slotsUsed

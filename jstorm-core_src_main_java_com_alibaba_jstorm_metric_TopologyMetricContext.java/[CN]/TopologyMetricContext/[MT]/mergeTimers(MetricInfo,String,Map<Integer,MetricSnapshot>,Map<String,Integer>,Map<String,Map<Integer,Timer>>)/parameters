@@ -1,5 +1,0 @@
-MetricInfo metricInfo
-String meta
-Map<Integer,MetricSnapshot> data
-Map<String,Integer> metaCounters
-Map<String,Map<Integer,Timer>> timers

@@ -4,24 +4,24 @@
   struct.topology.read(iprot);
   struct.set_topology_isSet(true);
 {
-    org.apache.thrift.protocol.TList _list196=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
-    struct.components=new ArrayList<ComponentSummary>(_list196.size);
-    ComponentSummary _elem197;
-    for (int _i198=0; _i198 < _list196.size; ++_i198) {
-      _elem197=new ComponentSummary();
-      _elem197.read(iprot);
-      struct.components.add(_elem197);
+    org.apache.thrift.protocol.TList _list188=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.components=new ArrayList<ComponentSummary>(_list188.size);
+    ComponentSummary _elem189;
+    for (int _i190=0; _i190 < _list188.size; ++_i190) {
+      _elem189=new ComponentSummary();
+      _elem189.read(iprot);
+      struct.components.add(_elem189);
     }
   }
   struct.set_components_isSet(true);
 {
-    org.apache.thrift.protocol.TList _list199=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
-    struct.tasks=new ArrayList<TaskSummary>(_list199.size);
-    TaskSummary _elem200;
-    for (int _i201=0; _i201 < _list199.size; ++_i201) {
-      _elem200=new TaskSummary();
-      _elem200.read(iprot);
-      struct.tasks.add(_elem200);
+    org.apache.thrift.protocol.TList _list191=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+    struct.tasks=new ArrayList<TaskSummary>(_list191.size);
+    TaskSummary _elem192;
+    for (int _i193=0; _i193 < _list191.size; ++_i193) {
+      _elem192=new TaskSummary();
+      _elem192.read(iprot);
+      struct.tasks.add(_elem192);
     }
   }
   struct.set_tasks_isSet(true);

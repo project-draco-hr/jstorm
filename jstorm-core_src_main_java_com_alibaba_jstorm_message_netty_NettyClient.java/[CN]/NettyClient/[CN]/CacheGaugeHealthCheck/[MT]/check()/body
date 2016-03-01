@@ -1,7 +1,7 @@
 {
   Double size=getValue();
   if (size > 8 * JStormUtils.SIZE_1_M) {
-    return Result.unhealthy(name + QueueGauge.QUEUE_IS_FULL);
+    return HealthCheck.Result.unhealthy(name + QueueGauge.QUEUE_IS_FULL);
   }
  else {
     return healthy;

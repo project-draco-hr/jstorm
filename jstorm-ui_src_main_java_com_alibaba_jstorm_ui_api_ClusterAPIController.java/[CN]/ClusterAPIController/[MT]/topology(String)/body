@@ -1,0 +1,16 @@
+{
+  Map ret=new HashMap<>();
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    ClusterSummary clusterSummary=client.getClient().getClusterInfo();
+    List<TopologyEntity> topologies=UIUtils.getTopologyEntities(clusterSummary);
+    ret.put("topologies",topologies);
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    ret=UIUtils.exceptionJson(e);
+    LOG.error(e.getMessage(),e);
+  }
+  return ret;
+}

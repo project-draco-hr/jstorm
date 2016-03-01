@@ -1,7 +1,0 @@
-{
-  int size=0;
-  for (  MetricInfo info : infos) {
-    size+=info.get_metrics_size();
-  }
-  return size;
-}

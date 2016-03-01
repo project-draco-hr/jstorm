@@ -1,0 +1,4 @@
+{
+  readProcCpuInfoFile();
+  return numProcessors;
+}

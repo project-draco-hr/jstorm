@@ -23,11 +23,13 @@
   }
   setTaskNum(taskNum,workerNum);
   for (  ResourceWorkerSlot worker : preAssignWorkers) {
-    Set<ResourceWorkerSlot> doneWorkers=removeWorkerFromSrcPool(taskContext.getWorkerToTaskNum().get(worker),worker);
-    if (doneWorkers != null) {
-      for (      ResourceWorkerSlot doneWorker : doneWorkers) {
-        taskNum-=doneWorker.getTasks().size();
-        workerNum--;
+    if (taskContext.getWorkerToTaskNum().keySet().contains(worker)) {
+      Set<ResourceWorkerSlot> doneWorkers=removeWorkerFromSrcPool(taskContext.getWorkerToTaskNum().get(worker),worker);
+      if (doneWorkers != null) {
+        for (        ResourceWorkerSlot doneWorker : doneWorkers) {
+          taskNum-=doneWorker.getTasks().size();
+          workerNum--;
+        }
       }
     }
   }

@@ -1,5 +1,5 @@
 {
   String path=Cluster.taskerror_path(topologyId,taskId);
   path=path + "/" + timeStamp;
-  return getString(path,false);
+  return (TaskError)getObject(path,false);
 }

@@ -1,0 +1,3 @@
+{
+  conf.put(TOPOLOGY_DEBUG_SAMPLE_RATE,rate);
+}

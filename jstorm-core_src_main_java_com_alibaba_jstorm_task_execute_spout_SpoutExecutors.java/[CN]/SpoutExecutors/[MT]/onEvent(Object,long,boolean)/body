@@ -1,5 +1,4 @@
 {
-  long start=System.nanoTime();
   try {
     if (event == null) {
       return;
@@ -36,13 +35,9 @@
     if (runnable != null)     runnable.run();
   }
  catch (  Throwable e) {
-    if (taskStatus.isShutdown() == false) {
+    if (!taskStatus.isShutdown()) {
       LOG.info("Unknow excpetion ",e);
       report_error.report(e);
     }
-  }
- finally {
-    long end=System.nanoTime();
-    ackerTimer.update((end - start) / TimeUtils.NS_PER_US);
   }
 }

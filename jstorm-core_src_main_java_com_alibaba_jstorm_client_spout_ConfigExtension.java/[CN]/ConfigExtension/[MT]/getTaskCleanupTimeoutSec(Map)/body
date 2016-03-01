@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(TASK_CLEANUP_TIMEOUT_SEC),10);
-}

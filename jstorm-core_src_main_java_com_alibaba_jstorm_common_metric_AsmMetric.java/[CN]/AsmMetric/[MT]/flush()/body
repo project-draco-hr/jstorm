@@ -5,9 +5,9 @@
     return;
   }
   doFlush();
-  List<Integer> rollwindows=rollWindows(time,windows);
+  List<Integer> rollWindows=rollWindows(time,windows);
   for (  int win : windows) {
-    if (rollwindows.contains(win)) {
+    if (rollWindows.contains(win)) {
       updateSnapshot(win);
       Map<Integer,T> metricMap=getWindowMetricMap();
       if (metricMap != null) {

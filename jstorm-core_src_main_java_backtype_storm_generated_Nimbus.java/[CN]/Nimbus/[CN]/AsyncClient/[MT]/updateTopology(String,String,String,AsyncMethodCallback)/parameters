@@ -1,4 +1,0 @@
-String name
-String uploadedLocation
-String updateConf
-AsyncMethodCallback resultHandler

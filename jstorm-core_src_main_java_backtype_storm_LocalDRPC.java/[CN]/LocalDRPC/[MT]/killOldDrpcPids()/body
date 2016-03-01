@@ -1,0 +1,16 @@
+{
+  Map conf=StormConfig.read_storm_config();
+  LOG.info("Configuration is \n" + conf);
+  String pidDir=StormConfig.drpcPids(conf);
+  File file=new File(pidDir);
+  if (file.exists() == false)   return;
+  String[] existPids=file.list();
+  for (  String existPid : existPids) {
+    try {
+      PathUtils.rmpath(pidDir + File.separator + existPid);
+    }
+ catch (    Exception e) {
+      LOG.warn(e.getMessage(),e);
+    }
+  }
+}

@@ -1,3 +1,0 @@
-I iface
-getTaskAndStreamMetrics_args args
-AsyncMethodCallback<List<MetricInfo>> resultHandler

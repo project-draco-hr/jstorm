@@ -1,0 +1,10 @@
+{
+  this.id=id;
+  this.name=name;
+  this.status=status;
+  this.uptime=UIUtils.prettyUptime(uptimeSeconds);
+  this.uptimeSeconds=uptimeSeconds;
+  this.tasksTotal=tasksTotal;
+  this.workersTotal=workersTotal;
+  this.errorInfo=errorInfo;
+}

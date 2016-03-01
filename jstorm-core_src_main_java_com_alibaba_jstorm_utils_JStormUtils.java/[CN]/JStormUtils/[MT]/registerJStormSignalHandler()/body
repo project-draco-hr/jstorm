@@ -1,0 +1,11 @@
+{
+  if (!OSInfo.isLinux()) {
+    LOG.info("Skip register signal for current OS");
+    return;
+  }
+  JStormSignalHandler instance=JStormSignalHandler.getInstance();
+  int[] signals={1,2,5,6,7,12,14,16};
+  for (  int signal : signals) {
+    instance.registerSignal(signal,null,true);
+  }
+}

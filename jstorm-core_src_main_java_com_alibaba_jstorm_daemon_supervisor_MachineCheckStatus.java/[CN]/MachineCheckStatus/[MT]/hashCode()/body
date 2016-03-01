@@ -1,0 +1,3 @@
+{
+  return statusType != null ? statusType.hashCode() : 0;
+}

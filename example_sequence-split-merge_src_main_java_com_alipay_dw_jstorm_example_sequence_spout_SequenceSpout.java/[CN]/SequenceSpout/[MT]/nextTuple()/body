@@ -4,8 +4,13 @@
     return;
   }
   if (isFinished == true) {
+    if (isSendCtrlMsg) {
+      long now=System.currentTimeMillis();
+      String ctrlMsg="spout don't send message due to pending num at " + now;
+      ((SpoutCollector)(collector.getDelegate())).emitCtrl(SequenceTopologyDef.CONTROL_STREAM_ID,new Values(String.valueOf(now)),ctrlMsg);
+    }
     LOG.info("Finish sending ");
-    JStormUtils.sleepMs(10000);
+    JStormUtils.sleepMs(500);
     return;
   }
   if (tupleId > SPOUT_MAX_SEND_NUM) {

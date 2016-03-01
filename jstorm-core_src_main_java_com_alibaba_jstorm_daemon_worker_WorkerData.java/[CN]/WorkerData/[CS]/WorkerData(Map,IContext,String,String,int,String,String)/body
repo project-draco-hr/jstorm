@@ -8,6 +8,8 @@
   this.shutdown=new AtomicBoolean(false);
   this.monitorEnable=new AtomicBoolean(true);
   this.topologyStatus=StatusType.active;
+  this.workerOldStatus=new AtomicBoolean(false);
+  this.workeInitConnectionStatus=new AtomicBoolean(false);
   if (StormConfig.cluster_mode(conf).equals("distributed")) {
     String pidDir=StormConfig.worker_pids_root(conf,worker_id);
     JStormServerUtils.createPid(pidDir);
@@ -18,10 +20,13 @@
   this.stormConf=new HashMap<Object,Object>();
   this.stormConf.putAll(conf);
   this.stormConf.putAll(rawConf);
+  JStormDebugger.update(stormConf);
+  registerUpdateListeners();
   JStormMetrics.setTopologyId(topology_id);
   JStormMetrics.setPort(port);
   JStormMetrics.setDebug(ConfigExtension.isEnableMetricDebug(stormConf));
-  JStormMetrics.setEnabled(ConfigExtension.isEnableMetrics(stormConf));
+  JStormMetrics.enabled=ConfigExtension.isEnableMetrics(stormConf);
+  JStormMetrics.enableStreamMetrics=ConfigExtension.isEnableStreamMetrics(stormConf);
   JStormMetrics.addDebugMetrics(ConfigExtension.getDebugMetricNames(stormConf));
   AsmMetric.setSampleRate(ConfigExtension.getMetricSampleRate(stormConf));
   ConfigExtension.setLocalSupervisorId(stormConf,supervisorId);
@@ -34,15 +39,15 @@
     }
   }
 ));
-  JStormMetrics.registerWorkerTopologyMetric(JStormMetrics.workerMetricName(MetricDef.MEMORY_USED,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+  JStormMetrics.registerWorkerTopologyMetric(JStormMetrics.workerMetricName(MetricDef.HEAP_MEMORY_USED,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
     @Override public Double getValue(){
-      return JStormUtils.getMemUsage();
+      return JStormUtils.getJVMHeapMemory();
     }
   }
 ));
-  JStormMetrics.registerWorkerMetric(JStormMetrics.workerMetricName(MetricDef.DISK_USAGE,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
+  JStormMetrics.registerWorkerTopologyMetric(JStormMetrics.workerMetricName(MetricDef.MEMORY_USED,MetricType.GAUGE),new AsmGauge(new Gauge<Double>(){
     @Override public Double getValue(){
-      return JStormUtils.getDiskUsage();
+      return JStormUtils.getMemUsage();
     }
   }
 ));
@@ -71,6 +76,7 @@
     LOG.error("init jarClassLoader error!",e);
     throw new InvalidParameterException();
   }
+  Config.registerSerialization(stormConf,"java.nio.HeapByteBuffer",KryoByteBufferSerializer.class);
   if (this.context == null) {
     this.context=TransportFactory.makeContext(stormConf);
   }
@@ -79,16 +85,18 @@
   boolean isLimited=ConfigExtension.getTopologyBufferSizeLimited(stormConf);
   DisruptorQueue.setLimited(isLimited);
   LOG.info("Disruptor use sleep:" + disruptorUseSleep + ", limited size:"+ isLimited);
-  int buffer_size=Utils.getInt(stormConf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
+  int queueSize=JStormUtils.parseInt(stormConf.get(Config.TOPOLOGY_CTRL_BUFFER_SIZE),256);
   WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(stormConf);
-  this.transferQueue=DisruptorQueue.mkInstance("TotalTransfer",ProducerType.MULTI,buffer_size,waitStrategy);
-  this.transferQueue.consumerStarted();
+  this.transferCtrlQueue=DisruptorQueue.mkInstance("TotalTransfer",ProducerType.MULTI,queueSize,waitStrategy);
+  QueueGauge transferCtrlGauge=new QueueGauge(transferCtrlQueue,MetricDef.SEND_QUEUE);
+  JStormMetrics.registerWorkerMetric(JStormMetrics.workerMetricName(MetricDef.SEND_QUEUE,MetricType.GAUGE),new AsmGauge(transferCtrlGauge));
+  int buffer_size=Utils.getInt(stormConf.get(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE));
   this.sendingQueue=DisruptorQueue.mkInstance("TotalSending",ProducerType.MULTI,buffer_size,waitStrategy);
-  this.sendingQueue.consumerStarted();
   this.nodeportSocket=new ConcurrentHashMap<WorkerSlot,IConnection>();
   this.taskNodeport=new ConcurrentHashMap<Integer,WorkerSlot>();
   this.workerToResource=new ConcurrentSkipListSet<ResourceWorkerSlot>();
   this.innerTaskTransfer=new ConcurrentHashMap<Integer,DisruptorQueue>();
+  this.controlQueues=new ConcurrentHashMap<Integer,DisruptorQueue>();
   this.deserializeQueues=new ConcurrentHashMap<Integer,DisruptorQueue>();
   this.tasksToComponent=new ConcurrentHashMap<Integer,String>();
   this.componentToSortedTasks=new ConcurrentHashMap<String,List<Integer>>();
@@ -122,5 +130,6 @@
     assignmentTS=System.currentTimeMillis();
   }
   outboundTasks=new HashSet<Integer>();
+  updateKryoSerializer();
   LOG.info("Successfully create WorkerData");
 }

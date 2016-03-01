@@ -1,0 +1,7 @@
+{
+  if (debug) {
+    LOG.info("HTTP:{}, search result:{}",retCode,data);
+  }
+  byte[] bytes=data.getBytes();
+  sendResponse(t,retCode,bytes);
+}

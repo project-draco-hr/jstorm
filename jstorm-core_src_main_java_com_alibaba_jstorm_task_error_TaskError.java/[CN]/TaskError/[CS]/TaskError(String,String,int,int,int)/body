@@ -1,0 +1,7 @@
+{
+  this.error=error;
+  this.level=level;
+  this.code=code;
+  this.timSecs=timSecs;
+  this.durationSecs=durationSecs;
+}

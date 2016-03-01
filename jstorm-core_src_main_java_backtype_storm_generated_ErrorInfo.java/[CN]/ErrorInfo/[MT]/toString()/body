@@ -13,6 +13,19 @@
   sb.append("errorTimeSecs:");
   sb.append(this.errorTimeSecs);
   first=false;
+  if (!first)   sb.append(", ");
+  sb.append("errorLevel:");
+  if (this.errorLevel == null) {
+    sb.append("null");
+  }
+ else {
+    sb.append(this.errorLevel);
+  }
+  first=false;
+  if (!first)   sb.append(", ");
+  sb.append("errorCode:");
+  sb.append(this.errorCode);
+  first=false;
   sb.append(")");
   return sb.toString();
 }

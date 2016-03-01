@@ -1,24 +1,24 @@
 {
   if (!is_set_nimbusMaster()) {
-    throw new TProtocolException("Required field 'nimbusMaster' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'nimbusMaster' is unset! Struct:" + toString());
   }
   if (!is_set_nimbusSlaves()) {
-    throw new TProtocolException("Required field 'nimbusSlaves' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'nimbusSlaves' is unset! Struct:" + toString());
   }
   if (!is_set_supervisorNum()) {
-    throw new TProtocolException("Required field 'supervisorNum' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'supervisorNum' is unset! Struct:" + toString());
   }
   if (!is_set_totalPortNum()) {
-    throw new TProtocolException("Required field 'totalPortNum' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'totalPortNum' is unset! Struct:" + toString());
   }
   if (!is_set_usedPortNum()) {
-    throw new TProtocolException("Required field 'usedPortNum' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'usedPortNum' is unset! Struct:" + toString());
   }
   if (!is_set_freePortNum()) {
-    throw new TProtocolException("Required field 'freePortNum' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'freePortNum' is unset! Struct:" + toString());
   }
   if (!is_set_version()) {
-    throw new TProtocolException("Required field 'version' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'version' is unset! Struct:" + toString());
   }
   if (nimbusMaster != null) {
     nimbusMaster.validate();

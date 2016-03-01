@@ -1,0 +1,8 @@
+{
+  readProcStatFile();
+  float overallCpuUsage=cpuUsageCalculator.getCpuTrackerUsagePercent();
+  if (overallCpuUsage != -1) {
+    overallCpuUsage=overallCpuUsage / getNumProcessors();
+  }
+  return overallCpuUsage;
+}

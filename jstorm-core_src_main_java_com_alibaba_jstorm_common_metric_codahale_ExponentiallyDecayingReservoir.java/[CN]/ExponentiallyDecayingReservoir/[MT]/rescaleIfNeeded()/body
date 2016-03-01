@@ -1,0 +1,7 @@
+{
+  final long now=System.currentTimeMillis();
+  final long next=nextScaleTime.get();
+  if (now >= next) {
+    rescale(now,next);
+  }
+}

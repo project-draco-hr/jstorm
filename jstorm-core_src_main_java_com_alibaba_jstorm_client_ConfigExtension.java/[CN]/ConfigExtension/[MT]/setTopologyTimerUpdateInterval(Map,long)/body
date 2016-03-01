@@ -1,0 +1,3 @@
+{
+  conf.put(TOPOLOGY_TIMER_UPDATE_INTERVAL,interval);
+}

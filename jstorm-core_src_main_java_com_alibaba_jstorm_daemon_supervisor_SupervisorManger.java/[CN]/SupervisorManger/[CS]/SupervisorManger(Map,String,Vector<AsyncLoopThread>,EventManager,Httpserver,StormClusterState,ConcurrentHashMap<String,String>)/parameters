@@ -1,0 +1,7 @@
+Map conf
+String supervisorId
+Vector<AsyncLoopThread> threads
+EventManager eventManager
+Httpserver httpserver
+StormClusterState stormClusterState
+ConcurrentHashMap<String,String> workerThreadPidsAtom

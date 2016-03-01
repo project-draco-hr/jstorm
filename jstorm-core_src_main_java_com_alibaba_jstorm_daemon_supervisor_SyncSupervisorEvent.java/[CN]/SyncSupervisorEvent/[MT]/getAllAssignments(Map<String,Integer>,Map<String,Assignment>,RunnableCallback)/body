@@ -1,0 +1,34 @@
+{
+  Map<String,Assignment> ret=new HashMap<String,Assignment>();
+  Map<String,Integer> updateAssignmentVersion=new HashMap<String,Integer>();
+  List<String> assignments=stormClusterState.assignments(callback);
+  if (assignments == null) {
+    assignmentVersion.clear();
+    localZkAssignments.clear();
+    LOG.debug("No assignment of ZK");
+    return;
+  }
+  for (  String topology_id : assignments) {
+    Integer zkVersion=stormClusterState.assignment_version(topology_id,callback);
+    LOG.debug(topology_id + "'s assigment version of zk is :" + zkVersion);
+    Integer recordedVersion=assignmentVersion.get(topology_id);
+    LOG.debug(topology_id + "'s assigment version of local is :" + recordedVersion);
+    Assignment assignment=null;
+    if (recordedVersion != null && zkVersion != null && recordedVersion.equals(zkVersion)) {
+      assignment=localZkAssignments.get(topology_id);
+    }
+    if (assignment == null) {
+      assignment=stormClusterState.assignment_info(topology_id,callback);
+    }
+    if (assignment == null) {
+      LOG.error("Failed to get Assignment of " + topology_id + " from ZK");
+      continue;
+    }
+    updateAssignmentVersion.put(topology_id,zkVersion);
+    ret.put(topology_id,assignment);
+  }
+  assignmentVersion.clear();
+  assignmentVersion.putAll(updateAssignmentVersion);
+  localZkAssignments.clear();
+  localZkAssignments.putAll(ret);
+}

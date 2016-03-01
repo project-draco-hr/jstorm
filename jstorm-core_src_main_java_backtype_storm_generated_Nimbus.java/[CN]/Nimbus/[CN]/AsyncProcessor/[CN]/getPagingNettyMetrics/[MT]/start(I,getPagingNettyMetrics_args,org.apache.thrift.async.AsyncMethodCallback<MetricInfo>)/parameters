@@ -1,0 +1,3 @@
+I iface
+getPagingNettyMetrics_args args
+org.apache.thrift.async.AsyncMethodCallback<MetricInfo> resultHandler

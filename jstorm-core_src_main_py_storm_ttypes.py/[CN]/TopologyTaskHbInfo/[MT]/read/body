@@ -20,12 +20,12 @@ def read(self, iprot):
         elif (fid == 3):
             if (ftype == TType.MAP):
                 self.taskHbs = {}
-                (_ktype198, _vtype199, _size197) = iprot.readMapBegin()
-                for _i201 in xrange(_size197):
-                    _key202 = iprot.readI32()
-                    _val203 = TaskHeartbeat()
-                    _val203.read(iprot)
-                    self.taskHbs[_key202] = _val203
+                (_ktype191, _vtype192, _size190) = iprot.readMapBegin()
+                for _i194 in xrange(_size190):
+                    _key195 = iprot.readI32()
+                    _val196 = TaskHeartbeat()
+                    _val196.read(iprot)
+                    self.taskHbs[_key195] = _val196
                 iprot.readMapEnd()
             else:
                 iprot.skip(ftype)

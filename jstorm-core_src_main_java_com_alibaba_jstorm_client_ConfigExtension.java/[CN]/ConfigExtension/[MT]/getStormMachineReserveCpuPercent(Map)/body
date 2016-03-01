@@ -1,0 +1,4 @@
+{
+  int percent=JStormUtils.parseInt(conf.get(STORM_MACHINE_RESOURCE_RESERVE_CPU_PERCENT),10);
+  return percent < 10 ? 10 : percent;
+}

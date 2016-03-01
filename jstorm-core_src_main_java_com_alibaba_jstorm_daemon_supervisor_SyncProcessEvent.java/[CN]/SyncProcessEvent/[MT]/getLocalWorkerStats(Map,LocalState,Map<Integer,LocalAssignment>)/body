@@ -1,40 +1,40 @@
 {
-  Map<String,StateHeartbeat> workeridHbstate=new HashMap<String,StateHeartbeat>();
+  Map<String,StateHeartbeat> workerIdHbstate=new HashMap<>();
   int now=TimeUtils.current_time_secs();
   Map<String,WorkerHeartbeat> idToHeartbeat=readWorkerHeartbeats(conf);
-  for (  Entry<String,WorkerHeartbeat> entry : idToHeartbeat.entrySet()) {
-    String workerid=entry.getKey().toString();
+  for (  Map.Entry<String,WorkerHeartbeat> entry : idToHeartbeat.entrySet()) {
+    String workerId=entry.getKey();
     WorkerHeartbeat whb=entry.getValue();
-    State state=null;
+    State state;
     if (whb == null) {
       state=State.notStarted;
-      Pair<Integer,Integer> timeToPort=this.workerIdToStartTimeAndPort.get(workerid);
+      Pair<Integer,Integer> timeToPort=this.workerIdToStartTimeAndPort.get(workerId);
       if (timeToPort != null) {
         LocalAssignment localAssignment=assignedTasks.get(timeToPort.getSecond());
         if (localAssignment == null) {
           LOG.info("Following worker don't exit assignment, so remove this port=" + timeToPort.getSecond());
           state=State.disallowed;
-          Integer port=this.workerIdToStartTimeAndPort.get(workerid).getSecond();
-          this.workerIdToStartTimeAndPort.remove(workerid);
+          Integer port=this.workerIdToStartTimeAndPort.get(workerId).getSecond();
+          this.workerIdToStartTimeAndPort.remove(workerId);
           this.portToWorkerId.remove(port);
         }
       }
     }
- else     if (matchesAssignment(whb,assignedTasks) == false) {
+ else     if (!matchesAssignment(whb,assignedTasks)) {
       state=State.disallowed;
     }
  else     if ((now - whb.getTimeSecs()) > JStormUtils.parseInt(conf.get(Config.SUPERVISOR_WORKER_TIMEOUT_SECS))) {
-      if (killingWorkers.containsKey(workerid) == false) {
+      if (!killingWorkers.containsKey(workerId)) {
         String outTimeInfo=" it is likely to be out of memory, the worker is time out ";
-        workerReportError.report(whb.getTopologyId(),whb.getPort(),whb.getTaskIds(),outTimeInfo);
+        workerReportError.report(whb.getTopologyId(),whb.getPort(),whb.getTaskIds(),outTimeInfo,ErrorConstants.CODE_WORKER_TIMEOUT);
       }
       state=State.timedOut;
     }
  else {
-      if (isWorkerDead(workerid)) {
-        if (killingWorkers.containsKey(workerid) == false) {
-          String workeDeadInfo="Worker is dead ";
-          workerReportError.report(whb.getTopologyId(),whb.getPort(),whb.getTaskIds(),workeDeadInfo);
+      if (isWorkerDead(workerId)) {
+        if (!killingWorkers.containsKey(workerId)) {
+          String workerDeadInfo="Worker is dead ";
+          workerReportError.report(whb.getTopologyId(),whb.getPort(),whb.getTaskIds(),workerDeadInfo,ErrorConstants.CODE_WORKER_DEAD);
         }
         state=State.timedOut;
       }
@@ -43,12 +43,12 @@
       }
     }
     if (state != State.valid) {
-      if (killingWorkers.containsKey(workerid) == false)       LOG.info("Worker:" + workerid + " state:"+ state+ " WorkerHeartbeat:"+ whb+ " assignedTasks:"+ assignedTasks+ " at supervisor time-secs "+ now);
+      if (!killingWorkers.containsKey(workerId))       LOG.info("Worker:" + workerId + " state:"+ state+ " WorkerHeartbeat:"+ whb+ " assignedTasks:"+ assignedTasks+ " at supervisor time-secs "+ now);
     }
  else {
-      LOG.debug("Worker:" + workerid + " state:"+ state+ " WorkerHeartbeat: "+ whb+ " at supervisor time-secs "+ now);
+      LOG.debug("Worker:" + workerId + " state:"+ state+ " WorkerHeartbeat: "+ whb+ " at supervisor time-secs "+ now);
     }
-    workeridHbstate.put(workerid,new StateHeartbeat(state,whb));
+    workerIdHbstate.put(workerId,new StateHeartbeat(state,whb));
   }
-  return workeridHbstate;
+  return workerIdHbstate;
 }

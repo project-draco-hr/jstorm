@@ -1,0 +1,8 @@
+{
+  List<TopologyEntity> ret=new ArrayList<>();
+  for (  TopologySummary summary : cluster.get_topologies()) {
+    TopologyEntity entity=new TopologyEntity(summary.get_id(),summary.get_name(),summary.get_status(),summary.get_uptimeSecs(),summary.get_numTasks(),summary.get_numWorkers(),summary.get_errorInfo());
+    ret.add(entity);
+  }
+  return ret;
+}

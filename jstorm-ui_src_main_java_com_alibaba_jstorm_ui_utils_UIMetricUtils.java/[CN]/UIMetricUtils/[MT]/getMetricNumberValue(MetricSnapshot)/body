@@ -9,8 +9,6 @@ case METER:
 return snapshot.get_m1();
 case HISTOGRAM:
 return snapshot.get_mean();
-case TIMER:
-return snapshot.get_mean();
 default :
 return 0;
 }

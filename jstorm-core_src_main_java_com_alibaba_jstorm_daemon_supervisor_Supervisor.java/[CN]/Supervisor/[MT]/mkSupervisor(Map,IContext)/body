@@ -11,8 +11,10 @@
     supervisorId=UUID.randomUUID().toString();
     localState.put(Common.LS_ID,supervisorId);
   }
-  Vector<AsyncLoopThread> threads=new Vector<AsyncLoopThread>();
-  Heartbeat hb=new Heartbeat(conf,stormClusterState,supervisorId);
+  localState.remove(Common.LS_LOCAl_ZK_ASSIGNMENTS);
+  localState.remove(Common.LS_LOCAL_ZK_ASSIGNMENT_VERSION);
+  Vector<AsyncLoopThread> threads=new Vector<>();
+  Heartbeat hb=new Heartbeat(conf,stormClusterState,supervisorId,localState,checkStatus);
   hb.update();
   AsyncLoopThread heartbeat=new AsyncLoopThread(hb,false,null,Thread.MIN_PRIORITY,true);
   threads.add(heartbeat);
@@ -20,24 +22,26 @@
   if (syncContainerHbThread != null) {
     threads.add(syncContainerHbThread);
   }
-  EventManagerImp processEventManager=new EventManagerImp();
-  AsyncLoopThread processEventThread=new AsyncLoopThread(processEventManager);
-  threads.add(processEventThread);
-  ConcurrentHashMap<String,String> workerThreadPids=new ConcurrentHashMap<String,String>();
+  ConcurrentHashMap<String,String> workerThreadPids=new ConcurrentHashMap<>();
   SyncProcessEvent syncProcessEvent=new SyncProcessEvent(supervisorId,conf,localState,workerThreadPids,sharedContext,workerReportError);
   EventManagerImp syncSupEventManager=new EventManagerImp();
   AsyncLoopThread syncSupEventThread=new AsyncLoopThread(syncSupEventManager);
   threads.add(syncSupEventThread);
-  SyncSupervisorEvent syncSupervisorEvent=new SyncSupervisorEvent(supervisorId,conf,processEventManager,syncSupEventManager,stormClusterState,localState,syncProcessEvent,hb);
+  SyncSupervisorEvent syncSupervisorEvent=new SyncSupervisorEvent(supervisorId,conf,syncSupEventManager,stormClusterState,localState,syncProcessEvent,hb);
   int syncFrequence=JStormUtils.parseInt(conf.get(Config.SUPERVISOR_MONITOR_FREQUENCY_SECS));
   EventManagerPusher syncSupervisorPusher=new EventManagerPusher(syncSupEventManager,syncSupervisorEvent,syncFrequence);
   AsyncLoopThread syncSupervisorThread=new AsyncLoopThread(syncSupervisorPusher);
   threads.add(syncSupervisorThread);
   Httpserver httpserver=null;
-  if (StormConfig.local_mode(conf) == false) {
+  if (!StormConfig.local_mode(conf)) {
     int port=ConfigExtension.getSupervisorDeamonHttpserverPort(conf);
     httpserver=new Httpserver(port,conf);
     httpserver.start();
   }
-  return new SupervisorManger(conf,supervisorId,threads,syncSupEventManager,processEventManager,httpserver,stormClusterState,workerThreadPids);
+  if (!StormConfig.local_mode(conf) && ConfigExtension.isEnableCheckSupervisor(conf)) {
+    SupervisorHealth supervisorHealth=new SupervisorHealth(conf,checkStatus,supervisorId);
+    AsyncLoopThread healthThread=new AsyncLoopThread(supervisorHealth,false,null,Thread.MIN_PRIORITY,true);
+    threads.add(healthThread);
+  }
+  return new SupervisorManger(conf,supervisorId,threads,syncSupEventManager,httpserver,stormClusterState,workerThreadPids);
 }

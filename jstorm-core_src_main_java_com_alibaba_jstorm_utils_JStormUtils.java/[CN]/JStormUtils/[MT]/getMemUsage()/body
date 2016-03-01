@@ -1,7 +1,7 @@
 {
-  if (OSInfo.isLinux() == true) {
+  if (OSInfo.isLinux()) {
     try {
-      Double value=0.0;
+      Double value;
       String pid=JStormUtils.process_pid();
       String command=String.format("top -b -n 1 -p %s | grep -w %s",pid,pid);
       String output=SystemOperation.exec(command);
@@ -40,5 +40,5 @@
   }
   MemoryMXBean memoryMXBean=ManagementFactory.getMemoryMXBean();
   MemoryUsage memoryUsage=memoryMXBean.getHeapMemoryUsage();
-  return Double.valueOf(memoryUsage.getUsed());
+  return (double)memoryUsage.getUsed();
 }

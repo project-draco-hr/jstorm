@@ -1,4 +1,0 @@
-String topologyId
-String host
-int page
-AsyncMethodCallback resultHandler

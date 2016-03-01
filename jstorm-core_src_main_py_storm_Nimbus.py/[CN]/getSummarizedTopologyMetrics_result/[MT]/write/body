@@ -6,8 +6,8 @@ def write(self, oprot):
     if (self.success is not None):
         oprot.writeFieldBegin('success', TType.LIST, 0)
         oprot.writeListBegin(TType.STRUCT, len(self.success))
-        for iter242 in self.success:
-            iter242.write(oprot)
+        for iter235 in self.success:
+            iter235.write(oprot)
         oprot.writeListEnd()
         oprot.writeFieldEnd()
     oprot.writeFieldStop()

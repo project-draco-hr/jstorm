@@ -1,0 +1,3 @@
+{
+  this.points=org.apache.thrift.TBaseHelper.copyBinary(points);
+}

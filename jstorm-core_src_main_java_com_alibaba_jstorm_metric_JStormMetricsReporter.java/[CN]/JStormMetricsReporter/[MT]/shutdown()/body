@@ -1,5 +1,5 @@
 {
-  if (!localMode && enableMetrics) {
+  if (!localMode && JStormMetrics.enabled) {
     this.checkMetricMetaThread.cleanup();
     this.flushMetricThread.cleanup();
   }

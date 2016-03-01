@@ -9,14 +9,14 @@
     hs.start();
   }
  catch (  BindException e) {
-    LOG.info("Httpserver Already start!");
+    LOG.info("HttpServer Already start!");
     hs=null;
     return;
   }
 catch (  IOException e) {
-    LOG.error("Httpserver Start Failed",e);
+    LOG.error("HttpServer Start Failed",e);
     hs=null;
     return;
   }
-  LOG.info("Success start httpserver at port:" + port);
+  LOG.info("Success start HttpServer at port:" + port);
 }

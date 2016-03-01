@@ -8,5 +8,6 @@
   this.cluster_state=workerData.getZkClusterstate();
   this.threadPool=workerData.getThreadPool();
   this.recvConnection=workerData.getRecvConnection();
+  this.conf=workerData.getStormConf();
   Runtime.getRuntime().addShutdownHook(new Thread(this));
 }

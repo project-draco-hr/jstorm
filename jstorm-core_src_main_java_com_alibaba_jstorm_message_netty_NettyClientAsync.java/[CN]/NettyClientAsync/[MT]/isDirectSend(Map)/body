@@ -1,5 +1,5 @@
 {
-  if (JStormServerUtils.isOnePending(conf) == true) {
+  if (JStormServerUtils.isOnePending(conf)) {
     return true;
   }
   return !ConfigExtension.isNettyTransferAsyncBatch(conf);

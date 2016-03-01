@@ -1,3 +1,0 @@
-{
-  conf.put(TOPOLOGY_DEBUG_RECV_TUPLE,Boolean.valueOf(debug));
-}

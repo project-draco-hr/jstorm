@@ -2,5 +2,9 @@
   this.isServer=isServer;
   this.localPort=ConfigExtension.getLocalWorkerPort(conf);
   this.localIp=NetWorkUtils.ip();
-  this.enableTransitTimeMetrics=MetricUtils.isEnableNettyMetrics(conf);
+  this.enableNettyMetrics=MetricUtils.isEnableNettyMetrics(conf);
+  if (enableNettyMetrics) {
+    msgDecodeTimer=(AsmHistogram)JStormMetrics.registerWorkerMetric(MetricUtils.workerMetricName(MetricDef.NETWORK_MSG_DECODE_TIME,MetricType.HISTOGRAM),new AsmHistogram());
+    msgDecodeTimer.setTimeUnit(TimeUnit.NANOSECONDS);
+  }
 }

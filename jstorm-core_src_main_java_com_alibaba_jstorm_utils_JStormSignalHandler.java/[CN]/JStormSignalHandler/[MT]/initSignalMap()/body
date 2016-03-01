@@ -1,0 +1,35 @@
+{
+  signalMap.put(1,"HUP");
+  signalMap.put(2,"INT");
+  signalMap.put(3,"QUIT");
+  signalMap.put(4,"ILL");
+  signalMap.put(5,"TRAP");
+  signalMap.put(6,"ABRT");
+  signalMap.put(6,"IOT");
+  signalMap.put(7,"BUS");
+  signalMap.put(8,"FPE");
+  signalMap.put(9,"KILL");
+  signalMap.put(10,"USR1");
+  signalMap.put(11,"SEGV");
+  signalMap.put(12,"USR2");
+  signalMap.put(13,"PIPE");
+  signalMap.put(14,"ALRM");
+  signalMap.put(15,"TERM");
+  signalMap.put(16,"STKFLT");
+  signalMap.put(17,"CHLD");
+  signalMap.put(18,"CONT");
+  signalMap.put(19,"STOP");
+  signalMap.put(20,"TSTP");
+  signalMap.put(21,"TTIN");
+  signalMap.put(22,"TTOU");
+  signalMap.put(23,"URG");
+  signalMap.put(24,"XCPU");
+  signalMap.put(25,"XFSZ");
+  signalMap.put(26,"VTALRM");
+  signalMap.put(27,"PROF");
+  signalMap.put(28,"WINCH");
+  signalMap.put(29,"IO");
+  signalMap.put(30,"PWR");
+  signalMap.put(31,"SYS");
+  signalMap.put(32,"UNUSED");
+}

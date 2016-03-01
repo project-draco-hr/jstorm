@@ -12,7 +12,7 @@
  catch (    Exception e) {
     }
     try {
-      if (isLoadByDefault(name) == false) {
+      if (!isLoadByDefault(name)) {
         result=findClass(name);
         if (result != null) {
           return result;

@@ -16,23 +16,23 @@ def read(self, iprot):
         elif (fid == 2):
             if (ftype == TType.LIST):
                 self.workers = []
-                (_etype131, _size128) = iprot.readListBegin()
-                for _i132 in xrange(_size128):
-                    _elem133 = WorkerSummary()
-                    _elem133.read(iprot)
-                    self.workers.append(_elem133)
+                (_etype124, _size121) = iprot.readListBegin()
+                for _i125 in xrange(_size121):
+                    _elem126 = WorkerSummary()
+                    _elem126.read(iprot)
+                    self.workers.append(_elem126)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)
         elif (fid == 3):
             if (ftype == TType.MAP):
                 self.workerMetric = {}
-                (_ktype135, _vtype136, _size134) = iprot.readMapBegin()
-                for _i138 in xrange(_size134):
-                    _key139 = iprot.readString().decode('utf-8')
-                    _val140 = MetricInfo()
-                    _val140.read(iprot)
-                    self.workerMetric[_key139] = _val140
+                (_ktype128, _vtype129, _size127) = iprot.readMapBegin()
+                for _i131 in xrange(_size127):
+                    _key132 = iprot.readString().decode('utf-8')
+                    _val133 = MetricInfo()
+                    _val133.read(iprot)
+                    self.workerMetric[_key132] = _val133
                 iprot.readMapEnd()
             else:
                 iprot.skip(ftype)

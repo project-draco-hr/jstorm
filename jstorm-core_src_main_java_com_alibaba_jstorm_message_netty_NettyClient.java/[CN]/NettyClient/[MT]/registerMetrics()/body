@@ -1,7 +1,6 @@
 {
   if (this.enableNettyMetrics) {
     sendTimer=(AsmHistogram)JStormMetrics.registerNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_SEND_TIME,nettyConnection),MetricType.HISTOGRAM),new AsmHistogram());
-    batchSizeHistogram=(AsmHistogram)JStormMetrics.registerNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_BATCH_SIZE,nettyConnection),MetricType.HISTOGRAM),new AsmHistogram());
     sendSpeed=(AsmMeter)JStormMetrics.registerNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_SEND_SPEED,nettyConnection),MetricType.METER),new AsmMeter());
     CacheGaugeHealthCheck cacheGauge=new CacheGaugeHealthCheck(messageBatchRef,MetricDef.NETTY_CLI_CACHE_SIZE + ":" + nettyConnection.toString());
     JStormMetrics.registerNettyMetric(MetricUtils.nettyMetricName(AsmMetric.mkName(MetricDef.NETTY_CLI_CACHE_SIZE,nettyConnection),MetricType.GAUGE),new AsmGauge(cacheGauge));
@@ -14,8 +13,8 @@
     JStormHealthCheck.registerWorkerHealthCheck(MetricDef.NETTY_CLI_CACHE_SIZE + ":" + nettyConnection.toString(),cacheGauge);
   }
   JStormHealthCheck.registerWorkerHealthCheck(MetricDef.NETTY_CLI_CONNECTION + ":" + nettyConnection.toString(),new HealthCheck(){
-    Result healthy=Result.healthy();
-    Result unhealthy=Result.unhealthy("NettyConnection " + nettyConnection.toString() + " is broken.");
+    HealthCheck.Result healthy=HealthCheck.Result.healthy();
+    HealthCheck.Result unhealthy=HealthCheck.Result.unhealthy("NettyConnection " + nettyConnection.toString() + " is broken.");
     @Override protected Result check() throws Exception {
       if (isChannelReady() == null) {
         return unhealthy;

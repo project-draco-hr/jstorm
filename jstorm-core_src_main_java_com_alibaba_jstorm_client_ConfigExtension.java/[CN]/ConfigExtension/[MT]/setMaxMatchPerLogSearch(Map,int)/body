@@ -1,0 +1,3 @@
+{
+  conf.put(MAX_MATCH_PER_LOG_SEARCH,maxMatch);
+}

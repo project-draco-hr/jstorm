@@ -1,4 +1,5 @@
 {
+  cluster_name=StringEscapeUtils.escapeHtml(cluster_name);
   dirs.clear();
   files.clear();
   Map conf=UIUtils.readUiConfig();

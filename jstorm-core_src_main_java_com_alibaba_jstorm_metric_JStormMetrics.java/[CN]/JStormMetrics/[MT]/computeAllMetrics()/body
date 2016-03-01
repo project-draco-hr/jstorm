@@ -1,8 +1,10 @@
 {
   long start=System.currentTimeMillis();
   MetricInfo metricInfo=MetricUtils.mkMetricInfo();
-  List<Map.Entry<String,AsmMetric>> entries=Lists.newArrayList();
-  entries.addAll(streamMetrics.metrics.entrySet());
+  List<Map.Entry<String,AsmMetric>> entries=Lists.newLinkedList();
+  if (enableStreamMetrics) {
+    entries.addAll(streamMetrics.metrics.entrySet());
+  }
   entries.addAll(taskMetrics.metrics.entrySet());
   entries.addAll(componentMetrics.metrics.entrySet());
   entries.addAll(workerMetrics.metrics.entrySet());
@@ -12,6 +14,9 @@
     String name=entry.getKey();
     AsmMetric metric=entry.getValue();
     Map<Integer,AsmSnapshot> snapshots=metric.getSnapshots();
+    if (snapshots.size() == 0) {
+      continue;
+    }
     int op=metric.getOp();
     if ((op & AsmMetric.MetricOp.LOG) == AsmMetric.MetricOp.LOG) {
       MetricUtils.printMetricSnapshot(metric,snapshots);
@@ -33,10 +38,6 @@
         }
  else         if (metric instanceof AsmHistogram) {
           Map data=MetricUtils.toThriftHistoSnapshots(metaType,snapshots);
-          putIfNotEmpty(metricInfo.get_metrics(),name,data);
-        }
- else         if (metric instanceof AsmTimer) {
-          Map data=MetricUtils.toThriftTimerSnapshots(metaType,snapshots);
           putIfNotEmpty(metricInfo.get_metrics(),name,data);
         }
       }

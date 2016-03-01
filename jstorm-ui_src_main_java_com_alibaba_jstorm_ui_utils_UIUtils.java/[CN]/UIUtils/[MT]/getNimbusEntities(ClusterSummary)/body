@@ -1,0 +1,13 @@
+{
+  List<NimbusEntity> ret=new ArrayList<>();
+  NimbusSummary ns=cluster.get_nimbus();
+  NimbusEntity master=new NimbusEntity(ns.get_nimbusMaster().get_host(),ns.get_nimbusMaster().get_uptimeSecs(),ns.get_version());
+  master.setStatus("Master");
+  ret.add(master);
+  for (  NimbusStat s : ns.get_nimbusSlaves()) {
+    NimbusEntity slave=new NimbusEntity(s.get_host(),s.get_uptimeSecs(),ns.get_version());
+    slave.setStatus("Slave");
+    ret.add(slave);
+  }
+  return ret;
+}

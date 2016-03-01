@@ -4,7 +4,6 @@
   this.streamComponentgrouper=_stream_component_grouper;
   this.topologyContext=_topology_context;
   this.taskStats=_task_stats;
-  isDebuging=JStormUtils.parseBoolean(stormConf.get(Config.TOPOLOGY_DEBUG),false);
   taskId=topologyContext.getThisTaskId();
   debugIdStr=" Emit from " + componentId + ":"+ taskId+ " ";
 }

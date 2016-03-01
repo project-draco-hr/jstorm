@@ -10,11 +10,11 @@ def read(self, iprot):
         if (fid == 0):
             if (ftype == TType.LIST):
                 self.success = []
-                (_etype239, _size236) = iprot.readListBegin()
-                for _i240 in xrange(_size236):
-                    _elem241 = MetricInfo()
-                    _elem241.read(iprot)
-                    self.success.append(_elem241)
+                (_etype232, _size229) = iprot.readListBegin()
+                for _i233 in xrange(_size229):
+                    _elem234 = MetricInfo()
+                    _elem234.read(iprot)
+                    self.success.append(_elem234)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)

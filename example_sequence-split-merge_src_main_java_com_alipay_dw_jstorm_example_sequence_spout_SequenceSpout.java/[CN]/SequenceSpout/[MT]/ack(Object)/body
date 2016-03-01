@@ -1,5 +1,4 @@
 {
-  Long tupleId=(Long)id;
   succeedCount++;
   handleCounter.decrementAndGet();
   return;

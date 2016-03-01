@@ -1,7 +1,4 @@
 {
-  if (consumerStartedFlag == false) {
-    return _cache.poll();
-  }
   final long nextSequence=_consumer.get() + 1;
   try {
     _barrier.waitFor(nextSequence);

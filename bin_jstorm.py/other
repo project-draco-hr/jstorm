@@ -3,6 +3,7 @@ import sys
 import random
 import subprocess as sub
 import getopt
+import time
 if (sys.platform == 'cygwin'):
     normclasspath = cygpath
 else:

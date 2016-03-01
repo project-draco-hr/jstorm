@@ -1,0 +1,33 @@
+{
+  ExitStatus exitStatus=ExitStatus.SUCCESS;
+  try {
+    shexec.execute();
+  }
+ catch (  ShellUtils.ExitCodeException e) {
+    exitStatus=ExitStatus.FAILED_WITH_EXIT_CODE;
+    if (shexec.isTimedOut()) {
+      exitStatus=ExitStatus.TIMED_OUT;
+    }
+    LOG.warn(execScript + " exitCode exception, exit code : " + e.getExitCode()+ "; the exitStatus is: "+ exitStatus);
+  }
+catch (  Exception e) {
+    if (!shexec.isTimedOut()) {
+      exitStatus=ExitStatus.FAILED_WITH_EXCEPTION;
+    }
+ else {
+      exitStatus=ExitStatus.TIMED_OUT;
+    }
+    LOG.warn(execScript + " exception, the exitStatus is: " + exitStatus);
+    LOG.warn(JStormUtils.getErrorInfo(e));
+  }
+ finally {
+    if (exitStatus == ExitStatus.SUCCESS && notPassed(shexec.getOutput())) {
+      exitStatus=ExitStatus.FAILED;
+    }
+ else {
+      status.updateInfo();
+    }
+    LOG.debug("Script execute output: " + shexec.getOutput());
+  }
+  return exitStatus;
+}

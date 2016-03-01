@@ -76,11 +76,12 @@ def write(self, oprot):
         oprot.writeDouble(self.stddev)
         oprot.writeFieldEnd()
     if (self.points is not None):
-        oprot.writeFieldBegin('points', TType.LIST, 19)
-        oprot.writeListBegin(TType.I64, len(self.points))
-        for iter109 in self.points:
-            oprot.writeI64(iter109)
-        oprot.writeListEnd()
+        oprot.writeFieldBegin('points', TType.STRING, 19)
+        oprot.writeString(self.points)
+        oprot.writeFieldEnd()
+    if (self.pointSize is not None):
+        oprot.writeFieldBegin('pointSize', TType.I32, 20)
+        oprot.writeI32(self.pointSize)
         oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()

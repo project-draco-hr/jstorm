@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(PROCESS_LAUNCHER_SLEEP_SECONDS),60);
+}

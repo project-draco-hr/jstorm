@@ -1,0 +1,4 @@
+String out_stream_id
+List<Object> values
+Collection<Tuple> anchors
+Integer out_task_id

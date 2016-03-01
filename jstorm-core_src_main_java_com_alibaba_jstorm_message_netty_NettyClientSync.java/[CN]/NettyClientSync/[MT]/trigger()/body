@@ -1,5 +1,5 @@
 {
-  if (isClosed() == true) {
+  if (isClosed()) {
     return;
   }
   long emitTime=emitTs.get();

@@ -1,0 +1,6 @@
+{
+  super(workerData.getTransferCtrlQueue(),idStr);
+  this.nodeportSocket=workerData.getNodeportSocket();
+  this.taskNodeport=workerData.getTaskNodeport();
+  this.atomKryoSerializer=workerData.getAtomKryoSerializer();
+}

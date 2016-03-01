@@ -35,8 +35,9 @@
     Map<Object,Object> config=(Map<Object,Object>)JStormUtils.from_json(updateConf);
     topoConf.putAll(config);
     StormConfig.write_nimbus_topology_conf(data.getConf(),topologyId,topoConf);
-    LOG.info("update topology " + name + " successfully");
     NimbusUtils.transitionName(data,name,true,StatusType.update_topology,config);
+    LOG.info("update topology " + name + " successfully");
+    notifyTopologyActionListener(name,"updateTopology");
   }
  catch (  NotAliveException e) {
     String errMsg="Error, no this topology " + name;

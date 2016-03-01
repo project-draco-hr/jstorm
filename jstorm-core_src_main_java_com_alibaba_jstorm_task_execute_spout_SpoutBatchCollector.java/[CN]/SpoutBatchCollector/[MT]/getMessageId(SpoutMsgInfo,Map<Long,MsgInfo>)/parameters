@@ -1,0 +1,2 @@
+SpoutMsgInfo msg
+Map<Long,MsgInfo> ackBatch

@@ -1,3 +1,0 @@
-I iface
-getTopologyMetrics_args args
-AsyncMethodCallback<TopologyMetric> resultHandler

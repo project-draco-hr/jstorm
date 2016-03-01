@@ -1,0 +1,48 @@
+{
+  if (StringUtils.isBlank(dir)) {
+    dir=".";
+  }
+  String fullFile=getFullFile(dir,filename);
+  response.setContentType("application/octet-stream");
+  response.setHeader("Content-Disposition","attachment; filename=" + filename);
+  String downloadUrl=String.format("http://%s:%s/logview?cmd=download&log=%s&size=%s",host,logServerPort,fullFile,BLOCK_DOWNLOAD_SIZE);
+  String sizeUrl=String.format("http://%s:%s/logview?cmd=showLog&log=%s&pos=0&size=0",host,logServerPort,fullFile);
+  try {
+    long position=0;
+    long fileSize;
+    HttpResponse httpResponse=httpGet(sizeUrl);
+    if (httpResponse != null && httpResponse.getStatusLine().getStatusCode() == 200) {
+      byte[] size=new byte[16];
+      httpResponse.getEntity().getContent().read(size);
+      fileSize=JStormUtils.parseLong(new String(size).trim(),MAX_DOWNLOAD_SIZE);
+      if (fileSize - position > MAX_DOWNLOAD_SIZE) {
+        position=fileSize - MAX_DOWNLOAD_SIZE;
+      }
+    }
+ else {
+      handlFailure(response,"Bad request, can not read the file");
+      return;
+    }
+    response.setContentLength((int)(fileSize - position));
+    OutputStream os=response.getOutputStream();
+    do {
+      httpResponse=httpGet(downloadUrl + "&pos=" + position);
+      int status=httpResponse.getStatusLine().getStatusCode();
+      if (status == 200) {
+        httpResponse.getEntity().writeTo(os);
+        Header[] header=httpResponse.getHeaders("Content-Length");
+        int contentLength=JStormUtils.parseInt(header[0].getValue(),BLOCK_DOWNLOAD_SIZE);
+        position+=contentLength;
+      }
+ else {
+        break;
+      }
+    }
+ while (position < fileSize);
+    os.flush();
+    os.close();
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+}

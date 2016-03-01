@@ -1,0 +1,7 @@
+{
+  JStormSignalHandler instance=JStormSignalHandler.getInstance();
+  int[] signals={1,2,3,4,5,6,7,8,10,11,12,14,16};
+  for (  int signal : signals) {
+    instance.registerSignal(signal,null,false);
+  }
+}

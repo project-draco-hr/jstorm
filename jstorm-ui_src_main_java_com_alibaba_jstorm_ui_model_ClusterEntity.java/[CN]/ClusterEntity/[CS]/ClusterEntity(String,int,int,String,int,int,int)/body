@@ -1,0 +1,10 @@
+{
+  this.clusterName=name;
+  this.supervisors=supervisor_num;
+  this.topologies=topology_num;
+  this.stormVersion=version;
+  this.taskTotal=task_num;
+  this.slotsTotal=total_ports;
+  this.slotsUsed=used_ports;
+  this.slotsFree=total_ports - used_ports;
+}

@@ -1,7 +1,6 @@
 {
   if (hostPort.contains(":")) {
-    String lastPart=hostPort.substring(hostPort.indexOf(":"));
-    return lastPart;
+    return hostPort.substring(hostPort.indexOf(":") + 1);
   }
  else {
     return null;

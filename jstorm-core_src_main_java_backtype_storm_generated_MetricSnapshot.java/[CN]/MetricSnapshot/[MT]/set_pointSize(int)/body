@@ -1,0 +1,4 @@
+{
+  this.pointSize=pointSize;
+  set_pointSize_isSet(true);
+}

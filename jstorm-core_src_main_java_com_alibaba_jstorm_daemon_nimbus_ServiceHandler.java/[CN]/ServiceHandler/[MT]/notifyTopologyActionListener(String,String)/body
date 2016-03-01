@@ -1,0 +1,4 @@
+{
+  ITopologyActionNotifierPlugin nimbusNotify=data.getNimbusNotify();
+  if (nimbusNotify != null)   nimbusNotify.notify(topologyName,action);
+}

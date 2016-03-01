@@ -1,0 +1,13 @@
+{
+  if (StringUtils.isBlank(dir)) {
+    dir=".";
+  }
+  String fullFile;
+  if (StringUtils.isBlank(dir)) {
+    fullFile=filename;
+  }
+ else {
+    fullFile=dir + File.separator + filename;
+  }
+  return fullFile;
+}

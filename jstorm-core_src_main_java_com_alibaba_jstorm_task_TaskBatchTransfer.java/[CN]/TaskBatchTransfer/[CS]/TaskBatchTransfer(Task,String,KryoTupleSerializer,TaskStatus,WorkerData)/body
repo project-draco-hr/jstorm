@@ -2,9 +2,4 @@
   super(task,taskName,serializer,taskStatus,workerData);
   batchMap=new HashMap<Integer,BatchTuple>();
   maxBatchSize=ConfigExtension.getTaskMsgBatchSize(workerData.getStormConf());
-  TaskBatchFlushTrigger batchFlushTrigger=new TaskBatchFlushTrigger(BATCH_FLUSH_INTERVAL_MS,taskName,this);
-  batchFlushTrigger.register(TimeUnit.MILLISECONDS);
-  TaskBatchCheckTrigger batchCheckTrigger=new TaskBatchCheckTrigger(BATCH_CHECK_INTERVAL_S,taskName,this);
-  batchCheckTrigger.register();
-  startCheck();
 }

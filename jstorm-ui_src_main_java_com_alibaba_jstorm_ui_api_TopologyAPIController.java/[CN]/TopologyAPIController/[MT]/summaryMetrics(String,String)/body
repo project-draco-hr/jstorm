@@ -1,0 +1,17 @@
+{
+  int window=60;
+  Map<String,Object> ret=new HashMap<>();
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    List<MetricInfo> infos=client.getClient().getMetrics(topology,MetaType.TOPOLOGY.getT());
+    List<ChartSeries> metrics=UIUtils.getChartSeries(infos,window);
+    ret.put("metrics",metrics);
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    ret=UIUtils.exceptionJson(e);
+    LOG.error(e.getMessage(),e);
+  }
+  return ret;
+}

@@ -1,0 +1,3 @@
+{
+  return JStormUtils.parseInt(conf.get(TASK_BATCH_FLUSH_INTERVAL_MS),2);
+}

@@ -1,0 +1,13 @@
+{
+  this.topology=worker.get_topology();
+  this.port=worker.get_port();
+  this.uptimeSeconds=worker.get_uptime();
+  this.uptime=UIUtils.prettyUptime(uptimeSeconds);
+  tasks=new ArrayList<>();
+  for (  TaskComponent task : worker.get_tasks()) {
+    Map<String,Object> t=new HashMap<>();
+    t.put("id",task.get_taskId());
+    t.put("component",task.get_component());
+    tasks.add(t);
+  }
+}

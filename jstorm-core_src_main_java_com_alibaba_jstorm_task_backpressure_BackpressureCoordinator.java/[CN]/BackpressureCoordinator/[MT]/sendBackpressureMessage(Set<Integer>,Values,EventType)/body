@@ -1,6 +1,6 @@
 {
   for (  Integer taskId : targetTasks) {
-    output.emitDirect(taskId,Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID,value);
+    ((BoltCollector)(output.getDelegate())).emitDirectCtrl(taskId,Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID,null,value);
     LOG.debug("Send " + backpressureType.toString() + " request to taskId-"+ taskId);
   }
 }

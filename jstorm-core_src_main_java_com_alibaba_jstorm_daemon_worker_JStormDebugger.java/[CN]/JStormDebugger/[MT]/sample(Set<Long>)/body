@@ -1,0 +1,11 @@
+{
+  if (Double.compare(sampleRate,1.0d) >= 0)   return true;
+  int threshold=(int)(sampleRate * PRECISION);
+  for (  Long id : root_ids) {
+    int mod=(int)(Math.abs(id) % PRECISION);
+    if (mod < threshold) {
+      return true;
+    }
+  }
+  return false;
+}

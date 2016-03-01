@@ -4,15 +4,18 @@
   boolean update=false;
   if (type.equals(EventType.stopBackpressure)) {
     String spoutComponentId=taskIdToComponentId.get(sourceTask);
-    SourceBackpressureInfo info=SourceTobackpressureInfo.remove(spoutComponentId);
+    SourceBackpressureInfo info=SourceTobackpressureInfo.get(spoutComponentId);
     if (info != null) {
       info.getTasks().remove(sourceTask);
-      if (info.getTasks().size() == 0) {
+      if (info.getTasks().isEmpty()) {
+        SourceTobackpressureInfo.remove(spoutComponentId);
+      }
+      if (info.getTasks().isEmpty()) {
         for (        Entry<String,TargetBackpressureInfo> entry : info.getTargetTasks().entrySet()) {
           String componentId=entry.getKey();
           Set<String> sourceSpouts=getInputSpoutsForBolt(topology,componentId,null);
           if (checkSpoutsUnderBackpressure(sourceSpouts) == false) {
-            Set<Integer> tasks=new TreeSet<Integer>();
+            Set<Integer> tasks=new HashSet<Integer>();
             tasks.addAll(context.getComponentTasks(componentId));
             sendBackpressureMessage(tasks,new Values(ctrlEvent),type);
           }

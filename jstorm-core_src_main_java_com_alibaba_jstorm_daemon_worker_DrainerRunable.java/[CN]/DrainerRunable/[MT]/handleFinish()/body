@@ -1,7 +1,0 @@
-{
-  for (  Entry<IConnection,List<TaskMessage>> entry : dispatchMap.entrySet()) {
-    Pair<IConnection,List<TaskMessage>> pair=new Pair<IConnection,List<TaskMessage>>(entry.getKey(),entry.getValue());
-    sendingQueue.publish(pair);
-  }
-  dispatchMap.clear();
-}

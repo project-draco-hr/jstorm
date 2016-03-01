@@ -1,3 +1,7 @@
 {
-  return rand.nextDouble() <= sampleRate;
+  if (curr.increment() >= freq) {
+    curr.set(0);
+    target.set(rand.nextInt(freq));
+  }
+  return curr.get() == target.get();
 }

@@ -1,0 +1,10 @@
+{
+  TaskEntity entity=null;
+  for (  TaskSummary task : tasks) {
+    if (task.get_taskId() == taskId) {
+      entity=new TaskEntity(task);
+      break;
+    }
+  }
+  return entity;
+}

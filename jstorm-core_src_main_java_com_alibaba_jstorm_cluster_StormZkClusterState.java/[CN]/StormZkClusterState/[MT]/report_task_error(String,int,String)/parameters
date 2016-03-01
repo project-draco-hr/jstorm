@@ -1,0 +1,3 @@
+String topology_id
+int task_id
+String error

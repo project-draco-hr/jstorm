@@ -1,11 +1,8 @@
 {
-  String nimbus=JStormMetrics.NIMBUS_METRIC_KEY;
-  if (topologyMetricContexts.containsKey(nimbus)) {
-    syncMetaFromRemote(nimbus,topologyMetricContexts.get(nimbus));
-  }
-  String cluster=JStormMetrics.CLUSTER_METRIC_KEY;
-  if (topologyMetricContexts.containsKey(cluster)) {
-    syncMetaFromRemote(cluster,topologyMetricContexts.get(cluster));
+  for (  String topology : JStormMetrics.SYS_TOPOLOGIES) {
+    if (topologyMetricContexts.containsKey(topology)) {
+      syncMetaFromRemote(topology,topologyMetricContexts.get(topology));
+    }
   }
   Map<String,Assignment> assignMap;
   try {

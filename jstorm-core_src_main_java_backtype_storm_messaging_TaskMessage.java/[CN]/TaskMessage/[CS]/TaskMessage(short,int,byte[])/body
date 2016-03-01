@@ -1,0 +1,5 @@
+{
+  _type=type;
+  _task=task;
+  _message=message;
+}

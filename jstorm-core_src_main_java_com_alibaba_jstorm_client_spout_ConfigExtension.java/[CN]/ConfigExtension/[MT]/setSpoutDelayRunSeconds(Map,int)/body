@@ -1,3 +1,0 @@
-{
-  conf.put(SPOUT_DELAY_RUN,Integer.valueOf(delay));
-}

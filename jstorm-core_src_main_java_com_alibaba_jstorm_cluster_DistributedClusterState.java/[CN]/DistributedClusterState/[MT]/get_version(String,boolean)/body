@@ -1,0 +1,4 @@
+{
+  Integer ret=zkobj.getVersion(zk,path,watch);
+  return ret;
+}

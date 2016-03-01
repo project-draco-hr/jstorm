@@ -1,0 +1,4 @@
+Map conf
+String supervisorId
+Map<String,String> removed
+boolean block

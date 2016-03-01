@@ -1,6 +1,11 @@
 {
-  meter.mark(obj.longValue());
-  for (  AsmMetric metric : this.assocMetrics) {
-    metric.update(obj);
+  if (enabled.get()) {
+    unflushed.addAndGet(obj.longValue());
+    long now=System.currentTimeMillis();
+    long elapsed=now - lastUpdateTime;
+    if (elapsed >= UPDATE_INTERVAL_MS) {
+      lastUpdateTime=now;
+      doFlush();
+    }
   }
 }

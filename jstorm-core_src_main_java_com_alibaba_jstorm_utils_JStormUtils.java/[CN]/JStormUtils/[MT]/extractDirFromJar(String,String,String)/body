@@ -1,0 +1,46 @@
+{
+  ZipFile zipFile=null;
+  try {
+    zipFile=new ZipFile(jarpath);
+    Enumeration<? extends ZipEntry> entries=zipFile.entries();
+    while (entries != null && entries.hasMoreElements()) {
+      ZipEntry ze=entries.nextElement();
+      if (!ze.isDirectory() && ze.getName().startsWith(dir)) {
+        InputStream in=zipFile.getInputStream(ze);
+        try {
+          File file=new File(destdir,ze.getName());
+          if (!file.getParentFile().mkdirs()) {
+            if (!file.getParentFile().isDirectory()) {
+              throw new IOException("Mkdirs failed to create " + file.getParentFile().toString());
+            }
+          }
+          OutputStream out=new FileOutputStream(file);
+          try {
+            byte[] buffer=new byte[8192];
+            int i;
+            while ((i=in.read(buffer)) != -1) {
+              out.write(buffer,0,i);
+            }
+          }
+  finally {
+            out.close();
+          }
+        }
+  finally {
+          if (in != null)           in.close();
+        }
+      }
+    }
+  }
+ catch (  Exception e) {
+    LOG.warn("No " + dir + " from "+ jarpath+ "!\n"+ e.getMessage());
+  }
+ finally {
+    if (zipFile != null)     try {
+      zipFile.close();
+    }
+ catch (    Exception e) {
+      LOG.warn(e.getMessage());
+    }
+  }
+}

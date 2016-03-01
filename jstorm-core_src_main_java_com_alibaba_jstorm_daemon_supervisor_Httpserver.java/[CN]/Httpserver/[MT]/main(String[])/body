@@ -1,0 +1,15 @@
+{
+  Map conf=new HashMap();
+  LogHandler logHandler=new LogHandler(conf);
+  logHandler.setDebug(true);
+  logHandler.setLogDir("/Users/wuchong/Downloads/");
+  Map<String,String> params=new HashMap<>();
+  params.put("file","SequenceTest6-worker-6800.log");
+  logHandler.handleSearchLog(null,params);
+  params.put("key","info");
+  logHandler.handleSearchLog(null,params);
+  params.put("case_ignore","true");
+  logHandler.handleSearchLog(null,params);
+  params.put("offset","7481");
+  logHandler.handleSearchLog(null,params);
+}

@@ -1,0 +1,65 @@
+{
+  Map<String,UIComponentMetric> componentData=new HashMap<>();
+  if (info != null) {
+    for (    Map.Entry<String,Map<Integer,MetricSnapshot>> metric : info.get_metrics().entrySet()) {
+      String name=metric.getKey();
+      String[] split_name=name.split("@");
+      String compName=UIMetricUtils.extractComponentName(split_name);
+      String metricName=UIMetricUtils.extractMetricName(split_name);
+      String group=UIMetricUtils.extractGroup(split_name);
+      String parentComp=null;
+      if (metricName != null && metricName.contains(".")) {
+        parentComp=metricName.split("\\.")[0];
+        metricName=metricName.split("\\.")[1];
+      }
+      if (!metric.getValue().containsKey(window)) {
+        LOG.debug("component snapshot {} missing window:{}",metric.getKey(),window);
+        continue;
+      }
+      MetricSnapshot snapshot=metric.getValue().get(window);
+      if (group != null && group.equals("udf")) {
+        UIUserDefinedMetric udm=new UIUserDefinedMetric(metricName,compName);
+        udm.setValue(UIMetricUtils.getMetricValue(snapshot));
+        udm.setType(snapshot.get_metricType());
+        userDefinedMetrics.add(udm);
+      }
+ else {
+        UIComponentMetric compMetric;
+        if (componentData.containsKey(compName)) {
+          compMetric=componentData.get(compName);
+        }
+ else {
+          compMetric=new UIComponentMetric(compName);
+          componentData.put(compName,compMetric);
+        }
+        compMetric.setMetricValue(snapshot,parentComp,metricName);
+      }
+    }
+  }
+  for (  UIComponentMetric comp : componentData.values()) {
+    comp.mergeValue();
+  }
+  TreeMap<String,UIComponentMetric> ret=new TreeMap<>();
+  for (  ComponentSummary summary : componentSummaries) {
+    String compName=summary.get_name();
+    UIComponentMetric compMetric;
+    if (componentData.containsKey(compName)) {
+      compMetric=componentData.get(compName);
+      compMetric.setParallel(summary.get_parallel());
+      compMetric.setType(summary.get_type());
+      compMetric.setErrors(summary.get_errors());
+    }
+ else {
+      compMetric=new UIComponentMetric(compName,summary.get_parallel(),summary.get_type());
+      compMetric.setErrors(summary.get_errors());
+      componentData.put(compName,compMetric);
+    }
+    String key=compMetric.getType() + compName;
+    if (compName.startsWith("__")) {
+      key="a" + key;
+    }
+    compMetric.setSortedKey(key);
+    ret.put(key,compMetric);
+  }
+  return new ArrayList<>(ret.descendingMap().values());
+}

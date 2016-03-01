@@ -1,3 +1,0 @@
-{
-  conf.put(UI_CLUSTERS,uiClusters);
-}

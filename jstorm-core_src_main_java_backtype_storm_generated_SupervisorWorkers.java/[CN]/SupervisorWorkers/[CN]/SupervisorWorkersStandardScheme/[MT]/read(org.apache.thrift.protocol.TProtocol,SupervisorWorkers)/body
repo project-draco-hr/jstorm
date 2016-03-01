@@ -20,13 +20,13 @@ case 1:
 case 2:
   if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
 {
-      org.apache.thrift.protocol.TList _list144=iprot.readListBegin();
-      struct.workers=new ArrayList<WorkerSummary>(_list144.size);
-      WorkerSummary _elem145;
-      for (int _i146=0; _i146 < _list144.size; ++_i146) {
-        _elem145=new WorkerSummary();
-        _elem145.read(iprot);
-        struct.workers.add(_elem145);
+      org.apache.thrift.protocol.TList _list136=iprot.readListBegin();
+      struct.workers=new ArrayList<WorkerSummary>(_list136.size);
+      WorkerSummary _elem137;
+      for (int _i138=0; _i138 < _list136.size; ++_i138) {
+        _elem137=new WorkerSummary();
+        _elem137.read(iprot);
+        struct.workers.add(_elem137);
       }
       iprot.readListEnd();
     }
@@ -39,15 +39,15 @@ break;
 case 3:
 if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
 {
-  org.apache.thrift.protocol.TMap _map147=iprot.readMapBegin();
-  struct.workerMetric=new HashMap<String,MetricInfo>(2 * _map147.size);
-  String _key148;
-  MetricInfo _val149;
-  for (int _i150=0; _i150 < _map147.size; ++_i150) {
-    _key148=iprot.readString();
-    _val149=new MetricInfo();
-    _val149.read(iprot);
-    struct.workerMetric.put(_key148,_val149);
+  org.apache.thrift.protocol.TMap _map139=iprot.readMapBegin();
+  struct.workerMetric=new HashMap<String,MetricInfo>(2 * _map139.size);
+  String _key140;
+  MetricInfo _val141;
+  for (int _i142=0; _i142 < _map139.size; ++_i142) {
+    _key140=iprot.readString();
+    _val141=new MetricInfo();
+    _val141.read(iprot);
+    struct.workerMetric.put(_key140,_val141);
   }
   iprot.readMapEnd();
 }

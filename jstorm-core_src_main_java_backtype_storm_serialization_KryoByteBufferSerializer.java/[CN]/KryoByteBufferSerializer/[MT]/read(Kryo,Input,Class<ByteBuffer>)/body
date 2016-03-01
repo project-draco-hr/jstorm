@@ -1,0 +1,4 @@
+{
+  int len=input.readInt();
+  return ByteBuffer.wrap(input.readBytes(len));
+}

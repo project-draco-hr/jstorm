@@ -1,0 +1,4 @@
+{
+  output.writeLong(inner.getValue());
+  output.writeString(inner.getKey());
+}

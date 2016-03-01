@@ -1,0 +1,33 @@
+{
+  boolean found=false;
+  String path=Cluster.taskerror_path(topology_id,task_id);
+  cluster_state.mkdirs(path);
+  List<Integer> children=new ArrayList<Integer>();
+  int timeSecs=TimeUtils.current_time_secs();
+  String timestampPath=path + Cluster.ZK_SEPERATOR + timeSecs;
+  TaskError taskError=new TaskError(error,error_level,error_code,timeSecs,duration_secs);
+  for (  String str : cluster_state.get_children(path,false)) {
+    String errorPath=path + Cluster.ZK_SEPERATOR + str;
+    Object obj=getObject(errorPath,false);
+    if (obj == null) {
+      deleteObject(errorPath);
+      continue;
+    }
+    TaskError errorInfo=(TaskError)obj;
+    if (errorInfo.getError().equals(error) || (tag != null && errorInfo.getError().startsWith(tag))) {
+      cluster_state.delete_node(errorPath);
+      setObject(timestampPath,taskError);
+      found=true;
+      break;
+    }
+    children.add(Integer.parseInt(str));
+  }
+  if (!found) {
+    Collections.sort(children);
+    while (children.size() >= 3) {
+      deleteObject(path + Cluster.ZK_SEPERATOR + children.remove(0));
+    }
+    setObject(timestampPath,taskError);
+  }
+  setLastErrInfo(topology_id,duration_secs,timeSecs);
+}

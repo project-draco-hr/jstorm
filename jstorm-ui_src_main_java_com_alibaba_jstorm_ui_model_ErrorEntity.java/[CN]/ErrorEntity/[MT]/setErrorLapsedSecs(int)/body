@@ -1,0 +1,3 @@
+{
+  this.errorLapsedSecs=errorLapsedSecs;
+}

@@ -1,0 +1,15 @@
+{
+  if (!OSInfo.isLinux()) {
+    return 0.0;
+  }
+  try {
+    List<String> lines=IOUtils.readLines(new FileInputStream("/proc/meminfo"));
+    String total=lines.get(0).split("\\s+")[1];
+    String free=lines.get(1).split("\\s+")[1];
+    return 1 - Double.valueOf(free) / Double.valueOf(total);
+  }
+ catch (  Exception ignored) {
+    LOG.warn("failed to get total memory usage.");
+  }
+  return 0.0;
+}

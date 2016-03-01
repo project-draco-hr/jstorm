@@ -1,3 +1,4 @@
 {
-  return this.points;
+  set_points(org.apache.thrift.TBaseHelper.rightSize(points));
+  return points == null ? null : points.array();
 }

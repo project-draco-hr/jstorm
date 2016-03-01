@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(TOPOLOGY_BACKPRESSURE_TRIGGER_SAMPLE_NUMBER),4);
-}

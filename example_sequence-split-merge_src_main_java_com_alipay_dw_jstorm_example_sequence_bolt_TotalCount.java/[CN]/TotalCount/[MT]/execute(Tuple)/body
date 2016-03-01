@@ -3,6 +3,11 @@
     LOG.info("Receive one Ticket Tuple " + input.getSourceComponent());
     return;
   }
+  if (input.getSourceStreamId().equals(SequenceTopologyDef.CONTROL_STREAM_ID)) {
+    String str=(input.getStringByField("CONTROL"));
+    LOG.warn(str);
+    return;
+  }
   long before=System.currentTimeMillis();
   try {
     if (checkTupleId) {
@@ -12,7 +17,14 @@
       }
       lastTupleId=tupleId;
     }
-    TradeCustomer tradeCustomer=(TradeCustomer)input.getValue(1);
+    TradeCustomer tradeCustomer=null;
+    try {
+      tradeCustomer=(TradeCustomer)input.getValue(1);
+    }
+ catch (    Exception e) {
+      LOG.error(input.getSourceComponent() + "  " + input.getSourceTask()+ " "+ input.getSourceStreamId()+ " target "+ ((TupleImplExt)input));
+      throw new RuntimeException(e);
+    }
     tradeSum.addAndGet(tradeCustomer.getTrade().getValue());
     customerSum.addAndGet(tradeCustomer.getCustomer().getValue());
     collector.ack(input);

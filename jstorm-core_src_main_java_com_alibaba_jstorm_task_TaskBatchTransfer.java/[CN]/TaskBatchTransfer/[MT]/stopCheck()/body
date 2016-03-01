@@ -1,4 +1,0 @@
-{
-  eventSampler=null;
-  LOG.info("Stop check batch size, task of  " + taskName);
-}

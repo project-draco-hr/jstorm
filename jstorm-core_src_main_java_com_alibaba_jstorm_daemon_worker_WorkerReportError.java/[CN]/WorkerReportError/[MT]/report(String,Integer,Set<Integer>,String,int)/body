@@ -1,0 +1,13 @@
+{
+  try {
+    Date now=new Date();
+    String nowStr=TimeFormat.getSecond(now);
+    String errorInfo=error + "on " + this.hostName+ ":"+ worker_port+ ","+ nowStr;
+    for (    Integer task : tasks) {
+      zkCluster.report_task_error(topology_id,task,errorInfo,ErrorConstants.FATAL,errorCode);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed update " + worker_port + "errors to ZK"+ "\n",e);
+  }
+}

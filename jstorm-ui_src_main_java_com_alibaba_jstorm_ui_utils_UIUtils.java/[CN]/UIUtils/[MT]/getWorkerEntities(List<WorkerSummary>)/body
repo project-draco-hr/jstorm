@@ -1,0 +1,7 @@
+{
+  List<WorkerEntity> workerEntities=new ArrayList<>();
+  for (  WorkerSummary worker : workers) {
+    workerEntities.add(new WorkerEntity(worker));
+  }
+  return workerEntities;
+}

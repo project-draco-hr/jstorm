@@ -3,8 +3,7 @@
   batchQueue=new ConcurrentLinkedQueue<MessageBatch>();
   WaitStrategy waitStrategy=(WaitStrategy)Utils.newInstance((String)storm_conf.get(Config.TOPOLOGY_DISRUPTOR_WAIT_STRATEGY));
   disruptorQueue=DisruptorQueue.mkInstance(name,ProducerType.MULTI,MAX_SEND_PENDING * 8,waitStrategy);
-  disruptorQueue.consumerStarted();
-  if (connectMyself == false) {
+  if (!connectMyself) {
     registerSyncMetrics();
   }
   Runnable trigger=new Runnable(){

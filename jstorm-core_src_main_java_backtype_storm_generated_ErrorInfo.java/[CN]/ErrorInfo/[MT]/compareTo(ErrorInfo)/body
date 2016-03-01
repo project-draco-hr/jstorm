@@ -23,5 +23,25 @@
       return lastComparison;
     }
   }
+  lastComparison=Boolean.valueOf(is_set_errorLevel()).compareTo(other.is_set_errorLevel());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_errorLevel()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.errorLevel,other.errorLevel);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
+  lastComparison=Boolean.valueOf(is_set_errorCode()).compareTo(other.is_set_errorCode());
+  if (lastComparison != 0) {
+    return lastComparison;
+  }
+  if (is_set_errorCode()) {
+    lastComparison=org.apache.thrift.TBaseHelper.compareTo(this.errorCode,other.errorCode);
+    if (lastComparison != 0) {
+      return lastComparison;
+    }
+  }
   return 0;
 }

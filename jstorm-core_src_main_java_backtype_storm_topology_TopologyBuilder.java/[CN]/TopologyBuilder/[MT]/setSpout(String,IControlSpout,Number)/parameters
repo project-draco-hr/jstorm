@@ -1,0 +1,3 @@
+String id
+IControlSpout spout
+Number parallelism_hint

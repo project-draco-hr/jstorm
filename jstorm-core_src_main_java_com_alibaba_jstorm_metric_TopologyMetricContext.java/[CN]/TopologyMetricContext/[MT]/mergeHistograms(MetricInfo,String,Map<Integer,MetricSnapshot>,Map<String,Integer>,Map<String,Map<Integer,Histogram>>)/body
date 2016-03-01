@@ -21,7 +21,7 @@
  else {
         if (snapshot.get_ts() >= old.get_ts()) {
           old.set_ts(snapshot.get_ts());
-          MetricUtils.updateHistogramPoints(histograms.get(meta).get(win),snapshot.get_points());
+          MetricUtils.updateHistogramPoints(histograms.get(meta).get(win),snapshot.get_points(),snapshot.get_pointSize());
         }
       }
     }

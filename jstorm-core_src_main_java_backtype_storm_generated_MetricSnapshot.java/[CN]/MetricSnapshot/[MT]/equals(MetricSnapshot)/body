@@ -114,5 +114,11 @@
     if (!(this_present_points && that_present_points))     return false;
     if (!this.points.equals(that.points))     return false;
   }
+  boolean this_present_pointSize=true && this.is_set_pointSize();
+  boolean that_present_pointSize=true && that.is_set_pointSize();
+  if (this_present_pointSize || that_present_pointSize) {
+    if (!(this_present_pointSize && that_present_pointSize))     return false;
+    if (this.pointSize != that.pointSize)     return false;
+  }
   return true;
 }

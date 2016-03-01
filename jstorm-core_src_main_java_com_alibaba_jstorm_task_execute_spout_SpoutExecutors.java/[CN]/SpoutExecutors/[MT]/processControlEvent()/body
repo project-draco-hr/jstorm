@@ -4,6 +4,14 @@
     if (event instanceof TimerTrigger.TimerEvent) {
       processTimerEvent((TimerTrigger.TimerEvent)event);
     }
+ else     if (event instanceof Tuple) {
+      processTupleEvent((Tuple)event);
+    }
+ else     if (event instanceof BatchTuple) {
+      for (      Tuple tuple : ((BatchTuple)event).getTuples()) {
+        processTupleEvent(tuple);
+      }
+    }
  else {
       LOG.warn("Received unknown control event, " + event.getClass().getName());
     }

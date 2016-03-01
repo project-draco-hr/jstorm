@@ -1,0 +1,4 @@
+String error
+String errorLevel
+int errorCode
+int duration

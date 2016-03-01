@@ -3,14 +3,14 @@
   struct.topology.write(oprot);
 {
     oprot.writeI32(struct.components.size());
-    for (    ComponentSummary _iter194 : struct.components) {
-      _iter194.write(oprot);
+    for (    ComponentSummary _iter186 : struct.components) {
+      _iter186.write(oprot);
     }
   }
 {
     oprot.writeI32(struct.tasks.size());
-    for (    TaskSummary _iter195 : struct.tasks) {
-      _iter195.write(oprot);
+    for (    TaskSummary _iter187 : struct.tasks) {
+      _iter187.write(oprot);
     }
   }
   struct.metrics.write(oprot);

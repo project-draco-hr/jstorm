@@ -1,0 +1,5 @@
+Integer out_task_id
+String stream
+List<Object> tuple
+Collection<Tuple> anchors
+Object root_id

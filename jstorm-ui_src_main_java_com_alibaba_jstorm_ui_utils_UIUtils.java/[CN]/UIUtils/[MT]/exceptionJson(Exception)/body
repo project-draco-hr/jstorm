@@ -1,0 +1,6 @@
+{
+  Map<String,String> ret=new HashMap<>();
+  ret.put("error","Internal Server Error");
+  ret.put("errorMessage",JStormUtils.getErrorInfo(ex));
+  return ret;
+}

@@ -1,6 +1,6 @@
 {
-  if (isDebug) {
-    LOG.info("Acking message {}",msgId);
+  if (JStormDebugger.isDebug(id)) {
+    LOG.info("Acking message rootId:{}, messageId:{}",id,msgId);
   }
   if (spout instanceof IAckValueSpout) {
     IAckValueSpout ackValueSpout=(IAckValueSpout)spout;
@@ -9,13 +9,12 @@
  else {
     spout.ack(msgId);
   }
-  long latency=0, lifeCycle=0;
-  if (tupleInfo.getTimestamp() != 0) {
-    long endTime=System.nanoTime();
-    latency=(endTime - tupleInfo.getTimestamp()) / TimeUtils.NS_PER_US;
+  long latencyStart=tupleInfo.getTimestamp(), lifeCycleStart=0;
+  if (latencyStart != 0 && JStormMetrics.enabled) {
+    long endTime=System.currentTimeMillis();
     if (tuple != null && tuple instanceof TupleExt) {
-      lifeCycle=(System.currentTimeMillis() - ((TupleExt)tuple).getCreationTimeStamp()) * TimeUtils.NS_PER_US;
+      lifeCycleStart=((TupleExt)tuple).getCreationTimeStamp();
     }
+    task_stats.spout_acked_tuple(stream,latencyStart,lifeCycleStart,endTime);
   }
-  task_stats.spout_acked_tuple(stream,latency,lifeCycle);
 }

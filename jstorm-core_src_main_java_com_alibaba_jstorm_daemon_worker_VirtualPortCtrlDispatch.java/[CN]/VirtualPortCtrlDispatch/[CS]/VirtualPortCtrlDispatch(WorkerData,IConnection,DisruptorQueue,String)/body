@@ -1,0 +1,6 @@
+{
+  super(recvQueue,idStr);
+  this.recvConnection=recvConnection;
+  this.controlQueues=workerData.getControlQueues();
+  this.atomKryoDeserializer=workerData.getAtomKryoDeserializer();
+}

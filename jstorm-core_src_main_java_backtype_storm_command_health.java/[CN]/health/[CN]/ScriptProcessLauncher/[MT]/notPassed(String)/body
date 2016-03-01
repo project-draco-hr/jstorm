@@ -1,0 +1,9 @@
+{
+  String[] splits=output.split("\n");
+  for (  String split : splits) {
+    if (split.startsWith(NOT_PASSED_PATTERN)) {
+      return true;
+    }
+  }
+  return false;
+}

@@ -10,9 +10,9 @@
   if (struct.is_set_taskHbs()) {
 {
       oprot.writeI32(struct.taskHbs.size());
-      for (      Map.Entry<Integer,TaskHeartbeat> _iter227 : struct.taskHbs.entrySet()) {
-        oprot.writeI32(_iter227.getKey());
-        _iter227.getValue().write(oprot);
+      for (      Map.Entry<Integer,TaskHeartbeat> _iter219 : struct.taskHbs.entrySet()) {
+        oprot.writeI32(_iter219.getKey());
+        _iter219.getValue().write(oprot);
       }
     }
   }

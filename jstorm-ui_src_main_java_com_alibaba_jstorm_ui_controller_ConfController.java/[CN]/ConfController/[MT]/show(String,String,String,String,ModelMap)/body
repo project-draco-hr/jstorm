@@ -1,6 +1,8 @@
 {
+  name=StringEscapeUtils.escapeHtml(name);
+  topologyId=StringEscapeUtils.escapeHtml(topologyId);
   String title=null;
-  String uri=String.format("api/v1/cluster/%s",name);
+  String uri=String.format("api/v2/cluster/%s",name);
   if (!StringUtils.isBlank(type)) {
     if (type.equals("supervisor")) {
       uri+=String.format("/supervisor/%s/configuration",host);

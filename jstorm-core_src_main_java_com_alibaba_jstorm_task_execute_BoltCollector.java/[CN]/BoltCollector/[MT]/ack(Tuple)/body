@@ -6,14 +6,13 @@
       ack_val=(Long)(pend_val);
     }
     for (    Entry<Long,Long> e : input.getMessageId().getAnchorsToIds().entrySet()) {
-      UnanchoredSend.send(topologyContext,sendTargets,taskTransfer,Acker.ACKER_ACK_STREAM_ID,JStormUtils.mk_list((Object)e.getKey(),JStormUtils.bit_xor(e.getValue(),ack_val)));
+      unanchoredSend(topologyContext,sendTargets,taskTransfer,Acker.ACKER_ACK_STREAM_ID,JStormUtils.mk_list((Object)e.getKey(),JStormUtils.bit_xor(e.getValue(),ack_val)));
     }
   }
-  Long startTime=(Long)tuple_start_times.remove(input);
-  if (startTime != null) {
-    Long endTime=System.nanoTime();
-    long latency=(endTime - startTime) / TimeUtils.NS_PER_US;
-    long lifeCycle=(System.currentTimeMillis() - ((TupleExt)input).getCreationTimeStamp()) * TimeUtils.NS_PER_US;
-    task_stats.bolt_acked_tuple(input.getSourceComponent(),input.getSourceStreamId(),latency,lifeCycle);
+  Long latencyStart=(Long)tuple_start_times.remove(input);
+  if (latencyStart != null && JStormMetrics.enabled) {
+    long lifeCycleStart=((TupleExt)input).getCreationTimeStamp();
+    long endTime=System.currentTimeMillis();
+    task_stats.bolt_acked_tuple(input.getSourceComponent(),input.getSourceStreamId(),latencyStart,lifeCycleStart,endTime);
   }
 }

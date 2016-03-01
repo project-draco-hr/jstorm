@@ -1,6 +1,0 @@
-{
-  super();
-  for (  int win : windowSeconds) {
-    timerMap.put(win,newTimer());
-  }
-}

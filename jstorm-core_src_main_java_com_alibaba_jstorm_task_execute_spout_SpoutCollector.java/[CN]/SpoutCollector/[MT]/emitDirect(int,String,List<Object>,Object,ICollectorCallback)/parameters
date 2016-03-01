@@ -1,0 +1,5 @@
+int taskId
+String streamId
+List<Object> tuple
+Object messageId
+ICollectorCallback callback

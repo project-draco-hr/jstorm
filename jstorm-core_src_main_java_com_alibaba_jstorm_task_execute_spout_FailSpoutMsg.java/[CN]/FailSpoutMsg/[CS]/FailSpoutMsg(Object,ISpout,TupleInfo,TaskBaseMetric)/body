@@ -1,0 +1,6 @@
+{
+  this.id=id;
+  this.spout=_spout;
+  this.tupleInfo=_tupleInfo;
+  this.task_stats=_task_stats;
+}

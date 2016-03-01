@@ -47,9 +47,7 @@
 ,5,60,TimeUnit.SECONDS);
   JStormMetrics.registerWorkerGauge(JStormMetrics.NIMBUS_METRIC_KEY,MetricDef.MEMORY_USED,new AsmGauge(new Gauge<Double>(){
     @Override public Double getValue(){
-      MemoryMXBean memoryMXBean=ManagementFactory.getMemoryMXBean();
-      MemoryUsage memoryUsage=memoryMXBean.getHeapMemoryUsage();
-      return (double)memoryUsage.getUsed();
+      return JStormUtils.getJVMHeapMemory();
     }
   }
 ));

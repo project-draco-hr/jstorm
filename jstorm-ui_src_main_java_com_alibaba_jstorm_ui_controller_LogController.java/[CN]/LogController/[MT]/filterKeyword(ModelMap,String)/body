@@ -1,0 +1,12 @@
+{
+  if (!StringUtils.isBlank(keyword)) {
+    if (keyword.length() > KEY_WORD_MIN_LENGTH) {
+      return true;
+    }
+ else {
+      model.addAttribute("tip","The keyword length must larger than 2");
+      return false;
+    }
+  }
+  return false;
+}

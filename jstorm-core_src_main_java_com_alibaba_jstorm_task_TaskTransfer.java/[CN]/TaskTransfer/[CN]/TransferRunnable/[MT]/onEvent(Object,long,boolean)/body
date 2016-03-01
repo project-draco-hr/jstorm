@@ -2,7 +2,7 @@
   if (event == null) {
     return;
   }
-  long start=System.nanoTime();
+  long start=serializeTimer.getTime();
   try {
     ITupleExt tuple=(ITupleExt)event;
     int taskid=tuple.getTargetTaskId();
@@ -14,7 +14,6 @@
     }
   }
   finally {
-    long end=System.nanoTime();
-    serializeTimer.update((end - start) / TimeUtils.NS_PER_US);
+    serializeTimer.updateTime(start);
   }
 }

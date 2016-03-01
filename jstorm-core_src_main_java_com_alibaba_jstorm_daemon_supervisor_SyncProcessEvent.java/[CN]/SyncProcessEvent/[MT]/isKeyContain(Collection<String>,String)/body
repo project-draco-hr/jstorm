@@ -7,7 +7,7 @@
   for (  String item : collection) {
     String regex=item + "[-._0-9]*.jar";
     Pattern p=Pattern.compile(regex);
-    if (p.matcher(fileName).matches() == true) {
+    if (p.matcher(fileName).matches()) {
       return true;
     }
   }

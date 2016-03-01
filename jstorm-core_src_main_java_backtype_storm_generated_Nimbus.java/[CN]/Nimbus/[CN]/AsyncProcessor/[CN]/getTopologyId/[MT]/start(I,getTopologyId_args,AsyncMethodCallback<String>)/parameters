@@ -1,3 +1,0 @@
-I iface
-getTopologyId_args args
-AsyncMethodCallback<String> resultHandler

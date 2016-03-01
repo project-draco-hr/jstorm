@@ -1,0 +1,10 @@
+{
+  for (  IUpdater updater : updaters) {
+    try {
+      updater.update(conf);
+    }
+ catch (    Exception e) {
+      LOG.error(e.getMessage(),e);
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  while (true) {
+    Thread.sleep(5000);
+    System.out.println(LinuxResource.getCpuUsage());
+    System.out.println(LinuxResource.getFreePhysicalMemorySize());
+  }
+}

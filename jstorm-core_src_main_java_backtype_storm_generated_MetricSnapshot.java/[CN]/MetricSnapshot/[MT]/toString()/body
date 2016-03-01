@@ -109,8 +109,14 @@
       sb.append("null");
     }
  else {
-      sb.append(this.points);
+      org.apache.thrift.TBaseHelper.toString(this.points,sb);
     }
+    first=false;
+  }
+  if (is_set_pointSize()) {
+    if (!first)     sb.append(", ");
+    sb.append("pointSize:");
+    sb.append(this.pointSize);
     first=false;
   }
   sb.append(")");

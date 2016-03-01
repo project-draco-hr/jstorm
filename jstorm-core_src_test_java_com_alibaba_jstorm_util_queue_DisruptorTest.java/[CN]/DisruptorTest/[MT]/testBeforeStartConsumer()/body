@@ -2,7 +2,6 @@
   System.out.println("!!!!!!!!!!!!Begin testBeforeStartConsumer!!!!!!!!!");
   final AtomicBoolean messageConsumed=new AtomicBoolean(false);
   DisruptorQueue queue=createQueue("consumerHang",ProducerType.MULTI,2);
-  queue.consumerStarted();
   push(queue,1);
   Runnable producer=new Producer(queue);
   Runnable consumer=new Consumer(queue,new EventHandler<Object>(){

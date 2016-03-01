@@ -14,9 +14,9 @@
       oprot.writeFieldBegin(TASK_HBS_FIELD_DESC);
 {
         oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,struct.taskHbs.size()));
-        for (        Map.Entry<Integer,TaskHeartbeat> _iter226 : struct.taskHbs.entrySet()) {
-          oprot.writeI32(_iter226.getKey());
-          _iter226.getValue().write(oprot);
+        for (        Map.Entry<Integer,TaskHeartbeat> _iter218 : struct.taskHbs.entrySet()) {
+          oprot.writeI32(_iter218.getKey());
+          _iter218.getValue().write(oprot);
         }
         oprot.writeMapEnd();
       }

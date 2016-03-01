@@ -1,0 +1,19 @@
+{
+  if (event == null) {
+    return;
+  }
+  ITupleExt tuple=(ITupleExt)event;
+  int targetTask=tuple.getTargetTaskId();
+  IConnection conn=getConnection(targetTask);
+  if (conn != null) {
+    byte[] tupleMessage=null;
+    try {
+      tupleMessage=serialize(tuple);
+    }
+ catch (    Throwable e) {
+      LOG.warn("serialize happened errors!!!",e);
+    }
+    TaskMessage message=new TaskMessage((short)1,targetTask,tupleMessage);
+    conn.send(message);
+  }
+}

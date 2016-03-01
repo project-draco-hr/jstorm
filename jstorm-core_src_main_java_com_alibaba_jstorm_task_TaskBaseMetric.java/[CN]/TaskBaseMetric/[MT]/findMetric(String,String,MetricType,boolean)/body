@@ -1,0 +1,14 @@
+{
+  String key=streamId + name;
+  AsmMetric existingMetric=metricCache.get(key);
+  if (existingMetric == null) {
+    String fullName=MetricUtils.streamMetricName(topologyId,componentId,taskId,streamId,name,metricType);
+    existingMetric=JStormMetrics.getStreamMetric(fullName);
+    if (existingMetric == null) {
+      existingMetric=AsmMetric.Builder.build(metricType);
+      JStormMetrics.registerStreamMetric(fullName,existingMetric,mergeTopology);
+    }
+    metricCache.putIfAbsent(key,existingMetric);
+  }
+  return existingMetric;
+}

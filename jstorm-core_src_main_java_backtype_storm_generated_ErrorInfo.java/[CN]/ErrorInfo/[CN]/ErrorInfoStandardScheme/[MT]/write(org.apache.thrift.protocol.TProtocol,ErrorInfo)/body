@@ -9,6 +9,14 @@
   oprot.writeFieldBegin(ERROR_TIME_SECS_FIELD_DESC);
   oprot.writeI32(struct.errorTimeSecs);
   oprot.writeFieldEnd();
+  if (struct.errorLevel != null) {
+    oprot.writeFieldBegin(ERROR_LEVEL_FIELD_DESC);
+    oprot.writeString(struct.errorLevel);
+    oprot.writeFieldEnd();
+  }
+  oprot.writeFieldBegin(ERROR_CODE_FIELD_DESC);
+  oprot.writeI32(struct.errorCode);
+  oprot.writeFieldEnd();
   oprot.writeFieldStop();
   oprot.writeStructEnd();
 }

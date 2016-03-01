@@ -1,0 +1,9 @@
+{
+  if (active.get()) {
+    result=frequence;
+  }
+ else {
+    result=-1;
+  }
+  return result;
+}

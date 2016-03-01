@@ -9,7 +9,7 @@
     Object id=tuple.getValue(0);
     Object obj=pending.remove((Long)id);
     if (obj == null) {
-      if (isDebug) {
+      if (JStormDebugger.isDebug(id)) {
         LOG.info("Pending map no entry:" + id);
       }
       runnable=null;
@@ -18,10 +18,10 @@
       TupleInfo tupleInfo=(TupleInfo)obj;
       String stream_id=tuple.getSourceStreamId();
       if (stream_id.equals(Acker.ACKER_ACK_STREAM_ID)) {
-        runnable=new AckSpoutMsg(spout,tuple,tupleInfo,task_stats,isDebug);
+        runnable=new AckSpoutMsg(id,spout,tuple,tupleInfo,task_stats);
       }
  else       if (stream_id.equals(Acker.ACKER_FAIL_STREAM_ID)) {
-        runnable=new FailSpoutMsg(id,spout,tupleInfo,task_stats,isDebug);
+        runnable=new FailSpoutMsg(id,spout,tupleInfo,task_stats);
       }
  else {
         LOG.warn("Receive one unknow source Tuple " + idStr);

@@ -1,6 +1,0 @@
-{
-  Timer timer=new Timer(new ExponentiallyDecayingReservoir());
-  List<Long> points=snapshot.get_points();
-  updateTimerPoints(timer,points);
-  return timer;
-}

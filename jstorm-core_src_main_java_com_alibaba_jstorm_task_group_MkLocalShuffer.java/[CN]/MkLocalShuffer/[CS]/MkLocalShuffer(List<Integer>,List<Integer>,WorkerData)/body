@@ -1,6 +1,7 @@
 {
   super(workerData);
   List<Integer> localOutTasks=new ArrayList<Integer>();
+  allTargetTasks.addAll(allOutTasks);
   for (  Integer outTask : allOutTasks) {
     if (workerTasks.contains(outTask)) {
       localOutTasks.add(outTask);
