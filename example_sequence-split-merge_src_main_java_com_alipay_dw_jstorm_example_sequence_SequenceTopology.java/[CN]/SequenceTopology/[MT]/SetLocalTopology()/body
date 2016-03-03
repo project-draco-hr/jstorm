@@ -1,6 +1,6 @@
 {
   TopologyBuilder builder=new TopologyBuilder();
-  conf.put(TOPOLOGY_BOLT_PARALLELISM_HINT,Integer.valueOf(1));
+  conf.put(TOPOLOGY_BOLT_PARALLELISM_HINT,1);
   SetBuilder(builder,conf);
   LOG.debug("test");
   LOG.info("Submit log");

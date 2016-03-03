@@ -1,9 +1,9 @@
 {
-  if (isLimited == false) {
+  if (!isLimited) {
     emit();
     return;
   }
-  if (isFinished == true) {
+  if (isFinished) {
     if (isSendCtrlMsg) {
       long now=System.currentTimeMillis();
       String ctrlMsg="spout don't send message due to pending num at " + now;

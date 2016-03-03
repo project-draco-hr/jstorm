@@ -10,6 +10,8 @@
   }
   long before=System.currentTimeMillis();
   try {
+    myCounter.update(1);
+    myMeter.update(1);
     if (checkTupleId) {
       Long tupleId=input.getLong(0);
       if (tupleId <= lastTupleId) {
@@ -17,7 +19,7 @@
       }
       lastTupleId=tupleId;
     }
-    TradeCustomer tradeCustomer=null;
+    TradeCustomer tradeCustomer;
     try {
       tradeCustomer=(TradeCustomer)input.getValue(1);
     }
@@ -31,6 +33,7 @@
     long now=System.currentTimeMillis();
     long spend=now - tradeCustomer.getTimestamp();
     tpsCounter.count(spend);
+    myJStormHistogram.update(now - before);
     if (slowDonw) {
       JStormUtils.sleepMs(20);
     }

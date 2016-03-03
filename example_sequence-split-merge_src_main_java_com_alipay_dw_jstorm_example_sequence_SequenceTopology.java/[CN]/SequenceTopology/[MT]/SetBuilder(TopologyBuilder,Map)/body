@@ -3,7 +3,7 @@
   int bolt_Parallelism_hint=JStormUtils.parseInt(conf.get(TOPOLOGY_BOLT_PARALLELISM_HINT),2);
   builder.setSpout(SequenceTopologyDef.SEQUENCE_SPOUT_NAME,new SequenceSpout(),spout_Parallelism_hint);
   boolean isEnableSplit=JStormUtils.parseBoolean(conf.get("enable.split"),false);
-  if (isEnableSplit == false) {
+  if (!isEnableSplit) {
     BoltDeclarer boltDeclarer=builder.setBolt(SequenceTopologyDef.TOTAL_BOLT_NAME,new TotalCount(),bolt_Parallelism_hint);
     boltDeclarer.shuffleGrouping(SequenceTopologyDef.SEQUENCE_SPOUT_NAME).allGrouping(SequenceTopologyDef.SEQUENCE_SPOUT_NAME,SequenceTopologyDef.CONTROL_STREAM_ID).addConfiguration(Config.TOPOLOGY_TICK_TUPLE_FREQ_SECS,3);
   }
@@ -15,7 +15,7 @@
     builder.setBolt(SequenceTopologyDef.TOTAL_BOLT_NAME,new TotalCount(),bolt_Parallelism_hint).noneGrouping(SequenceTopologyDef.MERGE_BOLT_NAME);
   }
   boolean kryoEnable=JStormUtils.parseBoolean(conf.get("kryo.enable"),false);
-  if (kryoEnable == true) {
+  if (kryoEnable) {
     System.out.println("Use Kryo ");
     boolean useJavaSer=JStormUtils.parseBoolean(conf.get("fall.back.on.java.serialization"),true);
     Config.setFallBackOnJavaSerialization(conf,useJavaSer);

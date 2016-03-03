@@ -7,7 +7,6 @@
   boolean isLocal=StormConfig.local_mode(conf);
   if (isLocal) {
     SetLocalTopology();
-    return;
   }
  else {
     SetRemoteTopology();

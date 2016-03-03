@@ -1,5 +1,4 @@
 {
   succeedCount++;
   handleCounter.decrementAndGet();
-  return;
 }
