@@ -20,9 +20,6 @@
     return;
   }
   String streamId=getStreamId(msgId.getBatchStatus());
-  List<Integer> outTasks=collector.emit(streamId,new Values(msgId.getBatchId()),msgId);
-  if (outTasks.isEmpty()) {
-    forward(msgId);
-  }
+  collector.emit(streamId,new Values(msgId.getBatchId()),msgId,new EmitCb(msgId));
   return;
 }
