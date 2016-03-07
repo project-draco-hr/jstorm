@@ -1,5 +1,5 @@
 {
   fn.postRun();
   fn.shutdown();
-  LOG.info("Succefully shutdown");
+  LOG.info("Successfully shutdown");
 }
