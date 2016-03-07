@@ -1,6 +1,7 @@
 {
   this.spout.open(storm_conf,userTopologyCtx,outputCollector);
   LOG.info("Successfully open SpoutExecutors " + idStr);
+  taskHbTrigger.register();
   int delayRun=ConfigExtension.getSpoutDelayRunSeconds(storm_conf);
   JStormUtils.sleepMs(delayRun * 1000);
   if (taskStatus.isRun()) {
