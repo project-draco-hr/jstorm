@@ -2,6 +2,7 @@
   int port=JStormUtils.parseInt(conf.get(Config.DRPC_PORT));
   int workerThreadNum=JStormUtils.parseInt(conf.get(Config.DRPC_WORKER_THREADS));
   int queueSize=JStormUtils.parseInt(conf.get(Config.DRPC_QUEUE_SIZE));
+  LOG.info("Begin to init Handler Server " + port);
   TNonblockingServerSocket socket=new TNonblockingServerSocket(port);
   THsHaServer.Args targs=new THsHaServer.Args(socket);
   targs.workerThreads(64);
