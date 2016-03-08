@@ -1,8 +1,15 @@
 {
+  receiveCounter2.incrementAndGet();
   for (  Integer bucket : _accum.keySet()) {
     BucketValue currVal=BUCKET_DATABASE.get(bucket);
     BucketValue newVal;
     if (currVal == null || !currVal.txid.equals(_attempt.getTransactionId())) {
+      if (currVal != null) {
+        if (currVal.txid.compareTo(_attempt.getTransactionId()) >= 0) {
+          System.out.println("!!!!!!!!!!! out of order in BucketCountUpdater !!!!!!!");
+          outOfOrder.set(true);
+        }
+      }
       newVal=new BucketValue();
       newVal.txid=_attempt.getTransactionId();
       newVal.count=_accum.get(bucket);
