@@ -1,3 +1,5 @@
 {
   bolt.prepare(storm_conf,userTopologyCtx,outputCollector);
+  LOG.info("Succeesfully do Bolt.prepare");
+  taskHbTrigger.register();
 }

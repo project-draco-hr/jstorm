@@ -1,6 +1,6 @@
 {
   int tries=50000;
-  double expected=tries * 0.1;
+  double expected=tries * SAMPLE_RATE;
   int lottery=0;
   int num=tries;
   while (num-- > 0) {
@@ -9,5 +9,5 @@
       lottery++;
     }
   }
-  assertEquals(expected,lottery,expected * 0.01);
+  assertEquals(expected,lottery,expected * 0.05);
 }

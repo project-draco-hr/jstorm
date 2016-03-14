@@ -5,5 +5,5 @@
   this.topologyContext=_topology_context;
   this.taskStats=_task_stats;
   taskId=topologyContext.getThisTaskId();
-  debugIdStr=" Emit from " + componentId + ":"+ taskId+ " ";
+  debugIdStr=" emit from " + componentId + ":"+ taskId+ " ";
 }

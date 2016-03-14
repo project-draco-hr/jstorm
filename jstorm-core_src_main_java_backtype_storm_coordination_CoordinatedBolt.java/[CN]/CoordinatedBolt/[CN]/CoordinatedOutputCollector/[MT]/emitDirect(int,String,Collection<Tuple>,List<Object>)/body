@@ -1,4 +1,5 @@
 {
   updateTaskCounts(tuple.get(0),Arrays.asList(task));
   _delegate.emitDirect(task,stream,anchors,tuple);
+  _delegate.flush();
 }

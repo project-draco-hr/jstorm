@@ -1,4 +1,7 @@
 {
+  if (SKIP == true) {
+    return;
+  }
   List<String> assignments=zkobj.getChildren(zk,Cluster.SUPERVISORS_SUBTREE,false);
   for (  String child : assignments) {
     byte[] data=zkobj.getData(zk,Cluster.supervisor_path(child),false);

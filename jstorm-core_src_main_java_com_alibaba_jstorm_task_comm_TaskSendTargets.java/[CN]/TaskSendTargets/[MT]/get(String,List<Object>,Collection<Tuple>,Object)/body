@@ -2,7 +2,7 @@
   List<Integer> out_tasks=new ArrayList<Integer>();
   Map<String,MkGrouper> componentCrouping=streamComponentgrouper.get(stream);
   if (componentCrouping == null) {
-    LOG.debug("Failed to get Grouper of " + stream + " in "+ debugIdStr);
+    LOG.debug("Failed to get Grouper of " + stream + " when "+ debugIdStr);
     return out_tasks;
   }
   for (  Entry<String,MkGrouper> ee : componentCrouping.entrySet()) {

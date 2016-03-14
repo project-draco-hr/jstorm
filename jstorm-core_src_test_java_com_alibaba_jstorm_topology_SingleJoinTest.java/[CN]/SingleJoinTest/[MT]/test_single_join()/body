@@ -1,4 +1,5 @@
 {
+  receiveCounter.set(0);
   try {
     FeederSpout genderSpout=new FeederSpout(new Fields("id","gender"));
     FeederSpout ageSpout=new FeederSpout(new Fields("id","age"));
@@ -24,6 +25,7 @@
       ageSpout.feed(new Values(i,i + 20));
     }
     JStormUtils.sleepMs(60 * 1000);
+    assertNotSame(0,receiveCounter.get());
     cluster.shutdown();
   }
  catch (  Exception e) {

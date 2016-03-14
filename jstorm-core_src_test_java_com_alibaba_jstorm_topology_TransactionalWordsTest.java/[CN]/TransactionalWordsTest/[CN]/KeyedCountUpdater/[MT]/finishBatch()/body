@@ -1,8 +1,15 @@
 {
+  receiveCounter1.incrementAndGet();
   for (  String key : _counts.keySet()) {
     CountValue val=COUNT_DATABASE.get(key);
     CountValue newVal;
     if (val == null || !val.txid.equals(_id.getTransactionId())) {
+      if (val != null) {
+        if (val.txid.compareTo(_id.getTransactionId()) >= 0) {
+          System.out.println("!!!!!!!!!!! out of order in KeyedCountUpdater !!!!!!!");
+          outOfOrder.set(true);
+        }
+      }
       newVal=new CountValue();
       newVal.txid=_id.getTransactionId();
       if (val != null) {

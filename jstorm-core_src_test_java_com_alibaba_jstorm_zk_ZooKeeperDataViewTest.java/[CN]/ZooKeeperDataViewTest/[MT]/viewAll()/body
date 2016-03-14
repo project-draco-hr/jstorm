@@ -1,4 +1,7 @@
 {
+  if (SKIP == true) {
+    return;
+  }
   Node root=new Node(Cluster.ZK_SEPERATOR);
   viewNode(root);
   System.out.println(gson.toJson(root));
