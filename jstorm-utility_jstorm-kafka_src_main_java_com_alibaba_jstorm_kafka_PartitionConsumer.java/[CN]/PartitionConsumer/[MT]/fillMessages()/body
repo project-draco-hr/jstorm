@@ -4,6 +4,15 @@
     long start=System.currentTimeMillis();
     msgs=consumer.fetchMessages(partition,emittingOffset + 1);
     if (msgs == null) {
+      short fetchResponseCode=consumer.getAndResetFetchResponseCode();
+      if (fetchResponseCode == ErrorMapping.OffsetOutOfRangeCode()) {
+        this.emittingOffset=consumer.getOffset(config.topic,partition,kafka.api.OffsetRequest.LatestTime());
+        LOG.error("reset kafka offset {}",emittingOffset);
+      }
+ else {
+        this.consumerSleepEndTime=System.currentTimeMillis() + 100;
+        LOG.error("sleep a litte {}",consumerSleepEndTime);
+      }
       LOG.error("fetch null message from offset {}",emittingOffset);
       return;
     }
