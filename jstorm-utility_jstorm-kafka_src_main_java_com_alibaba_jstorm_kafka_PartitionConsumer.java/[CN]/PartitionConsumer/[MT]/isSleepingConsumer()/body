@@ -1,6 +1,3 @@
 {
-  if (System.currentTimeMillis() < this.consumerSleepEndTime) {
-    return true;
-  }
-  return false;
+  return System.currentTimeMillis() < this.consumerSleepEndTime;
 }
