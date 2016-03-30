@@ -1,5 +1,5 @@
 {
-  if (JStormUtils.getTotalCpuUsage() <= 0.0) {
+  if (JStormUtils.getTotalCpuUsage() <= 0.0 || !ConfigExtension.isSupervisorEnableAutoAdjustSlots(conf)) {
     return JStormUtils.getSupervisorPortList(conf);
   }
   long freeMemory=JStormUtils.getFreePhysicalMem() * 1024L;
