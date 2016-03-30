@@ -34,5 +34,5 @@
   event.topologyMetrics=tpMetric;
   event.topologyId=JStormMetrics.CLUSTER_METRIC_KEY;
   pushEvent(event);
-  LOG.info("send update event for cluster metrics, size : {}",clusterMetrics.get_metrics_size());
+  LOG.debug("send update event for cluster metrics, size : {}",clusterMetrics.get_metrics_size());
 }

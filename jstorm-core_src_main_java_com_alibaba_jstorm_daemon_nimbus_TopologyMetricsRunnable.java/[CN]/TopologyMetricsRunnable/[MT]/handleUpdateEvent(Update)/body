@@ -35,7 +35,7 @@
       metricCache.put(PENDING_UPLOAD_METRIC_DATA_INFO + idx,summary);
       metricCache.put(PENDING_UPLOAD_METRIC_DATA + idx,topologyMetrics);
       markSet(idx);
-      LOG.info("put metric data to local cache, topology:{}, idx:{}, total:{}",topologyId,idx,total);
+      LOG.debug("put metric data to local cache, topology:{}, idx:{}, total:{}",topologyId,idx,total);
     }
  else {
       LOG.error("exceeding maxPendingUploadMetrics, skip caching metrics data for topology:{}",topologyId);

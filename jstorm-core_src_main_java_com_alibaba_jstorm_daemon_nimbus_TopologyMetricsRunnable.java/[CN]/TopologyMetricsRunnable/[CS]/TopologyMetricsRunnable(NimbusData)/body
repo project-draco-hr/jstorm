@@ -40,7 +40,7 @@
  else {
         JStormUtils.sleepMs((60 - secOffset + offset) * 1000);
       }
-      LOG.info("cluster metrics force upload.");
+      LOG.debug("cluster metrics force upload.");
       mergeAndUploadClusterMetrics();
     }
   }

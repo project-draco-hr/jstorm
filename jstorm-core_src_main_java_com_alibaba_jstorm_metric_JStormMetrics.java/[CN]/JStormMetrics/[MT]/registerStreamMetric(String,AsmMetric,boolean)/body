@@ -1,6 +1,6 @@
 {
   name=fixNameIfPossible(name);
-  LOG.info("register stream metric:{}",name);
+  LOG.debug("register stream metric:{}",name);
   AsmMetric ret=streamMetrics.register(name,metric);
   if (metric.isAggregate()) {
     List<AsmMetric> assocMetrics=new ArrayList<>();

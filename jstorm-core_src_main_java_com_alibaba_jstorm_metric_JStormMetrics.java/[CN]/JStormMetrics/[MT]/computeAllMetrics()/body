@@ -49,6 +49,6 @@
   if (debug) {
     MetricUtils.printMetricInfo(metricInfo,debugMetricNames);
   }
-  LOG.info("compute all metrics, cost:{}",System.currentTimeMillis() - start);
+  LOG.debug("compute all metrics, cost:{}",System.currentTimeMillis() - start);
   return metricInfo;
 }
