@@ -8,6 +8,7 @@
  else {
       out_tasks=sendTargets.get(out_stream_id,values,anchors,null);
     }
+    tryRotate();
     for (    Integer t : out_tasks) {
       MessageId msgid=getMessageId(anchors);
       TupleImplExt tp=new TupleImplExt(topologyContext,values,task_id,out_stream_id,msgid);

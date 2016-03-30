@@ -1,11 +1,6 @@
 {
   Map<Long,Long> anchors_to_ids=new HashMap<Long,Long>();
   if (anchors != null) {
-    long now=System.currentTimeMillis();
-    if (now - lastRotate > rotateTime) {
-      pending_acks.rotate();
-      lastRotate=now;
-    }
     for (    Tuple a : anchors) {
       Long edge_id=MessageId.generateId(random);
       put_xor(pending_acks,a,edge_id);
