@@ -4,5 +4,5 @@
   }
   executeEvent();
   super.nextTuple();
-  processControlEvent();
+  controlQueue.consumeBatch(this);
 }

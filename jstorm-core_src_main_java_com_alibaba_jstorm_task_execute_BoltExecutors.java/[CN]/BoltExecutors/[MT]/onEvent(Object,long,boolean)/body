@@ -5,12 +5,10 @@
   long start=System.currentTimeMillis();
   try {
     if (event instanceof Tuple) {
-      processControlEvent();
       processTupleEvent((Tuple)event);
     }
  else     if (event instanceof BatchTuple) {
       for (      Tuple tuple : ((BatchTuple)event).getTuples()) {
-        processControlEvent();
         processTupleEvent((Tuple)tuple);
       }
     }

@@ -4,8 +4,8 @@
   }
   while (!taskStatus.isShutdown()) {
     try {
+      controlQueue.consumeBatch(this);
       exeQueue.consumeBatchWhenAvailable(this);
-      processControlEvent();
     }
  catch (    Throwable e) {
       if (!taskStatus.isShutdown()) {

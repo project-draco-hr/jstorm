@@ -3,7 +3,7 @@
   while (shutdown.get() == false) {
     try {
       exeQueue.consumeBatchWhenAvailable(MultipleThreadSpoutExecutors.this);
-      processControlEvent();
+      controlQueue.consumeBatch(MultipleThreadSpoutExecutors.this);
     }
  catch (    Exception e) {
       if (shutdown.get() == false) {
