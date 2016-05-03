@@ -13,6 +13,5 @@
   String componentId=topologyContext.getThisComponentId();
   this.emitTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyContext.getTopologyId(),componentId,task_id,MetricDef.COLLECTOR_EMIT_TIME,MetricType.HISTOGRAM),new AsmHistogram());
   this.emitTimer.setEnabled(false);
-  random=new Random();
-  random.setSeed(System.currentTimeMillis());
+  random=new Random(Utils.secureRandomLong());
 }
