@@ -1,4 +1,0 @@
-{
-  long size=JStormUtils.parseLong(conf.get(MEMSIZE_PER_WORKER),JStormUtils.SIZE_1_G * 2);
-  return size > 0 ? size : JStormUtils.SIZE_1_G * 2;
-}

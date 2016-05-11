@@ -1,0 +1,8 @@
+{
+  Pair custormer=kryo.readObject(input,Pair.class);
+  Pair trade=kryo.readObject(input,Pair.class);
+  long timeStamp=input.readLong();
+  String buffer=input.readString();
+  TradeCustomer inner=new TradeCustomer(timeStamp,trade,custormer,buffer);
+  return inner;
+}

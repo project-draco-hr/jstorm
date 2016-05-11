@@ -1,7 +1,7 @@
 {
   Options r=new Options();
   for (  Object o : opts.getOptions())   r.addOption((Option)o);
-  Option jar=OptionBuilder.withArgName("path").hasArg().withDescription("comma  jar of the submitted topology").create("jar");
+  Option jar=OptionBuilder.withArgName("path").hasArg().withDescription("topology jar of the submitted topology").create("jar");
   r.addOption(jar);
   Option conf=OptionBuilder.withArgName("configuration file").hasArg().withDescription("an application configuration file").create("conf");
   r.addOption(conf);

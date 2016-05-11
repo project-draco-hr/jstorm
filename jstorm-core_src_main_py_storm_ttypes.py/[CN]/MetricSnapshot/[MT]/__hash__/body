@@ -19,4 +19,5 @@ def __hash__(self):
     value = ((value * 31) ^ hash(self.p999))
     value = ((value * 31) ^ hash(self.stddev))
     value = ((value * 31) ^ hash(self.points))
+    value = ((value * 31) ^ hash(self.pointSize))
     return value

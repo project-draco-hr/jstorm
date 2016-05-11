@@ -7,7 +7,6 @@
   Assert.assertEquals("produce: " + produceNum.get() + ", consume:"+ consumerNum.get(),produceNum.get(),consumerNum.get());
   System.out.println("!!!!!! finish testTryConsume test 1");
   resetNum();
-  queue.consumerStarted();
   push(queue,128);
   queue.consumeBatch(handler);
   Assert.assertEquals("produce: " + produceNum.get() + ", consume:"+ consumerNum.get(),produceNum.get(),consumerNum.get());
@@ -19,7 +18,6 @@
   Assert.assertEquals("produce: " + produceNum.get() + ", consume:"+ consumerNum.get(),produceNum.get(),consumerNum.get());
   System.out.println("!!!!!! finish testTryConsume test 3");
   resetNum();
-  queue2.consumerStarted();
   push(queue2,128);
   queue2.consumeBatch(handler);
   Assert.assertEquals("produce: " + produceNum.get() + ", consume:"+ consumerNum.get(),produceNum.get(),consumerNum.get());

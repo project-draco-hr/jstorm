@@ -10,7 +10,7 @@
   TopoMasterCtrlEvent updateBpConfig=new TopoMasterCtrlEvent(EventType.updateBackpressureConfig,new ArrayList<Object>());
   updateBpConfig.addEventValue(conf);
   Values values=new Values(updateBpConfig);
-  Set<Integer> targetTasks=new TreeSet<Integer>(taskIdToComponentId.keySet());
+  Set<Integer> targetTasks=new HashSet<Integer>(taskIdToComponentId.keySet());
   targetTasks.remove(topologyMasterId);
   targetTasks.removeAll(context.getComponentTasks(Acker.ACKER_COMPONENT_ID));
   sendBackpressureMessage(targetTasks,values,EventType.updateBackpressureConfig);

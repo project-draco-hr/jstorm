@@ -3,9 +3,9 @@
     String meta=metricEntry.getKey();
     MetricType metricType=MetricUtils.metricType(meta);
     Map<Integer,MetricSnapshot> winData=metricEntry.getValue();
-    if (metricType == MetricType.HISTOGRAM || metricType == MetricType.TIMER) {
+    if (metricType == MetricType.HISTOGRAM) {
       for (      MetricSnapshot snapshot : winData.values()) {
-        snapshot.set_points(new ArrayList<Long>(0));
+        snapshot.set_points(new byte[0]);
       }
     }
   }

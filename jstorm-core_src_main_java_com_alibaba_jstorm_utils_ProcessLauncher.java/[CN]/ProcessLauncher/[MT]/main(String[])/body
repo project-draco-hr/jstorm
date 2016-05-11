@@ -1,0 +1,45 @@
+{
+  System.out.println("Enviroment:" + System.getenv());
+  System.out.println("Properties:" + System.getProperties());
+  String workerId=System.getenv("jstorm.workerId");
+  if (StringUtils.isNotBlank(workerId)) {
+    Map conf=Utils.readStormConfig();
+    StormConfig.validate_distributed_mode(conf);
+    String pidDir=StormConfig.worker_pids_root(conf,workerId);
+    JStormServerUtils.createPid(pidDir);
+  }
+  int sleepSeconds=getSleepSeconds();
+  int ret=-1;
+  try {
+    if (System.getenv("REDIRECT") != null && System.getenv("REDIRECT").equals("true")) {
+      ProcessBuilder pb=new ProcessBuilder(args);
+      Process p=pb.start();
+      LogWriter err=null;
+      LogWriter in=null;
+      try {
+        err=new LogWriter(p.getErrorStream(),LOG);
+        err.start();
+        in=new LogWriter(p.getInputStream(),LOG);
+        in.start();
+        ret=p.waitFor();
+      }
+  finally {
+        if (err != null)         err.close();
+        if (in != null)         in.close();
+      }
+    }
+ else {
+      LauncherThread launcher=new LauncherThread(args);
+      launcher.start();
+      Thread.sleep(sleepSeconds * 1000);
+      launcher.interrupt();
+      ret=launcher.getResult();
+    }
+  }
+ catch (  InterruptedException e) {
+  }
+ finally {
+    System.out.println("Begin to exit:" + ret);
+    JStormUtils.haltProcess(ret);
+  }
+}

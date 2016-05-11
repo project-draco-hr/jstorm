@@ -1,0 +1,5 @@
+String host
+String logServerPort
+String dir
+String filename
+HttpServletResponse response

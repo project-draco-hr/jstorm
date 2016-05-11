@@ -1,0 +1,3 @@
+{
+  emitDirectCtrl(taskId,streamId,Arrays.asList(anchor),tuple);
+}

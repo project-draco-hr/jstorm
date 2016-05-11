@@ -1,0 +1,9 @@
+String logFile
+long offset
+String key
+int maxMatch
+int lookBack
+int lookAhead
+int maxBlocks
+int blockSize
+boolean caseIgnore

@@ -1,0 +1,10 @@
+{
+  try {
+    Class<?> clazz=Class.forName(fullClassName);
+    Field field=clazz.getField(fieldName);
+    return field.get(null);
+  }
+ catch (  ClassNotFoundException|IllegalAccessException|IllegalArgumentException|NoSuchFieldException|SecurityException ignored) {
+    return null;
+  }
+}

@@ -1,11 +1,10 @@
 {
-  if (shutdown.getAndSet(true) == true) {
+  if (shutdown.getAndSet(true)) {
     LOG.info("Supervisor has been shutdown before " + supervisorId);
     return;
   }
   LOG.info("Shutting down supervisor " + supervisorId);
   AsyncLoopRunnable.getShutdown().set(true);
-  int size=threads.size();
   for (  AsyncLoopThread thread : threads) {
     thread.cleanup();
     JStormUtils.sleepMs(10);
@@ -13,7 +12,6 @@
     LOG.info("Successfully shutdown thread:" + thread.getThread().getName());
   }
   eventManager.shutdown();
-  processesEventManager.shutdown();
   try {
     stormClusterState.disconnect();
   }

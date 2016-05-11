@@ -1,0 +1,3 @@
+Map conf
+String klass
+Class<? extends Serializer> serializerClass

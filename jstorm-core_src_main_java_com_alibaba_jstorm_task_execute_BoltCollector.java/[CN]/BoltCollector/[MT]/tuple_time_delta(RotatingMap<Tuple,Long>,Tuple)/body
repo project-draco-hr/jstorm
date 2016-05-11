@@ -1,7 +1,0 @@
-{
-  Long start_time=(Long)start_times.remove(tuple);
-  if (start_time != null) {
-    return (System.nanoTime() - start_time) / TimeUtils.NS_PER_US;
-  }
-  return null;
-}

@@ -1,8 +1,0 @@
-{
-  BatchTuple ret=batchMap.get(targetTaskId);
-  if (ret == null) {
-    ret=new BatchTuple(targetTaskId,batchSize);
-    batchMap.put(targetTaskId,ret);
-  }
-  return ret;
-}

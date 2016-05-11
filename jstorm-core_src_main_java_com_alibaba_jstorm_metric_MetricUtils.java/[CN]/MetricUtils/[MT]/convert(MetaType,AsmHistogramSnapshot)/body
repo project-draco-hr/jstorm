@@ -15,14 +15,13 @@
   ret.set_mean(ws.getMean());
   ret.set_stddev(ws.getStdDev());
   if (metaType == MetaType.COMPONENT || metaType == MetaType.TOPOLOGY) {
-    List<Long> pts=Lists.newArrayListWithCapacity(ws.getValues().length);
-    for (    Long pt : ws.getValues()) {
-      pts.add(pt);
-    }
-    ret.set_points(pts);
+    byte[] points=longs2bytes(ws.getValues());
+    ret.set_points(points);
+    ret.set_pointSize(ws.getValues().length);
   }
  else {
-    ret.set_points(new ArrayList<Long>(0));
+    ret.set_points(new byte[0]);
+    ret.set_pointSize(0);
   }
   return ret;
 }

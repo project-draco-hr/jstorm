@@ -1,0 +1,32 @@
+{
+  UIComponentMetric compMetric=new UIComponentMetric(compName);
+  if (info != null) {
+    for (    Map.Entry<String,Map<Integer,MetricSnapshot>> metric : info.get_metrics().entrySet()) {
+      String name=metric.getKey();
+      String[] split_name=name.split("@");
+      String componentName=UIMetricUtils.extractComponentName(split_name);
+      if (componentName != null && !componentName.equals(compName))       continue;
+      String metricName=UIMetricUtils.extractMetricName(split_name);
+      String parentComp=null;
+      if (metricName != null && metricName.contains(".")) {
+        parentComp=metricName.split("\\.")[0];
+        metricName=metricName.split("\\.")[1];
+      }
+      MetricSnapshot snapshot=metric.getValue().get(window);
+      compMetric.setMetricValue(snapshot,parentComp,metricName);
+    }
+  }
+  compMetric.mergeValue();
+  ComponentSummary summary=null;
+  for (  ComponentSummary cs : componentSummaries) {
+    if (cs.get_name().equals(compName)) {
+      summary=cs;
+      break;
+    }
+  }
+  if (summary != null) {
+    compMetric.setParallel(summary.get_parallel());
+    compMetric.setType(summary.get_type());
+  }
+  return compMetric;
+}

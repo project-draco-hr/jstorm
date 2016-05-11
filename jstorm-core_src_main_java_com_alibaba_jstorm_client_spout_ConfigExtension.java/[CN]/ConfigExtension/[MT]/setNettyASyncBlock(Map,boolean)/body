@@ -1,3 +1,0 @@
-{
-  conf.put(NETTY_ASYNC_BLOCK,block);
-}

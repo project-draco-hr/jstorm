@@ -1,0 +1,7 @@
+{
+  if (infos == null || infos.size() == 0) {
+    return null;
+  }
+  MetricInfo info=infos.get(infos.size() - 1);
+  return getSummaryMetrics(info,window);
+}

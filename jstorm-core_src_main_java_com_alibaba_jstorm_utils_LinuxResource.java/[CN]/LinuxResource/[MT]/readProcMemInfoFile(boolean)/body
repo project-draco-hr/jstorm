@@ -1,0 +1,33 @@
+{
+  if (readMemInfoFile && !readAgain) {
+    return;
+  }
+  FileParse fileParse=new FileParse(procfsMemFile,new LineParse(){
+    @Override public void prepare(){
+    }
+    @Override public boolean parseLine(    String line){
+      Matcher mat=PROCFS_MEMFILE_FORMAT.matcher(line);
+      if (mat.find()) {
+        if (mat.group(1).equals(_MEMTOTAL)) {
+          ramSize=Long.parseLong(mat.group(2));
+        }
+ else         if (mat.group(1).equals(_SWAPTOTAL)) {
+          swapSize=Long.parseLong(mat.group(2));
+        }
+ else         if (mat.group(1).equals(_MEMFREE)) {
+          ramSizeFree=Long.parseLong(mat.group(2));
+        }
+ else         if (mat.group(1).equals(_SWAPFREE)) {
+          swapSizeFree=Long.parseLong(mat.group(2));
+        }
+ else         if (mat.group(1).equals(_INACTIVE)) {
+          inactiveSize=Long.parseLong(mat.group(2));
+        }
+      }
+      return false;
+    }
+  }
+);
+  fileParse.parse();
+  readMemInfoFile=true;
+}

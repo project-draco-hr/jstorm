@@ -1,3 +1,0 @@
-{
-  conf.put(ALIMONITOR_METRICS_POST,post);
-}

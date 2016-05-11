@@ -9,7 +9,7 @@
     for (    Map.Entry<String,Result> result : results.entrySet()) {
       if (!result.getValue().isHealthy()) {
         try {
-          clusterState.report_task_error(topologyId,taskId,result.getValue().getMessage(),null);
+          clusterState.report_task_error(topologyId,taskId,result.getValue().getMessage(),ErrorConstants.WARN,ErrorConstants.CODE_QUEUE_FULL,ErrorConstants.DURATION_SECS_QUEUE_FULL);
           cnt++;
         }
  catch (        Exception e) {

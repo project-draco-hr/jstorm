@@ -1,0 +1,14 @@
+{
+  if (JStormMetrics.enabled) {
+    if (sample() && enabled.get() && start >= 0L) {
+      if (timeUnit == TimeUnit.MILLISECONDS) {
+        long end=System.currentTimeMillis();
+        this.unFlushed.update((end - start) * TimeUtils.US_PER_MS);
+      }
+ else {
+        long end=System.nanoTime();
+        this.unFlushed.update((end - start) / TimeUtils.NS_PER_US);
+      }
+    }
+  }
+}

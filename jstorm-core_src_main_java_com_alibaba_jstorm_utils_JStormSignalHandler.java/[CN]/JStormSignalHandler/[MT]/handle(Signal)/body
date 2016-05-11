@@ -1,0 +1,3 @@
+{
+  waitingSignals.offer(signal);
+}

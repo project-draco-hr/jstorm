@@ -13,20 +13,22 @@
   this.report_error=task.getReportErrorDie();
   this.taskTransfer=task.getTaskTransfer();
   this.metricsReporter=task.getWorkerData().getMetricsReporter();
-  this.isDebug=JStormUtils.parseBoolean(storm_conf.get(Config.TOPOLOGY_DEBUG),false);
   message_timeout_secs=JStormUtils.parseInt(storm_conf.get(Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS),30);
   int queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_EXECUTOR_RECEIVE_BUFFER_SIZE),256);
   WaitStrategy waitStrategy=(WaitStrategy)JStormUtils.createDisruptorWaitStrategy(storm_conf);
   this.exeQueue=DisruptorQueue.mkInstance(idStr,ProducerType.MULTI,queue_size,waitStrategy);
-  this.exeQueue.consumerStarted();
-  this.controlQueue=new LinkedBlockingDeque<Object>();
+  queue_size=Utils.getInt(storm_conf.get(Config.TOPOLOGY_CTRL_BUFFER_SIZE),32);
+  this.controlQueue=DisruptorQueue.mkInstance(idStr + " for control message",ProducerType.MULTI,queue_size,waitStrategy);
   this.registerInnerTransfer(exeQueue);
+  this.task.getControlQueues().put(taskId,this.controlQueue);
   QueueGauge exeQueueGauge=new QueueGauge(exeQueue,idStr,MetricDef.EXECUTE_QUEUE);
   JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.EXECUTE_QUEUE,MetricType.GAUGE),new AsmGauge(exeQueueGauge));
   JStormHealthCheck.registerTaskHealthCheck(taskId,MetricDef.EXECUTE_QUEUE,exeQueueGauge);
-  rotatingMapTrigger=new RotatingMapTrigger(storm_conf,idStr + "_rotating",exeQueue);
+  QueueGauge controlQueueGauge=new QueueGauge(controlQueue,idStr,MetricDef.CONTROL_QUEUE);
+  JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.CONTROL_QUEUE,MetricType.GAUGE),new AsmGauge(controlQueueGauge));
+  JStormHealthCheck.registerTaskHealthCheck(taskId,MetricDef.CONTROL_QUEUE,controlQueueGauge);
+  rotatingMapTrigger=new RotatingMapTrigger(storm_conf,idStr + "_rotating",controlQueue);
   rotatingMapTrigger.register();
-  taskHbTrigger=new TaskHeartbeatTrigger(storm_conf,idStr + "_taskHeartbeat",exeQueue,controlQueue,taskId,componentId,sysTopologyCtx,report_error);
-  taskHbTrigger.register();
+  taskHbTrigger=new TaskHeartbeatTrigger(storm_conf,idStr + "_taskHeartbeat",controlQueue,taskId,componentId,sysTopologyCtx,report_error);
   assignmentTs=System.currentTimeMillis();
 }

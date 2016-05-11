@@ -3,7 +3,7 @@
   this.tasksToComponent.putAll(tmp);
   LOG.info("Updated tasksToComponentMap:" + tasksToComponent);
   this.componentToSortedTasks.putAll(JStormUtils.reverse_map(tmp));
-  for (  Map.Entry<String,List<Integer>> entry : componentToSortedTasks.entrySet()) {
+  for (  java.util.Map.Entry<String,List<Integer>> entry : componentToSortedTasks.entrySet()) {
     List<Integer> tasks=entry.getValue();
     Collections.sort(tasks);
   }

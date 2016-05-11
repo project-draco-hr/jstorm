@@ -1,0 +1,7 @@
+def filter_array(array):
+    ret = []
+    for item in array:
+        temp = item.strip()
+        if (temp != ''):
+            ret.append(temp)
+    return ret

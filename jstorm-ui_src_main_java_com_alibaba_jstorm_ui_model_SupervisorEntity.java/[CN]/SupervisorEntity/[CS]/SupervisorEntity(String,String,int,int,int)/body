@@ -1,0 +1,9 @@
+{
+  this.id=id;
+  this.host=NetWorkUtils.ip2Host(host);
+  this.ip=NetWorkUtils.host2Ip(host);
+  this.uptimeSeconds=uptimeSeconds;
+  this.uptime=UIUtils.prettyUptime(JStormUtils.parseInt(uptimeSeconds,0));
+  this.slotsTotal=slotsTotal;
+  this.slotsUsed=slotsUsed;
+}

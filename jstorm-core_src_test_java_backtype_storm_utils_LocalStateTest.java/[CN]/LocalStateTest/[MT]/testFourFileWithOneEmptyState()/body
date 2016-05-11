@@ -1,0 +1,16 @@
+{
+  ls.put("c",1);
+  assertEquals(1,ls.get("c"));
+  ls.put("c",2);
+  assertEquals(2,ls.get("c"));
+  ls.put("c",3);
+  assertEquals(3,ls.get("c"));
+  String emptyPath=vs.createVersion();
+  touchVersion(emptyPath);
+  assertEquals(3,ls.get("c"));
+  emptyPath=vs.createVersion();
+  touchVersion(emptyPath);
+  assertEquals(3,ls.get("c"));
+  ls.put("c",4);
+  assertEquals(4,ls.get("c"));
+}

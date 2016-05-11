@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseBoolean(conf.get(NETTY_ASYNC_BLOCK),true);
-}

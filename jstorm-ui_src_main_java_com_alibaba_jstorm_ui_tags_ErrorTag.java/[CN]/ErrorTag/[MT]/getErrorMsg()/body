@@ -1,6 +1,6 @@
 {
-  for (  ErrorInfo er : e) {
-    if (isWarningMsg(er.get_error())) {
+  for (  ErrorEntity er : e) {
+    if (isWarningMsg(er.getError())) {
       isWarning=true;
     }
   }

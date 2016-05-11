@@ -1,5 +1,5 @@
 {
-  LOG.info("starting jstorm metrics reporter");
+  LOG.info("starting jstorm metrics reporter in {}",role.getClass().getSimpleName());
   if (role instanceof WorkerData) {
     WorkerData workerData=(WorkerData)role;
     this.conf=workerData.getStormConf();
@@ -12,9 +12,18 @@
     this.conf=nimbusData.getConf();
     this.topologyId=JStormMetrics.NIMBUS_METRIC_KEY;
   }
+ else   if (role instanceof SupervisorManger) {
+    SupervisorManger supervisor=(SupervisorManger)role;
+    this.conf=supervisor.getConf();
+    this.topologyId=JStormMetrics.SUPERVISOR_METRIC_KEY;
+    JStormMetrics.setTopologyId(this.topologyId);
+  }
+  JStormMetrics.enabled=ConfigExtension.isEnableMetrics(conf);
+  JStormMetrics.setDebug(ConfigExtension.isEnableMetricDebug(conf));
+  JStormMetrics.addDebugMetrics(ConfigExtension.getDebugMetricNames(conf));
+  JStormMetrics.setTimerUpdateInterval(ConfigExtension.getTimerUpdateInterval(conf));
   this.host=JStormMetrics.getHost();
-  this.enableMetrics=JStormMetrics.isEnabled();
-  if (!enableMetrics) {
+  if (!JStormMetrics.enabled) {
     LOG.warn("***** topology metrics is disabled! *****");
   }
  else {
@@ -22,7 +31,7 @@
   }
   this.checkMetaThreadCycle=30;
   this.flushMetricThreadCycle=1;
-  LOG.info("check meta thread freq:{}, flush metrics thread freq:{}",checkMetaThreadCycle,flushMetricThreadCycle);
+  LOG.info("check meta thread freq: {} sec, flush metrics thread freq: {} sec",checkMetaThreadCycle,flushMetricThreadCycle);
   this.localMode=StormConfig.local_mode(conf);
   this.clusterName=ConfigExtension.getClusterName(conf);
   LOG.info("done.");

@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseBoolean(conf.get(SUPERVISOR_USE_IP),false);
-}

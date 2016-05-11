@@ -1,0 +1,12 @@
+{
+  Set<String> ret=new HashSet<>();
+  if (!StringUtils.isBlank(items)) {
+    String[] metrics=items.split(delim);
+    for (    String metric : metrics) {
+      if (!StringUtils.isBlank(metric)) {
+        ret.add(metric);
+      }
+    }
+  }
+  return ret;
+}

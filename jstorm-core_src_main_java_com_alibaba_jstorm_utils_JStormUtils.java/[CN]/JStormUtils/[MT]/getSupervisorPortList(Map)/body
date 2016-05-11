@@ -1,46 +1,24 @@
 {
   List<Integer> portList=(List<Integer>)conf.get(Config.SUPERVISOR_SLOTS_PORTS);
   if (portList != null && portList.size() > 0) {
-    return portList;
+    return new ArrayList<Integer>(portList);
   }
-  LOG.info("Generate port list through CPU cores and system memory size");
-  double cpuWeight=ConfigExtension.getSupervisorSlotsPortCpuWeight(conf);
   int sysCpuNum=4;
   try {
     sysCpuNum=Runtime.getRuntime().availableProcessors();
   }
  catch (  Exception e) {
     LOG.info("Failed to get CPU cores, set cpu cores as 4");
-    sysCpuNum=4;
   }
-  int cpuPortNum=(int)(sysCpuNum / cpuWeight);
-  if (cpuPortNum < 1) {
-    LOG.info("Invalid supervisor.slots.port.cpu.weight setting :" + cpuWeight + ", cpu cores:"+ sysCpuNum);
-    cpuPortNum=1;
-  }
-  Double memWeight=ConfigExtension.getSupervisorSlotsPortMemWeight(conf);
-  int memPortNum=Integer.MAX_VALUE;
   Long physicalMemSize=JStormUtils.getPhysicMemorySize();
-  if (physicalMemSize == null) {
-    LOG.info("Failed to get memory size");
-  }
- else {
-    LOG.info("Get system memory size :" + physicalMemSize);
-    long workerMemSize=ConfigExtension.getMemSizePerWorker(conf);
-    memPortNum=(int)(physicalMemSize / (workerMemSize * memWeight));
-    if (memPortNum < 1) {
-      LOG.info("Invalide worker.memory.size setting:" + workerMemSize);
-      memPortNum=4;
+  if (physicalMemSize > 8589934592L) {
+    long reserveMemory=ConfigExtension.getStormMachineReserveMem(conf);
+    if (physicalMemSize < reserveMemory) {
+      throw new RuntimeException("ReserveMemory configured too larger ,because PhysicalMemSize is only :" + physicalMemSize);
     }
- else     if (memPortNum < 4) {
-      LOG.info("System memory is too small for jstorm");
-      memPortNum=4;
-    }
+    physicalMemSize-=reserveMemory;
   }
-  int portNum=Math.min(cpuPortNum,memPortNum);
-  if (portNum < 1) {
-    portNum=1;
-  }
+  int portNum=getSupervisorPortNum(conf,sysCpuNum,physicalMemSize,false);
   int portBase=ConfigExtension.getSupervisorSlotsPortsBase(conf);
   portList=new ArrayList<Integer>();
   for (int i=0; i < portNum; i++) {

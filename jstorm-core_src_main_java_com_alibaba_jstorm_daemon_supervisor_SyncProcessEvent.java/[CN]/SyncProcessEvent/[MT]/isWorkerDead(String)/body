@@ -1,5 +1,5 @@
 {
-  if (ConfigExtension.isCheckWorkerAliveBySystemInfo(conf) == false) {
+  if (!ConfigExtension.isCheckWorkerAliveBySystemInfo(conf)) {
     return false;
   }
   try {
@@ -9,7 +9,7 @@
     }
     for (    String pid : pids) {
       boolean isDead=JStormUtils.isProcDead(pid);
-      if (isDead == true) {
+      if (isDead) {
         LOG.info("Found " + workerId + " is dead ");
       }
  else {

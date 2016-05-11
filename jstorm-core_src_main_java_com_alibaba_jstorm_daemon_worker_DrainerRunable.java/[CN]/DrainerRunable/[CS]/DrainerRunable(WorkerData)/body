@@ -1,9 +1,0 @@
-{
-  super(workerData.getTransferQueue(),MetricDef.DRAINER_THREAD);
-  this.sendingQueue=workerData.getSendingQueue();
-  this.nodeportSocket=workerData.getNodeportSocket();
-  this.taskNodeport=workerData.getTaskNodeport();
-  this.dispatchMap=new HashMap<IConnection,List<TaskMessage>>();
-  this.queue=workerData.getTransferQueue();
-  this.queue.consumerStarted();
-}

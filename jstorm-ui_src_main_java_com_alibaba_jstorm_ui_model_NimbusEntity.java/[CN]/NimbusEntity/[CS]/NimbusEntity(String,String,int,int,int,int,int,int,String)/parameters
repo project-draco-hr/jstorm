@@ -1,9 +1,0 @@
-String host
-String uptime_secs
-int supervisor_num
-int total_port_num
-int used_port_num
-int free_port_num
-int task_num
-int topology_num
-String version

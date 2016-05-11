@@ -88,15 +88,14 @@
   if (struct.points != null) {
     if (struct.is_set_points()) {
       oprot.writeFieldBegin(POINTS_FIELD_DESC);
-{
-        oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64,struct.points.size()));
-        for (        long _iter119 : struct.points) {
-          oprot.writeI64(_iter119);
-        }
-        oprot.writeListEnd();
-      }
+      oprot.writeBinary(struct.points);
       oprot.writeFieldEnd();
     }
+  }
+  if (struct.is_set_pointSize()) {
+    oprot.writeFieldBegin(POINT_SIZE_FIELD_DESC);
+    oprot.writeI32(struct.pointSize);
+    oprot.writeFieldEnd();
   }
   oprot.writeFieldStop();
   oprot.writeStructEnd();

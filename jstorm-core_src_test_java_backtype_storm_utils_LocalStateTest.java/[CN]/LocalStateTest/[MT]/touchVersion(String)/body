@@ -1,0 +1,4 @@
+{
+  FileUtils.openOutputStream(new File(versionPath));
+  FileUtils.openOutputStream(new File(versionPath + ".version"));
+}

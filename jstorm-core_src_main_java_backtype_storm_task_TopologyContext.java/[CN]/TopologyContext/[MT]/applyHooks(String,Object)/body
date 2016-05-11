@@ -1,0 +1,7 @@
+{
+  for (  ITaskHook taskHook : _hooks) {
+    Class clazz=taskHook.getClass();
+    Method method=clazz.getDeclaredMethod(methodName,object.getClass());
+    method.invoke(taskHook,object);
+  }
+}

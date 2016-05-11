@@ -11,6 +11,8 @@
   DRPCRequest req=new DRPCRequest(args,strid);
   this.idtoStart.put(strid,TimeUtils.current_time_secs());
   this.idtoSem.put(strid,sem);
+  this.idtoFunction.put(strid,function);
+  this.idtoRequest.put(strid,req);
   ConcurrentLinkedQueue<DRPCRequest> queue=acquireQueue(function);
   queue.add(req);
   LOG.info("Waiting for DRPC request for " + function + " "+ args+ " at "+ (System.currentTimeMillis()));
@@ -22,6 +24,9 @@
   }
   LOG.info("Acquired for DRPC request for " + function + " "+ args+ " at "+ (System.currentTimeMillis()));
   Object result=this.idtoResult.get(strid);
+  if (!this.idtoResult.containsKey(strid)) {
+    result=new DRPCExecutionException("Request timed out");
+  }
   LOG.info("Returning for DRPC request for " + function + " "+ args+ " at "+ (System.currentTimeMillis()));
   this.cleanup(strid);
   if (result instanceof DRPCExecutionException) {

@@ -1,3 +1,0 @@
-List<TaskSummary> tasks
-int id
-String component

@@ -1,0 +1,3 @@
+I iface
+getTopologyMetrics_args args
+org.apache.thrift.async.AsyncMethodCallback<TopologyMetric> resultHandler

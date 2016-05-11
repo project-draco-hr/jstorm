@@ -1,10 +1,17 @@
 {
   List ret;
-  if (!conf.containsKey(Config.TOPOLOGY_KRYO_REGISTER)) {
+  Object existing=conf.get(Config.TOPOLOGY_KRYO_REGISTER);
+  if (existing == null) {
     ret=new ArrayList();
   }
  else {
-    ret=new ArrayList((List)conf.get(Config.TOPOLOGY_KRYO_REGISTER));
+    if (existing instanceof Map) {
+      ret=new ArrayList();
+      ret.add(existing);
+    }
+ else {
+      ret=(List)existing;
+    }
   }
   conf.put(Config.TOPOLOGY_KRYO_REGISTER,ret);
   return ret;

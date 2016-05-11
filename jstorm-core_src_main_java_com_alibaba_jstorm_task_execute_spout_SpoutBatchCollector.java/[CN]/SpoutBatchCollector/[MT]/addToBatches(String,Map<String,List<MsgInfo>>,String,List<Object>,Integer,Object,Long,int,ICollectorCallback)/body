@@ -1,0 +1,16 @@
+{
+  List<MsgInfo> batch=batches.get(key);
+  if (batch == null) {
+    batch=new ArrayList<MsgInfo>();
+    batches.put(key,batch);
+  }
+  batch.add(new SpoutMsgInfo(streamId,tuple,outTaskId,messageId,rootId,callback));
+  if (batch.size() > batchSize) {
+    List<MsgInfo> ret=batch;
+    batches.put(key,null);
+    return ret;
+  }
+ else {
+    return null;
+  }
+}

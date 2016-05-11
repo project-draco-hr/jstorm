@@ -1,0 +1,5 @@
+{
+  MemoryMXBean memoryMXBean=ManagementFactory.getMemoryMXBean();
+  MemoryUsage memoryUsage=memoryMXBean.getHeapMemoryUsage();
+  return (double)memoryUsage.getUsed();
+}

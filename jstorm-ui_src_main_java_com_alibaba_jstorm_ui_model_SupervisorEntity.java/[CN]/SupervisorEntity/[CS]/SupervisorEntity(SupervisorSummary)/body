@@ -1,0 +1,3 @@
+{
+  this(supervisor.get_supervisorId(),supervisor.get_host(),supervisor.get_uptimeSecs(),supervisor.get_numWorkers(),supervisor.get_numUsedWorkers());
+}

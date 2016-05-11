@@ -31,7 +31,7 @@
     curr.failed=true;
   }
  else {
-    LOG.info("Unknow source stream");
+    LOG.info("Unknow source stream, " + stream_id + " from task-"+ input.getSourceTask());
     return;
   }
   Integer task=curr.spout_task;

@@ -1,3 +1,0 @@
-{
-  return (this.points == null) ? 0 : this.points.size();
-}

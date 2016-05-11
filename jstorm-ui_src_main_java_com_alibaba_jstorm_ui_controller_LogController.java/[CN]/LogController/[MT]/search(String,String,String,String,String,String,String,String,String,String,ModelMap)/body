@@ -1,0 +1,51 @@
+{
+  clusterName=StringEscapeUtils.escapeHtml(clusterName);
+  topologyId=StringEscapeUtils.escapeHtml(topologyId);
+  if (StringUtils.isBlank(dir)) {
+    dir=".";
+  }
+  String fullFile=getFullFile(dir,logName);
+  boolean _caseIgnore=!StringUtils.isBlank(caseIgnore);
+  model.addAttribute("keyword",keyword);
+  try {
+    keyword=URLEncoder.encode(keyword,"UTF-8");
+  }
+ catch (  UnsupportedEncodingException e) {
+    e.printStackTrace();
+    LOG.error(e.getMessage(),e);
+    UIUtils.addErrorAttribute(model,e);
+  }
+  String url=String.format("http://%s:%s/logview?cmd=searchLog&file=%s&key=%s&offset=%s&case_ignore=%s",host,logServerPort,fullFile,keyword,JStormUtils.parseLong(pos,0),_caseIgnore);
+  if (filterKeyword(model,keyword)) {
+    try {
+      HttpResponse httpResponse=httpGet(url);
+      String data=EntityUtils.toString(httpResponse.getEntity());
+      Map result=(Map)JStormUtils.from_json(data);
+      if (result == null) {
+        model.addAttribute("tip",data);
+      }
+ else       if (result.get("error") != null) {
+        model.addAttribute("tip",result.get("msg"));
+      }
+ else {
+        model.addAttribute("matchResults",result.get("match_results"));
+        model.addAttribute("nextOffset",result.get("next_offset"));
+        model.addAttribute("numMatch",result.get("num_match"));
+      }
+    }
+ catch (    IOException e) {
+      e.printStackTrace();
+      model.addAttribute("tip","Internal Error, can't get response from logview");
+    }
+  }
+  model.addAttribute("host",host);
+  model.addAttribute("clusterName",clusterName);
+  model.addAttribute("logServerPort",logServerPort);
+  model.addAttribute("topologyId",topologyId);
+  model.addAttribute("workerPort",workerPort);
+  model.addAttribute("dir",dir);
+  model.addAttribute("file",logName);
+  model.addAttribute("caseIgnore",_caseIgnore);
+  UIUtils.addTitleAttribute(model,"LogSearch");
+  return "logSearch";
+}

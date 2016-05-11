@@ -1,0 +1,4 @@
+int taskId
+Tuple anchor
+List<Object> tuple
+ICollectorCallback callback

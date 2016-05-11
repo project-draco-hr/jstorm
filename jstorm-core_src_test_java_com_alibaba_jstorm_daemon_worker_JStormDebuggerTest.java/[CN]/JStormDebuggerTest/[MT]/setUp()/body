@@ -1,0 +1,8 @@
+{
+  conf=new HashMap<>();
+  conf.put(Config.TOPOLOGY_DEBUG,true);
+  ConfigExtension.setTopologyDebugRecvTuple(conf,true);
+  ConfigExtension.setTopologyDebugSampleRate(conf,SAMPLE_RATE);
+  JStormDebugger.update(conf);
+  random=new Random(System.currentTimeMillis());
+}

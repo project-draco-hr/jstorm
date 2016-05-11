@@ -1,4 +1,6 @@
 {
+  cluster=StringEscapeUtils.escapeHtml(cluster);
+  id=StringEscapeUtils.escapeHtml(id);
   long start=System.currentTimeMillis();
   LOG.info("request topology info for cluster name: " + cluster + " id:"+ id);
   int window=UIUtils.parseWindow(win);
@@ -10,20 +12,20 @@
     model.addAttribute("topology",JStormUtils.thriftToMap(topologyInfo.get_topology()));
     model.addAttribute("supervisorPort",UIUtils.getSupervisorPort(cluster));
     MetricInfo topologyMetrics=topologyInfo.get_metrics().get_topologyMetric();
-    UISummaryMetric topologyData=getTopologyData(topologyMetrics,window);
+    UISummaryMetric topologyData=UIMetricUtils.getSummaryMetrics(topologyMetrics,window);
     model.addAttribute("topologyData",topologyData);
     model.addAttribute("topologyHead",UIMetricUtils.sortHead(topologyData,UISummaryMetric.HEAD));
     MetricInfo componentMetrics=topologyInfo.get_metrics().get_componentMetric();
     List<UIUserDefinedMetric> userDefinedMetrics=Lists.newArrayList();
-    List<UIComponentMetric> componentData=getComponentData(componentMetrics,window,topologyInfo.get_components(),userDefinedMetrics);
+    List<UIComponentMetric> componentData=UIMetricUtils.getComponentMetrics(componentMetrics,window,topologyInfo.get_components(),userDefinedMetrics);
     model.addAttribute("componentData",componentData);
     model.addAttribute("componentHead",UIMetricUtils.sortHead(componentData,UIComponentMetric.HEAD));
     model.addAttribute("userDefinedMetrics",userDefinedMetrics);
     MetricInfo workerMetrics=topologyInfo.get_metrics().get_workerMetric();
-    List<UIWorkerMetric> workerData=getWorkerData(workerMetrics,id,window);
+    List<UIWorkerMetric> workerData=UIMetricUtils.getWorkerMetrics(workerMetrics,id,window);
     model.addAttribute("workerData",workerData);
     model.addAttribute("workerHead",UIMetricUtils.sortHead(workerData,UIWorkerMetric.HEAD));
-    List<TaskEntity> taskData=getTaskEntities(topologyInfo);
+    List<TaskEntity> taskData=UIUtils.getTaskEntities(topologyInfo);
     model.addAttribute("taskData",taskData);
   }
  catch (  NotAliveException nae) {

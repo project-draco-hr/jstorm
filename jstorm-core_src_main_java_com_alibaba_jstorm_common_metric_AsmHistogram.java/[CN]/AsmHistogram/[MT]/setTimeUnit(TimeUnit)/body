@@ -1,0 +1,6 @@
+{
+  if (timeUnit != TimeUnit.MILLISECONDS && timeUnit != TimeUnit.NANOSECONDS) {
+    throw new RuntimeException("bad time unit, only ms & ns are supported!");
+  }
+  this.timeUnit=timeUnit;
+}

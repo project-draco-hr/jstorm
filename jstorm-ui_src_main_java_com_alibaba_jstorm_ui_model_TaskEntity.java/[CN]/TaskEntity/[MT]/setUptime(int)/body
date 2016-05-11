@@ -1,3 +1,4 @@
 {
-  this.uptime=uptime;
+  this.uptimeSeconds=uptimeSeconds;
+  this.uptime=UIUtils.prettyUptime(uptimeSeconds);
 }

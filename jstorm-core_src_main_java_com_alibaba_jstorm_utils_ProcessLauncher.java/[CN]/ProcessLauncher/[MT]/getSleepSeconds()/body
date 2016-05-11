@@ -1,0 +1,10 @@
+{
+  Map<Object,Object> conf=null;
+  try {
+    conf=Utils.readStormConfig();
+  }
+ catch (  Exception e) {
+    conf=new HashMap<Object,Object>();
+  }
+  return ConfigExtension.getProcessLauncherSleepSeconds(conf);
+}

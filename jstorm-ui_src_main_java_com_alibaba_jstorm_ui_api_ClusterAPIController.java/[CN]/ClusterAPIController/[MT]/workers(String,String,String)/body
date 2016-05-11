@@ -1,0 +1,21 @@
+{
+  Map<String,Object> ret=new HashMap<>();
+  int win=UIUtils.parseWindow(window);
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    SupervisorWorkers supervisorWorkers=client.getClient().getSupervisorWorkers(host);
+    ret.put("supervisor",new SupervisorEntity(supervisorWorkers.get_supervisor()));
+    List<WorkerSummary> workerSummaries=supervisorWorkers.get_workers();
+    ret.put("workers",UIUtils.getWorkerEntities(workerSummaries));
+    Map<String,MetricInfo> workerMetricInfo=supervisorWorkers.get_workerMetric();
+    List<UIWorkerMetric> workerMetrics=UIMetricUtils.getWorkerMetrics(workerMetricInfo,workerSummaries,host,win);
+    ret.put("workerMetrics",workerMetrics);
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    ret=UIUtils.exceptionJson(e);
+    LOG.error(e.getMessage(),e);
+  }
+  return ret;
+}

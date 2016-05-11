@@ -1,0 +1,3 @@
+{
+  return (String)(conf.get(STORM_MACHINE_RESOURCE_ERROR_CHECK_DIR));
+}

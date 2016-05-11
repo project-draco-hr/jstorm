@@ -1,5 +1,5 @@
 {
   this.queue=queue;
   this.name=Joiner.on("-").join(names);
-  this.healthy=Result.healthy();
+  this.healthy=HealthCheck.Result.healthy();
 }

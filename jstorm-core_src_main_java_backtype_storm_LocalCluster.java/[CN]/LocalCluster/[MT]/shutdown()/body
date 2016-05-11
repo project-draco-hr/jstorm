@@ -2,4 +2,5 @@
   JStormUtils.sleepMs(10 * 1000);
   this.state.clean();
   instance=null;
+  JStormUtils.sleepMs(10 * 1000);
 }

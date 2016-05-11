@@ -3,7 +3,7 @@
   Set<String> inputSpouts=getInputSpoutsForBolt(topology,componentId,null);
   TopoMasterCtrlEvent ctrlEvent=(TopoMasterCtrlEvent)input.getValueByField("ctrlEvent");
   EventType type=ctrlEvent.getEventType();
-  Set<Integer> notifyList=new TreeSet<Integer>();
+  Set<Integer> notifyList=new HashSet<Integer>();
   Values values=null;
   TargetBackpressureInfo info=null;
   boolean update=false;
@@ -33,7 +33,7 @@
         info.setTimeStamp(System.currentTimeMillis());
         double taskBpRatio=Double.valueOf(info.getTasks().size()) / Double.valueOf(context.getComponentTasks(componentId).size());
         if (taskBpRatio >= triggerBpRatio) {
-          Set<Integer> spoutTasks=new TreeSet<Integer>(context.getComponentTasks(spout));
+          Set<Integer> spoutTasks=new HashSet<Integer>(context.getComponentTasks(spout));
           if (spoutTasks != null) {
             SourceTobackpressureInfo.get(spout).getTasks().addAll(spoutTasks);
             notifyList.addAll(spoutTasks);
@@ -65,8 +65,10 @@
         }
       }
       if (sourceInfo != null && checkIntervalExpired(sourceInfo.getLastestTimeStamp())) {
-        info.setTimeStamp(System.currentTimeMillis());
-        Set<Integer> spoutTasks=new TreeSet<Integer>(context.getComponentTasks(spout));
+        if (info != null) {
+          info.setTimeStamp(System.currentTimeMillis());
+        }
+        Set<Integer> spoutTasks=new HashSet<Integer>(context.getComponentTasks(spout));
         if (spoutTasks != null) {
           notifyList.addAll(spoutTasks);
         }

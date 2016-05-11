@@ -3,26 +3,29 @@
   Map<String,String> paramMap=parseRawQuery(uri.getRawQuery());
   LOG.info("Receive command " + paramMap);
   String cmd=paramMap.get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD);
-  if (StringUtils.isBlank(cmd) == true) {
+  if (StringUtils.isBlank(cmd)) {
     handlFailure(t,"Bad Request, Not set command type");
     return;
   }
   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW.equals(cmd)) {
     handleShowLog(t,paramMap);
-    return;
   }
  else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_LIST.equals(cmd)) {
     handleListDir(t,paramMap);
-    return;
   }
  else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_JSTACK.equals(cmd)) {
     handleJstack(t,paramMap);
-    return;
   }
  else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SHOW_CONF.equals(cmd)) {
     handleShowConf(t,paramMap);
-    return;
   }
-  handlFailure(t,"Bad Request, Not support command type " + cmd);
-  return;
+ else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_SEARCH_LOG.equals(cmd)) {
+    handleSearchLog(t,paramMap);
+  }
+ else   if (HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_CMD_DOWNLOAD.equals(cmd)) {
+    handleDownloadLog(t,paramMap);
+  }
+ else {
+    handlFailure(t,"Bad Request, Not support command type " + cmd);
+  }
 }

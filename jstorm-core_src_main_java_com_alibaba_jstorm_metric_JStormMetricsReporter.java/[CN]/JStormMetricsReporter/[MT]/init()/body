@@ -1,5 +1,5 @@
 {
-  if (!localMode && enableMetrics) {
+  if (!localMode && JStormMetrics.enabled) {
     this.checkMetricMetaThread=new AsyncLoopThread(new CheckMetricMetaThread());
     this.flushMetricThread=new AsyncLoopThread(new FlushMetricThread());
   }

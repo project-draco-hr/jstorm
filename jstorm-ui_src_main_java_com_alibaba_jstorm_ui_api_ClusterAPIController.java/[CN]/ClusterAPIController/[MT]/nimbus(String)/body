@@ -1,0 +1,16 @@
+{
+  Map ret;
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    ClusterSummary clusterSummary=client.getClient().getClusterInfo();
+    ret=new HashMap<>();
+    ret.put("nimbus",UIUtils.getNimbusEntities(clusterSummary));
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    ret=UIUtils.exceptionJson(e);
+    LOG.error(e.getMessage(),e);
+  }
+  return ret;
+}

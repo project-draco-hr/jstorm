@@ -34,6 +34,7 @@
     stormDistDir.setLastModified(System.currentTimeMillis());
     FileUtils.copyDirectory(stormDistDir,new File(topologyCodeLocation));
     LOG.info("Successfully read old jar/conf/topology " + name);
+    notifyTopologyActionListener(name,"restart");
   }
  catch (  Exception e) {
     LOG.error("Failed to read old jar/conf/topology",e);

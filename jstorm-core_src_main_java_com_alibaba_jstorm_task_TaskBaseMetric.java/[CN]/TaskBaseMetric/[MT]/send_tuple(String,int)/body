@@ -1,5 +1,5 @@
 {
-  if (enableMetrics && num_out_tasks > 0) {
+  if (JStormMetrics.enabled && num_out_tasks > 0) {
     update(stream,MetricDef.EMMITTED_NUM,num_out_tasks,MetricType.COUNTER);
     update(stream,MetricDef.SEND_TPS,num_out_tasks,MetricType.METER);
   }

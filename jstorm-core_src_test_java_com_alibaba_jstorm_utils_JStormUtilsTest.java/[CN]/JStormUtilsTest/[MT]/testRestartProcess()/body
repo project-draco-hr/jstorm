@@ -6,7 +6,7 @@
       Map<String,String> environment=new HashMap<String,String>();
       while (forkTimes < RESTART_TIMES) {
         try {
-          JStormUtils.launch_process(cmd + " " + forkTimes,environment,true);
+          JStormUtils.launchProcess(cmd + " " + forkTimes,environment,true);
         }
  catch (        IOException e) {
           LOG.error("Failed to fork process " + cmd + forkTimes,e);

@@ -1,0 +1,3 @@
+{
+  return (String)conf.get(PROCESS_LAUNCHER_CHILDOPTS);
+}

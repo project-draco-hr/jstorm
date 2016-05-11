@@ -6,10 +6,10 @@
   if (sleepTime == 0) {
     resetBackpressureInfo();
     TopoMasterCtrlEvent stopBp=new TopoMasterCtrlEvent(EventType.stopBackpressure,null);
-    outputCollector.emit(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID,new Values(stopBp));
+    spoutCollector.emitCtrl(Common.TOPOLOGY_MASTER_CONTROL_STREAM_ID,new Values(stopBp),null);
   }
  else {
     minBound=sleepTime;
   }
-  LOG.info("Stop backpressure at spout-{}, sleepTime={}, queueSizeReduced={}, flowCtrlTime={}",taskId,sleepTime,queueSizeReduced);
+  LOG.debug("Stop backpressure at spout-{}, sleepTime={}, queueSizeReduced={}, flowCtrlTime={}",taskId,sleepTime,queueSizeReduced);
 }

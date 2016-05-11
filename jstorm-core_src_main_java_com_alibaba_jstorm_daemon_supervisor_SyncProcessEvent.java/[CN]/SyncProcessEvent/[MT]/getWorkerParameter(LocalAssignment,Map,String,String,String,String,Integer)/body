@@ -1,0 +1,32 @@
+{
+  String stormRoot=StormConfig.supervisor_stormdist_root(conf,topologyId);
+  String stormJar=StormConfig.stormjar_path(stormRoot);
+  StringBuilder commandSB=new StringBuilder();
+  try {
+    if (this.cgroupManager != null) {
+      commandSB.append(cgroupManager.startNewWorker(totalConf,assignment.getCpu(),workerId));
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to prepare cgroup to workerId: " + workerId,e);
+    commandSB=new StringBuilder();
+  }
+  commandSB.append("java -server ");
+  commandSB.append(getWorkerMemParameter(assignment,totalConf,topologyId,port));
+  commandSB.append(" -Djava.library.path=").append((String)totalConf.get(Config.JAVA_LIBRARY_PATH));
+  commandSB.append(" -Djstorm.home=").append(stormHome);
+  commandSB.append(getLogParameter(totalConf,stormHome,assignment.getTopologyName(),port));
+  String classpath=getClassPath(stormHome,totalConf);
+  String workerClassPath=getWorkerClassPath(stormJar,totalConf,stormRoot);
+  commandSB.append(getSandBoxParameter(classpath,workerClassPath,workerId));
+  commandSB.append(" -cp ");
+  commandSB.append(classpath);
+  if (!ConfigExtension.isEnableTopologyClassLoader(totalConf))   commandSB.append(":").append(workerClassPath);
+  commandSB.append(" com.alibaba.jstorm.daemon.worker.Worker ");
+  commandSB.append(topologyId);
+  commandSB.append(" ").append(supervisorId);
+  commandSB.append(" ").append(port);
+  commandSB.append(" ").append(workerId);
+  commandSB.append(" ").append(workerClassPath);
+  return commandSB.toString();
+}

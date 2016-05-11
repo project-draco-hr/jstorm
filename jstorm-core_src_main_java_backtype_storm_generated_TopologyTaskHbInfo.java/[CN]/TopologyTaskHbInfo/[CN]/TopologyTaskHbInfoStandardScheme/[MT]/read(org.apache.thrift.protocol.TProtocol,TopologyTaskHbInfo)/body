@@ -28,15 +28,15 @@ break;
 case 3:
 if (schemeField.type == org.apache.thrift.protocol.TType.MAP) {
 {
-  org.apache.thrift.protocol.TMap _map222=iprot.readMapBegin();
-  struct.taskHbs=new HashMap<Integer,TaskHeartbeat>(2 * _map222.size);
-  int _key223;
-  TaskHeartbeat _val224;
-  for (int _i225=0; _i225 < _map222.size; ++_i225) {
-    _key223=iprot.readI32();
-    _val224=new TaskHeartbeat();
-    _val224.read(iprot);
-    struct.taskHbs.put(_key223,_val224);
+  org.apache.thrift.protocol.TMap _map214=iprot.readMapBegin();
+  struct.taskHbs=new HashMap<Integer,TaskHeartbeat>(2 * _map214.size);
+  int _key215;
+  TaskHeartbeat _val216;
+  for (int _i217=0; _i217 < _map214.size; ++_i217) {
+    _key215=iprot.readI32();
+    _val216=new TaskHeartbeat();
+    _val216.read(iprot);
+    struct.taskHbs.put(_key215,_val216);
   }
   iprot.readMapEnd();
 }

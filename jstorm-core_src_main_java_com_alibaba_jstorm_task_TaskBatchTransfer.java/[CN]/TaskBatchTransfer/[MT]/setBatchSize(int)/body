@@ -1,4 +1,0 @@
-{
-  this.batchSize=batchSize;
-  LOG.info(taskName + " set batch size as " + batchSize);
-}

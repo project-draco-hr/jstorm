@@ -1,3 +1,0 @@
-{
-  conf.put(TOPOLOGY_PERFORMANCE_METRICS,isEnable);
-}

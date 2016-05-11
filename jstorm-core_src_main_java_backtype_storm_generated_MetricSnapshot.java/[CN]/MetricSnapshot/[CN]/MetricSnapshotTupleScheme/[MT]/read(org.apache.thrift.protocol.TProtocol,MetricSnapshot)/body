@@ -6,7 +6,7 @@
   struct.set_ts_isSet(true);
   struct.metricType=iprot.readI32();
   struct.set_metricType_isSet(true);
-  BitSet incoming=iprot.readBitSet(16);
+  BitSet incoming=iprot.readBitSet(17);
   if (incoming.get(0)) {
     struct.longValue=iprot.readI64();
     struct.set_longValue_isSet(true);
@@ -68,15 +68,11 @@
     struct.set_stddev_isSet(true);
   }
   if (incoming.get(15)) {
-{
-      org.apache.thrift.protocol.TList _list121=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I64,iprot.readI32());
-      struct.points=new ArrayList<Long>(_list121.size);
-      long _elem122;
-      for (int _i123=0; _i123 < _list121.size; ++_i123) {
-        _elem122=iprot.readI64();
-        struct.points.add(_elem122);
-      }
-    }
+    struct.points=iprot.readBinary();
     struct.set_points_isSet(true);
+  }
+  if (incoming.get(16)) {
+    struct.pointSize=iprot.readI32();
+    struct.set_pointSize_isSet(true);
   }
 }

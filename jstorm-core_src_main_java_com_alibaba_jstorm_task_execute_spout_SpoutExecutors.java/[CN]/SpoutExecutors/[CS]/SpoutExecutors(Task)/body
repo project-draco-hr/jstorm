@@ -6,7 +6,6 @@
   this.componentId=sysTopologyCtx.getThisComponentId();
   this.taskId=task.getTaskId();
   this.nextTupleTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.EXECUTE_TIME,MetricType.HISTOGRAM),new AsmHistogram());
-  this.ackerTimer=(AsmHistogram)JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.ACKER_TIME,MetricType.HISTOGRAM),new AsmHistogram());
   this.emptyCpuGauge=new TimerRatio();
   JStormMetrics.registerTaskMetric(MetricUtils.taskMetricName(topologyId,componentId,taskId,MetricDef.EMPTY_CPU_RATIO,MetricType.GAUGE),new AsmGauge(emptyCpuGauge));
   isSpoutFullSleep=ConfigExtension.isSpoutPendFullSleep(storm_conf);
@@ -18,9 +17,15 @@
     }
   }
 ));
-  SpoutCollector collector=new SpoutCollector(task,pending,exeQueue);
+  SpoutCollector collector=null;
+  if (ConfigExtension.isTaskBatchTuple(storm_conf)) {
+    collector=new SpoutBatchCollector(task,pending,exeQueue);
+  }
+ else {
+    collector=new SpoutCollector(task,pending,exeQueue);
+  }
   this.outputCollector=new SpoutOutputCollector(collector);
-  taskTransfer.getBackpressureController().setOutputCollector(outputCollector);
-  taskHbTrigger.setSpoutOutputCollector(outputCollector);
+  taskTransfer.getBackpressureController().setSpoutCollector(collector);
+  taskHbTrigger.setSpoutOutputCollector(collector);
   LOG.info("Successfully create SpoutExecutors " + idStr);
 }

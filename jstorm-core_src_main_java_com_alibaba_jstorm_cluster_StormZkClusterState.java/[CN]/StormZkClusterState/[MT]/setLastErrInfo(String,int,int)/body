@@ -1,0 +1,15 @@
+{
+  String lastErrTopoPath=Cluster.lasterror_path(topologyId);
+  Map<Integer,String> lastErrInfo=null;
+  try {
+    lastErrInfo=(Map<Integer,String>)getObject(lastErrTopoPath,false);
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to get last error time. Remove the corrupt node for " + topologyId,e);
+    remove_lastErr_time(topologyId);
+    lastErrInfo=null;
+  }
+  if (lastErrInfo == null)   lastErrInfo=new HashMap<Integer,String>();
+  lastErrInfo.put(duration,timeStamp + "");
+  setObject(lastErrTopoPath,lastErrInfo);
+}

@@ -1,0 +1,2 @@
+String libName
+org.apache.thrift.async.AsyncMethodCallback resultHandler

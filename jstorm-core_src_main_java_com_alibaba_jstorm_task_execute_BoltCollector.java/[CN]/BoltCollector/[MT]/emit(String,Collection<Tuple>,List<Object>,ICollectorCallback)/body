@@ -1,0 +1,3 @@
+{
+  return sendBoltMsg(streamId,anchors,tuple,null,callback);
+}

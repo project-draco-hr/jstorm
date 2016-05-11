@@ -1,15 +1,15 @@
 {
   if (!is_set_topologyId()) {
-    throw new TProtocolException("Required field 'topologyId' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'topologyId' is unset! Struct:" + toString());
   }
   if (!is_set_supervisorId()) {
-    throw new TProtocolException("Required field 'supervisorId' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'supervisorId' is unset! Struct:" + toString());
   }
   if (!is_set_port()) {
-    throw new TProtocolException("Required field 'port' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'port' is unset! Struct:" + toString());
   }
   if (!is_set_allMetrics()) {
-    throw new TProtocolException("Required field 'allMetrics' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'allMetrics' is unset! Struct:" + toString());
   }
   if (allMetrics != null) {
     allMetrics.validate();

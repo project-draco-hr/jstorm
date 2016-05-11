@@ -3,7 +3,7 @@
     return;
   }
   if (processing) {
-    LOG.info("still processing, skip...");
+    LOG.debug("still processing, skip...");
   }
  else {
     processing=true;
@@ -31,7 +31,7 @@
             }
           }
         }
-        LOG.info("register metrics, size:{}, cost:{}",names.size(),System.currentTimeMillis() - start);
+        LOG.debug("register metrics, size:{}, cost:{}",names.size(),System.currentTimeMillis() - start);
       }
     }
  catch (    Exception ex) {

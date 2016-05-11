@@ -1,3 +1,0 @@
-{
-  conf.put(USE_OLD_ASSIGNMENT,Boolean.valueOf(useOld));
-}

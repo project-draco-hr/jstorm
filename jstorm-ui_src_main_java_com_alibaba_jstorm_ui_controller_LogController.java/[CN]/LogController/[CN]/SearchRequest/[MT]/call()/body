@@ -1,0 +1,20 @@
+{
+  try {
+    HttpResponse httpResponse=httpGet(url);
+    String data=EntityUtils.toString(httpResponse.getEntity());
+    Map matchResult=(Map)JStormUtils.from_json(data);
+    Map<String,Object> res=new HashMap<>();
+    if (matchResult != null && matchResult.get("error") == null) {
+      res.put("match",matchResult.get("match_results"));
+      res.put("host",host);
+      res.put("port",port);
+      res.put("dir",dir);
+      res.put("file",file);
+    }
+    result.add(res);
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+  return null;
+}

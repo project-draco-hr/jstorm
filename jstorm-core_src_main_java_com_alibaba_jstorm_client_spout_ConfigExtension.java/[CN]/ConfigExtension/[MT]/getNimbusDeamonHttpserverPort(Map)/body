@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(NIMBUS_DEAMON_HTTPSERVER_PORT),DEFAULT_DEAMON_HTTPSERVER_PORT);
-}

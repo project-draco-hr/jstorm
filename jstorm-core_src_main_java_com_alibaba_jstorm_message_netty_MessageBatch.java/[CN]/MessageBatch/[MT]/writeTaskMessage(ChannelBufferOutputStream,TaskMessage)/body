@@ -1,6 +1,8 @@
 {
   int payload_len=0;
   if (message.message() != null)   payload_len=message.message().length;
+  short type=message.get_type();
+  bout.writeShort(type);
   int task_id=message.task();
   if (task_id > Short.MAX_VALUE)   throw new RuntimeException("Task ID should not exceed " + Short.MAX_VALUE);
   bout.writeShort((short)task_id);

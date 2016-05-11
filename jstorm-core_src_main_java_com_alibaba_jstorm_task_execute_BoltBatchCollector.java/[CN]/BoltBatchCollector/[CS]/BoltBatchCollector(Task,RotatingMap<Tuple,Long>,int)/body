@@ -1,0 +1,67 @@
+{
+  super(task,tuple_start_times,message_timeout_secs);
+  String componentId=topologyContext.getThisComponentId();
+  batchCollector=new BatchCollector(task_id,componentId,storm_conf){
+    public List<MsgInfo> push(    String streamId,    List<Object> tuple,    Integer outTaskId,    Collection<Tuple> anchors,    Object messageId,    Long rootId,    ICollectorCallback callback){
+      if (anchors != null) {
+synchronized (pendingTuples) {
+          for (          Tuple a : anchors) {
+            Integer pendingCount=pendingTuples.get(a);
+            if (pendingCount == null) {
+              pendingCount=0;
+            }
+            pendingTuples.put(a,++pendingCount);
+          }
+        }
+      }
+      if (outTaskId != null) {
+synchronized (directBatches) {
+          return addToBatches(outTaskId.toString() + "-" + streamId,directBatches,streamId,tuple,outTaskId,anchors,batchSize,callback);
+        }
+      }
+ else {
+synchronized (streamToBatches) {
+          return addToBatches(streamId,streamToBatches,streamId,tuple,outTaskId,anchors,batchSize,callback);
+        }
+      }
+    }
+    public void flush(){
+      List<List<Object>> batches=new ArrayList<List<Object>>();
+synchronized (streamToBatches) {
+        for (        Map.Entry<String,List<MsgInfo>> entry : streamToBatches.entrySet()) {
+          if (entry.getValue() != null && entry.getValue().size() > 0) {
+            batches.add(JStormUtils.mk_list(entry.getKey(),null,entry.getValue()));
+            streamToBatches.put(entry.getKey(),null);
+          }
+        }
+      }
+synchronized (directBatches) {
+        for (        Map.Entry<String,List<MsgInfo>> entry : directBatches.entrySet()) {
+          if (entry.getValue() != null && entry.getValue().size() > 0) {
+            String[] strings=entry.getKey().split("-",2);
+            batches.add(JStormUtils.mk_list(strings[1],strings[0],entry.getValue()));
+            directBatches.put(entry.getKey(),null);
+          }
+        }
+      }
+      for (      List<Object> batch : batches) {
+        sendBatch((String)batch.get(0),(String)batch.get(1),(List<MsgInfo>)batch.get(2));
+      }
+      int size=pendingAcks.size();
+      while (--size >= 0) {
+        Tuple ackTuple=pendingAcks.poll();
+        if (ackTuple != null) {
+          if (!sendAckTuple(ackTuple)) {
+            try {
+              pendingAcks.put(ackTuple);
+            }
+ catch (            InterruptedException e) {
+              LOG.warn("Failed to put ackTuple, tuple=" + ackTuple,e);
+            }
+          }
+        }
+      }
+    }
+  }
+;
+}

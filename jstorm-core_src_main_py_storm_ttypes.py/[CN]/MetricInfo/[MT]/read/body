@@ -10,18 +10,18 @@ def read(self, iprot):
         if (fid == 1):
             if (ftype == TType.MAP):
                 self.metrics = {}
-                (_ktype111, _vtype112, _size110) = iprot.readMapBegin()
-                for _i114 in xrange(_size110):
-                    _key115 = iprot.readString().decode('utf-8')
-                    _val116 = {}
-                    (_ktype118, _vtype119, _size117) = iprot.readMapBegin()
-                    for _i121 in xrange(_size117):
-                        _key122 = iprot.readI32()
-                        _val123 = MetricSnapshot()
-                        _val123.read(iprot)
-                        _val116[_key122] = _val123
+                (_ktype104, _vtype105, _size103) = iprot.readMapBegin()
+                for _i107 in xrange(_size103):
+                    _key108 = iprot.readString().decode('utf-8')
+                    _val109 = {}
+                    (_ktype111, _vtype112, _size110) = iprot.readMapBegin()
+                    for _i114 in xrange(_size110):
+                        _key115 = iprot.readI32()
+                        _val116 = MetricSnapshot()
+                        _val116.read(iprot)
+                        _val109[_key115] = _val116
                     iprot.readMapEnd()
-                    self.metrics[_key115] = _val116
+                    self.metrics[_key108] = _val109
                 iprot.readMapEnd()
             else:
                 iprot.skip(ftype)

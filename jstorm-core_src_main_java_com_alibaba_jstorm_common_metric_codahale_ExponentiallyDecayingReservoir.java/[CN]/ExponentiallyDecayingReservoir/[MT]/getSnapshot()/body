@@ -1,0 +1,9 @@
+{
+  lockForRegularUsage();
+  try {
+    return new WeightedSnapshot(values.values());
+  }
+  finally {
+    unlockForRegularUsage();
+  }
+}

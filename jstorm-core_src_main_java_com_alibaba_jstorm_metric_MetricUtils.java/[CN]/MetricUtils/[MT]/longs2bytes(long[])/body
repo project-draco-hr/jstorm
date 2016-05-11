@@ -1,0 +1,8 @@
+{
+  int len=points.length;
+  byte[] bytePts=new byte[len * Longs.BYTES];
+  for (int i=0; i < len; i++) {
+    Bytes.putLong(bytePts,i * Longs.BYTES,points[i]);
+  }
+  return bytePts;
+}

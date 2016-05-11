@@ -1,5 +1,4 @@
 {
-  List<Integer> tasks=_delegate.emit(stream,anchors,tuple);
-  updateTaskCounts(tuple.get(0),tasks);
+  List<Integer> tasks=_delegate.emit(stream,anchors,tuple,new CollectorCb(tuple.get(0)));
   return tasks;
 }

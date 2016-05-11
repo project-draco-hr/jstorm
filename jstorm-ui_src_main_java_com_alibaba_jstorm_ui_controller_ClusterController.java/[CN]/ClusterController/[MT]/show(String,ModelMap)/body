@@ -1,20 +1,20 @@
 {
+  name=StringEscapeUtils.escapeHtml(name);
   long start=System.currentTimeMillis();
   NimbusClient client=null;
   try {
     client=NimbusClientManager.getNimbusClient(name);
     ClusterSummary clusterSummary=client.getClient().getClusterInfo();
-    model.addAttribute("nimbus",getNimbusEntities(clusterSummary));
-    model.addAttribute("topologies",JStormUtils.thriftToMap(clusterSummary.get_topologies()));
-    model.addAttribute("supervisors",JStormUtils.thriftToMap(clusterSummary.get_supervisors()));
-    ClusterConfig config=UIUtils.clusterConfig.get(name);
-    model.addAttribute("zkServers",getZooKeeperEntities(config));
+    model.addAttribute("nimbus",UIUtils.getNimbusEntities(clusterSummary));
+    model.addAttribute("topologies",UIUtils.getTopologyEntities(clusterSummary));
+    model.addAttribute("supervisors",UIUtils.getSupervisorEntities(clusterSummary));
+    model.addAttribute("zkServers",UIUtils.getZooKeeperEntities(name));
     List<MetricInfo> clusterMetrics=client.getClient().getMetrics(JStormMetrics.CLUSTER_METRIC_KEY,MetaType.TOPOLOGY.getT());
-    UISummaryMetric clusterData=getClusterData(clusterMetrics,AsmWindow.M1_WINDOW);
+    UISummaryMetric clusterData=UIMetricUtils.getSummaryMetrics(clusterMetrics,AsmWindow.M1_WINDOW);
     model.addAttribute("clusterData",clusterData);
     model.addAttribute("clusterHead",UIMetricUtils.sortHead(clusterData,UISummaryMetric.HEAD));
-    int logview_port=UIUtils.getNimbusPort(name);
-    ClusterEntity ce=UIUtils.getClusterEntity(clusterSummary,name,logview_port);
+    ClusterEntity ce=UIUtils.getClusterEntity(clusterSummary,name);
+    model.addAttribute("cluster",ce);
     UIUtils.clustersCache.put(name,ce);
   }
  catch (  Exception e) {

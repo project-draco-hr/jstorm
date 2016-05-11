@@ -1,6 +1,0 @@
-{
-  if (this.points == null) {
-    this.points=new ArrayList<Long>();
-  }
-  this.points.add(elem);
-}

@@ -1,0 +1,4 @@
+{
+  Pair<Long,byte[]> logPair=queryLog(t,paramMap);
+  sendResponse(t,HttpURLConnection.HTTP_OK,logPair.getSecond());
+}

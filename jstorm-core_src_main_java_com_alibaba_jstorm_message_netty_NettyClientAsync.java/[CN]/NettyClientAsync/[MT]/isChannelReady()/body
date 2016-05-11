@@ -3,7 +3,7 @@
   if (channel == null) {
     return null;
   }
-  if (blockSend == true && pendings.get() >= MAX_SEND_PENDING) {
+  if (blockSend && pendings.get() >= MAX_SEND_PENDING) {
     return null;
   }
   return channel;

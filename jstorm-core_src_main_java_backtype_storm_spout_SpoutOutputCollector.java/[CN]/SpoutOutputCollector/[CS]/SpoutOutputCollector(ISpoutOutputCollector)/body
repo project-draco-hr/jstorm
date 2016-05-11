@@ -1,3 +1,20 @@
 {
-  _delegate=delegate;
+  _delegate=new SpoutOutputCollectorCb(delegate){
+    @Override public List<Integer> emit(    String streamId,    List<Object> tuple,    Object messageId){
+      return delegate.emit(streamId,tuple,messageId);
+    }
+    @Override public void emitDirect(    int taskId,    String streamId,    List<Object> tuple,    Object messageId){
+      delegate.emitDirect(taskId,streamId,tuple,messageId);
+    }
+    @Override public void reportError(    Throwable error){
+      delegate.reportError(error);
+    }
+    @Override public List<Integer> emit(    String streamId,    List<Object> tuple,    Object messageId,    ICollectorCallback callback){
+      throw new RuntimeException("This method should not be called!");
+    }
+    @Override public void emitDirect(    int taskId,    String streamId,    List<Object> tuple,    Object messageId,    ICollectorCallback callback){
+      throw new RuntimeException("This method should not be called!");
+    }
+  }
+;
 }

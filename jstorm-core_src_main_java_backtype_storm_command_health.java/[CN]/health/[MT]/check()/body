@@ -1,0 +1,17 @@
+{
+  MachineCheckStatus status=new MachineCheckStatus();
+  Map conf=Utils.readStormConfig();
+  status.updatePanic();
+  runJStormMachineResourceCheckScript(status,conf);
+  if (status.getType() == MachineCheckStatus.StatusType.panic) {
+    return status;
+  }
+  status.updateError();
+  runJStormMachineResourceCheckScript(status,conf);
+  if (status.getType() == MachineCheckStatus.StatusType.error) {
+    return status;
+  }
+  status.updateWarning();
+  runJStormMachineResourceCheckScript(status,conf);
+  return status;
+}

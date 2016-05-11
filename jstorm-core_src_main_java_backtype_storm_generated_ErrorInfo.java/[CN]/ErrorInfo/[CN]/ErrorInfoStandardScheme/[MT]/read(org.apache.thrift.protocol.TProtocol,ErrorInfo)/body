@@ -25,6 +25,24 @@ case 2:
     org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
   }
 break;
+case 3:
+if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+struct.errorLevel=iprot.readString();
+struct.set_errorLevel_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 4:
+if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+struct.errorCode=iprot.readI32();
+struct.set_errorCode_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
 default :
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
 }

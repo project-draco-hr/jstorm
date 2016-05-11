@@ -1,0 +1,6 @@
+{
+  super.shutdown();
+  LOG.info("Begin to shutdown VirtualPortCtrlDispatch");
+  shutdownRecv();
+  LOG.info("Successfully shudown VirtualPortCtrlDispatch");
+}

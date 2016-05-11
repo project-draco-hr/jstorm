@@ -1,0 +1,44 @@
+{
+  long startTime=emitTotalTimer.getTime();
+  try {
+    List<Integer> ret=null;
+    Map<List<Integer>,List<MsgInfo>> outTasks;
+    if (outTaskId != null) {
+      outTasks=sendTargets.getBatch(Integer.valueOf(outTaskId),outStreamId,batchTobeFlushed);
+    }
+ else {
+      outTasks=sendTargets.getBatch(outStreamId,batchTobeFlushed);
+    }
+    if (outTasks == null || outTasks.size() == 0) {
+      return new ArrayList<Integer>();
+    }
+    Map<Long,MsgInfo> ackBatch=new HashMap<Long,MsgInfo>();
+    for (    Map.Entry<List<Integer>,List<MsgInfo>> entry : outTasks.entrySet()) {
+      List<Integer> tasks=entry.getKey();
+      List<MsgInfo> batch=entry.getValue();
+      for (int i=0; i < tasks.size(); i++) {
+        Integer t=tasks.get(i);
+        BatchTuple batchTuple=new BatchTuple(t,batch.size());
+        for (        MsgInfo msg : batch) {
+          MessageId msgId=getMessageId((SpoutMsgInfo)msg,ackBatch);
+          TupleImplExt tp=new TupleImplExt(topology_context,msg.values,task_id,msg.streamId,msgId);
+          tp.setTargetTaskId(t);
+          batchTuple.addToBatch(tp);
+        }
+        transfer_fn.transfer(batchTuple);
+      }
+      for (      MsgInfo msg : batch) {
+        if (msg.callback != null) {
+          msg.callback.execute(tasks);
+        }
+      }
+    }
+    if (ackBatch.size() > 0) {
+      sendBatch(Acker.ACKER_INIT_STREAM_ID,null,new ArrayList<MsgInfo>(ackBatch.values()));
+    }
+    return ret;
+  }
+  finally {
+    emitTotalTimer.updateTime(startTime);
+  }
+}

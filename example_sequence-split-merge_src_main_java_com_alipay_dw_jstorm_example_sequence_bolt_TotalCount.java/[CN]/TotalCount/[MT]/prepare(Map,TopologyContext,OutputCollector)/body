@@ -3,5 +3,17 @@
   tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
   checkTupleId=JStormUtils.parseBoolean(stormConf.get("bolt.check.tupleId"),false);
   slowDonw=JStormUtils.parseBoolean(stormConf.get("bolt.slow.down"),false);
+  metricClient=new MetricClient(context);
+  Gauge<Double> gauge=new Gauge<Double>(){
+    private Random random=new Random();
+    @Override public Double getValue(){
+      return random.nextDouble();
+    }
+  }
+;
+  myGauge=metricClient.registerGauge("myGauge",gauge);
+  myCounter=metricClient.registerCounter("myCounter");
+  myMeter=metricClient.registerMeter("myMeter");
+  myJStormHistogram=metricClient.registerHistogram("myHistogram");
   LOG.info("Finished preparation " + stormConf);
 }

@@ -170,18 +170,18 @@ org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
 }
 break;
 case 19:
-if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
-{
-org.apache.thrift.protocol.TList _list116=iprot.readListBegin();
-struct.points=new ArrayList<Long>(_list116.size);
-long _elem117;
-for (int _i118=0; _i118 < _list116.size; ++_i118) {
-_elem117=iprot.readI64();
-struct.points.add(_elem117);
-}
-iprot.readListEnd();
-}
+if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
+struct.points=iprot.readBinary();
 struct.set_points_isSet(true);
+}
+ else {
+org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);
+}
+break;
+case 20:
+if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
+struct.pointSize=iprot.readI32();
+struct.set_pointSize_isSet(true);
 }
  else {
 org.apache.thrift.protocol.TProtocolUtil.skip(iprot,schemeField.type);

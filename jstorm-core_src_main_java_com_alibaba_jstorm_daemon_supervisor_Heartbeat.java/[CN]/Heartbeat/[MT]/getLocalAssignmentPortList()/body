@@ -1,0 +1,14 @@
+{
+  Map<Integer,LocalAssignment> localAssignment=null;
+  try {
+    localAssignment=(Map<Integer,LocalAssignment>)localState.get(Common.LS_LOCAL_ASSIGNMENTS);
+  }
+ catch (  IOException e) {
+    LOG.error("get LS_LOCAL_ASSIGNMENTS of localState failed .");
+    throw e;
+  }
+  if (localAssignment == null) {
+    return null;
+  }
+  return JStormUtils.mk_list(localAssignment.keySet());
+}

@@ -1,0 +1,7 @@
+{
+  double rate=JStormUtils.parseDouble(conf.get(TOPOLOGY_DEBUG_SAMPLE_RATE),1.0d);
+  if (!conf.containsKey(TOPOLOGY_DEBUG_SAMPLE_RATE)) {
+    conf.put(TOPOLOGY_DEBUG_SAMPLE_RATE,rate);
+  }
+  return rate;
+}

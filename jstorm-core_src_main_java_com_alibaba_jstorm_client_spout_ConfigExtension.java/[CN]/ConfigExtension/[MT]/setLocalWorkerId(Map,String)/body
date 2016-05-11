@@ -1,3 +1,0 @@
-{
-  conf.put(LOCLA_WORKER_ID,workerId);
-}

@@ -1,4 +1,6 @@
 {
+  clusterName=StringEscapeUtils.escapeHtml(clusterName);
+  topologyId=StringEscapeUtils.escapeHtml(topologyId);
   if (StringUtils.isBlank(dir)) {
     dir=".";
   }
@@ -14,5 +16,9 @@
   model.addAttribute("host",host);
   model.addAttribute("dir",event.dir);
   model.addAttribute("clusterName",clusterName);
+  model.addAttribute("logServerPort",logServerPort);
+  model.addAttribute("topologyId",topologyId);
+  model.addAttribute("fullFile",getFullFile(event.dir,event.logName));
+  model.addAttribute("workerPort",workerPort);
   return "log";
 }

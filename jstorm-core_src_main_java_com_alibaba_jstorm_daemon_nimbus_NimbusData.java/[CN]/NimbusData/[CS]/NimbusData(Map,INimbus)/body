@@ -20,4 +20,12 @@
   if (!localMode) {
     startMetricThreads();
   }
+  if (conf.containsKey(Config.NIMBUS_TOPOLOGY_ACTION_NOTIFIER_PLUGIN)) {
+    String string=(String)conf.get(Config.NIMBUS_TOPOLOGY_ACTION_NOTIFIER_PLUGIN);
+    nimbusNotify=(ITopologyActionNotifierPlugin)Utils.newInstance(string);
+    nimbusNotify.prepare(conf);
+  }
+ else {
+    nimbusNotify=null;
+  }
 }

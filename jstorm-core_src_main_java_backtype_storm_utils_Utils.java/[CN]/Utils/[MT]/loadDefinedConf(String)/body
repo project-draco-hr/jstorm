@@ -1,7 +1,7 @@
 {
   File file=new File(confFile);
   if (file.exists() == false) {
-    return findAndReadConfigFile(confFile,true);
+    return LoadConf.findAndReadYaml(confFile,true,false);
   }
   Yaml yaml=new Yaml();
   Map ret;

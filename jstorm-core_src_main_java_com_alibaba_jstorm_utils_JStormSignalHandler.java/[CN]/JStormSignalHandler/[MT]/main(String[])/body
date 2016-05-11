@@ -1,0 +1,12 @@
+{
+  JStormSignalHandler instance=JStormSignalHandler.getInstance();
+  registerJStormSignalHandler();
+  while (true) {
+    try {
+      Thread.currentThread().sleep(1000);
+    }
+ catch (    InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+}

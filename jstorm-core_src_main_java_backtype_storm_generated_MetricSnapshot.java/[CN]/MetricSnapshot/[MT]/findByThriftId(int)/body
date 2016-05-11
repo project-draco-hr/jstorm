@@ -38,6 +38,8 @@ case 18:
 return STDDEV;
 case 19:
 return POINTS;
+case 20:
+return POINT_SIZE;
 default :
 return null;
 }

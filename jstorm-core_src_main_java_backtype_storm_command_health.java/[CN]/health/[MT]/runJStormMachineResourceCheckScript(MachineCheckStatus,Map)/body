@@ -1,0 +1,32 @@
+{
+  try {
+    long timeOut=ConfigExtension.getStormHealthTimeoutMs(conf);
+    List<String> evalScripts=null;
+    if (status.getType().equals(MachineCheckStatus.StatusType.panic)) {
+      evalScripts=getEvalScriptAbsolutePath(ConfigExtension.getStormMachineResourcePanicCheckDir(conf));
+    }
+ else     if (status.getType().equals(MachineCheckStatus.StatusType.error)) {
+      evalScripts=getEvalScriptAbsolutePath(ConfigExtension.getStormMachineResourceErrorCheckDir(conf));
+    }
+ else     if (status.getType().equals(MachineCheckStatus.StatusType.warning)) {
+      evalScripts=getEvalScriptAbsolutePath(ConfigExtension.getStormMachineResourceWarningCheckDir(conf));
+    }
+    if (evalScripts != null && evalScripts.size() > 0) {
+      for (      String command : evalScripts) {
+        ScriptProcessLauncher scriptProcessLauncher=new ScriptProcessLauncher(command,timeOut,status);
+        ExitStatus exit=scriptProcessLauncher.launch();
+        if (exit.equals(ExitStatus.FAILED)) {
+          return;
+        }
+      }
+    }
+ else {
+      status.updateInfo();
+      LOG.warn("jstorm machine resource " + status.getType() + "'s check scripts is non-existent");
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("Failed to run machine resource check scripts: " + e.getCause(),e);
+    status.updateInfo();
+  }
+}

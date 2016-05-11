@@ -1,0 +1,11 @@
+{
+  List<String> ret=new ArrayList<String>();
+  if (parentFile.exists()) {
+    File[] list=parentFile.listFiles();
+    for (    File file : list) {
+      if (!file.isDirectory() && file.canExecute())       ret.add(file.getAbsolutePath());
+    }
+  }
+  LOG.debug("valid scripts are {}",ret);
+  return ret;
+}

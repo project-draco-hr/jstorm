@@ -2,5 +2,5 @@
   if (slotNum < 1) {
     throw new InvalidParameterException();
   }
-  conf.put(CPU_SLOTS_PER_TASK,Integer.valueOf(slotNum));
+  conf.put(CPU_SLOTS_PER_TASK,slotNum);
 }

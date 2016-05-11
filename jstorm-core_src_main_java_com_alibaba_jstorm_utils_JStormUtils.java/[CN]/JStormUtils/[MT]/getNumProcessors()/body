@@ -1,0 +1,10 @@
+{
+  int sysCpuNum=0;
+  try {
+    sysCpuNum=Runtime.getRuntime().availableProcessors();
+  }
+ catch (  Exception e) {
+    LOG.info("Failed to get CPU cores .");
+  }
+  return sysCpuNum;
+}

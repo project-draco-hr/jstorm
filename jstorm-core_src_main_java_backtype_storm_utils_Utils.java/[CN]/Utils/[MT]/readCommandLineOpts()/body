@@ -15,5 +15,15 @@
       }
     }
   }
+  String excludeJars=System.getProperty("exclude.jars");
+  if (excludeJars != null) {
+    ret.put("exclude.jars",excludeJars);
+  }
+  String batchOptions=System.getProperty(ConfigExtension.TASK_BATCH_TUPLE);
+  if (StringUtils.isBlank(batchOptions) == false) {
+    boolean isBatched=JStormUtils.parseBoolean(batchOptions,true);
+    ConfigExtension.setTaskBatchTuple(ret,isBatched);
+    System.out.println(ConfigExtension.TASK_BATCH_TUPLE + " is " + batchOptions);
+  }
   return ret;
 }

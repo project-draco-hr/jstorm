@@ -1,0 +1,63 @@
+{
+  final long start=emitTimer.getTime();
+  try {
+    List<Integer> ret=new ArrayList<Integer>();
+    Map<List<Integer>,List<MsgInfo>> outTasks;
+    if (outTaskId != null) {
+      outTasks=sendTargets.getBatch(Integer.valueOf(outTaskId),outStreamId,batchTobeFlushed);
+    }
+ else {
+      outTasks=sendTargets.getBatch(outStreamId,batchTobeFlushed);
+    }
+    if (outTasks == null || outTasks.size() == 0) {
+    }
+ else {
+      for (      Map.Entry<List<Integer>,List<MsgInfo>> entry : outTasks.entrySet()) {
+        List<Integer> tasks=entry.getKey();
+        List<MsgInfo> batch=entry.getValue();
+        for (        Integer t : tasks) {
+          BatchTuple batchTuple=new BatchTuple(t,batch.size());
+          for (          MsgInfo msg : batch) {
+            Collection<Tuple> as=((BoltMsgInfo)msg).anchors;
+            MessageId msgId=getMessageId(as);
+            TupleImplExt tp=new TupleImplExt(topologyContext,msg.values,task_id,msg.streamId,msgId);
+            tp.setTargetTaskId(t);
+            batchTuple.addToBatch(tp);
+          }
+          taskTransfer.transfer(batchTuple);
+        }
+        for (        MsgInfo msg : batch) {
+          if (msg.callback != null) {
+            msg.callback.execute(tasks);
+          }
+        }
+      }
+    }
+    for (    MsgInfo msg : batchTobeFlushed) {
+      Collection<Tuple> anchors=((BoltMsgInfo)msg).anchors;
+      if (anchors != null && anchors.size() > 0) {
+        for (        Tuple a : anchors) {
+synchronized (pendingTuples) {
+            Integer pendingCount=pendingTuples.get(a);
+            if (pendingCount != null) {
+              if (--pendingCount <= 0) {
+                pendingTuples.remove(a);
+              }
+ else {
+                pendingTuples.put(a,pendingCount);
+              }
+            }
+          }
+        }
+      }
+    }
+    return ret;
+  }
+ catch (  Exception e) {
+    LOG.error("bolt emit",e);
+  }
+ finally {
+    emitTimer.updateTime(start);
+  }
+  return new ArrayList<Integer>();
+}

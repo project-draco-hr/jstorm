@@ -1,8 +1,8 @@
 {
   if (!is_set_topologyId()) {
-    throw new TProtocolException("Required field 'topologyId' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'topologyId' is unset! Struct:" + toString());
   }
   if (!is_set_topologyMasterId()) {
-    throw new TProtocolException("Required field 'topologyMasterId' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'topologyMasterId' is unset! Struct:" + toString());
   }
 }

@@ -1,5 +1,10 @@
 {
   if (zk != null) {
-    zk.close();
+    try {
+      zk.close();
+    }
+ catch (    Throwable e) {
+      e.printStackTrace();
+    }
   }
 }

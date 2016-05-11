@@ -1,3 +1,0 @@
-{
-  return (String)conf.get(ALIMONITOR_TASK_METIRC_NAME);
-}

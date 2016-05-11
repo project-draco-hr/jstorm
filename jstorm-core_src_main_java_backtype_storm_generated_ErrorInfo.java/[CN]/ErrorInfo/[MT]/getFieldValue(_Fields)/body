@@ -4,6 +4,10 @@ case ERROR:
     return get_error();
 case ERROR_TIME_SECS:
   return Integer.valueOf(get_errorTimeSecs());
+case ERROR_LEVEL:
+return get_errorLevel();
+case ERROR_CODE:
+return Integer.valueOf(get_errorCode());
 }
 throw new IllegalStateException();
 }

@@ -3,9 +3,9 @@
   if (available < 6) {
     return null;
   }
-  Long startTime=null;
-  if (isServer) {
-    startTime=System.nanoTime();
+  long startTime=0L;
+  if (isServer && enableNettyMetrics) {
+    startTime=msgDecodeTimer.getTime();
   }
   try {
     buf.markReaderIndex();
@@ -23,17 +23,20 @@
       if (ctrl_msg == ControlMessage.EOB_MESSAGE) {
         long interval=System.currentTimeMillis() - timeStamp;
         if (interval < 0)         interval=0;
-        if (enableTransitTimeMetrics) {
+        if (enableNettyMetrics) {
           AsmHistogram netTransTime=getTransmitHistogram(channel,clientPort);
           if (netTransTime != null) {
             netTransTime.update(interval * TimeUtils.NS_PER_US);
           }
         }
+        networkWorkerTransmitTime.update(interval * TimeUtils.NS_PER_US);
       }
-      recvSpeed.update(ControlMessage.encodeLength());
+      nettyServerRecvSpeed.update(ControlMessage.encodeLength());
       return ctrl_msg;
     }
-    short task=code;
+    short type=code;
+    short task=buf.readShort();
+    available-=2;
     if (available < 4) {
       buf.resetReaderIndex();
       return null;
@@ -50,14 +53,13 @@
     }
     ChannelBuffer payload=buf.readBytes(length);
     byte[] rawBytes=payload.array();
-    TaskMessage ret=new TaskMessage(task,rawBytes);
-    recvSpeed.update(rawBytes.length + 6);
+    TaskMessage ret=new TaskMessage(type,task,rawBytes);
+    nettyServerRecvSpeed.update(rawBytes.length + 8);
     return ret;
   }
   finally {
-    if (isServer) {
-      Long endTime=System.nanoTime();
-      msgDecodeTime.update((endTime - startTime) / TimeUtils.NS_PER_US);
+    if (isServer && enableNettyMetrics && msgDecodeTimer != null) {
+      msgDecodeTimer.updateTime(startTime);
     }
   }
 }

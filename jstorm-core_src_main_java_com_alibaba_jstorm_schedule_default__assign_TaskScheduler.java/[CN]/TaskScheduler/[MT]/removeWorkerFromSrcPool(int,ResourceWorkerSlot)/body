@@ -17,7 +17,7 @@
     if (leftTaskNum <= 0) {
       List<ResourceWorkerSlot> needDelete=new ArrayList<ResourceWorkerSlot>();
       for (      Entry<ResourceWorkerSlot,Integer> entry : taskContext.getWorkerToTaskNum().entrySet()) {
-        if (entry.getValue() == avgTaskNum)         needDelete.add(entry.getKey());
+        if (avgTaskNum != 0 && entry.getValue() == avgTaskNum)         needDelete.add(entry.getKey());
       }
       for (      ResourceWorkerSlot workerToDelete : needDelete) {
         taskContext.getWorkerToTaskNum().remove(workerToDelete);

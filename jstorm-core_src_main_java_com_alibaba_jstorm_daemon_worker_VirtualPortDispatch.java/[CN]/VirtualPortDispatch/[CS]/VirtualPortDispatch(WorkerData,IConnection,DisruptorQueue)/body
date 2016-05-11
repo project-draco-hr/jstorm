@@ -1,5 +1,0 @@
-{
-  super(recvQueue,MetricDef.DISPATCH_THREAD);
-  this.recvConnection=recvConnection;
-  this.deserializeQueues=workerData.getDeserializeQueues();
-}

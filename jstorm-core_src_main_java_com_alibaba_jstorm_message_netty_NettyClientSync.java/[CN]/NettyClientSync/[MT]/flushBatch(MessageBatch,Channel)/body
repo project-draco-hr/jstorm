@@ -3,7 +3,7 @@
   if (batch == null) {
     LOG.warn("Handle no data to {}, this shouldn't occur",name);
   }
- else   if (channel == null || channel.isWritable() == false) {
+ else   if (channel == null || !channel.isWritable()) {
     LOG.warn("Channel occur exception, during batch messages {}",name);
     batchQueue.offer(batch);
   }

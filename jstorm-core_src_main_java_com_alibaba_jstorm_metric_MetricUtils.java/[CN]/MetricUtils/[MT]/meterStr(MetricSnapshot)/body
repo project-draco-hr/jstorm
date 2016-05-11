@@ -1,6 +1,6 @@
 {
   StringBuilder sb=new StringBuilder(50);
   sb.append("id:").append(snapshot.get_metricId());
-  sb.append(",m1:").append(snapshot.get_m1()).append(",").append("m5:").append(snapshot.get_m5()).append(",").append("m15:").append(snapshot.get_m15());
+  sb.append(",m1:").append(snapshot.get_m1()).append(",m5:").append(snapshot.get_m5()).append(",m15:").append(snapshot.get_m15()).append(",mean:").append(snapshot.get_mean());
   return sb.toString();
 }

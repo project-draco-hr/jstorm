@@ -1,0 +1,8 @@
+{
+  this.url=url;
+  this.host=host;
+  this.port=port;
+  this.dir=dir;
+  this.file=file;
+  this.result=result;
+}

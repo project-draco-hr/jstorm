@@ -1,0 +1,4 @@
+{
+  count.increment();
+  reservoir.update(value);
+}

@@ -1,8 +1,8 @@
 {
-  if (OSInfo.isLinux() == false) {
+  if (!OSInfo.isLinux()) {
     return 0.0;
   }
-  Double value=0.0;
+  Double value;
   String output=null;
   try {
     String pid=JStormUtils.process_pid();

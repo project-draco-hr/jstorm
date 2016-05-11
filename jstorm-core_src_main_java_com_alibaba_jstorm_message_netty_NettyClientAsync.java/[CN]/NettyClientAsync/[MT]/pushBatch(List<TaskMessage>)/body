@@ -22,10 +22,8 @@
   Channel channel=isChannelReady();
   if (channel == null) {
     handleFailedChannel(messageBatch);
-    return;
   }
- else   if (messageBatch.isEmpty() == false) {
+ else   if (!messageBatch.isEmpty()) {
     flushRequest(channel,messageBatch);
   }
-  return;
 }

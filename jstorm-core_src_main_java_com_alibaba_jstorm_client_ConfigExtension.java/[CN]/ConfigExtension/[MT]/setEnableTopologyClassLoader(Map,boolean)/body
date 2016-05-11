@@ -1,3 +1,3 @@
 {
-  conf.put(TOPOLOGY_ENABLE_CLASSLOADER,Boolean.valueOf(enable));
+  conf.put(TOPOLOGY_ENABLE_CLASSLOADER,enable);
 }

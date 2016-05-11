@@ -1,0 +1,6 @@
+{
+  Map<List<Integer>,List<MsgInfo>> outTasks=new HashMap<List<Integer>,List<MsgInfo>>();
+  outTasks.put(JStormUtils.mk_list(outTaskId),batch);
+  taskStats.send_tuple(stream,batch.size());
+  return outTasks;
+}

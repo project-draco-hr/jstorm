@@ -1,8 +1,9 @@
 {
-  this.task_id=task_id;
-  this.uptime=uptime;
+  this.id=task_id;
+  this.uptime=UIUtils.prettyUptime(uptimeSeconds);
+  this.uptimeSeconds=uptimeSeconds;
   this.status=status;
   this.host=host;
   this.port=port;
-  this.errors=errors;
+  setErrors(errors);
 }

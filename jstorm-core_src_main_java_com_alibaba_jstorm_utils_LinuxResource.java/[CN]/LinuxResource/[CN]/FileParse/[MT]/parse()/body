@@ -1,0 +1,35 @@
+{
+  BufferedReader in=null;
+  InputStreamReader fReader=null;
+  try {
+    fReader=new InputStreamReader(new FileInputStream(file),Charset.forName("UTF-8"));
+    in=new BufferedReader(fReader);
+  }
+ catch (  FileNotFoundException f) {
+    return;
+  }
+  try {
+    String str=in.readLine();
+    while (str != null) {
+      if (parse.parseLine(str))       break;
+      str=in.readLine();
+    }
+  }
+ catch (  IOException io) {
+    LOG.warn("Error reading the stream " + io);
+  }
+ finally {
+    try {
+      fReader.close();
+      try {
+        in.close();
+      }
+ catch (      IOException i) {
+        LOG.warn("Error closing the stream " + in);
+      }
+    }
+ catch (    IOException i) {
+      LOG.warn("Error closing the stream " + fReader);
+    }
+  }
+}

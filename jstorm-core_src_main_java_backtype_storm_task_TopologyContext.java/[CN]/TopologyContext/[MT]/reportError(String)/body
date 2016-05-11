@@ -1,3 +1,3 @@
 {
-  _zkCluster.report_task_error(getTopologyId(),_taskId,errorMsg,null);
+  _zkCluster.report_task_error(getTopologyId(),_taskId,errorMsg);
 }

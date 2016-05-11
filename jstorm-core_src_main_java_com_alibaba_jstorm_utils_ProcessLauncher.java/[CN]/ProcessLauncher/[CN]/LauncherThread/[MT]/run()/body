@@ -1,0 +1,29 @@
+{
+  ProcessBuilder pb=new ProcessBuilder(args);
+  Process p;
+  try {
+    p=pb.start();
+  }
+ catch (  IOException e1) {
+    ret=-1;
+    System.out.println("Failed to start " + args + "\n"+ e1);
+    return;
+  }
+  try {
+    ret=p.waitFor();
+    LOG.info(JStormUtils.getOutput(p.getErrorStream()));
+    LOG.info(JStormUtils.getOutput(p.getInputStream()));
+    LOG.info("!!!! Wokrer shutdown quickly !!!!");
+  }
+ catch (  InterruptedException e) {
+    ret=0;
+    System.out.println("Successfully start process");
+  }
+catch (  Throwable e) {
+    LOG.error("Unknow exception" + e.getCause(),e);
+  }
+ finally {
+    System.out.println("Begin to exit:" + ret);
+    System.exit(ret);
+  }
+}

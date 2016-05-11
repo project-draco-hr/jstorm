@@ -1,0 +1,16 @@
+{
+  String myHostName=JStormServerUtils.getHostName(conf);
+  this.stormClusterState=stormClusterState;
+  this.supervisorId=supervisorId;
+  this.conf=conf;
+  this.myHostName=myHostName;
+  this.startTime=TimeUtils.current_time_secs();
+  this.frequence=JStormUtils.parseInt(conf.get(Config.SUPERVISOR_HEARTBEAT_FREQUENCY_SECS));
+  this.hbUpdateTrigger=new AtomicBoolean(true);
+  this.localState=localState;
+  this.checkStatus=status;
+  oldCheckStatus=new MachineCheckStatus();
+  oldCheckStatus.SetType(this.checkStatus.getType());
+  initSupervisorInfo(conf);
+  LOG.info("Successfully init supervisor heartbeat thread, " + supervisorInfo);
+}

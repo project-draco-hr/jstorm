@@ -1,0 +1,8 @@
+{
+  if (points != null && len > 0) {
+    for (int i=0; i < len; i++) {
+      long pt=Bytes.toLong(points,i * Longs.BYTES,Longs.BYTES);
+      histogram.update(pt);
+    }
+  }
+}

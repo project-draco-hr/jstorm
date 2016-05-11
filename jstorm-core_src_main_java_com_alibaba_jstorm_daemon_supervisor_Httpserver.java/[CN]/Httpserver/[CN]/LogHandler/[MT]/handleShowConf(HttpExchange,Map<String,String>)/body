@@ -1,5 +1,5 @@
 {
-  byte[] json="Failed to get configuration".getBytes();
+  byte[] json;
   try {
     String tmp=Utils.to_json(conf);
     json=tmp.getBytes();
@@ -9,8 +9,5 @@
     handlFailure(t,"Failed to get configuration");
     return;
   }
-  t.sendResponseHeaders(HttpURLConnection.HTTP_OK,json.length);
-  OutputStream os=t.getResponseBody();
-  os.write(json);
-  os.close();
+  sendResponse(t,HttpURLConnection.HTTP_OK,json);
 }

@@ -1,5 +1,0 @@
-{
-  if (sample()) {
-    this.unFlushed.update(obj.longValue(),TimeUnit.MILLISECONDS);
-  }
-}

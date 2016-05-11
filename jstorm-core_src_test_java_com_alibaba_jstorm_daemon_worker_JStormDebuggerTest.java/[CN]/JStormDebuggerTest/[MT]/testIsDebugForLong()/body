@@ -1,0 +1,13 @@
+{
+  int tries=50000;
+  double expected=tries * SAMPLE_RATE;
+  int lottery=0;
+  int num=tries;
+  while (num-- > 0) {
+    Long root_id=random.nextLong();
+    if (JStormDebugger.isDebug(root_id)) {
+      lottery++;
+    }
+  }
+  assertEquals(expected,lottery,expected * 0.05);
+}

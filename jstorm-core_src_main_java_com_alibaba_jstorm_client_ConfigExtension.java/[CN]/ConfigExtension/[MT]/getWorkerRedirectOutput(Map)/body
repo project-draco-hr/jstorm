@@ -1,5 +1,5 @@
 {
   Object result=conf.get(WOREKER_REDIRECT_OUTPUT);
-  if (result == null)   return true;
+  if (result == null)   return false;
   return (Boolean)result;
 }

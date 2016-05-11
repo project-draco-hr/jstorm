@@ -7,25 +7,25 @@
   struct.type=iprot.readString();
   struct.set_type_isSet(true);
 {
-    org.apache.thrift.protocol.TList _list172=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32,iprot.readI32());
-    struct.taskIds=new ArrayList<Integer>(_list172.size);
-    int _elem173;
-    for (int _i174=0; _i174 < _list172.size; ++_i174) {
-      _elem173=iprot.readI32();
-      struct.taskIds.add(_elem173);
+    org.apache.thrift.protocol.TList _list164=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.I32,iprot.readI32());
+    struct.taskIds=new ArrayList<Integer>(_list164.size);
+    int _elem165;
+    for (int _i166=0; _i166 < _list164.size; ++_i166) {
+      _elem165=iprot.readI32();
+      struct.taskIds.add(_elem165);
     }
   }
   struct.set_taskIds_isSet(true);
   BitSet incoming=iprot.readBitSet(1);
   if (incoming.get(0)) {
 {
-      org.apache.thrift.protocol.TList _list175=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
-      struct.errors=new ArrayList<ErrorInfo>(_list175.size);
-      ErrorInfo _elem176;
-      for (int _i177=0; _i177 < _list175.size; ++_i177) {
-        _elem176=new ErrorInfo();
-        _elem176.read(iprot);
-        struct.errors.add(_elem176);
+      org.apache.thrift.protocol.TList _list167=new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+      struct.errors=new ArrayList<ErrorInfo>(_list167.size);
+      ErrorInfo _elem168;
+      for (int _i169=0; _i169 < _list167.size; ++_i169) {
+        _elem168=new ErrorInfo();
+        _elem168.read(iprot);
+        struct.errors.add(_elem168);
       }
     }
     struct.set_errors_isSet(true);

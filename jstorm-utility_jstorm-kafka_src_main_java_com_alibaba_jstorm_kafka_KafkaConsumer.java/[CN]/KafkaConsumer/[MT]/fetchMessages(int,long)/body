@@ -25,13 +25,11 @@
     }
   }
   if (fetchResponse.hasError()) {
-    short code=fetchResponse.errorCode(topic,partition);
-    if (code == ErrorMapping.OffsetOutOfRangeCode() && config.resetOffsetIfOutOfRange) {
-      long startOffset=getOffset(topic,partition,config.startOffsetTime);
-      offset=startOffset;
+    fetchResponseCode=fetchResponse.errorCode(topic,partition);
+    if (fetchResponseCode == ErrorMapping.OffsetOutOfRangeCode()) {
     }
     if (leaderBroker != null) {
-      LOG.error("fetch data from kafka topic[" + config.topic + "] host["+ leaderBroker.host()+ ":"+ leaderBroker.port()+ "] partition["+ partition+ "] error:"+ code);
+      LOG.error("fetch data from kafka topic[" + config.topic + "] host["+ leaderBroker.host()+ ":"+ leaderBroker.port()+ "] partition["+ partition+ "] error:"+ fetchResponseCode);
     }
  else {
     }

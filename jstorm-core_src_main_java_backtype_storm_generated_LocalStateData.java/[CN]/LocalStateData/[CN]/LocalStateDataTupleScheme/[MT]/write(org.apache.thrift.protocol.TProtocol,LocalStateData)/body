@@ -2,9 +2,9 @@
   TTupleProtocol oprot=(TTupleProtocol)prot;
 {
     oprot.writeI32(struct.serialized_parts.size());
-    for (    Map.Entry<String,ThriftSerializedObject> _iter217 : struct.serialized_parts.entrySet()) {
-      oprot.writeString(_iter217.getKey());
-      _iter217.getValue().write(oprot);
+    for (    Map.Entry<String,ThriftSerializedObject> _iter209 : struct.serialized_parts.entrySet()) {
+      oprot.writeString(_iter209.getKey());
+      _iter209.getValue().write(oprot);
     }
   }
 }

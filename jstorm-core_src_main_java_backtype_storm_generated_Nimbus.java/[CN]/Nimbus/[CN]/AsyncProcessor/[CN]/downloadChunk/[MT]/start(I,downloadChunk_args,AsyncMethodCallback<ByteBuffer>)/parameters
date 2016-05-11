@@ -1,3 +1,0 @@
-I iface
-downloadChunk_args args
-AsyncMethodCallback<ByteBuffer> resultHandler

@@ -1,0 +1,8 @@
+{
+  long value=input.readLong();
+  String key=input.readString();
+  Pair inner=new Pair();
+  inner.setKey(key);
+  inner.setValue(value);
+  return inner;
+}

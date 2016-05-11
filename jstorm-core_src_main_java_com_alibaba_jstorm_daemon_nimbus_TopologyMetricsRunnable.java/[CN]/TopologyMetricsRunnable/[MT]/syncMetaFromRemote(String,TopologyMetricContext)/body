@@ -2,12 +2,12 @@
   try {
     int memSize=context.getMemMeta().size();
     Integer zkSize=(Integer)stormClusterState.get_topology_metric(topologyId);
-    if (zkSize != null && memSize != zkSize.intValue()) {
+    if (zkSize != null && memSize != zkSize) {
       ConcurrentMap<String,Long> memMeta=context.getMemMeta();
       for (      MetaType metaType : MetaType.values()) {
         List<MetricMeta> metaList=metricQueryClient.getMetricMeta(clusterName,topologyId,metaType);
         if (metaList != null) {
-          LOG.info("get remote metric meta, topology:{}, metaType:{}, mem:{}, zk:{}, new size:{}",topologyId,metaType,memSize,zkSize,metaList.size());
+          LOG.debug("get remote metric meta, topology:{}, metaType:{}, mem:{}, zk:{}, new size:{}",topologyId,metaType,memSize,zkSize,metaList.size());
           for (          MetricMeta meta : metaList) {
             memMeta.putIfAbsent(meta.getFQN(),meta.getId());
           }

@@ -1,0 +1,5 @@
+Map conf
+StormClusterState stormClusterState
+String supervisorId
+LocalState localState
+MachineCheckStatus status

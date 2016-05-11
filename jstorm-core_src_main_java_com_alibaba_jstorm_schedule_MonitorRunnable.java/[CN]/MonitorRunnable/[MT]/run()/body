@@ -56,7 +56,7 @@
               String nowStr=TimeFormat.getSecond(now);
               String errorInfo="Task-" + task + " is dead on "+ resource.getHostname()+ ":"+ resource.getPort()+ ", "+ nowStr;
               LOG.info(errorInfo);
-              clusterState.report_task_error(topologyid,task,errorInfo,null);
+              clusterState.report_task_error(topologyid,task,errorInfo,ErrorConstants.ERROR,ErrorConstants.CODE_TASK_DEAD,ErrorConstants.DURATION_SECS_TASK_DEAD);
             }
           }
           if (deadTaskWorkers.size() > 0) {

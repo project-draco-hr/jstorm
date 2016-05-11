@@ -2,7 +2,7 @@
   try {
     write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
   }
- catch (  TException te) {
+ catch (  org.apache.thrift.TException te) {
     throw new java.io.IOException(te);
   }
 }

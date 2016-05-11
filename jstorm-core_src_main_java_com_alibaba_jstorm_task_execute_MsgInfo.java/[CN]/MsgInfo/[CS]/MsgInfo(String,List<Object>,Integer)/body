@@ -1,0 +1,6 @@
+{
+  this.streamId=streamId;
+  this.values=values;
+  this.outTaskId=outTaskId;
+  this.callback=null;
+}

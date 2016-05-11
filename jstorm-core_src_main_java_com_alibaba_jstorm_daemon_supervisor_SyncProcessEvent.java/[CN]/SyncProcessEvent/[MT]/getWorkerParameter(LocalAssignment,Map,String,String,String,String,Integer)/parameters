@@ -1,0 +1,7 @@
+LocalAssignment assignment
+Map totalConf
+String stormHome
+String topologyId
+String supervisorId
+String workerId
+Integer port

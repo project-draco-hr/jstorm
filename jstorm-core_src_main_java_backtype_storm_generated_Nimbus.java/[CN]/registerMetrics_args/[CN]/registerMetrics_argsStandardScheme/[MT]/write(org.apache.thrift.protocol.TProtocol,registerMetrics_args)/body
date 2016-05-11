@@ -10,8 +10,8 @@
     oprot.writeFieldBegin(METRICS_FIELD_DESC);
 {
       oprot.writeSetBegin(new org.apache.thrift.protocol.TSet(org.apache.thrift.protocol.TType.STRING,struct.metrics.size()));
-      for (      String _iter235 : struct.metrics) {
-        oprot.writeString(_iter235);
+      for (      String _iter227 : struct.metrics) {
+        oprot.writeString(_iter227);
       }
       oprot.writeSetEnd();
     }

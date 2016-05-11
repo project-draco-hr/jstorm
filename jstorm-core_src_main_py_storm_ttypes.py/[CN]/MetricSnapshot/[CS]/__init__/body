@@ -1,4 +1,4 @@
-def __init__(self, metricId=None, ts=None, metricType=None, longValue=None, doubleValue=None, m1=None, m5=None, m15=None, mean=None, min=None, max=None, p50=None, p75=None, p95=None, p98=None, p99=None, p999=None, stddev=None, points=None):
+def __init__(self, metricId=None, ts=None, metricType=None, longValue=None, doubleValue=None, m1=None, m5=None, m15=None, mean=None, min=None, max=None, p50=None, p75=None, p95=None, p98=None, p99=None, p999=None, stddev=None, points=None, pointSize=None):
     self.metricId = metricId
     self.ts = ts
     self.metricType = metricType
@@ -18,3 +18,4 @@ def __init__(self, metricId=None, ts=None, metricType=None, longValue=None, doub
     self.p999 = p999
     self.stddev = stddev
     self.points = points
+    self.pointSize = pointSize

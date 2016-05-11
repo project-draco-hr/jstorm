@@ -1,0 +1,4 @@
+String topology_id
+int port
+ConcurrentHashMap<Integer,DisruptorQueue> deserializedQueue
+DisruptorQueue recvControlQueue

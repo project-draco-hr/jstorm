@@ -20,7 +20,6 @@
     TopologyMetric tpMetric=new TopologyMetric(topologyMetrics,componentMetrics,workerMetrics,taskMetrics,streamMetrics,nettyMetrics);
     Map<String,Integer> metricNameCounters=new HashMap<>();
     Map<String,Map<Integer,Histogram>> histograms=new HashMap<>();
-    Map<String,Map<Integer,Timer>> timers=new HashMap<>();
     for (    ConcurrentMap.Entry<String,MetricInfo> metricEntry : workerMetricMap.entrySet()) {
       MetricInfo metricInfo=metricEntry.getValue();
       Map<String,Map<Integer,MetricSnapshot>> metrics=metricInfo.get_metrics();
@@ -41,12 +40,9 @@
  else         if (metricType == MetricType.HISTOGRAM) {
           mergeHistograms(getMetricInfoByType(tpMetric,metaType),metricName,data,metricNameCounters,histograms);
         }
- else         if (metricType == MetricType.TIMER) {
-          mergeTimers(getMetricInfoByType(tpMetric,metaType),metricName,data,metricNameCounters,timers);
-        }
       }
     }
-    adjustHistogramTimerMetrics(tpMetric,metricNameCounters,histograms,timers);
+    adjustHistogramTimerMetrics(tpMetric,metricNameCounters,histograms);
     LOG.info("merge topology metrics:{}, cost:{}",topologyId,System.currentTimeMillis() - start);
     return tpMetric;
   }

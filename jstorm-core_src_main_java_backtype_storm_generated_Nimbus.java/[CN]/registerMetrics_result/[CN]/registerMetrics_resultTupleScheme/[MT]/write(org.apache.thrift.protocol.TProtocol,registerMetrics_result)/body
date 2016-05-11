@@ -8,9 +8,9 @@
   if (struct.is_set_success()) {
 {
       oprot.writeI32(struct.success.size());
-      for (      Map.Entry<String,Long> _iter245 : struct.success.entrySet()) {
-        oprot.writeString(_iter245.getKey());
-        oprot.writeI64(_iter245.getValue());
+      for (      Map.Entry<String,Long> _iter237 : struct.success.entrySet()) {
+        oprot.writeString(_iter237.getKey());
+        oprot.writeI64(_iter237.getValue());
       }
     }
   }

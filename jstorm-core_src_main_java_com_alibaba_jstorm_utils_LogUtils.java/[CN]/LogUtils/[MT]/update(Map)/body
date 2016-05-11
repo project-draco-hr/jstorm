@@ -1,0 +1,20 @@
+{
+  Map<String,String> logLevelConfig;
+  try {
+    logLevelConfig=ConfigExtension.getChangeLogLevelConfig(conf);
+  }
+ catch (  ClassCastException e) {
+    LOG.error("the log level config is not the type of Map<String, String> !");
+    return;
+  }
+  Long confTs=ConfigExtension.getChangeLogLevelTimeStamp(conf);
+  if (logLevelConfig != null && confTs != null && confTs > lastChangeTS) {
+    updateLogLevel(logLevelConfig);
+    if (WorkerClassLoader.isEnable()) {
+      WorkerClassLoader.switchThreadContext();
+      updateLogLevel(logLevelConfig);
+      WorkerClassLoader.restoreThreadContext();
+    }
+    lastChangeTS=confTs;
+  }
+}

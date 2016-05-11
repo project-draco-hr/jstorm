@@ -6,5 +6,11 @@
   boolean present_errorTimeSecs=true;
   list.add(present_errorTimeSecs);
   if (present_errorTimeSecs)   list.add(errorTimeSecs);
+  boolean present_errorLevel=true && (is_set_errorLevel());
+  list.add(present_errorLevel);
+  if (present_errorLevel)   list.add(errorLevel);
+  boolean present_errorCode=true;
+  list.add(present_errorCode);
+  if (present_errorCode)   list.add(errorCode);
   return list.hashCode();
 }

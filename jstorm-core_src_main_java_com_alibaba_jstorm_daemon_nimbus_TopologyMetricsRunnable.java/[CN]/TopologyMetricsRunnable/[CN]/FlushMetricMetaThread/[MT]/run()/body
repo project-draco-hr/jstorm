@@ -19,7 +19,7 @@
           if (curSize != metricContext.getFlushedMetaNum()) {
             metricContext.setFlushedMetaNum(curSize);
             metricUploader.registerMetrics(clusterName,topologyId,cachedMeta);
-            LOG.info("flush metric meta, topology:{}, total:{}, cost:{}.",topologyId,curSize,System.currentTimeMillis() - start);
+            LOG.debug("flush metric meta, topology:{}, total:{}, cost:{}.",topologyId,curSize,System.currentTimeMillis() - start);
           }
           stormClusterState.set_topology_metric(topologyId,curSize);
         }

@@ -1,5 +1,5 @@
 {
-  if (enableMetrics) {
+  if (JStormMetrics.enabled) {
     update(stream,MetricDef.FAILED_NUM,1,MetricType.COUNTER);
   }
 }

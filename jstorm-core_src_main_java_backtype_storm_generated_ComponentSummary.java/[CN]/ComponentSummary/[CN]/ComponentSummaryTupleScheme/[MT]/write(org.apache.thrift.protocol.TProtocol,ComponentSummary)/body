@@ -5,8 +5,8 @@
   oprot.writeString(struct.type);
 {
     oprot.writeI32(struct.taskIds.size());
-    for (    int _iter170 : struct.taskIds) {
-      oprot.writeI32(_iter170);
+    for (    int _iter162 : struct.taskIds) {
+      oprot.writeI32(_iter162);
     }
   }
   BitSet optionals=new BitSet();
@@ -17,8 +17,8 @@
   if (struct.is_set_errors()) {
 {
       oprot.writeI32(struct.errors.size());
-      for (      ErrorInfo _iter171 : struct.errors) {
-        _iter171.write(oprot);
+      for (      ErrorInfo _iter163 : struct.errors) {
+        _iter163.write(oprot);
       }
     }
   }

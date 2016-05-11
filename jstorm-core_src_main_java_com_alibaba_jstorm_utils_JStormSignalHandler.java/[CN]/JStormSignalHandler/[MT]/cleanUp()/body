@@ -1,0 +1,5 @@
+{
+  LOG.info("Cleaning up!");
+  isRunning=false;
+  return true;
+}

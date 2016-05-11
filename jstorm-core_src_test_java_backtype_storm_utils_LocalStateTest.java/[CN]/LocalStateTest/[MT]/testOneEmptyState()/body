@@ -1,0 +1,6 @@
+{
+  touchVersion(dir + File.separator + "12345");
+  assertEquals(null,ls.get("a"));
+  ls.put("c",1);
+  assertEquals(1,ls.get("c"));
+}

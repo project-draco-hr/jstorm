@@ -1,6 +1,6 @@
 {
   try {
-    batchTransfer.flush();
+    batchCollector.flush();
   }
  catch (  Exception e) {
     LOG.warn("Failed to public timer event to " + name,e);

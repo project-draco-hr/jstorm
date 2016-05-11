@@ -1,0 +1,7 @@
+{
+  if (JStormMetrics.enabled) {
+    update(stream,MetricDef.ACKED_NUM,1,MetricType.COUNTER);
+    updateTime(stream,MetricDef.PROCESS_LATENCY,latencyStart,endTime,true);
+    updateTime(stream,fastConcat(Common.ACKER_COMPONENT_ID,MetricDef.TUPLE_LIEF_CYCLE),lifeCycleStart,endTime,false);
+  }
+}

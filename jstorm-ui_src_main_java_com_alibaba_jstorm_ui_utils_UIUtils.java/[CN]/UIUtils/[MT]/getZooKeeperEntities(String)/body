@@ -1,0 +1,13 @@
+{
+  ClusterConfig config=UIUtils.clusterConfig.get(clusterName);
+  List<ZooKeeperEntity> ret=new ArrayList<>();
+  if (config != null) {
+    String zkPort=String.valueOf(config.getZkPort());
+    if (config.getZkServers() != null) {
+      for (      String ip : config.getZkServers()) {
+        ret.add(new ZooKeeperEntity(NetWorkUtils.ip2Host(ip),NetWorkUtils.host2Ip(ip),zkPort));
+      }
+    }
+  }
+  return ret;
+}

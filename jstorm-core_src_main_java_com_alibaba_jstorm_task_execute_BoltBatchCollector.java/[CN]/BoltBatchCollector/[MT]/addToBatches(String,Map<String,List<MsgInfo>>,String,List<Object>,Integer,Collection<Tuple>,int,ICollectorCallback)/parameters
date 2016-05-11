@@ -1,0 +1,8 @@
+String key
+Map<String,List<MsgInfo>> batches
+String streamId
+List<Object> tuple
+Integer outTaskId
+Collection<Tuple> anchors
+int batchSize
+ICollectorCallback callback

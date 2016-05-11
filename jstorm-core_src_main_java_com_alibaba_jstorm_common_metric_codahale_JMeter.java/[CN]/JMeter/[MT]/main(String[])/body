@@ -1,0 +1,11 @@
+{
+  int[] speeds=new int[]{0,0,0};
+  JMeter jmeter=new JMeter();
+  for (int i=0; i < speeds.length; i++) {
+    for (int j=0; j < 60; j++) {
+      JStormUtils.sleepMs(1000);
+    }
+    jmeter.mark(973);
+    System.out.println(String.format("m1:%.2f, m5:%.2f, m15:%.2f, mean:%.2f",jmeter.getOneMinuteRate(),jmeter.getFiveMinuteRate(),jmeter.getFifteenMinuteRate(),jmeter.getMeanRate()));
+  }
+}

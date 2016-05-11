@@ -1,0 +1,11 @@
+{
+  assertEquals(true,LogUtils.setLogBackLevel(null,null));
+  assertEquals(true,LogUtils.setLogBackLevel(null,"TRACE"));
+  assertEquals(true,LogUtils.setLogBackLevel(".","DEBUG"));
+  assertEquals(true,LogUtils.setLogBackLevel(null,"INFO"));
+  assertEquals(true,LogUtils.setLogBackLevel(null,"WARN"));
+  assertEquals(false,LogUtils.setLogBackLevel(null,"WARNING"));
+  assertEquals(false,LogUtils.setLogBackLevel(null,""));
+  assertEquals(false,LogUtils.setLogBackLevel(null,"-"));
+  assertEquals(true,LogUtils.setLogBackLevel("org.","DEBUG"));
+}

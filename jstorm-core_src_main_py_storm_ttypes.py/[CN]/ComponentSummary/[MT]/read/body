@@ -25,21 +25,21 @@ def read(self, iprot):
         elif (fid == 4):
             if (ftype == TType.LIST):
                 self.taskIds = []
-                (_etype147, _size144) = iprot.readListBegin()
-                for _i148 in xrange(_size144):
-                    _elem149 = iprot.readI32()
-                    self.taskIds.append(_elem149)
+                (_etype140, _size137) = iprot.readListBegin()
+                for _i141 in xrange(_size137):
+                    _elem142 = iprot.readI32()
+                    self.taskIds.append(_elem142)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)
         elif (fid == 5):
             if (ftype == TType.LIST):
                 self.errors = []
-                (_etype153, _size150) = iprot.readListBegin()
-                for _i154 in xrange(_size150):
-                    _elem155 = ErrorInfo()
-                    _elem155.read(iprot)
-                    self.errors.append(_elem155)
+                (_etype146, _size143) = iprot.readListBegin()
+                for _i147 in xrange(_size143):
+                    _elem148 = ErrorInfo()
+                    _elem148.read(iprot)
+                    self.errors.append(_elem148)
                 iprot.readListEnd()
             else:
                 iprot.skip(ftype)

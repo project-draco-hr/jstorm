@@ -1,3 +1,0 @@
-{
-  conf.put(SPOUT_PEND_FULL_SLEEP,sleep);
-}

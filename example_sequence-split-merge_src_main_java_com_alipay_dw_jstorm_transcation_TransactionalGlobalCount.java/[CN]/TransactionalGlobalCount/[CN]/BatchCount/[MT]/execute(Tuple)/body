@@ -1,3 +1,4 @@
 {
   _count++;
+  LOG.info("---BatchCount.execute(), _count=" + _count);
 }

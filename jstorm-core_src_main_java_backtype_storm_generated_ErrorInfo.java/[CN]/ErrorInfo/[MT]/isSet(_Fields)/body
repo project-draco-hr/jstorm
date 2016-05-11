@@ -7,6 +7,10 @@ case ERROR:
     return is_set_error();
 case ERROR_TIME_SECS:
   return is_set_errorTimeSecs();
+case ERROR_LEVEL:
+return is_set_errorLevel();
+case ERROR_CODE:
+return is_set_errorCode();
 }
 throw new IllegalStateException();
 }

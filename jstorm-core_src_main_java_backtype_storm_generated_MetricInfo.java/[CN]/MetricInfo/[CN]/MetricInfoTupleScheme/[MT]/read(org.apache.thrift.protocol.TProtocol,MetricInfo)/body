@@ -3,25 +3,25 @@
   BitSet incoming=iprot.readBitSet(1);
   if (incoming.get(0)) {
 {
-      org.apache.thrift.protocol.TMap _map136=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,iprot.readI32());
-      struct.metrics=new HashMap<String,Map<Integer,MetricSnapshot>>(2 * _map136.size);
-      String _key137;
-      Map<Integer,MetricSnapshot> _val138;
-      for (int _i139=0; _i139 < _map136.size; ++_i139) {
-        _key137=iprot.readString();
+      org.apache.thrift.protocol.TMap _map128=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.MAP,iprot.readI32());
+      struct.metrics=new HashMap<String,Map<Integer,MetricSnapshot>>(2 * _map128.size);
+      String _key129;
+      Map<Integer,MetricSnapshot> _val130;
+      for (int _i131=0; _i131 < _map128.size; ++_i131) {
+        _key129=iprot.readString();
 {
-          org.apache.thrift.protocol.TMap _map140=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
-          _val138=new HashMap<Integer,MetricSnapshot>(2 * _map140.size);
-          int _key141;
-          MetricSnapshot _val142;
-          for (int _i143=0; _i143 < _map140.size; ++_i143) {
-            _key141=iprot.readI32();
-            _val142=new MetricSnapshot();
-            _val142.read(iprot);
-            _val138.put(_key141,_val142);
+          org.apache.thrift.protocol.TMap _map132=new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.I32,org.apache.thrift.protocol.TType.STRUCT,iprot.readI32());
+          _val130=new HashMap<Integer,MetricSnapshot>(2 * _map132.size);
+          int _key133;
+          MetricSnapshot _val134;
+          for (int _i135=0; _i135 < _map132.size; ++_i135) {
+            _key133=iprot.readI32();
+            _val134=new MetricSnapshot();
+            _val134.read(iprot);
+            _val130.put(_key133,_val134);
           }
         }
-        struct.metrics.put(_key137,_val138);
+        struct.metrics.put(_key129,_val130);
       }
     }
     struct.set_metrics_isSet(true);

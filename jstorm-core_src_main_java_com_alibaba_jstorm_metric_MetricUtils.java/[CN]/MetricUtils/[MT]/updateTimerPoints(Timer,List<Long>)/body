@@ -1,7 +1,0 @@
-{
-  if (points != null) {
-    for (    Long pt : points) {
-      timer.update(pt,TimeUnit.MILLISECONDS);
-    }
-  }
-}

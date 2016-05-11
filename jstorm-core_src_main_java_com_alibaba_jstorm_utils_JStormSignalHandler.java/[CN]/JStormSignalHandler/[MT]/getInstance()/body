@@ -1,0 +1,8 @@
+{
+synchronized (JStormSignalHandler.class) {
+    if (instance == null) {
+      instance=new JStormSignalHandler();
+    }
+  }
+  return instance;
+}

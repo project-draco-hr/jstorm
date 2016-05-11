@@ -1,3 +1,0 @@
-{
-  conf.put(TASK_BATCH_TUPLE,isBatchTuple);
-}

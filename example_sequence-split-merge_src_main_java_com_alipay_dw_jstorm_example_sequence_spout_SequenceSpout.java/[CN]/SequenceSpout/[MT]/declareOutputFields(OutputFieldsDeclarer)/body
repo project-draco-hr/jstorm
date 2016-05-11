@@ -1,3 +1,4 @@
 {
   declarer.declare(new Fields("ID","RECORD"));
+  declarer.declareStream(SequenceTopologyDef.CONTROL_STREAM_ID,new Fields("CONTROL"));
 }

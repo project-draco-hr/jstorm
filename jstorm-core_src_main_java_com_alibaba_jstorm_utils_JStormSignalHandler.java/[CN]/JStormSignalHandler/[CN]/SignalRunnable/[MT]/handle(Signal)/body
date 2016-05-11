@@ -1,0 +1,29 @@
+{
+  LOG.info("Receive singal " + signal.getName() + " "+ signal.getNumber());
+  Runnable runner=signalHandlers.get(signal.getNumber());
+  try {
+    if (runner == null) {
+      LOG.info("Skip JStorm register handler of signal: {}",signal.getName());
+    }
+ else {
+      LOG.info("Begin to handle signal of {}",signal.getName());
+      runner.run();
+      LOG.info("Successfully handle signal of {}",signal.getName());
+    }
+  }
+ catch (  Throwable e) {
+    LOG.error("Failed to handle signal of " + signal.getName() + ":"+ e.getCause(),e);
+  }
+  try {
+    SignalHandler oldHandler=oldSignalHandlers.get(signal.getNumber());
+    if (oldHandler != null) {
+      LOG.info("Begin to run the old singleHandler");
+      oldHandler.handle(signal);
+      JStormUtils.sleepMs(1000);
+      LOG.info("Successfully run the old singleHandler");
+    }
+  }
+ catch (  Throwable e) {
+    LOG.error("Failed to run old SignalHandler of  signal: " + signal.getName() + ":"+ e.getCause(),e);
+  }
+}

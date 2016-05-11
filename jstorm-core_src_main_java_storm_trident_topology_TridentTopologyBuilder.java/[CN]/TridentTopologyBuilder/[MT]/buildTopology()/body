@@ -23,7 +23,7 @@
       for (      Map m : c.componentConfs) {
         scd.addConfigurations(m);
       }
-      Map<String,CoordSpec> specs=new HashMap();
+      Map<String,TridentBoltExecutor.CoordSpec> specs=new HashMap();
       specs.put(c.batchGroupId,new CoordSpec());
       BoltDeclarer bd=builder.setBolt(id,new TridentBoltExecutor(new TridentSpoutExecutor(c.commitStateId,c.streamName,((ITridentSpout)c.spout)),batchIdsForSpouts,specs),c.parallelism);
       bd.allGrouping(spoutCoordinator(id),MasterBatchCoordinator.BATCH_STREAM_ID);

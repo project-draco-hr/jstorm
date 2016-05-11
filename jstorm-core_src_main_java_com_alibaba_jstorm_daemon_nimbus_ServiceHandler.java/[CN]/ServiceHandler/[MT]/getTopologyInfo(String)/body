@@ -76,7 +76,7 @@
       List<TaskError> taskErrorList=taskErrors.get(taskId);
       if (taskErrorList != null && taskErrorList.size() != 0) {
         for (        TaskError taskError : taskErrorList) {
-          ErrorInfo errorInfo=new ErrorInfo(taskError.getError(),taskError.getTimSecs());
+          ErrorInfo errorInfo=new ErrorInfo(taskError.getError(),taskError.getTimSecs(),taskError.getLevel(),taskError.getCode());
           taskSummary.add_to_errors(errorInfo);
           String component=taskToComponent.get(taskId);
           componentSummaryMap.get(component).add_to_errors(errorInfo);

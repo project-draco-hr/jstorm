@@ -5,8 +5,8 @@
     oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
 {
       oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.success.size()));
-      for (      MetricInfo _iter253 : struct.success) {
-        _iter253.write(oprot);
+      for (      MetricInfo _iter245 : struct.success) {
+        _iter245.write(oprot);
       }
       oprot.writeListEnd();
     }

@@ -1,3 +1,0 @@
-{
-  conf.put(WORKER_CPU_CORE_UPPER_LIMIT,cpuUpperLimit);
-}

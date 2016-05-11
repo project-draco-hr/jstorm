@@ -1,3 +1,8 @@
 {
-  pending=new RotatingMap<Long,TupleInfo>(Acker.TIMEOUT_BUCKET_NUM,null,true);
+  if (ConfigExtension.isTaskBatchTuple(storm_conf)) {
+    pending=new RotatingMap<Long,TupleInfo>(Acker.TIMEOUT_BUCKET_NUM,null,false);
+  }
+ else {
+    pending=new RotatingMap<Long,TupleInfo>(Acker.TIMEOUT_BUCKET_NUM,null,true);
+  }
 }

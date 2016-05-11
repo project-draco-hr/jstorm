@@ -1,0 +1,4 @@
+{
+  Long reserve=JStormUtils.parseLong(conf.get(STORM_MACHINE_RESOURCE_RESERVE_MEM),1 * 1024 * 1024* 1024L);
+  return reserve < 1 * 1024 * 1024* 1024L ? 1 * 1024 * 1024* 1024L : reserve;
+}

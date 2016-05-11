@@ -1,0 +1,5 @@
+{
+  dir=System.getProperty("java.io.tmpdir") + File.separator + UUID.randomUUID().toString();
+  ls=new LocalState(dir);
+  vs=new VersionedStore(dir);
+}

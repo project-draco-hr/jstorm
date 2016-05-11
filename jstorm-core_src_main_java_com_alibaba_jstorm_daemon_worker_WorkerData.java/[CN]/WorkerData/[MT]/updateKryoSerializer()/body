@@ -1,0 +1,8 @@
+{
+  HashMap<String,Map<String,Fields>> componentToStreamToFields=generatecomponentToStreamToFields(sysTopology);
+  GeneralTopologyContext topologyContext=new GeneralTopologyContext(sysTopology,stormConf,tasksToComponent,componentToSortedTasks,componentToStreamToFields,topologyId);
+  KryoTupleDeserializer kryoTupleDeserializer=new KryoTupleDeserializer(stormConf,topologyContext);
+  KryoTupleSerializer kryoTupleSerializer=new KryoTupleSerializer(stormConf,topologyContext);
+  atomKryoDeserializer.getAndSet(kryoTupleDeserializer);
+  atomKryoSerializer.getAndSet(kryoTupleSerializer);
+}

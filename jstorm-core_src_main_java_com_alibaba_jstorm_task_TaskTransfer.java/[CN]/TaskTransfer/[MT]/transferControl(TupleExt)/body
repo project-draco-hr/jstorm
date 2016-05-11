@@ -1,0 +1,10 @@
+{
+  int taskId=tuple.getTargetTaskId();
+  DisruptorQueue controlQueue=controlQueues.get(taskId);
+  if (controlQueue != null) {
+    controlQueue.publish(tuple);
+  }
+ else {
+    transferControlQueue.publish(tuple);
+  }
+}

@@ -8,7 +8,7 @@
     spout.fail(msg_id);
   }
   task_stats.spout_failed_tuple(tupleInfo.getStream());
-  if (isDebug) {
+  if (JStormDebugger.isDebug(id)) {
     LOG.info("Failed message rootId: {}, messageId:{} : {}",id,msg_id,tupleInfo.getValues().toString());
   }
 }

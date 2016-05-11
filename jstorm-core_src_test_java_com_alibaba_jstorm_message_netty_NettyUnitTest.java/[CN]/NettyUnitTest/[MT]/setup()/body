@@ -1,0 +1,15 @@
+{
+  storm_conf=Utils.readDefaultConfig();
+  ConfigExtension.setLocalWorkerPort(storm_conf,port);
+  boolean syncMode=false;
+  if (syncMode) {
+    DisruptorQueue.setLimited(true);
+    ConfigExtension.setNettyMaxSendPending(storm_conf,1);
+    ConfigExtension.setNettySyncMode(storm_conf,true);
+  }
+ else {
+    ConfigExtension.setNettySyncMode(storm_conf,false);
+    ConfigExtension.setNettyASyncBlock(storm_conf,false);
+  }
+  context=TransportFactory.makeContext(storm_conf);
+}

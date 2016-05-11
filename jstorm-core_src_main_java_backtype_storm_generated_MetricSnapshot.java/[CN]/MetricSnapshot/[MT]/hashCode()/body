@@ -57,5 +57,8 @@
   boolean present_points=true && (is_set_points());
   list.add(present_points);
   if (present_points)   list.add(points);
+  boolean present_pointSize=true && (is_set_pointSize());
+  list.add(present_pointSize);
+  if (present_pointSize)   list.add(pointSize);
   return list.hashCode();
 }

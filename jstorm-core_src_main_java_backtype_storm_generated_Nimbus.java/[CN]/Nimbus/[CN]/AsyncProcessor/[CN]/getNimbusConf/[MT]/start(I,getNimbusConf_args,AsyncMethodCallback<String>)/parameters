@@ -1,3 +1,0 @@
-I iface
-getNimbusConf_args args
-AsyncMethodCallback<String> resultHandler

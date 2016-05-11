@@ -11,8 +11,8 @@
       for (      Map.Entry<Integer,MetricSnapshot> entryData : entry.getValue().entrySet()) {
         MetricSnapshot snapshot=entryData.getValue().deepCopy();
         winData.put(entryData.getKey(),snapshot);
-        if (metricType == MetricType.HISTOGRAM || metricType == MetricType.TIMER) {
-          entryData.getValue().set_points(new ArrayList<Long>(0));
+        if (metricType == MetricType.HISTOGRAM) {
+          entryData.getValue().set_points(new byte[0]);
         }
       }
       clusterMetrics.put_to_metrics(metricName,winData);

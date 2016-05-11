@@ -1,0 +1,3 @@
+{
+  this.points=points == null ? (ByteBuffer)null : ByteBuffer.wrap(Arrays.copyOf(points,points.length));
+}

@@ -1,0 +1,29 @@
+{
+  try {
+    if (ser_msg == null) {
+      return null;
+    }
+    if (ser_msg.length == 0) {
+      return null;
+    }
+ else     if (ser_msg.length == 1) {
+      byte newStatus=ser_msg[0];
+      LOG.info("Change task status as " + newStatus);
+      taskStatus.setStatus(newStatus);
+      return null;
+    }
+    Tuple tuple=null;
+    KryoTupleDeserializer kryo=atomKryoDeserializer.get();
+    if (kryo != null)     tuple=kryo.deserialize(ser_msg);
+    return tuple;
+  }
+ catch (  KryoException e) {
+    throw new RuntimeException(e);
+  }
+catch (  Throwable e) {
+    if (!taskStatus.isShutdown()) {
+      LOG.error(idStr + " recv thread error " + JStormUtils.toPrintableString(ser_msg)+ "\n",e);
+    }
+  }
+  return null;
+}

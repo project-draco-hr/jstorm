@@ -1,0 +1,2 @@
+List<MsgInfo> batch
+Map<List<Integer>,List<MsgInfo>> ret

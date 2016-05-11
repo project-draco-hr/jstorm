@@ -7,11 +7,19 @@
     isLimited=true;
     SPOUT_MAX_SEND_NUM=JStormUtils.parseLong(conf.get("spout.max.sending.num"));
   }
+  Boolean btrue=JStormUtils.parseBoolean(conf.get("spout.send.contrl.message"));
+  if (btrue != null && btrue) {
+    isSendCtrlMsg=true;
+  }
+ else {
+    isSendCtrlMsg=false;
+  }
   isFinished=false;
   tpsCounter=new TpsCounter(context.getThisComponentId() + ":" + context.getThisTaskId());
   MAX_PENDING_COUNTER=getMaxPending(conf);
   bufferLen=JStormUtils.parseInt(conf.get("byte.buffer.len"),0);
   random=new Random();
   random.setSeed(System.currentTimeMillis());
+  JStormUtils.sleepMs(20 * 1000);
   LOG.info("Finish open, buffer Len:" + bufferLen);
 }

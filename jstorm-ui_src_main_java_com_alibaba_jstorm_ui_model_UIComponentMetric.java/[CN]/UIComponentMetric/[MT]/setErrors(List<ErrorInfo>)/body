@@ -1,3 +1,11 @@
 {
-  this.errors=errors;
+  if (errors == null) {
+    this.errors=null;
+    return;
+  }
+  this.errors=new ArrayList<>();
+  for (  ErrorInfo info : errors) {
+    ErrorEntity err=new ErrorEntity(info.get_errorTimeSecs(),info.get_error());
+    this.errors.add(err);
+  }
 }

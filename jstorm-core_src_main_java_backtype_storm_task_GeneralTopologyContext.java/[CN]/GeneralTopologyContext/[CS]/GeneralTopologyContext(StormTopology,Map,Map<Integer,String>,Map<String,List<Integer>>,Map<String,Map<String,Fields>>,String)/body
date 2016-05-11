@@ -5,4 +5,10 @@
   _topologyId=topologyId;
   _componentToTasks=componentToSortedTasks;
   _componentToStreamToFields=componentToStreamToFields;
+  if (!StormConfig.local_mode(stormConf)) {
+    _topologyMasterId=_componentToTasks.get("__topology_master").get(0);
+  }
+ else {
+    _topologyMasterId=0;
+  }
 }

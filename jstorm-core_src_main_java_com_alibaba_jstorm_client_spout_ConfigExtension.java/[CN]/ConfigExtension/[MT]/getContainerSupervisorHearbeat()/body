@@ -1,3 +1,0 @@
-{
-  return (String)System.getenv(CONTAINER_SUPERVISOR_HEARTBEAT);
-}

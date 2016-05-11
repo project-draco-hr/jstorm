@@ -1,0 +1,3 @@
+{
+  return (Long)conf.get(CHANGE_LOG_LEVEL_TIMESTAMP);
+}

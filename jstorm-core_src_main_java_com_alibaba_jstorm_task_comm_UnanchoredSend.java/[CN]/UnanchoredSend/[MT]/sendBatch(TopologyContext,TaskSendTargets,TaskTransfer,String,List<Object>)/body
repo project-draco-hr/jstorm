@@ -1,0 +1,14 @@
+{
+  java.util.List<Integer> tasks=taskTargets.get(stream,values,null,values.get(0));
+  if (tasks.size() == 0) {
+    return;
+  }
+  Integer taskId=topologyContext.getThisTaskId();
+  for (  Integer task : tasks) {
+    TupleImplExt tup=new TupleImplExt(topologyContext,values,taskId,stream);
+    tup.setTargetTaskId(task);
+    BatchTuple batchTuple=new BatchTuple(taskId,1);
+    batchTuple.addToBatch(tup);
+    transfer_fn.transfer(batchTuple);
+  }
+}

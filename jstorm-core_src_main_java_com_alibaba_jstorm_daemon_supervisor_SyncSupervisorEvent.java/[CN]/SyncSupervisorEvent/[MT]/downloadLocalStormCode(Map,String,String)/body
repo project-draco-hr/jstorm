@@ -7,7 +7,7 @@
   String targetDir=stormroot + '/' + StormConfig.RESOURCES_SUBDIR;
   if (resourcesJar != null) {
     LOG.info("Extracting resources from jar at " + resourcesJar + " to "+ targetDir);
-    JStormUtils.extract_dir_from_jar(resourcesJar,StormConfig.RESOURCES_SUBDIR,stormroot);
+    JStormUtils.extractDirFromJar(resourcesJar,StormConfig.RESOURCES_SUBDIR,stormroot);
   }
  else   if (url != null) {
     LOG.info("Copying resources at " + url.toString() + " to "+ targetDir);

@@ -1,3 +1,0 @@
-{
-  conf.put(TASK_CLEANUP_TIMEOUT_SEC,timeout);
-}

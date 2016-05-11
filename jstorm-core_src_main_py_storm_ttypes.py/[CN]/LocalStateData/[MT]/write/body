@@ -6,9 +6,9 @@ def write(self, oprot):
     if (self.serialized_parts is not None):
         oprot.writeFieldBegin('serialized_parts', TType.MAP, 1)
         oprot.writeMapBegin(TType.STRING, TType.STRUCT, len(self.serialized_parts))
-        for (kiter195, viter196) in self.serialized_parts.items():
-            oprot.writeString(kiter195.encode('utf-8'))
-            viter196.write(oprot)
+        for (kiter188, viter189) in self.serialized_parts.items():
+            oprot.writeString(kiter188.encode('utf-8'))
+            viter189.write(oprot)
         oprot.writeMapEnd()
         oprot.writeFieldEnd()
     oprot.writeFieldStop()

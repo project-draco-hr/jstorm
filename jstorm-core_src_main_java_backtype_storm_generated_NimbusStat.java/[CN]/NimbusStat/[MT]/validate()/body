@@ -1,8 +1,8 @@
 {
   if (!is_set_host()) {
-    throw new TProtocolException("Required field 'host' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'host' is unset! Struct:" + toString());
   }
   if (!is_set_uptimeSecs()) {
-    throw new TProtocolException("Required field 'uptimeSecs' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'uptimeSecs' is unset! Struct:" + toString());
   }
 }

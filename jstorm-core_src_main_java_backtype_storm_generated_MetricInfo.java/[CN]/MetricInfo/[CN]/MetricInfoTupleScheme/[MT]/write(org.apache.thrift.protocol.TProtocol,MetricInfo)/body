@@ -8,13 +8,13 @@
   if (struct.is_set_metrics()) {
 {
       oprot.writeI32(struct.metrics.size());
-      for (      Map.Entry<String,Map<Integer,MetricSnapshot>> _iter134 : struct.metrics.entrySet()) {
-        oprot.writeString(_iter134.getKey());
+      for (      Map.Entry<String,Map<Integer,MetricSnapshot>> _iter126 : struct.metrics.entrySet()) {
+        oprot.writeString(_iter126.getKey());
 {
-          oprot.writeI32(_iter134.getValue().size());
-          for (          Map.Entry<Integer,MetricSnapshot> _iter135 : _iter134.getValue().entrySet()) {
-            oprot.writeI32(_iter135.getKey());
-            _iter135.getValue().write(oprot);
+          oprot.writeI32(_iter126.getValue().size());
+          for (          Map.Entry<Integer,MetricSnapshot> _iter127 : _iter126.getValue().entrySet()) {
+            oprot.writeI32(_iter127.getKey());
+            _iter127.getValue().write(oprot);
           }
         }
       }

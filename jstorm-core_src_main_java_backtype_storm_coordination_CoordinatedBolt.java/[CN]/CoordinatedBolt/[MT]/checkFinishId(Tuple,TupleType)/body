@@ -1,4 +1,5 @@
 {
+  _collector.flush();
   Object id=tup.getValue(0);
   boolean failed=false;
 synchronized (_tracked) {
@@ -24,6 +25,7 @@ synchronized (_tracked) {
           if (!(_sourceArgs.isEmpty() || type != TupleType.REGULAR)) {
             throw new IllegalStateException("Coordination condition met on a non-coordinating tuple. Should be impossible");
           }
+          _collector.flush();
           Iterator<Integer> outTasks=_countOutTasks.iterator();
           while (outTasks.hasNext()) {
             int task=outTasks.next();
@@ -56,6 +58,9 @@ synchronized (_tracked) {
       }
       _tracked.remove(id);
       failed=true;
+    }
+ finally {
+      _collector.flush();
     }
   }
   return failed;

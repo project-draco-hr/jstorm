@@ -1,3 +1,0 @@
-{
-  conf.put(TASK_ON_DIFFERENT_NODE,Boolean.valueOf(isIsolate));
-}

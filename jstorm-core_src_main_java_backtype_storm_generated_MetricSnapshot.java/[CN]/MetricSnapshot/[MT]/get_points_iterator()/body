@@ -1,3 +1,0 @@
-{
-  return (this.points == null) ? null : this.points.iterator();
-}

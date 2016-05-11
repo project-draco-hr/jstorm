@@ -1,3 +1,0 @@
-{
-  conf.put(DEFAULT_CACHE_TIMEOUT,timeout);
-}

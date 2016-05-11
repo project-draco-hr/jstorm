@@ -1,0 +1,4 @@
+{
+  this.startTime=System.currentTimeMillis();
+  this.lastTick=new AtomicLong(startTime);
+}

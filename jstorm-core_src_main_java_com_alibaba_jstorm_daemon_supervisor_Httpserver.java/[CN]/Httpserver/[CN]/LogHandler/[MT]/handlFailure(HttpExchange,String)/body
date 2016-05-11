@@ -1,8 +1,5 @@
 {
   LOG.error(errorMsg);
   byte[] data=errorMsg.getBytes();
-  t.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST,data.length);
-  OutputStream os=t.getResponseBody();
-  os.write(data);
-  os.close();
+  sendResponse(t,HttpURLConnection.HTTP_BAD_REQUEST,data);
 }

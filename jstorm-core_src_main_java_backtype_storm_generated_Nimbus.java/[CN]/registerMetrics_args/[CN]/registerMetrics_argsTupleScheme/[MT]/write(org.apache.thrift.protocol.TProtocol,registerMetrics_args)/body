@@ -14,8 +14,8 @@
   if (struct.is_set_metrics()) {
 {
       oprot.writeI32(struct.metrics.size());
-      for (      String _iter236 : struct.metrics) {
-        oprot.writeString(_iter236);
+      for (      String _iter228 : struct.metrics) {
+        oprot.writeString(_iter228);
       }
     }
   }

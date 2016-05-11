@@ -11,8 +11,5 @@
  else   if (snapshot instanceof AsmHistogramSnapshot) {
     return ((AsmHistogramSnapshot)snapshot).getSnapshot().getMean();
   }
- else   if (snapshot instanceof AsmTimerSnapshot) {
-    return ((AsmTimerSnapshot)snapshot).getHistogram().getMean();
-  }
   return 0;
 }

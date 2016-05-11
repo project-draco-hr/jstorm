@@ -3,7 +3,7 @@
   try {
     Map conf=Utils.readStormConfig();
     client=NimbusClient.getConfiguredClient(conf);
-    if (args.length > 0 && StringUtils.isBlank(args[0]) == false) {
+    if (args.length > 0 && !StringUtils.isBlank(args[0])) {
       String topologyName=args[0];
       TopologyInfo info=client.getClient().getTopologyInfoByName(topologyName);
       System.out.println("Successfully get topology info \n" + Utils.toPrettyJsonString(info));

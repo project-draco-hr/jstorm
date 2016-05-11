@@ -1,4 +1,5 @@
 {
+  System.setProperty(ConfigExtension.TASK_BATCH_TUPLE,"false");
   DefaultDirectedGraph<Node,IndexedEdge> graph=(DefaultDirectedGraph)_graph.clone();
   completeDRPC(graph,_colocate,_gen);
   List<SpoutNode> spoutNodes=new ArrayList<SpoutNode>();

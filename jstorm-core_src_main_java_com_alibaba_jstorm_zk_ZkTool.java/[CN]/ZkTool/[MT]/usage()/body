@@ -1,10 +1,10 @@
 {
-  LOG.info("Read ZK node's data, please do as following:");
-  LOG.info(ZkTool.class.getName() + " read zkpath");
-  LOG.info("\nDelete topology backup assignment, please do as following:");
-  LOG.info(ZkTool.class.getName() + " rm topologyname");
-  LOG.info("\nlist subdirectory of zkPath , please do as following:");
-  LOG.info(ZkTool.class.getName() + " list zkpath");
-  LOG.info("\nDelete all nodes about a topologyId of zk , please do as following:");
-  LOG.info(ZkTool.class.getName() + " clean topologyId");
+  System.out.println("Read ZK node's data, please do as following:");
+  System.out.println(ZkTool.class.getName() + " read zkpath");
+  System.out.println("\nDelete topology backup assignment, please do as following:");
+  System.out.println(ZkTool.class.getName() + " rm topologyname");
+  System.out.println("\nlist subdirectory of zkPath , please do as following:");
+  System.out.println(ZkTool.class.getName() + " list zkpath");
+  System.out.println("\nDelete all nodes about a topologyId of zk , please do as following:");
+  System.out.println(ZkTool.class.getName() + " clean topologyId");
 }

@@ -1,5 +1,5 @@
 {
   if (!is_set_serialized_parts()) {
-    throw new TProtocolException("Required field 'serialized_parts' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'serialized_parts' is unset! Struct:" + toString());
   }
 }

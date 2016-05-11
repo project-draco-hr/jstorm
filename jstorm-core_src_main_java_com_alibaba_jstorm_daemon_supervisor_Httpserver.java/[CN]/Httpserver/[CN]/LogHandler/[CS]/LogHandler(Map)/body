@@ -19,7 +19,7 @@
     }
   }
   String confDir=System.getProperty(Constants.JSTORM_CONF_DIR);
-  if (StringUtils.isBlank(confDir) == false) {
+  if (!StringUtils.isBlank(confDir)) {
     String confDirPath=PathUtils.getCanonicalPath(confDir);
     if (confDirPath != null) {
       accessDirs.add(confDirPath);

@@ -1,4 +1,8 @@
 {
+  boolean enableMetrics=ConfigExtension.isEnableMetrics(stormConf);
+  if (!enableMetrics) {
+    return false;
+  }
   int maxWorkerNumForNetty=ConfigExtension.getTopologyMaxWorkerNumForNettyMetrics(stormConf);
   int workerNum=JStormUtils.parseInt(stormConf.get("topology.workers"),1);
   return workerNum < maxWorkerNumForNetty;

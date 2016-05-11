@@ -1,3 +1,0 @@
-{
-  return getTimers(AsmMetricFilter.ALL);
-}

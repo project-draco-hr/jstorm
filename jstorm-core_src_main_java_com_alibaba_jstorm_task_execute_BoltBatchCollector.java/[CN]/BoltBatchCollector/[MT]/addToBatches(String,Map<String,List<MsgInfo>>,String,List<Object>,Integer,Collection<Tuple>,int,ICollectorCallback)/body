@@ -1,0 +1,16 @@
+{
+  List<MsgInfo> batch;
+  batch=batches.get(key);
+  if (batch == null) {
+    batch=new ArrayList<MsgInfo>();
+    batches.put(key,batch);
+  }
+  batch.add(new BoltMsgInfo(streamId,tuple,anchors,outTaskId,callback));
+  if (batch.size() > batchSize) {
+    batches.put(key,null);
+    return batch;
+  }
+ else {
+    return null;
+  }
+}

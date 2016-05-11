@@ -1,0 +1,20 @@
+{
+  if (readCpuInfoFile) {
+    return;
+  }
+  FileParse fileParse=new FileParse(procfsCpuFile,new LineParse(){
+    @Override public void prepare(){
+      numProcessors=0;
+    }
+    @Override public boolean parseLine(    String line){
+      Matcher mat=PROCESSOR_FORMAT.matcher(line);
+      if (mat.find()) {
+        numProcessors++;
+      }
+      return false;
+    }
+  }
+);
+  fileParse.parse();
+  readCpuInfoFile=true;
+}

@@ -1,0 +1,4 @@
+Map conf
+int sysCpuNum
+Long physicalMemSize
+boolean reserved

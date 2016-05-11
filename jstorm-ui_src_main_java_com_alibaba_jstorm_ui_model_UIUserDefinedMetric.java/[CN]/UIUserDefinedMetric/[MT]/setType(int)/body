@@ -9,7 +9,5 @@ case METER:
 this.type="Meter";
 case HISTOGRAM:
 this.type="Histogram";
-case TIMER:
-this.type="Timer";
 }
 }

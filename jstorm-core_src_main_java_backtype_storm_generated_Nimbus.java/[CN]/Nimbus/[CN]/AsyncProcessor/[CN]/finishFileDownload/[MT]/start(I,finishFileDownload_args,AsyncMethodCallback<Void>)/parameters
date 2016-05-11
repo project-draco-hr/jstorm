@@ -1,3 +1,0 @@
-I iface
-finishFileDownload_args args
-AsyncMethodCallback<Void> resultHandler

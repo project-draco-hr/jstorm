@@ -1,0 +1,5 @@
+{
+  this.errorTime=errorTime;
+  this.error=error;
+  this.errorLapsedSecs=TimeUtils.current_time_secs() - errorTime;
+}

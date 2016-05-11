@@ -19,6 +19,8 @@ synchronized (this) {
     thr.interrupt();
     LOG.info("Successfully shutdown " + thr.getThread().getName());
   }
+  TopologyContext userContext=task.getUserContext();
+  for (  ITaskHook iTaskHook : userContext.getHooks())   iTaskHook.cleanup();
   closeComponent(task_obj);
   try {
     zkCluster.disconnect();

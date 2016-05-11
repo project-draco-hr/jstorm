@@ -4,8 +4,7 @@
   for (  String name : UIUtils.clusterConfig.keySet()) {
     try {
       client=NimbusClientManager.getNimbusClient(name);
-      int port=getNimbusPort(name);
-      clusterEntities.put(name,getClusterEntity(client.getClient().getClusterInfo(),name,port));
+      clusterEntities.put(name,getClusterEntity(client.getClient().getClusterInfo(),name));
     }
  catch (    Exception e) {
       NimbusClientManager.removeClient(name);

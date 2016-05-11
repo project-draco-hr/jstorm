@@ -1,0 +1,55 @@
+{
+  if (JStormUtils.getTotalCpuUsage() <= 0.0 || !ConfigExtension.isSupervisorEnableAutoAdjustSlots(conf)) {
+    return JStormUtils.getSupervisorPortList(conf);
+  }
+  long freeMemory=JStormUtils.getFreePhysicalMem() * 1024L;
+  long reserveMemory=ConfigExtension.getStormMachineReserveMem(conf);
+  if (freeMemory < reserveMemory) {
+    List<Integer> list=null;
+    try {
+      list=getLocalAssignmentPortList();
+    }
+ catch (    IOException e) {
+      return JStormUtils.getSupervisorPortList(conf);
+    }
+    if (list == null)     return new ArrayList<Integer>();
+    return list;
+  }
+  int reserveCpuUsage=ConfigExtension.getStormMachineReserveCpuPercent(conf);
+  double cpuUsage=JStormUtils.getTotalCpuUsage();
+  if (cpuUsage > (100D - reserveCpuUsage)) {
+    List<Integer> list=null;
+    try {
+      list=getLocalAssignmentPortList();
+    }
+ catch (    IOException e) {
+      return JStormUtils.getSupervisorPortList(conf);
+    }
+    if (list == null)     return new ArrayList<Integer>();
+    return list;
+  }
+  Long conversionAvailableCpuNum=Math.round((100 - cpuUsage) / 100 * JStormUtils.getNumProcessors());
+  Long availablePhysicalMemorySize=freeMemory - reserveMemory;
+  int portNum=JStormUtils.getSupervisorPortNum(conf,conversionAvailableCpuNum.intValue(),availablePhysicalMemorySize,true);
+  List<Integer> portList=JStormUtils.getSupervisorPortList(conf);
+  List<Integer> usedList=null;
+  try {
+    usedList=getLocalAssignmentPortList();
+  }
+ catch (  Exception e) {
+    return JStormUtils.getSupervisorPortList(conf);
+  }
+  portList.removeAll(usedList);
+  Collections.sort(portList);
+  if (portNum >= portList.size()) {
+    return JStormUtils.getSupervisorPortList(conf);
+  }
+ else {
+    List<Integer> reportPortList=new ArrayList<Integer>();
+    reportPortList.addAll(usedList);
+    for (int i=1; i <= portNum; i++) {
+      reportPortList.add(portList.get(i));
+    }
+    return reportPortList;
+  }
+}

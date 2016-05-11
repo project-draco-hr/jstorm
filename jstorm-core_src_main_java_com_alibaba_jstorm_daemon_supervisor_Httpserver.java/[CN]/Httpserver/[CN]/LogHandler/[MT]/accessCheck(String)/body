@@ -1,14 +1,17 @@
 {
+  if (debug) {
+    return;
+  }
   File file=new File(fileName);
   String canonicalPath=file.getCanonicalPath();
   boolean isChild=false;
   for (  String dir : accessDirs) {
-    if (canonicalPath.indexOf(dir) >= 0) {
+    if (canonicalPath.contains(dir)) {
       isChild=true;
       break;
     }
   }
-  if (isChild == false) {
+  if (!isChild) {
     LOG.error("Access one disallowed path: " + canonicalPath);
     throw new IOException("Destination file/path is not accessible.");
   }

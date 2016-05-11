@@ -1,0 +1,16 @@
+{
+  final long oldTimeMs=lastTick.get();
+  final long newTimeMs=System.currentTimeMillis();
+  final long age=newTimeMs - oldTimeMs;
+  if (age > TICK_INTERVAL) {
+    final long newIntervalStartTick=newTimeMs - age % TICK_INTERVAL;
+    if (lastTick.compareAndSet(oldTimeMs,newIntervalStartTick)) {
+      final long requiredTicks=age / TICK_INTERVAL;
+      for (long i=0; i < requiredTicks; i++) {
+        m1Rate.tick();
+        m5Rate.tick();
+        m15Rate.tick();
+      }
+    }
+  }
+}

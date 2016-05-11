@@ -1,0 +1,13 @@
+{
+  int taskId=batch.getTargetTaskId();
+  DisruptorQueue exeQueue=innerTaskTransfer.get(taskId);
+  if (exeQueue != null) {
+    exeQueue.publish(batch);
+  }
+ else {
+    serializeQueue.publish(batch);
+  }
+  if (backpressureController.isBackpressureMode()) {
+    backpressureController.flowControl();
+  }
+}

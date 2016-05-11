@@ -1,0 +1,10 @@
+{
+  List ret;
+  if (!conf.containsKey(Config.TOPOLOGY_AUTO_TASK_HOOKS)) {
+    ret=new ArrayList();
+  }
+ else {
+    ret=new ArrayList((List)conf.get(Config.TOPOLOGY_AUTO_TASK_HOOKS));
+  }
+  return ret;
+}

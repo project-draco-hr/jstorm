@@ -1,0 +1,9 @@
+{
+  if (root_id != null) {
+    return JStormDebugger.isDebug(root_id);
+  }
+  if (anchors != null) {
+    return JStormDebugger.isDebug(anchors);
+  }
+  return false;
+}

@@ -1,16 +1,4 @@
 {
   BatchTuple batchTuple=(BatchTuple)tuple;
-  if (eventSampler != null) {
-    Pair<Integer,Double> result=eventSampler.avgCheck(batchTuple.currBatchSize());
-    if (result != null) {
-      Double avgBatchSize=result.getSecond();
-      LOG.info(taskName + " batch average size is " + avgBatchSize);
-      if (avgBatchSize < BATCH_SIZE_THRESHOLD) {
-        LOG.info("Due to average size is small, so directly reset batch size as 1");
-        setBatchSize(1);
-      }
-      stopCheck();
-    }
-  }
   return serializer.serializeBatch(batchTuple);
 }

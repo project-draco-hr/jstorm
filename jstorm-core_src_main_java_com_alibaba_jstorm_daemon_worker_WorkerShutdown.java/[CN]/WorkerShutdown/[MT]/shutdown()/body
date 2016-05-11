@@ -8,6 +8,7 @@
   }
   AsyncLoopRunnable.getShutdown().set(true);
   threadPool.shutdown();
+  if (ConfigExtension.isOutworkerDump(conf))   workerDumpInfoOutput();
   for (  ShutdownableDameon task : shutdowntasks) {
     task.shutdown();
   }

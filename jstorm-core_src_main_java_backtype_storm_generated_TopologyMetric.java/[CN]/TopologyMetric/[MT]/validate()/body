@@ -1,21 +1,21 @@
 {
   if (!is_set_topologyMetric()) {
-    throw new TProtocolException("Required field 'topologyMetric' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'topologyMetric' is unset! Struct:" + toString());
   }
   if (!is_set_componentMetric()) {
-    throw new TProtocolException("Required field 'componentMetric' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'componentMetric' is unset! Struct:" + toString());
   }
   if (!is_set_workerMetric()) {
-    throw new TProtocolException("Required field 'workerMetric' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'workerMetric' is unset! Struct:" + toString());
   }
   if (!is_set_taskMetric()) {
-    throw new TProtocolException("Required field 'taskMetric' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'taskMetric' is unset! Struct:" + toString());
   }
   if (!is_set_streamMetric()) {
-    throw new TProtocolException("Required field 'streamMetric' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'streamMetric' is unset! Struct:" + toString());
   }
   if (!is_set_nettyMetric()) {
-    throw new TProtocolException("Required field 'nettyMetric' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'nettyMetric' is unset! Struct:" + toString());
   }
   if (topologyMetric != null) {
     topologyMetric.validate();

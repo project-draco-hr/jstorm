@@ -1,0 +1,11 @@
+{
+  byte[] bytes=null;
+  KryoTupleSerializer kryo=atomKryoSerializer.get();
+  if (kryo != null) {
+    bytes=kryo.serialize((TupleExt)tuple);
+  }
+ else {
+    LOG.warn("KryoTupleSerializer is null, so drop batchTuple...");
+  }
+  return bytes;
+}

@@ -1,0 +1,26 @@
+{
+  final long start=emitTimer.getTime();
+  java.util.List<Integer> out_tasks=null;
+  try {
+    if (out_task_id != null) {
+      out_tasks=sendTargets.get(out_task_id,out_stream_id,values,anchors,null);
+    }
+ else {
+      out_tasks=sendTargets.get(out_stream_id,values,anchors,null);
+    }
+    tryRotate();
+    for (    Integer t : out_tasks) {
+      MessageId msgid=getMessageId(anchors);
+      TupleImplExt tp=new TupleImplExt(topologyContext,values,task_id,out_stream_id,msgid);
+      tp.setTargetTaskId(t);
+      transferCtr(tp);
+    }
+  }
+ catch (  Exception e) {
+    LOG.error("bolt emit",e);
+  }
+ finally {
+    emitTimer.updateTime(start);
+  }
+  return out_tasks;
+}

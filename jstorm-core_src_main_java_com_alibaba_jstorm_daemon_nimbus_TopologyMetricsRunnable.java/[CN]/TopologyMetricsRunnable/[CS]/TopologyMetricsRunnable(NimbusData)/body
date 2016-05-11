@@ -40,16 +40,14 @@
  else {
         JStormUtils.sleepMs((60 - secOffset + offset) * 1000);
       }
-      LOG.info("cluster metrics force upload.");
+      LOG.debug("cluster metrics force upload.");
       mergeAndUploadClusterMetrics();
     }
   }
 ,5,60,TimeUnit.SECONDS);
   JStormMetrics.registerWorkerGauge(JStormMetrics.NIMBUS_METRIC_KEY,MetricDef.MEMORY_USED,new AsmGauge(new Gauge<Double>(){
     @Override public Double getValue(){
-      MemoryMXBean memoryMXBean=ManagementFactory.getMemoryMXBean();
-      MemoryUsage memoryUsage=memoryMXBean.getHeapMemoryUsage();
-      return (double)memoryUsage.getUsed();
+      return JStormUtils.getJVMHeapMemory();
     }
   }
 ));

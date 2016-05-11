@@ -1,0 +1,9 @@
+{
+  this.values=new ConcurrentSkipListMap<>();
+  this.lock=new ReentrantReadWriteLock();
+  this.alpha=alpha;
+  this.size=size;
+  this.count=new AtomicLong(0);
+  this.startTime=currentTimeInSeconds();
+  this.nextScaleTime=new AtomicLong(System.currentTimeMillis() + RESCALE_THRESHOLD);
+}

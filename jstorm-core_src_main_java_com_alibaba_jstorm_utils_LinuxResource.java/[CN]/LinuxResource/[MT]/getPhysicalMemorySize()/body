@@ -1,0 +1,4 @@
+{
+  readProcMemInfoFile();
+  return ramSize * 1024;
+}

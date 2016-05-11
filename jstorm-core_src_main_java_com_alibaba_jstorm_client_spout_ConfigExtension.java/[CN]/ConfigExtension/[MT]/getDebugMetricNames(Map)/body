@@ -1,7 +1,0 @@
-{
-  String metrics=(String)conf.get(TOPOLOGY_DEBUG_METRIC_NAMES);
-  if (metrics == null) {
-    return "";
-  }
-  return metrics;
-}

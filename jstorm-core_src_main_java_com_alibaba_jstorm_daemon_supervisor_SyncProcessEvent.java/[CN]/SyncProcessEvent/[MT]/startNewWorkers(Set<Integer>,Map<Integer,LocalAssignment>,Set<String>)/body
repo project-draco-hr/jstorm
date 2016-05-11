@@ -1,6 +1,6 @@
 {
   Map<Integer,LocalAssignment> newWorkers=JStormUtils.select_keys_pred(keepPorts,localAssignments);
-  Map<Integer,String> newWorkerIds=new HashMap<Integer,String>();
+  Map<Integer,String> newWorkerIds=new HashMap<>();
   for (  Entry<Integer,LocalAssignment> entry : newWorkers.entrySet()) {
     Integer port=entry.getKey();
     LocalAssignment assignment=entry.getValue();
@@ -19,13 +19,7 @@
     }
     StringBuilder sb=new StringBuilder();
     sb.append("Launching worker with assiangment ");
-    sb.append(assignment.toString());
-    sb.append(" for the supervisor ");
-    sb.append(supervisorId);
-    sb.append(" on port ");
-    sb.append(port);
-    sb.append(" with id ");
-    sb.append(workerId);
+    sb.append(assignment).append(" for the supervisor ").append(supervisorId).append(" on port ").append(port).append(" with id ").append(workerId);
     LOG.info(sb.toString());
     try {
       String clusterMode=StormConfig.cluster_mode(conf);
@@ -37,7 +31,7 @@
       }
     }
  catch (    Exception e) {
-      workerReportError.report(assignment.getTopologyId(),port,assignment.getTaskIds(),new String(JStormUtils.getErrorInfo(e)));
+      workerReportError.report(assignment.getTopologyId(),port,assignment.getTaskIds(),JStormUtils.getErrorInfo(e),ErrorConstants.CODE_WORKER_EX);
       String errorMsg="Failed to launchWorker workerId:" + workerId + ":"+ port;
       LOG.error(errorMsg,e);
       throw e;

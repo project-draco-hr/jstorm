@@ -1,6 +1,0 @@
-{
-  handleOneEvent((TaskMessage)event);
-  if (endOfBatch == true && isDirectSend == false) {
-    handleFinish();
-  }
-}

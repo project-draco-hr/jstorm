@@ -1,0 +1,3 @@
+Integer taskId
+String componentId
+Map conf

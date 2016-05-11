@@ -1,12 +1,23 @@
 {
   List<AsyncLoopThread> threads=new ArrayList<AsyncLoopThread>();
-  startDispatchThread();
+  AsyncLoopThread controlRvthread=startDispatchThread();
+  threads.add(controlRvthread);
   RefreshConnections refreshConn=makeRefreshConnections();
   AsyncLoopThread refreshconn=new AsyncLoopThread(refreshConn,false,Thread.MIN_PRIORITY,true);
   threads.add(refreshconn);
   RefreshActive refreshZkActive=new RefreshActive(workerData);
   AsyncLoopThread refreshzk=new AsyncLoopThread(refreshZkActive,false,Thread.MIN_PRIORITY,true);
   threads.add(refreshzk);
+  DrainerCtrlRunable drainerCtrlRunable;
+  boolean isTaskBatchTuple=ConfigExtension.isTaskBatchTuple(workerData.getStormConf());
+  if (isTaskBatchTuple) {
+    drainerCtrlRunable=new DrainerBatchCtrlRunable(workerData,MetricDef.BATCH_SEND_THREAD);
+  }
+ else {
+    drainerCtrlRunable=new DrainerCtrlRunable(workerData,MetricDef.SEND_THREAD);
+  }
+  AsyncLoopThread controlSendThread=new AsyncLoopThread(drainerCtrlRunable,false,Thread.MAX_PRIORITY,true);
+  threads.add(controlSendThread);
   AsyncLoopThread syncContainerHbThread=SyncContainerHb.mkWorkerInstance(workerData.getStormConf());
   if (syncContainerHbThread != null) {
     threads.add(syncContainerHbThread);

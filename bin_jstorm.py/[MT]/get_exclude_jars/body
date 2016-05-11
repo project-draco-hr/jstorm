@@ -1,0 +1,3 @@
+def get_exclude_jars():
+    global EXCLUDE_JARS
+    return (' -Dexclude.jars=' + ','.join(EXCLUDE_JARS))

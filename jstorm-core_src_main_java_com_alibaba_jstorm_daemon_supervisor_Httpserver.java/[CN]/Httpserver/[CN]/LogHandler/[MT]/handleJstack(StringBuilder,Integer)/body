@@ -1,0 +1,17 @@
+{
+  String cmd="jstack " + pid;
+  try {
+    LOG.info("Begin to execute " + cmd);
+    String output=JStormUtils.launchProcess(cmd,new HashMap<String,String>(),false);
+    sb.append(output);
+    LOG.info("Successfully get output of " + cmd);
+  }
+ catch (  IOException e) {
+    LOG.info("Failed to execute " + cmd,e);
+    sb.append("Failed to execute " + cmd);
+  }
+catch (  Exception e) {
+    LOG.error(e.getMessage(),e);
+    sb.append("Failed to execute " + cmd + ", "+ e.getCause());
+  }
+}

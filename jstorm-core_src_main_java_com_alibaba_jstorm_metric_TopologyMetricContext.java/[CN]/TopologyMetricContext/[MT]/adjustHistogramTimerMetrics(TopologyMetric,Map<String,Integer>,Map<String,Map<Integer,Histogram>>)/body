@@ -1,0 +1,10 @@
+{
+  resetPoints(tpMetric.get_taskMetric().get_metrics());
+  resetPoints(tpMetric.get_streamMetric().get_metrics());
+  resetPoints(tpMetric.get_nettyMetric().get_metrics());
+  resetPoints(tpMetric.get_workerMetric().get_metrics());
+  Map<String,Map<Integer,MetricSnapshot>> compMetrics=tpMetric.get_componentMetric().get_metrics();
+  Map<String,Map<Integer,MetricSnapshot>> topologyMetrics=tpMetric.get_topologyMetric().get_metrics();
+  adjustMetrics(compMetrics,metaCounters,histograms);
+  adjustMetrics(topologyMetrics,metaCounters,histograms);
+}

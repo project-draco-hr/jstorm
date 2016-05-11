@@ -1,0 +1,6 @@
+{
+  Map<String,String> policyReplaceMap=new HashMap<>();
+  String realClassPath=classpath + ":" + workerClassPath;
+  policyReplaceMap.put(SandBoxMaker.CLASS_PATH_KEY,realClassPath);
+  return sandBoxMaker.sandboxPolicy(workerId,policyReplaceMap);
+}

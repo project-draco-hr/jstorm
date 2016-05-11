@@ -20,9 +20,6 @@
  else         if (metricType == MetricType.HISTOGRAM) {
           v=metricSnapshot.get_mean();
         }
- else         if (metricType == MetricType.TIMER) {
-          v=metricSnapshot.get_mean();
-        }
  else {
           v=0;
         }

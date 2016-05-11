@@ -8,7 +8,7 @@
       if (localAssignment == null || zkAssignment == null)       continue;
       Assignment assignment=assignments.get(localAssignment.getTopologyId());
       if (localAssignment.getTopologyId().equals(zkAssignment.getTopologyId()) && assignment != null && assignment.isTopologyChange(localAssignment.getTimeStamp()))       if (ret.add(localAssignment.getTopologyId())) {
-        LOG.info("Topology-" + localAssignment.getTopologyId() + " has been updated. LocalTs="+ localAssignment.getTimeStamp()+ ", ZkTs="+ zkAssignment.getTimeStamp());
+        LOG.info("Topology " + localAssignment.getTopologyId() + " has been updated. LocalTs="+ localAssignment.getTimeStamp()+ ", ZkTs="+ zkAssignment.getTimeStamp());
       }
     }
   }

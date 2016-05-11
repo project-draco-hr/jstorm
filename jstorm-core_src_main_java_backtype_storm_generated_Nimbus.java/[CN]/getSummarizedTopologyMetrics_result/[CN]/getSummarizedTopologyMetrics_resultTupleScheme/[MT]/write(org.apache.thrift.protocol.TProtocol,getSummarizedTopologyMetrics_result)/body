@@ -8,8 +8,8 @@
   if (struct.is_set_success()) {
 {
       oprot.writeI32(struct.success.size());
-      for (      MetricInfo _iter270 : struct.success) {
-        _iter270.write(oprot);
+      for (      MetricInfo _iter262 : struct.success) {
+        _iter262.write(oprot);
       }
     }
   }

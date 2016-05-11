@@ -1,0 +1,25 @@
+{
+  Map<String,Object> ret=new HashMap<>();
+  int win=UIUtils.parseWindow(window);
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    TopologyInfo topologyInfo=client.getClient().getTopologyInfo(topology);
+    MetricInfo componentMetrics=topologyInfo.get_metrics().get_componentMetric();
+    ret.put("topologyId",topology);
+    ret.put("topologyName",topologyInfo.get_topology().get_name());
+    UIComponentMetric componentData=UIMetricUtils.getComponentMetric(componentMetrics,win,component,topologyInfo.get_components());
+    ret.put("componentMetrics",componentData);
+    List<TaskEntity> taskEntities=UIUtils.getTaskEntities(topologyInfo,component);
+    ret.put("taskStats",taskEntities);
+    MetricInfo taskMetrics=client.getClient().getTaskMetrics(topology,component);
+    List<UITaskMetric> taskData=UIMetricUtils.getTaskMetrics(taskMetrics,component,win);
+    ret.put("taskMetrics",taskData);
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    ret=UIUtils.exceptionJson(e);
+    LOG.error(e.getMessage(),e);
+  }
+  return ret;
+}

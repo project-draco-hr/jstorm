@@ -1,8 +1,0 @@
-{
-  List<WorkerAssignment> ret=new ArrayList<WorkerAssignment>();
-  if (conf.get(USE_USERDEFINE_ASSIGNMENT) == null)   return ret;
-  for (  String worker : (List<String>)conf.get(USE_USERDEFINE_ASSIGNMENT)) {
-    ret.add(WorkerAssignment.parseFromObj(Utils.from_json(worker)));
-  }
-  return ret;
-}

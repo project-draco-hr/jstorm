@@ -53,6 +53,7 @@ synchronized (data) {
     startEvent.timestamp=System.currentTimeMillis();
     startEvent.sampleRate=metricsSampleRate;
     this.data.getMetricRunnable().pushEvent(startEvent);
+    notifyTopologyActionListener(topologyName,"submitTopology");
   }
  catch (  FailedAssignTopologyException e) {
     StringBuilder sb=new StringBuilder();

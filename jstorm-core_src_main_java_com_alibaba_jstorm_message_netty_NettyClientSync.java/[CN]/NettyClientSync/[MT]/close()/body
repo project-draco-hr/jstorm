@@ -2,7 +2,7 @@
   LOG.info("Begin to close connection to {} and flush all data, batchQueue {}, disruptor {}",name,batchQueue.size(),disruptorQueue.population());
   sendAllData();
   disruptorQueue.haltWithInterrupt();
-  if (connectMyself == false) {
+  if (!connectMyself) {
     unregisterSyncMetrics();
   }
   super.close();

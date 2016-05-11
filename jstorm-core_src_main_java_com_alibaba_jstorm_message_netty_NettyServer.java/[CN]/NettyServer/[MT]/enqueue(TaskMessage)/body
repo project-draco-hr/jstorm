@@ -1,9 +1,19 @@
 {
-  int task=message.task();
-  DisruptorQueue queue=deserializeQueues.get(task);
-  if (queue == null) {
-    LOG.debug("Received invalid message directed at port " + task + ". Dropping...");
-    return;
+  short type=message.get_type();
+  if (type == 0) {
+    int task=message.task();
+    DisruptorQueue queue=deserializeQueues.get(task);
+    if (queue == null) {
+      LOG.warn("Received invalid message directed at port " + task + ". Dropping...");
+      return;
+    }
+    queue.publish(message.message());
   }
-  queue.publish(message.message());
+ else   if (type == 1) {
+    if (recvControlQueue == null) {
+      LOG.info("this worker's recvControlQueue is null, so  Dropping this control message");
+      return;
+    }
+    recvControlQueue.publish(message);
+  }
 }

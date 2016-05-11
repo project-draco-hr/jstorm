@@ -15,14 +15,14 @@
   tradeCustomer.setBuffer(buffer);
   tradeSum.addAndGet(trade.getValue());
   customerSum.addAndGet(customer.getValue());
-  collector.emit(new Values(tupleId,tradeCustomer),Long.valueOf(tupleId));
+  collector.emit(new Values(tupleId,tradeCustomer),tupleId);
   tupleId++;
   handleCounter.incrementAndGet();
   while (handleCounter.get() >= MAX_PENDING_COUNTER - 1) {
     try {
       Thread.sleep(1);
     }
- catch (    InterruptedException e) {
+ catch (    InterruptedException ignored) {
     }
   }
   tpsCounter.count();

@@ -1,0 +1,21 @@
+{
+  updateListener=new UpdateListener();
+  updateListener.registerUpdater(new UpdateListener.IUpdater(){
+    @Override public void update(    Map conf){
+      metricReporter.updateMetricConfig(conf);
+    }
+  }
+);
+  updateListener.registerUpdater(new UpdateListener.IUpdater(){
+    @Override public void update(    Map conf){
+      JStormDebugger.update(conf);
+    }
+  }
+);
+  updateListener.registerUpdater(new UpdateListener.IUpdater(){
+    @Override public void update(    Map conf){
+      LogUtils.update(conf);
+    }
+  }
+);
+}

@@ -1,4 +1,0 @@
-NimbusSummary ns
-int topology_num
-String cluster_name
-int port

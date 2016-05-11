@@ -5,7 +5,7 @@
     zkClusterState=new DistributedClusterState(conf);
     List<String> children=zkClusterState.get_children(path,false);
     if (children == null || children.isEmpty()) {
-      LOG.info("No children of " + path);
+      System.out.println("No children of " + path);
     }
  else {
       StringBuilder sb=new StringBuilder();
@@ -14,7 +14,7 @@
         sb.append(" " + str + ",");
       }
       sb.append("\n");
-      LOG.info(sb.toString());
+      System.out.println(sb.toString());
     }
   }
  catch (  Exception e) {

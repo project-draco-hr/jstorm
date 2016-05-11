@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseDouble(conf.get(TOPOLOGY_BACKPRESSURE_WATER_MARK_HIGH),0.8);
-}

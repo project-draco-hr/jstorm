@@ -1,0 +1,9 @@
+{
+  touchVersion(vs.createVersion());
+  touchVersion(vs.createVersion());
+  touchVersion(vs.createVersion());
+  touchVersion(vs.createVersion());
+  assertEquals(null,ls.get("c"));
+  ls.put("c",1);
+  assertEquals(1,ls.get("c"));
+}

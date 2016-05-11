@@ -37,12 +37,12 @@ break;
 case 4:
 if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
 {
-org.apache.thrift.protocol.TList _list162=iprot.readListBegin();
-struct.taskIds=new ArrayList<Integer>(_list162.size);
-int _elem163;
-for (int _i164=0; _i164 < _list162.size; ++_i164) {
-_elem163=iprot.readI32();
-struct.taskIds.add(_elem163);
+org.apache.thrift.protocol.TList _list154=iprot.readListBegin();
+struct.taskIds=new ArrayList<Integer>(_list154.size);
+int _elem155;
+for (int _i156=0; _i156 < _list154.size; ++_i156) {
+_elem155=iprot.readI32();
+struct.taskIds.add(_elem155);
 }
 iprot.readListEnd();
 }
@@ -55,13 +55,13 @@ break;
 case 5:
 if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
 {
-org.apache.thrift.protocol.TList _list165=iprot.readListBegin();
-struct.errors=new ArrayList<ErrorInfo>(_list165.size);
-ErrorInfo _elem166;
-for (int _i167=0; _i167 < _list165.size; ++_i167) {
-_elem166=new ErrorInfo();
-_elem166.read(iprot);
-struct.errors.add(_elem166);
+org.apache.thrift.protocol.TList _list157=iprot.readListBegin();
+struct.errors=new ArrayList<ErrorInfo>(_list157.size);
+ErrorInfo _elem158;
+for (int _i159=0; _i159 < _list157.size; ++_i159) {
+_elem158=new ErrorInfo();
+_elem158.read(iprot);
+struct.errors.add(_elem158);
 }
 iprot.readListEnd();
 }

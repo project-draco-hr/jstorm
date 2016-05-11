@@ -1,7 +1,0 @@
-{
-  List<String> ret=new ArrayList<String>();
-  for (  WorkerAssignment worker : userDefines) {
-    ret.add(Utils.to_json(worker));
-  }
-  conf.put(USE_USERDEFINE_ASSIGNMENT,ret);
-}

@@ -1,0 +1,5 @@
+{
+  if (outTasks.isEmpty()) {
+    forward(msgId);
+  }
+}

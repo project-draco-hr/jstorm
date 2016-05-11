@@ -1,0 +1,4 @@
+{
+  this.enabled.set(enabled);
+  return this;
+}

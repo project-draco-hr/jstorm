@@ -3,10 +3,10 @@
   lastTime=TimeUtils.current_time_secs();
   try {
     if (localAssignments == null) {
-      localAssignments=new HashMap<Integer,LocalAssignment>();
+      localAssignments=new HashMap<>();
     }
     LOG.debug("Assigned tasks: " + localAssignments);
-    Map<String,StateHeartbeat> localWorkerStats=null;
+    Map<String,StateHeartbeat> localWorkerStats;
     try {
       localWorkerStats=getLocalWorkerStats(conf,localState,localAssignments);
     }
@@ -15,7 +15,7 @@
       throw e;
     }
     LOG.debug("Allocated: " + localWorkerStats);
-    Map<String,Integer> taskCleaupTimeoutMap=null;
+    Map<String,Integer> taskCleaupTimeoutMap;
     Set<Integer> keepPorts=null;
     try {
       taskCleaupTimeoutMap=(Map<String,Integer>)localState.get(Common.LS_TASK_CLEANUP_TIMEOUT);

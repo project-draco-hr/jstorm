@@ -3,9 +3,9 @@ switch (event.getOpCode()) {
 case TimerConstants.ROTATING_MAP:
 {
       Map<Long,TupleInfo> timeoutMap=pending.rotate();
-      for (      Map.Entry<Long,TupleInfo> entry : timeoutMap.entrySet()) {
+      for (      java.util.Map.Entry<Long,TupleInfo> entry : timeoutMap.entrySet()) {
         TupleInfo tupleInfo=entry.getValue();
-        FailSpoutMsg fail=new FailSpoutMsg(entry.getKey(),spout,(TupleInfo)tupleInfo,task_stats,isDebug);
+        FailSpoutMsg fail=new FailSpoutMsg(entry.getKey(),spout,(TupleInfo)tupleInfo,task_stats);
         fail.run();
       }
       break;

@@ -1,0 +1,27 @@
+{
+  boolean isEnable=ConfigExtension.isProcessLauncherEnable(totalConf);
+  if (isEnable == false) {
+    return "";
+  }
+  String stormRoot=StormConfig.supervisor_stormdist_root(conf,topologyId);
+  String stormJar=StormConfig.stormjar_path(stormRoot);
+  StringBuilder sb=new StringBuilder();
+  sb.append(" java ");
+  sb.append(ConfigExtension.getProcessLauncherChildOpts(totalConf));
+  sb.append(getLogParameter(totalConf,stormHome,assignment.getTopologyName(),port));
+  sb.append(" -cp ");
+  sb.append(getClassPath(stormHome,totalConf));
+  if (ConfigExtension.isEnableTopologyClassLoader(totalConf)) {
+  }
+ else {
+    sb.append(":").append(stormJar);
+  }
+  sb.append(" ").append(ProcessLauncher.class.getName()).append(" ");
+  String launcherCmd=sb.toString();
+  if (ConfigExtension.getWorkerRedirectOutput(totalConf)) {
+    String outFile=getWorkerRedirectOutput(totalConf,assignment,port);
+    outFile="-Dlogfile.name=" + outFile + " ";
+    launcherCmd=launcherCmd.replaceAll("-Dlogfile\\.name=.*?\\s",outFile);
+  }
+  return launcherCmd;
+}

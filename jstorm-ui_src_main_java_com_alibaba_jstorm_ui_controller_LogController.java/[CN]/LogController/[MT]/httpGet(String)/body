@@ -1,0 +1,5 @@
+{
+  HttpGet get=new HttpGet(url);
+  HttpClient httpclient=HttpClientBuilder.create().build();
+  return httpclient.execute(get);
+}

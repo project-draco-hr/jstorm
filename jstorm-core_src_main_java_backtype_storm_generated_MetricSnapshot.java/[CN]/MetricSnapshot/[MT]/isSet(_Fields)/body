@@ -41,6 +41,8 @@ case STDDEV:
 return is_set_stddev();
 case POINTS:
 return is_set_points();
+case POINT_SIZE:
+return is_set_pointSize();
 }
 throw new IllegalStateException();
 }

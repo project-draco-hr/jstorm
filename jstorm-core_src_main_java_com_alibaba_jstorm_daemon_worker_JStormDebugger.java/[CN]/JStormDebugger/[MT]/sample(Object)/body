@@ -1,0 +1,4 @@
+{
+  if (Double.compare(sampleRate,1.0d) >= 0)   return true;
+  return id != null && id instanceof Long && sample((Long)id);
+}

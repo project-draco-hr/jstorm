@@ -1,8 +1,8 @@
 {
   if (!is_set_taskId()) {
-    throw new TProtocolException("Required field 'taskId' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'taskId' is unset! Struct:" + toString());
   }
   if (!is_set_component()) {
-    throw new TProtocolException("Required field 'component' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'component' is unset! Struct:" + toString());
   }
 }

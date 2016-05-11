@@ -1,3 +1,0 @@
-I iface
-getPagingNettyMetrics_args args
-AsyncMethodCallback<MetricInfo> resultHandler

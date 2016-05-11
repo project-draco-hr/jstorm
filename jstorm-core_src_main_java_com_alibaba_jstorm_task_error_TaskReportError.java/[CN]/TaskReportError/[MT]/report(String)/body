@@ -1,7 +1,7 @@
 {
   LOG.error("Report error to /ZK/taskerrors/" + topology_id + "/"+ task_id+ ": "+ error);
   try {
-    zkCluster.report_task_error(topology_id,task_id,error,null);
+    zkCluster.report_task_error(topology_id,task_id,error,ErrorConstants.ERROR,ErrorConstants.CODE_USER);
   }
  catch (  Exception e) {
     LOG.error("Failed update error to /ZK/taskerrors/" + topology_id + "/"+ task_id+ "\n",e);

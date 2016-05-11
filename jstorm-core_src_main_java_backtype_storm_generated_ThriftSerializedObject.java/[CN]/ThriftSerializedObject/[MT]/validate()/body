@@ -1,8 +1,8 @@
 {
   if (!is_set_name()) {
-    throw new TProtocolException("Required field 'name' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'name' is unset! Struct:" + toString());
   }
   if (!is_set_bits()) {
-    throw new TProtocolException("Required field 'bits' is unset! Struct:" + toString());
+    throw new org.apache.thrift.protocol.TProtocolException("Required field 'bits' is unset! Struct:" + toString());
   }
 }

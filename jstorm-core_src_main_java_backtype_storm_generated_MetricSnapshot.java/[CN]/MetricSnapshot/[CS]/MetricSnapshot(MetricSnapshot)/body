@@ -19,7 +19,7 @@
   this.p999=other.p999;
   this.stddev=other.stddev;
   if (other.is_set_points()) {
-    List<Long> __this__points=new ArrayList<Long>(other.points);
-    this.points=__this__points;
+    this.points=org.apache.thrift.TBaseHelper.copyBinary(other.points);
   }
+  this.pointSize=other.pointSize;
 }

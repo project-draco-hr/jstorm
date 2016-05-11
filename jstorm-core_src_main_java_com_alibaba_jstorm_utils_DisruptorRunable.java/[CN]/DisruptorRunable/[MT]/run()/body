@@ -1,6 +1,5 @@
 {
   LOG.info("Successfully start thread " + idStr);
-  queue.consumerStarted();
   while (!shutdown.get()) {
     queue.consumeBatchWhenAvailable(this);
   }

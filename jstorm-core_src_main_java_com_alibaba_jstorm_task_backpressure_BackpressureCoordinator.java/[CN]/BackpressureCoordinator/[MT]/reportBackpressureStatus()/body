@@ -10,7 +10,7 @@
       stringBuilder.append("opened: ");
       stringBuilder.append(underTasks);
     }
-    zkCluster.report_task_error(context.getTopologyId(),context.getThisTaskId(),stringBuilder.toString(),BACKPRESSURE_TAG);
+    zkCluster.report_task_error(context.getTopologyId(),context.getThisTaskId(),stringBuilder.toString(),ErrorConstants.WARN,ErrorConstants.CODE_BP,ErrorConstants.DURATION_SECS_DEFAULT,BACKPRESSURE_TAG);
     zkCluster.set_backpressure_info(context.getTopologyId(),SourceTobackpressureInfo);
     LOG.info(stringBuilder.toString());
   }

@@ -1,0 +1,21 @@
+{
+  Map<List<Integer>,List<MsgInfo>> outTasks=new HashMap<List<Integer>,List<MsgInfo>>();
+  Map<String,MkGrouper> componentCrouping=streamComponentgrouper.get(stream);
+  if (componentCrouping == null) {
+    LOG.debug("Failed to get Grouper of " + stream + " in "+ debugIdStr);
+    return outTasks;
+  }
+  for (  Entry<String,MkGrouper> ee : componentCrouping.entrySet()) {
+    MkGrouper g=ee.getValue();
+    if (GrouperType.direct.equals(g.gettype())) {
+      throw new IllegalArgumentException("Cannot do regular emit to direct stream");
+    }
+    outTasks.putAll(g.grouperBatch(batch));
+  }
+  int num_out_tasks=0;
+  for (  Entry<List<Integer>,List<MsgInfo>> entry : outTasks.entrySet()) {
+    num_out_tasks+=entry.getKey().size() * entry.getValue().size();
+  }
+  taskStats.send_tuple(stream,num_out_tasks);
+  return outTasks;
+}

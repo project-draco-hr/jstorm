@@ -1,9 +1,3 @@
 {
-  if (name.startsWith("org.apache.log4j")) {
-    return true;
-  }
- else   if (name.startsWith("org.slf4j")) {
-    return true;
-  }
-  return false;
+  return name.startsWith("org.apache.log4j") || name.startsWith("org.slf4j");
 }

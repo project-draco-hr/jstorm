@@ -1,5 +1,5 @@
 {
-  if (test || !enableMetrics) {
+  if (test || !JStormMetrics.enabled) {
     return new HashMap<>();
   }
   try {

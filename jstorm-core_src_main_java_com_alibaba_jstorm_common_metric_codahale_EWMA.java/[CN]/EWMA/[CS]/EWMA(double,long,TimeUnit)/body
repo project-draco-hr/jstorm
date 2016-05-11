@@ -1,0 +1,4 @@
+{
+  this.interval=intervalUnit.toMillis(interval);
+  this.alpha=alpha;
+}

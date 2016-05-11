@@ -1,6 +1,6 @@
 {
   LOG.info("Close netty connection to {}",name());
-  if (being_closed.compareAndSet(false,true) == false) {
+  if (!being_closed.compareAndSet(false,true)) {
     LOG.info("Netty client has been closed.");
     return;
   }

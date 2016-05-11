@@ -1,0 +1,5 @@
+{
+  short code=this.fetchResponseCode;
+  this.fetchResponseCode=0;
+  return code;
+}

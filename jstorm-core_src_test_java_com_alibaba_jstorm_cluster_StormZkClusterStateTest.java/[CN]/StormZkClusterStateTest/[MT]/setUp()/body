@@ -1,0 +1,5 @@
+{
+  zookeeper=LocalUtils.startLocalZookeeper(LocalUtils.getTmpDir());
+  Map conf=LocalUtils.getLocalConf(zookeeper.getZooKeeperServer().getClientPort());
+  stormClusterState=(StormZkClusterState)Cluster.mk_storm_cluster_state(conf);
+}

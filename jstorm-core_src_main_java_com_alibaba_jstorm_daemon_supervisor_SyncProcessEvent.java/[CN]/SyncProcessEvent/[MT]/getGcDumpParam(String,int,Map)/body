@@ -1,0 +1,18 @@
+{
+  Date now=new Date();
+  String nowStr=TimeFormat.getSecond(now);
+  String topologyName=Common.getTopologyNameById(topologyId);
+  String logPath=JStormUtils.getLogDir();
+  String gcPath=PathUtils.join(logPath,topologyName);
+  try {
+    FileUtils.forceMkdir(new File(gcPath));
+  }
+ catch (  Exception ignored) {
+  }
+  String gcLogFile=PathUtils.join(logPath,topologyName,topologyName + "-worker-" + port+ "-gc.log");
+  String dumpFile=PathUtils.join(logPath,topologyName,"java-" + topologyId + "-"+ nowStr+ ".hprof");
+  PathUtils.mv(gcLogFile,gcLogFile + ".old");
+  StringBuilder gc=new StringBuilder(256);
+  gc.append(" -Xloggc:").append(gcLogFile).append(" -verbose:gc -XX:+PrintGCDateStamps -XX:+PrintGCDetails").append(" -XX:HeapDumpPath=").append(dumpFile).append(" ");
+  return gc.toString().replace("/./","/");
+}

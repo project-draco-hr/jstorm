@@ -18,7 +18,7 @@
       }
     }
  else {
-      LOG.info(" node of " + rootDir + assignmentPath+ " isn't existed ");
+      System.out.println(" node of " + rootDir + assignmentPath+ " isn't existed ");
     }
     if (zkClusterState.node_existed(stormBase,false)) {
       try {
@@ -29,7 +29,7 @@
       }
     }
  else {
-      LOG.info(" node of " + rootDir + stormBase+ " isn't existed ");
+      System.out.println(" node of " + rootDir + stormBase+ " isn't existed ");
     }
     if (zkClusterState.node_existed(taskbeats,false)) {
       try {
@@ -40,7 +40,7 @@
       }
     }
  else {
-      LOG.info(" node of " + rootDir + taskbeats+ " isn't existed ");
+      System.out.println(" node of " + rootDir + taskbeats+ " isn't existed ");
     }
     if (zkClusterState.node_existed(tasks,false)) {
       try {
@@ -51,7 +51,7 @@
       }
     }
  else {
-      LOG.info(" node of " + rootDir + tasks+ " isn't existed ");
+      System.out.println(" node of " + rootDir + tasks+ " isn't existed ");
     }
     if (zkClusterState.node_existed(taskerrors,false)) {
       try {
@@ -62,7 +62,7 @@
       }
     }
  else {
-      LOG.info(" node of " + rootDir + taskerrors+ " isn't existed ");
+      System.out.println(" node of " + rootDir + taskerrors+ " isn't existed ");
     }
     if (zkClusterState.node_existed(monitor,false)) {
       try {
@@ -73,7 +73,7 @@
       }
     }
  else {
-      LOG.info(" node of " + rootDir + monitor+ " isn't existed ");
+      System.out.println(" node of " + rootDir + monitor+ " isn't existed ");
     }
   }
  catch (  Exception e) {

@@ -1,0 +1,3 @@
+int signalNumber
+Runnable callback
+boolean replace

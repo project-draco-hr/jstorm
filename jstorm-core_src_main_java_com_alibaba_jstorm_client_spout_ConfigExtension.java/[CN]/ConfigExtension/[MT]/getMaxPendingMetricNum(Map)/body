@@ -1,3 +1,0 @@
-{
-  return JStormUtils.parseInt(conf.get(MAX_PENDING_METRIC_NUM),200);
-}

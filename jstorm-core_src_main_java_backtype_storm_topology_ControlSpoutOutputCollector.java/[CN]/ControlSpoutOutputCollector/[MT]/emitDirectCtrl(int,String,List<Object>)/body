@@ -1,0 +1,3 @@
+{
+  emitDirectCtrl(taskId,streamId,tuple,null);
+}

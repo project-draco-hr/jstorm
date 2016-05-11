@@ -1,0 +1,6 @@
+{
+  UIUtils.readUiConfig();
+  Map<String,List<ClusterEntity>> ret=new HashMap<>();
+  ret.put("clusters",new ArrayList<>(UIUtils.clustersCache.values()));
+  return ret;
+}

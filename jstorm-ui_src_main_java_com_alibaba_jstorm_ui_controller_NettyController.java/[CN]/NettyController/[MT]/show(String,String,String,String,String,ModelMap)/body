@@ -1,4 +1,5 @@
 {
+  clusterName=StringEscapeUtils.escapeHtml(clusterName);
   long start=System.currentTimeMillis();
   host=NetWorkUtils.host2Ip(host);
   int window=UIUtils.parseWindow(win);

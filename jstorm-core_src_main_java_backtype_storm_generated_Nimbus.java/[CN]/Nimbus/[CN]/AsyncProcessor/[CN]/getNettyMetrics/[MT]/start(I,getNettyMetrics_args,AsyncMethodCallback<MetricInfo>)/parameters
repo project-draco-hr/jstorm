@@ -1,3 +1,0 @@
-I iface
-getNettyMetrics_args args
-AsyncMethodCallback<MetricInfo> resultHandler

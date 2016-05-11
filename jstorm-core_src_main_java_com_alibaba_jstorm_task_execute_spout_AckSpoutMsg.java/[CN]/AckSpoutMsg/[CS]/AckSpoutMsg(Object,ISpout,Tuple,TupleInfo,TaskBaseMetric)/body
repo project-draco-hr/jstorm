@@ -1,0 +1,10 @@
+{
+  this.id=id;
+  this.task_stats=_task_stats;
+  this.spout=_spout;
+  this.msgId=tupleInfo.getMessageId();
+  this.stream=tupleInfo.getStream();
+  this.values=tupleInfo.getValues();
+  this.tuple=tuple;
+  this.tupleInfo=tupleInfo;
+}

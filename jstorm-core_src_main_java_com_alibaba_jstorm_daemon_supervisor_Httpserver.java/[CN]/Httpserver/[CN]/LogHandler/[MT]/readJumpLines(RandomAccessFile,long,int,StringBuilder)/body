@@ -1,0 +1,14 @@
+{
+  try {
+    randomAccessFile.seek(pos);
+    while (lines-- > 0) {
+      String line=randomAccessFile.readLine();
+      if (line != null) {
+        matchContent.append(line).append("\n");
+      }
+    }
+  }
+ catch (  IOException e) {
+    e.printStackTrace();
+  }
+}

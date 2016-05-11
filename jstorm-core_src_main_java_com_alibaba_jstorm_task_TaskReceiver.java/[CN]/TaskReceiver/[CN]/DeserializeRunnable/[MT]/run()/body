@@ -1,12 +1,11 @@
 {
-  deserializeQueue.consumerStarted();
   LOG.info("Successfully start recvThread of " + idStr);
-  while (taskStatus.isShutdown() == false) {
+  while (!taskStatus.isShutdown()) {
     try {
       deserializeQueue.consumeBatchWhenAvailable(this);
     }
  catch (    Throwable e) {
-      if (taskStatus.isShutdown() == false) {
+      if (!taskStatus.isShutdown()) {
         LOG.error("Unknow exception ",e);
       }
     }

@@ -1,0 +1,4 @@
+LocalAssignment assignment
+Map totalConf
+String topologyId
+Integer port

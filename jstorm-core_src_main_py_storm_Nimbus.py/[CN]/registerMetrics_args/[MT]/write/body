@@ -10,8 +10,8 @@ def write(self, oprot):
     if (self.metrics is not None):
         oprot.writeFieldBegin('metrics', TType.SET, 2)
         oprot.writeSetBegin(TType.STRING, len(self.metrics))
-        for iter212 in self.metrics:
-            oprot.writeString(iter212.encode('utf-8'))
+        for iter205 in self.metrics:
+            oprot.writeString(iter205.encode('utf-8'))
         oprot.writeSetEnd()
         oprot.writeFieldEnd()
     oprot.writeFieldStop()

@@ -1,0 +1,8 @@
+{
+  if (scriptDir == null) {
+    LOG.warn("jstorm machine resource check script directory is not configured, please check .");
+    return null;
+  }
+  File parentFile=new File(scriptDir);
+  return getChildLlist(parentFile);
+}

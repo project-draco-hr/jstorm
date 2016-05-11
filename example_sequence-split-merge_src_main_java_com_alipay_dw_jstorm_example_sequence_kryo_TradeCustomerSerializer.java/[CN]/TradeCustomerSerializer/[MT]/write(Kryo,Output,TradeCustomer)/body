@@ -1,0 +1,6 @@
+{
+  kryo.writeObject(output,inner.getCustomer());
+  kryo.writeObject(output,inner.getTrade());
+  output.writeLong(inner.getTimestamp());
+  output.writeString(inner.getBuffer());
+}

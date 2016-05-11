@@ -1,0 +1,7 @@
+String id
+String name
+String status
+int uptimeSeconds
+int tasksTotal
+int workersTotal
+String errorInfo

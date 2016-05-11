@@ -1,0 +1,7 @@
+{
+  this.jiffyLengthInMillis=BigInteger.valueOf(jiffyLengthInMillis);
+  this.cpuUsage=-1;
+  this.sampleTime=-1;
+  this.lastSampleTime=-1;
+  this.MINIMUM_UPDATE_INTERVAL=10 * jiffyLengthInMillis;
+}

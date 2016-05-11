@@ -1,5 +1,5 @@
 Map conf
-IContext sharedcontext
+IContext sharedContext
 String topologyId
 String supervisorId
 Integer port

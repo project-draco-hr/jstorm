@@ -1,0 +1,14 @@
+{
+  StringBuilder sb=new StringBuilder();
+  if (StringUtils.isBlank((String)totalConf.get(Config.TOPOLOGY_CLASSPATH)) == false) {
+    sb.append(totalConf.get(Config.TOPOLOGY_CLASSPATH)).append(":");
+  }
+  List<String> otherLibs=(List<String>)totalConf.get(GenericOptionsParser.TOPOLOGY_LIB_NAME);
+  if (otherLibs != null) {
+    for (    String libName : otherLibs) {
+      sb.append(StormConfig.stormlib_path(stormRoot,libName)).append(":");
+    }
+  }
+  sb.append(stormJar);
+  return sb.toString();
+}

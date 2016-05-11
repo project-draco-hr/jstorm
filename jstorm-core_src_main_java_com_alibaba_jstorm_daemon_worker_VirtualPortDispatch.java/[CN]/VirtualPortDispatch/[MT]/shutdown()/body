@@ -1,6 +1,0 @@
-{
-  super.shutdown();
-  LOG.info("Begin to shutdown VirtualPortDispatch");
-  shutdownRecv();
-  LOG.info("Successfully shudown VirtualPortDispatch");
-}

@@ -1,0 +1,4 @@
+{
+  this.reservoir=reservoir;
+  this.count=new LongAdder();
+}

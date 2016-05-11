@@ -1,0 +1,37 @@
+{
+  Map<String,Object> ret=new HashMap<>();
+  int win=UIUtils.parseWindow(window);
+  NimbusClient client=null;
+  try {
+    client=NimbusClientManager.getNimbusClient(clusterName);
+    TopologyInfo topologyInfo=client.getClient().getTopologyInfo(topology);
+    TopologySummary topologySummary=topologyInfo.get_topology();
+    ret.put("id",topologySummary.get_id());
+    ret.put("name",topologySummary.get_name());
+    ret.put("uptime",UIUtils.prettyUptime(topologySummary.get_uptimeSecs()));
+    ret.put("uptimeSeconds",topologySummary.get_uptimeSecs());
+    ret.put("status",topologySummary.get_status());
+    ret.put("tasksTotal",topologySummary.get_numTasks());
+    ret.put("workersTotal",topologySummary.get_numWorkers());
+    ret.put("windowHint",AsmWindow.win2str(win));
+    MetricInfo topologyMetrics=topologyInfo.get_metrics().get_topologyMetric();
+    UISummaryMetric topologyData=UIMetricUtils.getSummaryMetrics(topologyMetrics,win);
+    ret.put("topologyMetrics",topologyData);
+    MetricInfo componentMetrics=topologyInfo.get_metrics().get_componentMetric();
+    List<UIUserDefinedMetric> userDefinedMetrics=new ArrayList<>();
+    List<UIComponentMetric> componentData=UIMetricUtils.getComponentMetrics(componentMetrics,win,topologyInfo.get_components(),userDefinedMetrics);
+    ret.put("componentMetrics",componentData);
+    ret.put("userDefinedMetrics",userDefinedMetrics);
+    MetricInfo workerMetrics=topologyInfo.get_metrics().get_workerMetric();
+    List<UIWorkerMetric> workerData=UIMetricUtils.getWorkerMetrics(workerMetrics,topology,win);
+    ret.put("workerMetrics",workerData);
+    List<TaskEntity> taskData=UIUtils.getTaskEntities(topologyInfo);
+    ret.put("taskStats",taskData);
+  }
+ catch (  Exception e) {
+    NimbusClientManager.removeClient(clusterName);
+    ret=UIUtils.exceptionJson(e);
+    LOG.error(e.getMessage(),e);
+  }
+  return ret;
+}

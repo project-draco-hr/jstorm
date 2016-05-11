@@ -1,0 +1,15 @@
+{
+  if (start > 0) {
+    AsmMetric existingMetric=findMetric(streamId,name,MetricType.HISTOGRAM,mergeTopology);
+    if (existingMetric instanceof AsmHistogram) {
+      AsmHistogram histogram=(AsmHistogram)existingMetric;
+      if (histogram.okToUpdate(end)) {
+        long elapsed=(end - start) * TimeUtils.US_PER_MS;
+        if (elapsed >= 0) {
+          histogram.update(elapsed);
+          histogram.setLastUpdateTime(end);
+        }
+      }
+    }
+  }
+}

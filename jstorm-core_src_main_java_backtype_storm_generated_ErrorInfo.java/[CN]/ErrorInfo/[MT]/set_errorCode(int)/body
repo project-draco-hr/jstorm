@@ -1,0 +1,4 @@
+{
+  this.errorCode=errorCode;
+  set_errorCode_isSet(true);
+}

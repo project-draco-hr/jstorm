@@ -4,9 +4,9 @@
     String oldWorkerIds=portToWorkerId.get(entry.getKey());
     if (oldWorkerIds != null) {
       workerIdToStartTimeAndPort.remove(oldWorkerIds);
-      LOG.info("exit port is still occupied by old wokerId, so remove unuseful " + oldWorkerIds + " form workerIdToStartTimeAndPort");
+      LOG.info("exit port is still occupied by old workerId, so remove useless " + oldWorkerIds + " form workerIdToStartTimeAndPort");
     }
     portToWorkerId.put(entry.getKey(),entry.getValue());
-    workerIdToStartTimeAndPort.put(entry.getValue(),new Pair<Integer,Integer>(startTime,entry.getKey()));
+    workerIdToStartTimeAndPort.put(entry.getValue(),new Pair<>(startTime,entry.getKey()));
   }
 }

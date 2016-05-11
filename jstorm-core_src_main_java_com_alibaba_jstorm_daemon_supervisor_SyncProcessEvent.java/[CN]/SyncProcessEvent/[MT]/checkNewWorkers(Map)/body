@@ -1,5 +1,5 @@
 {
-  Set<String> workers=new HashSet<String>();
+  Set<String> workers=new HashSet<>();
   for (  Entry<String,Pair<Integer,Integer>> entry : workerIdToStartTimeAndPort.entrySet()) {
     String workerId=entry.getKey();
     int startTime=entry.getValue().getFirst();

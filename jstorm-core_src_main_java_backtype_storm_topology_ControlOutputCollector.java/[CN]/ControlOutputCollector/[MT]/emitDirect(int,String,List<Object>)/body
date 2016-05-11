@@ -1,0 +1,3 @@
+{
+  out.emitDirect(taskId,streamId,(List)null,tuple);
+}

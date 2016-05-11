@@ -1,5 +1,5 @@
 {
-  long start=System.nanoTime();
+  long start=enableNettyMetrics ? sendTimer.getTime() : 0L;
   try {
     disruptorQueue.consumeBatch(this);
     MessageBatch batch=batchQueue.poll();
@@ -9,7 +9,7 @@
         LOG.info("No channel {} to flush all data",name);
         return;
       }
- else       if (channel.isWritable() == false) {
+ else       if (!channel.isWritable()) {
         LOG.info("Channel {} is no writable",name);
         return;
       }
@@ -23,9 +23,8 @@
     JStormUtils.halt_process(-1,err);
   }
  finally {
-    long end=System.nanoTime();
-    if (sendTimer != null) {
-      sendTimer.update((end - start) / TimeUtils.NS_PER_US);
+    if (sendTimer != null && enableNettyMetrics) {
+      sendTimer.updateTime(start);
     }
   }
 }

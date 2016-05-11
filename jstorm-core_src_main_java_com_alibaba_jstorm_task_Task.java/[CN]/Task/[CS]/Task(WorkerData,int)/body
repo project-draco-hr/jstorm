@@ -1,5 +1,5 @@
 {
-  openOrPrepareWasCalled=new Atom(Boolean.valueOf(false));
+  openOrPrepareWasCalled=new Atom(false);
   this.workerData=workerData;
   this.topologyContext=workerData.getContextMaker().makeTopologyContext(workerData.getSysTopology(),taskId,openOrPrepareWasCalled);
   this.userContext=workerData.getContextMaker().makeTopologyContext(workerData.getRawTopology(),taskId,openOrPrepareWasCalled);
@@ -9,11 +9,17 @@
   this.taskStatus=new TaskStatus();
   this.innerTaskTransfer=workerData.getInnerTaskTransfer();
   this.deserializeQueues=workerData.getDeserializeQueues();
+  this.controlQueues=workerData.getControlQueues();
   this.topologyId=workerData.getTopologyId();
   this.context=workerData.getContext();
   this.workHalt=workerData.getWorkHalt();
   this.zkCluster=workerData.getZkCluster();
-  this.taskStats=new TaskBaseMetric(topologyId,componentId,taskId,ConfigExtension.isEnableMetrics(workerData.getStormConf()));
+  this.taskStats=new TaskBaseMetric(topologyId,componentId,taskId);
+  List<String> listHooks=Config.getTopologyAutoTaskHooks(stormConf);
+  for (  String hook : listHooks) {
+    ITaskHook iTaskHook=(ITaskHook)Utils.newInstance(hook);
+    userContext.addTaskHook(iTaskHook);
+  }
   LOG.info("Begin to deserialize taskObj " + componentId + ":"+ this.taskId);
   WorkerClassLoader.switchThreadContext();
   this.taskObj=Common.get_task_object(topologyContext.getRawTopology(),componentId,WorkerClassLoader.getInstance());

@@ -1,3 +1,0 @@
-{
-  super(workerData.getSendingQueue(),MetricDef.BATCH_DRAINER_THREAD);
-}

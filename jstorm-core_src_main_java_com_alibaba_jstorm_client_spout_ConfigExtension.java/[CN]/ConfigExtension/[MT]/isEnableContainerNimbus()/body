@@ -1,9 +1,0 @@
-{
-  String path=System.getenv(CONTAINER_NIMBUS_HEARTBEAT);
-  if (StringUtils.isBlank(path)) {
-    return false;
-  }
- else {
-    return true;
-  }
-}

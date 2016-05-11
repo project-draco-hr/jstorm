@@ -1,0 +1,6 @@
+{
+  signalThread=new Thread(new SignalRunnable());
+  signalThread.setDaemon(true);
+  signalThread.setName("SignalRunnable");
+  signalThread.start();
+}

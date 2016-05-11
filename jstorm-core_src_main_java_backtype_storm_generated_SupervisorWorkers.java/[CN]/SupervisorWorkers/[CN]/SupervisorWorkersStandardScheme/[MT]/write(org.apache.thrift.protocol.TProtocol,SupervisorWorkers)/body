@@ -10,8 +10,8 @@
     oprot.writeFieldBegin(WORKERS_FIELD_DESC);
 {
       oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT,struct.workers.size()));
-      for (      WorkerSummary _iter151 : struct.workers) {
-        _iter151.write(oprot);
+      for (      WorkerSummary _iter143 : struct.workers) {
+        _iter143.write(oprot);
       }
       oprot.writeListEnd();
     }
@@ -21,9 +21,9 @@
     oprot.writeFieldBegin(WORKER_METRIC_FIELD_DESC);
 {
       oprot.writeMapBegin(new org.apache.thrift.protocol.TMap(org.apache.thrift.protocol.TType.STRING,org.apache.thrift.protocol.TType.STRUCT,struct.workerMetric.size()));
-      for (      Map.Entry<String,MetricInfo> _iter152 : struct.workerMetric.entrySet()) {
-        oprot.writeString(_iter152.getKey());
-        _iter152.getValue().write(oprot);
+      for (      Map.Entry<String,MetricInfo> _iter144 : struct.workerMetric.entrySet()) {
+        oprot.writeString(_iter144.getKey());
+        _iter144.getValue().write(oprot);
       }
       oprot.writeMapEnd();
     }

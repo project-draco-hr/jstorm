@@ -1,5 +1,5 @@
 {
-  byte[] filesJson="Failed to get file list".getBytes();
+  byte[] filesJson;
   try {
     String dir=paramMap.get(HttpserverUtils.HTTPSERVER_LOGVIEW_PARAM_DIR);
     filesJson=getJSonFiles(dir);
@@ -9,8 +9,5 @@
     handlFailure(t,"Failed to get file list");
     return;
   }
-  t.sendResponseHeaders(HttpURLConnection.HTTP_OK,filesJson.length);
-  OutputStream os=t.getResponseBody();
-  os.write(filesJson);
-  os.close();
+  sendResponse(t,HttpURLConnection.HTTP_OK,filesJson);
 }

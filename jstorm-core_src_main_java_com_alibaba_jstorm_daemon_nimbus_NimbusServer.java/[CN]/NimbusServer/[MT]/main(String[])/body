@@ -1,4 +1,5 @@
 {
+  Thread.setDefaultUncaughtExceptionHandler(new DefaultUncaughtExceptionHandler());
   @SuppressWarnings("rawtypes") Map config=Utils.readStormConfig();
   JStormServerUtils.startTaobaoJvmMonitor();
   NimbusServer instance=new NimbusServer();

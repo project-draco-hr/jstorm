@@ -1,0 +1,16 @@
+{
+  LOG.info("Start");
+  while (isRunning) {
+    Signal signal=null;
+    try {
+      signal=waitingSignals.take();
+      if (signal != null) {
+        handle(signal);
+      }
+    }
+ catch (    Throwable e) {
+      LOG.error("Failed to handle " + e.getCause(),e);
+    }
+  }
+  LOG.info("End");
+}

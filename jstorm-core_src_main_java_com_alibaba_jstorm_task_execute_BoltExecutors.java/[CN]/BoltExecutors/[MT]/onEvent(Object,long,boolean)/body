@@ -2,15 +2,13 @@
   if (event == null) {
     return;
   }
-  long start=System.nanoTime();
+  long start=System.currentTimeMillis();
   try {
     if (event instanceof Tuple) {
-      processControlEvent();
       processTupleEvent((Tuple)event);
     }
  else     if (event instanceof BatchTuple) {
       for (      Tuple tuple : ((BatchTuple)event).getTuples()) {
-        processControlEvent();
         processTupleEvent((Tuple)tuple);
       }
     }
@@ -22,8 +20,8 @@
     }
   }
   finally {
-    long end=System.nanoTime();
-    exeTime=(end - start) / TimeUtils.NS_PER_US;
-    boltExeTimer.update(exeTime);
+    if (JStormMetrics.enabled) {
+      exeTime=System.currentTimeMillis() - start;
+    }
   }
 }

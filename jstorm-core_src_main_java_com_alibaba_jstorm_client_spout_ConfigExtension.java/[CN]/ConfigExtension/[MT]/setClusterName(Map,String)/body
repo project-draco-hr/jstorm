@@ -1,3 +1,0 @@
-{
-  conf.put(CLUSTER_NAME,clusterName);
-}

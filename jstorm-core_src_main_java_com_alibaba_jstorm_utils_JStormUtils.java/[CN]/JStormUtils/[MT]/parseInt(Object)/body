@@ -7,7 +7,7 @@
   }
  else   if (o instanceof Long) {
     long value=(Long)o;
-    return Integer.valueOf((int)value);
+    return (int)value;
   }
  else   if (o instanceof Integer) {
     return (Integer)o;

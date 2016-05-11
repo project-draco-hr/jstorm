@@ -2,4 +2,6 @@
   TTupleProtocol oprot=(TTupleProtocol)prot;
   oprot.writeString(struct.error);
   oprot.writeI32(struct.errorTimeSecs);
+  oprot.writeString(struct.errorLevel);
+  oprot.writeI32(struct.errorCode);
 }
