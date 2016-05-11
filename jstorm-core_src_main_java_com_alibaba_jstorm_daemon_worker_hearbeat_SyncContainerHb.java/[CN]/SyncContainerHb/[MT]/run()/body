@@ -1,4 +1,4 @@
 {
   handleWriteDir();
-  handlReadDir();
+  handleReadDir();
 }
