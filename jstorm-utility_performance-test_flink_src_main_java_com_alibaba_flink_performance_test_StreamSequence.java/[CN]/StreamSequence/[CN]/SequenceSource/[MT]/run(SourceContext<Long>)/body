@@ -1,0 +1,9 @@
+{
+  while (active) {
+    int sendNum=sendNumEachTime;
+    while (--sendNum >= 0) {
+      ++count;
+      ctx.collect(count);
+    }
+  }
+}

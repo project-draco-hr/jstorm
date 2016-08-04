@@ -1,0 +1,21 @@
+{
+  StringBuilder sb=new StringBuilder();
+  String url=String.format("http://%s:%d/jobs/%s",ip,port,jobId);
+  Map json=httpResponse(url);
+  String jobName=(String)json.get("name");
+  String uptime=Utils.prettyUptime(Utils.getInt(json.get("duration"),0));
+  sb.append("job: ").append(jobName).append(" uptime: ").append(uptime).append("\n");
+  List<Map> vertices=(List<Map>)json.get("vertices");
+  for (  Map v : vertices) {
+    String name=(String)v.get("name");
+    int duration=(int)v.get("duration");
+    Map metrics=(Map)v.get("metrics");
+    long recv=Utils.parseLong(metrics.get("read-records"));
+    long send=Utils.parseLong(metrics.get("write-records"));
+    double recvTps=(recv * 1000.0) / duration;
+    double sendTps=(send * 1000.0) / duration;
+    sb.append(String.format("[<%s> recv_tps: %.2f, send_tps: %.2f]\n",name,recvTps,sendTps));
+  }
+  sb.append("---------------------------------------------\n");
+  return sb.toString();
+}

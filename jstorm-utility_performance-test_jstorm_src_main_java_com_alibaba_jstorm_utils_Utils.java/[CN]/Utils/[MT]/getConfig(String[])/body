@@ -1,0 +1,12 @@
+{
+  Config ret=new Config();
+  if (args == null || args.length == 0) {
+    return ret;
+  }
+  if (StringUtils.isBlank(args[0])) {
+    return ret;
+  }
+  Map conf=LoadConf(args[0]);
+  ret.putAll(conf);
+  return ret;
+}

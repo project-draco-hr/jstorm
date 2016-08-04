@@ -1,0 +1,8 @@
+{
+  _collector=collector;
+  _rand=new Random();
+  sendingCount=0;
+  startTime=System.currentTimeMillis();
+  sendNumPerNexttuple=Utils.getInt(conf.get("send.num.each.time"),1);
+  isStatEnable=Utils.getBoolean(conf.get("is.stat.enable"),false);
+}

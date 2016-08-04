@@ -1,0 +1,24 @@
+{
+  if (null == o) {
+    return defaultValue;
+  }
+  if (o instanceof Integer || o instanceof Short || o instanceof Byte) {
+    return ((Number)o).intValue();
+  }
+ else   if (o instanceof Long) {
+    final long l=(Long)o;
+    if (Integer.MIN_VALUE <= l && l <= Integer.MAX_VALUE) {
+      return (int)l;
+    }
+  }
+ else   if (o instanceof Double) {
+    final double d=(Double)o;
+    if (Integer.MIN_VALUE <= d && d <= Integer.MAX_VALUE) {
+      return (int)d;
+    }
+  }
+ else   if (o instanceof String) {
+    return Integer.parseInt((String)o);
+  }
+  return defaultValue;
+}

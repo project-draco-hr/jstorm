@@ -1,0 +1,8 @@
+{
+  if (arg.endsWith("yaml")) {
+    return LoadYaml(arg);
+  }
+ else {
+    return LoadProperty(arg);
+  }
+}

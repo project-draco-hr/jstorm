@@ -1,0 +1,4 @@
+{
+  conf=com.alibaba.jstorm.utils.Utils.getConfig(args);
+  test();
+}

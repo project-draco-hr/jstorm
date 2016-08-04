@@ -1,0 +1,19 @@
+{
+  Map ret;
+  try {
+    DefaultHttpClient httpClient=new DefaultHttpClient();
+    HttpGet getRequest=new HttpGet(url);
+    getRequest.addHeader("accept","application/json");
+    HttpResponse response=httpClient.execute(getRequest);
+    if (response.getStatusLine().getStatusCode() != 200) {
+      throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
+    }
+    String data=EntityUtils.toString(response.getEntity());
+    ret=(Map)Utils.from_json(data);
+    httpClient.getConnectionManager().shutdown();
+  }
+ catch (  IOException e) {
+    ret=errorMsg(e.getMessage());
+  }
+  return ret;
+}

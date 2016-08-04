@@ -1,0 +1,11 @@
+{
+  StreamExecutionEnvironment env=StreamExecutionEnvironment.getExecutionEnvironment();
+  DataStream<Long> text=env.addSource(new SequenceSource(10)).slotSharingGroup("123");
+  DataStream<Long> counts=text.map(new MapFunction<Long,Long>(){
+    @Override public Long map(    Long aLong) throws Exception {
+      return aLong;
+    }
+  }
+);
+  env.execute("StreamSequence");
+}

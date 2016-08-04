@@ -1,0 +1,4 @@
+{
+  collector=outputCollector;
+  countMap=new HashMap<String,Integer>();
+}

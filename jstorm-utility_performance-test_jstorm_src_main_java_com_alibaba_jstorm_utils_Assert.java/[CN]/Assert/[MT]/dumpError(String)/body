@@ -1,0 +1,11 @@
+{
+  File file=new File(ERROR_FILE_NAME);
+  try {
+    FileUtils.writeStringToFile(file,"\n!!!!!!!!!!!!!!!!!!!!!!\n",true);
+    FileUtils.writeStringToFile(file,errMsg,true);
+    FileUtils.writeStringToFile(file,"\n!!!!!!!!!!!!!!!!!!!!!!\n",true);
+  }
+ catch (  IOException e) {
+    LOG.error("Failed to dump " + errMsg,e);
+  }
+}

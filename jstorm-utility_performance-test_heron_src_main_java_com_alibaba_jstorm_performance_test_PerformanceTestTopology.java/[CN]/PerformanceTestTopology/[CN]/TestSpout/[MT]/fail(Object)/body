@@ -1,0 +1,4 @@
+{
+  Integer val=(Integer)msgId;
+  collector.emit(new Values(val),val);
+}

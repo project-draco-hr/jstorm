@@ -1,0 +1,11 @@
+{
+  if (!isStatEnable)   return;
+  sendingCount++;
+  long now=System.currentTimeMillis();
+  long interval=now - startTime;
+  if (interval > 60 * 1000) {
+    LOG.info("Sending tps of last one minute is " + (sendingCount * sendNumPerNexttuple * 1000) / interval);
+    startTime=now;
+    sendingCount=0;
+  }
+}

@@ -1,0 +1,5 @@
+{
+  Map<String,String> error=new HashMap<>();
+  error.put("error",msg);
+  return error;
+}

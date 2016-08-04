@@ -1,0 +1,6 @@
+{
+  while (active) {
+    String sentence=CHOICES[_rand.nextInt(CHOICES.length)];
+    ctx.collect(sentence);
+  }
+}

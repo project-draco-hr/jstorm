@@ -1,0 +1,8 @@
+{
+  int n=sendNumPerNexttuple;
+  while (--n >= 0) {
+    String sentence=CHOICES[_rand.nextInt(CHOICES.length)];
+    _collector.emit(new Values(sentence));
+  }
+  updateSendTps();
+}

@@ -1,0 +1,5 @@
+{
+  RuntimeException exception=new RuntimeException(errMsg);
+  dumpError(JStormUtils.getErrorInfo(exception));
+  throw exception;
+}

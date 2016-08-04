@@ -1,0 +1,12 @@
+{
+  int spout_Parallelism_hint=Utils.getInt(conf.get(TOPOLOGY_SPOUT_PARALLELISM_HINT),1);
+  int split_Parallelism_hint=Utils.getInt(conf.get(TOPOLOGY_SPLIT_PARALLELISM_HINT),1);
+  int count_Parallelism_hint=Utils.getInt(conf.get(TOPOLOGY_COUNT_PARALLELISM_HINT),2);
+  TopologyBuilder builder=new TopologyBuilder();
+  builder.setSpout("spout",new FastRandomSentenceSpout(),spout_Parallelism_hint);
+  builder.setBolt("split",new SplitSentence(),split_Parallelism_hint).shuffleGrouping("spout");
+  builder.setBolt("count",new WordCount(),count_Parallelism_hint).fieldsGrouping("split",new Fields("word"));
+  String[] className=Thread.currentThread().getStackTrace()[1].getClassName().split("\\.");
+  String topologyName=className[className.length - 1];
+  StormSubmitter.submitTopology(topologyName,conf,builder.createTopology());
+}

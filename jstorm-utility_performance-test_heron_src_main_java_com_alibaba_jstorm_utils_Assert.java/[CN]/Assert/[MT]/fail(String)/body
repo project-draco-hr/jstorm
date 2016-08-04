@@ -1,0 +1,5 @@
+{
+  RuntimeException exception=new RuntimeException(errMsg);
+  dumpError(Utils.getErrorInfo(exception));
+  throw exception;
+}

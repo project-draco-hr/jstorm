@@ -1,0 +1,12 @@
+{
+  if (args.length != 1) {
+    throw new RuntimeException("Specify topology name");
+  }
+  int parallelism=10;
+  TopologyBuilder builder=new TopologyBuilder();
+  builder.setSpout("word",new WordSpout(),parallelism);
+  builder.setBolt("consumer",new ConsumerBolt(),parallelism).fieldsGrouping("word",new Fields("word"));
+  Config conf=new Config();
+  conf.setNumStmgrs(parallelism);
+  StormSubmitter.submitTopology(args[0],conf,builder.createTopology());
+}

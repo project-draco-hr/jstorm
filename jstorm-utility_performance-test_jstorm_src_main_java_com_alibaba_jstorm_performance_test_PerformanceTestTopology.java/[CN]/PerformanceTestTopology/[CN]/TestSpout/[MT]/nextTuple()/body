@@ -1,0 +1,7 @@
+{
+  int sendNum=sendNumEachTime;
+  while (--sendNum >= 0) {
+    ++count;
+    collector.emit(new Values(count),count);
+  }
+}

@@ -1,0 +1,4 @@
+{
+  int nextInt=rnd.nextInt(ARRAY_LENGTH);
+  collector.emit(new Values(words[nextInt]));
+}

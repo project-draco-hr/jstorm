@@ -1,0 +1,3 @@
+{
+  LOG.info(id + ", total:" + total);
+}

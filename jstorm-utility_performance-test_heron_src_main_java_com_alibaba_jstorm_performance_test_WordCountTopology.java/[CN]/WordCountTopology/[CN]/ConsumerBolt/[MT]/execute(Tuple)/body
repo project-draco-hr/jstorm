@@ -1,0 +1,10 @@
+{
+  String key=tuple.getString(0);
+  if (countMap.get(key) == null) {
+    countMap.put(key,1);
+  }
+ else {
+    Integer val=countMap.get(key);
+    countMap.put(key,++val);
+  }
+}

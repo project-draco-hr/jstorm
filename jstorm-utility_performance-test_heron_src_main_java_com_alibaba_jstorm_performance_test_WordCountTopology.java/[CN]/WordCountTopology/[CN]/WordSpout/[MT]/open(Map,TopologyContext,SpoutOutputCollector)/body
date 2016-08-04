@@ -1,0 +1,7 @@
+{
+  RandomString randomString=new RandomString(WORD_LENGTH);
+  for (int i=0; i < ARRAY_LENGTH; i++) {
+    words[i]=randomString.nextString();
+  }
+  collector=spoutOutputCollector;
+}

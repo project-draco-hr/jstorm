@@ -1,0 +1,4 @@
+{
+  long count=input.getLong(0);
+  collector.ack(input);
+}

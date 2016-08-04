@@ -1,0 +1,8 @@
+{
+  if (args.length == 0) {
+    System.err.println("Please input configuration file");
+    System.exit(-1);
+  }
+  conf=com.alibaba.jstorm.utils.Utils.LoadConf(args[0]);
+  SetRemoteTopology();
+}

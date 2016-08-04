@@ -1,0 +1,8 @@
+{
+  if (arg.endsWith("yaml")) {
+    return LoadConf.LoadYaml(arg);
+  }
+ else {
+    return LoadConf.LoadProperty(arg);
+  }
+}

@@ -1,0 +1,14 @@
+{
+  String streamName=(String)conf.get(Config.TOPOLOGY_NAME);
+  if (streamName == null) {
+    String[] className=Thread.currentThread().getStackTrace()[1].getClassName().split("\\.");
+    streamName=className[className.length - 1];
+  }
+  TopologyBuilder builder=new TopologyBuilder();
+  int spout_Parallelism_hint=Utils.getInt(conf.get(TOPOLOGY_SPOUT_PARALLELISM_HINT),1);
+  int bolt_Parallelism_hint=Utils.getInt(conf.get(TOPOLOGY_BOLT_PARALLELISM_HINT),2);
+  builder.setSpout("spout",new TestSpout(),spout_Parallelism_hint);
+  BoltDeclarer boltDeclarer=builder.setBolt("bolt",new TestBolt(),bolt_Parallelism_hint);
+  boltDeclarer.shuffleGrouping("spout");
+  StormSubmitter.submitTopology(streamName,conf,builder.createTopology());
+}

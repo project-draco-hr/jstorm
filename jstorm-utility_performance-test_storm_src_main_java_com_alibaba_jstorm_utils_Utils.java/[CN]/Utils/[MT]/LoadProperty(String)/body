@@ -1,0 +1,18 @@
+{
+  Properties properties=new Properties();
+  Map conf=new HashMap();
+  try {
+    InputStream stream=new FileInputStream(prop);
+    properties.load(stream);
+    conf.putAll(properties);
+    return conf;
+  }
+ catch (  FileNotFoundException e) {
+    System.out.println("No such file " + prop);
+    return conf;
+  }
+catch (  Exception e1) {
+    e1.printStackTrace();
+    return conf;
+  }
+}

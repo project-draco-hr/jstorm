@@ -1,0 +1,11 @@
+{
+  long now=System.currentTimeMillis();
+synchronized (this) {
+    if (now >= interval + lastCheck) {
+      double pastSecond=((double)(now - lastCheck)) / 1000;
+      lastCheck=now;
+      return pastSecond;
+    }
+  }
+  return null;
+}

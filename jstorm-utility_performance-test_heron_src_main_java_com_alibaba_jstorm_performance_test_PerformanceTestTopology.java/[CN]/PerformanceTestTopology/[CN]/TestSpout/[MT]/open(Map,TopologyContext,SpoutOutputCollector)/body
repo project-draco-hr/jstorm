@@ -1,0 +1,7 @@
+{
+  this.collector=collector;
+  this.count=0l;
+  this.isAckRequired=Utils.getBoolean(conf.get("is.ack.required"),false);
+  this.sendNumEachTime=Utils.getInt(conf.get("send.num.each.time"),1);
+  this.startTimeStamp=System.currentTimeMillis();
+}

@@ -1,0 +1,11 @@
+{
+  StreamExecutionEnvironment env=StreamExecutionEnvironment.getExecutionEnvironment();
+  ParameterTool tool=ParameterTool.fromArgs(args);
+  int sourceParallel=Integer.parseInt(tool.get("s"));
+  int operatorParallel=Integer.parseInt(tool.get("p"));
+  System.out.println("sourceParallel: " + sourceParallel + ", operatorParallel: "+ operatorParallel);
+  env.setParallelism(operatorParallel);
+  DataStream<String> text=env.addSource(new WordSource()).setParallelism(sourceParallel);
+  DataStream<Tuple2<String,Integer>> counts=text.flatMap(new LineSplitter()).keyBy(0).sum(1);
+  System.out.println(env.getExecutionPlan());
+}
